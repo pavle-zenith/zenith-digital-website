@@ -96,37 +96,45 @@ export const services = {
   intro:
     "One team for the whole journey. From a first Wix Studio build to migrations, campaigns, and white-label work for agencies.",
   cta: { label: "All services", href: "/services", variant: "primary" } as CtaLink,
-  // Bento layout: `size` controls the cell span. Assets (media) added later.
+  // Stripe-style grid: row 1 = two wide (span 3 of 6), row 2 = three equal
+  // (span 2 of 6), row 3 = one full-width (span 6). `image` is the per-service
+  // generated mockup.
   items: [
     {
       title: "Website design & development",
       description: "Fast, structured, conversion-ready sites that turn visitors into paying clients.",
-      size: "lg" as const,
-    },
-    {
-      title: "SEO, AEO & PPC campaigns",
-      description: "Search and paid campaigns tied to your site so every euro lands somewhere built to convert.",
-      size: "sm" as const,
-    },
-    {
-      title: "Wix Studio development",
-      description: "Custom code, CMS architecture, and integrations on top of Wix Studio.",
-      size: "sm" as const,
+      image: "/services/web-design.jpg",
+      span: 3,
     },
     {
       title: "Landing pages",
       description: "High-converting pages for campaigns, launches, and lead capture.",
-      size: "sm" as const,
+      image: "/services/landing-pages.jpg",
+      span: 3,
+    },
+    {
+      title: "SEO, AEO & PPC campaigns",
+      description: "Search and paid campaigns tied to your site so every euro lands somewhere built to convert.",
+      image: "/services/seo-aeo.jpg",
+      span: 2,
     },
     {
       title: "Website migrations",
       description: "Move to Wix Studio from any platform with full URL mapping and zero ranking loss.",
-      size: "sm" as const,
+      image: "/services/migrations.jpg",
+      span: 2,
+    },
+    {
+      title: "Wix Studio development",
+      description: "Custom code, CMS architecture, and integrations on top of Wix Studio.",
+      image: "/services/wix-studio.jpg",
+      span: 2,
     },
     {
       title: "White-label design & development",
       description: "Unbranded builds for agencies and freelancers to resell under their own brand.",
-      size: "lg" as const,
+      image: "/services/white-label.jpg",
+      span: 6,
     },
   ],
 };

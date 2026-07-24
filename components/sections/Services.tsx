@@ -1,12 +1,22 @@
+import Image from "next/image";
+
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { services } from "@/content/home";
 
+// span -> col-span utility (static strings so Tailwind keeps them).
+const SPAN: Record<number, string> = {
+  2: "md:col-span-2",
+  3: "md:col-span-3",
+  6: "md:col-span-6",
+};
+
 /**
- * Section 6 — Services (Stripe-style bento grid). Intro headline top-left with an
- * "All services" CTA top-right, then a bento of service cards divided by hairlines.
- * `size: "lg"` cells span two columns. Media assets drop in later.
+ * Section 6 — Services (Stripe-style grid). Intro headline top-left with an
+ * "All services" CTA, then a 6-column grid: row 1 = two wide cards (span 3),
+ * row 2 = three equal cards (span 2), row 3 = one full-width card (span 6).
+ * Each card leads with its generated product-UI mockup, divided by hairlines.
  */
 export function Services() {
   return (
@@ -24,20 +34,31 @@ export function Services() {
         </div>
       </div>
 
-      {/* Bento grid — 1px gaps on a rule-colored bg render as hairlines. */}
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-4">
+      {/* 6-col grid — 1px gaps on a rule-colored bg render as hairlines. */}
+      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-6">
         {services.items.map((item) => (
           <article
             key={item.title}
             className={cn(
               "flex flex-col bg-light-bg p-6 transition hover:bg-light-surface",
-              item.size === "lg" ? "md:col-span-2" : "md:col-span-1",
+              SPAN[item.span],
             )}
           >
-            {/* Media placeholder — fixed height, real asset drops in later */}
-            <div className="mb-5 h-28 rounded-[6px] border border-dashed border-light-border bg-light-surface" />
+            {/* Product-UI mockup */}
+            <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-[6px] border border-light-border bg-light-surface">
+              <Image
+                src={item.image}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1440px) 50vw, 700px"
+                className="object-cover"
+                aria-hidden
+              />
+            </div>
             <h3 className="font-display text-h3 font-medium">{item.title}</h3>
-            <p className="mt-2 text-body leading-snug text-light-muted">{item.description}</p>
+            <p className="mt-2 max-w-md text-body leading-snug text-light-muted">
+              {item.description}
+            </p>
           </article>
         ))}
       </div>

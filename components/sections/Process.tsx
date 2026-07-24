@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
-import { process } from "@/content/home";
+import { processSection } from "@/content/home";
 
 const STEP_MS = 4000;
 
@@ -45,30 +45,30 @@ export function Process() {
   useEffect(() => {
     if (paused) return;
     timer.current = setInterval(() => {
-      setActive((a) => (a + 1) % process.steps.length);
+      setActive((a) => (a + 1) % processSection.steps.length);
     }, STEP_MS);
     return () => {
       if (timer.current) clearInterval(timer.current);
     };
   }, [paused]);
 
-  const step = process.steps[active];
+  const step = processSection.steps[active];
   // Highlight everything up to (and including) the active step's column —
   // progress accumulates. The clip on the highlight layer animates the sweep.
-  const hiddenRight = 100 - ((active + 1) / process.steps.length) * 100;
+  const hiddenRight = 100 - ((active + 1) / processSection.steps.length) * 100;
 
   return (
     <Section tone="light" frameClassName="!py-24">
       {/* Header */}
       <div className="mb-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <h2 className="max-w-3xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-          {process.heading}
+          {processSection.heading}
         </h2>
         <Link
-          href={process.cta.href}
+          href={processSection.cta.href}
           className="inline-flex shrink-0 items-center gap-2 rounded-[6px] bg-accent px-6 py-3 text-body font-medium text-accent-ink transition hover:bg-accent-hover"
         >
-          {process.cta.label} <span aria-hidden>&rarr;</span>
+          {processSection.cta.label} <span aria-hidden>&rarr;</span>
         </Link>
       </div>
 
@@ -96,7 +96,7 @@ export function Process() {
         <div className="relative h-[440px] w-full">
           {/* Vertical dotted grid segments */}
           <div className="absolute inset-0 grid grid-cols-5">
-            {process.steps.map((_, i) => (
+            {processSection.steps.map((_, i) => (
               <div key={i} className="border-l border-dashed border-light-border first:border-l-0" />
             ))}
             <div className="absolute inset-y-0 right-0 border-l border-dashed border-light-border" />
@@ -147,7 +147,7 @@ export function Process() {
         {/* Step labels along the bottom — click a step to activate it. Steps up
             to the active one stay lit, echoing the curve's progress. */}
         <div className="grid grid-cols-5">
-          {process.steps.map((s, i) => {
+          {processSection.steps.map((s, i) => {
             const lit = i <= active;
             return (
               <button

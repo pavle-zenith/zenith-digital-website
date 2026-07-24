@@ -391,7 +391,7 @@ export const included = {
 // 9. Named process — interactive "happiness curve" (Lightdash-style). Five steps
 // plotted along a rising curve; the active step highlights its part of the curve
 // and shows its heading + bullets. Auto-advances on a timer, loops, clickable.
-export const process = {
+export const processSection = {
   name: "The Zenith Sprint",
   heading: "The path from first call to a site that performs",
   cta: { label: "Start your project", href: "/book-a-call", variant: "primary" } as CtaLink,

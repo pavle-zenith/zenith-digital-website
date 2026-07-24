@@ -1,0 +1,59 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import { Section } from "@/components/ui/Section";
+
+type BannerData = {
+  heading: string[];
+  paragraph: string;
+  cta: { label: string; href: string };
+  image: string;
+};
+
+/**
+ * Full-bleed image CTA banner (Stripe Sessions style). The image spans the full
+ * max-width column edge-to-edge (flush to the frame rails, no vertical padding).
+ * All content sits at the bottom: heading + paragraph bottom-left, a filled
+ * white button bottom-right, over a bottom-heavy scrim for legibility.
+ * Reused for the case-studies banner and the general banner below the process.
+ */
+export function CtaBanner({ data }: { data: BannerData }) {
+  return (
+    <Section tone="light" frameClassName="!py-0">
+      <div className="frame-bleed relative overflow-hidden">
+        {/* Background image */}
+        <Image
+          src={data.image}
+          alt=""
+          fill
+          sizes="(max-width: 1440px) 100vw, 1440px"
+          className="object-cover"
+          aria-hidden
+        />
+        {/* Bottom-heavy scrim so the bottom-anchored content reads */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"
+          aria-hidden
+        />
+
+        {/* Content pinned to the bottom: text left, button right */}
+        <div className="relative flex min-h-[440px] flex-col justify-end p-10 md:p-14 lg:min-h-[480px]">
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <h2 className="font-display text-h2 font-medium leading-[1.1] tracking-tight text-balance text-white">
+                {data.heading.join(" ")}
+              </h2>
+              <p className="mt-4 max-w-xl text-body-lg text-white/75">{data.paragraph}</p>
+            </div>
+            <Link
+              href={data.cta.href}
+              className="inline-flex shrink-0 items-center gap-2 self-start rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90 md:self-end"
+            >
+              {data.cta.label} <span aria-hidden>&rsaquo;</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}

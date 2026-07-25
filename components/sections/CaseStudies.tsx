@@ -34,7 +34,7 @@ export function CaseStudies() {
                 alt={`${cs.client} website`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 36vw"
-                className="object-cover object-top"
+                className="object-cover object-center"
               />
             </div>
 
@@ -77,7 +77,7 @@ export function CaseStudies() {
 
               {/* Title + stats + button pinned bottom */}
               <div className="relative flex flex-col gap-8">
-                <h3 className="max-w-xl font-display text-h3 font-medium leading-[1.2] text-balance">
+                <h3 className="max-w-2xl font-display text-[1.75rem] font-medium leading-[1.2] tracking-tight text-balance">
                   {cs.title}
                 </h3>
                 <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">

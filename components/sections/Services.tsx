@@ -37,29 +37,58 @@ export function Services() {
       {/* 6-col grid — 1px gaps on a rule-colored bg render as hairlines. */}
       <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-6">
         {services.items.map((item) => (
-          <article
-            key={item.title}
-            className={cn(
-              "flex flex-col bg-light-bg p-6 transition hover:bg-light-surface",
-              SPAN[item.span],
-            )}
-          >
-            {/* Product-UI mockup */}
-            <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-[6px] border border-light-border bg-light-surface">
-              <Image
-                src={item.image}
-                alt=""
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1440px) 50vw, 700px"
-                className="object-cover"
-                aria-hidden
-              />
-            </div>
-            <h3 className="font-display text-h3 font-medium">{item.title}</h3>
-            <p className="mt-2 max-w-md text-body leading-snug text-light-muted">
-              {item.description}
-            </p>
-          </article>
+          item.span === 6 ? (
+            // Full-width row (white-label): compact, CTA-height. Small thumbnail
+            // left, title + description beside it, no tall image.
+            <article
+              key={item.title}
+              className={cn(
+                "flex flex-col gap-5 bg-light-bg p-6 transition hover:bg-light-surface sm:flex-row sm:items-center sm:gap-6",
+                SPAN[item.span],
+              )}
+            >
+              <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden rounded-[6px] border border-light-border bg-light-surface sm:aspect-square sm:h-24 sm:w-24">
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  sizes="200px"
+                  className="object-cover"
+                  aria-hidden
+                />
+              </div>
+              <div>
+                <h3 className="font-display text-h3 font-medium">{item.title}</h3>
+                <p className="mt-2 max-w-2xl text-body leading-snug text-light-muted">
+                  {item.description}
+                </p>
+              </div>
+            </article>
+          ) : (
+            <article
+              key={item.title}
+              className={cn(
+                "flex flex-col bg-light-bg p-6 transition hover:bg-light-surface",
+                SPAN[item.span],
+              )}
+            >
+              {/* Product-UI mockup */}
+              <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-[6px] border border-light-border bg-light-surface">
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1440px) 50vw, 700px"
+                  className="object-cover"
+                  aria-hidden
+                />
+              </div>
+              <h3 className="font-display text-h3 font-medium">{item.title}</h3>
+              <p className="mt-2 max-w-md text-body leading-snug text-light-muted">
+                {item.description}
+              </p>
+            </article>
+          )
         ))}
       </div>
     </Section>

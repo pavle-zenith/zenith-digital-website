@@ -68,13 +68,13 @@ export function Hero() {
             href={c.href}
             className="group flex flex-col gap-4 bg-light-bg p-6 transition hover:bg-light-surface"
           >
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] border border-light-border">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] border border-light-border bg-light-surface">
               <Image
                 src={c.image}
                 alt={`${c.client} website`}
                 fill
                 sizes="(max-width: 640px) 100vw, 50vw"
-                className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
               />
             </div>
             <div className="flex items-baseline justify-between gap-3">

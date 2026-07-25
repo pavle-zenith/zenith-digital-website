@@ -52,25 +52,43 @@ export const logos = {
   ],
 };
 
-// 4. Problem / "Sound familiar?"
-export const problem = {
-  eyebrow: "Sound familiar?",
-  heading: "You've outgrown your website. It just hasn't caught up yet.",
-  pains: [
+// 4. Why they chose Zenith — dark bento grid. `art` selects the line-art visual;
+// `span` sets the column width (3 across the top, 2 wider on the bottom).
+export const whyZenith = {
+  heading: "The reasons businesses pick us, and stay",
+  intro:
+    "We're not the cheapest and we're not trying to be. We're the team that ships fast, protects what you've built, and knows Wix Studio better than anyone.",
+  cta: { label: "Book a call", href: "/book-a-call" },
+  items: [
     {
-      title: "You've outgrown a template or DIY builder",
-      description:
-        "The site got you started. Now it's holding you back, and every edit feels like a fight.",
+      art: "migration",
+      title: "Migration without headaches",
+      body: "We've moved sites from WordPress, Webflow, Squarespace, Framer, and custom HTML without any surprises.",
+      span: 2,
     },
     {
-      title: "You've been burned by a slow or flaky agency",
-      description:
-        "Months of delays, rotating account managers, and a bill that never quite matched the work.",
+      art: "seo",
+      title: "100% SEO & GEO retention",
+      body: "We protect the organic visibility you've already earned, and set you up for AI discoverability from day one.",
+      span: 2,
     },
     {
-      title: "You have a pretty site that doesn't convert or rank",
-      description:
-        "It looks fine. It just doesn't turn visitors into enquiries, and search engines can't find it.",
+      art: "industry",
+      title: "Cross-industry experience",
+      body: "SaaS startups, consulting firms, e-commerce brands, event agencies, course platforms, real estate platforms & more.",
+      span: 2,
+    },
+    {
+      art: "editor",
+      title: "Wix Professionals since 2019",
+      body: "We've been building on the platform since before most agencies knew it existed which means we know exactly what it can do, and exactly where its limits are.",
+      span: 3,
+    },
+    {
+      art: "map",
+      title: "Europe based, pragmatically raised",
+      body: "Based in Belgrade. Operating across the UK, EU, and US. We run lean, communicate clearly, and make sure your budget goes into the actual work.",
+      span: 3,
     },
   ],
 };
@@ -292,37 +310,49 @@ export const industries = {
       name: "SaaS & tech",
       blurb: "Product sites and web apps that turn launches into pipeline. Knode raised $10M with theirs.",
       href: "/industries/saas-tech",
-      image: "/work/work-1.jpg",
+      image: "/industries/saas-tech.jpg",
     },
     {
       name: "Travel & hospitality",
       blurb: "Booking-ready sites for transfers, stays, and experiences. Bel'Istria grew impressions 257%.",
       href: "/industries/travel-hospitality",
-      image: "/work/work-2.jpg",
+      image: "/industries/travel-hospitality.jpg",
     },
     {
       name: "Coaches & speakers",
       blurb: "Lead-capture pages built to sell seats and sessions for experts and public speakers.",
       href: "/industries/coaches-speakers",
-      image: "/work/work-3.jpg",
+      image: "/industries/coaches-speakers.jpg",
     },
     {
       name: "Marketing & agencies",
       blurb: "Campaign landing pages and white-label builds. MOD's drove €1M+ in client revenue.",
       href: "/industries/marketing-agencies",
-      image: "/work/work-4.jpg",
+      image: "/industries/marketing-agencies.jpg",
     },
     {
       name: "E-commerce & retail",
       blurb: "Storefronts and brand sites built to convert, launched across new markets.",
       href: "/industries/ecommerce-retail",
-      image: "/work/work-5.jpg",
+      image: "/industries/ecommerce-retail.jpg",
+    },
+    {
+      name: "Clothing & fashion brands",
+      blurb: "Brand-led storefronts and lookbooks that make new labels look established from day one.",
+      href: "/industries/clothing-fashion",
+      image: "/industries/clothing.jpg",
+    },
+    {
+      name: "Creatives & personal brands",
+      blurb: "Portfolio and personal-brand sites for videographers, photographers, and creators who need to stand out.",
+      href: "/industries/creatives",
+      image: "/industries/creatives.jpg", // TODO: image coming later
     },
     {
       name: "Professional services",
       blurb: "Credible, conversion-ready sites for firms that win work on trust and expertise.",
       href: "/industries/professional-services",
-      image: "/work/work-6.jpg",
+      image: "/industries/professional-services.jpg",
     },
   ],
 };
@@ -533,13 +563,66 @@ export const founder = {
 };
 
 // 13. Testimonials
+// 13. Testimonials — tab switcher split with a stats cell. Tabs auto-advance on
+// a timer (each tab shows a fill bar). Bold spans in `quote` use **asterisks**.
 export const testimonials = {
-  eyebrow: "In their words",
-  heading: "Hear it from the business owners we work with",
+  stats: [
+    { value: "100+", label: "Projects shipped" },
+    { value: "5.96x", label: "Average ROAS" },
+    { value: "€1M+", label: "Client revenue generated" },
+  ],
+  rating: { platform: "Clutch", score: "5/5", href: "/testimonials", cta: "See all clients" },
   items: [
-    { quote: "Zenith redefined what hard work means to me. They treat every website project with pride, enthusiasm, and extreme passion.", name: "Flynn Blackie", role: "Founder & Director, MOD Digital" },
-    { quote: "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith overdelivered on every front imaginable.", name: "John Smyth", role: "CEO, AdVantage Media Marketing" },
-    { quote: "We hired Zenith to help us rebrand our site. Conversion skyrocketed. We saw what it takes to be one of the top professionals in the field.", name: "Uros Stanimirovic", role: "Co-Founder & CTO, Genroks AI" },
+    {
+      result: "Grew bookings 220% with a rebuilt Wix Studio site",
+      quote:
+        "Zenith redefined what hard work means to me. They treat every website project with **pride, enthusiasm, and extreme passion**, and it shows in the results.",
+      name: "Flynn Blackie",
+      role: "Founder & Director, MOD Digital",
+      avatar: "/avatars/a1.webp",
+      logo: "/logos-dark/mod.png",
+      logoAlt: "MOD Digital",
+    },
+    {
+      result: "Overdelivered on a white-label partnership, front to back",
+      quote:
+        "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith **overdelivered on every front imaginable** and made the whole thing effortless.",
+      name: "John Smyth",
+      role: "CEO, AdVantage Media Marketing",
+      avatar: "/avatars/a2.jpg",
+      logo: "/logos-dark/foxstays.png",
+      logoAlt: "AdVantage",
+    },
+    {
+      result: "Rebranded, and conversion skyrocketed",
+      quote:
+        "We hired Zenith to help us rebrand our site. **Conversion skyrocketed.** We saw what it takes to be one of the top professionals in the field.",
+      name: "Uros Stanimirovic",
+      role: "Co-Founder & CTO, Genroks AI",
+      avatar: "/avatars/a3.jpg",
+      logo: "/logos-dark/genroks.png",
+      logoAlt: "Genroks AI",
+    },
+    {
+      result: "A full SaaS site and landing page, live in 3 weeks",
+      quote:
+        "They took our vision and shipped a **premium SaaS site in three weeks**. It carried us straight into a $10M Series A raise.",
+      name: "The Knode team",
+      role: "Knode AI",
+      avatar: "/avatars/a1.webp",
+      logo: "/logos-dark/knode.png",
+      logoAlt: "Knode AI",
+    },
+    {
+      result: "Our fractional web team, leading design and dev",
+      quote:
+        "Zenith runs our design and development operations end to end. **Reliable, fast, and genuinely invested** in the outcome.",
+      name: "The Capacity team",
+      role: "Capacity",
+      avatar: "/avatars/a2.jpg",
+      logo: "/logos-dark/capacity.png",
+      logoAlt: "Capacity",
+    },
   ],
 };
 
@@ -551,10 +634,40 @@ export const partnerships = {
 };
 
 // 15. Free website audit
+// Free-audit — split section (Lightdash style): heading + CTA + 3 accordion
+// tabs left, a mock audit-report visual right. Light mode, no background image.
 export const audit = {
-  heading: "Not ready to talk? Get a free audit of your current site.",
-  line: "We review your site by hand, not a bot, and send a video walkthrough of exactly what to fix first.",
-  cta: { label: "Get my free audit", href: "/free-website-audit", variant: "primary" } as CtaLink,
+  heading: "A free audit that actually tells you something",
+  intro:
+    "Drop your site in and we'll review it by hand, then send a short video walkthrough of the highest-impact fixes. No auto-generated PDF, no obligation.",
+  cta: { label: "Get my free audit", href: "/free-website-audit" },
+  inputPlaceholder: "yourwebsite.com",
+  tabs: [
+    {
+      title: "Reviewed by a human, not a bot",
+      body: "We go through your site by hand and record a short video walkthrough. No auto-generated PDF full of vanity scores.",
+    },
+    {
+      title: "The three things costing you the most",
+      body: "We flag the highest-impact fixes first, the ones holding back conversions, rankings, and speed, so you know exactly where to start.",
+    },
+    {
+      title: "Yours to keep, no strings",
+      body: "You get the walkthrough whether or not we ever work together. No pitch, no obligation, no signup wall.",
+    },
+  ],
+  // Mock audit-report card shown on the right.
+  report: {
+    label: "Site audit",
+    score: "62",
+    scoreLabel: "Performance score",
+    delta: "18 issues found",
+    findings: [
+      { text: "Largest Contentful Paint over 4s", severity: "high" },
+      { text: "Missing meta descriptions on 9 pages", severity: "med" },
+      { text: "No structured data for search", severity: "med" },
+    ],
+  },
 };
 
 // FAQ section (Trueform-style: sticky heading left, accordion cards right)
@@ -605,7 +718,6 @@ export const footer = {
   clocks: [
     { city: "Belgrade", tz: "Europe/Belgrade" },
     { city: "Edinburgh", tz: "Europe/London" },
-    { city: "Liverpool", tz: "Europe/London" },
   ],
   columns: [
     {

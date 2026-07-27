@@ -156,7 +156,7 @@ export function Process() {
                 onClick={() => setActive(i)}
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
-                className="group border-t-2 pt-4 text-left transition-colors duration-500"
+                className="group min-w-0 border-t-2 pt-4 text-left transition-colors duration-500"
                 style={{ borderColor: lit ? "var(--color-accent)" : "transparent" }}
               >
                 <span
@@ -167,9 +167,11 @@ export function Process() {
                 >
                   {s.step}
                 </span>
+                {/* Names don't fit five-up at phone widths; the overlay already
+                    announces the active step there. */}
                 <span
                   className={cn(
-                    "mt-1.5 block font-display text-body-lg font-medium transition-colors duration-500",
+                    "mt-1.5 hidden font-display text-body-lg font-medium transition-colors duration-500 sm:block",
                     lit ? "text-light-text" : "text-light-muted group-hover:text-light-text",
                   )}
                 >

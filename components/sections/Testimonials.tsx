@@ -87,7 +87,7 @@ export function Testimonials() {
                   onClick={() => setActive(i)}
                   aria-pressed={i === active}
                   className={cn(
-                    "relative flex items-center justify-center border-l border-light-border py-6 transition first:border-l-0",
+                    "relative flex min-w-0 items-center justify-center border-l border-light-border px-2 py-5 transition first:border-l-0 sm:py-6",
                     i === active ? "bg-light-surface" : "bg-light-bg hover:bg-light-surface/60",
                   )}
                 >
@@ -97,7 +97,7 @@ export function Testimonials() {
                   width={120}
                   height={26}
                   className={cn(
-                    "h-5 w-auto object-contain transition",
+                    "h-4 w-auto max-w-full object-contain transition sm:h-5",
                     i === active ? "opacity-100" : "opacity-40",
                   )}
                 />

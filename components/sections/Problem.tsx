@@ -69,7 +69,7 @@ function CardArt({ name }: { name: string }) {
     case "migration":
       // Old site card -> arrow -> new site card, one "page" node moving across.
       return (
-        <svg viewBox="0 0 260 130" className="h-full w-auto" fill="none" aria-hidden>
+        <svg viewBox="0 0 260 130" className="h-full w-full" fill="none" aria-hidden>
           <rect x="10" y="18" width="86" height="94" rx="6" fill="var(--color-light-surface)" stroke={line} />
           <rect x="20" y="28" width="66" height="18" rx="3" fill={line} />
           <path d="M20 58h50M20 70h66M20 82h40M20 94h58" stroke={line} strokeWidth="3" strokeLinecap="round" />
@@ -84,7 +84,7 @@ function CardArt({ name }: { name: string }) {
     case "seo":
       // Search result ranked #1 with a rising bar of rank positions.
       return (
-        <svg viewBox="0 0 240 130" className="h-full w-auto" fill="none" aria-hidden>
+        <svg viewBox="0 0 240 130" className="h-full w-full" fill="none" aria-hidden>
           <rect x="16" y="20" width="150" height="90" rx="8" fill="var(--color-light-surface)" stroke={line} />
           <circle cx="34" cy="38" r="7" fill={accent} opacity="0.15" />
           <path d="M31 38l2 2 4-4" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -102,7 +102,7 @@ function CardArt({ name }: { name: string }) {
     case "industry":
       // Grid of varied industry tiles, a few accented.
       return (
-        <svg viewBox="0 0 240 130" className="h-full w-auto" fill="none" aria-hidden>
+        <svg viewBox="0 0 240 130" className="h-full w-full" fill="none" aria-hidden>
           {[
             [16, 18, false], [70, 18, true], [124, 18, false], [178, 18, false],
             [16, 58, false], [70, 58, false], [124, 58, true], [178, 58, false],
@@ -119,7 +119,7 @@ function CardArt({ name }: { name: string }) {
     case "editor":
       // Wix Studio editor: toolbar, left rail, canvas with a selected block + cursor.
       return (
-        <svg viewBox="0 0 300 130" className="h-full w-auto" fill="none" aria-hidden>
+        <svg viewBox="0 0 300 130" className="h-full w-full" fill="none" aria-hidden>
           <rect x="10" y="12" width="280" height="106" rx="8" fill="var(--color-light-surface)" stroke={line} />
           <path d="M10 34h280" stroke={line} />
           <circle cx="24" cy="23" r="2.5" fill={muted} /><circle cx="33" cy="23" r="2.5" fill={muted} /><circle cx="42" cy="23" r="2.5" fill={muted} />
@@ -139,7 +139,7 @@ function CardArt({ name }: { name: string }) {
     case "map":
       // Abstract node network over a "Europe" wordless region: 3 hubs + links.
       return (
-        <svg viewBox="0 0 300 130" className="h-full w-auto" fill="none" aria-hidden>
+        <svg viewBox="0 0 300 130" className="h-full w-full" fill="none" aria-hidden>
           <path
             d="M60 30c18-6 34 2 50-2s30 6 44 2 26 4 40 0M40 66c22 4 40-6 60-2s36 8 56 4 40 2 52-6M70 98c20 2 36-6 54-2s32 6 48 2"
             stroke={line}

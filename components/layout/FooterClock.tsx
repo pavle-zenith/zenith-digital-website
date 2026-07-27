@@ -28,7 +28,7 @@ export function FooterClock({ city, tz }: { city: string; tz: string }) {
     : "";
 
   return (
-    <div className="text-right">
+    <div className="text-left md:text-right">
       <p className="font-display font-medium uppercase tracking-wide text-light-text">{city}</p>
       <p className="mt-1 min-h-[1.5rem] text-body text-light-muted">{time.toUpperCase()}</p>
     </div>

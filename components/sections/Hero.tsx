@@ -17,10 +17,16 @@ export function Hero() {
     <Section tone="light" divide={false} frameClassName="!py-0">
       {/* Hero content */}
       <div className="flex flex-col justify-end pb-14 pt-20">
-        {/* Eyebrow: "Top 1% Partner of  Wix Studio" */}
+        {/* Eyebrow: "Top 1% Partner of" + the Wix Studio lockup */}
         <div className="mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-light-surface px-3 py-1.5 text-label font-medium">
           <span className="text-light-muted">{hero.badgePrefix}</span>
-          <span className="font-display font-medium text-light-text">{hero.badgeBrand}</span>
+          <Image
+            src="/logos-white/wix-studio.png"
+            alt={hero.badgeBrand}
+            width={100}
+            height={24}
+            className="h-5 w-auto object-contain invert"
+          />
         </div>
 
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">

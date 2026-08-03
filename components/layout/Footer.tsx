@@ -24,8 +24,9 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Link columns */}
-      <div className="frame border-t border-light-border py-12">
+      {/* Link columns — the rule spans the full viewport, content stays framed */}
+      <div className="border-t border-light-border">
+      <div className="frame py-12">
         <div className="grid max-w-3xl grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-3">
           {footer.columns.map((col) => (
             <div key={col.heading}>
@@ -74,6 +75,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Partners + audit box */}
       <div className="frame flex flex-col justify-between gap-10 pb-14 pt-6 lg:flex-row lg:items-center">
@@ -85,9 +87,9 @@ export function Footer() {
                 key={p.alt}
                 src={p.src}
                 alt={p.alt}
-                width={140}
-                height={32}
-                className="h-6 w-auto object-contain"
+                width={180}
+                height={40}
+                className={`${p.className} w-auto object-contain invert`}
               />
             ))}
           </div>
@@ -108,8 +110,9 @@ export function Footer() {
         </Link>
       </div>
 
-      {/* Meta bar */}
-      <div className="frame flex flex-col gap-4 border-t border-light-border py-6 text-body text-light-muted md:flex-row md:items-center md:justify-between">
+      {/* Meta bar — full-viewport rule, framed content */}
+      <div className="border-t border-light-border">
+      <div className="frame flex flex-col gap-4 py-6 text-body text-light-muted md:flex-row md:items-center md:justify-between">
         <p className="max-w-2xl">{footer.copyright}</p>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           {footer.legal.map((l) => (
@@ -119,13 +122,16 @@ export function Footer() {
           ))}
         </div>
       </div>
+      </div>
 
-      {/* Giant uppercase wordmark blending up from the very bottom */}
-      <div aria-hidden className="pointer-events-none -mt-1 select-none px-(--gutter)">
+      {/* Giant uppercase wordmark blending up from the very bottom — contained
+          within the frame's inner padding */}
+      <div aria-hidden className="frame pointer-events-none -mt-1 select-none [border-inline:0]">
         <span
           className="block translate-y-[22%] text-center font-display font-medium uppercase leading-[0.8] tracking-tight text-transparent"
           style={{
-            fontSize: "12vw",
+            // 12vw, capped so the wordmark never outgrows the 1440px frame column
+            fontSize: "clamp(48px, 12vw, 186px)",
             // Bottom 22% is clipped by the footer edge, so keep the ink strong
             // through the visible bottom and fade out toward the top.
             backgroundImage:

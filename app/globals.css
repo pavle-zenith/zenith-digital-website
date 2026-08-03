@@ -55,7 +55,7 @@
   --text-body--line-height: 1.6;
   --text-label: 0.8125rem;
   --text-label--line-height: 1.4;
-  --text-label--letter-spacing: 0.08em;
+  --text-label--letter-spacing: 0.04em;
 
   /* Spacing scale (4px base → 4,8,12,16,24,32,48,64,96,128) */
   --spacing-1: 4px;
@@ -194,7 +194,7 @@ body {
     border-radius: var(--radius-btn);
   }
   .track-label {
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
   }
 }
 

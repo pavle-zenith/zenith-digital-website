@@ -92,9 +92,9 @@ export function VideoTestimonials() {
                   <Image
                     src={item.logo}
                     alt={item.company}
-                    width={110}
-                    height={28}
-                    className="h-6 w-auto object-contain"
+                    width={160}
+                    height={40}
+                    className="h-7 w-auto object-contain"
                   />
                 ) : (
                   <span className="font-display font-medium">{item.company}</span>

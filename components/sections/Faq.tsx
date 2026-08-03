@@ -6,13 +6,22 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { faqSection } from "@/content/home";
+import type { CtaLink } from "@/lib/types";
+
+type FaqData = {
+  heading: string[];
+  subhead: string;
+  ctas: CtaLink[];
+  items: { q: string; a: string }[];
+};
 
 /**
  * FAQ (Trueform layout). Left: sticky two-line heading, subhead, and two buttons.
  * Right: an accordion where each question is its own bordered rounded card that
- * expands to reveal the answer. Feeds FAQPage JSON-LD on the page.
+ * expands to reveal the answer. Feeds FAQPage JSON-LD on the page. Defaults to
+ * the homepage content; other pages pass their own `data` (e.g. /book-a-call).
  */
-export function Faq() {
+export function Faq({ data = faqSection }: { data?: FaqData }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -21,15 +30,15 @@ export function Faq() {
         {/* Left: sticky heading */}
         <div className="lg:sticky lg:top-24 lg:self-start">
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight">
-            {faqSection.heading.map((line) => (
+            {data.heading.map((line) => (
               <span key={line} className="block">
                 {line}
               </span>
             ))}
           </h2>
-          <p className="mt-6 max-w-md text-body-lg text-light-muted">{faqSection.subhead}</p>
+          <p className="mt-6 max-w-md text-body-lg text-light-muted">{data.subhead}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            {faqSection.ctas.map((cta) => (
+            {data.ctas.map((cta) => (
               <Button key={cta.href} cta={cta} tone="light" />
             ))}
           </div>
@@ -37,7 +46,7 @@ export function Faq() {
 
         {/* Right: accordion of bordered cards */}
         <div className="flex flex-col gap-3">
-          {faqSection.items.map((item, i) => {
+          {data.items.map((item, i) => {
             const isOpen = open === i;
             return (
               <div

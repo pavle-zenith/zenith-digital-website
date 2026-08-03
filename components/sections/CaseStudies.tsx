@@ -66,9 +66,9 @@ export function CaseStudies() {
                   <Image
                     src={cs.logo}
                     alt={cs.client}
-                    width={130}
-                    height={30}
-                    className="h-6 w-auto object-contain object-left"
+                    width={220}
+                    height={56}
+                    className="h-7 w-auto object-contain object-left"
                   />
                 ) : (
                   <span className="font-display text-body-lg font-medium">{cs.client}</span>

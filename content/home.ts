@@ -18,7 +18,11 @@ export const hero = {
     "We design, build, and launch results-driven Wix Studio websites. And when you outgrow Wix, we build custom.",
   proof: {
     label: "150+ Websites Created",
-    avatars: ["/avatars/a1.webp", "/avatars/a2.jpg", "/avatars/a3.jpg"],
+    avatars: [
+      "/avatars/flynn-blackie.jpg",
+      "/avatars/uros-stanimirovic.jpg",
+      "/avatars/ivan-belobrajdic.jpg",
+    ],
   },
   ctas: [BOOK_CALL, { label: "See our work", href: "/case-studies", variant: "secondary" } as CtaLink],
   // 2x2 highlighted case studies that flow directly out of the hero.
@@ -168,7 +172,7 @@ export const videoTestimonials = {
       name: "Flynn Blackie",
       role: "Founder & Director",
       company: "MOD Digital",
-      logo: "/logos/mod.png",
+      logo: "/logos-white/mod.png",
       poster: "/testimonials/flynn.jpg",
       video: "", // Flynn is an image for now
     },
@@ -177,7 +181,7 @@ export const videoTestimonials = {
       name: "Uros Stanimirovic",
       role: "Co-Founder & CTO",
       company: "Genroks AI",
-      logo: "/logos/genroks.png",
+      logo: "/logos-white/genroks.png",
       poster: "",
       video: "/testimonials/uros.mov",
     },
@@ -186,7 +190,7 @@ export const videoTestimonials = {
       name: "John Smyth",
       role: "CEO",
       company: "AdVantage Media Marketing",
-      logo: "/logos/advantage.png",
+      logo: "/logos-white/advantage.png",
       poster: "",
       video: "/testimonials/john.mov",
     },
@@ -201,7 +205,7 @@ export const caseStudies = {
   items: [
     {
       client: "Knode AI",
-      logo: "/logos/knode.png",
+      logo: "/logos-white/knode.png",
       thumb: "/casestudies/knode.jpg",
       title: "From 0 to raising a $10 Million Series A funding with a premium Wix Studio SaaS for Knode AI",
       stats: [
@@ -214,7 +218,7 @@ export const caseStudies = {
     },
     {
       client: "Bel'Istria",
-      logo: "/logos/belistria.png",
+      logo: "/logos-white/belistria.png",
       thumb: "/casestudies/belistria.jpg",
       title: "Crafting an immersive Croatia private transfer and travel booking experience in Wix Studio",
       stats: [
@@ -226,7 +230,7 @@ export const caseStudies = {
     },
     {
       client: "Fort Lauderdale Dock Rentals",
-      logo: "/logos/foxstays.png",
+      logo: "/logos-white/foxstays.png",
       thumb: "/casestudies/fortlauderdale.jpg",
       title: "Building a booking and lead-capture website ecosystem for Florida's premier yacht and dock charter",
       stats: [
@@ -238,7 +242,7 @@ export const caseStudies = {
     },
     {
       client: "Scottish Luxury Experience",
-      logo: "",
+      logo: "/logos-white/mod.png",
       thumb: "/casestudies/scottishluxury.jpg",
       title: "Enabling thousands of tourists to visit Scotland's beauty through the UK's best-looking travel website",
       stats: [
@@ -579,19 +583,20 @@ export const testimonials = {
         "Zenith redefined what hard work means to me. They treat every website project with **pride, enthusiasm, and extreme passion**, and it shows in the results.",
       name: "Flynn Blackie",
       role: "Founder & Director, MOD Digital",
-      avatar: "/avatars/a1.webp",
+      avatar: "/avatars/flynn-blackie.jpg",
       logo: "/logos-dark/mod.png",
       logoAlt: "MOD Digital",
     },
     {
-      result: "Overdelivered on a white-label partnership, front to back",
+      result: "A redesign that became a long-term partnership",
       quote:
-        "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith **overdelivered on every front imaginable** and made the whole thing effortless.",
-      name: "John Smyth",
-      role: "CEO, AdVantage Media Marketing",
-      avatar: "/avatars/a2.jpg",
-      logo: "/logos-dark/foxstays.png",
-      logoAlt: "AdVantage",
+        "Our collaboration on redesigning Bel'Istria was the beginning of a long-term partnership. Their **composure and communication exceeded all standards**.",
+      name: "Ivan Belobrajdic",
+      role: "Bel'Istria",
+      avatar: "/avatars/ivan-belobrajdic.jpg",
+      logo: "/logos-dark/belistria-white.png",
+      logoAlt: "Bel'Istria",
+      invertLogo: true,
     },
     {
       result: "Rebranded, and conversion skyrocketed",
@@ -599,7 +604,7 @@ export const testimonials = {
         "We hired Zenith to help us rebrand our site. **Conversion skyrocketed.** We saw what it takes to be one of the top professionals in the field.",
       name: "Uros Stanimirovic",
       role: "Co-Founder & CTO, Genroks AI",
-      avatar: "/avatars/a3.jpg",
+      avatar: "/avatars/uros-stanimirovic.jpg",
       logo: "/logos-dark/genroks.png",
       logoAlt: "Genroks AI",
     },
@@ -607,19 +612,24 @@ export const testimonials = {
       result: "A full SaaS site and landing page, live in 3 weeks",
       quote:
         "They took our vision and shipped a **premium SaaS site in three weeks**. It carried us straight into a $10M Series A raise.",
+      // TODO(owner): quote is paraphrased — swap in Gemma's real quote, then
+      // set name to "Gemma Sole".
       name: "The Knode team",
       role: "Knode AI",
-      avatar: "/avatars/a1.webp",
+      avatar: "/avatars/gemma-sole.jpg",
       logo: "/logos-dark/knode.png",
       logoAlt: "Knode AI",
+      // the knode mark has lots of padding baked in; render it larger
+      logoClass: "h-6 sm:h-8",
     },
     {
       result: "Our fractional web team, leading design and dev",
       quote:
         "Zenith runs our design and development operations end to end. **Reliable, fast, and genuinely invested** in the outcome.",
-      name: "The Capacity team",
+      // TODO(owner): quote is paraphrased — swap in Ben's real quote.
+      name: "Ben Hall",
       role: "Capacity",
-      avatar: "/avatars/a2.jpg",
+      avatar: "/avatars/ben-hall.jpg",
       logo: "/logos-dark/capacity.png",
       logoAlt: "Capacity",
     },
@@ -745,12 +755,14 @@ export const footer = {
     phone: "+381 64 97 60617",
   },
   partnersLabel: "Partnered with industry-leading companies:",
+  // White marks inverted on the light footer; per-logo heights balance the
+  // marks optically (same set as the /book-a-call partner strip).
   partners: [
-    { src: "/logos-dark/mod.png", alt: "MOD Digital" },
-    { src: "/logos-dark/capacity.png", alt: "Capacity" },
-    { src: "/logos-dark/techtonnik.png", alt: "Techtonnik" },
-    { src: "/logos-dark/genroks.png", alt: "Genroks" },
-    { src: "/logos-dark/stilby.png", alt: "Stilby" },
+    { src: "/logos-white/shopify-partners.png", alt: "Shopify Partners", className: "h-8" },
+    { src: "/logos-white/wix-studio.png", alt: "Wix Studio", className: "h-7" },
+    { src: "/logos-white/capacity.png", alt: "Capacity", className: "h-6" },
+    { src: "/logos-white/techtonnik.png", alt: "Techtonnik", className: "h-6" },
+    { src: "/logos-white/mod.png", alt: "MOD Digital", className: "h-5" },
   ],
   audit: {
     heading: "Free website audit",

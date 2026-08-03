@@ -144,7 +144,7 @@ export function Pricing() {
   );
 }
 
-/** Per-tier line icon (pen / layers / spark), sized for the glyph cell. */
+/** Per-tier line icon (Lucide via Iconify), sized for the glyph cell. */
 function TierIcon({ name }: { name: string }) {
   const common = {
     viewBox: "0 0 24 24",
@@ -157,26 +157,28 @@ function TierIcon({ name }: { name: string }) {
     "aria-hidden": true,
   };
   if (name === "layers") {
+    // lucide:layers
     return (
       <svg {...common}>
-        <path d="M12 2l9 5-9 5-9-5 9-5z" />
-        <path d="M3 12l9 5 9-5" />
-        <path d="M3 17l9 5 9-5" />
+        <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+        <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+        <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
       </svg>
     );
   }
   if (name === "spark") {
+    // lucide:sparkles
     return (
       <svg {...common}>
-        <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18" />
+        <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594zM20 2v4m2-2h-4" />
+        <circle cx="4" cy="20" r="2" />
       </svg>
     );
   }
-  // pen
+  // lucide:pen-line
   return (
     <svg {...common}>
-      <path d="M12 20h9" />
-      <path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
+      <path d="M13 21h8m.174-14.188a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
     </svg>
   );
 }

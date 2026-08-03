@@ -97,7 +97,11 @@ export function Testimonials() {
                   width={120}
                   height={26}
                   className={cn(
-                    "h-4 w-auto max-w-full object-contain transition sm:h-5",
+                    "w-auto max-w-full object-contain transition",
+                    // per-logo size override for marks with baked-in padding
+                    "logoClass" in item && item.logoClass ? item.logoClass : "h-4 sm:h-5",
+                    // white marks get inverted to read on the light tab row
+                    "invertLogo" in item && item.invertLogo && "invert",
                     i === active ? "opacity-100" : "opacity-40",
                   )}
                 />

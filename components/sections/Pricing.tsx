@@ -35,7 +35,7 @@ export function Pricing() {
             <h2 className="font-display text-h2 font-medium leading-tight tracking-tight">
               {pricing.heading}
             </h2>
-            <p className="mt-4 text-body-lg text-text-muted">{pricing.intro}</p>
+            <p className="mt-4 text-body-lg font-medium text-text-muted">{pricing.intro}</p>
           </div>
           <Link
             href={pricing.cta.href}
@@ -118,7 +118,7 @@ export function Pricing() {
                 <h3 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
                   {pricing.whiteLabel.heading}
                 </h3>
-                <p className="mt-4 max-w-2xl text-body-lg text-text-muted">
+                <p className="mt-4 max-w-2xl text-body-lg font-medium text-text-muted">
                   {pricing.whiteLabel.paragraph}
                 </p>
               </div>

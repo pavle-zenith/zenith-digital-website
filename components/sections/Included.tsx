@@ -23,7 +23,7 @@ export function Included() {
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {included.heading}
         </h2>
-        <p className="mt-5 text-body-lg text-light-muted">{included.intro}</p>
+        <p className="mt-5 text-body-lg font-medium text-light-muted">{included.intro}</p>
       </div>
 
       {/* Tabs */}

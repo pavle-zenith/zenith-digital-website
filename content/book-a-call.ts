@@ -112,7 +112,7 @@ export const quoteBand = {
   items: [
     {
       quote:
-        "They made an impression on me right from the beginning. It's incredibly easy to communicate with their team and even easier to work with them.",
+        "They made an impression on me right from the beginning, it's incredibly easy to communicate with their team and even easier to work with them.",
       name: "Gemma K. Sole",
       role: "Head of GTM, Knode AI",
       avatar: "/avatars/gemma-sole.jpg",

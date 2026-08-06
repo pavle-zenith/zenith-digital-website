@@ -17,7 +17,7 @@ export function CaseStudies() {
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {caseStudies.heading}
         </h2>
-        <p className="text-body-lg text-light-muted">{caseStudies.intro}</p>
+        <p className="text-body-lg font-medium text-light-muted">{caseStudies.intro}</p>
       </div>
 
       {/* Column of rows; each row = two separate cards with a gap between them */}

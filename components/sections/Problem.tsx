@@ -24,7 +24,7 @@ export function Problem() {
           {whyZenith.heading}
         </h2>
         <div className="flex flex-col items-start gap-6 md:items-end">
-          <p className="max-w-md text-body-lg text-light-muted md:text-right">{whyZenith.intro}</p>
+          <p className="max-w-md text-body-lg font-medium text-light-muted md:text-right">{whyZenith.intro}</p>
           <Link
             href={whyZenith.cta.href}
             className="inline-flex items-center gap-2 rounded-[6px] bg-accent px-6 py-3 text-body font-medium text-accent-ink transition hover:bg-accent-hover"

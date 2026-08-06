@@ -36,12 +36,14 @@ export function Faq({ data = faqSection }: { data?: FaqData }) {
               </span>
             ))}
           </h2>
-          <p className="mt-6 max-w-md text-body-lg text-light-muted">{data.subhead}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {data.ctas.map((cta) => (
-              <Button key={cta.href} cta={cta} tone="light" />
-            ))}
-          </div>
+          <p className="mt-6 max-w-md text-body-lg font-medium text-light-muted">{data.subhead}</p>
+          {data.ctas.length > 0 ? (
+            <div className="mt-8 flex flex-wrap gap-3">
+              {data.ctas.map((cta) => (
+                <Button key={cta.href} cta={cta} tone="light" />
+              ))}
+            </div>
+          ) : null}
         </div>
 
         {/* Right: accordion of bordered cards */}

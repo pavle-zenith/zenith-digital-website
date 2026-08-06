@@ -27,7 +27,7 @@ export function Services() {
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {services.heading}
           </h2>
-          <p className="mt-4 max-w-xl text-body-lg text-light-muted">{services.intro}</p>
+          <p className="mt-4 max-w-xl text-body-lg font-medium text-light-muted">{services.intro}</p>
         </div>
         <div className="shrink-0">
           <Button cta={services.cta} tone="light" />

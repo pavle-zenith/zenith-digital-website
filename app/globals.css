@@ -163,6 +163,69 @@ body {
 .animate-marquee {
   animation: marquee 35s linear infinite;
 }
+.animate-marquee-reverse {
+  animation: marquee 35s linear infinite reverse;
+}
+/* Slower variant for the case-studies client-logo rows. */
+.animate-marquee-slow {
+  animation: marquee 70s linear infinite;
+}
+.animate-marquee-slow-reverse {
+  animation: marquee 70s linear infinite reverse;
+}
+
+/* Animated buttons. .btn-animated: a single-hue gradient (accent ->
+   accent-hover) that pans across the fill on hover — the one permitted
+   gradient-like effect. .btn-arrow: the arrow nudges right when the parent
+   (.group) is hovered. Both collapse under prefers-reduced-motion via the
+   global override above. */
+.btn-animated {
+  background-image: linear-gradient(
+    110deg,
+    var(--color-accent) 0%,
+    var(--color-accent-hover) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  transition: background-position 0.5s ease;
+}
+.btn-animated:hover {
+  background-position: 100% 50%;
+}
+.btn-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.group:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Cross-industry graph curve: line draws in, fill fades up (live-site port). */
+@keyframes chart-draw {
+  from {
+    stroke-dashoffset: 8000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes chart-fill-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.chart-line {
+  stroke-dasharray: 8000;
+  stroke-dashoffset: 8000;
+  animation: chart-draw 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.chart-fill {
+  opacity: 0;
+  animation: chart-fill-fade 1s ease-out 0.8s forwards;
+}
 
 /* Testimonial tab countdown fill (0 -> full over the cycle). */
 @keyframes tab-fill {

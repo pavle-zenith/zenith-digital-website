@@ -17,7 +17,9 @@ export function CaseStudies() {
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {caseStudies.heading}
         </h2>
-        <p className="text-body-lg font-medium text-light-muted">{caseStudies.intro}</p>
+        <p className="text-body-lg font-medium text-light-muted">
+          {caseStudies.intro}
+        </p>
       </div>
 
       {/* Column of rows; each row = two separate cards with a gap between them */}
@@ -71,7 +73,9 @@ export function CaseStudies() {
                     className="h-7 w-auto object-contain object-left"
                   />
                 ) : (
-                  <span className="font-display text-body-lg font-medium">{cs.client}</span>
+                  <span className="font-display text-body-lg font-medium">
+                    {cs.client}
+                  </span>
                 )}
               </div>
 
@@ -84,19 +88,23 @@ export function CaseStudies() {
                   <div className="flex gap-10">
                     {cs.stats.map((s) => (
                       <div key={s.label}>
-                        <div className="font-display text-h3 font-medium leading-none">{s.value}</div>
-                        <div className="mt-1.5 text-body text-white/60">{s.label}</div>
+                        <div className="font-display text-h3 font-medium leading-none">
+                          {s.value}
+                        </div>
+                        <div className="mt-1.5 text-body text-white/60">
+                          {s.label}
+                        </div>
                       </div>
                     ))}
                   </div>
-                <a
-                  href={cs.liveUrl}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-[6px] bg-white px-5 py-2.5 text-body font-medium text-light-text transition hover:bg-white/90"
-                >
-                  View case study <span aria-hidden>&rarr;</span>
-                </a>
+                  <a
+                    href={cs.liveUrl}
+                    target="_blank"
+                    rel="noopener"
+                    className="group inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-[6px] bg-white px-5 py-2.5 text-body font-medium text-light-text transition hover:bg-white/90"
+                  >
+                    View case study <span aria-hidden className="btn-arrow">&rarr;</span>
+                  </a>
                 </div>
               </div>
             </div>

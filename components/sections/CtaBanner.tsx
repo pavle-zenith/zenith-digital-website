@@ -8,6 +8,7 @@ type BannerData = {
   paragraph: string;
   checks?: string[];
   cta: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string };
   image: string;
 };
 
@@ -69,12 +70,22 @@ export function CtaBanner({ data }: { data: BannerData }) {
                 </ul>
               ) : null}
             </div>
-            <Link
-              href={data.cta.href}
-              className="inline-flex shrink-0 items-center gap-2 self-start rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90 md:self-end"
-            >
-              {data.cta.label} <span aria-hidden>&rsaquo;</span>
-            </Link>
+            <div className="flex shrink-0 flex-wrap gap-3 self-start md:self-end">
+              <Link
+                href={data.cta.href}
+                className="inline-flex items-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90"
+              >
+                {data.cta.label} <span aria-hidden>&rsaquo;</span>
+              </Link>
+              {data.ctaSecondary ? (
+                <Link
+                  href={data.ctaSecondary.href}
+                  className="inline-flex items-center gap-2 rounded-[6px] border border-white/30 px-6 py-3 text-body font-medium text-white transition hover:bg-white/10"
+                >
+                  {data.ctaSecondary.label} <span aria-hidden>&rsaquo;</span>
+                </Link>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

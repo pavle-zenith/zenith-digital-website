@@ -66,9 +66,9 @@ export function Process() {
         </h2>
         <Link
           href={processSection.cta.href}
-          className="inline-flex shrink-0 items-center gap-2 rounded-[6px] bg-accent px-6 py-3 text-body font-medium text-accent-ink transition hover:bg-accent-hover"
+          className="btn-animated group inline-flex shrink-0 items-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium text-accent-ink transition"
         >
-          {processSection.cta.label} <span aria-hidden>&rarr;</span>
+          {processSection.cta.label} <span aria-hidden className="btn-arrow">&rarr;</span>
         </Link>
       </div>
 

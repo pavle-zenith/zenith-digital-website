@@ -60,9 +60,9 @@ export function AuditWhoFor() {
               {"link" in item && item.link ? (
                 <Link
                   href={item.link.href}
-                  className="mt-4 inline-flex items-center gap-1.5 font-display text-body font-medium text-text transition hover:text-text-muted"
+                  className="group mt-4 inline-flex items-center gap-1.5 font-display text-body font-medium text-text transition hover:text-text-muted"
                 >
-                  {item.link.label} <span aria-hidden>&rarr;</span>
+                  {item.link.label} <span aria-hidden className="btn-arrow">&rarr;</span>
                 </Link>
               ) : null}
             </div>

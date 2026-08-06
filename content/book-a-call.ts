@@ -1,5 +1,7 @@
 import type { CtaLink } from "@/lib/types";
 
+import { beforeAfterItems } from "./case-studies";
+
 /**
  * /book-a-call — bottom-funnel conversion page. Every CTA on the site resolves
  * here; the page's only job is getting the call booked with zero friction.
@@ -78,31 +80,11 @@ export const callCovers = {
   ],
 };
 
-// 3. Before/after work (light, centered heading, 2x2 grid of drag sliders)
+// 3. Before/after work (light, centered heading, 2x2 grid of drag sliders).
+// Slider pairs are shared from content/case-studies.ts.
 export const beforeAfter = {
   heading: "Our previous website work in action",
-  items: [
-    {
-      title: "Knode AI",
-      before: "/before-after/knode-before.jpg",
-      after: "/before-after/knode-after.jpg",
-    },
-    {
-      title: "FoxStays Dock Rental",
-      before: "/before-after/foxstays-before.jpg",
-      after: "/before-after/foxstays-after.jpg",
-    },
-    {
-      title: "Hunting Brook Gardens",
-      before: "/before-after/huntingbrook-before.jpg",
-      after: "/before-after/huntingbrook-after.jpg",
-    },
-    {
-      title: "MindEd",
-      before: "/before-after/minded-before.jpg",
-      after: "/before-after/minded-after.jpg",
-    },
-  ],
+  items: beforeAfterItems,
 };
 
 // 4. Testimonial band (dark with texture, three quote cards). Features the

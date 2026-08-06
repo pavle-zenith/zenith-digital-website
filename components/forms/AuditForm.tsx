@@ -65,16 +65,6 @@ export function AuditForm({ id }: { id?: string }) {
       </div>
 
       <label className="mt-5 block">
-        <span className="mb-1.5 block text-body font-medium">{auditForm.fields.phone.label}</span>
-        <input
-          type="tel"
-          name="phone"
-          placeholder={auditForm.fields.phone.placeholder}
-          className={inputCls}
-        />
-      </label>
-
-      <label className="mt-5 block">
         <span className="mb-1.5 block text-body font-medium">{auditForm.fields.note.label}</span>
         <input
           type="text"
@@ -97,9 +87,9 @@ export function AuditForm({ id }: { id?: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-btn bg-accent px-6 py-4 text-body font-medium text-accent-ink transition hover:bg-accent-hover disabled:opacity-60"
+        className="btn-animated group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-btn px-6 py-4 text-body font-medium text-accent-ink transition disabled:opacity-60"
       >
-        {pending ? "Sending..." : auditForm.submit} <span aria-hidden>&rarr;</span>
+        {pending ? "Sending..." : auditForm.submit} <span aria-hidden className="btn-arrow">&rarr;</span>
       </button>
 
       {state.status === "error" ? (

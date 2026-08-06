@@ -1,16 +1,34 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
 import { quoteBand } from "@/content/book-a-call";
 
+type QuoteItem = {
+  quote: string;
+  placeholder?: boolean;
+  name: string;
+  role: string;
+  avatar: string;
+  logo: string;
+  logoAlt: string;
+  logoClass?: string;
+};
+
+type QuoteBandData = {
+  heading: string;
+  items: QuoteItem[];
+  link?: { label: string; href: string };
+};
+
 /**
  * Testimonial band — dark section on the faint navy texture. Three quote cards
  * in the shared hairline grid (white logo top, quote, avatar + name with a
- * verified tick + role pinned bottom). Features the clients NOT already on the
- * homepage testimonial sections (Gemma / Ivan / Jim).
+ * verified tick + role pinned bottom). Defaults to the /book-a-call picks;
+ * other pages (e.g. /case-studies) pass their own `data`.
  */
-export function QuoteBand() {
+export function QuoteBand({ data = quoteBand }: { data?: QuoteBandData }) {
   return (
     <div className="relative isolate overflow-hidden">
       {/* Faint texture background (same register as pricing / video testimonials) */}
@@ -26,11 +44,11 @@ export function QuoteBand() {
 
       <Section tone="dark" className="bg-transparent" frameClassName="!py-24">
         <h2 className="mx-auto mb-12 max-w-2xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-          {quoteBand.heading}
+          {data.heading}
         </h2>
 
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-border bg-border md:grid-cols-3">
-          {quoteBand.items.map((item) => (
+          {data.items.map((item) => (
             <figure
               key={item.name}
               className="flex flex-col bg-surface bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent p-8"
@@ -69,6 +87,17 @@ export function QuoteBand() {
             </figure>
           ))}
         </div>
+
+        {data.link ? (
+          <p className="mt-10 text-center">
+            <Link
+              href={data.link.href}
+              className="group inline-flex items-center gap-2 font-display font-medium transition hover:text-text-muted"
+            >
+              {data.link.label} <span aria-hidden className="btn-arrow">&rarr;</span>
+            </Link>
+          </p>
+        ) : null}
       </Section>
     </div>
   );

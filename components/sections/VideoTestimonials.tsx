@@ -49,7 +49,7 @@ export function VideoTestimonials() {
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {videoTestimonials.heading}
           </h2>
-          <p className="text-body-lg text-text-muted">{videoTestimonials.intro}</p>
+          <p className="text-body-lg font-medium text-text-muted">{videoTestimonials.intro}</p>
         </div>
 
         {/* 3 portrait cards — taller */}
@@ -83,8 +83,9 @@ export function VideoTestimonials() {
                 <div className="absolute inset-0 bg-gradient-to-b from-surface-2 to-surface" />
               )}
 
-              {/* Legibility gradient — hard at the bottom for the text, clear up top */}
-              <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-black via-black/80 to-transparent" />
+              {/* Legibility gradient — hard at the bottom for the text, clear up top.
+                  Base #010020 matches the case-study panel gradient. */}
+              <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-[#010020] via-[#010020]/80 to-transparent" />
 
               {/* Top row: logo left, play right */}
               <div className="relative flex items-start justify-between p-5">

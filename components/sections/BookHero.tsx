@@ -68,7 +68,7 @@ export function BookHero() {
           ))}
         </div>
         <p className="mt-4 font-display text-body-lg font-medium">{bookHero.proof.label}</p>
-        <p className="mt-6 text-body-lg leading-relaxed text-light-muted">{bookHero.subhead}</p>
+        <p className="mt-6 text-body-lg font-medium leading-relaxed text-light-muted">{bookHero.subhead}</p>
       </div>
 
       {/* Partner strip */}

@@ -1,22 +1,23 @@
 import { Section } from "@/components/ui/Section";
 import { CoverIcon } from "@/components/ui/CoverIcon";
-import { callCovers } from "@/content/book-a-call";
+import { auditCovers } from "@/content/free-website-audit";
 
 /**
- * "What the call covers" — light section. Centered heading, then six cells in
- * the shared hairline grid (1px gaps over a rule-colored background). Each cell:
- * a navy icon chip top-left (Lucide line icons via Iconify, inlined), a spacer,
- * then the title + body anchored at the bottom (live-site layout).
+ * "What you'll get" — light section. Six icon cards in the shared hairline
+ * grid (same register as the /book-a-call covers grid).
  */
-export function CallCovers() {
+export function AuditCovers() {
   return (
     <Section tone="light" frameClassName="!py-24">
-      <h2 className="mx-auto mb-12 max-w-3xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-        {callCovers.heading}
-      </h2>
+      <div className="mb-12 grid gap-8 md:grid-cols-2 md:items-start">
+        <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+          {auditCovers.heading}
+        </h2>
+        <p className="text-body-lg font-medium text-light-muted">{auditCovers.support}</p>
+      </div>
 
       <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-2 lg:grid-cols-3">
-        {callCovers.items.map((item) => (
+        {auditCovers.items.map((item) => (
           <article key={item.title} className="flex flex-col bg-light-bg p-8">
             <span className="flex h-12 w-12 items-center justify-center rounded-card bg-accent text-accent-ink">
               <CoverIcon name={item.icon} />

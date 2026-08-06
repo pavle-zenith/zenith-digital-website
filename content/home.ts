@@ -611,11 +611,9 @@ export const testimonials = {
     {
       result: "A full SaaS site and landing page, live in 3 weeks",
       quote:
-        "They took our vision and shipped a **premium SaaS site in three weeks**. It carried us straight into a $10M Series A raise.",
-      // TODO(owner): quote is paraphrased — swap in Gemma's real quote, then
-      // set name to "Gemma Sole".
-      name: "The Knode team",
-      role: "Knode AI",
+        "They made an impression on me right from the beginning, it's **incredibly easy to communicate with their team** and even easier to work with them.",
+      name: "Gemma Sole",
+      role: "Head of GTM, Knode AI",
       avatar: "/avatars/gemma-sole.jpg",
       logo: "/logos-dark/knode.png",
       logoAlt: "Knode AI",

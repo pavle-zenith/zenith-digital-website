@@ -25,7 +25,7 @@ export function Hero() {
             alt={hero.badgeBrand}
             width={100}
             height={24}
-            className="h-5 w-auto object-contain invert"
+            className="h-7 w-auto object-contain invert"
           />
         </div>
 
@@ -35,7 +35,7 @@ export function Hero() {
             <h1 className="font-display text-h1 font-medium leading-[1.08] tracking-tight">
               {hero.headline}
             </h1>
-            <p className="mt-6 max-w-xl text-body-lg leading-relaxed text-light-muted">
+            <p className="mt-6 max-w-xl text-body-lg font-medium leading-relaxed text-light-muted">
               {hero.subhead}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">

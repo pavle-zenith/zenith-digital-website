@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
+import { AuditReport } from "@/components/ui/AuditReport";
 import { cn } from "@/lib/utils";
 import { audit } from "@/content/home";
 
@@ -46,7 +47,7 @@ export function Audit() {
           <h2 className="max-w-lg font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {audit.heading}
           </h2>
-          <p className="mt-5 max-w-md text-body-lg text-light-muted">{audit.intro}</p>
+          <p className="mt-5 max-w-md text-body-lg font-medium text-light-muted">{audit.intro}</p>
 
           {/* Accordion tabs */}
           <div className="mt-10 border-t border-light-border">
@@ -118,52 +119,9 @@ export function Audit() {
 
         {/* Right column: mock audit-report card */}
         <div className="flex items-center justify-center rounded-[8px] bg-light-surface p-8 lg:p-12">
-          <AuditReport />
+          <AuditReport report={audit.report} />
         </div>
       </div>
     </Section>
-  );
-}
-
-const SEVERITY: Record<string, string> = {
-  high: "bg-[#E5484D]",
-  med: "bg-[#F5A623]",
-  low: "bg-positive",
-};
-
-function AuditReport() {
-  const r = audit.report;
-  return (
-    <div className="w-full max-w-md">
-      {/* Score card */}
-      <div className="flex items-center justify-between rounded-[8px] border border-light-border bg-light-bg p-6">
-        <div>
-          <p className="font-mono text-label uppercase track-label text-light-muted">{r.label}</p>
-          <p className="mt-3 font-display text-display font-medium leading-none tracking-tight">
-            {r.score}
-            <span className="text-h3 text-light-muted">/100</span>
-          </p>
-          <p className="mt-2 text-body text-light-muted">{r.scoreLabel}</p>
-        </div>
-        <span className="inline-flex items-center rounded-full bg-[#E5484D]/10 px-3 py-1 font-mono text-label uppercase track-label text-[#E5484D]">
-          {r.delta}
-        </span>
-      </div>
-
-      {/* Findings list */}
-      <div className="mt-3 rounded-[8px] border border-light-border bg-light-bg p-6">
-        <p className="mb-4 font-mono text-label uppercase track-label text-light-muted">
-          Top findings
-        </p>
-        <ul className="flex flex-col gap-4">
-          {r.findings.map((f) => (
-            <li key={f.text} className="flex items-start gap-3">
-              <span className={cn("mt-1.5 h-2 w-2 shrink-0 rounded-full", SEVERITY[f.severity])} />
-              <span className="text-body text-light-text">{f.text}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
   );
 }

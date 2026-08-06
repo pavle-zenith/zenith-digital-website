@@ -192,7 +192,7 @@ export function Nav() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="block py-2 text-body-lg text-light-muted hover:text-light-text"
+                className="block py-2 text-body-lg font-medium text-light-muted hover:text-light-text"
                 onClick={() => setOpen(false)}
               >
                 {item.label}

@@ -35,7 +35,7 @@ export function Industries() {
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {industries.heading}
           </h2>
-          <p className="mt-5 max-w-xl text-body-lg text-light-muted">{industries.intro}</p>
+          <p className="mt-5 max-w-xl text-body-lg font-medium text-light-muted">{industries.intro}</p>
         </div>
         <div className="flex gap-2">
           <button

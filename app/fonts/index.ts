@@ -24,11 +24,14 @@ export const saansMono = localFont({
   display: "swap",
 });
 
-/** Inter — body / UI face. Single variable file covers the full weight axis. */
+/** Inter Display — body / paragraph face (optical size cut of Inter). */
 export const inter = localFont({
   src: [
-    { path: "./inter/InterVariable.ttf", weight: "100 900", style: "normal" },
-    { path: "./inter/InterVariable-Italic.ttf", weight: "100 900", style: "italic" },
+    { path: "./inter-display/InterDisplay-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./inter-display/InterDisplay-Medium.ttf", weight: "500", style: "normal" },
+    { path: "./inter-display/InterDisplay-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "./inter-display/InterDisplay-Italic.ttf", weight: "400", style: "italic" },
+    { path: "./inter-display/InterDisplay-MediumItalic.ttf", weight: "500", style: "italic" },
   ],
   variable: "--font-body",
   display: "swap",

@@ -3,21 +3,31 @@
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 /**
  * Draggable before/after comparison (mouse + touch via pointer events). The
  * "after" image fills the card; the "before" image sits on top and is revealed
  * left of the handle with a clip-path inset. A 44px knob rides the divider and
- * doubles as a keyboard slider (arrow keys). Shared component — reused on
- * /case-studies later, so keep it page-agnostic.
+ * doubles as a keyboard slider (arrow keys). Shared component — keep it
+ * page-agnostic. `caption={false}` hides the visible title (it still feeds
+ * alt/aria text); `frameClassName` replaces the default shape classes
+ * (aspect/radius/border) when a host needs a different frame.
  */
 export function BeforeAfterSlider({
   title,
   before,
   after,
+  caption = true,
+  labels = true,
+  frameClassName,
 }: {
   title: string;
   before: string;
   after: string;
+  caption?: boolean;
+  labels?: boolean;
+  frameClassName?: string;
 }) {
   const [pct, setPct] = useState(50);
   const ref = useRef<HTMLDivElement>(null);
@@ -52,7 +62,10 @@ export function BeforeAfterSlider({
     <figure className="flex flex-col gap-4">
       <div
         ref={ref}
-        className="relative aspect-[4/3] cursor-ew-resize touch-pan-y select-none overflow-hidden rounded-card border border-border"
+        className={cn(
+          "relative cursor-ew-resize touch-pan-y select-none overflow-hidden",
+          frameClassName ?? "aspect-[4/3] rounded-card border border-border",
+        )}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
@@ -79,12 +92,16 @@ export function BeforeAfterSlider({
         />
 
         {/* Corner labels */}
-        <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-[11px] uppercase track-label text-white backdrop-blur-sm">
-          Before
-        </span>
-        <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-[11px] uppercase track-label text-white backdrop-blur-sm">
-          After
-        </span>
+        {labels ? (
+          <>
+            <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-[11px] uppercase track-label text-white backdrop-blur-sm">
+              Before
+            </span>
+            <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-[11px] uppercase track-label text-white backdrop-blur-sm">
+              After
+            </span>
+          </>
+        ) : null}
 
         {/* Divider + knob */}
         <div
@@ -108,7 +125,9 @@ export function BeforeAfterSlider({
           </svg>
         </button>
       </div>
-      <figcaption className="font-display text-body-lg font-medium">{title}</figcaption>
+      {caption ? (
+        <figcaption className="font-display text-body-lg font-medium">{title}</figcaption>
+      ) : null}
     </figure>
   );
 }

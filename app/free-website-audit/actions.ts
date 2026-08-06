@@ -54,7 +54,6 @@ export async function submitAudit(
 
   const site = normalizeUrl(String(formData.get("website") ?? ""));
   const email = String(formData.get("email") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
   const note = String(formData.get("note") ?? "").trim();
 
   if (!site) {
@@ -80,7 +79,7 @@ export async function submitAudit(
       to: process.env.AUDIT_TO_EMAIL ?? "hello@thezenithdigital.com",
       replyTo: email,
       subject: `Audit request: ${site}`,
-      text: [`Website: ${site}`, `Email: ${email}`, phone && `Phone: ${phone}`, note && `Note: ${note}`]
+      text: [`Website: ${site}`, `Email: ${email}`, note && `Note: ${note}`]
         .filter(Boolean)
         .join("\n"),
     });

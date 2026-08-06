@@ -39,9 +39,9 @@ export function Pricing() {
           </div>
           <Link
             href={pricing.cta.href}
-            className="inline-flex shrink-0 items-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90"
           >
-            {pricing.cta.label} <span aria-hidden>&rarr;</span>
+            {pricing.cta.label} <span aria-hidden className="btn-arrow">&rarr;</span>
           </Link>
         </div>
 
@@ -97,13 +97,13 @@ export function Pricing() {
                     <Link
                       href={tier.cta.href}
                       className={cn(
-                        "inline-flex w-full items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium transition",
+                        "group inline-flex w-full items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium transition",
                         featured
                           ? "bg-white text-bg hover:bg-white/90"
                           : "border border-border text-text hover:bg-surface-2",
                       )}
                     >
-                      {tier.cta.label} <span aria-hidden>&rarr;</span>
+                      {tier.cta.label} <span aria-hidden className="btn-arrow">&rarr;</span>
                     </Link>
                   </div>
                 </div>
@@ -125,15 +125,15 @@ export function Pricing() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href={pricing.whiteLabel.ctas[0].href}
-                  className="inline-flex items-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90"
+                  className="group inline-flex items-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90"
                 >
-                  {pricing.whiteLabel.ctas[0].label} <span aria-hidden>&rarr;</span>
+                  {pricing.whiteLabel.ctas[0].label} <span aria-hidden className="btn-arrow">&rarr;</span>
                 </Link>
                 <Link
                   href={pricing.whiteLabel.ctas[1].href}
-                  className="inline-flex items-center gap-2 rounded-[6px] border border-border px-6 py-3 text-body font-medium text-text transition hover:bg-surface-2"
+                  className="group inline-flex items-center gap-2 rounded-[6px] border border-border px-6 py-3 text-body font-medium text-text transition hover:bg-surface-2"
                 >
-                  {pricing.whiteLabel.ctas[1].label} <span aria-hidden>&rarr;</span>
+                  {pricing.whiteLabel.ctas[1].label} <span aria-hidden className="btn-arrow">&rarr;</span>
                 </Link>
               </div>
             </div>

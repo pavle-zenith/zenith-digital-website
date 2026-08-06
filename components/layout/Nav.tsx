@@ -82,9 +82,9 @@ export function Nav() {
         <div className="hidden items-center gap-2 md:flex">
           <Link
             href={nav.ctas[0].href}
-            className="inline-flex items-center gap-2 rounded-[6px] border border-light-border bg-light-surface px-4 py-2 text-body font-medium text-light-text transition hover:bg-light-border"
+            className="group inline-flex items-center gap-2 rounded-[6px] border border-light-border bg-light-surface px-4 py-2 text-body font-medium text-light-text transition hover:bg-light-border"
           >
-            {nav.ctas[0].label} <span aria-hidden>&rarr;</span>
+            {nav.ctas[0].label} <span aria-hidden className="btn-arrow">&rarr;</span>
           </Link>
           <Button cta={nav.ctas[1]} tone="light" className="!px-4 !py-2 text-body" />
         </div>

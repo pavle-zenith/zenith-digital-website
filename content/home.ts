@@ -63,52 +63,57 @@ export const whyZenith = {
   intro:
     "We're not the cheapest and we're not trying to be. We're the team that ships fast, protects what you've built, and knows Wix Studio better than anyone.",
   cta: { label: "Book a call", href: "/book-a-call" },
+  // OWNER: the center image between the header and the cards (e.g. a team or
+  // work shot). A framed placeholder renders until this path is set.
+  image: "",
   items: [
     {
-      art: "migration",
+      icon: "migrate",
       title: "Migration without headaches",
       body: "We've moved sites from WordPress, Webflow, Squarespace, Framer, and custom HTML without any surprises.",
-      span: 2,
     },
     {
-      art: "seo",
+      icon: "search",
       title: "100% SEO & GEO retention",
       body: "We protect the organic visibility you've already earned, and set you up for AI discoverability from day one.",
-      span: 2,
     },
     {
-      art: "industry",
+      icon: "grid",
       title: "Cross-industry experience",
       body: "SaaS startups, consulting firms, e-commerce brands, event agencies, course platforms, real estate platforms & more.",
-      span: 2,
     },
     {
-      art: "editor",
+      icon: "award",
       title: "Wix Professionals since 2019",
       body: "We've been building on the platform since before most agencies knew it existed which means we know exactly what it can do, and exactly where its limits are.",
-      span: 3,
     },
     {
-      art: "map",
+      icon: "globe",
       title: "Europe based, pragmatically raised",
       body: "Based in Belgrade. Operating across the UK, EU, and US. We run lean, communicate clearly, and make sure your budget goes into the actual work.",
-      span: 3,
+    },
+    {
+      icon: "rocket",
+      title: "Live in 3–4 weeks",
+      body: "Most builds go live within a month of kickoff, without the agency habit of quietly slipping deadlines.",
     },
   ],
 };
 
-// 5. Comparison matrix
+// 5. Comparison matrix — last column is the highlighted Zenith column.
 export const comparison = {
-  heading: "How we compare to freelancers, agencies, and DIY templates",
-  columns: ["", "Freelancers", "Agencies", "Templates & DIY", "Zenith"],
+  heading: "How we compare to AI websites, freelancers, and agencies",
+  intro:
+    "Every option gets you a website. This is what each one actually costs you over a year.",
+  columns: ["", "AI websites", "Freelancers", "Agencies", "Zenith Digital"],
   rows: [
-    { criterion: "Annual cost", values: ["Unpredictable", "€15k–50k+", "Cheap, until it isn't", "From €2,500, fixed"] },
-    { criterion: "Time to launch", values: ["Whenever", "2–4 months", "Weeks of your time", "3–4 weeks"] },
-    { criterion: "Consistent team", values: ["One person, no backup", "Rotating staff", "Just you", "Same team, start to finish"] },
-    { criterion: "Copywriting included", values: ["Rarely", "Extra cost", "You write it", "Included"] },
-    { criterion: "SEO & AEO", values: ["Sometimes", "Add-on", "Bolt-on plugins", "Built in"] },
-    { criterion: "Post-launch support", values: ["Unpredictable", "Retainer required", "Forums", "30 days free, then flexible"] },
-    { criterion: "You own and can edit it", values: ["Depends", "Often locked in", "Yes", "Yes, with a handover"] },
+    { criterion: "Annual cost", values: ["Cheap, until it isn't", "Unpredictable", "€15k–50k+", "From €2,500, fixed"] },
+    { criterion: "Time to launch", values: ["Minutes, then weeks of fixing it", "Whenever", "2–4 months", "3–4 weeks"] },
+    { criterion: "Consistent team", values: ["No team at all", "One person, no backup", "Rotating staff", "Same team, start to finish"] },
+    { criterion: "Copywriting included", values: ["Generic filler", "Rarely", "Extra cost", "Included"] },
+    { criterion: "SEO & AEO", values: ["Thin, templated pages", "Sometimes", "Add-on", "Built in"] },
+    { criterion: "Post-launch support", values: ["A chatbot", "Unpredictable", "Retainer required", "30 days free, then flexible"] },
+    { criterion: "You own and can edit it", values: ["Locked to their platform", "Depends", "Often locked in", "Yes, with a handover"] },
   ],
 };
 
@@ -119,44 +124,49 @@ export const services = {
     "One team for the whole journey. From a first Wix Studio build to migrations, campaigns, and white-label work for agencies.",
   cta: { label: "All services", href: "/services", variant: "primary" } as CtaLink,
   // Stripe-style grid: row 1 = two wide (span 3 of 6), row 2 = three equal
-  // (span 2 of 6), row 3 = one full-width (span 6). `image` is the per-service
-  // generated mockup.
+  // Stripe-style grid (6 cols): three rows of two equal cards (span 3).
+  // `image` is the per-service generated mockup.
   items: [
     {
       title: "Website design & development",
       description: "Fast, structured, conversion-ready sites that turn visitors into paying clients.",
-      image: "/services/web-design.jpg",
+      image: "/services/web-design.webp",
       span: 3,
     },
     {
       title: "Landing pages",
       description: "High-converting pages for campaigns, launches, and lead capture.",
-      image: "/services/landing-pages.jpg",
+      image: "/services/landing-pages.webp",
+      span: 3,
+    },
+    {
+      title: "White-label design & development",
+      description: "Unbranded builds for agencies and freelancers to resell under their own brand.",
+      image: "/services/white-label.webp",
       span: 3,
     },
     {
       title: "SEO, AEO & PPC campaigns",
       description: "Search and paid campaigns tied to your site so every euro lands somewhere built to convert.",
-      image: "/services/seo-aeo.jpg",
-      span: 2,
+      image: "/services/seo-aeo.webp",
+      span: 3,
     },
     {
       title: "Website migrations",
       description: "Move to Wix Studio from any platform with full URL mapping and zero ranking loss.",
-      image: "/services/migrations.jpg",
-      span: 2,
+      // Interactive before/after slider instead of a static mockup. Client
+      // name intentionally not shown on the card.
+      beforeAfter: {
+        before: "/before-after/foxstays-before.jpg",
+        after: "/before-after/foxstays-after.jpg",
+      },
+      span: 3,
     },
     {
       title: "Wix Studio development",
       description: "Custom code, CMS architecture, and integrations on top of Wix Studio.",
-      image: "/services/wix-studio.jpg",
-      span: 2,
-    },
-    {
-      title: "White-label design & development",
-      description: "Unbranded builds for agencies and freelancers to resell under their own brand.",
-      image: "/services/white-label.jpg",
-      span: 6,
+      image: "/services/wix-studio.webp",
+      span: 3,
     },
   ],
 };
@@ -198,62 +208,9 @@ export const videoTestimonials = {
 };
 
 // 6a. Case studies showcase (two-panel cards: thumbnail + branded panel)
-export const caseStudies = {
-  heading: "Real examples of how our websites helped businesses drive growth",
-  intro:
-    "These aren't showcase sites built to impress other designers. They're working websites built for real businesses, with specific problems to solve, and real outcomes attached.",
-  items: [
-    {
-      client: "Knode AI",
-      logo: "/logos-white/knode.png",
-      thumb: "/casestudies/knode.jpg",
-      title: "From 0 to raising a $10 Million Series A funding with a premium Wix Studio SaaS for Knode AI",
-      stats: [
-        { value: "$10M USD", label: "Currently raising" },
-        { value: "3 Weeks", label: "Time-to-market" },
-      ],
-      liveUrl: "https://knode.ai",
-      // per-client panel background
-      panel: "#161b6b",
-    },
-    {
-      client: "Bel'Istria",
-      logo: "/logos-white/belistria.png",
-      thumb: "/casestudies/belistria.jpg",
-      title: "Crafting an immersive Croatia private transfer and travel booking experience in Wix Studio",
-      stats: [
-        { value: "257%", label: "YoY impressions" },
-        { value: "35+", label: "Pages migrated" },
-      ],
-      liveUrl: "https://belistria.eu",
-      panel: "#0e2a1f",
-    },
-    {
-      client: "Fort Lauderdale Dock Rentals",
-      logo: "/logos-white/foxstays.png",
-      thumb: "/casestudies/fortlauderdale.jpg",
-      title: "Building a booking and lead-capture website ecosystem for Florida's premier yacht and dock charter",
-      stats: [
-        { value: "30+", label: "Warm leads" },
-        { value: "50+", label: "Docks available" },
-      ],
-      liveUrl: "https://foxstays.com",
-      panel: "#3a2410",
-    },
-    {
-      client: "Scottish Luxury Experience",
-      logo: "/logos-white/mod.png",
-      thumb: "/casestudies/scottishluxury.jpg",
-      title: "Enabling thousands of tourists to visit Scotland's beauty through the UK's best-looking travel website",
-      stats: [
-        { value: "€500k", label: "Pipeline value" },
-        { value: "4 Weeks", label: "Time-to-market" },
-      ],
-      liveUrl: "https://thescottishluxuryexperience.com",
-      panel: "#241a2e",
-    },
-  ],
-};
+// Featured two-panel cards now live in content/case-studies.ts (single
+// source of truth); re-exported here for existing imports.
+export { caseStudies } from "./case-studies";
 
 // 6b. Full-bleed image CTA band between the case studies and the cross-industry
 // logo grid (Stripe Sessions banner style: photo background, headline top-left,
@@ -271,22 +228,22 @@ export const crossIndustry = {
   heading: "We leverage our 10 years of expertise from cross-industry projects for our clients",
   // logo paths are placeholders; swap for the real marks. Names kept so it's clear which logo goes where.
   items: [
-    { name: "Knode", logo: "/logos-dark/knode.png", text: "Full SaaS website & Landing page from scratch in 3 weeks. Knode is currently raising $10M Series A." },
+    { name: "Knode", logo: "/logos-blue/knode.avif", text: "Full SaaS website & Landing page from scratch in 3 weeks. Knode is currently raising $10M Series A." },
     { name: "Techtonnik", logo: "/logos-dark/techtonnik.png", text: "Web fulfillment partners since 2023. Delivered 10+ Websites & 2 Web apps." },
-    { name: "MOD", logo: "/logos-dark/mod.png", text: "Delivered 15+ Landing pages for marketing campaigns generating €1M+ in client revenue." },
-    { name: "Capacity", logo: "/logos-dark/capacity.png", text: "Fractional web design team leading design & development operations." },
-    { name: "Empyrean Global", logo: "", text: "Redesigned web identity from scratch & acted as website consulting partner." },
-    { name: "BoomBoom Creatives", logo: "", text: "Several marketing landing pages throughout 2023/2024 in Webflow / Wix Studio." },
+    { name: "MOD", logo: "/logos-blue/mod.avif", text: "Delivered 15+ Landing pages for marketing campaigns generating €1M+ in client revenue." },
+    { name: "Capacity", logo: "/logos-blue/capacity.avif", text: "Fractional web design team leading design & development operations." },
+    { name: "Empyrean Global", logo: "/logos-blue/empyrean.avif", text: "Redesigned web identity from scratch & acted as website consulting partner." },
+    { name: "BoomBoom Creatives", logo: "/logos-blue/boomboom.avif", text: "Several marketing landing pages throughout 2023/2024 in Webflow / Wix Studio." },
     { name: "Stilby", logo: "/logos-dark/stilby.png", text: "Developed and launched two websites to expand into Montenegro & Slovakia markets." },
-    { name: "Genroks", logo: "/logos-dark/genroks.png", text: "Two separate web identities for an AI ISO Standard Compliance Generator Startup in Framer." },
-    { name: "Fox Energy", logo: "", text: "Full scale marketing website for oil & gas company looking to attract investors." },
-    { name: "NOTYOU", logo: "", text: "Full web e-Commerce identity for a popular local brand from ATL, Georgia." },
-    { name: "AdVantage", logo: "", text: "Managing dozens of client websites, security and email systems since 2024." },
-    { name: "FoxStays", logo: "/logos-dark/foxstays.png", text: "Web app and lead generation ecosystem for the yacht & dock rental market." },
-    { name: "LMF HR", logo: "", text: "Fractional Web Design & IT Partner for consulting firm clients in Indianapolis." },
-    { name: "Jim Steele", logo: "/logos-dark/jimsteele.png", text: "Marketing page & lead capture ecosystem for UK's popular motivational speaker." },
-    { name: "Creatify Collective", logo: "", text: "Development of a full brand identity for a growing Videography agency." },
-    { name: "Kema Coatings", logo: "", text: "Two branded websites for an expanding coating & protection company." },
+    { name: "Genroks", logo: "/logos-blue/genroks.avif", text: "Two separate web identities for an AI ISO Standard Compliance Generator Startup in Framer." },
+    { name: "Fox Energy", logo: "/logos-blue/foxenergy.avif", text: "Full scale marketing website for oil & gas company looking to attract investors." },
+    { name: "NOTYOU", logo: "/logos-blue/notyou.avif", text: "Full web e-Commerce identity for a popular local brand from ATL, Georgia." },
+    { name: "AdVantage", logo: "/logos-blue/advantage.avif", text: "Managing dozens of client websites, security and email systems since 2024." },
+    { name: "FoxStays", logo: "/logos-blue/foxstays.avif", text: "Web app and lead generation ecosystem for the yacht & dock rental market." },
+    { name: "LMF HR", logo: "/logos-blue/lmfhr.avif", text: "Fractional Web Design & IT Partner for consulting firm clients in Indianapolis." },
+    { name: "Jim Steele", logo: "/logos-blue/jimsteele.avif", text: "Marketing page & lead capture ecosystem for UK's popular motivational speaker." },
+    { name: "Creatify Collective", logo: "/logos-blue/creatify.avif", text: "Development of a full brand identity for a growing Videography agency." },
+    { name: "Kema Coatings", logo: "/logos-blue/kema.avif", text: "Two branded websites for an expanding coating & protection company." },
   ],
 };
 

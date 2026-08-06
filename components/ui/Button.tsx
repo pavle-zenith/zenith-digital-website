@@ -4,11 +4,11 @@ import { cn, isInternal } from "@/lib/utils";
 import type { CtaLink, Tone } from "@/lib/types";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium transition hover:brightness-105 active:scale-[.99]";
+  "group inline-flex items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium transition active:scale-[.99]";
 
 function classes(variant: "primary" | "secondary", tone: Tone) {
   if (variant === "primary") {
-    return cn(base, "bg-accent text-accent-ink hover:bg-accent-hover");
+    return cn(base, "btn-animated text-accent-ink");
   }
   return cn(
     base,
@@ -32,7 +32,18 @@ export function Button({
   const variant = cta.variant || "primary";
   const cls = cn(classes(variant, tone), className);
   const label = children ?? cta.label;
-  const arrow = <span aria-hidden>&rarr;</span>;
+  // Arrow swap: the resting arrow slides out right while a second one slides
+  // in from the left (clipped by the overflow-hidden wrapper).
+  const arrow = (
+    <span className="relative overflow-hidden" aria-hidden>
+      <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-[170%]">
+        &rarr;
+      </span>
+      <span className="absolute inset-y-0 left-0 inline-block -translate-x-[170%] transition-transform duration-300 ease-out group-hover:translate-x-0">
+        &rarr;
+      </span>
+    </span>
+  );
 
   if (isInternal(cta.href)) {
     return (

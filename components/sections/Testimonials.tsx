@@ -16,8 +16,9 @@ const CYCLE_MS = 6000;
  * avatar + name + role) over a row of client-logo tabs. Tabs auto-advance on a
  * timer and each carries a fill bar that tracks the countdown; clicking a tab
  * jumps to it and restarts the timer. Hovering the tabs pauses the rotation.
+ * `showStats={false}` drops the stats cell and lets the testimonial run full width.
  */
-export function Testimonials() {
+export function Testimonials({ showStats = true }: { showStats?: boolean }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const count = testimonials.items.length;
@@ -37,20 +38,27 @@ export function Testimonials() {
           rule; each cell carries its own padding for internal spacing. The block's
           own top/bottom borders are the section boundary (no extra frame padding). */}
       <div className="frame-bleed border-y border-light-border">
-        <div className="grid lg:grid-cols-[0.8fr_1.6fr] lg:divide-x lg:divide-light-border">
+        <div
+          className={cn(
+            "grid",
+            showStats && "lg:grid-cols-[0.8fr_1.6fr] lg:divide-x lg:divide-light-border",
+          )}
+        >
           {/* Left cell: key stats. Outer (left) padding matches the frame gutter
               so content lines up with the rest of the site; inner padding sets
               the gap to the divider. */}
-          <div className="flex flex-col justify-center gap-10 py-12 pl-[clamp(20px,4vw,64px)] pr-8 lg:pr-12">
-            {testimonials.stats.map((s) => (
-              <div key={s.label}>
-                <div className="font-display text-h2 font-medium leading-none tracking-tight">
-                  {s.value}
+          {showStats && (
+            <div className="flex flex-col justify-center gap-10 py-12 pl-[clamp(20px,4vw,64px)] pr-8 lg:pr-12">
+              {testimonials.stats.map((s) => (
+                <div key={s.label}>
+                  <div className="font-display text-h2 font-medium leading-none tracking-tight">
+                    {s.value}
+                  </div>
+                  <div className="mt-2 text-body text-light-muted">{s.label}</div>
                 </div>
-                <div className="mt-2 text-body text-light-muted">{s.label}</div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* Right cell: testimonial + tabs */}
           <div
@@ -58,7 +66,14 @@ export function Testimonials() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="flex min-h-[320px] flex-1 flex-col justify-center py-10 pl-8 pr-[clamp(20px,4vw,64px)] text-center lg:pl-12">
+            <div
+              className={cn(
+                "flex min-h-[320px] flex-1 flex-col justify-center py-10 text-center",
+                showStats
+                  ? "pl-8 pr-[clamp(20px,4vw,64px)] lg:pl-12"
+                  : "px-[clamp(20px,4vw,64px)]",
+              )}
+            >
               <h3 className="mx-auto max-w-xl font-display text-h3 font-medium leading-tight tracking-tight text-balance">
                 {t.result}
               </h3>
@@ -137,9 +152,9 @@ export function Testimonials() {
           </p>
           <Link
             href={testimonials.rating.href}
-            className="inline-flex items-center gap-2 font-display font-medium transition hover:text-accent"
+            className="group inline-flex items-center gap-2 font-display font-medium transition hover:text-accent"
           >
-            {testimonials.rating.cta} <span aria-hidden>&rarr;</span>
+            {testimonials.rating.cta} <span aria-hidden className="btn-arrow">&rarr;</span>
           </Link>
         </div>
       </div>

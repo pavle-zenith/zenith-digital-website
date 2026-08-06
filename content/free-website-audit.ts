@@ -28,7 +28,7 @@ export const auditHero = {
     { src: "/logos-white/techtonnik.png", alt: "Techtonnik", className: "h-5" },
   ],
   // Short trust checks under the form card
-  checks: ["Real person review", "No commitment", "48hr delivery"],
+  checks: ["Real person review", "No commitment", "Delivered within 2 business days"],
 };
 
 // The form (white card in the hero; the closing banner anchors back to it)
@@ -37,7 +37,6 @@ export const auditForm = {
   fields: {
     website: { label: "Your website", placeholder: "yourwebsite.com" },
     email: { label: "Your email", placeholder: "you@company.com" },
-    phone: { label: "Your phone", placeholder: "+44 7700 900123 (optional)" },
     note: {
       label: "Anything specific you want us to look at?",
       placeholder: "e.g. the pricing page, why nobody fills the contact form...",

@@ -46,7 +46,7 @@ export function PartnerBenefits() {
               <div
                 key={col}
                 className={cn(
-                  "px-6 py-4 font-display text-body-lg font-medium",
+                  "px-4 py-4 font-display text-body-lg font-medium sm:px-6",
                   i === 1 ? "bg-surface" : "text-text-muted",
                 )}
               >
@@ -59,10 +59,10 @@ export function PartnerBenefits() {
               key={theirs}
               className="grid grid-cols-2 divide-x divide-border border-b border-border last:border-b-0"
             >
-              <div className="px-6 py-4 text-body text-text-muted">
+              <div className="px-4 py-4 text-body text-text-muted sm:px-6">
                 {theirs}
               </div>
-              <div className="bg-surface px-6 py-4 text-body font-medium">
+              <div className="bg-surface px-4 py-4 text-body font-medium sm:px-6">
                 {ours}
               </div>
             </div>

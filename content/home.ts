@@ -63,9 +63,8 @@ export const whyZenith = {
   intro:
     "We're not the cheapest and we're not trying to be. We're the team that ships fast, protects what you've built, and knows Wix Studio better than anyone.",
   cta: { label: "Book a call", href: "/book-a-call" },
-  // OWNER: the center image between the header and the cards (e.g. a team or
-  // work shot). A framed placeholder renders until this path is set.
-  image: "",
+  // Center image between the header and the cards.
+  image: "/why-zenith-highlight.webp",
   items: [
     {
       icon: "migrate",
@@ -91,11 +90,6 @@ export const whyZenith = {
       icon: "globe",
       title: "Europe based, pragmatically raised",
       body: "Based in Belgrade. Operating across the UK, EU, and US. We run lean, communicate clearly, and make sure your budget goes into the actual work.",
-    },
-    {
-      icon: "rocket",
-      title: "Live in 3–4 weeks",
-      body: "Most builds go live within a month of kickoff, without the agency habit of quietly slipping deadlines.",
     },
   ],
 };

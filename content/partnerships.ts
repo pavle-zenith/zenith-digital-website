@@ -15,13 +15,15 @@ import type { CtaLink } from "@/lib/types";
  *   minimumCommitment  — confirm or edit the "no minimum commitment" claim
  *   feedbackWindow     — feedback consolidation window, e.g. "3 business days"
  *   revisionPolicy     — rounds included + rate for extra rounds
- *   partnerCount       — number of agency partners (proof stats row)
- *   inHouseCost        — in-house hire cost for the hiring-math band,
- *                        e.g. "€60–90k+/year"
  *   capacityPolicy     — volume/capacity policy sentence (FAQ answer)
+ *   retainerPrice      — monthly retainer price (pricing card 1)
+ *   retainerCapacity   — build slots reserved per month
+ *   retainerTerms      — retainer notice/rollover terms
+ *   fixedFrom          — starting price for a fixed per-project build
  *
  * Also confirm before launch (real copy, not bracketed):
  *   - the risk strip claims in pBenefits.riskStrip
+ *   - the LMF HR / WellingtonWebCo story placeholders in pStories
  *   - add a founder photo at pApply.founder.photo (renders a monogram until set)
  */
 export const commercials = {
@@ -35,8 +37,10 @@ export const commercials = {
   feedbackWindow: "[feedback window to set: e.g. 3 business days]",
   revisionPolicy:
     "[revision policy to set: N rounds included, extra rounds at €X]",
-  partnerCount: "[n]",
-  inHouseCost: "[in-house cost to set: e.g. €60–90k+/year]",
+  retainerPrice: "[€X/mo]",
+  retainerCapacity: "[N build slots]",
+  retainerTerms: "[notice terms to set]",
+  fixedFrom: "[From €X]",
   capacityPolicy:
     "[Capacity policy to set: e.g. parallel partner builds you take]",
 };
@@ -44,7 +48,8 @@ export const commercials = {
 // 1. Hero
 export const pHero = {
   eyebrow: "White-label & referral partnerships",
-  heading: "You deliver. We build.",
+  heading:
+    "White label website development services for digital agencies and consultants",
   subhead:
     "Partner with the team behind 150+ launches. Unbranded Wix Studio and custom builds, delivered under your agency's name, with the quality your clients think you built in-house.",
   ctas: [
@@ -59,32 +64,71 @@ export const pHero = {
       variant: "secondary",
     } as CtaLink,
   ],
-  trust: [
-    "NDA as standard",
-    "Unbranded deliverables",
-    "Dedicated point of contact",
+};
+
+// 1a. Completed-projects slider — the same mechanics as the homepage
+// industries carousel, but images only (4:3 portfolio shots, no captions).
+export const pProjects = {
+  heading: "Built for partners, shipped under their brand",
+  intro:
+    "A sample of what comes out the other side. Every one of these launched for a client who never saw our name.",
+  items: [
+    { name: "Knode AI", image: "/portfolio-slider/knode-ai.jpg" },
+    {
+      name: "Scottish Luxury Experience",
+      image: "/portfolio-slider/scottishluxuryexperience.jpg",
+    },
+    {
+      name: "Fort Lauderdale Dock Rental",
+      image: "/portfolio-slider/fort-lauderdale-dock-rental.jpg",
+    },
+    {
+      name: "Hunting Brook Gardens",
+      image: "/portfolio-slider/hunting-brook.jpg",
+    },
+    { name: "Highland Fling", image: "/portfolio-slider/highland-fling.jpg" },
+    {
+      name: "Clubby Cocktails",
+      image: "/portfolio-slider/clubby-cocktails.jpg",
+    },
+    { name: "GoRogue", image: "/portfolio-slider/gorogue.jpg" },
+    { name: "Fringe", image: "/portfolio-slider/fringe.jpg" },
+    {
+      name: "Redwolf Electrical",
+      image: "/portfolio-slider/redwolf-electrical.jpg",
+    },
+    { name: "MindEd", image: "/portfolio-slider/mindeed.jpg" },
+    { name: "Bradsells", image: "/portfolio-slider/bradsells.jpg" },
+    { name: "X Lounge", image: "/portfolio-slider/x-lounge.jpg" },
+    { name: "Tennilytics", image: "/portfolio-slider/tennilytics.jpg" },
+    { name: "TCN", image: "/portfolio-slider/tcn.jpg" },
+    { name: "JMJ", image: "/portfolio-slider/jmj.jpg" },
+    { name: "Bel'Istria", image: "/portfolio-slider/belistria.jpg" },
+    { name: "Chef", image: "/portfolio-slider/chef.jpg" },
   ],
 };
 
 // 1b. Problem-first beat — the three agency situations, between hero and tracks.
+// OWNER: swap the placeholder images for real ones when available.
 export const pProblems = {
-  srHeading: "Who this is for",
+  heading: "You sell the work. We make sure it ships.",
   items: [
     {
       title: "More demand than hands",
       body: "You're selling faster than you can build. Every new deal makes the backlog worse.",
+      image: "/industries/marketing-agencies.jpg",
     },
     {
       title: "Landing bigger clients",
       body: "The pitches are getting bigger than your in-house capability. You need senior build quality without the senior hires.",
+      image: "/industries/professional-services.jpg",
     },
     {
       title: "Occasional overflow",
       body: "Your team's fine most of the time. You need a reliable release valve for the months it isn't.",
+      image: "/industries/creatives.jpg",
     },
   ],
-  closing:
-    "All three end the same way: you deliver under your brand, we build behind it.",
 };
 
 // 2. The two tracks — the page's core decision, side by side.
@@ -130,9 +174,16 @@ export const pTracks = {
   ],
 };
 
-// 3. How it works — simple numbered row, four steps.
+// 3. How it works — tabbed four-step split with a mock graphic per step.
 export const pProcess = {
   heading: "How a white-label build runs",
+  intro:
+    "One channel, four steps, your brand out front. This is how a project moves from brief to handover.",
+  cta: {
+    label: "Apply to partner",
+    href: "#apply",
+    variant: "primary",
+  } as CtaLink,
   steps: [
     {
       title: "Brief",
@@ -149,6 +200,119 @@ export const pProcess = {
     {
       title: "Handover",
       body: "The finished site is transferred to your account with documentation. Your brand on everything, our name on nothing.",
+    },
+  ],
+};
+
+// 3a. What we build for partners — the platforms and project types covered.
+export const pServices = {
+  heading: "What we build under your brand",
+  intro:
+    "Whatever your client needs building, on whichever platform makes sense for them.",
+  items: [
+    {
+      icon: "browser",
+      title: "Full website development",
+      body: "Multi-page marketing sites, from structure and design through to build and launch.",
+    },
+    {
+      icon: "target",
+      title: "Landing pages",
+      body: "Single-page campaign and lead-capture builds, scoped and shipped fast.",
+    },
+    {
+      icon: "blocks",
+      title: "Wix Studio development",
+      body: "Custom code, CMS architecture, and integrations on the platform we know best.",
+    },
+    {
+      icon: "framer",
+      title: "Framer development",
+      body: "Framer builds with CMS collections, reusable components, and interactions.",
+    },
+    {
+      icon: "component",
+      title: "Webflow development",
+      body: "Webflow builds with a clean class structure your team can maintain.",
+    },
+    {
+      icon: "bag",
+      title: "Shopify e-commerce",
+      body: "Storefront builds, theme customisation, and product architecture.",
+    },
+    {
+      icon: "code",
+      title: "Custom development",
+      body: "Next.js and headless builds for when a platform stops being enough. This site is the proof.",
+    },
+  ],
+};
+
+// 3b. Partner pricing — three ways to work together. Every commercial figure
+// is an OWNER placeholder until set.
+export const pPricing = {
+  heading: "Three ways to work with us",
+  intro:
+    "Pick the structure that matches how you sell. All three run under your brand, or ours if you'd rather stay out of delivery.",
+  tiers: [
+    {
+      name: "Monthly",
+      badge: "Reserved capacity",
+      price: commercials.retainerPrice,
+      priceNote: "per month",
+      summary:
+        "A standing production slot for agencies with steady throughput. Reserved build capacity and priority turnaround.",
+      features: [
+        `${commercials.retainerCapacity} reserved each month`,
+        "Priority queue ahead of one-off projects",
+        "Dedicated PM and partner channel",
+        "Unbranded deliverables & NDA",
+        `Rolls month to month (${commercials.retainerTerms})`,
+      ],
+      cta: {
+        label: "Apply for a retainer",
+        href: "/partnerships?track=production#apply",
+      } as CtaLink,
+      highlighted: true,
+    },
+    {
+      name: "Fixed",
+      badge: "Per project",
+      price: commercials.fixedFrom,
+      priceNote: "per build",
+      summary:
+        "Overflow work priced per project. Scope, price, and timeline agreed in writing before we start.",
+      features: [
+        `Partner pricing (${commercials.partnerDiscount})`,
+        `Agreed turnaround SLAs (${commercials.buildSla})`,
+        "Unbranded deliverables & NDA",
+        `Revisions: ${commercials.revisionPolicy}`,
+        "No minimum commitment",
+      ],
+      cta: {
+        label: "Apply as a production partner",
+        href: "/partnerships?track=production#apply",
+      } as CtaLink,
+      highlighted: false,
+    },
+    {
+      name: "Referral",
+      badge: "Commission",
+      price: commercials.referralCommission,
+      priceNote: "of project value",
+      summary:
+        "Send a qualified introduction and stay out of delivery. We close and build under the Zenith brand.",
+      features: [
+        "No delivery involvement required",
+        "Full visibility on deal status",
+        `Paid on client payment (${commercials.referralPayout})`,
+        "No cap on introductions",
+      ],
+      cta: {
+        label: "Apply as a referral partner",
+        href: "/partnerships?track=referral#apply",
+      } as CtaLink,
+      highlighted: false,
     },
   ],
 };
@@ -188,18 +352,6 @@ export const pBenefits = {
       body: `Use us for one overflow project or as your standing production team. ${commercials.minimumCommitment}.`,
     },
   ],
-  // The hiring-math band under the grid: in-house hire vs. partner, no scale
-  // claims, EU/UK reality. The Zenith column is the highlighted one.
-  hiringMath: {
-    intro: `A mid-level designer plus developer in-house runs ${commercials.inHouseCost} before tools, management, and bench time. A white-label partner costs you only when there's a project.`,
-    columns: ["In-house hire", "Zenith partner"],
-    rows: [
-      ["Salary every month", "Per-project pricing"],
-      ["Bench time between projects", "Zero idle cost"],
-      ["One skillset per hire", "Design, build, and SEO in one team"],
-      ["Notice periods", "No commitment"],
-    ],
-  },
   // Risk-reduction strip — OWNER: confirm each claim before launch.
   riskStrip: [
     "No minimum commitment",
@@ -220,30 +372,144 @@ export const pExpectations = {
   closing: "Clear terms up front so neither side burns margin on ambiguity.",
 };
 
-// 6. Proof — one real white-label testimonial, full width. No padding with
-// off-topic quotes; partner-relationship logos only.
-export const pProof = {
-  quote:
-    "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith was able to overdeliver on every front imaginable.",
-  name: "John Smyth",
-  role: "CEO, AdVantage Media Marketing",
-  logo: "/logos-white/advantage.png",
-  logoAlt: "AdVantage Media Marketing",
-  stats: [
-    { value: commercials.partnerCount, label: "agency partners" },
-    { value: "10+", label: "websites delivered for Techtonnik since 2023" },
-    { value: "15+", label: "landing pages for MOD Digital" },
+// 6. Partner case studies — THE core proof section. Duration is the headline
+// metric on every card; cards with a public case study cross-link to it.
+export type PartnerStory = {
+  name: string;
+  logo: string;
+  relationship: string;
+  title: string;
+  story: string;
+  // OWNER: per-partner site screenshot; a framed placeholder renders until set.
+  image?: string;
+  stats: { value: string; label: string }[];
+  quote?: { text: string; name?: string; role?: string; avatar?: string };
+  featured?: boolean;
+  href?: string;
+};
+
+export const pStories = {
+  heading: "The partners who kept coming back",
+  intro:
+    "White-label partnerships live or die on reliability. Here's what ours look like after the first project.",
+  stories: [
     {
-      value: "Dozens",
-      label: "of client sites managed for AdVantage since 2024",
+      name: "Techtonnik",
+      logo: "/logos-blue/techtonnik.png",
+      relationship: "Production partner since 2023",
+      title: "Web fulfillment for an agency serving Serbia's IT sector",
+      story:
+        "Started with one build. Now 10+ websites and 2 web apps delivered across 7+ industries, all under Techtonnik's brand.",
+      stats: [
+        { value: "10+", label: "websites" },
+        { value: "2", label: "web apps" },
+        { value: "7+", label: "industries" },
+      ],
+      // OWNER: mock quote — replace with a real attributed one before launch.
+      quote: {
+        text: "Briefs go in, finished sites come out. Zenith made web delivery something we can promise our clients again.",
+        name: "[Name]",
+        role: "Founder @Techtonnik",
+        avatar: "/avatars/a1.webp",
+      },
+      href: "/case-studies",
     },
-  ],
-  logos: [
-    { src: "/logos-white/mod.png", alt: "MOD Digital" },
-    { src: "/logos-white/techtonnik.png", alt: "Techtonnik" },
-    { src: "/logos-white/capacity.png", alt: "Capacity" },
-    { src: "/logos-white/advantage.png", alt: "AdVantage Media Marketing" },
-  ],
+    {
+      name: "AdVantage Media Marketing",
+      logo: "/logos-blue/advantage.avif",
+      relationship: "White-label partner since 2024",
+      title: "The full white-label relationship, under AdVantage's brand",
+      story:
+        "Builds, plus ongoing management of dozens of client websites, security, and email systems. AdVantage's clients never hear our name.",
+      stats: [
+        { value: "Dozens", label: "of client sites managed" },
+        { value: "2024", label: "partners since" },
+      ],
+      // The one full white-label testimonial — featured, largest treatment.
+      // OWNER: swap the mock avatar for John's real photo.
+      quote: {
+        text: "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith was able to overdeliver on every front imaginable.",
+        name: "John Smyth",
+        role: "CEO @AdVantage",
+        avatar: "/avatars/a2.jpg",
+      },
+      featured: true,
+    },
+    {
+      name: "MOD Digital",
+      logo: "/logos-blue/mod.avif",
+      relationship: "Campaign production partner",
+      title: "15+ landing pages behind MOD's client campaigns",
+      story:
+        "Landing pages built for MOD's client marketing campaigns, generating €1M+ in client revenue.",
+      stats: [
+        { value: "15+", label: "landing pages" },
+        { value: "€1M+", label: "client campaign revenue" },
+      ],
+      quote: {
+        text: "Zenith redefined what hard work means to me. They treat every project with pride, enthusiasm, and extreme passion.",
+        name: "Flynn Blackie",
+        role: "Founder & Director @MOD Digital",
+        avatar: "/avatars/flynn-blackie.jpg",
+      },
+      href: "/case-studies",
+    },
+    {
+      name: "Capacity",
+      logo: "/logos-blue/capacity.avif",
+      relationship: "Embedded fractional team",
+      title: "A standing fractional team for Capacity's consulting clients",
+      story:
+        "Zenith runs design and development operations end to end for Capacity's consulting clients. A standing team, not per-project outsourcing.",
+      stats: [
+        { value: "5+", label: "consulting projects" },
+        { value: "End to end", label: "design & dev operations" },
+      ],
+      // OWNER: attribute the quote (mock name/avatar until then).
+      quote: {
+        text: "Reliable, fast, and genuinely invested in the outcome.",
+        name: "[Name]",
+        role: "@Capacity",
+        avatar: "/avatars/a3.jpg",
+      },
+      href: "/case-studies",
+    },
+    {
+      name: "LMF HR",
+      logo: "/logos-blue/lmfhr.avif",
+      relationship: "Fractional web & IT partner",
+      title:
+        "Fractional web design & IT for consulting-firm clients in Indianapolis",
+      story:
+        "Web design and IT handled as a standing fractional arrangement for LMF HR's consulting-firm clients in Indianapolis.",
+      // OWNER: replace with real figures.
+      stats: [{ value: "[n]", label: "client sites delivered" }],
+      // OWNER: mock quote — replace with a real attributed one before launch.
+      quote: {
+        text: "Our consulting clients get a web team without us hiring one. It just works, month after month.",
+        name: "[Name]",
+        role: "@LMF HR",
+        avatar: "/avatars/a2.jpg",
+      },
+    },
+    {
+      // OWNER: fill in the WellingtonWebCo relationship — every bracketed
+      // value below is a placeholder. A wordmark renders until a logo is added.
+      name: "WellingtonWebCo",
+      logo: "",
+      relationship: "[relationship to set]",
+      title: "[Partnership headline to set]",
+      story: "[Partnership story to set]",
+      stats: [{ value: "[n]", label: "[metric to set]" }],
+      // OWNER: mock quote — replace with a real attributed one before launch.
+      quote: {
+        text: "[Partner quote to set]",
+        name: "[Name]",
+        role: "@WellingtonWebCo",
+        avatar: "/avatars/a1.webp",
+      },
+    },
+  ] as PartnerStory[],
 };
 
 // 7. FAQ — feeds the shared Faq section + FAQPage JSON-LD on the page.

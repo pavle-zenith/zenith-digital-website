@@ -10,7 +10,7 @@ import { Faq } from "@/components/sections/Faq";
 import { auditCta, auditFaq } from "@/content/free-website-audit";
 
 export const metadata: Metadata = {
-  title: "Free website audit — Zenith Digital",
+  title: "Free website audit | Zenith Digital",
   description:
     "Get a free, hand-reviewed audit of your website: a short video walkthrough of the fixes that would move conversions, rankings, and speed first.",
   alternates: { canonical: "/free-website-audit" },

@@ -10,7 +10,7 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { bookFaq, bookFinalCta } from "@/content/book-a-call";
 
 export const metadata: Metadata = {
-  title: "Book a free website call — Zenith Digital",
+  title: "Book a free website call | Zenith Digital",
   description:
     "A free 20-minute call. We'll review your site live, show you what's costing you leads, and send a fixed-price proposal the same day.",
   alternates: { canonical: "/book-a-call" },

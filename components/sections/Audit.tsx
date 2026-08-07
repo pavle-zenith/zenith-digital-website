@@ -50,7 +50,7 @@ export function Audit() {
           <p className="mt-5 max-w-md text-body-lg font-medium text-light-muted">{audit.intro}</p>
 
           {/* Accordion tabs */}
-          <div className="mt-10 border-t border-light-border">
+          <div className="mt-10 border-t border-r border-light-border">
             {audit.tabs.map((tab, i) => {
               const isOpen = open === i;
               return (

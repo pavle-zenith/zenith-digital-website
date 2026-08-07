@@ -5,15 +5,17 @@ import { PartnershipsHero } from "@/components/sections/PartnershipsHero";
 import { PartnerProblems } from "@/components/sections/PartnerProblems";
 import { PartnerTracks } from "@/components/sections/PartnerTracks";
 import { PartnerProcess } from "@/components/sections/PartnerProcess";
+import { PartnerServices } from "@/components/sections/PartnerServices";
+import { PartnerPricing } from "@/components/sections/PartnerPricing";
 import { PartnerBenefits } from "@/components/sections/PartnerBenefits";
 import { PartnerExpectations } from "@/components/sections/PartnerExpectations";
-import { PartnerProof } from "@/components/sections/PartnerProof";
+import { PartnerStories } from "@/components/sections/PartnerStories";
 import { PartnerApply } from "@/components/sections/PartnerApply";
 import { Faq } from "@/components/sections/Faq";
 import { pFaq } from "@/content/partnerships";
 
 export const metadata: Metadata = {
-  title: "White-label web design for agencies — Zenith Digital partnerships",
+  title: "White-label web design for agencies | Zenith Digital partnerships",
   description:
     "Resell premium Wix Studio and custom builds under your own brand. Unbranded deliverables, NDA, partner pricing, and a dedicated team behind 150+ launches.",
   alternates: { canonical: "/partnerships" },
@@ -57,9 +59,11 @@ export default function PartnershipsPage() {
       <PartnerProblems />
       <PartnerTracks />
       <PartnerProcess />
+      <PartnerServices />
+      <PartnerPricing />
       <PartnerBenefits />
       <PartnerExpectations />
-      <PartnerProof />
+      <PartnerStories />
       <Faq data={pFaq} />
       <PartnerApply />
     </>

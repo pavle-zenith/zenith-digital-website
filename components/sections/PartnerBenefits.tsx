@@ -1,88 +1,64 @@
+import Image from "next/image";
+
 import { Section } from "@/components/ui/Section";
-import { cn } from "@/lib/utils";
 import { pBenefits } from "@/content/partnerships";
 
 /**
- * What partners get — dark section, six cells in one hairline-bounded grid
+ * What partners get — dark, textured. Six cells in one hairline-bounded grid
  * (same shared-1px-rule construction as the light "Why Zenith" bento). Each
  * cell leads with a small line icon in a hairline square (dark-tone take on
- * the Included boxes). Under the grid: the hiring-math comparison band
- * (in-house hire vs. partner, Zenith column highlighted like the comparison
- * table) and the risk-reduction strip.
+ * the Included boxes). The risk-reduction strip closes the section.
  */
 export function PartnerBenefits() {
   return (
-    <Section tone="dark" frameClassName="!py-24">
-      <h2 className="mb-12 max-w-2xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-        {pBenefits.heading}
-      </h2>
-
-      {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines. */}
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
-        {pBenefits.items.map((item) => (
-          <article key={item.title} className="flex flex-col bg-bg p-8">
-            <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-border bg-surface text-text">
-              <BenefitIcon name={item.icon} />
-            </span>
-            <h3 className="mt-8 font-display text-h3 font-medium">
-              {item.title}
-            </h3>
-            <p className="mt-3 text-body leading-snug text-text-muted">
-              {item.body}
-            </p>
-          </article>
-        ))}
+    <div className="relative isolate overflow-hidden">
+      {/* Faint texture background (same register as the other dark bands) */}
+      <div className="absolute inset-0 -z-10 bg-bg">
+        <Image
+          src="/textures/bg-texture.png"
+          alt=""
+          fill
+          className="object-cover opacity-[0.14]"
+          aria-hidden
+        />
       </div>
 
-      {/* Hiring-math band: intro line, then the two-column comparison */}
-      <div className="mt-16 grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-        <p className="max-w-md text-body-lg font-medium leading-relaxed text-text-muted">
-          {pBenefits.hiringMath.intro}
-        </p>
+      <Section tone="dark" className="bg-transparent" frameClassName="!py-24">
+        <h2 className="mb-12 max-w-2xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+          {pBenefits.heading}
+        </h2>
 
-        <div className="overflow-hidden rounded-card border border-border">
-          <div className="grid grid-cols-2 divide-x divide-border border-b border-border">
-            {pBenefits.hiringMath.columns.map((col, i) => (
-              <div
-                key={col}
-                className={cn(
-                  "px-4 py-4 font-display text-body-lg font-medium sm:px-6",
-                  i === 1 ? "bg-surface" : "text-text-muted",
-                )}
-              >
-                {col}
-              </div>
-            ))}
-          </div>
-          {pBenefits.hiringMath.rows.map(([theirs, ours]) => (
-            <div
-              key={theirs}
-              className="grid grid-cols-2 divide-x divide-border border-b border-border last:border-b-0"
-            >
-              <div className="px-4 py-4 text-body text-text-muted sm:px-6">
-                {theirs}
-              </div>
-              <div className="bg-surface px-4 py-4 text-body font-medium sm:px-6">
-                {ours}
-              </div>
-            </div>
+        {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines. */}
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+          {pBenefits.items.map((item) => (
+            <article key={item.title} className="flex flex-col bg-bg p-8">
+              <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-border bg-surface text-text">
+                <BenefitIcon name={item.icon} />
+              </span>
+              <h3 className="mt-8 font-display text-h3 font-medium">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-body leading-snug text-text-muted">
+                {item.body}
+              </p>
+            </article>
           ))}
         </div>
-      </div>
 
-      {/* Risk-reduction strip */}
-      <ul className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
-        {pBenefits.riskStrip.map((item) => (
-          <li
-            key={item}
-            className="flex items-center gap-2 text-body font-medium"
-          >
-            <Check />
-            {item}
-          </li>
-        ))}
-      </ul>
-    </Section>
+        {/* Risk-reduction strip */}
+        <ul className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
+          {pBenefits.riskStrip.map((item) => (
+            <li
+              key={item}
+              className="flex items-center gap-2 text-body font-medium"
+            >
+              <Check />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </div>
   );
 }
 

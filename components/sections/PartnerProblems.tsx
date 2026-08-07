@@ -1,33 +1,55 @@
+import Image from "next/image";
+
 import { Section } from "@/components/ui/Section";
 import { pProblems } from "@/content/partnerships";
 
 /**
- * Problem-first beat between the hero and the two tracks — three agency
- * situations in a hairline-topped row (same register as the process steps),
- * closed by one display-weight punchline. Headerless by design; an sr-only
- * heading keeps the outline intact.
+ * Problem-first beat between the projects slider and the two tracks — a
+ * centered headline over three agency situations, each a tall portrait card
+ * with the copy set inside the image over a bottom-weighted scrim.
  */
 export function PartnerProblems() {
   return (
     <Section tone="light" frameClassName="!py-20">
-      <h2 className="sr-only">{pProblems.srHeading}</h2>
+      <h2 className="mx-auto mb-12 max-w-3xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+        {pProblems.heading}
+      </h2>
 
-      <div className="grid gap-x-8 gap-y-10 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3">
         {pProblems.items.map((item) => (
-          <div key={item.title} className="border-t border-light-border pt-6">
-            <h3 className="font-display text-body-lg font-medium">
-              {item.title}
-            </h3>
-            <p className="mt-2 text-body leading-snug text-light-muted">
-              {item.body}
-            </p>
-          </div>
+          <article
+            key={item.title}
+            className="relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-card bg-bg p-8"
+          >
+            <Image
+              src={item.image}
+              alt=""
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+              aria-hidden
+            />
+            {/* Scrim: solid navy at the bottom for readable text, clearing
+                toward the top so the image shows. */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(0deg, #010020 18%, rgba(1,0,32,0.75) 48%, rgba(1,0,32,0.25) 100%)",
+              }}
+              aria-hidden
+            />
+            <div className="relative">
+              <h3 className="font-display text-h3 font-medium leading-tight text-white text-balance">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-body-lg leading-snug text-white/80">
+                {item.body}
+              </p>
+            </div>
+          </article>
         ))}
       </div>
-
-      <p className="mt-14 max-w-3xl font-display text-h3 font-medium leading-snug tracking-tight text-balance">
-        {pProblems.closing}
-      </p>
     </Section>
   );
 }

@@ -5,9 +5,9 @@ import { Section } from "@/components/ui/Section";
 import { auditWhoFor } from "@/content/free-website-audit";
 
 /**
- * "Who gets the most out of it" — dark section, three cards with full-bleed
- * background photos under a navy scrim (same gradient base as the case-study
- * panels), title + body pinned to the bottom.
+ * "Who gets the most out of it" — dark section, three 3:4 portrait cards with
+ * a full-bleed photo and the copy set inside over a bottom-weighted navy
+ * scrim (same treatment as the partnerships problem cards).
  */
 export function AuditWhoFor() {
   return (
@@ -24,51 +24,56 @@ export function AuditWhoFor() {
       </div>
 
       <Section tone="dark" className="bg-transparent" frameClassName="!py-24">
-      <h2 className="mx-auto mb-12 text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-        {auditWhoFor.heading}
-      </h2>
+        <h2 className="mx-auto mb-12 text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+          {auditWhoFor.heading}
+        </h2>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {auditWhoFor.items.map((item) => (
-          <article
-            key={item.title}
-            className="relative flex min-h-[560px] flex-col justify-between overflow-hidden rounded-card border border-border lg:min-h-[620px]"
-          >
-            <Image
-              src={item.image}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover"
-              aria-hidden
-            />
-            {/* Navy scrim: solid behind the title (top) and body (bottom),
-                lighter through the middle so the photo shows */}
-            <div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(1,0,32,0.92) 0%, rgba(1,0,32,0.4) 30%, rgba(1,0,32,0.4) 55%, rgba(1,0,32,0.95) 100%)",
-              }}
-              aria-hidden
-            />
-            <h3 className="relative p-7 font-display text-h3 font-medium leading-tight text-balance">
-              {item.title}
-            </h3>
-            <div className="relative p-7">
-              <p className="text-body leading-snug text-text">{item.body}</p>
-              {"link" in item && item.link ? (
-                <Link
-                  href={item.link.href}
-                  className="group mt-4 inline-flex items-center gap-1.5 font-display text-body font-medium text-text transition hover:text-text-muted"
-                >
-                  {item.link.label} <span aria-hidden className="btn-arrow">&rarr;</span>
-                </Link>
-              ) : null}
-            </div>
-          </article>
-        ))}
-      </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {auditWhoFor.items.map((item) => (
+            <article
+              key={item.title}
+              className="relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-card bg-bg p-8"
+            >
+              <Image
+                src={item.image}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover"
+                aria-hidden
+              />
+              {/* Scrim: solid navy at the bottom for readable text, clearing
+                  toward the top so the photo shows. */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(0deg, #010020 18%, rgba(1,0,32,0.75) 48%, rgba(1,0,32,0.25) 100%)",
+                }}
+                aria-hidden
+              />
+              <div className="relative">
+                <h3 className="font-display text-h3 font-medium leading-tight text-white text-balance">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-body-lg leading-snug text-white/80">
+                  {item.body}
+                </p>
+                {"link" in item && item.link ? (
+                  <Link
+                    href={item.link.href}
+                    className="group mt-4 inline-flex items-center gap-1.5 font-display text-body font-medium text-white transition hover:text-white/70"
+                  >
+                    {item.link.label}{" "}
+                    <span aria-hidden className="btn-arrow">
+                      &rarr;
+                    </span>
+                  </Link>
+                ) : null}
+              </div>
+            </article>
+          ))}
+        </div>
       </Section>
     </div>
   );

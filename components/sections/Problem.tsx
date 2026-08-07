@@ -2,13 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
+import { cn } from "@/lib/utils";
 import { whyZenith } from "@/content/home";
 
 /**
  * "The reasons businesses pick us, and stay" — header (heading left, intro +
  * CTA right), a wide center image (framed placeholder until the owner sets
- * whyZenith.image), then six reason cards in the shared-hairline grid, each
- * led by a small line icon in an accent square (Included register).
+ * whyZenith.image), then five reason cards in the shared-hairline grid (three
+ * thirds over two halves), each led by a small line icon in an accent square
+ * (Included register).
  */
 export function Problem() {
   return (
@@ -25,13 +27,16 @@ export function Problem() {
             href={whyZenith.cta.href}
             className="btn-animated group inline-flex items-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium text-accent-ink transition"
           >
-            {whyZenith.cta.label} <span aria-hidden className="btn-arrow">&rarr;</span>
+            {whyZenith.cta.label}{" "}
+            <span aria-hidden className="btn-arrow">
+              &rarr;
+            </span>
           </Link>
         </div>
       </div>
 
-      {/* Center image — framed placeholder surface until the owner supplies one */}
-      <div className="relative mb-12 aspect-[21/9] overflow-hidden rounded-card border border-light-border bg-light-surface">
+      {/* Center image — 16:9 to match the supplied artwork, so nothing crops. */}
+      <div className="relative mb-12 aspect-video overflow-hidden rounded-card border border-light-border bg-light-surface">
         {whyZenith.image ? (
           <Image
             src={whyZenith.image}
@@ -44,15 +49,27 @@ export function Problem() {
         ) : null}
       </div>
 
-      {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines. */}
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-2 lg:grid-cols-3">
-        {whyZenith.items.map((item) => (
-          <article key={item.title} className="flex flex-col bg-light-bg p-8">
+      {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines.
+          Five cards: three thirds on top, two halves beneath. */}
+      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-2 lg:grid-cols-6">
+        {whyZenith.items.map((item, i) => (
+          <article
+            key={item.title}
+            className={cn(
+              "flex flex-col bg-light-bg p-8",
+              i < 3 ? "lg:col-span-2" : "lg:col-span-3",
+              i === 4 && "md:col-span-2 lg:col-span-3",
+            )}
+          >
             <span className="flex h-11 w-11 items-center justify-center rounded-[6px] bg-accent text-accent-ink">
               <ReasonIcon name={item.icon} />
             </span>
-            <h3 className="mt-8 font-display text-h3 font-medium">{item.title}</h3>
-            <p className="mt-3 max-w-md text-body leading-snug text-light-muted">{item.body}</p>
+            <h3 className="mt-8 font-display text-h3 font-medium">
+              {item.title}
+            </h3>
+            <p className="mt-3 max-w-md text-body leading-snug text-light-muted">
+              {item.body}
+            </p>
           </article>
         ))}
       </div>

@@ -28,7 +28,7 @@ export function PartnerBenefits() {
         className="bg-transparent"
         frameClassName="!py-14 md:!py-24"
       >
-        <h2 className="mb-8 max-w-2xl font-display md:mb-12 text-h2 font-medium leading-tight tracking-tight text-balance">
+        <h2 className="mx-auto mb-8 max-w-2xl text-center font-display md:mb-12 text-h2 font-medium leading-tight tracking-tight text-balance">
           {pBenefits.heading}
         </h2>
 
@@ -50,7 +50,7 @@ export function PartnerBenefits() {
         </div>
 
         {/* Risk-reduction strip */}
-        <ul className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
+        <ul className="mt-14 flex flex-wrap justify-center gap-x-8 gap-y-3 border-t border-border pt-6">
           {pBenefits.riskStrip.map((item) => (
             <li
               key={item}

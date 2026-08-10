@@ -34,11 +34,13 @@ export function PartnerForm() {
 function ParamForm() {
   const raw = useSearchParams().get("track");
   const preselect =
-    raw === "production"
-      ? "White-label production"
-      : raw === "referral"
-        ? "Referral"
-        : null;
+    raw === "retainer"
+      ? "Retainer"
+      : raw === "production"
+        ? "White-label production"
+        : raw === "referral"
+          ? "Referral"
+          : null;
   return <FormInner preselect={preselect} />;
 }
 
@@ -83,7 +85,7 @@ function FormInner({ preselect }: { preselect: string | null }) {
         <legend className="mb-2 block text-body font-medium">
           {pApply.fields.track.label}
         </legend>
-        <div className="grid gap-2.5 sm:grid-cols-3">
+        <div className="grid gap-2.5 sm:grid-cols-2">
           {pApply.fields.track.options.map((option) => (
             <label
               key={option}

@@ -3,23 +3,13 @@ import type { CtaLink } from "@/lib/types";
 /*
  * /partnerships — every string on the page lives here.
  *
- * OWNER — set every field in `commercials` below before launch. The current
- * values are visible [bracketed] placeholders wired into the page copy, so an
- * unset field is easy to spot on any preview. Fields to set:
- *   partnerDiscount    — white-label pricing, e.g. "20% off retail"
- *   buildSla           — standard turnaround, e.g. "a 5-page build in 3 weeks"
- *   referralCommission — e.g. "10–15%"
- *   referralPayout     — payout terms, e.g. "net 14 after the client pays"
- *   wholesaleStructure — how partner pricing works (FAQ answer)
- *   postHandover       — post-handover change terms (FAQ answer)
- *   minimumCommitment  — confirm or edit the "no minimum commitment" claim
- *   feedbackWindow     — feedback consolidation window, e.g. "3 business days"
- *   revisionPolicy     — rounds included + rate for extra rounds
- *   capacityPolicy     — volume/capacity policy sentence (FAQ answer)
- *   retainerPrice      — monthly retainer price (pricing card 1)
- *   retainerCapacity   — build slots reserved per month
- *   retainerTerms      — retainer notice/rollover terms
- *   fixedFrom          — starting price for a fixed per-project build
+ * Commercial terms are final except the two bracketed fields below. The WL
+ * full-site wholesale prices are INTERNAL (gated rate card, shared after a
+ * partner applies) — never add them to this file or render them on the page.
+ *
+ * OWNER — still to set:
+ *   postHandover   — post-handover change terms (FAQ answer)
+ *   capacityPolicy — volume/capacity policy sentence (FAQ answer)
  *
  * Also confirm before launch (real copy, not bracketed):
  *   - the risk strip claims in pBenefits.riskStrip
@@ -27,20 +17,16 @@ import type { CtaLink } from "@/lib/types";
  *   - add a founder photo at pApply.founder.photo (renders a monogram until set)
  */
 export const commercials = {
-  partnerDiscount: "[partner % off retail to set]",
-  buildSla: "[SLA to set: e.g. a 5-page build in N weeks]",
-  referralCommission: "[commission % to set]",
-  referralPayout: "[payout terms to set]",
-  wholesaleStructure: "[Wholesale pricing structure to set]",
+  partnerDiscount: "full rate card shared on application",
+  buildSla: "Landing page in 1 week, 5-page build in 2 weeks",
+  referralCommission: "10%",
+  referralPayout: "when the client pays",
+  wholesaleStructure:
+    "Wholesale partner rates with the full rate card shared on application",
   postHandover: "[Post-handover terms to set: included window, then rate]",
-  minimumCommitment: "No minimum commitment [to confirm]",
-  feedbackWindow: "[feedback window to set: e.g. 3 business days]",
-  revisionPolicy:
-    "[revision policy to set: N rounds included, extra rounds at €X]",
-  retainerPrice: "[€X/mo]",
-  retainerCapacity: "[N build slots]",
-  retainerTerms: "[notice terms to set]",
-  fixedFrom: "[From €X]",
+  minimumCommitment: "No minimum commitment",
+  feedbackWindow: "3 business days",
+  revisionPolicy: "2 rounds included, extra rounds at €250",
   capacityPolicy:
     "[Capacity policy to set: e.g. parallel partner builds you take]",
 };
@@ -163,7 +149,7 @@ export const pTracks = {
         `${commercials.referralCommission} of project value on close`,
         "No delivery involvement required",
         "Full visibility on the deal status",
-        `Paid on client payment (${commercials.referralPayout})`,
+        `Paid ${commercials.referralPayout}`,
       ],
       cta: {
         label: "Apply as a referral partner",
@@ -248,8 +234,8 @@ export const pServices = {
   ],
 };
 
-// 3b. Partner pricing — three ways to work together. Every commercial figure
-// is an OWNER placeholder until set.
+// 3b. Partner pricing — three ways to work together. Final commercial terms;
+// the full-site wholesale rate card stays gated (see the header comment).
 export const pPricing = {
   heading: "Three ways to work with us",
   intro:
@@ -257,36 +243,40 @@ export const pPricing = {
   tiers: [
     {
       name: "Monthly",
+      icon: "calendar",
       badge: "Reserved capacity",
-      price: commercials.retainerPrice,
+      price: "From €1,099",
       priceNote: "per month",
       summary:
         "A standing production slot for agencies with steady throughput. Reserved build capacity and priority turnaround.",
       features: [
-        `${commercials.retainerCapacity} reserved each month`,
+        "1 reserved production slot: 30 hrs/month of development",
         "Priority queue ahead of one-off projects",
         "Dedicated PM and partner channel",
         "Unbranded deliverables & NDA",
-        `Rolls month to month (${commercials.retainerTerms})`,
+        "Rolls month to month, 30 days notice",
       ],
       cta: {
         label: "Apply for a retainer",
-        href: "/partnerships?track=production#apply",
+        href: "/partnerships?track=retainer#apply",
       } as CtaLink,
       highlighted: true,
     },
     {
       name: "Fixed",
+      icon: "file-check",
       badge: "Per project",
-      price: commercials.fixedFrom,
+      price: "From €1,250",
       priceNote: "per build",
       summary:
         "Overflow work priced per project. Scope, price, and timeline agreed in writing before we start.",
       features: [
-        `Partner pricing (${commercials.partnerDiscount})`,
-        `Agreed turnaround SLAs (${commercials.buildSla})`,
+        "Scales from a single landing page to full-site builds",
+        "Partner pricing: full rate card shared after a short application",
+        "Turnaround SLAs: landing page in 1 week, 5-page build in 2 weeks",
         "Unbranded deliverables & NDA",
-        `Revisions: ${commercials.revisionPolicy}`,
+        "2 revision rounds included, extra rounds €250",
+        "50% upfront, 50% on delivery",
         "No minimum commitment",
       ],
       cta: {
@@ -297,15 +287,18 @@ export const pPricing = {
     },
     {
       name: "Referral",
+      icon: "send",
       badge: "Commission",
-      price: commercials.referralCommission,
+      price: "10%",
       priceNote: "of project value",
       summary:
         "Send a qualified introduction and stay out of delivery. We close and build under the Zenith brand.",
       features: [
+        "Rises to 15% after your second closed deal in a year",
         "No delivery involvement required",
         "Full visibility on deal status",
-        `Paid on client payment (${commercials.referralPayout})`,
+        "Paid when the client pays; retainers pay 10% of the first 3 months",
+        "New introductions only, 6-month attribution window",
         "No cap on introductions",
       ],
       cta: {
@@ -334,7 +327,7 @@ export const pBenefits = {
     {
       icon: "percent",
       title: "Partner pricing",
-      body: `${commercials.wholesaleStructure} so your margin survives the project.`,
+      body: `${commercials.wholesaleStructure}, so your margin survives the project.`,
     },
     {
       icon: "clock",
@@ -549,6 +542,10 @@ export const pFaq = {
       a: `You introduce, we close and deliver, you get ${commercials.referralCommission} when the client pays. You can see deal status at any point. No cap on introductions.`,
     },
     {
+      q: "Can I be both a referral and white-label partner?",
+      a: "Referral means you introduce and step away. If you want to manage the client or set your own price, that's the white-label track at partner pricing. One or the other per deal, never both.",
+    },
+    {
       q: "What happens if I send you more work than you can handle?",
       a: `We tell you before you commit, not after. We'd rather cap intake than miss a partner deadline. ${commercials.capacityPolicy}`,
     },
@@ -573,7 +570,12 @@ export const pApply = {
     website: { label: "Website", placeholder: "youragency.com" },
     track: {
       label: "Which track?",
-      options: ["White-label production", "Referral", "Not sure yet"],
+      options: [
+        "Retainer",
+        "White-label production",
+        "Referral",
+        "Not sure yet",
+      ],
     },
     need: {
       label: "What do you need?",

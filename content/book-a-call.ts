@@ -121,17 +121,13 @@ export const quoteBand = {
       logoAlt: "Bel'Istria",
     },
     {
-      // TODO(owner): the live site accidentally shows Gemma's quote under Jim's
-      // name. Swap in Jim's real quote; this placeholder ships clearly marked.
       quote:
-        "Jim's quote is on its way. We only publish clients' real words, so this card stays empty until we have his.",
-      placeholder: true,
-      name: "Jim Steele",
-      role: "Director, HPLabs UK",
-      avatar: "/avatars/jim-steele.jpg",
-      logo: "/logos-white/jimsteele.png",
-      logoAlt: "HPLabs UK",
-      logoClass: "h-6",
+        "We hired Zenith to help us rebrand our site. Conversion skyrocketed. We saw what it takes to be one of the top professionals in the field.",
+      name: "Uros Stanimirovic",
+      role: "Co-Founder & CTO, Genroks AI",
+      avatar: "/avatars/uros-stanimirovic.jpg",
+      logo: "/logos-white/genroks.png",
+      logoAlt: "Genroks AI",
     },
   ],
 };

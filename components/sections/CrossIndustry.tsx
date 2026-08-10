@@ -18,7 +18,7 @@ const CURVE_FILL =
  */
 export function CrossIndustry() {
   return (
-    <Section tone="light" frameClassName="!py-20">
+    <Section tone="light" frameClassName="!py-12 md:!py-20">
       <div className="relative isolate">
         {/* Curve background — spans the full inner section, rail to rail (the
             negative inset cancels the frame's gutter padding), behind the grid */}
@@ -41,7 +41,11 @@ export function CrossIndustry() {
                 <stop offset="100%" stopColor="#1633bd" stopOpacity="0" />
               </linearGradient>
             </defs>
-            <path className="chart-fill" fill="url(#cs-curve-grad)" d={CURVE_FILL} />
+            <path
+              className="chart-fill"
+              fill="url(#cs-curve-grad)"
+              d={CURVE_FILL}
+            />
             <path
               className="chart-line"
               fill="none"
@@ -76,7 +80,9 @@ export function CrossIndustry() {
                   </span>
                 )}
               </div>
-              <p className="text-body-lg font-medium leading-snug text-light-muted">{item.text}</p>
+              <p className="text-body-lg font-medium leading-snug text-light-muted">
+                {item.text}
+              </p>
             </div>
           ))}
         </div>

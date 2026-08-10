@@ -79,7 +79,7 @@
 
 /* Section vertical rhythm (§7) */
 :root {
-  --section-py: clamp(72px, 10vw, 160px);
+  --section-py: clamp(56px, 10vw, 160px);
   --gutter: 24px;
   --measure: 68ch;
 }
@@ -192,6 +192,13 @@ body {
 .btn-animated:hover {
   background-position: 100% 50%;
 }
+/* Always set arrows in the body face: the display face renders the arrow glyph
+   as a thin chevron, so arrows would otherwise differ between display-set and
+   body-set buttons. */
+.arrow-glyph,
+.btn-arrow {
+  font-family: var(--font-body);
+}
 .btn-arrow {
   display: inline-block;
   transition: transform 0.3s ease;
@@ -295,4 +302,14 @@ body {
 /* Cancel the .frame horizontal padding so an element spans to the side rails. */
 .frame-bleed {
   margin-inline: calc(-1 * clamp(20px, 4vw, 64px));
+}
+/* Bleeds only from tablet up — on phones the block keeps the site gutter so
+   card/tab blocks don't run into the screen edge. */
+.frame-bleed-md {
+  margin-inline: 0;
+}
+@media (min-width: 768px) {
+  .frame-bleed-md {
+    margin-inline: calc(-1 * clamp(20px, 4vw, 64px));
+  }
 }

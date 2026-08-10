@@ -41,7 +41,8 @@ function MarqueeRow({
     <div
       className="relative w-full overflow-hidden py-4"
       style={{
-        maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+        maskImage:
+          "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
         WebkitMaskImage:
           "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
       }}

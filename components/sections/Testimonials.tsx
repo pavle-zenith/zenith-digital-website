@@ -37,11 +37,12 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
           as the pricing grid). The two cells are split by a full-height vertical
           rule; each cell carries its own padding for internal spacing. The block's
           own top/bottom borders are the section boundary (no extra frame padding). */}
-      <div className="frame-bleed border-y border-light-border">
+      <div className="frame-bleed-md border-y border-light-border">
         <div
           className={cn(
             "grid",
-            showStats && "lg:grid-cols-[0.8fr_1.6fr] lg:divide-x lg:divide-light-border",
+            showStats &&
+              "lg:grid-cols-[0.8fr_1.6fr] lg:divide-x lg:divide-light-border",
           )}
         >
           {/* Left cell: key stats. Outer (left) padding matches the frame gutter
@@ -54,7 +55,9 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
                   <div className="font-display text-h2 font-medium leading-none tracking-tight">
                     {s.value}
                   </div>
-                  <div className="mt-2 text-body text-light-muted">{s.label}</div>
+                  <div className="mt-2 text-body text-light-muted">
+                    {s.label}
+                  </div>
                 </div>
               ))}
             </div>
@@ -83,11 +86,21 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
 
               <figcaption className="mt-8 flex items-center justify-center gap-3">
                 <span className="relative h-11 w-11 overflow-hidden rounded-[6px] border border-light-border">
-                  <Image src={t.avatar} alt={t.name} fill sizes="44px" className="object-cover" />
+                  <Image
+                    src={t.avatar}
+                    alt={t.name}
+                    fill
+                    sizes="44px"
+                    className="object-cover"
+                  />
                 </span>
                 <span className="text-left">
-                  <span className="block font-display font-medium">{t.name}</span>
-                  <span className="block text-body text-light-muted">{t.role}</span>
+                  <span className="block font-display font-medium">
+                    {t.name}
+                  </span>
+                  <span className="block text-body text-light-muted">
+                    {t.role}
+                  </span>
                 </span>
               </figcaption>
             </div>
@@ -103,39 +116,45 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
                   aria-pressed={i === active}
                   className={cn(
                     "relative flex min-w-0 items-center justify-center border-l border-light-border px-2 py-5 transition first:border-l-0 sm:py-6",
-                    i === active ? "bg-light-surface" : "bg-light-bg hover:bg-light-surface/60",
+                    i === active
+                      ? "bg-light-surface"
+                      : "bg-light-bg hover:bg-light-surface/60",
                   )}
                 >
-                <Image
-                  src={item.logo}
-                  alt={item.logoAlt}
-                  width={120}
-                  height={26}
-                  className={cn(
-                    "w-auto max-w-full object-contain transition",
-                    // per-logo size override for marks with baked-in padding
-                    "logoClass" in item && item.logoClass ? item.logoClass : "h-4 sm:h-5",
-                    // white marks get inverted to read on the light tab row
-                    "invertLogo" in item && item.invertLogo && "invert",
-                    i === active ? "opacity-100" : "opacity-40",
-                  )}
-                />
-                {/* Fill bar: fills over the cycle on the active tab (keyframe
-                    restarts via the key); stays full on past tabs, empty ahead. */}
-                <span className="absolute inset-x-0 bottom-0 h-0.5 overflow-hidden bg-light-border">
-                  <span
-                    key={`${i}-${active}`}
-                    className="block h-full origin-left bg-accent"
-                    style={
-                      i === active
-                        ? {
-                            animation: paused ? "none" : `tab-fill ${CYCLE_MS}ms linear forwards`,
-                            width: paused ? "0%" : undefined,
-                          }
-                        : { width: i < active ? "100%" : "0%" }
-                    }
+                  <Image
+                    src={item.logo}
+                    alt={item.logoAlt}
+                    width={120}
+                    height={26}
+                    className={cn(
+                      "w-auto max-w-full object-contain transition",
+                      // per-logo size override for marks with baked-in padding
+                      "logoClass" in item && item.logoClass
+                        ? item.logoClass
+                        : "h-4 sm:h-5",
+                      // white marks get inverted to read on the light tab row
+                      "invertLogo" in item && item.invertLogo && "invert",
+                      i === active ? "opacity-100" : "opacity-40",
+                    )}
                   />
-                </span>
+                  {/* Fill bar: fills over the cycle on the active tab (keyframe
+                    restarts via the key); stays full on past tabs, empty ahead. */}
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 overflow-hidden bg-light-border">
+                    <span
+                      key={`${i}-${active}`}
+                      className="block h-full origin-left bg-accent"
+                      style={
+                        i === active
+                          ? {
+                              animation: paused
+                                ? "none"
+                                : `tab-fill ${CYCLE_MS}ms linear forwards`,
+                              width: paused ? "0%" : undefined,
+                            }
+                          : { width: i < active ? "100%" : "0%" }
+                      }
+                    />
+                  </span>
                 </button>
               ))}
             </div>
@@ -146,15 +165,24 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
             inset to the frame gutter on both sides. */}
         <div className="flex flex-col gap-3 border-t border-light-border px-[clamp(20px,4vw,64px)] py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="flex items-center gap-2 text-body text-light-text">
-            Rated <span className="font-display font-medium">{testimonials.rating.score}</span> on{" "}
-            <span className="font-display font-medium">{testimonials.rating.platform}</span>
+            Rated{" "}
+            <span className="font-display font-medium">
+              {testimonials.rating.score}
+            </span>{" "}
+            on{" "}
+            <span className="font-display font-medium">
+              {testimonials.rating.platform}
+            </span>
             <Stars />
           </p>
           <Link
             href={testimonials.rating.href}
             className="group inline-flex items-center gap-2 font-display font-medium transition hover:text-accent"
           >
-            {testimonials.rating.cta} <span aria-hidden className="btn-arrow">&rarr;</span>
+            {testimonials.rating.cta}{" "}
+            <span aria-hidden className="btn-arrow">
+              &rarr;
+            </span>
           </Link>
         </div>
       </div>
@@ -187,7 +215,12 @@ function Stars() {
   return (
     <span className="ml-1 inline-flex gap-0.5 text-accent" aria-hidden>
       {Array.from({ length: 5 }, (_, i) => (
-        <svg key={i} viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+        <svg
+          key={i}
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill="currentColor"
+        >
           <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z" />
         </svg>
       ))}

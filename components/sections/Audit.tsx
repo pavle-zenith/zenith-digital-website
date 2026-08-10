@@ -32,11 +32,13 @@ export function Audit() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const q = url.trim();
-    router.push(q ? `${audit.cta.href}?url=${encodeURIComponent(q)}` : audit.cta.href);
+    router.push(
+      q ? `${audit.cta.href}?url=${encodeURIComponent(q)}` : audit.cta.href,
+    );
   };
 
   return (
-    <Section tone="light" frameClassName="!py-24">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
         {/* Left column: heading, intro, tabs, then the input pinned to the bottom */}
         <div
@@ -47,7 +49,9 @@ export function Audit() {
           <h2 className="max-w-lg font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {audit.heading}
           </h2>
-          <p className="mt-5 max-w-md text-body-lg font-medium text-light-muted">{audit.intro}</p>
+          <p className="mt-4 max-w-md text-body-lg md:mt-5 font-medium text-light-muted">
+            {audit.intro}
+          </p>
 
           {/* Accordion tabs */}
           <div className="mt-10 border-t border-r border-light-border">
@@ -61,7 +65,9 @@ export function Audit() {
                     aria-expanded={isOpen}
                     className={cn(
                       "flex w-full items-center border-l-2 py-5 pl-5 pr-4 text-left transition",
-                      isOpen ? "border-accent" : "border-light-border hover:pl-6",
+                      isOpen
+                        ? "border-accent"
+                        : "border-light-border hover:pl-6",
                     )}
                   >
                     <span
@@ -110,9 +116,12 @@ export function Audit() {
             />
             <button
               type="submit"
-              className="btn-animated group inline-flex shrink-0 items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium text-accent-ink transition"
+              className="btn-animated group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-[6px] px-6 py-3 sm:w-auto text-body font-medium text-accent-ink transition"
             >
-              {audit.cta.label} <span aria-hidden className="btn-arrow">&rarr;</span>
+              {audit.cta.label}{" "}
+              <span aria-hidden className="btn-arrow">
+                &rarr;
+              </span>
             </button>
           </form>
         </div>

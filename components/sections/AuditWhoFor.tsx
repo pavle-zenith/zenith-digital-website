@@ -23,8 +23,12 @@ export function AuditWhoFor() {
         />
       </div>
 
-      <Section tone="dark" className="bg-transparent" frameClassName="!py-24">
-        <h2 className="mx-auto mb-12 text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+      <Section
+        tone="dark"
+        className="bg-transparent"
+        frameClassName="!py-14 md:!py-24"
+      >
+        <h2 className="mx-auto mb-8 md:mb-12 text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {auditWhoFor.heading}
         </h2>
 

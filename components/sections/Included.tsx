@@ -17,13 +17,15 @@ export function Included() {
   const tab = included.tabs[active];
 
   return (
-    <Section tone="light" frameClassName="!py-24">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
       {/* Header */}
-      <div className="mx-auto mb-12 max-w-2xl text-center">
+      <div className="mx-auto mb-8 md:mb-12 max-w-2xl text-center">
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {included.heading}
         </h2>
-        <p className="mt-5 text-body-lg font-medium text-light-muted">{included.intro}</p>
+        <p className="mt-4 text-body-lg md:mt-5 font-medium text-light-muted">
+          {included.intro}
+        </p>
       </div>
 
       {/* Tabs */}
@@ -56,8 +58,12 @@ export function Included() {
             <span className="flex h-11 w-11 items-center justify-center rounded-[6px] bg-accent text-accent-ink">
               <BoxIcon name={box.icon} />
             </span>
-            <h3 className="mt-10 font-display text-body-lg font-medium">{box.title}</h3>
-            <p className="mt-2 text-body leading-snug text-light-muted">{box.text}</p>
+            <h3 className="mt-10 font-display text-body-lg font-medium">
+              {box.title}
+            </h3>
+            <p className="mt-2 text-body leading-snug text-light-muted">
+              {box.text}
+            </p>
           </div>
         ))}
       </div>
@@ -91,7 +97,9 @@ function BoxIcon({ name }: { name: string }) {
       </>
     ),
     // lucide:plug
-    plug: <path d="M12 22v-5m3-9V2m2 6a1 1 0 0 1 1 1v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1zM9 8V2" />,
+    plug: (
+      <path d="M12 22v-5m3-9V2m2 6a1 1 0 0 1 1 1v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1zM9 8V2" />
+    ),
     // lucide:code
     code: <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />,
     // lucide:layers
@@ -103,7 +111,9 @@ function BoxIcon({ name }: { name: string }) {
       </>
     ),
     // lucide:pen-line
-    pen: <path d="M13 21h8m.174-14.188a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />,
+    pen: (
+      <path d="M13 21h8m.174-14.188a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+    ),
     // lucide:search
     search: (
       <>

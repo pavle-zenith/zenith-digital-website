@@ -43,13 +43,19 @@ export function VideoTestimonials() {
         />
       </div>
 
-      <Section tone="dark" className="bg-transparent" frameClassName="!py-20">
+      <Section
+        tone="dark"
+        className="bg-transparent"
+        frameClassName="!py-12 md:!py-20"
+      >
         {/* Header: heading left, intro right */}
         <div className="grid gap-8 md:grid-cols-2 md:items-start">
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {videoTestimonials.heading}
           </h2>
-          <p className="text-body-lg font-medium text-text-muted">{videoTestimonials.intro}</p>
+          <p className="text-body-lg font-medium text-text-muted">
+            {videoTestimonials.intro}
+          </p>
         </div>
 
         {/* 3 portrait cards — taller */}
@@ -98,7 +104,9 @@ export function VideoTestimonials() {
                     className="h-7 w-auto object-contain"
                   />
                 ) : (
-                  <span className="font-display font-medium">{item.company}</span>
+                  <span className="font-display font-medium">
+                    {item.company}
+                  </span>
                 )}
                 <span className="flex h-9 w-9 items-center justify-center rounded-[6px] bg-black/40 backdrop-blur transition group-hover:bg-black/60">
                   <span className="ml-0.5 border-y-[5px] border-l-[8px] border-y-transparent border-l-white" />
@@ -144,14 +152,31 @@ export function VideoTestimonials() {
             onClick={(e) => e.stopPropagation()}
           >
             {activeItem.video ? (
-              <video src={activeItem.video} controls autoPlay playsInline className="h-full w-full object-cover" />
+              <video
+                src={activeItem.video}
+                controls
+                autoPlay
+                playsInline
+                className="h-full w-full object-cover"
+              />
             ) : activeItem.poster ? (
-              <Image src={activeItem.poster} alt={activeItem.name} fill className="object-cover" />
+              <Image
+                src={activeItem.poster}
+                alt={activeItem.name}
+                fill
+                className="object-cover"
+              />
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center gap-2 p-8 text-center">
-                <div className="font-display text-h3 font-medium">{activeItem.name}</div>
-                <div className="text-body text-text-muted">{activeItem.company}</div>
-                <p className="mt-4 text-body text-text-muted">Video testimonial coming soon.</p>
+                <div className="font-display text-h3 font-medium">
+                  {activeItem.name}
+                </div>
+                <div className="text-body text-text-muted">
+                  {activeItem.company}
+                </div>
+                <p className="mt-4 text-body text-text-muted">
+                  Video testimonial coming soon.
+                </p>
               </div>
             )}
           </div>

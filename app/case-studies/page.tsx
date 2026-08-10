@@ -13,7 +13,8 @@ import { Faq } from "@/components/sections/Faq";
 import { caseStudyCards, csFinalCta } from "@/content/case-studies";
 
 export const metadata: Metadata = {
-  title: "Case studies | Wix Studio websites with real results | Zenith Digital",
+  title:
+    "Case studies | Wix Studio websites with real results | Zenith Digital",
   description:
     "150+ websites shipped. Browse Zenith Digital's case studies: Wix Studio and custom builds with the revenue, bookings, and traffic numbers behind each one.",
   alternates: { canonical: "/case-studies" },

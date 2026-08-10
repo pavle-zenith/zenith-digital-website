@@ -29,11 +29,19 @@ export function Section({
       id={id}
       data-tone={tone}
       className={cn(
-        tone === "dark" ? "tone-dark bg-bg text-text" : "tone-light bg-light-bg text-light-text",
+        tone === "dark"
+          ? "tone-dark bg-bg text-text"
+          : "tone-light bg-light-bg text-light-text",
         className,
       )}
     >
-      <div className={cn("frame section-py", divide && "frame-divide", frameClassName)}>
+      <div
+        className={cn(
+          "frame section-py",
+          divide && "frame-divide",
+          frameClassName,
+        )}
+      >
         {children}
       </div>
     </Tag>

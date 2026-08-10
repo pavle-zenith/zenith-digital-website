@@ -23,7 +23,12 @@ export function AuditPageHero() {
         />
       </div>
 
-      <Section tone="dark" divide={false} className="bg-transparent" frameClassName="!py-20 lg:!py-32">
+      <Section
+        tone="dark"
+        divide={false}
+        className="bg-transparent"
+        frameClassName="!py-12 md:!py-20 lg:!py-32"
+      >
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           {/* Left: proof, heading, subhead, client logos */}
           <div>
@@ -34,7 +39,13 @@ export function AuditPageHero() {
                     key={src}
                     className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-white"
                   >
-                    <Image src={src} alt="" fill sizes="40px" className="object-cover" />
+                    <Image
+                      src={src}
+                      alt=""
+                      fill
+                      sizes="40px"
+                      className="object-cover"
+                    />
                   </span>
                 ))}
               </div>
@@ -51,7 +62,9 @@ export function AuditPageHero() {
               {auditHero.subhead}
             </p>
 
-            <p className="mt-10 font-display text-body font-medium">{auditHero.clientsLabel}</p>
+            <p className="mt-10 font-display text-body font-medium">
+              {auditHero.clientsLabel}
+            </p>
             <div className="mt-5 flex flex-wrap items-center gap-x-10 gap-y-4">
               {auditHero.clients.map((logo) => (
                 <Image
@@ -71,7 +84,10 @@ export function AuditPageHero() {
             <AuditForm id="audit-form" />
             <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
               {auditHero.checks.map((check) => (
-                <li key={check} className="flex items-center gap-2 text-body font-medium">
+                <li
+                  key={check}
+                  className="flex items-center gap-2 text-body font-medium"
+                >
                   <Check />
                   {check}
                 </li>

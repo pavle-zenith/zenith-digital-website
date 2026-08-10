@@ -42,8 +42,12 @@ export function QuoteBand({ data = quoteBand }: { data?: QuoteBandData }) {
         />
       </div>
 
-      <Section tone="dark" className="bg-transparent" frameClassName="!py-24">
-        <h2 className="mx-auto mb-12 max-w-2xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+      <Section
+        tone="dark"
+        className="bg-transparent"
+        frameClassName="!py-14 md:!py-24"
+      >
+        <h2 className="mx-auto mb-8 md:mb-12 max-w-2xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {data.heading}
         </h2>
 
@@ -60,7 +64,9 @@ export function QuoteBand({ data = quoteBand }: { data?: QuoteBandData }) {
                 height={40}
                 className={cn(
                   "w-auto self-start object-contain",
-                  "logoClass" in item && item.logoClass ? item.logoClass : "h-5",
+                  "logoClass" in item && item.logoClass
+                    ? item.logoClass
+                    : "h-5",
                 )}
               />
               {"placeholder" in item && item.placeholder ? (
@@ -74,14 +80,22 @@ export function QuoteBand({ data = quoteBand }: { data?: QuoteBandData }) {
               )}
               <figcaption className="mt-auto flex items-center gap-3 pt-8">
                 <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[6px] border border-border">
-                  <Image src={item.avatar} alt={item.name} fill sizes="44px" className="object-cover" />
+                  <Image
+                    src={item.avatar}
+                    alt={item.name}
+                    fill
+                    sizes="44px"
+                    className="object-cover"
+                  />
                 </span>
                 <span>
                   <span className="flex items-center gap-1.5 font-display font-medium">
                     {item.name}
                     <VerifiedCheck />
                   </span>
-                  <span className="block text-body text-text-muted">{item.role}</span>
+                  <span className="block text-body text-text-muted">
+                    {item.role}
+                  </span>
                 </span>
               </figcaption>
             </figure>
@@ -94,7 +108,10 @@ export function QuoteBand({ data = quoteBand }: { data?: QuoteBandData }) {
               href={data.link.href}
               className="group inline-flex items-center gap-2 font-display font-medium transition hover:text-text-muted"
             >
-              {data.link.label} <span aria-hidden className="btn-arrow">&rarr;</span>
+              {data.link.label}{" "}
+              <span aria-hidden className="btn-arrow">
+                &rarr;
+              </span>
             </Link>
           </p>
         ) : null}

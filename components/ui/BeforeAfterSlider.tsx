@@ -120,13 +120,24 @@ export function BeforeAfterSlider({
           className="absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-light-border bg-white text-light-text shadow-none"
           style={{ left: `${pct}%` }}
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+          >
             <path d="M8 8l-4 4 4 4M16 8l4 4-4 4" />
           </svg>
         </button>
       </div>
       {caption ? (
-        <figcaption className="font-display text-body-lg font-medium">{title}</figcaption>
+        <figcaption className="font-display text-body-lg font-medium">
+          {title}
+        </figcaption>
       ) : null}
     </figure>
   );

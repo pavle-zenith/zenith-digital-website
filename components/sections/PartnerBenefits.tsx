@@ -23,8 +23,12 @@ export function PartnerBenefits() {
         />
       </div>
 
-      <Section tone="dark" className="bg-transparent" frameClassName="!py-24">
-        <h2 className="mb-12 max-w-2xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+      <Section
+        tone="dark"
+        className="bg-transparent"
+        frameClassName="!py-14 md:!py-24"
+      >
+        <h2 className="mb-8 max-w-2xl font-display md:mb-12 text-h2 font-medium leading-tight tracking-tight text-balance">
           {pBenefits.heading}
         </h2>
 

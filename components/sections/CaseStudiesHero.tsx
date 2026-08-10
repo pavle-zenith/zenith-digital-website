@@ -10,7 +10,7 @@ import { csHero } from "@/content/case-studies";
  */
 export function CaseStudiesHero() {
   return (
-    <Section tone="light" divide={false} frameClassName="!py-20">
+    <Section tone="light" divide={false} frameClassName="!py-12 md:!py-20">
       <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
         <h1 className="max-w-3xl font-display text-h2 font-medium leading-[1.15] tracking-tight text-balance">
           {csHero.heading}{" "}

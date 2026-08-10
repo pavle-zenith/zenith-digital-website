@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { useActionState } from "react";
 
-import { submitAudit, type AuditFormState } from "@/app/free-website-audit/actions";
+import {
+  submitAudit,
+  type AuditFormState,
+} from "@/app/free-website-audit/actions";
 import { auditForm } from "@/content/free-website-audit";
 
 const initialState: AuditFormState = { status: "idle" };
@@ -18,7 +21,10 @@ const inputCls =
  * closing banner anchors back to #audit-form.
  */
 export function AuditForm({ id }: { id?: string }) {
-  const [state, formAction, pending] = useActionState(submitAudit, initialState);
+  const [state, formAction, pending] = useActionState(
+    submitAudit,
+    initialState,
+  );
 
   if (state.status === "success") {
     return (
@@ -27,7 +33,9 @@ export function AuditForm({ id }: { id?: string }) {
         className="rounded-card bg-light-bg p-8 text-left text-light-text"
         role="status"
       >
-        <p className="font-display text-body-lg font-medium">{auditForm.success(state.site)}</p>
+        <p className="font-display text-body-lg font-medium">
+          {auditForm.success(state.site)}
+        </p>
       </div>
     );
   }
@@ -38,11 +46,15 @@ export function AuditForm({ id }: { id?: string }) {
       action={formAction}
       className="scroll-mt-24 rounded-card bg-light-bg p-6 text-left text-light-text sm:p-10"
     >
-      <h2 className="mb-8 text-center font-display text-h3 font-medium">{auditForm.cardTitle}</h2>
+      <h2 className="mb-8 text-center font-display text-h3 font-medium">
+        {auditForm.cardTitle}
+      </h2>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1.5 block text-body font-medium">{auditForm.fields.website.label}</span>
+          <span className="mb-1.5 block text-body font-medium">
+            {auditForm.fields.website.label}
+          </span>
           <input
             type="text"
             name="website"
@@ -53,7 +65,9 @@ export function AuditForm({ id }: { id?: string }) {
           />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-body font-medium">{auditForm.fields.email.label}</span>
+          <span className="mb-1.5 block text-body font-medium">
+            {auditForm.fields.email.label}
+          </span>
           <input
             type="email"
             name="email"
@@ -65,7 +79,9 @@ export function AuditForm({ id }: { id?: string }) {
       </div>
 
       <label className="mt-5 block">
-        <span className="mb-1.5 block text-body font-medium">{auditForm.fields.note.label}</span>
+        <span className="mb-1.5 block text-body font-medium">
+          {auditForm.fields.note.label}
+        </span>
         <input
           type="text"
           name="note"
@@ -89,7 +105,10 @@ export function AuditForm({ id }: { id?: string }) {
         disabled={pending}
         className="btn-animated group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-btn px-6 py-4 text-body font-medium text-accent-ink transition disabled:opacity-60"
       >
-        {pending ? "Sending..." : auditForm.submit} <span aria-hidden className="btn-arrow">&rarr;</span>
+        {pending ? "Sending..." : auditForm.submit}{" "}
+        <span aria-hidden className="btn-arrow">
+          &rarr;
+        </span>
       </button>
 
       {state.status === "error" ? (

@@ -10,8 +10,8 @@ import { callCovers } from "@/content/book-a-call";
  */
 export function CallCovers() {
   return (
-    <Section tone="light" frameClassName="!py-24">
-      <h2 className="mx-auto mb-12 max-w-3xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
+      <h2 className="mx-auto mb-8 md:mb-12 max-w-3xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
         {callCovers.heading}
       </h2>
 
@@ -21,8 +21,12 @@ export function CallCovers() {
             <span className="flex h-12 w-12 items-center justify-center rounded-card bg-accent text-accent-ink">
               <CoverIcon name={item.icon} />
             </span>
-            <h3 className="mt-16 font-display text-h3 font-medium">{item.title}</h3>
-            <p className="mt-3 max-w-md text-body leading-snug text-light-muted">{item.body}</p>
+            <h3 className="mt-16 font-display text-h3 font-medium">
+              {item.title}
+            </h3>
+            <p className="mt-3 max-w-md text-body leading-snug text-light-muted">
+              {item.body}
+            </p>
           </article>
         ))}
       </div>

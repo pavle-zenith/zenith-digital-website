@@ -47,7 +47,12 @@ export function AuditReport({ report }: { report: Report }) {
         <ul className="flex flex-col gap-4">
           {report.findings.map((f) => (
             <li key={f.text} className="flex items-start gap-3">
-              <span className={cn("mt-1.5 h-2 w-2 shrink-0 rounded-full", SEVERITY[f.severity])} />
+              <span
+                className={cn(
+                  "mt-1.5 h-2 w-2 shrink-0 rounded-full",
+                  SEVERITY[f.severity],
+                )}
+              />
               <span className="text-body text-light-text">{f.text}</span>
             </li>
           ))}

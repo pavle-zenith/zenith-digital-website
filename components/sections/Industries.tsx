@@ -27,15 +27,17 @@ export function Industries() {
   };
 
   return (
-    <Section tone="light" frameClassName="!py-20">
+    <Section tone="light" frameClassName="!py-12 md:!py-20">
       {/* Header: heading + intro on the left, arrows on the right, all aligned to
           the bottom so the text and controls share one baseline above the cards. */}
-      <div className="mb-12 flex flex-wrap items-end justify-between gap-8">
+      <div className="mb-8 flex md:mb-12 flex-wrap items-end justify-between gap-8">
         <div>
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {industries.heading}
           </h2>
-          <p className="mt-5 max-w-xl text-body-lg font-medium text-light-muted">{industries.intro}</p>
+          <p className="mt-4 max-w-xl text-body-lg md:mt-5 font-medium text-light-muted">
+            {industries.intro}
+          </p>
         </div>
         <div className="flex gap-2">
           <button
@@ -84,7 +86,9 @@ export function Industries() {
             <h3 className="mt-5 font-display text-body-lg font-medium tracking-tight text-light-text">
               {it.name}
             </h3>
-            <p className="mt-2 text-body leading-snug text-light-muted">{it.blurb}</p>
+            <p className="mt-2 text-body leading-snug text-light-muted">
+              {it.blurb}
+            </p>
           </div>
         ))}
       </div>
@@ -104,7 +108,11 @@ function Arrow({ dir }: { dir: "left" | "right" }) {
       strokeLinejoin="round"
       aria-hidden
     >
-      {dir === "left" ? <path d="M19 12H5m0 0l6-6m-6 6l6 6" /> : <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />}
+      {dir === "left" ? (
+        <path d="M19 12H5m0 0l6-6m-6 6l6 6" />
+      ) : (
+        <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
+      )}
     </svg>
   );
 }

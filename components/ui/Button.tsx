@@ -3,8 +3,10 @@ import Link from "next/link";
 import { cn, isInternal } from "@/lib/utils";
 import type { CtaLink, Tone } from "@/lib/types";
 
+// Full width and stacked on phones (CTA pairs read as a column), auto width
+// from sm up.
 const base =
-  "group inline-flex items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium transition active:scale-[.99]";
+  "group inline-flex w-full items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium transition active:scale-[.99] sm:w-auto";
 
 function classes(variant: "primary" | "secondary", tone: Tone) {
   if (variant === "primary") {
@@ -35,7 +37,7 @@ export function Button({
   // Arrow swap: the resting arrow slides out right while a second one slides
   // in from the left (clipped by the overflow-hidden wrapper).
   const arrow = (
-    <span className="relative overflow-hidden" aria-hidden>
+    <span className="arrow-glyph relative overflow-hidden" aria-hidden>
       <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-[170%]">
         &rarr;
       </span>

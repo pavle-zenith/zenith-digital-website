@@ -7,7 +7,7 @@ import { pExpectations } from "@/content/partnerships";
  */
 export function PartnerExpectations() {
   return (
-    <Section tone="light" frameClassName="!py-24">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
       <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <h2 className="max-w-md font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {pExpectations.heading}

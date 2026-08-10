@@ -27,9 +27,13 @@ export function ComparisonTable() {
         />
       </div>
 
-      <Section tone="dark" className="bg-transparent" frameClassName="!py-24">
+      <Section
+        tone="dark"
+        className="bg-transparent"
+        frameClassName="!py-14 md:!py-24"
+      >
         {/* Header — heading left, intro right (same register as the showcase). */}
-        <div className="mb-12 grid gap-8 md:grid-cols-2 md:items-start">
+        <div className="mb-8 grid md:mb-12 gap-8 md:grid-cols-2 md:items-start">
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {comparison.heading}
           </h2>

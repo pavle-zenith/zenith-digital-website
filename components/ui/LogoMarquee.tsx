@@ -8,7 +8,13 @@ type Logo = { src: string; alt: string };
  * side rails (frame-bleed) and its top/bottom hairlines run the full frame width, so
  * it "connects" to the main frame rules. Pauses under prefers-reduced-motion.
  */
-export function LogoMarquee({ logos, caption }: { logos: Logo[]; caption?: string }) {
+export function LogoMarquee({
+  logos,
+  caption,
+}: {
+  logos: Logo[];
+  caption?: string;
+}) {
   // Duplicate the set so the -50% translate loops seamlessly.
   const track = [...logos, ...logos];
 

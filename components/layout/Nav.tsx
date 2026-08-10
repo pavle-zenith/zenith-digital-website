@@ -21,6 +21,15 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll while the full-screen drawer is open.
+  useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header
       className={cn(
@@ -29,8 +38,9 @@ export function Nav() {
       )}
       onMouseLeave={() => setMenuOpen(false)}
     >
-      {/* Bar sits in the max-width column, flush to the frame rails (no inner padding) */}
-      <div className="mx-auto flex h-16 max-w-[var(--container-site)] items-center justify-between">
+      {/* Bar sits in the max-width column, inset by the frame gutter so the
+          logo lines up with section content on every breakpoint. */}
+      <div className="mx-auto flex h-16 max-w-[var(--container-site)] items-center justify-between px-[clamp(20px,4vw,64px)] md:px-0">
         {/* Left cluster: logo + nav items sitting next to it */}
         <div className="flex items-center gap-8">
           <Link
@@ -84,9 +94,16 @@ export function Nav() {
             href={nav.ctas[0].href}
             className="group inline-flex items-center gap-2 rounded-[6px] border border-light-border bg-light-surface px-4 py-2 text-body font-medium text-light-text transition hover:bg-light-border"
           >
-            {nav.ctas[0].label} <span aria-hidden className="btn-arrow">&rarr;</span>
+            {nav.ctas[0].label}{" "}
+            <span aria-hidden className="btn-arrow">
+              &rarr;
+            </span>
           </Link>
-          <Button cta={nav.ctas[1]} tone="light" className="!px-4 !py-2 text-body" />
+          <Button
+            cta={nav.ctas[1]}
+            tone="light"
+            className="!px-4 !py-2 text-body"
+          />
         </div>
 
         <button
@@ -106,7 +123,9 @@ export function Nav() {
       <div
         className={cn(
           "absolute inset-x-0 top-full hidden overflow-hidden border-b border-[var(--rule)] bg-light-bg transition-[max-height,opacity] duration-200 md:block",
-          menuOpen ? "max-h-[520px] opacity-100" : "pointer-events-none max-h-0 opacity-0",
+          menuOpen
+            ? "max-h-[520px] opacity-100"
+            : "pointer-events-none max-h-0 opacity-0",
         )}
       >
         <div className="mx-auto grid max-w-[var(--container-site)] grid-cols-3 divide-x divide-light-border border-x border-light-border">
@@ -119,11 +138,17 @@ export function Nav() {
             <DividedList tone="light">
               {caseStudiesMenu.ourWork.map((it) => (
                 <DividedRow key={it.label} className="px-6">
-                  <Link href={it.href} className="group block" onClick={() => setMenuOpen(false)}>
+                  <Link
+                    href={it.href}
+                    className="group block"
+                    onClick={() => setMenuOpen(false)}
+                  >
                     <span className="block font-display font-medium group-hover:text-accent">
                       {it.label}
                     </span>
-                    <span className="mt-0.5 block text-[0.8125rem] tracking-normal text-light-muted">{it.desc}</span>
+                    <span className="mt-0.5 block text-[0.8125rem] tracking-normal text-light-muted">
+                      {it.desc}
+                    </span>
                   </Link>
                 </DividedRow>
               ))}
@@ -138,7 +163,11 @@ export function Nav() {
             <DividedList tone="light">
               {caseStudiesMenu.recentProjects.map((it) => (
                 <DividedRow key={it.label} className="px-6">
-                  <Link href={it.href} className="group block" onClick={() => setMenuOpen(false)}>
+                  <Link
+                    href={it.href}
+                    className="group block"
+                    onClick={() => setMenuOpen(false)}
+                  >
                     <span className="flex items-center gap-2 font-display font-medium group-hover:text-accent">
                       {it.label}
                       {it.tag ? (
@@ -147,7 +176,9 @@ export function Nav() {
                         </span>
                       ) : null}
                     </span>
-                    <span className="mt-0.5 block text-[0.8125rem] tracking-normal text-light-muted">{it.desc}</span>
+                    <span className="mt-0.5 block text-[0.8125rem] tracking-normal text-light-muted">
+                      {it.desc}
+                    </span>
                   </Link>
                 </DividedRow>
               ))}
@@ -180,31 +211,39 @@ export function Nav() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — full-screen overlay below the bar, so opening it never
+          pushes the page down. Hairline-divided rows up top, sign-off + CTAs
+          pinned to the bottom. */}
       <div
         className={cn(
-          "overflow-hidden border-t border-[var(--rule)] bg-light-bg transition-[max-height] duration-300 md:hidden",
-          open ? "max-h-[460px]" : "max-h-0 border-transparent",
+          "fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col bg-light-bg transition-opacity duration-200 md:hidden",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
+        aria-hidden={!open}
       >
-        <ul className="mx-auto flex max-w-[var(--container-site)] flex-col gap-1 py-4">
+        <ul className="flex flex-col overflow-y-auto border-t border-light-border px-[clamp(20px,4vw,64px)]">
           {nav.items.map((item) => (
-            <li key={item.href}>
+            <li key={item.href} className="border-b border-light-border">
               <Link
                 href={item.href}
-                className="block py-2 text-body-lg font-medium text-light-muted hover:text-light-text"
+                className="block py-5 font-display text-h3 font-medium"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
               </Link>
             </li>
           ))}
-          <li className="mt-2 flex flex-col gap-2">
-            {nav.ctas.map((cta) => (
-              <Button key={cta.href} cta={cta} tone="light" className="w-full" />
-            ))}
-          </li>
         </ul>
+
+        {/* Sign-off + CTAs pinned to the bottom */}
+        <div className="mt-auto flex flex-col gap-4 border-t border-light-border px-[clamp(20px,4vw,64px)] py-8">
+          <p className="font-display text-h3 font-medium leading-tight text-balance">
+            {nav.drawerTagline}
+          </p>
+          {nav.ctas.map((cta) => (
+            <Button key={cta.href} cta={cta} tone="light" className="w-full" />
+          ))}
+        </div>
       </div>
     </header>
   );

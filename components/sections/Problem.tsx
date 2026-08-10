@@ -14,8 +14,8 @@ import { whyZenith } from "@/content/home";
  */
 export function Problem() {
   return (
-    <Section tone="light" frameClassName="!py-24">
-      <div className="mb-12 grid gap-8 md:grid-cols-2 md:items-end">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
+      <div className="mb-8 grid md:mb-12 gap-8 md:grid-cols-2 md:items-end">
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {whyZenith.heading}
         </h2>
@@ -25,7 +25,7 @@ export function Problem() {
           </p>
           <Link
             href={whyZenith.cta.href}
-            className="btn-animated group inline-flex items-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium text-accent-ink transition"
+            className="btn-animated group inline-flex w-full items-center justify-center gap-2 rounded-[6px] px-6 py-3 sm:w-auto text-body font-medium text-accent-ink transition"
           >
             {whyZenith.cta.label}{" "}
             <span aria-hidden className="btn-arrow">
@@ -36,7 +36,7 @@ export function Problem() {
       </div>
 
       {/* Center image — 16:9 to match the supplied artwork, so nothing crops. */}
-      <div className="relative mb-12 aspect-video overflow-hidden rounded-card border border-light-border bg-light-surface">
+      <div className="relative mb-8 aspect-video md:mb-12 overflow-hidden rounded-card border border-light-border bg-light-surface">
         {whyZenith.image ? (
           <Image
             src={whyZenith.image}

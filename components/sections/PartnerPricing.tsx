@@ -1,13 +1,15 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import { Section } from "@/components/ui/Section";
-import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { pPricing } from "@/content/partnerships";
 
 /**
- * Partner pricing — three light cards (monthly retainer, fixed per-project,
- * referral) in one hairline-bounded grid, same anatomy as the homepage tiers:
- * name + badge pill, price, summary, checklist, CTA band pinned to the
- * bottom. The recommended tier sits on the light surface.
+ * Partner pricing — same card anatomy as the homepage tiers: a header zone
+ * (icon + badge row, name, summary, price, full-width CTA) over a checklist
+ * zone on white. Tier distinction lives in the header zones: navy + texture
+ * for the featured retainer, white for fixed, grey surface for referral.
  */
 export function PartnerPricing() {
   return (
@@ -21,68 +23,157 @@ export function PartnerPricing() {
         </p>
       </div>
 
-      {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines. */}
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border lg:grid-cols-3">
-        {pPricing.tiers.map((tier) => (
-          <div
-            key={tier.name}
-            className={cn(
-              "flex flex-col",
-              tier.highlighted ? "bg-light-surface" : "bg-light-bg",
-            )}
-          >
-            <div className="flex flex-1 flex-col p-8">
-              <div className="flex flex-wrap items-center gap-3">
-                <h3 className="font-display text-body-lg font-medium">
-                  {tier.name}
-                </h3>
-                <span className="rounded-full border border-light-border px-2.5 py-0.5 font-mono text-[10px] uppercase track-label text-light-muted">
-                  {tier.badge}
-                </span>
-              </div>
+      {/* Tier cards */}
+      <div className="grid gap-4 lg:grid-cols-3">
+        {pPricing.tiers.map((tier, i) => {
+          const featured = tier.highlighted;
+          return (
+            <div
+              key={tier.name}
+              className="flex flex-col overflow-hidden rounded-[8px] border border-light-border bg-light-bg text-light-text"
+            >
+              {/* Header zone — alternating solid treatments: navy + texture
+                  (featured) / white / grey. */}
+              <div
+                className={cn(
+                  "relative overflow-hidden",
+                  featured
+                    ? "bg-bg text-white"
+                    : i > 1
+                      ? "bg-light-surface"
+                      : "bg-light-bg",
+                )}
+              >
+                {featured ? (
+                  <Image
+                    src="/textures/studio-texture.jpg"
+                    alt=""
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="pointer-events-none object-cover opacity-[0.28]"
+                    aria-hidden
+                  />
+                ) : null}
 
-              <div className="mt-4 font-display text-h2 font-medium leading-none tracking-tight">
-                {tier.price}
-              </div>
-              <p className="mt-2 text-body text-light-muted">
-                {tier.priceNote}
-              </p>
+                <div className="relative p-8">
+                  <div className="flex h-8 items-center justify-between">
+                    <span className={featured ? "text-white" : "text-light-muted"}>
+                      <TierIcon name={tier.icon} />
+                    </span>
+                    <span
+                      className={cn(
+                        "inline-flex items-center rounded-full px-2.5 py-1 font-mono text-[10px] uppercase track-label",
+                        featured
+                          ? "bg-white text-bg"
+                          : "border border-light-border text-light-muted",
+                      )}
+                    >
+                      {tier.badge}
+                    </span>
+                  </div>
 
-              <p className="mt-6 min-h-[72px] text-body leading-snug text-light-muted">
-                {tier.summary}
-              </p>
-
-              <p className="mb-4 mt-8 font-mono text-label uppercase track-label text-light-muted">
-                What&apos;s included
-              </p>
-              <ul className="flex flex-col gap-3">
-                {tier.features.map((f) => (
-                  <li
-                    key={f}
-                    className="flex items-start gap-3 text-body text-light-text"
+                  <h3 className="mt-6 font-display text-h3 font-medium leading-tight">
+                    {tier.name}
+                  </h3>
+                  <p
+                    className={cn(
+                      "mt-2 min-h-[72px] text-body leading-snug",
+                      featured ? "text-white/60" : "text-light-muted",
+                    )}
                   >
-                    <CircleCheck />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                    {tier.summary}
+                  </p>
 
-            {/* CTA band */}
-            <div className="border-t border-light-border p-6">
-              <Button
-                cta={{
-                  ...tier.cta,
-                  variant: tier.highlighted ? "primary" : "secondary",
-                }}
-                tone="light"
-                className="w-full"
-              />
+                  <div className="mt-6 font-display text-h2 font-medium leading-[1.05] tracking-tight">
+                    {tier.price}
+                  </div>
+                  <p
+                    className={cn(
+                      "mt-2 text-body",
+                      featured ? "text-white/60" : "text-light-muted",
+                    )}
+                  >
+                    {tier.priceNote}
+                  </p>
+                  <Link
+                    href={tier.cta.href}
+                    className={cn(
+                      "group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium transition",
+                      featured
+                        ? "bg-white text-bg hover:bg-white/90"
+                        : "btn-animated text-accent-ink",
+                    )}
+                  >
+                    {tier.cta.label}{" "}
+                    <span aria-hidden className="btn-arrow">
+                      &rarr;
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Checklist zone */}
+              <div className="flex-1 border-t border-light-border px-8 py-8">
+                <p className="font-mono text-label uppercase track-label text-light-muted">
+                  What&apos;s included
+                </p>
+                <ul className="mt-5 flex flex-col gap-3">
+                  {tier.features.map((f) => (
+                    <li
+                      key={f}
+                      className="flex items-start gap-3 text-body text-light-text"
+                    >
+                      <CircleCheck />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </Section>
+  );
+}
+
+/** Per-tier line icon (Lucide via Iconify), sized for the header row. */
+function TierIcon({ name }: { name: string }) {
+  const common = {
+    viewBox: "0 0 24 24",
+    className: "h-7 w-7",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+  if (name === "calendar") {
+    // lucide:calendar-days
+    return (
+      <svg {...common}>
+        <rect width="18" height="18" x="3" y="4" rx="2" />
+        <path d="M16 2v4M8 2v4M3 10h18" />
+      </svg>
+    );
+  }
+  if (name === "file-check") {
+    // lucide:file-check
+    return (
+      <svg {...common}>
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+        <path d="m9 15 2 2 4-4" />
+      </svg>
+    );
+  }
+  // lucide:send
+  return (
+    <svg {...common}>
+      <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+      <path d="m21.854 2.147-10.94 10.939" />
+    </svg>
   );
 }
 

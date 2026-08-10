@@ -3,12 +3,15 @@
 import { headers } from "next/headers";
 import { Resend } from "resend";
 
+import { pApply } from "@/content/partnerships";
+
 export type PartnerFormState =
   | { status: "idle" }
   | { status: "success" }
   | { status: "error"; message: string };
 
-const TRACKS = ["White-label production", "Referral", "Not sure yet"];
+// Whitelist comes from the same content the form renders its radios from.
+const TRACKS: string[] = pApply.fields.track.options;
 
 // Basic in-memory rate limit: max 5 submissions per IP per hour. Resets on
 // deploy, which is fine for a spam speed bump (not a security boundary).

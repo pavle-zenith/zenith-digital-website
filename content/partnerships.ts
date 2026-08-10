@@ -14,7 +14,6 @@ import type { CtaLink } from "@/lib/types";
  * Also confirm before launch (real copy, not bracketed):
  *   - the risk strip claims in pBenefits.riskStrip
  *   - the LMF HR / WellingtonWebCo story placeholders in pStories
- *   - add a founder photo at pApply.founder.photo (renders a monogram until set)
  */
 export const commercials = {
   partnerDiscount: "full rate card shared on application",
@@ -398,6 +397,7 @@ export const pStories = {
         { value: "2", label: "web apps" },
         { value: "7+", label: "industries" },
       ],
+      image: "/partners/techtonnik.webp",
       // OWNER: mock quote — replace with a real attributed one before launch.
       quote: {
         text: "Briefs go in, finished sites come out. Zenith made web delivery something we can promise our clients again.",
@@ -407,27 +407,28 @@ export const pStories = {
       },
       href: "/case-studies",
     },
-    {
-      name: "AdVantage Media Marketing",
-      logo: "/logos-blue/advantage.avif",
-      relationship: "White-label partner since 2024",
-      title: "The full white-label relationship, under AdVantage's brand",
-      story:
-        "Builds, plus ongoing management of dozens of client websites, security, and email systems. AdVantage's clients never hear our name.",
-      stats: [
-        { value: "Dozens", label: "of client sites managed" },
-        { value: "2024", label: "partners since" },
-      ],
-      // The one full white-label testimonial — featured, largest treatment.
-      // OWNER: swap the mock avatar for John's real photo.
-      quote: {
-        text: "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith was able to overdeliver on every front imaginable.",
-        name: "John Smyth",
-        role: "CEO @AdVantage",
-        avatar: "/avatars/a2.jpg",
-      },
-      featured: true,
-    },
+    // AdVantage story hidden per owner request (2026-08-10) — uncomment to restore.
+    // {
+    //   name: "AdVantage Media Marketing",
+    //   logo: "/logos-blue/advantage.avif",
+    //   relationship: "White-label partner since 2024",
+    //   title: "The full white-label relationship, under AdVantage's brand",
+    //   story:
+    //     "Builds, plus ongoing management of dozens of client websites, security, and email systems. AdVantage's clients never hear our name.",
+    //   stats: [
+    //     { value: "Dozens", label: "of client sites managed" },
+    //     { value: "2024", label: "partners since" },
+    //   ],
+    //   // The one full white-label testimonial — featured, largest treatment.
+    //   // OWNER: swap the mock avatar for John's real photo.
+    //   quote: {
+    //     text: "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith was able to overdeliver on every front imaginable.",
+    //     name: "John Smyth",
+    //     role: "CEO @AdVantage",
+    //     avatar: "/avatars/a2.jpg",
+    //   },
+    //   featured: true,
+    // },
     {
       name: "MOD Digital",
       logo: "/logos-blue/mod.avif",
@@ -439,6 +440,7 @@ export const pStories = {
         { value: "15+", label: "landing pages" },
         { value: "€1M+", label: "client campaign revenue" },
       ],
+      image: "/partners/mod-digital.webp",
       quote: {
         text: "Zenith redefined what hard work means to me. They treat every project with pride, enthusiasm, and extreme passion.",
         name: "Flynn Blackie",
@@ -458,6 +460,7 @@ export const pStories = {
         { value: "5+", label: "consulting projects" },
         { value: "End to end", label: "design & dev operations" },
       ],
+      image: "/partners/capacity.webp",
       // OWNER: attribute the quote (mock name/avatar until then).
       quote: {
         text: "Reliable, fast, and genuinely invested in the outcome.",
@@ -477,6 +480,7 @@ export const pStories = {
         "Web design and IT handled as a standing fractional arrangement for LMF HR's consulting-firm clients in Indianapolis.",
       // OWNER: replace with real figures.
       stats: [{ value: "[n]", label: "client sites delivered" }],
+      image: "/partners/lmf-hr.webp",
       // OWNER: mock quote — replace with a real attributed one before launch.
       quote: {
         text: "Our consulting clients get a web team without us hiring one. It just works, month after month.",
@@ -494,6 +498,7 @@ export const pStories = {
       title: "[Partnership headline to set]",
       story: "[Partnership story to set]",
       stats: [{ value: "[n]", label: "[metric to set]" }],
+      image: "/partners/wellington-web-co.webp",
       // OWNER: mock quote — replace with a real attributed one before launch.
       quote: {
         text: "[Partner quote to set]",
@@ -556,12 +561,11 @@ export const pFaq = {
 export const pApply = {
   heading: "Apply to partner",
   founder: {
-    note: "Applications come straight to Pavle, the founder. No sales team, no account managers, no queue. If we're a fit, you'll know within one business day.",
+    headline: "All quotes go to Pavle.",
+    note: "Applications come straight to the founder. No sales team, no account managers, no queue. If we're a fit, you'll know within one business day.",
     name: "Pavle Maoduš",
     role: "Founder, Zenith Digital",
-    // OWNER: add a real founder photo (e.g. /team/pavle.jpg). A monogram tile
-    // renders until this is set.
-    photo: "",
+    photo: "/team/pavle.jpg",
   },
   fields: {
     agency: { label: "Agency / company name", placeholder: "Your agency" },

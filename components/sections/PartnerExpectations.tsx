@@ -18,8 +18,9 @@ export function PartnerExpectations() {
             {pExpectations.items.map((item) => (
               <li
                 key={item}
-                className="py-5 text-body-lg font-medium leading-snug"
+                className="flex items-start gap-3 py-5 text-body-lg font-medium leading-snug"
               >
+                <CircleCheck />
                 {item}
               </li>
             ))}
@@ -30,5 +31,24 @@ export function PartnerExpectations() {
         </div>
       </div>
     </Section>
+  );
+}
+
+/** Circled check per ask — same register as the pricing checklists. */
+function CircleCheck() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="mt-1 h-5 w-5 shrink-0 text-light-muted"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8.5 12l2.5 2.5 4.5-4.5" />
+    </svg>
   );
 }

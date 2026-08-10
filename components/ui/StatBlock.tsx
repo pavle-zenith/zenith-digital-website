@@ -16,7 +16,9 @@ export function StatBlock({
       <span className="font-display text-h1 font-medium leading-none">
         {metric.value}
       </span>
-      <span className={tone === "dark" ? "text-text-muted" : "text-light-muted"}>
+      <span
+        className={tone === "dark" ? "text-text-muted" : "text-light-muted"}
+      >
         {metric.label}
       </span>
     </div>

@@ -10,8 +10,8 @@ import { pProblems } from "@/content/partnerships";
  */
 export function PartnerProblems() {
   return (
-    <Section tone="light" frameClassName="!py-20">
-      <h2 className="mx-auto mb-12 max-w-3xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+    <Section tone="light" frameClassName="!py-12 md:!py-20">
+      <h2 className="mx-auto mb-8 md:mb-12 max-w-3xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
         {pProblems.heading}
       </h2>
 

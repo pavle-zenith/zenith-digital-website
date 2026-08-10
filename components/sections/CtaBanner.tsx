@@ -45,11 +45,16 @@ export function CtaBanner({ data }: { data: BannerData }) {
               <h2 className="font-display text-h2 font-medium leading-[1.1] tracking-tight text-balance text-white">
                 {data.heading.join(" ")}
               </h2>
-              <p className="mt-4 max-w-xl text-body-lg font-medium text-white/75">{data.paragraph}</p>
+              <p className="mt-4 max-w-xl text-body-lg font-medium text-white/75">
+                {data.paragraph}
+              </p>
               {data.checks ? (
                 <ul className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
                   {data.checks.map((check) => (
-                    <li key={check} className="flex items-center gap-2 text-body font-medium text-white">
+                    <li
+                      key={check}
+                      className="flex items-center gap-2 text-body font-medium text-white"
+                    >
                       <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-bg">
                         <svg
                           viewBox="0 0 24 24"

@@ -16,7 +16,7 @@ export function Hero() {
   return (
     <Section tone="light" divide={false} frameClassName="!py-0">
       {/* Hero content */}
-      <div className="flex flex-col justify-end pb-14 pt-20">
+      <div className="flex flex-col justify-end pb-10 pt-10 md:pb-14 md:pt-20">
         {/* Eyebrow: "Top 1% Partner of" + the Wix Studio lockup */}
         <div className="mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-light-surface px-3 py-1.5 text-label font-medium">
           <span className="text-light-muted">{hero.badgePrefix}</span>
@@ -45,19 +45,27 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Bottom-right: proof badge — label left, avatars right */}
+          {/* Bottom-right: proof badge — avatars left, label right */}
           <div className="flex shrink-0 items-center gap-3 lg:pb-2">
-            <span className="font-display font-medium text-light-text">{hero.proof.label}</span>
             <div className="flex -space-x-3">
               {hero.proof.avatars.map((src) => (
                 <span
                   key={src}
                   className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-light-bg"
                 >
-                  <Image src={src} alt="" fill sizes="36px" className="object-cover" />
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="36px"
+                    className="object-cover"
+                  />
                 </span>
               ))}
             </div>
+            <span className="font-display font-medium text-light-text">
+              {hero.proof.label}
+            </span>
           </div>
         </div>
       </div>
@@ -67,7 +75,7 @@ export function Hero() {
 
       {/* 2x2 highlighted case studies — flows out of the hero. The 1px grid gaps on a
           rule-colored background render as hairlines that touch the frame rails. */}
-      <div className="frame-bleed grid grid-cols-1 gap-px border-t border-light-border bg-light-border sm:grid-cols-2">
+      <div className="frame-bleed-md grid grid-cols-1 gap-px border-t border-light-border bg-light-border sm:grid-cols-2">
         {hero.featured.map((c) => (
           <Link
             key={c.client}
@@ -89,7 +97,9 @@ export function Hero() {
                 {c.tag}
               </span>
             </div>
-            <span className="text-body font-medium text-light-text">{c.metric}</span>
+            <span className="text-body font-medium text-light-text">
+              {c.metric}
+            </span>
           </Link>
         ))}
       </div>

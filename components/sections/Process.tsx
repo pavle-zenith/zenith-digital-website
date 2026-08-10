@@ -58,7 +58,7 @@ export function Process() {
   const hiddenRight = 100 - ((active + 1) / processSection.steps.length) * 100;
 
   return (
-    <Section tone="light" frameClassName="!py-24">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
       {/* Header */}
       <div className="mb-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <h2 className="max-w-3xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
@@ -66,9 +66,12 @@ export function Process() {
         </h2>
         <Link
           href={processSection.cta.href}
-          className="btn-animated group inline-flex shrink-0 items-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium text-accent-ink transition"
+          className="btn-animated group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-[6px] px-6 py-3 sm:w-auto text-body font-medium text-accent-ink transition"
         >
-          {processSection.cta.label} <span aria-hidden className="btn-arrow">&rarr;</span>
+          {processSection.cta.label}{" "}
+          <span aria-hidden className="btn-arrow">
+            &rarr;
+          </span>
         </Link>
       </div>
 
@@ -84,7 +87,10 @@ export function Process() {
           </h3>
           <ul className="mt-5 flex flex-col gap-2">
             {step.points.map((p) => (
-              <li key={p} className="flex items-center gap-3 text-body text-light-muted">
+              <li
+                key={p}
+                className="flex items-center gap-3 text-body text-light-muted"
+              >
                 <span className="h-2 w-2 shrink-0 bg-accent" />
                 {p}
               </li>
@@ -97,7 +103,10 @@ export function Process() {
           {/* Vertical dotted grid segments */}
           <div className="absolute inset-0 grid grid-cols-5">
             {processSection.steps.map((_, i) => (
-              <div key={i} className="border-l border-dashed border-light-border first:border-l-0" />
+              <div
+                key={i}
+                className="border-l border-dashed border-light-border first:border-l-0"
+              />
             ))}
             <div className="absolute inset-y-0 right-0 border-l border-dashed border-light-border" />
           </div>
@@ -109,7 +118,13 @@ export function Process() {
             className="absolute inset-0 h-full w-full"
             aria-hidden
           >
-            <path d={fullCurve} fill="none" stroke="var(--color-light-border)" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+            <path
+              d={fullCurve}
+              fill="none"
+              stroke="var(--color-light-border)"
+              strokeWidth="2"
+              vectorEffect="non-scaling-stroke"
+            />
           </svg>
 
           {/* Highlight layer: full accent curve + fade-to-white fill, revealed by
@@ -127,8 +142,16 @@ export function Process() {
               <defs>
                 {/* Fade from the curve down to white */}
                 <linearGradient id="process-fade" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.16" />
-                  <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
+                  <stop
+                    offset="0%"
+                    stopColor="var(--color-accent)"
+                    stopOpacity="0.16"
+                  />
+                  <stop
+                    offset="100%"
+                    stopColor="var(--color-accent)"
+                    stopOpacity="0"
+                  />
                 </linearGradient>
               </defs>
               <path d={fullFill} fill="url(#process-fade)" />
@@ -157,7 +180,9 @@ export function Process() {
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
                 className="group min-w-0 border-t-2 pt-4 text-left transition-colors duration-500"
-                style={{ borderColor: lit ? "var(--color-accent)" : "transparent" }}
+                style={{
+                  borderColor: lit ? "var(--color-accent)" : "transparent",
+                }}
               >
                 <span
                   className={cn(
@@ -172,7 +197,9 @@ export function Process() {
                 <span
                   className={cn(
                     "mt-1.5 hidden font-display text-body-lg font-medium transition-colors duration-500 sm:block",
-                    lit ? "text-light-text" : "text-light-muted group-hover:text-light-text",
+                    lit
+                      ? "text-light-text"
+                      : "text-light-muted group-hover:text-light-text",
                   )}
                 >
                   {s.label}

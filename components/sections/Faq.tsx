@@ -25,7 +25,7 @@ export function Faq({ data = faqSection }: { data?: FaqData }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <Section tone="light" frameClassName="!py-20">
+    <Section tone="light" frameClassName="!py-12 md:!py-20">
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         {/* Left: sticky heading */}
         <div className="lg:sticky lg:top-24 lg:self-start">
@@ -36,7 +36,9 @@ export function Faq({ data = faqSection }: { data?: FaqData }) {
               </span>
             ))}
           </h2>
-          <p className="mt-6 max-w-md text-body-lg font-medium text-light-muted">{data.subhead}</p>
+          <p className="mt-6 max-w-md text-body-lg font-medium text-light-muted">
+            {data.subhead}
+          </p>
           {data.ctas.length > 0 ? (
             <div className="mt-8 flex flex-wrap gap-3">
               {data.ctas.map((cta) => (
@@ -61,7 +63,9 @@ export function Faq({ data = faqSection }: { data?: FaqData }) {
                   aria-expanded={isOpen}
                   onClick={() => setOpen(isOpen ? null : i)}
                 >
-                  <span className="font-display text-body-lg font-medium">{item.q}</span>
+                  <span className="font-display text-body-lg font-medium">
+                    {item.q}
+                  </span>
                   <span
                     className={cn(
                       "shrink-0 text-h3 leading-none text-light-text transition-transform duration-200",

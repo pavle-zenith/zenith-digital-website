@@ -11,8 +11,8 @@ import { pPricing } from "@/content/partnerships";
  */
 export function PartnerPricing() {
   return (
-    <Section tone="light" frameClassName="!py-24">
-      <div className="mb-12 grid gap-8 md:grid-cols-2 md:items-end">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
+      <div className="mb-8 grid md:mb-12 gap-8 md:grid-cols-2 md:items-end">
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {pPricing.heading}
         </h2>

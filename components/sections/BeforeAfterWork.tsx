@@ -24,12 +24,14 @@ export function BeforeAfterWork({
   const muted = tone === "dark" ? "text-text-muted" : "text-light-muted";
 
   return (
-    <Section tone={tone} frameClassName="!py-24">
+    <Section tone={tone} frameClassName="!py-14 md:!py-24">
       <h2 className="mx-auto mb-4 max-w-2xl text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
         {data.heading}
       </h2>
       {data.support ? (
-        <p className={`mx-auto mb-12 max-w-xl text-center text-body-lg font-medium ${muted}`}>
+        <p
+          className={`mx-auto mb-8 max-w-xl md:mb-12 text-center text-body-lg font-medium ${muted}`}
+        >
           {data.support}
         </p>
       ) : (

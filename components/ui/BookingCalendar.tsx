@@ -14,7 +14,11 @@ export function BookingCalendar({ calLink }: { calLink: string }) {
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "discovery-call" });
-      cal("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view" });
+      cal("ui", {
+        theme: "light",
+        hideEventTypeDetails: false,
+        layout: "month_view",
+      });
     })();
   }, []);
 

@@ -10,8 +10,8 @@ import { pTracks } from "@/content/partnerships";
  */
 export function PartnerTracks() {
   return (
-    <Section tone="light" frameClassName="!py-24">
-      <h2 className="mb-12 font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
+      <h2 className="mb-8 font-display text-h2 md:mb-12 font-medium leading-tight tracking-tight text-balance">
         {pTracks.heading}
       </h2>
 

@@ -6,8 +6,16 @@ import type { CtaLink, Metric } from "@/lib/types";
  * (businesses that outgrow templates), per the homepage brief. Real figures only.
  */
 
-export const BOOK_CALL: CtaLink = { label: "Book a call", href: "/book-a-call", variant: "primary" };
-export const AUDIT: CtaLink = { label: "Free website audit", href: "/free-website-audit", variant: "secondary" };
+export const BOOK_CALL: CtaLink = {
+  label: "Book a call",
+  href: "/book-a-call",
+  variant: "primary",
+};
+export const AUDIT: CtaLink = {
+  label: "Free website audit",
+  href: "/free-website-audit",
+  variant: "secondary",
+};
 
 // 1. Hero
 export const hero = {
@@ -24,13 +32,44 @@ export const hero = {
       "/avatars/ivan-belobrajdic.jpg",
     ],
   },
-  ctas: [BOOK_CALL, { label: "See our work", href: "/case-studies", variant: "secondary" } as CtaLink],
+  ctas: [
+    BOOK_CALL,
+    {
+      label: "See our work",
+      href: "/case-studies",
+      variant: "secondary",
+    } as CtaLink,
+  ],
   // 2x2 highlighted case studies that flow directly out of the hero.
   featured: [
-    { client: "Bel'Istria", tag: "Travel", metric: "257% more impressions", image: "/portfolio/belistria.jpg", href: "/case-studies" },
-    { client: "Knode AI", tag: "SaaS", metric: "$10M Series A raised", image: "/portfolio/knode.jpg", href: "/case-studies" },
-    { client: "Fort Lauderdale Dock Rentals", tag: "Marine", metric: "30+ warm leads", image: "/portfolio/fortlauderdale.jpg", href: "/case-studies" },
-    { client: "Scottish Luxury Experience", tag: "Travel", metric: "€500k pipeline", image: "/portfolio/scottishluxury.jpg", href: "/case-studies" },
+    {
+      client: "Bel'Istria",
+      tag: "Travel",
+      metric: "257% more impressions",
+      image: "/portfolio/belistria.jpg",
+      href: "/case-studies",
+    },
+    {
+      client: "Knode AI",
+      tag: "SaaS",
+      metric: "$10M Series A raised",
+      image: "/portfolio/knode.jpg",
+      href: "/case-studies",
+    },
+    {
+      client: "Fort Lauderdale Dock Rentals",
+      tag: "Marine",
+      metric: "30+ warm leads",
+      image: "/portfolio/fortlauderdale.jpg",
+      href: "/case-studies",
+    },
+    {
+      client: "Scottish Luxury Experience",
+      tag: "Travel",
+      metric: "€500k pipeline",
+      image: "/portfolio/scottishluxury.jpg",
+      href: "/case-studies",
+    },
   ],
 };
 
@@ -101,13 +140,59 @@ export const comparison = {
     "Every option gets you a website. This is what each one actually costs you over a year.",
   columns: ["", "AI websites", "Freelancers", "Agencies", "Zenith Digital"],
   rows: [
-    { criterion: "Annual cost", values: ["Cheap, until it isn't", "Unpredictable", "€15k–50k+", "From €2,500, fixed"] },
-    { criterion: "Time to launch", values: ["Minutes, then weeks of fixing it", "Whenever", "2–4 months", "3–4 weeks"] },
-    { criterion: "Consistent team", values: ["No team at all", "One person, no backup", "Rotating staff", "Same team, start to finish"] },
-    { criterion: "Copywriting included", values: ["Generic filler", "Rarely", "Extra cost", "Included"] },
-    { criterion: "SEO & AEO", values: ["Thin, templated pages", "Sometimes", "Add-on", "Built in"] },
-    { criterion: "Post-launch support", values: ["A chatbot", "Unpredictable", "Retainer required", "30 days free, then flexible"] },
-    { criterion: "You own and can edit it", values: ["Locked to their platform", "Depends", "Often locked in", "Yes, with a handover"] },
+    {
+      criterion: "Annual cost",
+      values: [
+        "Cheap, until it isn't",
+        "Unpredictable",
+        "€15k–50k+",
+        "From €2,500, fixed",
+      ],
+    },
+    {
+      criterion: "Time to launch",
+      values: [
+        "Minutes, then weeks of fixing it",
+        "Whenever",
+        "2–4 months",
+        "3–4 weeks",
+      ],
+    },
+    {
+      criterion: "Consistent team",
+      values: [
+        "No team at all",
+        "One person, no backup",
+        "Rotating staff",
+        "Same team, start to finish",
+      ],
+    },
+    {
+      criterion: "Copywriting included",
+      values: ["Generic filler", "Rarely", "Extra cost", "Included"],
+    },
+    {
+      criterion: "SEO & AEO",
+      values: ["Thin, templated pages", "Sometimes", "Add-on", "Built in"],
+    },
+    {
+      criterion: "Post-launch support",
+      values: [
+        "A chatbot",
+        "Unpredictable",
+        "Retainer required",
+        "30 days free, then flexible",
+      ],
+    },
+    {
+      criterion: "You own and can edit it",
+      values: [
+        "Locked to their platform",
+        "Depends",
+        "Often locked in",
+        "Yes, with a handover",
+      ],
+    },
   ],
 };
 
@@ -116,38 +201,47 @@ export const services = {
   heading: "Everything you need to design, build, and grow online.",
   intro:
     "One team for the whole journey. From a first Wix Studio build to migrations, campaigns, and white-label work for agencies.",
-  cta: { label: "All services", href: "/services", variant: "primary" } as CtaLink,
+  cta: {
+    label: "All services",
+    href: "/services",
+    variant: "primary",
+  } as CtaLink,
   // Stripe-style grid: row 1 = two wide (span 3 of 6), row 2 = three equal
   // Stripe-style grid (6 cols): three rows of two equal cards (span 3).
   // `image` is the per-service generated mockup.
   items: [
     {
       title: "Website design & development",
-      description: "Fast, structured, conversion-ready sites that turn visitors into paying clients.",
+      description:
+        "Fast, structured, conversion-ready sites that turn visitors into paying clients.",
       image: "/services/web-design.webp",
       span: 3,
     },
     {
       title: "Landing pages",
-      description: "High-converting pages for campaigns, launches, and lead capture.",
+      description:
+        "High-converting pages for campaigns, launches, and lead capture.",
       image: "/services/landing-pages.webp",
       span: 3,
     },
     {
       title: "White-label design & development",
-      description: "Unbranded builds for agencies and freelancers to resell under their own brand.",
+      description:
+        "Unbranded builds for agencies and freelancers to resell under their own brand.",
       image: "/services/white-label.webp",
       span: 3,
     },
     {
       title: "SEO, AEO & PPC campaigns",
-      description: "Search and paid campaigns tied to your site so every euro lands somewhere built to convert.",
+      description:
+        "Search and paid campaigns tied to your site so every euro lands somewhere built to convert.",
       image: "/services/seo-aeo.webp",
       span: 3,
     },
     {
       title: "Website migrations",
-      description: "Move to Wix Studio from any platform with full URL mapping and zero ranking loss.",
+      description:
+        "Move to Wix Studio from any platform with full URL mapping and zero ranking loss.",
       // Interactive before/after slider instead of a static mockup. Client
       // name intentionally not shown on the card.
       beforeAfter: {
@@ -158,7 +252,8 @@ export const services = {
     },
     {
       title: "Wix Studio development",
-      description: "Custom code, CMS architecture, and integrations on top of Wix Studio.",
+      description:
+        "Custom code, CMS architecture, and integrations on top of Wix Studio.",
       image: "/services/wix-studio.webp",
       span: 3,
     },
@@ -172,7 +267,8 @@ export const videoTestimonials = {
     "We don't ask for testimonials until the work is done and the results are in. These are real clients who came to us with a site that wasn't even pulling its weight, and left with one that does.",
   items: [
     {
-      quote: "Zenith redefined what hard work means to me. They treat every website project with pride, enthusiasm and extreme passion.",
+      quote:
+        "Zenith redefined what hard work means to me. They treat every website project with pride, enthusiasm and extreme passion.",
       name: "Flynn Blackie",
       role: "Founder & Director",
       company: "MOD Digital",
@@ -181,7 +277,8 @@ export const videoTestimonials = {
       video: "", // Flynn is an image for now
     },
     {
-      quote: "We hired Zenith to help us rebrand our site. Conversion skyrocketed. We saw what it takes to be one of the top professionals in the field.",
+      quote:
+        "We hired Zenith to help us rebrand our site. Conversion skyrocketed. We saw what it takes to be one of the top professionals in the field.",
       name: "Uros Stanimirovic",
       role: "Co-Founder & CTO",
       company: "Genroks AI",
@@ -190,7 +287,8 @@ export const videoTestimonials = {
       video: "/testimonials/uros.mov",
     },
     {
-      quote: "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith was able to overdeliver on every front imaginable.",
+      quote:
+        "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith was able to overdeliver on every front imaginable.",
       name: "John Smyth",
       role: "CEO",
       company: "AdVantage Media Marketing",
@@ -219,25 +317,90 @@ export const caseStudiesCta = {
 
 // 6c. Cross-industry client grid (copied 1:1 from the live site)
 export const crossIndustry = {
-  heading: "We leverage our 10 years of expertise from cross-industry projects for our clients",
+  heading:
+    "We leverage our 10 years of expertise from cross-industry projects for our clients",
   // logo paths are placeholders; swap for the real marks. Names kept so it's clear which logo goes where.
   items: [
-    { name: "Knode", logo: "/logos-blue/knode.avif", text: "Full SaaS website & Landing page from scratch in 3 weeks. Knode is currently raising $10M Series A." },
-    { name: "Techtonnik", logo: "/logos-dark/techtonnik.png", text: "Web fulfillment partners since 2023. Delivered 10+ Websites & 2 Web apps." },
-    { name: "MOD", logo: "/logos-blue/mod.avif", text: "Delivered 15+ Landing pages for marketing campaigns generating €1M+ in client revenue." },
-    { name: "Capacity", logo: "/logos-blue/capacity.avif", text: "Fractional web design team leading design & development operations." },
-    { name: "Empyrean Global", logo: "/logos-blue/empyrean.avif", text: "Redesigned web identity from scratch & acted as website consulting partner." },
-    { name: "BoomBoom Creatives", logo: "/logos-blue/boomboom.avif", text: "Several marketing landing pages throughout 2023/2024 in Webflow / Wix Studio." },
-    { name: "Stilby", logo: "/logos-dark/stilby.png", text: "Developed and launched two websites to expand into Montenegro & Slovakia markets." },
-    { name: "Genroks", logo: "/logos-blue/genroks.avif", text: "Two separate web identities for an AI ISO Standard Compliance Generator Startup in Framer." },
-    { name: "Fox Energy", logo: "/logos-blue/foxenergy.avif", text: "Full scale marketing website for oil & gas company looking to attract investors." },
-    { name: "NOTYOU", logo: "/logos-blue/notyou.avif", text: "Full web e-Commerce identity for a popular local brand from ATL, Georgia." },
-    { name: "AdVantage", logo: "/logos-blue/advantage.avif", text: "Managing dozens of client websites, security and email systems since 2024." },
-    { name: "FoxStays", logo: "/logos-blue/foxstays.avif", text: "Web app and lead generation ecosystem for the yacht & dock rental market." },
-    { name: "LMF HR", logo: "/logos-blue/lmfhr.avif", text: "Fractional Web Design & IT Partner for consulting firm clients in Indianapolis." },
-    { name: "Jim Steele", logo: "/logos-blue/jimsteele.avif", text: "Marketing page & lead capture ecosystem for UK's popular motivational speaker." },
-    { name: "Creatify Collective", logo: "/logos-blue/creatify.avif", text: "Development of a full brand identity for a growing Videography agency." },
-    { name: "Kema Coatings", logo: "/logos-blue/kema.avif", text: "Two branded websites for an expanding coating & protection company." },
+    {
+      name: "Knode",
+      logo: "/logos-blue/knode.avif",
+      text: "Full SaaS website & Landing page from scratch in 3 weeks. Knode is currently raising $10M Series A.",
+    },
+    {
+      name: "Techtonnik",
+      logo: "/logos-dark/techtonnik.png",
+      text: "Web fulfillment partners since 2023. Delivered 10+ Websites & 2 Web apps.",
+    },
+    {
+      name: "MOD",
+      logo: "/logos-blue/mod.avif",
+      text: "Delivered 15+ Landing pages for marketing campaigns generating €1M+ in client revenue.",
+    },
+    {
+      name: "Capacity",
+      logo: "/logos-blue/capacity.avif",
+      text: "Fractional web design team leading design & development operations.",
+    },
+    {
+      name: "Empyrean Global",
+      logo: "/logos-blue/empyrean.avif",
+      text: "Redesigned web identity from scratch & acted as website consulting partner.",
+    },
+    {
+      name: "BoomBoom Creatives",
+      logo: "/logos-blue/boomboom.avif",
+      text: "Several marketing landing pages throughout 2023/2024 in Webflow / Wix Studio.",
+    },
+    {
+      name: "Stilby",
+      logo: "/logos-dark/stilby.png",
+      text: "Developed and launched two websites to expand into Montenegro & Slovakia markets.",
+    },
+    {
+      name: "Genroks",
+      logo: "/logos-blue/genroks.avif",
+      text: "Two separate web identities for an AI ISO Standard Compliance Generator Startup in Framer.",
+    },
+    {
+      name: "Fox Energy",
+      logo: "/logos-blue/foxenergy.avif",
+      text: "Full scale marketing website for oil & gas company looking to attract investors.",
+    },
+    {
+      name: "NOTYOU",
+      logo: "/logos-blue/notyou.avif",
+      text: "Full web e-Commerce identity for a popular local brand from ATL, Georgia.",
+    },
+    {
+      name: "AdVantage",
+      logo: "/logos-blue/advantage.avif",
+      text: "Managing dozens of client websites, security and email systems since 2024.",
+    },
+    {
+      name: "FoxStays",
+      logo: "/logos-blue/foxstays.avif",
+      text: "Web app and lead generation ecosystem for the yacht & dock rental market.",
+    },
+    {
+      name: "LMF HR",
+      logo: "/logos-blue/lmfhr.avif",
+      text: "Fractional Web Design & IT Partner for consulting firm clients in Indianapolis.",
+    },
+    {
+      name: "Jim Steele",
+      logo: "/logos-blue/jimsteele.avif",
+      text: "Marketing page & lead capture ecosystem for UK's popular motivational speaker.",
+    },
+    {
+      name: "Creatify Collective",
+      logo: "/logos-blue/creatify.avif",
+      text: "Development of a full brand identity for a growing Videography agency.",
+    },
+    {
+      name: "Kema Coatings",
+      logo: "/logos-blue/kema.avif",
+      text: "Two branded websites for an expanding coating & protection company.",
+    },
   ],
 };
 
@@ -246,10 +409,38 @@ export const featuredWork = {
   eyebrow: "Selected work",
   heading: "Real businesses. Real numbers.",
   cases: [
-    { client: "Flynn Blackie", industry: "Marketing", metric: "220%", metricLabel: "more bookings", image: "/work/work-1.jpg", href: "/case-studies" },
-    { client: "Scottish Luxury Experience", industry: "Travel", metric: "€500k", metricLabel: "pipeline value", image: "/work/work-2.jpg", href: "/case-studies" },
-    { client: "Bel'Istria", industry: "Travel", metric: "257%", metricLabel: "more impressions", image: "/work/work-3.jpg", href: "/case-studies" },
-    { client: "Hunting Brook", industry: "Courses", metric: "€200k+", metricLabel: "in course sales", image: "/work/work-4.jpg", href: "/case-studies" },
+    {
+      client: "Flynn Blackie",
+      industry: "Marketing",
+      metric: "220%",
+      metricLabel: "more bookings",
+      image: "/work/work-1.jpg",
+      href: "/case-studies",
+    },
+    {
+      client: "Scottish Luxury Experience",
+      industry: "Travel",
+      metric: "€500k",
+      metricLabel: "pipeline value",
+      image: "/work/work-2.jpg",
+      href: "/case-studies",
+    },
+    {
+      client: "Bel'Istria",
+      industry: "Travel",
+      metric: "257%",
+      metricLabel: "more impressions",
+      image: "/work/work-3.jpg",
+      href: "/case-studies",
+    },
+    {
+      client: "Hunting Brook",
+      industry: "Courses",
+      metric: "€200k+",
+      metricLabel: "in course sales",
+      image: "/work/work-4.jpg",
+      href: "/case-studies",
+    },
   ],
 };
 
@@ -263,49 +454,57 @@ export const industries = {
   items: [
     {
       name: "SaaS & tech",
-      blurb: "Product sites and web apps that turn launches into pipeline. Knode raised $10M with theirs.",
+      blurb:
+        "Product sites and web apps that turn launches into pipeline. Knode raised $10M with theirs.",
       href: "/industries/saas-tech",
       image: "/industries/saas-tech.jpg",
     },
     {
       name: "Travel & hospitality",
-      blurb: "Booking-ready sites for transfers, stays, and experiences. Bel'Istria grew impressions 257%.",
+      blurb:
+        "Booking-ready sites for transfers, stays, and experiences. Bel'Istria grew impressions 257%.",
       href: "/industries/travel-hospitality",
       image: "/industries/travel-hospitality.jpg",
     },
     {
       name: "Coaches & speakers",
-      blurb: "Lead-capture pages built to sell seats and sessions for experts and public speakers.",
+      blurb:
+        "Lead-capture pages built to sell seats and sessions for experts and public speakers.",
       href: "/industries/coaches-speakers",
       image: "/industries/coaches-speakers.jpg",
     },
     {
       name: "Marketing & agencies",
-      blurb: "Campaign landing pages and white-label builds. MOD's drove €1M+ in client revenue.",
+      blurb:
+        "Campaign landing pages and white-label builds. MOD's drove €1M+ in client revenue.",
       href: "/industries/marketing-agencies",
       image: "/industries/marketing-agencies.jpg",
     },
     {
       name: "E-commerce & retail",
-      blurb: "Storefronts and brand sites built to convert, launched across new markets.",
+      blurb:
+        "Storefronts and brand sites built to convert, launched across new markets.",
       href: "/industries/ecommerce-retail",
       image: "/industries/ecommerce-retail.jpg",
     },
     {
       name: "Clothing & fashion brands",
-      blurb: "Brand-led storefronts and lookbooks that make new labels look established from day one.",
+      blurb:
+        "Brand-led storefronts and lookbooks that make new labels look established from day one.",
       href: "/industries/clothing-fashion",
       image: "/industries/clothing.jpg",
     },
     {
       name: "Creatives & personal brands",
-      blurb: "Portfolio and personal-brand sites for videographers, photographers, and creators who need to stand out.",
+      blurb:
+        "Portfolio and personal-brand sites for videographers, photographers, and creators who need to stand out.",
       href: "/industries/creatives",
       image: "/industries/creatives.jpg", // TODO: image coming later
     },
     {
       name: "Professional services",
-      blurb: "Credible, conversion-ready sites for firms that win work on trust and expertise.",
+      blurb:
+        "Credible, conversion-ready sites for firms that win work on trust and expertise.",
       href: "/industries/professional-services",
       image: "/industries/professional-services.jpg",
     },
@@ -387,7 +586,11 @@ export const included = {
 export const processSection = {
   name: "The Zenith Sprint",
   heading: "The path from first call to a site that performs",
-  cta: { label: "Start your project", href: "/book-a-call", variant: "primary" } as CtaLink,
+  cta: {
+    label: "Start your project",
+    href: "/book-a-call",
+    variant: "primary",
+  } as CtaLink,
   steps: [
     {
       step: "Step 1",
@@ -436,7 +639,8 @@ export const proof = {
 // 11. Pricing preview — dark, 3-tier section
 export const pricing = {
   heading: "Transparent, fixed pricing",
-  intro: "Fixed scope, fixed price, fixed timeline. No retainers, no licensing traps, no surprise invoices.",
+  intro:
+    "Fixed scope, fixed price, fixed timeline. No retainers, no licensing traps, no surprise invoices.",
   cta: { label: "Book a call", href: "/book-a-call" },
   // White-label band below the tiers
   whiteLabel: {
@@ -454,8 +658,10 @@ export const pricing = {
       icon: "pen",
       price: "From €2,500",
       priceNote: "one-time",
-      summary: "A clean, credible build for businesses that need to launch fast.",
+      summary:
+        "A clean, credible build for businesses that need to launch fast.",
       timeline: "2-week delivery",
+      featuresLabel: "Core functionality",
       features: [
         "Up to 5 pages",
         "Wix Studio design & build",
@@ -472,10 +678,11 @@ export const pricing = {
       icon: "layers",
       price: "€4,500",
       priceNote: "one-time",
-      summary: "Prestige design, custom functionality, and the full SEO and copy stack, handled.",
+      summary:
+        "Prestige design, custom functionality, and the full SEO and copy stack, handled.",
       timeline: "5-week delivery",
+      featuresLabel: "Everything in The Minimum, plus:",
       features: [
-        "Everything in The Minimum",
         "Up to 12 pages",
         "Custom functionality & CMS",
         "Integrations & automations",
@@ -488,13 +695,14 @@ export const pricing = {
     },
     {
       name: "The Zenith",
-      icon: "spark",
+      icon: "mountain",
       price: "Custom",
       priceNote: "monthly",
-      summary: "A long-term partnership: growth retainers, ads, SEO campaigns, and ongoing builds.",
+      summary:
+        "A long-term partnership: growth retainers, ads, SEO campaigns, and ongoing builds.",
       timeline: "Ongoing",
+      featuresLabel: "Everything in The Studio, plus:",
       features: [
-        "Everything in The Studio",
         "Dedicated design & dev team",
         "Growth retainer & ad campaigns",
         "Ongoing SEO & content",
@@ -526,7 +734,12 @@ export const testimonials = {
     { value: "5.96x", label: "Average ROAS" },
     { value: "€1M+", label: "Client revenue generated" },
   ],
-  rating: { platform: "Clutch", score: "5/5", href: "/testimonials", cta: "See all clients" },
+  rating: {
+    platform: "Clutch",
+    score: "5/5",
+    href: "/testimonials",
+    cta: "See all clients",
+  },
   items: [
     {
       result: "Grew bookings 220% with a rebuilt Wix Studio site",
@@ -589,7 +802,11 @@ export const testimonials = {
 export const partnerships = {
   heading: "Agency or freelancer?",
   line: "Sell our builds under your brand. Unbranded deliverables, NDA, partner pricing.",
-  cta: { label: "Explore partnerships", href: "/partnerships", variant: "secondary" } as CtaLink,
+  cta: {
+    label: "Explore partnerships",
+    href: "/partnerships",
+    variant: "secondary",
+  } as CtaLink,
 };
 
 // 15. Free website audit
@@ -632,31 +849,82 @@ export const audit = {
 // FAQ section (Trueform-style: sticky heading left, accordion cards right)
 export const faqSection = {
   heading: ["Common questions.", "Asked in every intro call."],
-  subhead: "If you're thinking about working with us, you're probably wondering one of these. Here's where we stand.",
+  subhead:
+    "If you're thinking about working with us, you're probably wondering one of these. Here's where we stand.",
   ctas: [
-    { label: "Book a call", href: "/book-a-call", variant: "primary" } as CtaLink,
-    { label: "Email us", href: "mailto:hello@thezenithdigital.com", variant: "secondary" } as CtaLink,
+    {
+      label: "Book a call",
+      href: "/book-a-call",
+      variant: "primary",
+    } as CtaLink,
+    {
+      label: "Email us",
+      href: "mailto:hello@thezenithdigital.com",
+      variant: "secondary",
+    } as CtaLink,
   ],
   items: [
-    { q: "Why Wix Studio specifically?", a: "It's the fastest route to a premium, editable, SEO-ready site for most businesses. You own it, your team can run it, and there are no licensing traps. When a project genuinely outgrows Wix, we build fully custom, this site is the proof." },
-    { q: "What if we're on Webflow, WordPress, or a custom stack today?", a: "We migrate from any platform with full URL mapping and zero ranking loss. You keep your rankings and get a faster, cleaner site." },
-    { q: "Can our marketing team really run the site after launch?", a: "Yes. You get a site you own, a recorded Loom walkthrough of how to edit it, and 30 days of free support after launch." },
-    { q: "What about AEO and SEO?", a: "Both are built in, not bolted on. Clean structure, metadata, schema, and content targeting so you're found by people, search engines, and AI answer engines." },
-    { q: "We need more than a marketing site, branding, automations, etc. Do you do that?", a: "Yes. Alongside design and build we handle SEO/GEO/PPC campaigns, automations and integrations, and white-label production for agencies." },
-    { q: "How fast can we actually launch?", a: "Most sites launch in 3 to 4 weeks from the first call. A focused 5-page build ships in around two weeks." },
-    { q: "How do you work with clients?", a: "A free 20-minute call, then an intake form, then a same-day proposal with scope, timeline, and a fixed price. Once you sign off we design, you review directly, and we launch." },
-    { q: "Do you work with international clients?", a: "Yes. We're based in Belgrade and work across the UK, EU, and US, including multilingual builds." },
+    {
+      q: "Why Wix Studio specifically?",
+      a: "It's the fastest route to a premium, editable, SEO-ready site for most businesses. You own it, your team can run it, and there are no licensing traps. When a project genuinely outgrows Wix, we build fully custom, this site is the proof.",
+    },
+    {
+      q: "What if we're on Webflow, WordPress, or a custom stack today?",
+      a: "We migrate from any platform with full URL mapping and zero ranking loss. You keep your rankings and get a faster, cleaner site.",
+    },
+    {
+      q: "Can our marketing team really run the site after launch?",
+      a: "Yes. You get a site you own, a recorded Loom walkthrough of how to edit it, and 30 days of free support after launch.",
+    },
+    {
+      q: "What about AEO and SEO?",
+      a: "Both are built in, not bolted on. Clean structure, metadata, schema, and content targeting so you're found by people, search engines, and AI answer engines.",
+    },
+    {
+      q: "We need more than a marketing site, branding, automations, etc. Do you do that?",
+      a: "Yes. Alongside design and build we handle SEO/GEO/PPC campaigns, automations and integrations, and white-label production for agencies.",
+    },
+    {
+      q: "How fast can we actually launch?",
+      a: "Most sites launch in 3 to 4 weeks from the first call. A focused 5-page build ships in around two weeks.",
+    },
+    {
+      q: "How do you work with clients?",
+      a: "A free 20-minute call, then an intake form, then a same-day proposal with scope, timeline, and a fixed price. Once you sign off we design, you review directly, and we launch.",
+    },
+    {
+      q: "Do you work with international clients?",
+      a: "Yes. We're based in Belgrade and work across the UK, EU, and US, including multilingual builds.",
+    },
   ],
 };
 
 // 16. FAQ (legacy — kept for schema until removed)
 export const faqs = [
-  { q: "Is it worth the investment?", a: "A website is a sales tool, not a brochure. Our builds are structured to convert and rank, and clients have generated over €1M in revenue from them. If it doesn't pay for itself, it isn't done right." },
-  { q: "How long does it take?", a: "Most sites launch in 3-4 weeks from the first call. The Minimum ships in around two weeks, larger builds in about five." },
-  { q: "Can I edit it after launch?", a: "Yes. You get a site you own, plus a recorded Loom walkthrough of how to update it, and 30 days of free support after launch." },
-  { q: "Do you work with international clients?", a: "Yes. We're based in Belgrade and work with clients across the UK, EU, and US, including multilingual builds." },
-  { q: "What support do I get?", a: "Thirty days of free support after launch, then flexible ongoing support. Response times are within 24 hours, not 48-72." },
-  { q: "Why isn't your own site on Wix?", a: "Because we build custom too. Wix Studio is our front door and where most clients start. This site is what our custom work looks like when you outgrow the platform." },
+  {
+    q: "Is it worth the investment?",
+    a: "A website is a sales tool, not a brochure. Our builds are structured to convert and rank, and clients have generated over €1M in revenue from them. If it doesn't pay for itself, it isn't done right.",
+  },
+  {
+    q: "How long does it take?",
+    a: "Most sites launch in 3-4 weeks from the first call. The Minimum ships in around two weeks, larger builds in about five.",
+  },
+  {
+    q: "Can I edit it after launch?",
+    a: "Yes. You get a site you own, plus a recorded Loom walkthrough of how to update it, and 30 days of free support after launch.",
+  },
+  {
+    q: "Do you work with international clients?",
+    a: "Yes. We're based in Belgrade and work with clients across the UK, EU, and US, including multilingual builds.",
+  },
+  {
+    q: "What support do I get?",
+    a: "Thirty days of free support after launch, then flexible ongoing support. Response times are within 24 hours, not 48-72.",
+  },
+  {
+    q: "Why isn't your own site on Wix?",
+    a: "Because we build custom too. Wix Studio is our front door and where most clients start. This site is what our custom work looks like when you outgrow the platform.",
+  },
 ];
 
 // 17. Final CTA
@@ -707,7 +975,11 @@ export const footer = {
   // White marks inverted on the light footer; per-logo heights balance the
   // marks optically (same set as the /book-a-call partner strip).
   partners: [
-    { src: "/logos-white/shopify-partners.png", alt: "Shopify Partners", className: "h-8" },
+    {
+      src: "/logos-white/shopify-partners.png",
+      alt: "Shopify Partners",
+      className: "h-8",
+    },
     { src: "/logos-white/wix-studio.png", alt: "Wix Studio", className: "h-7" },
     { src: "/logos-white/capacity.png", alt: "Capacity", className: "h-6" },
     { src: "/logos-white/techtonnik.png", alt: "Techtonnik", className: "h-6" },
@@ -730,15 +1002,43 @@ export const footer = {
 /** Mega-dropdown panel for "Case Studies" (DesignMe-style three columns). */
 export const caseStudiesMenu = {
   ourWork: [
-    { label: "Case studies", desc: "See our latest work", href: "/case-studies" },
+    {
+      label: "Case studies",
+      desc: "See our latest work",
+      href: "/case-studies",
+    },
     { label: "Industries", desc: "Who we build for", href: "/industries" },
-    { label: "Clients", desc: "The businesses that trusted us", href: "/case-studies" },
+    {
+      label: "Clients",
+      desc: "The businesses that trusted us",
+      href: "/case-studies",
+    },
   ],
   recentProjects: [
-    { label: "Knode", desc: "SaaS site that raised a $10M round", href: "/case-studies", tag: "" },
-    { label: "Scottish Luxury Experience", desc: "€500k travel pipeline", href: "/case-studies", tag: "" },
-    { label: "Bel'Istria", desc: "257% more impressions", href: "/case-studies", tag: "" },
-    { label: "Hunting Brook", desc: "€200k+ in course sales", href: "/case-studies", tag: "New" },
+    {
+      label: "Knode",
+      desc: "SaaS site that raised a $10M round",
+      href: "/case-studies",
+      tag: "",
+    },
+    {
+      label: "Scottish Luxury Experience",
+      desc: "€500k travel pipeline",
+      href: "/case-studies",
+      tag: "",
+    },
+    {
+      label: "Bel'Istria",
+      desc: "257% more impressions",
+      href: "/case-studies",
+      tag: "",
+    },
+    {
+      label: "Hunting Brook",
+      desc: "€200k+ in course sales",
+      href: "/case-studies",
+      tag: "New",
+    },
   ],
   featured: {
     label: "Featured case study",
@@ -750,13 +1050,27 @@ export const caseStudiesMenu = {
 
 export const nav = {
   items: [
-    { label: "Case Studies", href: "/case-studies", menu: "caseStudies" as const },
+    {
+      label: "Case Studies",
+      href: "/case-studies",
+      menu: "caseStudies" as const,
+    },
     { label: "Services", href: "/services" },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Partnerships", href: "/partnerships" },
   ],
   ctas: [
-    { label: "Free website audit", href: "/free-website-audit", variant: "secondary" } as CtaLink,
-    { label: "Get a quote", href: "/book-a-call", variant: "primary" } as CtaLink,
+    {
+      label: "Free website audit",
+      href: "/free-website-audit",
+      variant: "secondary",
+    } as CtaLink,
+    {
+      label: "Get a quote",
+      href: "/book-a-call",
+      variant: "primary",
+    } as CtaLink,
   ],
+  // Sign-off pinned to the bottom of the mobile drawer.
+  drawerTagline: "Wix Studio experts. Custom builds when you outgrow it.",
 };

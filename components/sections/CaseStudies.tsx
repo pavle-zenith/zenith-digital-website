@@ -11,9 +11,9 @@ import { caseStudies } from "@/content/home";
  */
 export function CaseStudies() {
   return (
-    <Section tone="light" frameClassName="!py-20">
+    <Section tone="light" frameClassName="!py-12 md:!py-20">
       {/* Header */}
-      <div className="mb-12 grid gap-8 md:grid-cols-2 md:items-start">
+      <div className="mb-8 grid md:mb-12 gap-8 md:grid-cols-2 md:items-start">
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {caseStudies.heading}
         </h2>
@@ -40,8 +40,9 @@ export function CaseStudies() {
               />
             </div>
 
-            {/* Right card: panel with a texture image under a navy gradient tint */}
-            <div className="relative flex flex-col justify-between gap-8 overflow-hidden rounded-[8px] bg-bg p-8 text-white">
+            {/* Right card: panel with a texture image under a navy gradient
+                tint. Taller on phones so the stacked content breathes. */}
+            <div className="relative flex min-h-[420px] flex-col justify-between gap-8 overflow-hidden rounded-[8px] bg-bg p-8 text-white lg:min-h-0">
               {/* Placeholder texture image */}
               <Image
                 src="/case-study-texture.jpg"
@@ -81,7 +82,7 @@ export function CaseStudies() {
 
               {/* Title + stats + button pinned bottom */}
               <div className="relative flex flex-col gap-8">
-                <h3 className="max-w-2xl font-display text-[1.75rem] font-medium leading-[1.2] tracking-tight text-balance">
+                <h3 className="max-w-2xl font-display text-[1.375rem] font-medium leading-[1.25] tracking-tight text-balance sm:text-[1.75rem] sm:leading-[1.2]">
                   {cs.title}
                 </h3>
                 <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
@@ -101,9 +102,12 @@ export function CaseStudies() {
                     href={cs.liveUrl}
                     target="_blank"
                     rel="noopener"
-                    className="group inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-[6px] bg-white px-5 py-2.5 text-body font-medium text-light-text transition hover:bg-white/90"
+                    className="group inline-flex w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[6px] bg-white px-5 py-2.5 sm:w-auto text-body font-medium text-light-text transition hover:bg-white/90"
                   >
-                    View case study <span aria-hidden className="btn-arrow">&rarr;</span>
+                    View case study{" "}
+                    <span aria-hidden className="btn-arrow">
+                      &rarr;
+                    </span>
                   </a>
                 </div>
               </div>

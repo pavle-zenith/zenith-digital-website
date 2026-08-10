@@ -21,14 +21,16 @@ const SPAN: Record<number, string> = {
  */
 export function Services() {
   return (
-    <Section tone="light" frameClassName="!py-20">
+    <Section tone="light" frameClassName="!py-12 md:!py-20">
       {/* Intro row: headline left, CTA bottom-right */}
       <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div className="max-w-2xl">
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {services.heading}
           </h2>
-          <p className="mt-4 max-w-xl text-body-lg font-medium text-light-muted">{services.intro}</p>
+          <p className="mt-4 max-w-xl text-body-lg font-medium text-light-muted">
+            {services.intro}
+          </p>
         </div>
         <div className="shrink-0">
           <Button cta={services.cta} tone="light" />

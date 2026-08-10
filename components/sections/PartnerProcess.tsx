@@ -27,12 +27,12 @@ export function PartnerProcess() {
   }, [paused, count]);
 
   return (
-    <Section tone="light" frameClassName="!py-24">
-      <div className="mb-12 max-w-2xl">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
+      <div className="mb-8 max-w-2xl md:mb-12">
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {pProcess.heading}
         </h2>
-        <p className="mt-5 text-body-lg font-medium text-light-muted">
+        <p className="mt-4 text-body-lg md:mt-5 font-medium text-light-muted">
           {pProcess.intro}
         </p>
       </div>

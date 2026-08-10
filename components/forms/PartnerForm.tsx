@@ -133,7 +133,10 @@ function FormInner({ preselect }: { preselect: string | null }) {
         disabled={pending}
         className="btn-animated group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-btn px-6 py-4 text-body font-medium text-accent-ink transition disabled:opacity-60"
       >
-        {pending ? "Sending..." : pApply.submit} <span aria-hidden className="btn-arrow">&rarr;</span>
+        {pending ? "Sending..." : pApply.submit}{" "}
+        <span aria-hidden className="btn-arrow">
+          &rarr;
+        </span>
       </button>
 
       {state.status === "error" ? (

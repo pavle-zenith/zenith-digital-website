@@ -13,7 +13,11 @@ import { beforeAfterItems } from "./case-studies";
 export const bookHero = {
   badge: "Free 20-minute call",
   heading: "20 minutes. An honest look at your website.",
-  checks: ["Free 20-minute call", "Advice you can use the same day", "No retainers, no pressure"],
+  checks: [
+    "Free 20-minute call",
+    "Advice you can use the same day",
+    "No retainers, no pressure",
+  ],
   subhead:
     "Book a slot and we'll review your current site live on the call: what's working, what's quietly costing you leads, and what we'd change. Everything we cover is yours, whether we work together or not.",
   calLink: "pavle-zenith/discovery-call",
@@ -34,7 +38,11 @@ export const bookHero = {
   // Per-logo heights balance the marks optically (lockups with small type
   // render taller than heavy full-height wordmarks).
   partners: [
-    { src: "/logos-white/shopify-partners.png", alt: "Shopify Partners", className: "h-8" },
+    {
+      src: "/logos-white/shopify-partners.png",
+      alt: "Shopify Partners",
+      className: "h-8",
+    },
     { src: "/logos-white/wix-studio.png", alt: "Wix Studio", className: "h-7" },
     { src: "/logos-white/capacity.png", alt: "Capacity", className: "h-6" },
     { src: "/logos-white/techtonnik.png", alt: "Techtonnik", className: "h-6" },
@@ -45,7 +53,8 @@ export const bookHero = {
 // 2. What the call covers (light, centered heading, six-cell hairline grid
 // with an icon chip per cell)
 export const callCovers = {
-  heading: "What we cover in 20 minutes will save you months, headaches, and thousands of euros",
+  heading:
+    "What we cover in 20 minutes will save you months, headaches, and thousands of euros",
   items: [
     {
       icon: "audit",
@@ -114,7 +123,8 @@ export const quoteBand = {
     {
       // TODO(owner): the live site accidentally shows Gemma's quote under Jim's
       // name. Swap in Jim's real quote; this placeholder ships clearly marked.
-      quote: "Jim's quote is on its way. We only publish clients' real words, so this card stays empty until we have his.",
+      quote:
+        "Jim's quote is on its way. We only publish clients' real words, so this card stays empty until we have his.",
       placeholder: true,
       name: "Jim Steele",
       role: "Director, HPLabs UK",
@@ -132,7 +142,11 @@ export const bookFaq = {
   subhead: "The things people check before they pick a slot.",
   ctas: [
     { label: "Book a call", href: "#calendar", variant: "primary" } as CtaLink,
-    { label: "Email us", href: "mailto:hello@thezenithdigital.com", variant: "secondary" } as CtaLink,
+    {
+      label: "Email us",
+      href: "mailto:hello@thezenithdigital.com",
+      variant: "secondary",
+    } as CtaLink,
   ],
   items: [
     {

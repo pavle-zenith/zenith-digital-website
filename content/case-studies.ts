@@ -78,7 +78,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     slug: "fort-lauderdale-dock-rentals",
     industry: "marine",
     metric: "30+ warm leads",
-    story: "Booking and lead-capture ecosystem for Florida's premier dock charter",
+    story:
+      "Booking and lead-capture ecosystem for Florida's premier dock charter",
     thumb: "/portfolio/fortlauderdale.jpg",
     logo: "/logos-white/foxstays.png",
     liveUrl: "https://fortlauderdaledockrental.com",
@@ -97,7 +98,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     slug: "hunting-brook-gardens",
     industry: "courses",
     metric: "€200k+ course earnings",
-    story: "Landing pages and course infrastructure for an award-winning gardener",
+    story:
+      "Landing pages and course infrastructure for an award-winning gardener",
     thumb: "/casestudies/huntingbrook.jpg",
     liveUrl: "https://unlimited.huntingbrookgardens.com",
   },
@@ -106,7 +108,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     slug: "jim-steele",
     industry: "coaches",
     metric: "10+ venues interested",
-    story: "Marketing page and lead-capture ecosystem for a UK motivational speaker",
+    story:
+      "Marketing page and lead-capture ecosystem for a UK motivational speaker",
     logo: "/logos-white/jimsteele.png",
     liveUrl: "https://jimsteelespeaker.com",
   },
@@ -170,7 +173,8 @@ export const caseStudies = {
       client: "Knode AI",
       logo: "/logos-white/knode.png",
       thumb: "/casestudies/knode.jpg",
-      title: "From 0 to raising a $10 Million Series A funding with a premium Wix Studio SaaS for Knode AI",
+      title:
+        "From 0 to raising a $10 Million Series A funding with a premium Wix Studio SaaS for Knode AI",
       stats: [
         { value: "$10M USD", label: "Currently raising" },
         { value: "3 Weeks", label: "Time-to-market" },
@@ -183,7 +187,8 @@ export const caseStudies = {
       client: "Bel'Istria",
       logo: "/logos-white/belistria.png",
       thumb: "/casestudies/belistria.jpg",
-      title: "Crafting an immersive Croatia private transfer and travel booking experience in Wix Studio",
+      title:
+        "Crafting an immersive Croatia private transfer and travel booking experience in Wix Studio",
       stats: [
         { value: "257%", label: "YoY impressions" },
         { value: "35+", label: "Pages migrated" },
@@ -195,7 +200,8 @@ export const caseStudies = {
       client: "Fort Lauderdale Dock Rentals",
       logo: "/logos-white/foxstays.png",
       thumb: "/casestudies/fortlauderdale.jpg",
-      title: "Building a booking and lead-capture website ecosystem for Florida's premier yacht and dock charter",
+      title:
+        "Building a booking and lead-capture website ecosystem for Florida's premier yacht and dock charter",
       stats: [
         { value: "30+", label: "Warm leads" },
         { value: "50+", label: "Docks available" },
@@ -207,7 +213,8 @@ export const caseStudies = {
       client: "Scottish Luxury Experience",
       logo: "/logos-white/mod.png",
       thumb: "/casestudies/scottishluxury.jpg",
-      title: "Enabling thousands of tourists to visit Scotland's beauty through the UK's best-looking travel website",
+      title:
+        "Enabling thousands of tourists to visit Scotland's beauty through the UK's best-looking travel website",
       stats: [
         { value: "€500k", label: "Pipeline value" },
         { value: "4 Weeks", label: "Time-to-market" },
@@ -278,7 +285,8 @@ export const csGallery = {
 
 export const csHero = {
   heading: "We partner with Founders, Marketing Teams & Small Businesses",
-  headingMuted: "by turning Websites & SEO into financially compounding assets.",
+  headingMuted:
+    "by turning Websites & SEO into financially compounding assets.",
   support:
     "These aren't showcase sites built to impress other designers. They're working websites built for real businesses, with specific problems to solve and real outcomes attached.",
   stats: [
@@ -288,8 +296,16 @@ export const csHero = {
     { value: "7+", label: "Industries" },
   ],
   ctas: [
-    { label: "Book a call", href: "/book-a-call", variant: "primary" } as CtaLink,
-    { label: "Get a free audit", href: "/free-website-audit", variant: "secondary" } as CtaLink,
+    {
+      label: "Book a call",
+      href: "/book-a-call",
+      variant: "primary",
+    } as CtaLink,
+    {
+      label: "Get a free audit",
+      href: "/free-website-audit",
+      variant: "secondary",
+    } as CtaLink,
   ],
 };
 

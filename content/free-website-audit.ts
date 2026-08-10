@@ -28,7 +28,11 @@ export const auditHero = {
     { src: "/logos-white/techtonnik.png", alt: "Techtonnik", className: "h-5" },
   ],
   // Short trust checks under the form card
-  checks: ["Real person review", "No commitment", "Delivered within 2 business days"],
+  checks: [
+    "Real person review",
+    "No commitment",
+    "Delivered within 2 business days",
+  ],
 };
 
 // The form (white card in the hero; the closing banner anchors back to it)
@@ -39,7 +43,8 @@ export const auditForm = {
     email: { label: "Your email", placeholder: "you@company.com" },
     note: {
       label: "Anything specific you want us to look at?",
-      placeholder: "e.g. the pricing page, why nobody fills the contact form...",
+      placeholder:
+        "e.g. the pricing page, why nobody fills the contact form...",
     },
   },
   submit: "Get my free audit",
@@ -116,7 +121,8 @@ export const auditWhoFor = {
 // 4. Example audit (light; sticky mock report left, before/after column right)
 export const auditExample = {
   heading: "What an audit actually looks like",
-  caption: "A real walkthrough runs 5 to 10 minutes and covers your site specifically, not a template.",
+  caption:
+    "A real walkthrough runs 5 to 10 minutes and covers your site specifically, not a template.",
   // Mock report with findings written the way we'd say them on the call.
   report: {
     label: "Site audit",
@@ -124,7 +130,7 @@ export const auditExample = {
     scoreLabel: "Performance score",
     delta: "18 issues found",
     findings: [
-      { text: "\"Get a quote\" button leads to a dead end", severity: "high" },
+      { text: '"Get a quote" button leads to a dead end', severity: "high" },
       { text: "The homepage never says who the site is for", severity: "high" },
       { text: "Over 4 seconds to load on a phone", severity: "med" },
       { text: "No reviews or client proof above the fold", severity: "med" },
@@ -142,7 +148,7 @@ export const auditFaq = {
   items: [
     {
       q: "Is it actually free? What's the catch?",
-      a: "Yes. No hidden costs, no \"free tier\" with a paid upgrade. We review your site, record a Loom walkthrough, and send it over. That's the whole thing.",
+      a: 'Yes. No hidden costs, no "free tier" with a paid upgrade. We review your site, record a Loom walkthrough, and send it over. That\'s the whole thing.',
     },
     {
       q: "What happens after I get the audit?",
@@ -169,7 +175,10 @@ export const auditFaq = {
 
 // 6. Closing CTA banner (anchors back up to the hero form)
 export const auditCta = {
-  heading: ["Most websites we review have at least", "three fixable problems. Let's find yours."],
+  heading: [
+    "Most websites we review have at least",
+    "three fixable problems. Let's find yours.",
+  ],
   paragraph:
     "Get a free, honest review from someone who builds websites every day. Find out exactly what to focus on first.",
   checks: ["No commitment", "No pitch", "Delivered within 2 business days"],

@@ -13,7 +13,11 @@ import { bookHero } from "@/content/book-a-call";
  */
 export function BookHero() {
   return (
-    <Section tone="light" divide={false} frameClassName="!pt-14 !pb-20">
+    <Section
+      tone="light"
+      divide={false}
+      frameClassName="!pt-10 md:!pt-14 !pb-12 md:!pb-20"
+    >
       <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
         {/* Badge */}
         <span className="inline-flex items-center rounded-full bg-light-surface px-3 py-1.5 font-mono text-label uppercase track-label text-light-muted">
@@ -27,7 +31,10 @@ export function BookHero() {
         {/* Check items */}
         <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
           {bookHero.checks.map((check) => (
-            <li key={check} className="flex items-center gap-2 text-body text-light-muted">
+            <li
+              key={check}
+              className="flex items-center gap-2 text-body text-light-muted"
+            >
               <Check />
               {check}
             </li>
@@ -63,12 +70,22 @@ export function BookHero() {
               key={src}
               className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-light-bg"
             >
-              <Image src={src} alt="" fill sizes="40px" className="object-cover" />
+              <Image
+                src={src}
+                alt=""
+                fill
+                sizes="40px"
+                className="object-cover"
+              />
             </span>
           ))}
         </div>
-        <p className="mt-4 font-display text-body-lg font-medium">{bookHero.proof.label}</p>
-        <p className="mt-6 text-body-lg font-medium leading-relaxed text-light-muted">{bookHero.subhead}</p>
+        <p className="mt-4 font-display text-body-lg font-medium">
+          {bookHero.proof.label}
+        </p>
+        <p className="mt-6 text-body-lg font-medium leading-relaxed text-light-muted">
+          {bookHero.subhead}
+        </p>
       </div>
 
       {/* Partner strip */}

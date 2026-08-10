@@ -27,7 +27,11 @@ export function PartnershipsHero() {
   };
 
   return (
-    <Section tone="light" divide={false} frameClassName="!pb-8 !pt-24">
+    <Section
+      tone="light"
+      divide={false}
+      frameClassName="!pb-8 !pt-14 md:!pt-24"
+    >
       <span className="inline-flex w-fit items-center rounded-full border border-light-border px-3.5 py-1.5 font-mono text-label uppercase track-label text-light-muted">
         {pHero.eyebrow}
       </span>

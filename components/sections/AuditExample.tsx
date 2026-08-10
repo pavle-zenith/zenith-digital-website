@@ -12,8 +12,8 @@ import { beforeAfter } from "@/content/book-a-call";
  */
 export function AuditExample() {
   return (
-    <Section tone="light" frameClassName="!py-24">
-      <h2 className="mx-auto mb-12 text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
+      <h2 className="mx-auto mb-8 md:mb-12 text-center font-display text-h2 font-medium leading-tight tracking-tight text-balance">
         {auditExample.heading}
       </h2>
 
@@ -23,7 +23,9 @@ export function AuditExample() {
           <div className="flex flex-col items-center gap-6 rounded-card bg-light-surface p-6 sm:p-10">
             <AuditReport report={auditExample.report} />
           </div>
-          <p className="mt-5 max-w-md text-body text-light-muted">{auditExample.caption}</p>
+          <p className="mt-5 max-w-md text-body text-light-muted">
+            {auditExample.caption}
+          </p>
         </div>
 
         {/* Before/after column */}

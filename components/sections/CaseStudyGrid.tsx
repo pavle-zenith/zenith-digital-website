@@ -6,7 +6,11 @@ import { Suspense } from "react";
 
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
-import { INDUSTRIES, caseStudyCards, type IndustrySlug } from "@/content/case-studies";
+import {
+  INDUSTRIES,
+  caseStudyCards,
+  type IndustrySlug,
+} from "@/content/case-studies";
 
 /**
  * Full project grid with the industry filter bar. Filtering is client-side
@@ -33,7 +37,9 @@ function FilterableGrid() {
   const industry = raw && raw in INDUSTRIES ? (raw as IndustrySlug) : null;
 
   const select = (slug: IndustrySlug | null) => {
-    router.replace(slug ? `${pathname}?industry=${slug}` : pathname, { scroll: false });
+    router.replace(slug ? `${pathname}?industry=${slug}` : pathname, {
+      scroll: false,
+    });
   };
 
   return <GridInner industry={industry} onSelect={select} />;
@@ -51,14 +57,18 @@ function GridInner({
     : caseStudyCards;
 
   return (
-    <Section tone="light" frameClassName="!py-20">
+    <Section tone="light" frameClassName="!py-12 md:!py-20">
       {/* Filter pills */}
       <div className="mb-10 flex flex-wrap gap-2">
         <FilterPill active={industry === null} onClick={() => onSelect?.(null)}>
           All
         </FilterPill>
         {(Object.keys(INDUSTRIES) as IndustrySlug[]).map((slug) => (
-          <FilterPill key={slug} active={industry === slug} onClick={() => onSelect?.(slug)}>
+          <FilterPill
+            key={slug}
+            active={industry === slug}
+            onClick={() => onSelect?.(slug)}
+          >
             {INDUSTRIES[slug]}
           </FilterPill>
         ))}
@@ -93,7 +103,9 @@ function GridInner({
                 </div>
               ) : (
                 <div className="flex h-full w-full items-center justify-center">
-                  <span className="font-display text-h3 font-medium text-text">{c.client}</span>
+                  <span className="font-display text-h3 font-medium text-text">
+                    {c.client}
+                  </span>
                 </div>
               )}
             </div>
@@ -101,7 +113,9 @@ function GridInner({
             {/* Body */}
             <div className="flex flex-1 flex-col p-6">
               <div className="flex items-baseline justify-between gap-3">
-                <h3 className="font-display text-body-lg font-medium">{c.client}</h3>
+                <h3 className="font-display text-body-lg font-medium">
+                  {c.client}
+                </h3>
                 <span className="shrink-0 font-mono text-label uppercase track-label text-light-muted">
                   {INDUSTRIES[c.industry]}
                 </span>
@@ -114,7 +128,9 @@ function GridInner({
               >
                 {c.metricIsQuote ? <>&ldquo;{c.metric}&rdquo;</> : c.metric}
               </p>
-              <p className="mt-2 text-body leading-snug text-light-muted">{c.story}</p>
+              <p className="mt-2 text-body leading-snug text-light-muted">
+                {c.story}
+              </p>
               {c.liveUrl ? (
                 <a
                   href={c.liveUrl}
@@ -122,7 +138,10 @@ function GridInner({
                   rel="noopener"
                   className="mt-auto inline-flex items-center gap-1.5 pt-5 font-display text-body font-medium transition group-hover:text-accent"
                 >
-                  View live site <span aria-hidden className="btn-arrow">&rarr;</span>
+                  View live site{" "}
+                  <span aria-hidden className="btn-arrow">
+                    &rarr;
+                  </span>
                 </a>
               ) : (
                 <span className="mt-auto pt-5" aria-hidden />

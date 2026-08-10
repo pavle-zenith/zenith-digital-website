@@ -17,7 +17,7 @@ import { pStories } from "@/content/partnerships";
  */
 export function PartnerStories() {
   return (
-    <Section tone="light" frameClassName="!py-24">
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
       {/* Header: heading left, support right */}
       <div className="mb-4 grid gap-8 md:grid-cols-2 md:items-end">
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
@@ -30,11 +30,11 @@ export function PartnerStories() {
 
       {/* Story rows — the track bleeds to the frame rails so the dividing
           hairlines run edge to edge; each row re-applies the gutter. */}
-      <div className="frame-bleed divide-y divide-light-border">
+      <div className="frame-bleed-md divide-y divide-light-border">
         {pStories.stories.map((s) => (
           <article
             key={s.name}
-            className="grid gap-8 px-[clamp(20px,4vw,64px)] py-14 last:pb-0 lg:grid-cols-2 lg:gap-16"
+            className="grid gap-8 px-0 py-10 last:pb-0 md:px-[clamp(20px,4vw,64px)] md:py-14 lg:grid-cols-2 lg:gap-16"
           >
             {/* Media: partner site shot (or the framed placeholder) with the
                 stats riding the bottom edge in a translucent blur bar */}

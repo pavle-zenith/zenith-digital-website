@@ -48,6 +48,8 @@ export const allTestimonials: Testimonial[] = [
       "We've worked with Pavle and Zenith on multiple projects from Wix to Bubble to custom code. I guarantee that they can make anything happen.",
     avatar: "/avatars/jack-shorrock.jpg",
     logoDark: "/logos-blue/juststay.png",
+    video: "/testimonials/jack-shorrock.mp4",
+    poster: "/avatars/jack-shorrock.jpg",
   },
   {
     id: "uros-stanimirovic",
@@ -60,6 +62,7 @@ export const allTestimonials: Testimonial[] = [
     logo: "/logos-white/genroks.png",
     logoDark: "/logos-dark/genroks.png",
     video: "/testimonials/uros.mov",
+    poster: "/avatars/uros-stanimirovic.jpg",
   },
   {
     id: "john-smyth",
@@ -84,6 +87,7 @@ export const allTestimonials: Testimonial[] = [
     // file, so there's nothing to use. Re-export it and point this at it.
     avatar: PLACEHOLDER_AVATAR,
     logoDark: "/logos-blue/notyou.avif",
+    video: "/testimonials/bates-green.mov",
   },
   {
     id: "alex-may",
@@ -168,6 +172,8 @@ export const allTestimonials: Testimonial[] = [
     quote:
       "When I booked the introductory call, I never would have guessed that Zenith and WWCo would go on to create dozens of local business websites throughout Scotland. Amazing at what they do and I trust Pavle to always deliver.",
     avatar: "/avatars/finlay-wellington.png",
+    video: "/testimonials/finlay-wellington.mp4",
+    poster: "/testimonials/finlay-wellington-poster.png",
   },
   {
     id: "dragan-gavric",
@@ -261,6 +267,8 @@ export const allTestimonials: Testimonial[] = [
     quote:
       "I commend Zenith for their unwavering dedication to excellence and attentive customer service, advising me on changes that allow me to differentiate my website from the templates I was using.",
     avatar: "/avatars/michael-forte.jpg",
+    video: "/testimonials/michael-forte.mp4",
+    poster: "/avatars/michael-forte.jpg",
   },
   {
     id: "david-opavski",
@@ -326,6 +334,8 @@ export const allTestimonials: Testimonial[] = [
     quote:
       "Their professionalism and expertise have been instrumental in the growth of my business, and I can confidently give them a rating of 10/10.",
     avatar: "/avatars/kayla-bloom.jpg",
+    video: "/testimonials/kayla-bloom.mov",
+    poster: "/testimonials/kayla-bloom-poster.jpg",
   },
   {
     id: "luka-stojakovic",

@@ -19,7 +19,9 @@ export function LogoMarquee({
   const track = [...logos, ...logos];
 
   return (
-    <div className="frame-bleed border-y border-light-border">
+    // Top rule only — whatever follows (featured grid, section divide) owns
+    // the bottom separator, so bands never stack into a double hairline.
+    <div className="frame-bleed border-t border-light-border">
       {/* Single cell: caption and logos share one row, divided by the marquee mask. */}
       <div className="flex flex-col items-center gap-6 px-[clamp(20px,4vw,64px)] py-8 lg:flex-row lg:gap-10">
         {caption ? (

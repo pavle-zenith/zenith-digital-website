@@ -13,9 +13,9 @@ import { footer } from "@/content/home";
  */
 export function Footer() {
   return (
-    <footer className="tone-light overflow-hidden border-t border-light-border bg-light-bg text-light-text">
-      {/* Mission + city clocks */}
-      <div className="frame flex flex-col justify-between gap-10 pb-12 pt-16 md:flex-row md:items-start">
+    <footer className="tone-light overflow-hidden bg-light-bg text-light-text">
+      {/* Mission + city clocks — top rule confined to the frame column */}
+      <div className="frame frame-divide flex flex-col justify-between gap-10 pb-12 pt-16 md:flex-row md:items-start">
         <p className="max-w-md text-body-lg">{footer.mission}</p>
         <div className="flex gap-12">
           {footer.clocks.map((c) => (
@@ -24,9 +24,38 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Link columns — the rule spans the full viewport, content stays framed */}
-      <div className="border-t border-light-border">
-        <div className="frame py-12">
+      {/* Middle of the footer — link columns + partner strip share one
+          inverted-texture layer, confined to the frame column and fading out
+          into the white footer at its top and bottom edges. */}
+      <div className="relative">
+        <div
+          className="pointer-events-none absolute inset-y-0 left-1/2 w-full max-w-[var(--container-site)] -translate-x-1/2 overflow-hidden"
+          aria-hidden
+        >
+          <Image
+            src="/textures/studio-texture.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.28] invert"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, var(--color-light-bg) 0%, transparent 18%, transparent 82%, var(--color-light-bg) 100%)",
+            }}
+          />
+        </div>
+
+        <div className="frame frame-divide relative py-12">
           <div className="grid max-w-3xl grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-3">
             {footer.columns.map((col) => (
               <div key={col.heading}>
@@ -75,10 +104,9 @@ export function Footer() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Partners + audit box */}
-      <div className="frame flex flex-col justify-between gap-10 pb-14 pt-6 lg:flex-row lg:items-center">
+        {/* Partners + audit box */}
+        <div className="frame relative flex flex-col justify-between gap-10 pb-14 pt-6 lg:flex-row lg:items-center">
         <div>
           <p className="text-body-lg font-medium">{footer.partnersLabel}</p>
           <div className="mt-6 flex flex-wrap items-center gap-x-12 gap-y-6">
@@ -98,7 +126,7 @@ export function Footer() {
         {/* Audit box (in place of socials) */}
         <Link
           href={footer.audit.cta.href}
-          className="group flex shrink-0 items-center justify-between gap-8 rounded-[8px] border border-light-border p-6 transition hover:bg-light-surface lg:max-w-sm"
+          className="group flex shrink-0 items-center justify-between gap-8 rounded-[8px] border border-light-border bg-light-bg p-6 transition hover:bg-light-surface lg:max-w-sm"
         >
           <div>
             <p className="font-display text-body-lg font-medium">
@@ -112,11 +140,12 @@ export function Footer() {
             <span aria-hidden>&rarr;</span>
           </span>
         </Link>
+        </div>
       </div>
 
-      {/* Meta bar — full-viewport rule, framed content */}
-      <div className="border-t border-light-border">
-        <div className="frame flex flex-col gap-4 py-6 text-body text-light-muted md:flex-row md:items-center md:justify-between">
+      {/* Meta bar — rule confined to the frame column like the ones above */}
+      <div>
+        <div className="frame frame-divide flex flex-col gap-4 py-6 text-body text-light-muted md:flex-row md:items-center md:justify-between">
           <p className="max-w-2xl">{footer.copyright}</p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {footer.legal.map((l) => (

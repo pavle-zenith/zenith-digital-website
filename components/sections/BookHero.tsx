@@ -16,9 +16,38 @@ export function BookHero() {
     <Section
       tone="light"
       divide={false}
-      frameClassName="!pt-10 md:!pt-14 !pb-12 md:!pb-20"
+      frameClassName="relative !pt-10 md:!pt-14 !pb-12 md:!pb-20"
     >
-      <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+      {/* Inverted studio texture, confined to the frame column and the top of
+          the section; fades to solid before the calendar card. */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] overflow-hidden"
+        aria-hidden
+      >
+        <Image
+          src="/textures/studio-texture.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-[0.28] invert"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, transparent 45%, var(--color-light-bg) 100%)",
+          }}
+        />
+      </div>
+
+      <div className="relative mx-auto flex max-w-4xl flex-col items-center text-center">
         {/* Badge */}
         <span className="inline-flex items-center rounded-full bg-light-surface px-3 py-1.5 font-mono text-label uppercase track-label text-light-muted">
           {bookHero.badge}
@@ -45,7 +74,7 @@ export function BookHero() {
       {/* Cal.com embed — anchor target for every "Book a call" CTA */}
       <div
         id="calendar"
-        className="mt-10 min-h-[480px] scroll-mt-24 overflow-hidden rounded-card border border-light-border bg-white p-2 sm:p-4 md:min-h-[640px]"
+        className="relative mt-10 min-h-[480px] scroll-mt-24 overflow-hidden rounded-card border border-light-border bg-white p-2 sm:p-4 md:min-h-[640px]"
       >
         <BookingCalendar calLink={bookHero.calLink} />
       </div>

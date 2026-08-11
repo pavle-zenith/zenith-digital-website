@@ -88,6 +88,9 @@ html {
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  /* Anchor-index links (e.g. /services) glide; the reduced-motion override
+     below forces scroll-behavior back to auto. */
+  scroll-behavior: smooth;
 }
 
 body {

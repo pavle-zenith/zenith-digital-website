@@ -510,6 +510,10 @@ export const pStories = {
   ] as PartnerStory[],
 };
 
+// Shared with the master /faq page (single source, no drift).
+export const bothTracksAnswer =
+  "Referral means you introduce and step away. If you want to manage the client or set your own price, that's the white-label track at partner pricing. One or the other per deal, never both.";
+
 // 7. FAQ — feeds the shared Faq section + FAQPage JSON-LD on the page.
 export const pFaq = {
   heading: ["Partner questions,", "answered straight"],
@@ -548,7 +552,7 @@ export const pFaq = {
     },
     {
       q: "Can I be both a referral and white-label partner?",
-      a: "Referral means you introduce and step away. If you want to manage the client or set your own price, that's the white-label track at partner pricing. One or the other per deal, never both.",
+      a: bothTracksAnswer,
     },
     {
       q: "What happens if I send you more work than you can handle?",

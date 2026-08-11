@@ -32,9 +32,33 @@ export function PartnershipsHero() {
       divide={false}
       frameClassName="!pb-8 !pt-14 md:!pt-24"
     >
-      <span className="inline-flex w-fit items-center rounded-full border border-light-border px-3.5 py-1.5 font-mono text-label uppercase track-label text-light-muted">
-        {pHero.eyebrow}
-      </span>
+      {/* Content block on the inverted studio texture — the layer stretches up
+          over the frame's top padding and down to the divider, rail to rail. */}
+      <div className="relative">
+        <div
+          className="frame-bleed pointer-events-none absolute inset-x-0 -bottom-8 -top-14 overflow-hidden md:-top-24"
+          aria-hidden
+        >
+          <Image
+            src="/textures/studio-texture.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.28] invert"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
+            }}
+          />
+        </div>
+
+        <div className="relative">
+          <span className="inline-flex w-fit items-center rounded-full border border-light-border px-3.5 py-1.5 font-mono text-label uppercase track-label text-light-muted">
+            {pHero.eyebrow}
+          </span>
 
       {/* Full-width headline — runs the whole frame, like the homepage hero */}
       <h1 className="mt-8 font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
@@ -60,7 +84,7 @@ export function PartnershipsHero() {
             type="button"
             onClick={() => scrollByCard(-1)}
             aria-label="Previous projects"
-            className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border text-light-text transition hover:bg-light-surface"
+            className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text transition hover:bg-light-surface"
           >
             <Arrow dir="left" />
           </button>
@@ -68,10 +92,12 @@ export function PartnershipsHero() {
             type="button"
             onClick={() => scrollByCard(1)}
             aria-label="Next projects"
-            className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border text-light-text transition hover:bg-light-surface"
+            className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text transition hover:bg-light-surface"
           >
             <Arrow dir="right" />
           </button>
+        </div>
+      </div>
         </div>
       </div>
 

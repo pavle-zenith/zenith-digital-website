@@ -2,20 +2,20 @@ import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
-import { csHero } from "@/content/case-studies";
+import { sHero } from "@/content/services";
 
 /**
- * /case-studies hero — light and compact (Braintrust register): one bold
- * two-tone statement H1 (primary sentence in ink, continuation muted) with the
- * two conversion CTAs bottom-right, on the inverted studio texture confined
- * to the frame column (same register as the /services hero).
+ * /services hero — white themed, compact, on the inverted studio texture
+ * (same register as the pricing white-label band). The texture is confined
+ * to the frame column: it spans rail to rail (ignoring the frame's inline
+ * padding) but not the full viewport.
  */
-export function CaseStudiesHero() {
+export function ServicesHero() {
   return (
     <Section
       tone="light"
       divide={false}
-      frameClassName="relative !py-12 md:!py-20"
+      frameClassName="relative !pb-12 !pt-14 md:!pb-16 md:!pt-24"
     >
       {/* Texture layer — fills the frame column, under the (relative) content */}
       <div
@@ -38,14 +38,15 @@ export function CaseStudiesHero() {
         />
       </div>
 
-      <div className="relative flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
-        <h1 className="max-w-3xl font-display text-h2 font-medium leading-[1.15] tracking-tight text-balance">
-          {csHero.heading}{" "}
-          <span className="text-light-muted">{csHero.headingMuted}</span>
+      <div className="relative max-w-3xl">
+        <h1 className="font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
+          {sHero.heading}
         </h1>
-
-        <div className="flex flex-wrap gap-3 lg:shrink-0 lg:pb-1">
-          {csHero.ctas.map((cta) => (
+        <p className="mt-6 max-w-xl text-body-lg font-medium leading-relaxed text-light-muted">
+          {sHero.support}
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          {sHero.ctas.map((cta) => (
             <Button key={cta.href} cta={cta} tone="light" />
           ))}
         </div>

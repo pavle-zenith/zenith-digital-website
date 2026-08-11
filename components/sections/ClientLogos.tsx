@@ -16,9 +16,9 @@ export function ClientLogos() {
 
   return (
     <Section tone="light" frameClassName="!py-0" divide={false}>
-      {/* No rules of its own — the testimonials band above closes with a bottom
-          rule and the grid section below brings its frame divider. */}
-      <div className="frame-bleed flex flex-col gap-2 py-8">
+      {/* Own top rule (the testimonials band above is border-t only); the grid
+          section below brings its frame divider. */}
+      <div className="frame-bleed flex flex-col gap-2 border-t border-light-border py-8">
         {rows.map((row, i) => (
           <MarqueeRow key={i} logos={row} reverse={i === 1} />
         ))}

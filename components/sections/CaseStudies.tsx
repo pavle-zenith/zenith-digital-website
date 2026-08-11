@@ -46,13 +46,15 @@ export function CaseStudies() {
             {/* Right card: panel with a texture image under a navy gradient
                 tint. Taller on phones so the stacked content breathes. */}
             <div className="relative flex min-h-[420px] flex-col justify-between gap-8 overflow-hidden rounded-[8px] bg-bg p-8 text-white lg:min-h-0">
-              {/* Placeholder texture image */}
+              {/* The sitewide studio texture, same as every other dark band.
+                  Held at 0.2 rather than the usual 0.14: the gradient below
+                  mutes it further towards the bottom of the panel. */}
               <Image
-                src="/case-study-texture.jpg"
+                src="/textures/studio-texture.jpg"
                 alt=""
                 fill
                 sizes="(max-width: 1024px) 100vw, 60vw"
-                className="pointer-events-none object-cover opacity-25"
+                className="pointer-events-none object-cover opacity-20"
                 aria-hidden
               />
               {/* Gradient tint over the texture: solid navy at the bottom for

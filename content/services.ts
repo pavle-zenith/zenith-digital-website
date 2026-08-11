@@ -45,6 +45,12 @@ export type ServiceUsp = { icon: string; title: string; text: string };
 
 export type ServiceEntry = {
   id: string;
+  /**
+   * Dedicated /services/[slug] page for this entry, where one exists. The
+   * section only renders the link if the page is actually published, so an
+   * unfinished page can't be linked into from the hub.
+   */
+  pageSlug?: string;
   title: string;
   when: string;
   deliverables: string[];
@@ -58,6 +64,7 @@ export type ServiceEntry = {
 export const sServices: ServiceEntry[] = [
   {
     id: "website-design-development",
+    pageSlug: "wix-studio-website-design",
     title: "Website design & development",
     when: "You've outgrown a template or DIY builder, or your current site looks fine but doesn't convert. You need a site that sells, not a brochure.",
     deliverables: [
@@ -119,6 +126,7 @@ export const sServices: ServiceEntry[] = [
   },
   {
     id: "website-migrations",
+    pageSlug: "website-migration",
     title: "Website migrations",
     when: "You're on WordPress, Webflow, Squarespace, or Framer and want out. But you're terrified of losing the rankings you've earned. That fear is justified. That's why migration is a discipline, not a copy-paste.",
     deliverables: [
@@ -173,6 +181,7 @@ export const sServices: ServiceEntry[] = [
   },
   {
     id: "landing-pages",
+    pageSlug: "landing-pages",
     title: "Landing pages",
     when: "You're paying for ads or launching a campaign, and sending that traffic to your homepage. Dedicated pages convert; homepages introduce.",
     deliverables: [
@@ -228,6 +237,7 @@ export const sServices: ServiceEntry[] = [
   },
   {
     id: "seo-aeo-ppc",
+    pageSlug: "seo-aeo-ppc",
     title: "SEO, AEO & PPC campaigns",
     when: "The site is live but invisible. You're not ranking, you're not showing up in AI answers, and paid campaigns land on pages that leak.",
     deliverables: [

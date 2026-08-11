@@ -34,6 +34,10 @@
 
   /* Feedback */
   --color-positive: #35c88c;
+  /* Deeper green for positive marks on light fills (#35c88c only reaches ~2:1
+     on white, under the 3:1 floor for meaningful graphics). */
+  --color-positive-ink: #1e9e6a;
+  --color-negative: #e5484d;
 
   /* Typography */
   --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;

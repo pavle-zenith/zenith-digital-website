@@ -1,5 +1,7 @@
 import type { CtaLink, Metric } from "@/lib/types";
 
+import { attribution, testimonial } from "./testimonials-data";
+
 /**
  * Homepage content. Single source of truth for all section copy + asset paths.
  * Copy is drafted from the live Zenith site, re-pointed at the real ICP
@@ -134,6 +136,17 @@ export const whyZenith = {
 };
 
 // 5. Comparison matrix — last column is the highlighted Zenith column.
+/**
+ * Each cell carries how good that answer is, so the table can mark itself:
+ * `good` renders the verified tick, `mixed` a question mark, `bad` a cross.
+ */
+export type ComparisonRating = "good" | "mixed" | "bad";
+export type ComparisonCell = { text: string; rating: ComparisonRating };
+
+const good = (text: string): ComparisonCell => ({ text, rating: "good" });
+const mixed = (text: string): ComparisonCell => ({ text, rating: "mixed" });
+const bad = (text: string): ComparisonCell => ({ text, rating: "bad" });
+
 export const comparison = {
   heading: "How we compare to AI websites, freelancers, and agencies",
   intro:
@@ -143,54 +156,64 @@ export const comparison = {
     {
       criterion: "Annual cost",
       values: [
-        "Cheap, until it isn't",
-        "Unpredictable",
-        "€15k–50k+",
-        "From €2,500, fixed",
+        mixed("Cheap, until it isn't"),
+        mixed("Unpredictable"),
+        bad("€15k–50k+"),
+        good("From €2,500, fixed"),
       ],
     },
     {
       criterion: "Time to launch",
       values: [
-        "Minutes, then weeks of fixing it",
-        "Whenever",
-        "2–4 months",
-        "3–4 weeks",
+        mixed("Minutes, then weeks of fixing it"),
+        bad("Whenever"),
+        bad("2–4 months"),
+        good("3–4 weeks"),
       ],
     },
     {
       criterion: "Consistent team",
       values: [
-        "No team at all",
-        "One person, no backup",
-        "Rotating staff",
-        "Same team, start to finish",
+        bad("No team at all"),
+        mixed("One person, no backup"),
+        mixed("Rotating staff"),
+        good("Same team, start to finish"),
       ],
     },
     {
       criterion: "Copywriting included",
-      values: ["Generic filler", "Rarely", "Extra cost", "Included"],
+      values: [
+        bad("Generic filler"),
+        bad("Rarely"),
+        mixed("Extra cost"),
+        good("Included"),
+      ],
     },
     {
       criterion: "SEO & AEO",
-      values: ["Thin, templated pages", "Sometimes", "Add-on", "Built in"],
+      values: [
+        bad("Thin, templated pages"),
+        mixed("Sometimes"),
+        mixed("Add-on"),
+        good("Built in"),
+      ],
     },
     {
       criterion: "Post-launch support",
       values: [
-        "A chatbot",
-        "Unpredictable",
-        "Retainer required",
-        "30 days free, then flexible",
+        bad("A chatbot"),
+        mixed("Unpredictable"),
+        mixed("Retainer required"),
+        good("30 days free, then flexible"),
       ],
     },
     {
       criterion: "You own and can edit it",
       values: [
-        "Locked to their platform",
-        "Depends",
-        "Often locked in",
-        "Yes, with a handover",
+        bad("Locked to their platform"),
+        mixed("Depends"),
+        bad("Often locked in"),
+        good("Yes, with a handover"),
       ],
     },
   ],
@@ -212,6 +235,7 @@ export const services = {
   items: [
     {
       title: "Website design & development",
+      href: "/services/wix-studio-website-design",
       description:
         "Fast, structured, conversion-ready sites that turn visitors into paying clients.",
       image: "/services/web-design.webp",
@@ -219,6 +243,7 @@ export const services = {
     },
     {
       title: "Landing pages",
+      href: "/services",
       description:
         "High-converting pages for campaigns, launches, and lead capture.",
       image: "/services/landing-pages.webp",
@@ -226,6 +251,7 @@ export const services = {
     },
     {
       title: "White-label design & development",
+      href: "/partnerships",
       description:
         "Unbranded builds for agencies and freelancers to resell under their own brand.",
       image: "/services/white-label.webp",
@@ -233,6 +259,7 @@ export const services = {
     },
     {
       title: "SEO, AEO & PPC campaigns",
+      href: "/services/seo-aeo-ppc",
       description:
         "Search and paid campaigns tied to your site so every euro lands somewhere built to convert.",
       image: "/services/seo-aeo.webp",
@@ -240,6 +267,7 @@ export const services = {
     },
     {
       title: "Website migrations",
+      href: "/services/website-migration",
       description:
         "Move to Wix Studio from any platform with full URL mapping and zero ranking loss.",
       // Interactive before/after slider instead of a static mockup. Client
@@ -252,6 +280,7 @@ export const services = {
     },
     {
       title: "Wix Studio development",
+      href: "/services",
       description:
         "Custom code, CMS architecture, and integrations on top of Wix Studio.",
       image: "/services/wix-studio.webp",
@@ -694,6 +723,40 @@ export const founder = {
 // 13. Testimonials
 // 13. Testimonials — tab switcher split with a stats cell. Tabs auto-advance on
 // a timer (each tab shows a fill bar). Bold spans in `quote` use **asterisks**.
+/**
+ * Build a homepage tab from the canonical testimonial: the quote is pulled
+ * from the source of truth and `emphasis` is wrapped in ** ** for the tab's
+ * bold span, so the wording stays identical to /testimonials.
+ */
+function featuredTestimonial(
+  id: string,
+  opts: {
+    result: string;
+    emphasis?: string;
+    logo: string;
+    logoAlt?: string;
+    logoClass?: string;
+    invertLogo?: boolean;
+  },
+) {
+  const t = testimonial(id);
+  const quote =
+    opts.emphasis && t.quote.includes(opts.emphasis)
+      ? t.quote.replace(opts.emphasis, `**${opts.emphasis}**`)
+      : t.quote;
+  return {
+    result: opts.result,
+    quote,
+    name: t.name,
+    role: attribution(t),
+    avatar: t.avatar,
+    logo: opts.logo,
+    logoAlt: opts.logoAlt ?? t.company,
+    ...(opts.logoClass ? { logoClass: opts.logoClass } : {}),
+    ...(opts.invertLogo ? { invertLogo: opts.invertLogo } : {}),
+  };
+}
+
 export const testimonials = {
   stats: [
     { value: "100+", label: "Projects shipped" },
@@ -705,61 +768,41 @@ export const testimonials = {
     platform: "Clutch",
     score: "5/5",
   },
+  /**
+   * Featured tabs. Only the outcome headline and the phrase to emphasise are
+   * set here; the quote text, name, role, and avatar come from the testimonial
+   * source of truth, so the tabs can never drift from /testimonials.
+   * `emphasis` must appear verbatim in the quote or the bolding is skipped.
+   */
   items: [
-    {
+    featuredTestimonial("flynn-blackie", {
       result: "Grew bookings 220% with a rebuilt Wix Studio site",
-      quote:
-        "Zenith redefined what hard work means to me. They treat every website project with **pride, enthusiasm, and extreme passion**, and it shows in the results.",
-      name: "Flynn Blackie",
-      role: "Founder & Director, MOD Digital",
-      avatar: "/avatars/flynn-blackie.jpg",
+      emphasis: "pride, enthusiasm and extreme passion",
       logo: "/logos-dark/mod.png",
-      logoAlt: "MOD Digital",
-    },
-    {
+    }),
+    featuredTestimonial("ivan-belobrajdic", {
       result: "A redesign that became a long-term partnership",
-      quote:
-        "Our collaboration on redesigning Bel'Istria was the beginning of a long-term partnership. Their **composure and communication exceeded all standards**.",
-      name: "Ivan Belobrajdic",
-      role: "Bel'Istria",
-      avatar: "/avatars/ivan-belobrajdic.jpg",
+      emphasis: "composure and communication exceeded all standards",
       logo: "/logos-dark/belistria-white.png",
-      logoAlt: "Bel'Istria",
       invertLogo: true,
-    },
-    {
+    }),
+    featuredTestimonial("uros-stanimirovic", {
       result: "Rebranded, and conversion skyrocketed",
-      quote:
-        "We hired Zenith to help us rebrand our site. **Conversion skyrocketed.** We saw what it takes to be one of the top professionals in the field.",
-      name: "Uros Stanimirovic",
-      role: "Co-Founder & CTO, Genroks AI",
-      avatar: "/avatars/uros-stanimirovic.jpg",
+      emphasis: "Conversion skyrocketed.",
       logo: "/logos-dark/genroks.png",
-      logoAlt: "Genroks AI",
-    },
-    {
+    }),
+    featuredTestimonial("gemma-sole", {
       result: "A full SaaS site and landing page, live in 3 weeks",
-      quote:
-        "They made an impression on me right from the beginning, it's **incredibly easy to communicate with their team** and even easier to work with them.",
-      name: "Gemma Sole",
-      role: "Head of GTM, Knode AI",
-      avatar: "/avatars/gemma-sole.jpg",
+      emphasis: "incredibly easy to communicate with their team",
       logo: "/logos-dark/knode.png",
-      logoAlt: "Knode AI",
       // the knode mark has lots of padding baked in; render it larger
       logoClass: "h-6 sm:h-8",
-    },
-    {
+    }),
+    featuredTestimonial("ben-hall", {
       result: "Our fractional web team, leading design and dev",
-      quote:
-        "Zenith runs our design and development operations end to end. **Reliable, fast, and genuinely invested** in the outcome.",
-      // TODO(owner): quote is paraphrased — swap in Ben's real quote.
-      name: "Ben Hall",
-      role: "Capacity",
-      avatar: "/avatars/ben-hall.jpg",
+      emphasis: "Reliable, fast, and genuinely invested",
       logo: "/logos-dark/capacity.png",
-      logoAlt: "Capacity",
-    },
+    }),
   ],
 };
 

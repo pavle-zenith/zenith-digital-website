@@ -132,8 +132,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
               <VerifiedCheck className="text-white" />
             </div>
             <div className="text-body text-white/70">
-              {card.role ? `${card.role}, ` : ""}
-              {card.company}
+              {[card.role, card.company].filter(Boolean).join(" - ")}
             </div>
           </div>
           <span className="inline-flex w-fit items-center rounded-full border border-white/15 bg-bg/55 px-3 py-1.5 backdrop-blur-md">
@@ -182,8 +181,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
               <VerifiedCheck className="text-light-text" />
             </span>
             <span className="block text-body text-accent">
-              {card.role ? `${card.role}, ` : ""}
-              {card.company}
+              {[card.role, card.company].filter(Boolean).join(" - ")}
             </span>
           </span>
         </figcaption>
@@ -195,7 +193,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
               : "text-light-text",
           )}
         >
-          {card.placeholder ? card.quote : <>&ldquo;{card.quote}&rdquo;</>}
+          {card.quote}
         </blockquote>
         {card.tag ? (
           <Link

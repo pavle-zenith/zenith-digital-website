@@ -1,5 +1,7 @@
 import type { CtaLink } from "@/lib/types";
 
+import { quoteOf } from "./testimonials-data";
+
 import { beforeAfterItems } from "./case-studies";
 
 /**
@@ -102,30 +104,18 @@ export const quoteBand = {
   heading: "What clients said after we launched their website",
   items: [
     {
-      quote:
-        "They made an impression on me right from the beginning, it's incredibly easy to communicate with their team and even easier to work with them.",
-      name: "Gemma K. Sole",
-      role: "Head of GTM, Knode AI",
-      avatar: "/avatars/gemma-sole.jpg",
+      ...quoteOf("gemma-sole"),
       logo: "/logos-white/knode.png",
       logoAlt: "Knode AI",
       logoClass: "h-6",
     },
     {
-      quote:
-        "Our collaboration on redesigning Bel'Istria was the beginning of a long-term partnership. Their composure and communication exceeded all standards.",
-      name: "Ivan Belobrajdic",
-      role: "Chief Director, Bel'Istria",
-      avatar: "/avatars/ivan-belobrajdic.jpg",
+      ...quoteOf("ivan-belobrajdic"),
       logo: "/logos-white/belistria.png",
       logoAlt: "Bel'Istria",
     },
     {
-      quote:
-        "We hired Zenith to help us rebrand our site. Conversion skyrocketed. We saw what it takes to be one of the top professionals in the field.",
-      name: "Uros Stanimirovic",
-      role: "Co-Founder & CTO, Genroks AI",
-      avatar: "/avatars/uros-stanimirovic.jpg",
+      ...quoteOf("uros-stanimirovic"),
       logo: "/logos-white/genroks.png",
       logoAlt: "Genroks AI",
     },

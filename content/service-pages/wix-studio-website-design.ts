@@ -1,0 +1,281 @@
+import type { CtaLink } from "@/lib/types";
+import { quoteOf } from "../testimonials-data";
+import type { ServicePageContent } from "./types";
+
+/**
+ * /services/wix-studio-website-design
+ * Targets: wix studio website design · wix studio agency · hire wix studio
+ * designer · wix studio expert.
+ *
+ * Every figure here already exists elsewhere on the site (Top 1% Wix Partner,
+ * 150+ sites, €2,500 floor, Knode's raise, Scottish Luxury's pipeline). No new
+ * numbers were invented for this page.
+ */
+
+const ctas: CtaLink[] = [
+  { label: "Book a call", href: "/book-a-call", variant: "primary" },
+  {
+    label: "Free website audit",
+    href: "/free-website-audit",
+    variant: "secondary",
+  },
+];
+
+export const wixStudioWebsiteDesign: ServicePageContent = {
+  slug: "wix-studio-website-design",
+  publish: true,
+  seo: {
+    title:
+      "Wix Studio website design by a Top 1% Wix Partner | Zenith Digital",
+    description:
+      "Custom Wix Studio website design from a Top 1% Wix Partner. Conversion-first builds launched in 2 to 5 weeks, from €2,500 fixed. 150+ sites shipped.",
+  },
+
+  hero: {
+    name: "Wix Studio website design",
+    h1: "Wix Studio website design that pays for itself",
+    subhead:
+      "Custom-designed, conversion-first Wix Studio websites from a Top 1% Wix Partner. Launched in 2 to 5 weeks, from €2,500 fixed.",
+    chips: ["Top 1% Wix Partner", "150+ sites shipped", "3 to 4 week launch"],
+    ctas,
+  },
+
+  whoFor: {
+    heading: "Who this is for",
+    intro:
+      "Three situations bring people to this page. If one of them is yours, the call is worth twenty minutes.",
+    items: [
+      {
+        title: "You've outgrown the template",
+        body: "The DIY build got the business online and did its job. Now every change is a workaround, the layout fights the content you actually have, and the design is recognisably the same one a few hundred other companies bought.",
+      },
+      {
+        title: "The last agency burned you",
+        body: "Weeks of silence, a launch date that kept sliding, and a finished site nobody on your team can edit. What you want now is a fixed scope, a fixed price, and a reply inside a working day.",
+      },
+      {
+        title: "You're launching and it has to look established",
+        body: "A new company, a raise in progress, or a first serious product. The site has to carry more credibility than the founding date does, and it has to be live before the conversations start.",
+      },
+    ],
+  },
+
+  included: {
+    heading: "What's included",
+    intro:
+      "Every build ships with all eight. Nothing here is an upsell you discover halfway through.",
+    items: [
+      {
+        title: "Strategy and structure",
+        body: "We work out who is buying, what they need to see, and the order they need to see it in before anyone opens a design file. The sitemap comes out of that conversation rather than out of a template's page list.",
+      },
+      {
+        title: "Conversion copywriting",
+        body: "Words written to sell rather than to fill a layout, included from The Studio tier upward. Bring your own copy if you have it and we'll structure the design around it instead.",
+      },
+      {
+        title: "Custom Wix Studio design",
+        body: "Designed from a blank canvas in Wix Studio. No purchased theme, no reskinned template, so a competitor can't buy the same starting point you did.",
+      },
+      {
+        title: "Responsive build",
+        body: "Laid out for phones first, where most of your traffic already is, then scaled up through tablet and desktop breakpoints and checked on real devices before launch.",
+      },
+      {
+        title: "On-page SEO and schema",
+        body: "Titles, meta descriptions, heading hierarchy, internal links, and structured data set on every page before you go live, so the site is indexable on day one instead of month three.",
+      },
+      {
+        title: "Analytics and lead capture",
+        body: "Forms, booking, and conversion events wired into your CRM and analytics, so you can see which pages produce enquiries and which ones only produce traffic.",
+      },
+      {
+        title: "Loom handover",
+        body: "A recorded walkthrough of your own site: editing pages, swapping images, publishing changes. Your team runs the site after we step away, without a support ticket.",
+      },
+      {
+        title: "30 to 60 days of support",
+        body: "We stay on after launch to fix anything that surfaces once real traffic and real users arrive, because that's when the edge cases show up.",
+      },
+    ],
+  },
+
+  process: {
+    heading: "How a build runs",
+    intro:
+      "Five stages, most of them measured in days. You'll know at every point what's happening and what we need from you.",
+    steps: [
+      {
+        title: "Discovery call",
+        duration: "Day 1",
+        body: "Twenty free minutes on what the site has to do, who it's selling to, and what's failing on the current one. If we're not the right fit we say so on the call.",
+      },
+      {
+        title: "Proposal",
+        duration: "Same day",
+        body: "Scope, fixed price, and launch date in writing, sent the same day as the call. No multi-week discovery invoice before you can see a number.",
+      },
+      {
+        title: "Wireframes and copy",
+        duration: "Week 1",
+        body: "Structure and words first, greyscale, no visual polish to hide behind. Signing off at this stage is what keeps the design phase from turning into rounds of opinion.",
+      },
+      {
+        title: "Design and build",
+        duration: "Weeks 2 to 4",
+        body: "Design and build happen in Wix Studio directly, so what you review is the real site on a real URL rather than a flat mockup that still has to be rebuilt.",
+      },
+      {
+        title: "Launch and handover",
+        duration: "Week 5",
+        body: "Domain, redirects, analytics, and search console set up, then the Loom walkthrough. The site is yours, on your own Wix account, from that day.",
+      },
+    ],
+  },
+
+  proof: {
+    heading: "Builds like yours",
+    intro:
+      "Two sites where the design work is directly attached to a business outcome.",
+    caseSlugs: ["scottish-luxury-experience", "knode-ai"],
+    testimonial: quoteOf("gemma-sole"),
+  },
+
+  pricing: {
+    heading: "What it costs",
+    from: "From €2,500",
+    fromNote: "fixed, one-time",
+    note: "The price is agreed before we start and it doesn't move unless you add scope. Most businesses land between the €2,500 entry build and the €4,500 Studio tier.",
+    drivers: [
+      {
+        title: "Page count",
+        body: "A five-page site and a fifteen-page site are different jobs. Page count is the single biggest lever on the number you're quoted.",
+      },
+      {
+        title: "Custom functionality",
+        body: "Booking flows, CMS collections, member areas, and integrations add build time. A brochure site with a contact form does not.",
+      },
+      {
+        title: "Copywriting scope",
+        body: "Writing every page from scratch costs more than editing copy you already have. Both are fine, and we'll tell you which one your project needs.",
+      },
+    ],
+    cta: { label: "Get a fixed quote", href: "/book-a-call", variant: "primary" },
+    ctaSecondary: {
+      label: "See all pricing",
+      href: "/#pricing",
+      variant: "secondary",
+    },
+  },
+
+  unique: {
+    kind: "comparison",
+    heading: "Why a Top 1% Wix Partner instead of a freelancer or a template",
+    intro:
+      "All three options put a website on your domain. They differ on what happens in month six.",
+    columns: [
+      {
+        name: "A template",
+        note: "Cheapest, fastest, most replaceable",
+        points: [
+          "Design shared with everyone else who bought it",
+          "Your content bends to fit the layout",
+          "SEO basics left to you to configure",
+          "No one to call when it breaks",
+        ],
+      },
+      {
+        name: "A freelancer",
+        note: "Cheaper, until availability changes",
+        points: [
+          "Quality varies with who you happen to hire",
+          "One person is one point of failure",
+          "Copy, design, SEO rarely all in one skill set",
+          "Handover depends on them still being around",
+        ],
+      },
+      {
+        name: "Zenith",
+        note: "Fixed price, fixed date, named team",
+        points: [
+          "Designed from scratch, no theme underneath",
+          "Copy, design, build, and SEO in one engagement",
+          "Fixed price agreed before work starts",
+          "30 to 60 days of support, then a site you can run",
+        ],
+      },
+    ],
+    footnote: {
+      title: "What Top 1% Wix Partner actually means",
+      body: "Wix ranks its partner agencies on delivered work and client outcomes, and publishes the tiers. Top 1% is the highest band. It isn't a badge you buy or apply for, which is exactly why it's worth checking on any agency that claims platform expertise, including ours.",
+    },
+  },
+
+  faq: {
+    heading: ["Wix Studio design,", "answered straight"],
+    subhead: "The questions that come up on nearly every discovery call.",
+    ctas,
+    items: [
+      {
+        q: "How much does a Wix Studio website cost?",
+        a: "From €2,500 for a build of up to five pages, and €4,500 for the twelve-page Studio tier with custom functionality and full copywriting. The figure is fixed before we start, so the number in the proposal is the number you pay.",
+      },
+      {
+        q: "How long does a Wix Studio website take?",
+        a: "Two to five weeks from kickoff, depending on page count and how quickly copy and feedback come back. Knode AI's ten-page SaaS site went from nothing to live in three weeks while the company was raising.",
+      },
+      {
+        q: "Is Wix Studio good for SEO?",
+        a: "Yes, and the platform stopped being the limiting factor years ago. Wix Studio gives you control over titles, meta descriptions, heading structure, canonical tags, redirects, robots directives, and structured data. What actually decides whether you rank is whether someone configured all of that properly and wrote pages worth ranking.",
+      },
+      {
+        q: "Can I edit the site myself after launch?",
+        a: "That's the point of building on Wix Studio. You get the site on your own account plus a recorded Loom walkthrough of how to edit pages, swap images, and publish. No developer, no monthly fee to change a headline.",
+      },
+      {
+        q: "What's the difference between Wix and Wix Studio?",
+        a: "Wix is the consumer drag-and-drop builder. Wix Studio is the professional environment on top of it, with a responsive layout engine, CSS-grid-style control, reusable components, a proper CMS, and custom code. Same underlying infrastructure, a different tool for the person building.",
+      },
+      {
+        q: "Do you use templates?",
+        a: "No. Every build starts from a blank Wix Studio canvas and a sitemap written for your business. We use our own component patterns to move quickly, which is not the same as starting from a theme somebody else can also buy.",
+      },
+    ],
+  },
+
+  related: {
+    heading: "Related services",
+    items: [
+      {
+        label: "Website migration",
+        href: "/services/website-migration",
+        desc: "Already have a site with rankings worth protecting? Move it across without losing them.",
+      },
+      {
+        label: "SEO, AEO & PPC",
+        href: "/services/seo-aeo-ppc",
+        desc: "Once the site is live, the campaigns and search work that bring people to it.",
+      },
+      {
+        label: "All services",
+        href: "/services",
+        desc: "The full picture, including Wix Studio development and white-label production.",
+      },
+    ],
+  },
+
+  finalCta: {
+    heading: ["Get a fixed price", "before you commit"],
+    paragraph:
+      "A free 20-minute call, then scope, price, and a launch date in writing the same day. If a rebuild isn't what you need, we'll tell you that instead.",
+    cta: { label: "Book a call", href: "/book-a-call" },
+    ctaSecondary: { label: "Free website audit", href: "/free-website-audit" },
+    image: "/textures/studio-texture.jpg",
+  },
+
+  schema: {
+    description:
+      "Custom Wix Studio website design and build from a Top 1% Wix Partner. Strategy, conversion copywriting, responsive build, on-page SEO and schema, analytics, and handover. Launched in 2 to 5 weeks from €2,500 fixed.",
+    priceFrom: "2500",
+  },
+};

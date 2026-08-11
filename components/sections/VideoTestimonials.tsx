@@ -1,22 +1,45 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
+import { cn } from "@/lib/utils";
 import { videoTestimonials } from "@/content/home";
+
+type VideoItem = {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  logo: string;
+  poster: string;
+  video: string;
+};
+
+type VideoData = { heading: string; intro: string; items: VideoItem[] };
 
 /**
  * Video testimonials on a faint textured navy background with the white hairline
- * frame. Heading left, intro right, then 3 portrait cards: company logo top-left,
+ * frame. Heading left, intro right, then portrait cards: company logo top-left,
  * play button top-right, the person's video/poster filling the card, and a bottom
  * panel with the quote, name + verified check, and role - company. Clicking a card
- * opens a blurred full-screen overlay that plays the portrait video (placeholders
- * until real posters/videos land).
+ * opens a blurred full-screen overlay that plays the portrait video.
+ *
+ * Defaults to the homepage set and its three-up grid. `slider` swaps the grid
+ * for a snap-scroll track with arrows (used on /testimonials); the card itself
+ * is identical either way.
  */
-export function VideoTestimonials() {
+export function VideoTestimonials({
+  data = videoTestimonials,
+  slider = false,
+}: {
+  data?: VideoData;
+  slider?: boolean;
+}) {
   const [active, setActive] = useState<number | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (active === null) return;
@@ -29,7 +52,16 @@ export function VideoTestimonials() {
     };
   }, [active]);
 
-  const activeItem = active !== null ? videoTestimonials.items[active] : null;
+  const activeItem = active !== null ? data.items[active] : null;
+
+  // Arrows step one card plus the 24px track gap.
+  const scrollByCard = (dir: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector<HTMLElement>("[data-card]");
+    const step = card ? card.offsetWidth + 24 : track.clientWidth * 0.8;
+    track.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
 
   return (
     <div className="relative isolate overflow-hidden">
@@ -49,24 +81,72 @@ export function VideoTestimonials() {
         className="bg-transparent"
         frameClassName="!py-12 md:!py-20"
       >
-        {/* Header: heading left, intro right */}
+        {/* Header: heading left, intro right (plus arrows in slider mode) */}
         <div className="grid gap-8 md:grid-cols-2 md:items-start">
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-            {videoTestimonials.heading}
+            {data.heading}
           </h2>
-          <p className="text-body-lg font-medium text-text-muted">
-            {videoTestimonials.intro}
-          </p>
+          <div
+            className={cn(
+              slider && "flex flex-wrap items-end justify-between gap-6",
+            )}
+          >
+            <p className="max-w-xl text-body-lg font-medium text-text-muted">
+              {data.intro}
+            </p>
+            {slider ? (
+              <div className="flex shrink-0 gap-2">
+                {([-1, 1] as const).map((dir) => (
+                  <button
+                    key={dir}
+                    type="button"
+                    onClick={() => scrollByCard(dir)}
+                    aria-label={
+                      dir === -1
+                        ? "Previous video testimonial"
+                        : "Next video testimonial"
+                    }
+                    className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-border bg-bg text-text transition hover:bg-surface-2"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      className={cn("h-4 w-4", dir === -1 && "rotate-180")}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden
+                    >
+                      <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
+                    </svg>
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </div>
         </div>
 
-        {/* 3 portrait cards — taller */}
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {videoTestimonials.items.map((item, i) => (
+        <div
+          ref={trackRef}
+          className={cn(
+            "mt-12",
+            slider
+              ? "flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              : "grid grid-cols-1 gap-6 md:grid-cols-3",
+          )}
+        >
+          {data.items.map((item, i) => (
             <button
               key={item.name}
+              data-card
               type="button"
               onClick={() => setActive(i)}
-              className="group relative flex aspect-[3/4.4] flex-col overflow-hidden rounded-[8px] border border-border text-left"
+              className={cn(
+                "group relative flex aspect-[3/4.4] flex-col overflow-hidden rounded-[8px] border border-border text-left",
+                slider &&
+                  "w-[280px] shrink-0 snap-start sm:w-[320px] lg:w-[360px]",
+              )}
             >
               {/* Poster / video first-frame area */}
               {item.poster ? (
@@ -186,4 +266,3 @@ export function VideoTestimonials() {
     </div>
   );
 }
-

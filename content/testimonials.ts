@@ -14,7 +14,6 @@ import {
  * are all projections of that one list, so a client's words can't drift.
  *
  * OWNER — still to set (visible [bracketed] placeholders until then):
- *   - Clutch profile URL (FAQ CTA) — currently https://clutch.co
  *   - real headshots for the 4 people still on the placeholder avatar
  */
 
@@ -27,15 +26,35 @@ export {
 } from "./testimonials-data";
 export type { Testimonial } from "./testimonials-data";
 
-// Video testimonials — the three clients who recorded one. Used by the
-// homepage video section and by the wall's video cards.
-const videoIds = ["uros-stanimirovic", "john-smyth", "flynn-blackie"];
+// Clients with a video (or, for Flynn, a poster shot), in the order the
+// /testimonials slider plays them.
+// Adding a video is a one-line change: set `video` on the testimonial and add
+// its id here. Anyone listed here is shown as a video rather than a wall
+// quote card, so nobody appears twice.
+const videoIds = [
+  "jack-shorrock",
+  "finlay-wellington",
+  "john-smyth",
+  "flynn-blackie",
+  "michael-forte",
+  "kayla-bloom",
+  "uros-stanimirovic",
+  "bates-green",
+];
+
+// The homepage picks its own three rather than taking the first three above,
+// so reordering the /testimonials slider can't quietly change the homepage.
+const homepageVideoIds = [
+  "uros-stanimirovic",
+  "john-smyth",
+  "flynn-blackie",
+];
 
 export const videoTestimonials = {
   heading: "Hear directly from business owners that gave us their trust",
   intro:
     "We don't ask for testimonials until the work is done and the results are in. These are real clients who came to us with a site that wasn't even pulling its weight, and left with one that does.",
-  items: videoIds.map((id) => {
+  items: homepageVideoIds.map((id) => {
     const t = testimonial(id);
     return {
       quote: t.quote,
@@ -54,23 +73,33 @@ export const tHero = {
   heading: "What clients say after launch",
   support:
     "No cherry-picked praise and no anonymous quotes. Real names, real companies, real outcomes.",
-  // The review count is derived, so it can't fall out of date when the batch
-  // grows. Every other figure already appears elsewhere on the site.
+  // Every figure here already appears elsewhere on the site.
   stats: [
-    { value: `${allTestimonials.length}`, label: "Client reviews" },
     { value: "5/5", label: "Rated on Clutch" },
     { value: "150+", label: "Websites shipped" },
     { value: "€1M+", label: "Client revenue generated" },
   ] as Metric[],
 };
 
-// 2. Video testimonials on /testimonials — same three clips as the homepage,
-// its own framing. Rendered as a slider between the hero and the wall.
+/** DOM id of the video slider track; the hero's arrows scroll it. */
+export const VIDEO_TRACK_ID = "video-testimonial-track";
+
+// 2. Video testimonials on /testimonials — every clip we have, rendered as a
+// bare slider between the hero and the wall. No heading or intro: the faces
+// are the section.
 export const tVideos = {
-  heading: "Some of them said it on camera",
-  intro:
-    "Three clients recorded a video instead of typing a line. Same words, harder to fake.",
-  items: videoTestimonials.items,
+  items: videoIds.map((id) => {
+    const t = testimonial(id);
+    return {
+      quote: t.quote,
+      name: t.name,
+      role: t.role,
+      company: t.company,
+      logo: t.logo ?? "",
+      poster: t.poster ?? "",
+      video: t.video ?? "",
+    };
+  }),
 };
 
 // 3. Wall of love — five card types are supported; the wall currently emits
@@ -128,38 +157,8 @@ export const wall: WallCard[] = allTestimonials
   .filter((t) => !videoIds.includes(t.id))
   .map(asQuote);
 
-// 4. FAQ — small, page-specific; emits FAQPage JSON-LD on /testimonials.
-export const tFaq = {
-  heading: ["About these", "testimonials"],
-  subhead: "How we collect them, and how you can check.",
-  ctas: [
-    { label: "Book a call", href: "/book-a-call", variant: "primary" } as CtaLink,
-    {
-      // OWNER: point at the live Clutch profile once confirmed.
-      label: "Leave a Clutch review",
-      href: "https://clutch.co",
-      variant: "secondary",
-    } as CtaLink,
-  ],
-  items: [
-    {
-      q: "Are these real?",
-      a: `Every one of the ${allTestimonials.length} quotes on this page is from a named client on a real project, published with their name, role, and company. Several are on video, and several are on Clutch, both harder to fake than a line of text on a website.`,
-    },
-    {
-      q: "Can I talk to a past client?",
-      a: "Yes. Book a call and ask. For serious projects we'll happily connect you with a reference in your industry.",
-    },
-    {
-      q: "Where else can I verify you?",
-      a: "Our Clutch profile, the Wix Partner directory (Top 1% Partner), and the live client sites linked throughout. Every one is a working business you can visit.",
-    },
-    {
-      q: "Worked with us?",
-      a: "Leave a review on Clutch. It's the most useful thank-you there is.",
-    },
-  ],
-};
+// 4. FAQ — removed from this page (the client-logo marquee sits here now).
+// The master /faq page still answers these questions.
 
 // 5. Final CTA band
 export const tFinalCta = {

@@ -491,13 +491,15 @@ export const pStories = {
       // value below is a placeholder. A wordmark renders until a logo is added.
       name: "WellingtonWebCo",
       logo: "",
+      // OWNER: relationship + stats still to set. "Dozens" is Finlay's own
+      // word from his quote; swap in the real count when you have it.
       relationship: "[relationship to set]",
-      title: "[Partnership headline to set]",
-      story: "[Partnership story to set]",
+      title:
+        "Web design and hosting fulfillment for Scotland's local businesses",
+      story:
+        "Wellington Web Co owns the client relationship and the local market. We design, build, and host the sites behind it, under their brand. One introductory call has since run to dozens of local business websites across Scotland.",
       stats: [{ value: "[n]", label: "[metric to set]" }],
       image: "/partners/wellington-web-co.webp",
-      // Real quote from the owner's batch; the rest of this story's fields are
-      // still owner-pending placeholders.
       quote: partnerQuote("finlay-wellington"),
     },
   ] as PartnerStory[],

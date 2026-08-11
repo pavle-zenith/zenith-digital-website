@@ -4,13 +4,13 @@ import { JsonLd } from "@/components/JsonLd";
 import { TestimonialsHero } from "@/components/sections/TestimonialsHero";
 import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
 import { WallOfLove } from "@/components/sections/WallOfLove";
-import { Faq } from "@/components/sections/Faq";
+import { ClientLogos } from "@/components/sections/ClientLogos";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import {
   allTestimonials,
-  tFaq,
   tFinalCta,
   tVideos,
+  VIDEO_TRACK_ID,
 } from "@/content/testimonials";
 
 export const metadata: Metadata = {
@@ -54,27 +54,21 @@ const reviewSchema = {
   })),
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: tFaq.items.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export default function TestimonialsPage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={reviewSchema} />
-      <JsonLd data={faqSchema} />
 
       <TestimonialsHero />
-      <VideoTestimonials data={tVideos} slider />
+      <VideoTestimonials
+        data={tVideos}
+        slider
+        tone="light"
+        trackId={VIDEO_TRACK_ID}
+      />
       <WallOfLove />
-      <Faq data={tFaq} />
+      <ClientLogos />
       <CtaBanner data={tFinalCta} />
     </>
   );

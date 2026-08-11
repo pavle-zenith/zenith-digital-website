@@ -1,7 +1,9 @@
 import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
+import { SliderArrows } from "@/components/ui/SliderArrows";
 import { tHero } from "@/content/testimonials";
+import { VIDEO_TRACK_ID } from "@/content/testimonials";
 
 /**
  * /testimonials hero — white, on the inverted studio texture (the same
@@ -48,8 +50,10 @@ export function TestimonialsHero() {
 
       {/* Proof stats — divided column on phones, inline row from sm up (the
           same rhythm as the case-study meta strip). Set below the H1 so the
-          headline stays the largest thing on the page. */}
-      <div className="relative mt-10 flex flex-col divide-y divide-light-border sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 md:mt-14">
+          headline stays the largest thing on the page. The video slider's
+          arrows sit at the end of this row, bottom-right of the hero. */}
+      <div className="relative mt-10 flex flex-col gap-8 md:mt-14 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col divide-y divide-light-border sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0">
         {tHero.stats.map((stat) => (
           <div
             key={stat.label}
@@ -63,6 +67,14 @@ export function TestimonialsHero() {
             </div>
           </div>
         ))}
+        </div>
+
+        <SliderArrows
+          targetId={VIDEO_TRACK_ID}
+          label="video testimonial"
+          tone="light"
+          className="self-start md:self-auto"
+        />
       </div>
     </Section>
   );

@@ -15,10 +15,10 @@ export function AuditWhoFor() {
       {/* Faint texture background (same register as pricing) */}
       <div className="absolute inset-0 -z-10 bg-bg">
         <Image
-          src="/textures/bg-texture.png"
+          src="/textures/studio-texture.jpg"
           alt=""
           fill
-          className="object-cover opacity-[0.14]"
+          className="object-cover opacity-[0.16]"
           aria-hidden
         />
       </div>

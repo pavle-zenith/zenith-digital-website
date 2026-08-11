@@ -170,5 +170,5 @@ export const bookFinalCta = {
   paragraph:
     "Pick a slot that works for you. Twenty minutes, an honest read on your site, and a fixed-price proposal the same day.",
   cta: { label: "Book a call", href: "#calendar" },
-  image: "/textures/bg-texture-invert.jpg",
+  image: "/textures/studio-texture.jpg",
 };

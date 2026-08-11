@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -9,6 +10,7 @@ import { cn } from "@/lib/utils";
 import {
   INDUSTRIES,
   caseStudyCards,
+  detailSlugs,
   type IndustrySlug,
 } from "@/content/case-studies";
 
@@ -17,8 +19,9 @@ import {
  * (small dataset) and synced to ?industry= in the URL so filtered views are
  * shareable and future /industries/[slug] pages can deep-link a pre-filtered
  * grid. All cards are server-rendered; the filter only hides cards on the
- * client. Cards link to the live site for now (detail pages deferred) — the
- * href is data-driven so the swap later is a data change.
+ * client. A card links to its detail page once the study ships one (the
+ * live-site link moves inside that page); until then it links to the live
+ * site — all data-driven, no per-card code.
  */
 export function CaseStudyGrid() {
   return (
@@ -131,7 +134,17 @@ function GridInner({
               <p className="mt-2 text-body leading-snug text-light-muted">
                 {c.story}
               </p>
-              {c.liveUrl ? (
+              {detailSlugs.has(c.slug) ? (
+                <Link
+                  href={`/case-studies/${c.slug}`}
+                  className="mt-auto inline-flex items-center gap-1.5 pt-5 font-display text-body font-medium transition group-hover:text-accent"
+                >
+                  Read the case study{" "}
+                  <span aria-hidden className="btn-arrow">
+                    &rarr;
+                  </span>
+                </Link>
+              ) : c.liveUrl ? (
                 <a
                   href={c.liveUrl}
                   target="_blank"

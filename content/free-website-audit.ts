@@ -183,5 +183,5 @@ export const auditCta = {
     "Get a free, honest review from someone who builds websites every day. Find out exactly what to focus on first.",
   checks: ["No commitment", "No pitch", "Delivered within 2 business days"],
   cta: { label: "Review my website", href: "#audit-form" },
-  image: "/textures/bg-texture-invert.jpg",
+  image: "/textures/studio-texture.jpg",
 };

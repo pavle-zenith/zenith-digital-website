@@ -1,11 +1,11 @@
-import type { CtaLink } from "@/lib/types";
+import type { CtaLink, Metric } from "@/lib/types";
 
 /**
  * /case-studies — single source of truth for all case-study data. The homepage
  * featured two-panel cards and the before/after slider sets import from here
- * (no duplicated case data anywhere). Detail pages are deferred; card hrefs are
- * data-driven so swapping liveUrl -> /case-studies/[slug] later is a data
- * change, not a refactor.
+ * (no duplicated case data anywhere). Studies listed in `caseStudyDetails` get
+ * a /case-studies/[slug] detail page and their cards flip to internal links
+ * automatically — shipping a new study is a data change, not a refactor.
  */
 
 // Industry taxonomy — the filter pill list derives from this map, so adding a
@@ -163,7 +163,9 @@ export const caseStudyCards: CaseStudyCard[] = [
 ];
 
 // Featured two-panel cards (thumbnail + branded panel). Shared with the
-// homepage CaseStudies section.
+// homepage CaseStudies section. `slug` ties each card back to the grid data:
+// when the study has a shipped detail page the panel button links there
+// instead of the live site.
 export const caseStudies = {
   heading: "Real examples of how our websites helped businesses drive growth",
   intro:
@@ -171,6 +173,7 @@ export const caseStudies = {
   items: [
     {
       client: "Knode AI",
+      slug: "knode-ai",
       logo: "/logos-white/knode.png",
       thumb: "/casestudies/knode.jpg",
       title:
@@ -185,6 +188,7 @@ export const caseStudies = {
     },
     {
       client: "Bel'Istria",
+      slug: "belistria",
       logo: "/logos-white/belistria.png",
       thumb: "/casestudies/belistria.jpg",
       title:
@@ -198,6 +202,7 @@ export const caseStudies = {
     },
     {
       client: "Fort Lauderdale Dock Rentals",
+      slug: "fort-lauderdale-dock-rentals",
       logo: "/logos-white/foxstays.png",
       thumb: "/casestudies/fortlauderdale.jpg",
       title:
@@ -211,6 +216,7 @@ export const caseStudies = {
     },
     {
       client: "Scottish Luxury Experience",
+      slug: "scottish-luxury-experience",
       logo: "/logos-white/mod.png",
       thumb: "/casestudies/scottishluxury.jpg",
       title:
@@ -248,6 +254,158 @@ export const beforeAfterItems = [
     after: "/before-after/minded-after.jpg",
   },
 ];
+
+// ---- Case study detail pages (/case-studies/[slug]) ----
+
+export type CaseStudyGalleryImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+export type CaseStudyResultMetric = Metric & {
+  /** Tint the value --positive ("results up" metrics). */
+  positive?: boolean;
+  /** Render the value in quotes (a quote-metric, never an invented number). */
+  isQuote?: boolean;
+};
+
+/**
+ * Everything the detail template can render. Every section is conditional:
+ * client data arrives unevenly, so a study ships once it has the minimum set
+ * (headline, challenge, approach, one result, one image) and a section with no
+ * data renders nothing — no empty frames, no placeholders in production.
+ */
+export type CaseStudyDetail = CaseStudyCard & {
+  /** Outcome-led H1 — the raise, never "[Client] website design". */
+  headline: string;
+  /** 2–3 oversized stat blocks under the H1. */
+  heroMetrics: Metric[];
+  /** Hero metadata card. Omit liveUrl to drop that row. */
+  meta: {
+    industry: string;
+    engagementType: string;
+    timeline: string;
+    platform: string;
+    liveUrl?: string;
+  };
+  /** "The challenge" paragraphs, written from the client's world. */
+  challenge: string[];
+  /** 2–4 titled moves, not an essay. */
+  approach: { heading: string; body: string }[];
+  results: CaseStudyResultMetric[];
+  /** One qualitative line under the numbers. */
+  resultsNote?: string;
+  /** First image illustrates the challenge; the rest feed the gallery. */
+  gallery?: CaseStudyGalleryImage[];
+  beforeAfter?: { before: string; after: string };
+  /** Muted autoplay loop in the gallery. */
+  video?: string;
+  testimonial?: { quote: string; name: string; role: string; avatar?: string };
+  /** Scope strip items ("Wix Studio", "CMS", ...). */
+  techUsed?: string[];
+  publishedAt: string;
+  seo?: { title?: string; description?: string };
+};
+
+function cardOf(slug: string): CaseStudyCard {
+  const card = caseStudyCards.find((c) => c.slug === slug);
+  if (!card) throw new Error(`No case-study card for slug "${slug}"`);
+  return card;
+}
+
+// Shipped detail pages, in next-study rotation order.
+export const caseStudyDetails: CaseStudyDetail[] = [
+  {
+    ...cardOf("knode-ai"),
+    // OWNER: narrative assembled from existing site copy and real screenshots
+    // (no invented metrics) — confirm the story beats before more studies ship.
+    headline: "From zero to a $10M Series A raise in three weeks",
+    heroMetrics: [
+      { value: "$10M", label: "Series A raised" },
+      { value: "3 weeks", label: "Kickoff to launch" },
+      { value: "10", label: "Pages designed and built" },
+    ],
+    meta: {
+      industry: INDUSTRIES.saas,
+      engagementType: "New build",
+      timeline: "3 weeks",
+      platform: "Wix Studio",
+      liveUrl: "https://knode.ai",
+    },
+    challenge: [
+      "Knode had a working AI product, a sharp team, and a website that still spoke for the company they were a year ago. Investor conversations were starting, and every one of them began with someone typing knode.ai into a browser.",
+      "The brief was direct: look like the company Knode was becoming, not the one they used to be. And do it on a startup timeline, because the fundraise wasn't going to wait for a two-month design phase.",
+    ],
+    approach: [
+      {
+        heading: "Positioning before pixels",
+        body: "Before any design, we worked out what the site had to say and to whom. Knode speaks to two audiences at once: buyers evaluating a sales coaching product, and investors evaluating a company. The structure serves both. Product pages make the case to buyers, while the story and customer proof give investor diligence what it looks for.",
+      },
+      {
+        heading: "A premium build at startup speed",
+        body: "Ten pages, designed and built from scratch in Wix Studio, live in three weeks. No template. The design puts real product UI on screen from the first fold, so the site reads like a continuation of what Knode ships, not a brochure about it.",
+      },
+      {
+        heading: "Built to scale with the raise",
+        body: "A raise changes a company fast. The site runs on a CMS, so the Knode team ships new pages and customer stories without waiting on a developer. What launched in three weeks keeps growing without us in the loop.",
+      },
+    ],
+    results: [
+      { value: "$10M", label: "Series A raised" },
+      { value: "3 weeks", label: "From kickoff to live" },
+    ],
+    resultsNote:
+      "The site carried Knode into its Series A conversations looking like the company they were becoming.",
+    gallery: [
+      {
+        src: "/casestudies/knode.jpg",
+        alt: "Knode AI homepage in a browser window: Uncover and replicate your sales team's winning formula",
+      },
+      {
+        src: "/portfolio-slider/knode-ai.jpg",
+        alt: "Knode AI homepage hero, with product UI showing call recordings feeding a coaching plan",
+        caption: "The launch hero: real product UI, no stock illustration.",
+      },
+    ],
+    beforeAfter: {
+      before: "/before-after/knode-before.jpg",
+      after: "/before-after/knode-after.jpg",
+    },
+    testimonial: {
+      quote:
+        "They made an impression on me right from the beginning, it's incredibly easy to communicate with their team and even easier to work with them.",
+      name: "Gemma K. Sole",
+      role: "Head of GTM, Knode AI",
+      avatar: "/avatars/gemma-sole.jpg",
+    },
+    // TODO(owner): confirm the full scope list (copywriting? integrations?).
+    techUsed: ["Wix Studio", "CMS", "SEO & schema"],
+    publishedAt: "2026-08-11",
+    seo: {
+      title: "Knode AI case study | From zero to a $10M raise | Zenith Digital",
+      description:
+        "How Zenith Digital designed and built Knode AI's 10-page Wix Studio site in three weeks, and how it carried the company into a $10M Series A raise.",
+    },
+  },
+];
+
+/** Slugs with a shipped detail page — their cards flip to internal links. */
+export const detailSlugs = new Set(caseStudyDetails.map((d) => d.slug));
+
+export function getCaseStudyDetail(slug: string): CaseStudyDetail | undefined {
+  return caseStudyDetails.find((d) => d.slug === slug);
+}
+
+// Final CTA band shared by all detail pages.
+export const csDetailCta = {
+  heading: ["Want numbers like these", "on your site?"],
+  paragraph:
+    "A free 20-minute call. We'll tell you honestly what's holding your site back, and what it would take to fix it.",
+  cta: { label: "Book a call", href: "/book-a-call" },
+  ctaSecondary: { label: "Free website audit", href: "/free-website-audit" },
+  image: "/textures/studio-texture.jpg",
+};
 
 // All client logos for the double marquee strip (blue marks on light).
 export const clientLogos = [
@@ -359,5 +517,5 @@ export const csFinalCta = {
     "A free 20-minute call. We'll tell you honestly what's holding your site back, and what it would take to fix it.",
   cta: { label: "Book a call", href: "/book-a-call" },
   ctaSecondary: { label: "Get a free audit", href: "/free-website-audit" },
-  image: "/textures/bg-texture-invert.jpg",
+  image: "/textures/studio-texture.jpg",
 };

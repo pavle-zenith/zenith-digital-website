@@ -1,13 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { caseStudies } from "@/content/home";
+import { detailSlugs } from "@/content/case-studies";
 
 /**
  * Case studies showcase (ported from the live site). Section header (heading left,
  * intro right), then a single column of rows. Each row is TWO SEPARATE cards side by
  * side: a website thumbnail card on the left, and a per-client branded panel card on
- * the right (ray texture, logo, title, two stats, and a "View website" button).
+ * the right (ray texture, logo, title, two stats, and a "View case study" button —
+ * pointing at the study's detail page once it ships one, the live site until then).
  */
 export function CaseStudies() {
   return (
@@ -98,17 +101,29 @@ export function CaseStudies() {
                       </div>
                     ))}
                   </div>
-                  <a
-                    href={cs.liveUrl}
-                    target="_blank"
-                    rel="noopener"
-                    className="group inline-flex w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[6px] bg-white px-5 py-2.5 sm:w-auto text-body font-medium text-light-text transition hover:bg-white/90"
-                  >
-                    View case study{" "}
-                    <span aria-hidden className="btn-arrow">
-                      &rarr;
-                    </span>
-                  </a>
+                  {detailSlugs.has(cs.slug) ? (
+                    <Link
+                      href={`/case-studies/${cs.slug}`}
+                      className="group inline-flex w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[6px] bg-white px-5 py-2.5 sm:w-auto text-body font-medium text-light-text transition hover:bg-white/90"
+                    >
+                      View case study{" "}
+                      <span aria-hidden className="btn-arrow">
+                        &rarr;
+                      </span>
+                    </Link>
+                  ) : (
+                    <a
+                      href={cs.liveUrl}
+                      target="_blank"
+                      rel="noopener"
+                      className="group inline-flex w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[6px] bg-white px-5 py-2.5 sm:w-auto text-body font-medium text-light-text transition hover:bg-white/90"
+                    >
+                      View case study{" "}
+                      <span aria-hidden className="btn-arrow">
+                        &rarr;
+                      </span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

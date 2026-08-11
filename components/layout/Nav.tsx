@@ -34,7 +34,9 @@ export function Nav() {
     <header
       className={cn(
         "tone-light sticky top-0 z-50 border-b border-light-border text-light-text transition-colors duration-300",
-        scrolled ? "bg-light-bg/70 backdrop-blur-xl" : "bg-light-bg",
+        // Solid while the drawer is open so the bar never shows page content
+        // through the blur above the opaque drawer.
+        scrolled && !open ? "bg-light-bg/70 backdrop-blur-xl" : "bg-light-bg",
       )}
       onMouseLeave={() => setMenuOpen(false)}
     >
@@ -212,11 +214,14 @@ export function Nav() {
       </div>
 
       {/* Mobile drawer — full-screen overlay below the bar, so opening it never
-          pushes the page down. Hairline-divided rows up top, sign-off + CTAs
-          pinned to the bottom. */}
+          pushes the page down. Positioned absolute with an explicit viewport
+          height (NOT fixed: the bar's backdrop-filter makes the header the
+          containing block for fixed children, which collapsed the drawer to
+          zero height). Hairline-divided rows up top, sign-off + CTAs pinned
+          to the bottom. */}
       <div
         className={cn(
-          "fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col bg-light-bg transition-opacity duration-200 md:hidden",
+          "absolute inset-x-0 top-full z-40 flex h-[calc(100dvh-4rem)] flex-col bg-light-bg transition-opacity duration-200 md:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
         aria-hidden={!open}

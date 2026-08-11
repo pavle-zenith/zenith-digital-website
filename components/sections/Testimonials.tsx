@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
+import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import { cn } from "@/lib/utils";
 import { testimonials } from "@/content/home";
 
@@ -35,9 +36,10 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
     <Section tone="light" frameClassName="!py-0" divide={false}>
       {/* Bleeds to the frame rails so every rule runs edge-to-edge (same pattern
           as the pricing grid). The two cells are split by a full-height vertical
-          rule; each cell carries its own padding for internal spacing. The block's
-          own top/bottom borders are the section boundary (no extra frame padding). */}
-      <div className="frame-bleed-md border-y border-light-border">
+          rule; each cell carries its own padding for internal spacing. Top rule
+          only — the next section's divide (or ClientLogos' own top rule) closes
+          the band, avoiding a double hairline. */}
+      <div className="frame-bleed-md border-t border-light-border">
         <div
           className={cn(
             "grid",
@@ -95,8 +97,9 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
                   />
                 </span>
                 <span className="text-left">
-                  <span className="block font-display font-medium">
+                  <span className="flex items-center gap-1.5 font-display font-medium">
                     {t.name}
+                    <VerifiedCheck className="text-light-text" />
                   </span>
                   <span className="block text-body text-light-muted">
                     {t.role}

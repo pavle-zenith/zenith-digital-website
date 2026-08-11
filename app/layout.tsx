@@ -6,6 +6,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.thezenithdigital.com"),
   title: "Zenith Digital | Wix Studio Agency",
   description:
     "Zenith Digital is a Wix Studio web design agency based in Belgrade, serving the UK, EU, and US.",

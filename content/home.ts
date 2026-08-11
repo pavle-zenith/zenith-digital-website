@@ -261,43 +261,9 @@ export const services = {
 };
 
 // 6b. Video testimonials (on the faint textured navy bg, white hairline frame)
-export const videoTestimonials = {
-  heading: "Hear directly from business owners that gave us their trust",
-  intro:
-    "We don't ask for testimonials until the work is done and the results are in. These are real clients who came to us with a site that wasn't even pulling its weight, and left with one that does.",
-  items: [
-    {
-      quote:
-        "Zenith redefined what hard work means to me. They treat every website project with pride, enthusiasm and extreme passion.",
-      name: "Flynn Blackie",
-      role: "Founder & Director",
-      company: "MOD Digital",
-      logo: "/logos-white/mod.png",
-      poster: "/testimonials/flynn.jpg",
-      video: "", // Flynn is an image for now
-    },
-    {
-      quote:
-        "We hired Zenith to help us rebrand our site. Conversion skyrocketed. We saw what it takes to be one of the top professionals in the field.",
-      name: "Uros Stanimirovic",
-      role: "Co-Founder & CTO",
-      company: "Genroks AI",
-      logo: "/logos-white/genroks.png",
-      poster: "",
-      video: "/testimonials/uros.mov",
-    },
-    {
-      quote:
-        "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith was able to overdeliver on every front imaginable.",
-      name: "John Smyth",
-      role: "CEO",
-      company: "AdVantage Media Marketing",
-      logo: "/logos-white/advantage.png",
-      poster: "",
-      video: "/testimonials/john.mov",
-    },
-  ],
-};
+// Video testimonial data now lives in content/testimonials.ts (single source
+// of truth shared with /testimonials); re-exported here for existing imports.
+export { videoTestimonials } from "./testimonials";
 
 // 6a. Case studies showcase (two-panel cards: thumbnail + branded panel)
 // Featured two-panel cards now live in content/case-studies.ts (single
@@ -312,7 +278,7 @@ export const caseStudiesCta = {
   paragraph:
     "Browse the full portfolio of Wix Studio and custom builds, with the numbers behind each one.",
   cta: { label: "View all case studies", href: "/case-studies" },
-  image: "/textures/bg-texture-invert.jpg",
+  image: "/textures/studio-texture.jpg",
 };
 
 // 6c. Cross-industry client grid (copied 1:1 from the live site)
@@ -934,7 +900,7 @@ export const finalCta = {
   paragraph:
     "A free 20-minute call. We'll tell you honestly what's holding your site back, and what it would take to fix it.",
   cta: { label: "Book a call", href: "/book-a-call" },
-  image: "/textures/bg-texture-invert.jpg",
+  image: "/textures/studio-texture.jpg",
 };
 
 // 18. Footer (light; live-site layout: mission + city clocks, link columns,
@@ -960,6 +926,7 @@ export const footer = {
       heading: "Zenith resources",
       links: [
         { label: "Free website audit", href: "/free-website-audit" },
+        { label: "FAQ", href: "/faq" },
         { label: "Blog", href: "/blog" },
         { label: "About", href: "/about" },
       ],
@@ -1058,6 +1025,7 @@ export const nav = {
     { label: "Services", href: "/services" },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Partnerships", href: "/partnerships" },
+    { label: "FAQ", href: "/faq" },
   ],
   ctas: [
     {

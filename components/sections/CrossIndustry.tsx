@@ -80,7 +80,7 @@ export function CrossIndustry() {
                   </span>
                 )}
               </div>
-              <p className="text-body-lg font-medium leading-snug text-light-muted">
+              <p className="text-body font-medium leading-snug text-light-muted">
                 {item.text}
               </p>
             </div>

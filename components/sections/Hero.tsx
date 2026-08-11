@@ -15,8 +15,30 @@ import { hero, logos } from "@/content/home";
 export function Hero() {
   return (
     <Section tone="light" divide={false} frameClassName="!py-0">
-      {/* Hero content */}
-      <div className="flex flex-col justify-end pb-10 pt-10 md:pb-14 md:pt-20">
+      {/* Hero content — on the inverted studio texture, confined to the frame
+          column (rail to rail via frame-bleed) and ending at the marquee rule */}
+      <div className="relative">
+        <div
+          className="frame-bleed pointer-events-none absolute inset-0 overflow-hidden"
+          aria-hidden
+        >
+          <Image
+            src="/textures/studio-texture.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.28] invert"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
+            }}
+          />
+        </div>
+
+        <div className="relative flex flex-col justify-end pb-10 pt-10 md:pb-14 md:pt-20">
         {/* Eyebrow: "Top 1% Partner of" + the Wix Studio lockup */}
         <div className="mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-light-surface px-3 py-1.5 text-label font-medium">
           <span className="text-light-muted">{hero.badgePrefix}</span>
@@ -68,6 +90,7 @@ export function Hero() {
             </span>
           </div>
         </div>
+        </div>
       </div>
 
       {/* Logo marquee band — bleeds to the frame side rails */}
@@ -75,7 +98,7 @@ export function Hero() {
 
       {/* 2x2 highlighted case studies — flows out of the hero. The 1px grid gaps on a
           rule-colored background render as hairlines that touch the frame rails. */}
-      <div className="frame-bleed-md grid grid-cols-1 gap-px border-t border-light-border bg-light-border sm:grid-cols-2">
+      <div className="frame-bleed-md grid grid-cols-1 gap-px bg-light-border max-md:my-6 max-md:overflow-hidden max-md:rounded-card max-md:border max-md:border-light-border sm:grid-cols-2 md:border-t md:border-light-border">
         {hero.featured.map((c) => (
           <Link
             key={c.client}

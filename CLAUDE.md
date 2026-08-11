@@ -294,3 +294,32 @@ All commercial terms (prices, margins, turnarounds, revision limits) are **place
 - **No forced rule-of-three cadence** ("faster, smarter, better") on everything. It's a tell.
 - **No Title Case Everywhere.** Sentence case for headings and human phrasing throughout.
 - **No emoji in body copy**, no "Lorem ipsum" or invented figures shipped to production. Contractions are welcome; write like a sharp human, not a brochure.
+
+## 15. Established build conventions (source of truth: the homepage)
+
+The homepage (`app/page.tsx` + `components/sections/*`) is the reference implementation of the design system as actually built. When building any new page or section, reuse these patterns; do not re-derive them.
+
+**Layout & the hairline frame**
+- Every section is a `Section` (`components/ui/Section.tsx`): tone `dark`/`light`, content in the `.frame` column with side rails. Override vertical padding via `frameClassName` (e.g. `"!py-14 md:!py-24"`); mobile padding is always smaller than desktop.
+- Horizontal rules and blocky bands run edge to edge of the frame. `frame-bleed` (all viewports) is for continuous strips only: rules, logo marquees, image tracks, CTA banners. `frame-bleed-md` is for card/tab/grid blocks, so phones keep the site gutter. Content inside a bled block re-applies the gutter with `px-[clamp(20px,4vw,64px)]`.
+- Hairline grids: `grid gap-px` over a rule-colored background (`bg-border` / `bg-light-border`) with solid-filled cells (`bg-bg` / `bg-light-bg`). Never floating shadowed cards.
+- No double hairlines: a band that sits on a section boundary draws only its TOP rule; the element below it (next section's `divide`, a grid's `border-t`) owns the separator. Never `border-y` on boundary bands.
+- Dark textured bands: `relative isolate overflow-hidden` wrapper + absolute `/textures/bg-texture.png` at `opacity-[0.14]` + `<Section className="bg-transparent">`.
+
+**Buttons & arrows**
+- Primary CTA = the shared `Button` (`btn-animated` accent fill, white text). On navy sections the accent fill is invisible; use a white-filled button (`bg-white text-bg hover:bg-white/90`) there instead.
+- CTAs are full-width and column-stacked on phones (`w-full sm:w-auto`), label centered.
+- Inline/text arrows are always the body-face pointer `&rarr;` with `.btn-arrow` / `.arrow-glyph`. Never `>` chevron glyphs, never display-face arrows.
+- Slider navigation arrows: `rounded-[6px]` bordered squares (never circles) with a solid section-background fill so sliding content cannot show through them. Arrows stay static; only the slides move.
+
+**Sliders**
+- Snap-scroll track: `flex snap-x snap-mandatory overflow-x-auto` with the scrollbar hidden (`[scrollbar-width:none] [&::-webkit-scrollbar]:hidden`), slides `shrink-0 snap-start`, arrows via `scrollBy({ left: clientWidth })`. Sliders loop (clone-based) rather than dead-ending.
+
+**Icons**
+- Inline Lucide SVG paths in a local `Record<string, ReactNode>` map per component. No icon packages. Icon chips are `h-11 w-11 rounded-[6px]` bordered squares on a surface fill.
+
+**Misc**
+- Meta titles use `|` as the separator ("Page | Qualifier | Zenith Digital").
+- Heading-to-paragraph spacing stays tight (`mt-3`/`mt-4`).
+- Testimonial names carry the scalloped verified tick; stats over media sit in a glass bar (`bg-bg/55 backdrop-blur-md`).
+- Every page's copy lives in its own `content/<page>.ts` file; components read only from content. Owner-pending values ship as visible `[bracketed]` placeholders.

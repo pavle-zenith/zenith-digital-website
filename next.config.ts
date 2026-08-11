@@ -9,14 +9,26 @@ const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
 
   // 301s preserving URL equity from the legacy Wix site (CLAUDE.md §8).
-  // The three service orphans point at /services until the dedicated
-  // /services/[slug] pages exist; /contact-us stays unmapped until a contact
-  // target ships.
+  // The three service orphans now land on their dedicated /services/[slug]
+  // pages; /contact-us stays unmapped until a contact target ships.
+  // /branding has no page of its own, so it goes to the nearest live target.
   async redirects() {
     return [
-      { source: "/webdesign", destination: "/services", permanent: true },
-      { source: "/marketing", destination: "/services", permanent: true },
-      { source: "/branding", destination: "/services", permanent: true },
+      {
+        source: "/webdesign",
+        destination: "/services/wix-studio-website-design",
+        permanent: true,
+      },
+      {
+        source: "/marketing",
+        destination: "/services/seo-aeo-ppc",
+        permanent: true,
+      },
+      {
+        source: "/branding",
+        destination: "/services/wix-studio-website-design",
+        permanent: true,
+      },
       {
         source: "/discovery-call",
         destination: "/book-a-call",

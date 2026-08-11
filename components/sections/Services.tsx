@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
@@ -40,10 +41,13 @@ export function Services() {
       {/* 6-col grid — 1px gaps on a rule-colored bg render as hairlines. */}
       <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-6">
         {services.items.map((item) => (
-          <article
+          // Each card links to its dedicated service page where one exists,
+          // and to the hub otherwise, so the grid feeds the internal link graph.
+          <Link
             key={item.title}
+            href={item.href}
             className={cn(
-              "flex flex-col bg-light-bg p-6 transition hover:bg-light-surface",
+              "group flex flex-col bg-light-bg p-6 transition hover:bg-light-surface",
               SPAN[item.span],
             )}
           >
@@ -72,11 +76,13 @@ export function Services() {
                 />
               </div>
             )}
-            <h3 className="font-display text-h3 font-medium">{item.title}</h3>
+            <h3 className="font-display text-h3 font-medium transition group-hover:text-accent">
+              {item.title}
+            </h3>
             <p className="mt-2 max-w-md text-body leading-snug text-light-muted">
               {item.description}
             </p>
-          </article>
+          </Link>
         ))}
       </div>
     </Section>

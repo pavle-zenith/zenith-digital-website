@@ -1,5 +1,22 @@
 import type { CtaLink } from "@/lib/types";
 
+import { testimonial } from "./testimonials-data";
+
+/**
+ * Partner-story quotes come from the testimonial source of truth. These used
+ * to be invented lines under "[Name]"; the owner's batch supplied the real
+ * words from the same people, so nothing here is written by us.
+ */
+function partnerQuote(id: string) {
+  const t = testimonial(id);
+  return {
+    text: t.quote,
+    name: t.name,
+    role: t.company ? `${t.role} @${t.company}` : t.role,
+    avatar: t.avatar,
+  };
+}
+
 /*
  * /partnerships — every string on the page lives here.
  *
@@ -399,12 +416,7 @@ export const pStories = {
       ],
       image: "/partners/techtonnik.webp",
       // OWNER: mock quote — replace with a real attributed one before launch.
-      quote: {
-        text: "Briefs go in, finished sites come out. Zenith made web delivery something we can promise our clients again.",
-        name: "[Name]",
-        role: "Founder @Techtonnik",
-        avatar: "/avatars/a1.webp",
-      },
+      quote: partnerQuote("stevan-radovanovic"),
       href: "/case-studies",
     },
     // AdVantage story hidden per owner request (2026-08-10) — uncomment to restore.
@@ -441,12 +453,7 @@ export const pStories = {
         { value: "€1M+", label: "client campaign revenue" },
       ],
       image: "/partners/mod-digital.webp",
-      quote: {
-        text: "Zenith redefined what hard work means to me. They treat every project with pride, enthusiasm, and extreme passion.",
-        name: "Flynn Blackie",
-        role: "Founder & Director @MOD Digital",
-        avatar: "/avatars/flynn-blackie.jpg",
-      },
+      quote: partnerQuote("flynn-blackie"),
       href: "/case-studies",
     },
     {
@@ -462,12 +469,7 @@ export const pStories = {
       ],
       image: "/partners/capacity.webp",
       // OWNER: attribute the quote (mock name/avatar until then).
-      quote: {
-        text: "Reliable, fast, and genuinely invested in the outcome.",
-        name: "[Name]",
-        role: "@Capacity",
-        avatar: "/avatars/a3.jpg",
-      },
+      quote: partnerQuote("ben-hall"),
       href: "/case-studies",
     },
     {
@@ -482,12 +484,7 @@ export const pStories = {
       stats: [{ value: "[n]", label: "client sites delivered" }],
       image: "/partners/lmf-hr.webp",
       // OWNER: mock quote — replace with a real attributed one before launch.
-      quote: {
-        text: "Our consulting clients get a web team without us hiring one. It just works, month after month.",
-        name: "[Name]",
-        role: "@LMF HR",
-        avatar: "/avatars/a2.jpg",
-      },
+      quote: partnerQuote("les-marie"),
     },
     {
       // OWNER: fill in the WellingtonWebCo relationship — every bracketed
@@ -499,13 +496,9 @@ export const pStories = {
       story: "[Partnership story to set]",
       stats: [{ value: "[n]", label: "[metric to set]" }],
       image: "/partners/wellington-web-co.webp",
-      // OWNER: mock quote — replace with a real attributed one before launch.
-      quote: {
-        text: "[Partner quote to set]",
-        name: "[Name]",
-        role: "@WellingtonWebCo",
-        avatar: "/avatars/a1.webp",
-      },
+      // Real quote from the owner's batch; the rest of this story's fields are
+      // still owner-pending placeholders.
+      quote: partnerQuote("finlay-wellington"),
     },
   ] as PartnerStory[],
 };

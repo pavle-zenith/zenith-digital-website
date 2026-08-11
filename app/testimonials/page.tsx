@@ -2,10 +2,16 @@ import type { Metadata } from "next";
 
 import { JsonLd } from "@/components/JsonLd";
 import { TestimonialsHero } from "@/components/sections/TestimonialsHero";
+import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
 import { WallOfLove } from "@/components/sections/WallOfLove";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
-import { tFaq, tFinalCta, wall } from "@/content/testimonials";
+import {
+  allTestimonials,
+  tFaq,
+  tFinalCta,
+  tVideos,
+} from "@/content/testimonials";
 
 export const metadata: Metadata = {
   title: "Testimonials | Zenith Digital client reviews & results",
@@ -30,26 +36,22 @@ const breadcrumbSchema = {
   ],
 };
 
-// Review markup for the real, attributed quotes only — placeholders and
-// video-only cards stay out. No AggregateRating until the live Clutch
-// profile supplies a real rating value and count.
+// Review markup for every quote actually shown on this page: the 28 in the
+// wall plus the 3 in the video slider, which is all of them. No
+// AggregateRating until the live Clutch profile supplies a real rating value
+// and count.
 const reviewSchema = {
   "@context": "https://schema.org",
-  "@graph": wall
-    .filter(
-      (c): c is Extract<typeof wall[number], { type: "quote" }> =>
-        c.type === "quote" && !c.placeholder,
-    )
-    .map((c) => ({
-      "@type": "Review",
-      author: { "@type": "Person", name: c.name },
-      reviewBody: c.quote,
-      itemReviewed: {
-        "@type": "Organization",
-        name: "Zenith Digital",
-        url: SITE,
-      },
-    })),
+  "@graph": allTestimonials.map((t) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: t.name },
+    reviewBody: t.quote,
+    itemReviewed: {
+      "@type": "Organization",
+      name: "Zenith Digital",
+      url: SITE,
+    },
+  })),
 };
 
 const faqSchema = {
@@ -70,6 +72,7 @@ export default function TestimonialsPage() {
       <JsonLd data={faqSchema} />
 
       <TestimonialsHero />
+      <VideoTestimonials data={tVideos} slider />
       <WallOfLove />
       <Faq data={tFaq} />
       <CtaBanner data={tFinalCta} />

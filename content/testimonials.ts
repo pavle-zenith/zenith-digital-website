@@ -1,68 +1,81 @@
-import type { CtaLink } from "@/lib/types";
+import type { CtaLink, Metric } from "@/lib/types";
+
+import {
+  allTestimonials,
+  attribution,
+  testimonial,
+  type Testimonial,
+} from "./testimonials-data";
 
 /*
- * /testimonials — single source of truth for testimonial data. The homepage
- * video section imports `videoTestimonials` from here (re-exported through
- * content/home.ts), and the wall's video cards derive from the same items.
+ * /testimonials — page copy plus the derived views of the testimonial batch.
+ * The quotes themselves live in content/testimonials-data.ts and are never
+ * retyped here: the wall, the homepage video section, and the homepage tabs
+ * are all projections of that one list, so a client's words can't drift.
  *
  * OWNER — still to set (visible [bracketed] placeholders until then):
- *   - Clutch profile URL (hero chip, FAQ CTA, rating cards) — currently
- *     https://clutch.co until the live profile link is confirmed
- *   - the two Clutch rating-card lines (pull from real reviews only)
- *   - Jim Steele's real quote (marked placeholder card, never a duplicate)
- *   - Jack Shorrock's exact quote from the live site
- *   - Ben Hall's quote is paraphrased — swap in his real words
+ *   - Clutch profile URL (FAQ CTA) — currently https://clutch.co
+ *   - real headshots for the 4 people still on the placeholder avatar
  */
 
-// Video testimonials — used by the homepage section AND the wall's video cards.
+export {
+  allTestimonials,
+  attribution,
+  testimonial,
+  quoteOf,
+  PLACEHOLDER_AVATAR,
+} from "./testimonials-data";
+export type { Testimonial } from "./testimonials-data";
+
+// Video testimonials — the three clients who recorded one. Used by the
+// homepage video section and by the wall's video cards.
+const videoIds = ["uros-stanimirovic", "john-smyth", "flynn-blackie"];
+
 export const videoTestimonials = {
   heading: "Hear directly from business owners that gave us their trust",
   intro:
     "We don't ask for testimonials until the work is done and the results are in. These are real clients who came to us with a site that wasn't even pulling its weight, and left with one that does.",
-  items: [
-    {
-      quote:
-        "Zenith redefined what hard work means to me. They treat every website project with pride, enthusiasm and extreme passion.",
-      name: "Flynn Blackie",
-      role: "Founder & Director",
-      company: "MOD Digital",
-      logo: "/logos-white/mod.png",
-      poster: "/testimonials/flynn.jpg",
-      video: "", // Flynn is an image for now
-    },
-    {
-      quote:
-        "We hired Zenith to help us rebrand our site. Conversion skyrocketed. We saw what it takes to be one of the top professionals in the field.",
-      name: "Uros Stanimirovic",
-      role: "Co-Founder & CTO",
-      company: "Genroks AI",
-      logo: "/logos-white/genroks.png",
-      poster: "",
-      video: "/testimonials/uros.mov",
-    },
-    {
-      quote:
-        "Even though I didn't have a crystal-clear vision of how a white-label partnership looked, Zenith was able to overdeliver on every front imaginable.",
-      name: "John Smyth",
-      role: "CEO",
-      company: "AdVantage Media Marketing",
-      logo: "/logos-white/advantage.png",
-      poster: "",
-      video: "/testimonials/john.mov",
-    },
-  ],
+  items: videoIds.map((id) => {
+    const t = testimonial(id);
+    return {
+      quote: t.quote,
+      name: t.name,
+      role: t.role,
+      company: t.company,
+      logo: t.logo ?? "",
+      poster: t.poster ?? "",
+      video: t.video ?? "",
+    };
+  }),
 };
 
-// 1. Hero (dark, compact — no CTAs, the wall is the point)
+// 1. Hero (light, on the inverted texture — no CTAs, the wall is the point)
 export const tHero = {
   heading: "What clients say after launch",
   support:
     "No cherry-picked praise and no anonymous quotes. Real names, real companies, real outcomes.",
-  chips: ["Rated 5/5 on Clutch", "150+ websites shipped"],
+  // The review count is derived, so it can't fall out of date when the batch
+  // grows. Every other figure already appears elsewhere on the site.
+  stats: [
+    { value: `${allTestimonials.length}`, label: "Client reviews" },
+    { value: "5/5", label: "Rated on Clutch" },
+    { value: "150+", label: "Websites shipped" },
+    { value: "€1M+", label: "Client revenue generated" },
+  ] as Metric[],
 };
 
-// 2. Wall of love — five card types, hand-ordered so no two adjacent cards
-// share a type and videos/site-shots stay distributed.
+// 2. Video testimonials on /testimonials — same three clips as the homepage,
+// its own framing. Rendered as a slider between the hero and the wall.
+export const tVideos = {
+  heading: "Some of them said it on camera",
+  intro:
+    "Three clients recorded a video instead of typing a line. Same words, harder to fake.",
+  items: videoTestimonials.items,
+};
+
+// 3. Wall of love — five card types are supported; the wall currently emits
+// video and quote cards only. Rating, pull-quote, and site-shot cards stay in
+// the union so the parked variants can be restored without a refactor.
 export type WallCard =
   | {
       type: "video";
@@ -87,109 +100,35 @@ export type WallCard =
   | { type: "pull"; line: string; attribution: string }
   | { type: "site"; client: string; image: string; href: string };
 
-const vt = videoTestimonials.items;
-const video = (i: number) => ({
-  type: "video" as const,
-  name: vt[i].name,
-  role: vt[i].role,
-  company: vt[i].company,
-  logo: vt[i].logo,
-  poster: vt[i].poster,
-  video: vt[i].video,
+/** Outcome tags on the few clients with a published number attached. */
+const TAGS: Record<string, { label: string; href: string }> = {
+  "gemma-sole": { label: "$10M raised", href: "/case-studies/knode-ai" },
+  "ivan-belobrajdic": { label: "257% YoY impressions", href: "/case-studies" },
+  "flynn-blackie": { label: "€1M+ campaign revenue", href: "/case-studies" },
+  "les-marie": { label: "12+ sites delivered", href: "/case-studies" },
+  "stevan-radovanovic": { label: "10+ projects", href: "/case-studies" },
+};
+
+const asQuote = (t: Testimonial): WallCard => ({
+  type: "quote",
+  name: t.name,
+  role: t.role,
+  company: t.company,
+  avatar: t.avatar,
+  quote: t.quote,
+  ...(TAGS[t.id] ? { tag: TAGS[t.id] } : {}),
 });
 
-export const wall: WallCard[] = [
-  video(1), // Uros — Genroks
-  {
-    type: "quote",
-    name: "Gemma K. Sole",
-    role: "Head of GTM",
-    company: "Knode AI",
-    avatar: "/avatars/gemma-sole.jpg",
-    quote:
-      "They made an impression on me right from the beginning, it's incredibly easy to communicate with their team and even easier to work with them.",
-    tag: { label: "$10M raised", href: "/case-studies" },
-  },
-  {
-    type: "site",
-    client: "Scottish Luxury Experience",
-    image: "/casestudies/scottishluxury.jpg",
-    href: "/case-studies",
-  },
-  // OWNER: pull this line from a real Clutch review; never invent one.
-  { type: "rating", line: "[Line from a real Clutch review to pull]" },
-  {
-    type: "quote",
-    name: "Ivan Belobrajdic",
-    role: "Chief Director",
-    company: "Bel'Istria",
-    avatar: "/avatars/ivan-belobrajdic.jpg",
-    quote:
-      "Our collaboration on redesigning Bel'Istria was the beginning of a long-term partnership. Their composure and communication exceeded all standards.",
-    tag: { label: "257% YoY impressions", href: "/case-studies" },
-  },
-  video(2), // John — AdVantage
-  {
-    type: "pull",
-    line: "Zenith redefined what hard work means to me.",
-    attribution: "Flynn Blackie, Founder & Director, MOD Digital",
-  },
-  {
-    type: "site",
-    client: "Knode AI",
-    image: "/casestudies/knode.jpg",
-    href: "/case-studies",
-  },
-  {
-    // OWNER: quote is paraphrased — swap in Ben's real words.
-    type: "quote",
-    name: "Ben Hall",
-    role: "",
-    company: "Capacity",
-    avatar: "/avatars/ben-hall.jpg",
-    quote:
-      "Zenith runs our design and development operations end to end. Reliable, fast, and genuinely invested in the outcome.",
-  },
-  // OWNER: pull this line from a real Clutch review; never invent one.
-  { type: "rating", line: "[Line from a real Clutch review to pull]" },
-  {
-    type: "site",
-    client: "Bel'Istria",
-    image: "/casestudies/belistria.jpg",
-    href: "/case-studies",
-  },
-  {
-    // Marked placeholder — never ship Gemma's quote under Jim's name.
-    type: "quote",
-    name: "Jim Steele",
-    role: "Director",
-    company: "HPLabs UK",
-    avatar: "/avatars/jim-steele.jpg",
-    quote:
-      "Jim's quote is on its way. We only publish clients' real words, so this card stays empty until we have his.",
-    placeholder: true,
-  },
-  video(0), // Flynn — MOD (poster only for now)
-  {
-    // Marked placeholder — exact quote to port from the live Wix site.
-    type: "quote",
-    name: "Jack Shorrock",
-    role: "",
-    company: "Just Stay UK",
-    avatar: "",
-    quote:
-      "Jack's quote from the live site is on its way. Real words only, so this card waits for the exact text.",
-    placeholder: true,
-  },
-  {
-    type: "site",
-    client: "Hunting Brook Gardens",
-    image: "/casestudies/huntingbrook.jpg",
-    href: "/case-studies",
-  },
-];
+/**
+ * The wall: one quote card per client who didn't record a video. The three
+ * video clients appear in the slider above instead, so nobody is shown twice
+ * and no quote is printed twice on the same page.
+ */
+export const wall: WallCard[] = allTestimonials
+  .filter((t) => !videoIds.includes(t.id))
+  .map(asQuote);
 
-// 3. FAQ — small, page-specific; emits FAQPage JSON-LD on /testimonials.
+// 4. FAQ — small, page-specific; emits FAQPage JSON-LD on /testimonials.
 export const tFaq = {
   heading: ["About these", "testimonials"],
   subhead: "How we collect them, and how you can check.",
@@ -205,7 +144,7 @@ export const tFaq = {
   items: [
     {
       q: "Are these real?",
-      a: "Every quote is from a named client on a real project. Most are on Clutch or on video, both harder to fake than a website quote.",
+      a: `Every one of the ${allTestimonials.length} quotes on this page is from a named client on a real project, published with their name, role, and company. Several are on video, and several are on Clutch, both harder to fake than a line of text on a website.`,
     },
     {
       q: "Can I talk to a past client?",
@@ -222,7 +161,7 @@ export const tFaq = {
   ],
 };
 
-// 4. Final CTA band
+// 5. Final CTA band
 export const tFinalCta = {
   heading: ["The next quote up there", "could be yours"],
   paragraph:

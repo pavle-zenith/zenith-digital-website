@@ -1,5 +1,7 @@
 import type { CtaLink, Metric } from "@/lib/types";
 
+import { quoteOf } from "./testimonials-data";
+
 /**
  * /case-studies — single source of truth for all case-study data. The homepage
  * featured two-panel cards and the before/after slider sets import from here
@@ -388,13 +390,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       before: "/before-after/knode-before.jpg",
       after: "/before-after/knode-after.jpg",
     },
-    testimonial: {
-      quote:
-        "They made an impression on me right from the beginning, it's incredibly easy to communicate with their team and even easier to work with them.",
-      name: "Gemma K. Sole",
-      role: "Head of GTM, Knode AI",
-      avatar: "/avatars/gemma-sole.jpg",
-    },
+    testimonial: quoteOf("gemma-sole"),
     // Scope column beside the introduction.
     // TODO(owner): confirm the full list (copywriting? integrations?).
     techUsed: [
@@ -500,32 +496,22 @@ export const csBeforeAfter = {
 // 7. Testimonial band — outcome-led picks tied to projects visible above.
 export const csQuotes = {
   heading: "What clients said after we launched their website",
+  // Quotes come from the testimonial source of truth; only the tone-matched
+  // logo is set per band.
   items: [
     {
-      quote:
-        "Zenith redefined what hard work means to me. They treat every website project with pride, enthusiasm, and extreme passion, and it shows in the results.",
-      name: "Flynn Blackie",
-      role: "Founder & Director, MOD Digital",
-      avatar: "/avatars/flynn-blackie.jpg",
+      ...quoteOf("flynn-blackie"),
       logo: "/logos-white/mod.png",
       logoAlt: "MOD Digital",
       logoClass: "h-5",
     },
     {
-      quote:
-        "We hired Zenith to help us rebrand our site. Conversion skyrocketed. We saw what it takes to be one of the top professionals in the field.",
-      name: "Uros Stanimirovic",
-      role: "Co-Founder & CTO, Genroks AI",
-      avatar: "/avatars/uros-stanimirovic.jpg",
+      ...quoteOf("uros-stanimirovic"),
       logo: "/logos-white/genroks.png",
       logoAlt: "Genroks AI",
     },
     {
-      quote:
-        "Our collaboration on redesigning Bel'Istria was the beginning of a long-term partnership. Their composure and communication exceeded all standards.",
-      name: "Ivan Belobrajdic",
-      role: "Chief Director, Bel'Istria",
-      avatar: "/avatars/ivan-belobrajdic.jpg",
+      ...quoteOf("ivan-belobrajdic"),
       logo: "/logos-white/belistria.png",
       logoAlt: "Bel'Istria",
     },

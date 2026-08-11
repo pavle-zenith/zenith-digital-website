@@ -62,9 +62,11 @@ function GridInner({
   return (
     <Section tone="light" frameClassName="!py-12 md:!py-20">
       {/* Filter pills — a horizontal scroll rail on phones (nine stacked rows
-          is too much), wrapping normally from md up. The rail bleeds to the
-          frame rails so pills can scroll past the gutter. */}
-      <div className="frame-bleed mb-10 flex snap-x gap-2 overflow-x-auto px-[clamp(20px,4vw,64px)] pb-1 [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden">
+          is too much), wrapping normally from md up. The phone bleed uses
+          max-md utilities rather than .frame-bleed: that class is unlayered
+          CSS, so a md:mx-0 utility can never outrank it and the rail would go
+          on ignoring the section gutter on desktop. */}
+      <div className="mb-10 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] max-md:mx-[calc(-1*clamp(20px,4vw,64px))] max-md:px-[clamp(20px,4vw,64px)] md:flex-wrap md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
         <FilterPill active={industry === null} onClick={() => onSelect?.(null)}>
           All
         </FilterPill>
@@ -184,9 +186,10 @@ function FilterPill({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        // shrink-0 + snap-start so the rail scrolls cleanly on phones
-        // instead of squeezing every pill onto one line.
-        "shrink-0 snap-start whitespace-nowrap rounded-full border px-4 py-2 text-body font-medium transition",
+        // shrink-0 so the rail scrolls on phones instead of squeezing every
+        // pill onto one line. No scroll snapping: snap-start would align the
+        // first pill to the scrollport edge and swallow the rail's gutter.
+        "shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-body font-medium transition",
         active
           ? "border-accent bg-accent text-accent-ink"
           : "border-light-border text-light-text hover:bg-light-surface",

@@ -45,7 +45,7 @@ const videoIds = [
 // The homepage picks its own three rather than taking the first three above,
 // so reordering the /testimonials slider can't quietly change the homepage.
 const homepageVideoIds = [
-  "uros-stanimirovic",
+  "jack-shorrock",
   "john-smyth",
   "flynn-blackie",
 ];

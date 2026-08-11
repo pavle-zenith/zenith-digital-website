@@ -64,7 +64,7 @@ export function ServicePageProof({ data }: { data: ServicePageContent }) {
                         alt={`${c.client} website`}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover object-top transition duration-500 group-hover:scale-[1.02]"
+                        className="object-cover object-center transition duration-500 group-hover:scale-[1.02]"
                       />
                     ) : c.logo ? (
                       <div className="flex h-full w-full items-center justify-center">

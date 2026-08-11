@@ -36,7 +36,12 @@ export type CaseStudyCard = {
   /** Owner still to supply the real metric — rendered as a visible placeholder. */
   metricPending?: boolean;
   story: string;
-  /** Screenshot thumb; omit to render the styled wordmark placeholder. */
+  /**
+   * Screenshot thumb from /portfolio-slider (4:3 browser mockup on the client's
+   * own backdrop). Card media crops these centred, not from the top: the
+   * composition is already framed, so a top anchor would leave a fat top margin
+   * and clip the window's bottom edge. Omit to render the wordmark placeholder.
+   */
   thumb?: string;
   /** White wordmark used by the placeholder card (and available for overlays). */
   logo?: string;
@@ -52,7 +57,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "saas",
     metric: "$10M Series A raised",
     story: "Full SaaS site and landing page from scratch in 3 weeks",
-    thumb: "/portfolio/knode.jpg",
+    thumb: "/portfolio-slider/knode-ai.jpg",
     logo: "/logos-white/knode.png",
     liveUrl: "https://knode.ai",
   },
@@ -62,7 +67,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "travel",
     metric: "€500k pipeline value",
     story: "The UK's best-looking travel website, live in 4 weeks",
-    thumb: "/portfolio/scottishluxury.jpg",
+    thumb: "/portfolio-slider/scottishluxuryexperience.jpg",
     liveUrl: "https://thescottishluxuryexperience.com",
   },
   {
@@ -71,7 +76,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "travel",
     metric: "257% YoY impressions",
     story: "Croatia transfer and travel booking experience, 35+ pages migrated",
-    thumb: "/portfolio/belistria.jpg",
+    thumb: "/portfolio-slider/belistria.jpg",
     logo: "/logos-white/belistria.png",
     liveUrl: "https://belistria.eu",
   },
@@ -82,7 +87,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "30+ warm leads",
     story:
       "Booking and lead-capture ecosystem for Florida's premier dock charter",
-    thumb: "/portfolio/fortlauderdale.jpg",
+    thumb: "/portfolio-slider/fort-lauderdale-dock-rental.jpg",
     logo: "/logos-white/foxstays.png",
     liveUrl: "https://fortlauderdaledockrental.com",
   },
@@ -102,7 +107,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "€200k+ course earnings",
     story:
       "Landing pages and course infrastructure for an award-winning gardener",
-    thumb: "/casestudies/huntingbrook.jpg",
+    thumb: "/portfolio-slider/hunting-brook.jpg",
     liveUrl: "https://unlimited.huntingbrookgardens.com",
   },
   {
@@ -159,7 +164,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "Metric coming soon",
     metricPending: true, // TODO(owner): supply the real metric
     story: "Education platform redesign for a kids learning app",
-    thumb: "/casestudies/minded.jpg",
+    thumb: "/portfolio-slider/mindeed.jpg",
     // TODO(owner): confirm live URL
   },
 ];

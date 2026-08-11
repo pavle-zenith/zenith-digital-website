@@ -39,7 +39,8 @@ export function CaseStudyDetailHero({ study }: { study: CaseStudyDetail }) {
         />
       </div>
 
-      <div className="relative flex flex-col items-center text-center">
+      {/* Left-aligned on phones, centered from md up. */}
+      <div className="relative flex flex-col items-start text-left md:items-center md:text-center">
         <nav
           aria-label="Breadcrumb"
           className="font-mono text-label uppercase track-label text-light-muted"
@@ -56,7 +57,7 @@ export function CaseStudyDetailHero({ study }: { study: CaseStudyDetail }) {
           <span className="text-light-text">{study.client}</span>
         </nav>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4 md:mt-12">
+        <div className="mt-10 flex flex-wrap items-center gap-4 md:mt-12 md:justify-center">
           {study.logoDark ? (
             <Image
               src={study.logoDark}

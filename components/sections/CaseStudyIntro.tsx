@@ -29,17 +29,19 @@ export function CaseStudyIntro({ study }: { study: CaseStudyDetail }) {
                 {study.introduction}
               </p>
             ) : null}
+            {/* Phones get the same hairline-divided column as the meta strip;
+                sm and up it becomes the inline stat row. */}
             {stats.length > 0 ? (
-              <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-8 sm:flex sm:flex-wrap sm:gap-0 sm:divide-x sm:divide-light-border md:mt-12">
+              <div className="mt-10 flex flex-col divide-y divide-light-border sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 md:mt-12">
                 {stats.map((s) => (
                   <div
                     key={s.label}
-                    className="sm:px-10 sm:first:pl-0 sm:last:pr-0"
+                    className="flex items-baseline justify-between gap-6 py-3 first:pt-0 sm:block sm:py-0 sm:px-10 sm:first:pl-0 sm:last:pr-0"
                   >
                     <div className="font-display text-h3 font-medium leading-none">
                       {s.value}
                     </div>
-                    <div className="mt-2 max-w-[20ch] text-body leading-snug text-light-muted">
+                    <div className="max-w-[20ch] text-right text-body leading-snug text-light-muted sm:mt-2 sm:text-left">
                       {s.label}
                     </div>
                   </div>

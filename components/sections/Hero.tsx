@@ -97,8 +97,12 @@ export function Hero() {
       <LogoMarquee logos={logos.items} caption={logos.caption} />
 
       {/* 2x2 highlighted case studies — flows out of the hero. The 1px grid gaps on a
-          rule-colored background render as hairlines that touch the frame rails. */}
-      <div className="frame-bleed-md grid grid-cols-1 gap-px bg-light-border max-md:my-6 max-md:overflow-hidden max-md:rounded-card max-md:border max-md:border-light-border sm:grid-cols-2 md:border-t md:border-light-border">
+          rule-colored background render as hairlines that touch the frame rails.
+          The phone spacing is PADDING on this wrapper, not a margin on the grid:
+          the section runs at !py-0, so a margin here collapses straight out of
+          the section and shows a navy strip of <body> between sections. */}
+      <div className="max-md:py-6">
+      <div className="frame-bleed-md grid grid-cols-1 gap-px bg-light-border max-md:overflow-hidden max-md:rounded-card max-md:border max-md:border-light-border sm:grid-cols-2 md:border-t md:border-light-border">
         {hero.featured.map((c) => (
           <Link
             key={c.client}
@@ -125,6 +129,7 @@ export function Hero() {
             </span>
           </Link>
         ))}
+      </div>
       </div>
     </Section>
   );

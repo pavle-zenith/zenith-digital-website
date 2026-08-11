@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
@@ -65,9 +64,12 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
             </div>
           )}
 
-          {/* Right cell: testimonial + tabs */}
+          {/* Right cell: testimonial + tabs. min-w-0 is load-bearing: the tab
+              rail's fixed-width tabs would otherwise set this grid item's
+              automatic minimum size to the full rail width and blow the page
+              out horizontally on phones. */}
           <div
-            className="flex flex-col"
+            className="flex min-w-0 flex-col"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
@@ -108,9 +110,11 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
               </figcaption>
             </div>
 
-            {/* Logo tabs with fill bars — bleed to the rail (logos are centered
-                per cell), like the pricing CTA cells. */}
-            <div className="grid grid-cols-5 border-t border-light-border">
+            {/* Logo tabs with fill bars. Phones scroll them as a rail with a
+                fixed tab width: five in a grid leaves ~60px a logo, which
+                squeezes each mark to a different size and reads as jumping.
+                From sm up they go back to the even five-column row. */}
+            <div className="flex snap-x snap-mandatory overflow-x-auto border-t border-light-border [scrollbar-width:none] sm:grid sm:grid-cols-5 sm:overflow-visible [&::-webkit-scrollbar]:hidden">
               {testimonials.items.map((item, i) => (
                 <button
                   key={item.name}
@@ -118,7 +122,7 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
                   onClick={() => setActive(i)}
                   aria-pressed={i === active}
                   className={cn(
-                    "relative flex min-w-0 items-center justify-center border-l border-light-border px-2 py-5 transition first:border-l-0 sm:py-6",
+                    "relative flex w-32 shrink-0 snap-start items-center justify-center border-l border-light-border px-2 py-5 transition first:border-l-0 sm:w-auto sm:min-w-0 sm:py-6",
                     i === active
                       ? "bg-light-surface"
                       : "bg-light-bg hover:bg-light-surface/60",
@@ -165,9 +169,10 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
         </div>
 
         {/* Clutch rating bar — full-width row, edge-to-edge top rule; content
-            inset to the frame gutter on both sides. */}
-        <div className="flex flex-col gap-3 border-t border-light-border px-[clamp(20px,4vw,64px)] py-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="flex items-center gap-2 text-body text-light-text">
+            inset to the frame gutter on both sides. Display only: the rating
+            speaks for itself and the nav already routes to /testimonials. */}
+        <div className="flex border-t border-light-border px-[clamp(20px,4vw,64px)] py-6">
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-body text-light-text">
             Rated{" "}
             <span className="font-display font-medium">
               {testimonials.rating.score}
@@ -178,15 +183,6 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
             </span>
             <Stars />
           </p>
-          <Link
-            href={testimonials.rating.href}
-            className="group inline-flex items-center gap-2 font-display font-medium transition hover:text-accent"
-          >
-            {testimonials.rating.cta}{" "}
-            <span aria-hidden className="btn-arrow">
-              &rarr;
-            </span>
-          </Link>
         </div>
       </div>
     </Section>

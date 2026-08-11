@@ -75,17 +75,19 @@ export function CtaBanner({ data }: { data: BannerData }) {
                 </ul>
               ) : null}
             </div>
-            <div className="flex shrink-0 flex-wrap gap-3 self-start md:self-end">
+            {/* Phones: both buttons full width and stacked, matching the
+                shared Button. Auto width side by side from sm up. */}
+            <div className="flex w-full shrink-0 flex-col gap-3 self-start sm:w-auto sm:flex-row sm:flex-wrap md:self-end">
               <Link
                 href={data.cta.href}
-                className="inline-flex items-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90 sm:w-auto"
               >
                 {data.cta.label} <span aria-hidden>&rsaquo;</span>
               </Link>
               {data.ctaSecondary ? (
                 <Link
                   href={data.ctaSecondary.href}
-                  className="inline-flex items-center gap-2 rounded-[6px] border border-white/30 px-6 py-3 text-body font-medium text-white transition hover:bg-white/10"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-[6px] border border-white/30 px-6 py-3 text-body font-medium text-white transition hover:bg-white/10 sm:w-auto"
                 >
                   {data.ctaSecondary.label} <span aria-hidden>&rsaquo;</span>
                 </Link>

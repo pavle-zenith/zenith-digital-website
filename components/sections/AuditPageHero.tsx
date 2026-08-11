@@ -65,7 +65,9 @@ export function AuditPageHero() {
             <p className="mt-10 font-display text-body font-medium">
               {auditHero.clientsLabel}
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-x-10 gap-y-4">
+            {/* Phones get smaller marks on an even, tighter rhythm — at the
+                content heights the row wrapped into a ragged two-line block. */}
+            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-5 sm:gap-x-10 sm:gap-y-4">
               {auditHero.clients.map((logo) => (
                 <Image
                   key={logo.src}
@@ -73,7 +75,7 @@ export function AuditPageHero() {
                   alt={logo.alt}
                   width={180}
                   height={40}
-                  className={`${logo.className} w-auto object-contain opacity-90`}
+                  className={`${logo.className} w-auto object-contain opacity-90 max-sm:h-4`}
                 />
               ))}
             </div>

@@ -72,7 +72,7 @@ function CategoryBlock({
       id={category.id}
       className="scroll-mt-24 py-10 first:pt-0 last:pb-0 md:py-12"
     >
-      <h2 className="font-display text-h3 font-medium leading-tight tracking-tight md:text-[1.75rem]">
+      <h2 className="text-center font-display text-h3 font-medium leading-tight tracking-tight md:text-left md:text-[1.75rem]">
         {category.label}
       </h2>
 

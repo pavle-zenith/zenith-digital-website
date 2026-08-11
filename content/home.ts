@@ -700,11 +700,10 @@ export const testimonials = {
     { value: "5.96x", label: "Average ROAS" },
     { value: "€1M+", label: "Client revenue generated" },
   ],
+  // Display-only rating row (no CTA — the nav already routes to /testimonials).
   rating: {
     platform: "Clutch",
     score: "5/5",
-    href: "/testimonials",
-    cta: "See all clients",
   },
   items: [
     {

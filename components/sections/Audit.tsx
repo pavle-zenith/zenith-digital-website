@@ -101,9 +101,12 @@ export function Audit() {
           <div className="min-h-12 flex-1" aria-hidden />
 
           {/* Site-URL input + CTA */}
+          {/* On phones the field carries its own border and surface fill so it
+              reads as an input before it's focused; from sm up the two sit in
+              one bordered bar and the field goes borderless again. */}
           <form
             onSubmit={submit}
-            className="flex flex-col gap-3 rounded-[8px] border border-light-border p-3 sm:flex-row sm:items-center"
+            className="flex flex-col gap-3 sm:flex-row sm:items-center sm:rounded-[8px] sm:border sm:border-light-border sm:p-3"
           >
             <input
               type="text"
@@ -112,7 +115,7 @@ export function Audit() {
               onChange={(e) => setUrl(e.target.value)}
               placeholder={audit.inputPlaceholder}
               aria-label="Your website URL"
-              className="min-w-0 flex-1 bg-transparent px-4 py-2.5 text-body text-light-text outline-none placeholder:text-light-muted"
+              className="min-w-0 flex-1 rounded-[6px] border border-light-border bg-light-surface px-4 py-3 text-body text-light-text outline-none placeholder:text-light-muted sm:rounded-none sm:border-0 sm:bg-transparent sm:py-2.5"
             />
             <button
               type="submit"
@@ -127,7 +130,7 @@ export function Audit() {
         </div>
 
         {/* Right column: mock audit-report card */}
-        <div className="flex items-center justify-center rounded-[8px] bg-light-surface p-8 lg:p-12">
+        <div className="flex items-center justify-center rounded-[8px] bg-light-surface p-5 sm:p-8 lg:p-12">
           <AuditReport report={audit.report} />
         </div>
       </div>

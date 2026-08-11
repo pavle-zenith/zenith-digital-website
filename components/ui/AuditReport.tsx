@@ -22,8 +22,9 @@ const SEVERITY: Record<string, string> = {
 export function AuditReport({ report }: { report: Report }) {
   return (
     <div className="w-full max-w-md">
-      {/* Score card */}
-      <div className="flex items-center justify-between rounded-[8px] border border-light-border bg-light-bg p-6">
+      {/* Score card — the head stacks on phones: side by side there isn't room
+          for the score block and the issues pill, and both wrap mid-phrase. */}
+      <div className="flex flex-col items-start gap-4 rounded-[8px] border border-light-border bg-light-bg p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
         <div>
           <p className="font-mono text-label uppercase track-label text-light-muted">
             {report.label}
@@ -34,7 +35,7 @@ export function AuditReport({ report }: { report: Report }) {
           </p>
           <p className="mt-2 text-body text-light-muted">{report.scoreLabel}</p>
         </div>
-        <span className="inline-flex items-center rounded-full bg-[#E5484D]/10 px-3 py-1 font-mono text-label uppercase track-label text-[#E5484D]">
+        <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded-full bg-[#E5484D]/10 px-3 py-1 font-mono text-label uppercase track-label text-[#E5484D]">
           {report.delta}
         </span>
       </div>

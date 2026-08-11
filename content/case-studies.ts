@@ -279,8 +279,12 @@ export type CaseStudyResultMetric = Metric & {
 export type CaseStudyDetail = CaseStudyCard & {
   /** Outcome-led H1 — the raise, never "[Client] website design". */
   headline: string;
-  /** 2–3 oversized stat blocks under the H1. */
-  heroMetrics: Metric[];
+  /** Dark-ink wordmark (/logos-dark) — the hero is a light section, so the
+   *  card's white `logo` would be invisible there. */
+  logoDark?: string;
+  /** The project's headline numbers, 2–3 of them, shown under the
+   *  introduction paragraph. */
+  stats: Metric[];
   /** Hero metadata card. Omit liveUrl to drop that row. */
   meta: {
     industry: string;
@@ -291,6 +295,11 @@ export type CaseStudyDetail = CaseStudyCard & {
   };
   /** "The challenge" paragraphs, written from the client's world. */
   challenge: string[];
+  /** Full-bleed project screenshot band under the meta strip. */
+  heroShot?: CaseStudyGalleryImage;
+  /** Lead paragraph under the shot: what the client does, in plain terms.
+   *  Pairs with `techUsed` as the scope column beside it. */
+  introduction?: string;
   /** 2–4 titled moves, not an essay. */
   approach: { heading: string; body: string }[];
   results: CaseStudyResultMetric[];
@@ -321,7 +330,8 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     // OWNER: narrative assembled from existing site copy and real screenshots
     // (no invented metrics) — confirm the story beats before more studies ship.
     headline: "From zero to a $10M Series A raise in three weeks",
-    heroMetrics: [
+    logoDark: "/logos-dark/knode.png",
+    stats: [
       { value: "$10M", label: "Series A raised" },
       { value: "3 weeks", label: "Kickoff to launch" },
       { value: "10", label: "Pages designed and built" },
@@ -337,6 +347,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "Knode had a working AI product, a sharp team, and a website that still spoke for the company they were a year ago. Investor conversations were starting, and every one of them began with someone typing knode.ai into a browser.",
       "The brief was direct: look like the company Knode was becoming, not the one they used to be. And do it on a startup timeline, because the fundraise wasn't going to wait for a two-month design phase.",
     ],
+    heroShot: {
+      src: "/portfolio-slider/knode-ai.jpg",
+      alt: "Knode AI homepage: uncover and replicate your sales team's winning formula, with call recordings feeding a coaching plan",
+    },
+    introduction:
+      "Knode is sales coaching software. It reads recorded calls, pinpoints the behaviors that close deals, and turns them into coaching plans a manager can hold a team to. When we met, the product was working and the Series A was in motion. The website was the part that hadn't caught up.",
     approach: [
       {
         heading: "Positioning before pixels",
@@ -379,8 +395,15 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       role: "Head of GTM, Knode AI",
       avatar: "/avatars/gemma-sole.jpg",
     },
-    // TODO(owner): confirm the full scope list (copywriting? integrations?).
-    techUsed: ["Wix Studio", "CMS", "SEO & schema"],
+    // Scope column beside the introduction.
+    // TODO(owner): confirm the full list (copywriting? integrations?).
+    techUsed: [
+      "Positioning & messaging",
+      "Web & UI design",
+      "Wix Studio build",
+      "CMS setup",
+      "SEO & schema",
+    ],
     publishedAt: "2026-08-11",
     seo: {
       title: "Knode AI case study | From zero to a $10M raise | Zenith Digital",

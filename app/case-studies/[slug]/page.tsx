@@ -3,13 +3,13 @@ import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/JsonLd";
 import { CaseStudyDetailHero } from "@/components/sections/CaseStudyDetailHero";
-import { CaseStudyLeadQuote } from "@/components/sections/CaseStudyLeadQuote";
-import { CaseStudyChallenge } from "@/components/sections/CaseStudyChallenge";
-import { CaseStudyApproach } from "@/components/sections/CaseStudyApproach";
-import { CaseStudyResults } from "@/components/sections/CaseStudyResults";
-import { CaseStudyGallery } from "@/components/sections/CaseStudyGallery";
-import { CaseStudyScope } from "@/components/sections/CaseStudyScope";
-import { CaseStudyNext } from "@/components/sections/CaseStudyNext";
+import { CaseStudyMetaStrip } from "@/components/sections/CaseStudyMetaStrip";
+import { CaseStudyShot } from "@/components/sections/CaseStudyShot";
+import { CaseStudyIntro } from "@/components/sections/CaseStudyIntro";
+import { CaseStudyMedia } from "@/components/sections/CaseStudyMedia";
+import { CaseStudyStory } from "@/components/sections/CaseStudyStory";
+import { CaseStudyTestimonial } from "@/components/sections/CaseStudyTestimonial";
+import { CaseStudyRelated } from "@/components/sections/CaseStudyRelated";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import {
   caseStudyDetails,
@@ -50,12 +50,6 @@ export default async function CaseStudyPage({ params }: Props) {
   const study = getCaseStudyDetail(slug);
   if (!study) notFound();
 
-  const index = caseStudyDetails.findIndex((d) => d.slug === study.slug);
-  const next =
-    caseStudyDetails.length > 1
-      ? caseStudyDetails[(index + 1) % caseStudyDetails.length]
-      : null;
-
   const url = `${SITE}/case-studies/${study.slug}`;
   const image = study.gallery?.[0]?.src ?? study.thumb;
   const zenith = { "@type": "Organization", name: "Zenith Digital", url: SITE };
@@ -87,6 +81,8 @@ export default async function CaseStudyPage({ params }: Props) {
     ],
   };
 
+  // Review markup rides with the visible quote — it ships only when the
+  // testimonial section actually renders.
   const reviewSchema = study.testimonial
     ? {
         "@context": "https://schema.org",
@@ -104,16 +100,16 @@ export default async function CaseStudyPage({ params }: Props) {
       {reviewSchema ? <JsonLd data={reviewSchema} /> : null}
 
       <CaseStudyDetailHero study={study} />
+      <CaseStudyMetaStrip study={study} />
+      {study.heroShot ? <CaseStudyShot image={study.heroShot} /> : null}
+      <CaseStudyIntro study={study} />
+      <CaseStudyMedia study={study} />
+      <CaseStudyStory study={study} />
       {study.testimonial ? (
-        <CaseStudyLeadQuote testimonial={study.testimonial} />
+        <CaseStudyTestimonial testimonial={study.testimonial} />
       ) : null}
-      {study.challenge.length > 0 ? <CaseStudyChallenge study={study} /> : null}
-      {study.approach.length > 0 ? <CaseStudyApproach study={study} /> : null}
-      {study.results.length > 0 ? <CaseStudyResults study={study} /> : null}
-      <CaseStudyGallery study={study} />
-      {study.techUsed?.length ? <CaseStudyScope items={study.techUsed} /> : null}
-      <CaseStudyNext next={next} />
       <CtaBanner data={csDetailCta} />
+      <CaseStudyRelated currentSlug={study.slug} />
     </>
   );
 }

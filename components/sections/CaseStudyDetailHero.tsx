@@ -2,124 +2,97 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
-import { Pill } from "@/components/ui/Pill";
-import { INDUSTRIES, type CaseStudyDetail } from "@/content/case-studies";
+import type { CaseStudyDetail } from "@/content/case-studies";
 
 /**
- * Detail-page hero — dark, on the faint studio texture. Breadcrumb, client
- * mark + industry tag, the outcome-led H1, the 2–3 stat trio, and the
- * metadata card (right on desktop, below on mobile). The live-site link lives
- * here in the card — index cards point at the detail page, not the live site.
+ * Detail-page hero — white, centered, on the inverted studio texture (same
+ * register as the /services and /case-studies heroes). Breadcrumb, client
+ * wordmark, then the outcome-led H1. Industry and the rest of the project
+ * facts sit in the strip directly below (CaseStudyMetaStrip), and the hero
+ * metric trio is held back for now — see the commented block.
  */
 export function CaseStudyDetailHero({ study }: { study: CaseStudyDetail }) {
-  const metaRows = [
-    { label: "Industry", value: study.meta.industry },
-    { label: "Engagement", value: study.meta.engagementType },
-    { label: "Timeline", value: study.meta.timeline },
-    { label: "Platform", value: study.meta.platform },
-  ];
-
   return (
-    <div className="relative isolate overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-bg">
+    <Section
+      tone="light"
+      divide={false}
+      frameClassName="relative !pb-14 !pt-10 md:!pb-20 md:!pt-14"
+    >
+      {/* Texture layer — fills the frame column, under the (relative) content */}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden
+      >
         <Image
           src="/textures/studio-texture.jpg"
           alt=""
           fill
-          className="object-cover opacity-[0.16]"
-          aria-hidden
+          sizes="100vw"
+          className="object-cover opacity-[0.28] invert"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
+          }}
         />
       </div>
 
-      <Section
-        tone="dark"
-        divide={false}
-        className="bg-transparent"
-        frameClassName="!pb-14 !pt-10 md:!pb-20 md:!pt-14"
-      >
+      <div className="relative flex flex-col items-center text-center">
         <nav
           aria-label="Breadcrumb"
-          className="font-mono text-label uppercase track-label text-text-muted"
+          className="font-mono text-label uppercase track-label text-light-muted"
         >
-          <Link href="/case-studies" className="transition hover:text-text">
+          <Link
+            href="/case-studies"
+            className="transition hover:text-light-text"
+          >
             Case studies
           </Link>
           <span aria-hidden className="mx-2">
             /
           </span>
-          <span className="text-text">{study.client}</span>
+          <span className="text-light-text">{study.client}</span>
         </nav>
 
-        <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-16 md:mt-14">
-          <div>
-            <div className="flex flex-wrap items-center gap-4">
-              {study.logo ? (
-                <Image
-                  src={study.logo}
-                  alt={study.client}
-                  width={220}
-                  height={56}
-                  className="h-7 w-auto object-contain"
-                />
-              ) : (
-                <span className="font-display text-body-lg font-medium">
-                  {study.client}
-                </span>
-              )}
-              <Pill>{INDUSTRIES[study.industry]}</Pill>
-            </div>
-
-            <h1 className="mt-6 max-w-3xl font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
-              {study.headline}
-            </h1>
-
-            {study.heroMetrics.length > 0 ? (
-              <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:gap-0 sm:divide-x sm:divide-border">
-                {study.heroMetrics.map((m) => (
-                  <div key={m.label} className="sm:px-10 sm:first:pl-0 sm:last:pr-0">
-                    <div className="font-display text-h1 font-medium leading-none">
-                      {m.value}
-                    </div>
-                    <div className="mt-2 text-body text-text-muted">
-                      {m.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : null}
-          </div>
-
-          {/* Metadata card (byCrawford register) */}
-          <aside className="self-end overflow-hidden rounded-card border border-border bg-surface">
-            <dl className="divide-y divide-border">
-              {metaRows.map((row) => (
-                <div
-                  key={row.label}
-                  className="flex items-baseline justify-between gap-6 px-6 py-4"
-                >
-                  <dt className="font-mono text-label uppercase track-label text-text-muted">
-                    {row.label}
-                  </dt>
-                  <dd className="text-right font-medium">{row.value}</dd>
-                </div>
-              ))}
-            </dl>
-            {study.meta.liveUrl ? (
-              <a
-                href={study.meta.liveUrl}
-                target="_blank"
-                rel="noopener"
-                className="group flex items-baseline justify-between gap-6 border-t border-border px-6 py-4 font-display font-medium transition hover:bg-surface-2"
-              >
-                View live site{" "}
-                <span aria-hidden className="btn-arrow">
-                  &rarr;
-                </span>
-              </a>
-            ) : null}
-          </aside>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4 md:mt-12">
+          {study.logoDark ? (
+            <Image
+              src={study.logoDark}
+              alt={study.client}
+              width={220}
+              height={56}
+              // Taller than the usual h-7: the /logos-dark wordmarks carry
+              // heavy transparent padding, so the mark reads small at h-7.
+              className="h-10 w-auto object-contain"
+            />
+          ) : (
+            <span className="font-display text-body-lg font-medium">
+              {study.client}
+            </span>
+          )}
         </div>
-      </Section>
-    </div>
+
+        <h1 className="mt-6 max-w-4xl font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
+          {study.headline}
+        </h1>
+
+        {/* Hero metric trio — hidden for now (owner); the figures now show
+            under the introduction instead. Drop this comment to bring the row
+            back here too.
+        <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-0 sm:divide-x sm:divide-light-border">
+          {study.stats.map((m) => (
+            <div key={m.label} className="sm:px-10 sm:first:pl-0 sm:last:pr-0">
+              <div className="font-display text-h1 font-medium leading-none">
+                {m.value}
+              </div>
+              <div className="mt-2 text-body text-light-muted">{m.label}</div>
+            </div>
+          ))}
+        </div>
+        */}
+      </div>
+    </Section>
   );
 }

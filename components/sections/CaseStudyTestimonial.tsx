@@ -5,25 +5,25 @@ import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import type { CaseStudyDetail } from "@/content/case-studies";
 
 /**
- * Lead testimonial — placed right after the detail-page hero (Flow Ninja
- * placement): the client's voice lands before our narrative, so everything
- * after it reads as confirmed rather than claimed. The page skips this
- * section entirely when the study has no testimonial.
+ * Highlighted client testimonial, closing the study before the related
+ * slider. No card or fill: the quote sits centered in the open section with
+ * room around it, then avatar, name with the verified tick, and role. The
+ * page skips the section when the study has no testimonial.
  */
-export function CaseStudyLeadQuote({
+export function CaseStudyTestimonial({
   testimonial,
 }: {
   testimonial: NonNullable<CaseStudyDetail["testimonial"]>;
 }) {
   return (
-    <Section tone="dark" frameClassName="!py-14 md:!py-20">
+    <Section tone="light" frameClassName="!py-20 md:!py-32">
       <figure className="mx-auto max-w-3xl text-center">
-        <blockquote className="font-display text-h3 font-medium leading-snug text-balance md:text-[1.75rem]">
+        <blockquote className="font-display text-h3 font-medium leading-snug tracking-tight text-balance md:text-[1.75rem]">
           &ldquo;{testimonial.quote}&rdquo;
         </blockquote>
-        <figcaption className="mt-8 flex items-center justify-center gap-3">
+        <figcaption className="mt-10 flex items-center justify-center gap-3">
           {testimonial.avatar ? (
-            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[6px] border border-border">
+            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[6px] border border-light-border">
               <Image
                 src={testimonial.avatar}
                 alt={testimonial.name}
@@ -36,9 +36,9 @@ export function CaseStudyLeadQuote({
           <span className="text-left">
             <span className="flex items-center gap-1.5 font-display font-medium">
               {testimonial.name}
-              <VerifiedCheck />
+              <VerifiedCheck className="text-light-text" />
             </span>
-            <span className="block text-body text-text-muted">
+            <span className="block text-body text-light-muted">
               {testimonial.role}
             </span>
           </span>

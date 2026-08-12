@@ -36,8 +36,8 @@ const breadcrumbSchema = {
   ],
 };
 
-// Review markup for every quote actually shown on this page: the 28 in the
-// wall plus the 3 in the video slider, which is all of them. No
+// Review markup for every quote actually shown on this page. The wall carries
+// all of them in full, so the schema and the visible text match one-for-one. No
 // AggregateRating until the live Clutch profile supplies a real rating value
 // and count.
 const reviewSchema = {

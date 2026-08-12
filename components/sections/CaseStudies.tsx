@@ -47,14 +47,14 @@ export function CaseStudies() {
                 tint. Taller on phones so the stacked content breathes. */}
             <div className="relative flex min-h-[420px] flex-col justify-between gap-8 overflow-hidden rounded-[8px] bg-bg p-8 text-white lg:min-h-0">
               {/* The sitewide studio texture, same as every other dark band.
-                  Held at 0.2 rather than the usual 0.14: the gradient below
-                  mutes it further towards the bottom of the panel. */}
+                  Carried at 0.3 rather than the usual 0.14 because the gradient
+                  below mutes it again, hard at the bottom where the text sits. */}
               <Image
                 src="/textures/studio-texture.jpg"
                 alt=""
                 fill
                 sizes="(max-width: 1024px) 100vw, 60vw"
-                className="pointer-events-none object-cover opacity-20"
+                className="pointer-events-none object-cover opacity-30"
                 aria-hidden
               />
               {/* Gradient tint over the texture: solid navy at the bottom for

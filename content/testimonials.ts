@@ -29,8 +29,9 @@ export type { Testimonial } from "./testimonials-data";
 // Clients with a video (or, for Flynn, a poster shot), in the order the
 // /testimonials slider plays them.
 // Adding a video is a one-line change: set `video` on the testimonial and add
-// its id here. Anyone listed here is shown as a video rather than a wall
-// quote card, so nobody appears twice.
+// its id here. These people also keep a wall card below: the slider card shows
+// one truncated sentence over their face, so the wall is the only place their
+// full quote is readable as text.
 const videoIds = [
   "jack-shorrock",
   "finlay-wellington",
@@ -149,13 +150,12 @@ const asQuote = (t: Testimonial): WallCard => ({
 });
 
 /**
- * The wall: one quote card per client who didn't record a video. The three
- * video clients appear in the slider above instead, so nobody is shown twice
- * and no quote is printed twice on the same page.
+ * The wall: one quote card per client, everybody included. The video clients
+ * are in the slider above as well, and that's deliberate. Their slider card
+ * truncates to a single sentence so the panel doesn't bury their face, so
+ * without a wall card their full testimonial would never appear in text.
  */
-export const wall: WallCard[] = allTestimonials
-  .filter((t) => !videoIds.includes(t.id))
-  .map(asQuote);
+export const wall: WallCard[] = allTestimonials.map(asQuote);
 
 // 4. FAQ — removed from this page (the client-logo marquee sits here now).
 // The master /faq page still answers these questions.

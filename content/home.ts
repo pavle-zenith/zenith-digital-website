@@ -43,33 +43,38 @@ export const hero = {
     } as CtaLink,
   ],
   // 2x2 highlighted case studies that flow directly out of the hero.
+  // Shots come from /portfolio-blocky: browser mockups on each client's own
+  // backdrop, mostly 1:1 with the window centred and wide margins, so the card's
+  // 16:10 centre crop takes backdrop and never the window. OWNER: these are the
+  // uncompressed source PNGs (13MB across the four); compress before launch.
   featured: [
     {
       client: "Bel'Istria",
       tag: "Travel",
       metric: "257% more impressions",
-      image: "/portfolio/belistria.jpg",
+      image: "/portfolio-blocky/belistria.png",
       href: "/case-studies",
     },
     {
       client: "Knode AI",
       tag: "SaaS",
       metric: "$10M Series A raised",
-      image: "/portfolio/knode.jpg",
+      image: "/portfolio-blocky/knode.png",
       href: "/case-studies",
     },
     {
       client: "Fort Lauderdale Dock Rentals",
       tag: "Marine",
       metric: "30+ warm leads",
-      image: "/portfolio/fortlauderdale.jpg",
+      image: "/portfolio-blocky/fort-lauderdale-dock-rentals.png",
       href: "/case-studies",
     },
     {
       client: "Scottish Luxury Experience",
       tag: "Travel",
       metric: "€500k pipeline",
-      image: "/portfolio/scottishluxury.jpg",
+      // The Safari-chrome shot on the mountain-and-lake backdrop, 4:3.
+      image: "/portfolio-blocky/scottish-luxury-experience.png",
       href: "/case-studies",
     },
   ],

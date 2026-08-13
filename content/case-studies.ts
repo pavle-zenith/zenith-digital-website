@@ -461,8 +461,15 @@ export const clientLogos = [
 // Auto-sliding artwork gallery under the hero. One vertical artwork per client
 // (owner-supplied); the clothing-brand industry image is the placeholder until
 // the real set lands.
+// Portrait brand cards for the marquee under the /case-studies hero. Source
+// PNGs are 1080x1350 (4:5), copied in at full weight while the format is being
+// tested. OWNER: compress before launch (notyou.png alone is 1.6MB).
 export const csGallery = {
-  items: [{ image: "/industries/clothing.jpg", alt: "Client website artwork" }],
+  items: [
+    { image: "/case-study-cards/belistria.png", alt: "Bel'Istria" },
+    { image: "/case-study-cards/777.png", alt: "777 Lucky Club" },
+    { image: "/case-study-cards/notyou.png", alt: "NotYou Brand" },
+  ],
 };
 
 export const csHero = {

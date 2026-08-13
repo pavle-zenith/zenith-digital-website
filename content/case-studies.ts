@@ -461,14 +461,36 @@ export const clientLogos = [
 // Auto-sliding artwork gallery under the hero. One vertical artwork per client
 // (owner-supplied); the clothing-brand industry image is the placeholder until
 // the real set lands.
-// Portrait brand cards for the marquee under the /case-studies hero. Source
-// PNGs are 1080x1350 (4:5), copied in at full weight while the format is being
-// tested. OWNER: compress before launch (notyou.png alone is 1.6MB).
+/**
+ * Portrait brand cards for the marquee under the /case-studies hero. 1080x1350
+ * (4:5) WebP at q82, converted from the source PNGs (19MB down to 1.2MB).
+ *
+ * The order alternates light and dark rather than running alphabetically. Seven
+ * of these are near-black and eight are light, so two darks side by side read as
+ * one wide card. Fifteen items can't alternate perfectly around a loop, so the
+ * one same-tone seam is placed between the two least similar lights: Maodus
+ * (the cream sketch) wrapping back to Jimi Blake (dusk garden).
+ */
 export const csGallery = {
   items: [
-    { image: "/case-study-cards/belistria.png", alt: "Bel'Istria" },
-    { image: "/case-study-cards/777.png", alt: "777 Lucky Club" },
-    { image: "/case-study-cards/notyou.png", alt: "NotYou Brand" },
+    { image: "/case-study-cards/jimi-blake.webp", alt: "Jimi Blake" },
+    { image: "/case-study-cards/techtonnik.webp", alt: "Techtonnik" },
+    { image: "/case-study-cards/foxstays.webp", alt: "FoxStays" },
+    { image: "/case-study-cards/atw.webp", alt: "ATW Trucking" },
+    { image: "/case-study-cards/jim-steele.webp", alt: "Jim Steele" },
+    { image: "/case-study-cards/belistria.webp", alt: "Bel'Istria" },
+    { image: "/case-study-cards/yacht-junky.webp", alt: "Yacht Junky" },
+    { image: "/case-study-cards/notyou.webp", alt: "NotYou Brand" },
+    { image: "/case-study-cards/lmfhr.webp", alt: "LMF HR" },
+    { image: "/case-study-cards/777.webp", alt: "777 Lucky Club" },
+    { image: "/case-study-cards/genroks.webp", alt: "Genroks AI" },
+    {
+      image: "/case-study-cards/wellington-web-co.webp",
+      alt: "Wellington Web Co",
+    },
+    { image: "/case-study-cards/stilby.webp", alt: "Stilby" },
+    { image: "/case-study-cards/capacity.webp", alt: "Capacity" },
+    { image: "/case-study-cards/maodus.webp", alt: "Destilerija Maodus" },
   ],
 };
 

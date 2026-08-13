@@ -27,7 +27,9 @@ export function WorkGallery() {
           {track.map((item, i) => (
             <div
               key={i}
-              className="relative aspect-[3/4] w-[280px] shrink-0 overflow-hidden rounded-[8px] bg-light-surface sm:w-[320px] lg:w-[340px]"
+              // 4:5 matches the source artwork, so the wordmark sits where it
+              // was designed to and nothing crops off the top or bottom.
+              className="relative aspect-[4/5] w-[280px] shrink-0 overflow-hidden rounded-[8px] bg-light-surface sm:w-[320px] lg:w-[340px]"
             >
               <Image
                 src={item.image}

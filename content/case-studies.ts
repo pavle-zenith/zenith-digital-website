@@ -102,9 +102,10 @@ export const caseStudyCards: CaseStudyCard[] = [
     client: "Scottish Luxury Experience",
     slug: "scottish-luxury-experience",
     industry: "travel",
-    metric: "€500k pipeline value",
+    metric: "$521k in 7 months",
     story: "The UK's best-looking travel website, live in 4 weeks",
     thumb: "/case-study-grid/scottish-luxury-experience.webp",
+    logo: "/logos-white/sle.avif",
     liveUrl: "https://www.scottishluxuryexperience.com",
   },
   {
@@ -474,12 +475,12 @@ export const caseStudies = {
     {
       client: "Scottish Luxury Experience",
       slug: "scottish-luxury-experience",
-      logo: "/logos-white/mod.png",
+      logo: "/logos-white/sle.avif",
       thumb: "/casestudies/scottishluxury.jpg",
       title:
         "Enabling thousands of tourists to visit Scotland's beauty through the UK's best-looking travel website",
       stats: [
-        { value: "€500k", label: "Pipeline value" },
+        { value: "$521k", label: "Revenue in 7 months" },
         { value: "4 Weeks", label: "Time-to-market" },
       ],
       liveUrl: "https://thescottishluxuryexperience.com",
@@ -595,8 +596,7 @@ function cardOf(slug: string): CaseStudyCard {
 export const caseStudyDetails: CaseStudyDetail[] = [
   {
     ...cardOf("knode-ai"),
-    // OWNER: narrative assembled from existing site copy and real screenshots
-    // (no invented metrics) — confirm the story beats before more studies ship.
+    // Narrative confirmed by owner (Aug 2026): story beats match the project.
     headline: "From zero to a $10M Series A raise in three weeks",
     logoDark: "/logos-dark/knode.png",
     stats: [
@@ -657,13 +657,13 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       after: "/before-after/knode-after.jpg",
     },
     testimonial: quoteOf("gemma-sole"),
-    // Scope column beside the introduction.
-    // TODO(owner): confirm the full list (copywriting? integrations?).
+    // Scope confirmed by owner: integrations in, copywriting out.
     techUsed: [
       "Positioning & messaging",
       "Web & UI design",
       "Wix Studio build",
       "CMS setup",
+      "Integrations",
       "SEO & schema",
     ],
     publishedAt: "2026-08-11",
@@ -675,16 +675,11 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("belistria"),
-    // OWNER — open items on this study, all flagged in the draft:
-    //   1. Launch year. The 257% is year over year, so the copy says "eight
-    //      weeks, January kickoff to a late-February launch" without a year
-    //      until you confirm which one.
-    //   2. The AI visibility scores below are your figures. Keep whatever tool
+    // OWNER — remaining items (timeline confirmed: Jan–Feb 2025 build, AEO
+    // campaign through 2026; zero rankings lost is confirmed and claimed):
+    //   1. The AI visibility scores are your figures. Keep whatever tool
     //      measured them to hand in case a prospect asks for the receipts.
-    //   3. Ranking retention through the migration is NOT claimed anywhere
-    //      here, because you didn't confirm it. If nothing was lost, say so and
-    //      it strengthens the migration beat.
-    //   4. Assets: no old-site screenshot, so there's no before/after pair yet.
+    //   2. Assets: no old-site screenshot, so there's no before/after pair yet.
     headline:
       "From losing local search to the answer AI recommends for Istria transfers",
     // No dark-ink Bel'Istria wordmark exists (both files in /logos-dark and
@@ -697,7 +692,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     meta: {
       industry: INDUSTRIES.travel,
       engagementType: "Migration & redesign",
-      timeline: "8 weeks",
+      timeline: "8-week build, ongoing since",
       platform: "Wix Studio",
       liveUrl: "https://www.belistria.eu",
     },
@@ -710,11 +705,11 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       alt: "Bel'Istria homepage: luxury travel experiences in Croatia, with chauffeur service and trip planning calls to action",
     },
     introduction:
-      "Bel'Istria runs private chauffeur transfers and luxury travel experiences across Istria, Croatia. When they came to us the site was still on Wix Classic: non-responsive, slow, and losing search visibility to nearly every local transfer operator in the region. Over eight weeks, from a January kickoff to a late-February launch, we migrated the site to Wix Studio, rebuilt it around individual service pages, and ran a full AEO campaign.",
+      "Bel'Istria runs private chauffeur transfers and luxury travel experiences across Istria, Croatia. When they came to us the site was still on Wix Classic: non-responsive, slow, and losing search visibility to nearly every local transfer operator in the region. Over eight weeks in early 2025, from a January kickoff to a late-February launch, we migrated the site to Wix Studio and rebuilt it around individual service pages. Through 2026, we ran a full AEO campaign on top of that foundation.",
     approach: [
       {
         heading: "A migration that raised the floor",
-        body: "The move from Wix Classic to Wix Studio carried 35+ pages of content and the blog across with full URL mapping. That fixed the structural problems in one step: responsive layouts, modern performance, and a CMS the site could grow on. It launched with room to build, and it has. The site now runs 70+ dynamic pages, all ranking.",
+        body: "The move from Wix Classic to Wix Studio carried 35+ pages of content and the blog across with full URL mapping, and not a single ranking was lost in the move. That fixed the structural problems in one step: responsive layouts, modern performance, and a CMS the site could grow on. It launched with room to build, and it has. The site now runs 70+ dynamic pages, all ranking.",
       },
       {
         heading: "One page per service, not one page for everything",
@@ -722,7 +717,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       },
       {
         heading: "Built to be the answer, not just a result",
-        body: "This is where the project went beyond standard SEO. Alongside schema and on-page structure, we ran a full AEO pass: an llms.txt file, FAQ content on every service cluster, E-E-A-T content establishing who Bel'Istria is, citation cleanup across the web, and Google Business Profile optimization. The goal was to make Bel'Istria the answer engines' recommendation, not just a link on page one.",
+        body: "This is where the project went beyond standard SEO. Through 2026, on top of the migrated foundation, we ran a full AEO campaign: an llms.txt file, FAQ content on every service cluster, E-E-A-T content establishing who Bel'Istria is, citation cleanup across the web, and Google Business Profile optimization. The goal was to make Bel'Istria the answer engines' recommendation, not just a link on page one.",
       },
       {
         heading: "Booking built in",
@@ -735,6 +730,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         label: "YoY search impression growth, led by terms the old site never ranked for",
         positive: true,
       },
+      { value: "0", label: "Rankings lost in the migration" },
       { value: "30 → 70", label: "AI visibility score, ChatGPT", positive: true },
       { value: "35 → 75", label: "AI visibility score, Gemini", positive: true },
       {
@@ -780,6 +776,184 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         "How Zenith Digital migrated Bel'Istria from Wix Classic to Wix Studio and ran an AEO campaign: 257% impression growth, 70+ ranking pages, and the top AI recommendation for Istria luxury transfers in 8 weeks.",
     },
   },
+  {
+    ...cardOf("scottish-luxury-experience"),
+    // All confirmed (Aug 2026): $521k metric sitewide, name = Scottish Luxury
+    // Experience, launched December 2025, Flynn signed off on Zenith as
+    // development partner on this and all MOD-related projects. Flynn's quote
+    // stands as the partner voice by choice.
+    headline: "The website behind $521k of luxury trips in seven months",
+    stats: [
+      { value: "4 weeks", label: "Kickoff to launch" },
+      { value: "$521k", label: "Revenue in the first 7 months" },
+      { value: "£15k–£100k", label: "Trips sold through the site" },
+    ],
+    meta: {
+      industry: INDUSTRIES.travel,
+      engagementType: "Partnership build with MOD Digital",
+      timeline: "4 weeks",
+      platform: "Wix Studio",
+      liveUrl: "https://www.scottishluxuryexperience.com",
+    },
+    challenge: [
+      "Scottish Luxury Experience sells bespoke luxury trips across Scotland, priced from £15k to £100k per journey. Its three founders had the heritage, the supplier network, and a genuinely premium product. What they didn't have was a website worthy of it, and the constraint that shaped the whole build came straight from the price tag: a brand selling £100k journeys cannot look mass-market at any touchpoint.",
+      "The deadline was just as fixed. MOD Digital was building the growth engine around the brand, the ad calendar was already set, and the site had to be live before the first campaign spent a pound. Four weeks, no slack.",
+    ],
+    heroShot: {
+      src: "/casestudies/scottishluxury.jpg",
+      alt: "Scottish Luxury Experience homepage: Discover Scotland, with a Highland cow hero and bespoke trip planning prompts",
+    },
+    introduction:
+      "Zenith Digital designed and built the Scottish Luxury Experience website in Wix Studio in four weeks, launching in December 2025: the layer every client sees first, in front of the demand and sales system MOD Digital runs behind it. Within seven months of launch, the engine the site fronts had turned paid traffic into $521k of booked trips.",
+    approach: [
+      {
+        heading: "Luxury you can feel before you enquire",
+        body: "The design brief came from the price tag. Cinematic Scotland imagery, restrained type, and pacing that lets the destination sell itself. Nothing that could read as a template, because nothing about a £15k trip should. The job of every fold is to make a five-figure enquiry feel like the natural next step.",
+      },
+      {
+        heading: "A landing layer built for paid traffic",
+        body: "This site earns its keep under ad spend. Every page is message-matched to the campaigns that feed it, loads fast enough to not waste a click, and points at one action. Luxury pacing and conversion discipline usually pull in opposite directions; the build's real work was making them agree.",
+      },
+      {
+        heading: "An enquiry flow that respects the price tag",
+        body: "You don't add a £40k trip to a cart. The enquiry flow is built for considered purchases: it gathers what the sales conversation needs, then hands the client into the founders' reveal-call process without friction. The website's job ends exactly where the human conversation should begin.",
+      },
+      {
+        heading: "Two teams, one deadline",
+        body: "This was a partnership build in the shape our white-label work runs: MOD Digital owned strategy, demand, CRM, and the AI proposal engine; Zenith built the website that fronts all of it. Clear lanes, one four-week deadline, no seams a client would ever see. The CRM and proposal stack are MOD's work, not ours, and the results below belong to the system, not the site alone.",
+      },
+    ],
+    results: [
+      {
+        value: "$521k",
+        label: "Trip revenue within 7 months of launch (full system, MOD + Zenith)",
+        positive: true,
+      },
+      {
+        value: "48x",
+        label: "Return on ad spend across the growth engine",
+        positive: true,
+      },
+      { value: "4 weeks", label: "Website build, kickoff to launch" },
+      { value: "£5m", label: "Revenue tracking for end of 2026" },
+    ],
+    resultsNote:
+      "Within seven months of Zenith Digital shipping the Scottish Luxury Experience website, the growth system it fronts, run in partnership with MOD Digital, had turned paid traffic into $521k of booked luxury travel.",
+    gallery: [
+      {
+        src: "/case-study-grid/scottish-luxury-experience.webp",
+        alt: "Scottish Luxury Experience site in a browser window, Discover Scotland hero with trip planning prompts",
+      },
+    ],
+    testimonial: quoteOf("flynn-blackie"),
+    techUsed: [
+      {
+        label: "Wix Studio design & build",
+        href: "/services/wix-studio-website-design",
+      },
+      { label: "Campaign landing layer", href: "/services/landing-pages" },
+      "Booking & enquiry flows",
+      { label: "Partnership build", href: "/partnerships" },
+    ],
+    publishedAt: "2026-08-14",
+    cta: {
+      heading: ["Selling something premium?", "The website has to prove it first."],
+      paragraph:
+        "A free 20-minute call. We'll tell you honestly whether your site looks like your price tag, and what it would take to fix it.",
+    },
+    seo: {
+      title:
+        "Scottish Luxury Experience case study | $521k in 7 months | Zenith Digital",
+      description:
+        "How Zenith Digital built the Wix Studio website fronting Scottish Luxury Experience's growth system, in partnership with MOD Digital: a 4-week build, $521k in trip revenue, and 48x ROAS within 7 months.",
+    },
+  },
+  {
+    ...cardOf("yacht-junky"),
+    // OWNER — one remaining item: no business metrics yet, so every figure
+    // below is a platform fact (features, architecture), never an invented
+    // outcome. When listing counts / enquiry volumes exist, send them and the
+    // results block upgrades from capability proof to business proof.
+    headline: "A multi-seller yacht marketplace, built entirely inside Wix Studio",
+    stats: [
+      { value: "100%", label: "Wix Studio native, no external stack" },
+      { value: "7", label: "Marketplace features built with Velo and CMS" },
+      { value: "2-sided", label: "Buyers and private sellers on one platform" },
+    ],
+    meta: {
+      industry: INDUSTRIES.marine,
+      engagementType: "Partnership build with MOD Digital",
+      timeline: "4 weeks",
+      platform: "Wix Studio + Velo",
+      liveUrl: "https://moddigital.wixstudio.com/yacht-junky",
+    },
+    challenge: [
+      "A boat and yacht marketplace has real platform requirements: sellers who list and manage inventory, buyers who search and filter their way to one specific vessel, and enquiries that have to reach the right private seller without publishing anyone's contact details. The usual answer is a custom development budget and months of build.",
+      "The brief was to prove the usual answer wrong: build the whole thing as a native Wix Studio platform, so it ships at Wix Studio speed and the team runs it without a developer on retainer.",
+    ],
+    heroShot: {
+      src: "/case-study-grid/yacht-junky.webp",
+      alt: "Yacht Junky marketplace homepage: the ultimate boat and yacht marketplace, with category search and featured listings",
+    },
+    introduction:
+      "Yacht Junky is a multi-seller marketplace where dealers and private owners list boats and yachts, and buyers search, compare, and enquire. Zenith Digital built it entirely inside Wix Studio, using the native CMS as the data layer and Velo for everything the platform needed beyond it: seller notifications, enquiry history, private contact routing, and currency conversion.",
+    approach: [
+      {
+        heading: "The CMS as a marketplace database",
+        body: "Listings, sellers, and enquiries live in Wix Studio's native CMS collections, related to each other the way a marketplace database should be. Every listing page is generated dynamically from the data, so a new vessel is a content entry, not a build task, and the catalog scales without anyone touching a page.",
+      },
+      {
+        heading: "Search that thinks like a boat buyer",
+        body: "Nobody buys a yacht from a category page. The search layer runs detailed filters across the specs buyers actually shortlist on, and prices convert between currencies on the fly, because boat buyers and boat sellers are rarely in the same country.",
+      },
+      {
+        heading: "Velo where the platform outgrows the page",
+        body: "The marketplace mechanics are custom Velo code: sellers get email notifications the moment an enquiry lands, buyers build an enquiry history as they shortlist, and private sellers stay reachable without their contact details ever being published. That's the layer that separates a platform from a listings brochure.",
+      },
+      {
+        heading: "Why native matters",
+        body: "The same build on a custom stack means hosting, maintenance, and a developer relationship for the life of the product. Native means the team edits everything the way they'd edit any Wix site. The honest trade-off: a platform that outgrows these mechanics, with payments, escrow, or seller dashboards, eventually argues for custom. This build shows how far the platform genuinely goes before that day, and it's further than most agencies will tell you.",
+      },
+    ],
+    results: [
+      { value: "7", label: "Marketplace features shipped on the native platform" },
+      { value: "0", label: "External services, databases, or hosting added" },
+      {
+        value: "100%",
+        label: "Owner-editable, no developer needed to run it",
+      },
+    ],
+    resultsNote:
+      "Yacht Junky runs listings, filtered search, enquiries, seller notifications, and currency conversion entirely inside Wix Studio. Zenith Digital built it with Velo and the native CMS, and the platform ceiling is higher than most agencies will tell you.",
+    gallery: [
+      {
+        src: "/case-study-grid/yacht-junky.webp",
+        alt: "Yacht Junky marketplace in a browser window, showing the boat and yacht listing grid with search filters",
+      },
+    ],
+    // Flynn as partner voice — this was a MOD collaboration, per owner.
+    testimonial: quoteOf("flynn-blackie"),
+    techUsed: [
+      { label: "Wix Studio development", href: "/services#wix-studio-development" },
+      "Velo custom code",
+      "CMS architecture",
+      "Marketplace UX",
+      "Email automations",
+      "Currency conversion",
+    ],
+    publishedAt: "2026-08-14",
+    cta: {
+      heading: ["Need more than", "a marketing site?"],
+      paragraph:
+        "Custom functionality, CMS platforms, and marketplace builds on Wix Studio. A free 20-minute call, and we'll tell you honestly whether your idea fits the platform or needs custom.",
+    },
+    seo: {
+      title:
+        "Yacht Junky case study | A marketplace built in Wix Studio | Zenith Digital",
+      description:
+        "How Zenith Digital built a multi-seller boat and yacht marketplace natively in Wix Studio: Velo-powered search and filters, seller notifications, enquiry history, and currency conversion, with no external stack.",
+    },
+  },
 ];
 
 /** Slugs with a shipped detail page — their cards flip to internal links. */
@@ -822,10 +996,9 @@ export const clientLogos = [
 
 // ---- /case-studies page copy ----
 
-// 1. Hero (dark, compact). NOTE(owner): the site currently mixes counts —
-// "150+ Websites Created" (hero proof), "100+ projects shipped" (stats), and
-// "97+ websites analyzed" (audits). This page uses 150+ per the hero; lock one
-// sitewide number when ready.
+// 1. Hero (dark, compact). Sitewide count locked at 100+ (owner decision,
+// Aug 2026). The audit page's "97+ websites analyzed" is a different claim
+// (audits run, not sites built) and stays.
 // Auto-sliding artwork gallery under the hero. One vertical artwork per client
 // (owner-supplied); the clothing-brand industry image is the placeholder until
 // the real set lands.
@@ -869,7 +1042,7 @@ export const csHero = {
   support:
     "These aren't showcase sites built to impress other designers. They're working websites built for real businesses, with specific problems to solve and real outcomes attached.",
   stats: [
-    { value: "150+", label: "Websites" },
+    { value: "100+", label: "Websites" },
     { value: "€1M+", label: "Client revenue" },
     { value: "5.96x", label: "Average ROAS" },
     { value: "7+", label: "Industries" },

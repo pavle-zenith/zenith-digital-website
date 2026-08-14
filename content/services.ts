@@ -77,7 +77,7 @@ export const sServices: ServiceEntry[] = [
     ],
     proof: [
       {
-        text: "€500k pipeline · Scottish Luxury Experience",
+        text: "$521k in 7 months · Scottish Luxury Experience",
         href: "/case-studies",
       },
       { text: "“Conversion skyrocketed” · Genroks AI", href: "/case-studies" },
@@ -90,7 +90,7 @@ export const sServices: ServiceEntry[] = [
     slides: [
       {
         title:
-          "Scottish Luxury Experience turned its new site into a €500k pipeline.",
+          "Scottish Luxury Experience turned its new site into $521k of booked trips in seven months.",
         image: "/casestudies/scottishluxury.jpg",
         client: "Scottish Luxury Experience",
       },

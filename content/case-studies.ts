@@ -112,7 +112,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     slug: "belistria",
     industry: "travel",
     metric: "257% YoY impressions",
-    story: "Croatia transfer and travel booking experience, 35+ pages migrated",
+    story:
+      "AI-first migration from Wix Classic. 70+ pages ranking, top spot in AI answers.",
     thumb: "/portfolio-blocky/belistria.png",
     logo: "/logos-white/belistria.png",
     liveUrl: "https://www.belistria.eu",
@@ -567,9 +568,20 @@ export type CaseStudyDetail = CaseStudyCard & {
   /** Muted autoplay loop in the gallery. */
   video?: string;
   testimonial?: { quote: string; name: string; role: string; avatar?: string };
-  /** Scope strip items ("Wix Studio", "CMS", ...). */
-  techUsed?: string[];
+  /**
+   * Scope strip items ("Wix Studio", "CMS", ...). An item can carry an href to
+   * point at the service page that sells that piece of work, which turns the
+   * scope list into internal links from proof back to the offer.
+   */
+  techUsed?: (string | { label: string; href: string })[];
   publishedAt: string;
+  /**
+   * Closing CTA, when the study's outcome is specific enough to beat the
+   * generic one. Only heading and paragraph vary; the buttons and texture come
+   * from csDetailCta so every study's CTA still looks identical. Omit to use
+   * the shared copy.
+   */
+  cta?: { heading: string[]; paragraph: string };
   seo?: { title?: string; description?: string };
 };
 
@@ -659,6 +671,113 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       title: "Knode AI case study | From zero to a $10M raise | Zenith Digital",
       description:
         "How Zenith Digital designed and built Knode AI's 10-page Wix Studio site in three weeks, and how it carried the company into a $10M Series A raise.",
+    },
+  },
+  {
+    ...cardOf("belistria"),
+    // OWNER — open items on this study, all flagged in the draft:
+    //   1. Launch year. The 257% is year over year, so the copy says "eight
+    //      weeks, January kickoff to a late-February launch" without a year
+    //      until you confirm which one.
+    //   2. The AI visibility scores below are your figures. Keep whatever tool
+    //      measured them to hand in case a prospect asks for the receipts.
+    //   3. Ranking retention through the migration is NOT claimed anywhere
+    //      here, because you didn't confirm it. If nothing was lost, say so and
+    //      it strengthens the migration beat.
+    //   4. Assets: no old-site screenshot, so there's no before/after pair yet.
+    headline:
+      "From losing local search to the answer AI recommends for Istria transfers",
+    // No dark-ink Bel'Istria wordmark exists (both files in /logos-dark and
+    // /logos are white-on-transparent), so the hero renders the client name.
+    stats: [
+      { value: "257%", label: "YoY impression growth" },
+      { value: "70+", label: "Pages ranking" },
+      { value: "8 weeks", label: "Kickoff to launch" },
+    ],
+    meta: {
+      industry: INDUSTRIES.travel,
+      engagementType: "Migration & redesign",
+      timeline: "8 weeks",
+      platform: "Wix Studio",
+      liveUrl: "https://www.belistria.eu",
+    },
+    challenge: [
+      "The old Bel'Istria site had grown the way many long-running small business sites do: piece by piece, added to by whoever got to it that week. It ran on Wix Classic, didn't work properly on phones, and the design had no through-line. Meanwhile, the search results it depended on were going to local competitors, page after page.",
+      "The timing forced the decision. A new season was coming, and every booking it would bring was going to start with a search or, increasingly, a question typed into an AI assistant. The brief was direct: stop losing the searches Bel'Istria should own, and be ready before the season started.",
+    ],
+    heroShot: {
+      src: "/portfolio-blocky/belistria.png",
+      alt: "Bel'Istria homepage: luxury travel experiences in Croatia, with chauffeur service and trip planning calls to action",
+    },
+    introduction:
+      "Bel'Istria runs private chauffeur transfers and luxury travel experiences across Istria, Croatia. When they came to us the site was still on Wix Classic: non-responsive, slow, and losing search visibility to nearly every local transfer operator in the region. Over eight weeks, from a January kickoff to a late-February launch, we migrated the site to Wix Studio, rebuilt it around individual service pages, and ran a full AEO campaign.",
+    approach: [
+      {
+        heading: "A migration that raised the floor",
+        body: "The move from Wix Classic to Wix Studio carried 35+ pages of content and the blog across with full URL mapping. That fixed the structural problems in one step: responsive layouts, modern performance, and a CMS the site could grow on. It launched with room to build, and it has. The site now runs 70+ dynamic pages, all ranking.",
+      },
+      {
+        heading: "One page per service, not one page for everything",
+        body: "The old site asked a handful of pages to rank for everything. We rebuilt the architecture around individual pages for each major service cluster: chauffeur services, airport transfers, hotel transfers, events and weddings, and exclusive experiences. Each page targets its own searches, answers its own questions, and books its own customers.",
+      },
+      {
+        heading: "Built to be the answer, not just a result",
+        body: "This is where the project went beyond standard SEO. Alongside schema and on-page structure, we ran a full AEO pass: an llms.txt file, FAQ content on every service cluster, E-E-A-T content establishing who Bel'Istria is, citation cleanup across the web, and Google Business Profile optimization. The goal was to make Bel'Istria the answer engines' recommendation, not just a link on page one.",
+      },
+      {
+        heading: "Booking built in",
+        body: "Two booking flows, one for chauffeur services and one for private trips, so the traffic the new pages earn has somewhere to convert on the spot. One thing we deliberately didn't build on Wix: a custom travel itinerary generator the project surfaced along the way. We scoped it and concluded it belonged off-site rather than forced into the platform. Knowing where Wix Studio's limits are is part of building well on it.",
+      },
+    ],
+    results: [
+      {
+        value: "257%",
+        label: "YoY search impression growth, led by terms the old site never ranked for",
+        positive: true,
+      },
+      { value: "30 → 70", label: "AI visibility score, ChatGPT", positive: true },
+      { value: "35 → 75", label: "AI visibility score, Gemini", positive: true },
+      {
+        value: "30 → 80",
+        label: "AI visibility score, Perplexity",
+        positive: true,
+      },
+      { value: "+1000%", label: "AI crawler activity", positive: true },
+      { value: "70+", label: "Pages live and ranking" },
+    ],
+    resultsNote:
+      "Within a season of the rebuild, Bel'Istria went from being outranked by local competitors to the highlighted recommendation when AI assistants are asked about luxury transfers in Istria. The work continues: ongoing SEO today, with multilingual and hospitality expansion planned next.",
+    gallery: [
+      {
+        src: "/casestudies/belistria.jpg",
+        alt: "Bel'Istria site in a browser window, showing the Croatia luxury travel homepage",
+      },
+      {
+        src: "/portfolio-slider/belistria.jpg",
+        alt: "Bel'Istria luxury vehicle fleet page, listing chauffeur-driven Mercedes classes with passenger and luggage capacity",
+        caption:
+          "One page per service cluster, each targeting its own searches.",
+      },
+    ],
+    testimonial: quoteOf("ivan-belobrajdic"),
+    techUsed: [
+      { label: "Wix Studio migration", href: "/services/website-migration" },
+      { label: "SEO & AEO campaign", href: "/services/seo-aeo-ppc" },
+      "Service page architecture",
+      "Booking systems",
+      "Citations & GBP optimization",
+    ],
+    publishedAt: "2026-08-14",
+    cta: {
+      heading: ["Want to be the answer", "AI recommends in your market?"],
+      paragraph:
+        "A free 20-minute call. We'll tell you honestly where your site stands in search and AI answers, and what it would take to fix it.",
+    },
+    seo: {
+      title:
+        "Bel'Istria case study | 257% impressions & top AI recommendation | Zenith Digital",
+      description:
+        "How Zenith Digital migrated Bel'Istria from Wix Classic to Wix Studio and ran an AEO campaign: 257% impression growth, 70+ ranking pages, and the top AI recommendation for Istria luxury transfers in 8 weeks.",
     },
   },
 ];

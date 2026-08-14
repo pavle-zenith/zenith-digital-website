@@ -108,7 +108,9 @@ export default async function CaseStudyPage({ params }: Props) {
       {study.testimonial ? (
         <CaseStudyTestimonial testimonial={study.testimonial} />
       ) : null}
-      <CtaBanner data={csDetailCta} />
+      {/* Per-study CTA copy when the outcome is specific enough to beat the
+          generic line; buttons and texture always come from csDetailCta. */}
+      <CtaBanner data={{ ...csDetailCta, ...(study.cta ?? {}) }} />
       <CaseStudyRelated currentSlug={study.slug} />
     </>
   );

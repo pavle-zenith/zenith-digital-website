@@ -58,12 +58,15 @@ export default function PartnershipsPage() {
       <PartnershipsHero />
       <PartnerProblems />
       <PartnerTracks />
+      {/* Proof sits directly under the two tracks: the reader has just picked
+          a lane, so the partners who took each one are the next thing they
+          want. Everything below is the mechanics of working together. */}
+      <PartnerStories />
       <PartnerProcess />
       <PartnerServices />
       <PartnerPricing />
       <PartnerBenefits />
       <PartnerExpectations />
-      <PartnerStories />
       <Faq data={pFaq} />
       <PartnerApply />
     </>

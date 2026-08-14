@@ -20,10 +20,30 @@ export const INDUSTRIES = {
   courses: "Courses & education",
   ecommerce: "E-commerce & retail",
   agencies: "Agencies & white-label",
+  property: "Property & real estate",
   services: "Professional services",
 } as const;
 
 export type IndustrySlug = keyof typeof INDUSTRIES;
+
+/**
+ * Shorter labels for the filter pills only. Nine full-length pills need ~1474px
+ * and never fit one row, so the last one dropped alone to a second row. The
+ * trimmed set fits on a single row from lg up. Cards keep the full INDUSTRIES
+ * label in their corner tag, so nothing is lost, and the pill still reads
+ * unambiguously next to the "All" that precedes it.
+ */
+export const INDUSTRY_FILTER_LABELS: Record<IndustrySlug, string> = {
+  travel: "Travel",
+  saas: "SaaS",
+  marine: "Marine",
+  coaches: "Coaches",
+  courses: "Courses",
+  ecommerce: "E-commerce",
+  agencies: "Agencies",
+  property: "Property",
+  services: "Professional services",
+};
 
 export type CaseStudyCard = {
   client: string;
@@ -49,7 +69,24 @@ export type CaseStudyCard = {
   liveUrl?: string;
 };
 
-// Full project grid (figures ported from the live site).
+/**
+ * Full project grid.
+ *
+ * OWNER — read before launch. Two kinds of card live here:
+ *
+ * 1. The first eleven carry REAL figures ported from the live site.
+ * 2. Everything below "Wellington Web Co" is COPY WRITTEN TO FILL THE GRID at
+ *    your request. The `story` lines are invented. The `metric` lines are
+ *    deliberately NOT invented numbers: each one states the scope of the build
+ *    ("Boat and yacht marketplace") rather than a result ("+240% bookings"),
+ *    because a fabricated percentage on a named client's card is a claim about
+ *    that client's business and reads as real. Send me the actual numbers and
+ *    I'll swap them in. Anything still describing scope at launch is a card
+ *    that never got its figure.
+ *
+ * Thumbs are the 4:3 shots from /case-study-grid. Cards with no shot fall back
+ * to their white wordmark, then to the client name set in the display face.
+ */
 export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Knode AI",
@@ -59,7 +96,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     story: "Full SaaS site and landing page from scratch in 3 weeks",
     thumb: "/portfolio-slider/knode-ai.jpg",
     logo: "/logos-white/knode.png",
-    liveUrl: "https://knode.ai",
+    liveUrl: "https://www.knode.ai",
   },
   {
     client: "Scottish Luxury Experience",
@@ -67,8 +104,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "travel",
     metric: "€500k pipeline value",
     story: "The UK's best-looking travel website, live in 4 weeks",
-    thumb: "/portfolio-slider/scottishluxuryexperience.jpg",
-    liveUrl: "https://thescottishluxuryexperience.com",
+    thumb: "/case-study-grid/scottish-luxury-experience.webp",
+    liveUrl: "https://www.scottishluxuryexperience.com",
   },
   {
     client: "Bel'Istria",
@@ -76,9 +113,9 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "travel",
     metric: "257% YoY impressions",
     story: "Croatia transfer and travel booking experience, 35+ pages migrated",
-    thumb: "/portfolio-slider/belistria.jpg",
+    thumb: "/portfolio-blocky/belistria.png",
     logo: "/logos-white/belistria.png",
-    liveUrl: "https://belistria.eu",
+    liveUrl: "https://www.belistria.eu",
   },
   {
     client: "Fort Lauderdale Dock Rentals",
@@ -97,8 +134,9 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "agencies",
     metric: "220% more bookings",
     story: "15+ landing pages driving €1M+ in client campaign revenue",
+    thumb: "/case-study-grid/mod-digital.webp",
     logo: "/logos-white/mod.png",
-    // TODO(owner): confirm live URL
+    liveUrl: "https://www.moddigital.co.uk/ai-ready-websites",
   },
   {
     client: "Hunting Brook Gardens",
@@ -107,8 +145,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "€200k+ course earnings",
     story:
       "Landing pages and course infrastructure for an award-winning gardener",
-    thumb: "/portfolio-slider/hunting-brook.jpg",
-    liveUrl: "https://unlimited.huntingbrookgardens.com",
+    thumb: "/case-study-grid/hunting-brook.webp",
+    liveUrl: "https://unlimited.huntingbrookgardens.com/plantsperson-course",
   },
   {
     client: "Jim Steele",
@@ -117,8 +155,9 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "10+ venues interested",
     story:
       "Marketing page and lead-capture ecosystem for a UK motivational speaker",
+    thumb: "/case-study-grid/jim-steele.webp",
     logo: "/logos-white/jimsteele.png",
-    liveUrl: "https://jimsteelespeaker.com",
+    liveUrl: "https://www.jimsteelespeaker.com",
   },
   {
     client: "Stilby",
@@ -126,8 +165,9 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "ecommerce",
     metric: "3 languages, 2-week launch",
     story: "Multilingual sites to expand into Montenegro and Slovakia",
+    thumb: "/case-study-grid/stilby.webp",
     logo: "/logos-white/stilby.png",
-    liveUrl: "https://stilby.eu",
+    liveUrl: "https://www.stilby.eu",
   },
   {
     client: "Techtonnik",
@@ -135,8 +175,9 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "services",
     metric: "10+ projects delivered",
     story: "Web fulfillment partner since 2023 across 7+ industries",
+    thumb: "/case-study-grid/techtonnik.webp",
     logo: "/logos-white/techtonnik.png",
-    liveUrl: "https://techtonnik.com",
+    liveUrl: "https://www.techtonnik.com",
   },
   {
     client: "Capacity",
@@ -144,8 +185,9 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "agencies",
     metric: "5+ consulting projects",
     story: "Fractional web design team leading design & dev operations",
+    thumb: "/case-study-grid/capacity.webp",
     logo: "/logos-white/capacity.png",
-    liveUrl: "https://wearecapacity.co",
+    liveUrl: "https://www.wearecapacity.co",
   },
   {
     client: "Genroks AI",
@@ -154,8 +196,215 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "Conversion skyrocketed post-rebrand",
     metricIsQuote: true,
     story: "Two web identities for an AI compliance startup",
+    thumb: "/case-study-grid/genroks.webp",
     logo: "/logos-white/genroks.png",
-    // TODO(owner): confirm live URL
+    liveUrl: "https://www.genroks.com",
+  },
+
+  // ---- Everything below has placeholder copy. See the note above. ----
+
+  {
+    client: "Wellington Web Co",
+    slug: "wellington-web-co",
+    industry: "agencies",
+    // Grounded in Finlay's testimonial, which is the one real thing here.
+    metric: "Dozens of local business sites",
+    story: "Design, build, and hosting behind a Scottish agency's own brand",
+    // Same shot the partnerships page uses for this partner: 4:3, so it drops
+    // into the card exactly like the /case-study-grid set.
+    thumb: "/partners/wellington-web-co.webp",
+    liveUrl: "https://wellingtonwebco.com",
+  },
+  {
+    client: "AdVantage Media",
+    slug: "advantage-media",
+    industry: "agencies",
+    metric: "White-label production partner",
+    story: "Conversion-driven small business sites shipped under their brand",
+    thumb: "/case-study-grid/advantage-media.webp",
+    logo: "/logos-white/advantage.png",
+    liveUrl: "https://www.advantage-media-marketing.com",
+  },
+  {
+    client: "Just Stay",
+    slug: "just-stay",
+    industry: "travel",
+    metric: "Booking and property management build",
+    story: "Short-let and contractor stays platform for a UK Airbnb superhost",
+    thumb: "/case-study-grid/just-stay.webp",
+    liveUrl: "https://www.juststaytoday.co.uk",
+  },
+  {
+    client: "Yacht Junky",
+    slug: "yacht-junky",
+    industry: "marine",
+    metric: "Boat and yacht marketplace",
+    story: "Multi-seller listing platform for private sellers and dealers",
+    thumb: "/case-study-grid/yacht-junky.webp",
+    liveUrl: "https://moddigital.wixstudio.com/yacht-junky",
+  },
+  {
+    client: "Highland Fling",
+    slug: "highland-fling",
+    industry: "travel",
+    metric: "Adventure booking platform",
+    story: "Bungee and adrenaline experience bookings across Scotland",
+    thumb: "/case-study-grid/highland-fling.webp",
+    liveUrl: "https://moddigital.wixstudio.com/highlandfling",
+  },
+  {
+    client: "Villa Maria",
+    slug: "villa-maria",
+    industry: "travel",
+    metric: "Direct booking site",
+    story: "Riverside apartments and rooms taking bookings without the OTAs",
+    thumb: "/case-study-grid/villa-maria.webp",
+    liveUrl: "https://villamarijakanjiza.rs",
+  },
+  {
+    client: "St Matthew Place",
+    slug: "st-matthew-place",
+    industry: "property",
+    metric: "Development launch site",
+    story: "Sales site for a luxury apartment development in Boka Kotorska",
+    thumb: "/case-study-grid/st-matthew-place.webp",
+    liveUrl: "https://www.saintmatthewplace.com",
+  },
+  {
+    client: "Superstan",
+    slug: "superstan",
+    industry: "property",
+    metric: "Property listing portal",
+    story: "Searchable listings and enquiry routing for an estate agency",
+    thumb: "/case-study-grid/superstan.webp",
+    liveUrl: "https://superstanbg.rs",
+  },
+  {
+    client: "NotYou Brand",
+    slug: "notyou-brand",
+    industry: "ecommerce",
+    metric: "Streetwear storefront",
+    story: "Drop-driven store and lookbook for a creative apparel label",
+    thumb: "/case-study-grid/notyou-brand.webp",
+    liveUrl: "https://notyoubrand.com",
+  },
+  {
+    client: "Lepa Couture",
+    slug: "lepa-couture",
+    industry: "ecommerce",
+    // Marko's testimonial calls it a prestige Shopify site, so this much is real.
+    metric: "Prestige Shopify storefront",
+    story: "Made-to-order couture catalogue with per-piece sizing",
+    thumb: "/case-study-grid/lepa-couture.webp",
+    liveUrl: "https://www.lepacouture.com",
+  },
+  {
+    client: "Bradsells",
+    slug: "bradsells",
+    industry: "ecommerce",
+    metric: "Craft spirits brand site",
+    story: "Scottish coffee liqueur brand story and direct sales",
+    thumb: "/case-study-grid/bradsells.webp",
+    liveUrl: "https://distilnation.com/bradsells",
+  },
+  {
+    client: "Destilerija Maodus",
+    slug: "destilerija-maodus",
+    industry: "ecommerce",
+    metric: "Distillery brand and shop",
+    story: "Illustrated brand site and gift ordering for a rakija distillery",
+    thumb: "/case-study-grid/destilerija-maodus.webp",
+    liveUrl: "https://destilerija-maodus-website.vercel.app",
+  },
+  {
+    client: "Destilerija Gorska",
+    slug: "destilerija-gorska",
+    industry: "ecommerce",
+    metric: "Distillery brand site",
+    story: "Product storytelling for a small-batch fruit brandy producer",
+    thumb: "/case-study-grid/destilerija-gorska.webp",
+    liveUrl: "https://destilerijagorska.rs",
+  },
+  {
+    client: "ATW Trucking",
+    slug: "atw-trucking",
+    industry: "services",
+    metric: "Logistics site rebuild",
+    story: "Freight, logistics, and heavy equipment shipping for an Indiana carrier",
+    thumb: "/case-study-grid/atw-trucking.webp",
+    liveUrl: "https://www.atwtrucking.com",
+  },
+  {
+    client: "LMF HR",
+    slug: "lmf-hr",
+    industry: "services",
+    // Les Marie's testimonial supplies this one.
+    metric: "12+ client sites delivered",
+    story: "HR and staffing site, plus the home care sites built alongside it",
+    thumb: "/case-study-grid/lmfhr.webp",
+    liveUrl: "https://www.lmfhr.com",
+  },
+  {
+    client: "Pressure Test Scotland",
+    slug: "pressure-test-scotland",
+    industry: "services",
+    metric: "Instant-quote lead capture",
+    story: "Quote form and service pages for a Scotland-wide pipe testing firm",
+    thumb: "/case-study-grid/pressure-test-scotland.webp",
+    liveUrl: "https://www.pressuretestscotland.co.uk",
+  },
+  {
+    client: "LORAK Films",
+    slug: "lorak-films",
+    industry: "services",
+    metric: "Production company portfolio",
+    story: "Reel-led portfolio and case studies for a film production crew",
+    thumb: "/case-study-grid/lorak-films.webp",
+    liveUrl: "https://www.lorakfilms.com",
+  },
+  {
+    client: "Creatify Collective",
+    slug: "creatify-collective",
+    industry: "agencies",
+    metric: "Creative studio portfolio",
+    story: "Selected work site for a fashion, lifestyle, and automotive studio",
+    thumb: "/case-study-grid/creatify-collective.webp",
+    liveUrl: "https://www.creatifycollective.co",
+  },
+  {
+    client: "Bianomics",
+    slug: "bianomics",
+    industry: "services",
+    metric: "Consultancy positioning site",
+    story: "Brand, events, and operations offer pulled into one narrative",
+    thumb: "/case-study-grid/bianomics.webp",
+  },
+  {
+    client: "Katie Hailey",
+    slug: "katie-hailey",
+    industry: "coaches",
+    metric: "Practitioner booking site",
+    story: "Yoga, sound healing, and retreat bookings for a UK practitioner",
+    thumb: "/case-study-grid/katie-hailey.webp",
+    liveUrl: "https://www.katiehailey.com",
+  },
+  {
+    client: "Kevan Christie",
+    slug: "kevan-christie",
+    industry: "coaches",
+    metric: "Author and book launch site",
+    story: "Debut novel launch, archives, and press for an Edinburgh journalist",
+    thumb: "/case-study-grid/kevan-christie.webp",
+    liveUrl: "https://www.kevanchristie.com",
+  },
+  {
+    client: "Iskra",
+    slug: "iskra",
+    industry: "saas",
+    metric: "App landing and onboarding",
+    story: "Landing page and store funnel for a quit-smoking tracker app",
+    thumb: "/case-study-grid/iskra.webp",
+    liveUrl: "https://www.iskraclub.com",
   },
   {
     client: "MindEd",
@@ -197,7 +446,7 @@ export const caseStudies = {
       client: "Bel'Istria",
       slug: "belistria",
       logo: "/logos-white/belistria.png",
-      thumb: "/casestudies/belistria.jpg",
+      thumb: "/portfolio-blocky/belistria.png",
       title:
         "Crafting an immersive Croatia private transfer and travel booking experience in Wix Studio",
       stats: [

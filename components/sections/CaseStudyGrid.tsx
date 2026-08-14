@@ -9,6 +9,7 @@ import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
 import {
   INDUSTRIES,
+  INDUSTRY_FILTER_LABELS,
   caseStudyCards,
   detailSlugs,
   type IndustrySlug,
@@ -61,12 +62,15 @@ function GridInner({
 
   return (
     <Section tone="light" frameClassName="!py-12 md:!py-20">
-      {/* Filter pills — a horizontal scroll rail on phones (nine stacked rows
-          is too much), wrapping normally from md up. The phone bleed uses
-          max-md utilities rather than .frame-bleed: that class is unlayered
-          CSS, so a md:mx-0 utility can never outrank it and the rail would go
-          on ignoring the section gutter on desktop. */}
-      <div className="mb-10 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] max-md:mx-[calc(-1*clamp(20px,4vw,64px))] max-md:px-[clamp(20px,4vw,64px)] md:flex-wrap md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
+      {/* Filter pills — one row, always. The row never wraps: wrapping is what
+          stranded a lone pill on a second row. The nine pills measure 947px, so
+          they sit still from xl up (1176px of frame at 1280) and the row becomes
+          a horizontal scroll rail below that. The boundary is xl rather than lg
+          because at 1024 the frame is only 940px, which would spill 7px of pill
+          outside it. The bleed uses max-xl utilities rather than .frame-bleed:
+          that class is unlayered CSS, so an xl:mx-0 utility could never outrank
+          it and the rail would go on ignoring the section gutter on desktop. */}
+      <div className="mb-10 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] max-xl:mx-[calc(-1*clamp(20px,4vw,64px))] max-xl:px-[clamp(20px,4vw,64px)] xl:overflow-visible xl:pb-0 [&::-webkit-scrollbar]:hidden">
         <FilterPill active={industry === null} onClick={() => onSelect?.(null)}>
           All
         </FilterPill>
@@ -76,7 +80,7 @@ function GridInner({
             active={industry === slug}
             onClick={() => onSelect?.(slug)}
           >
-            {INDUSTRIES[slug]}
+            {INDUSTRY_FILTER_LABELS[slug]}
           </FilterPill>
         ))}
       </div>

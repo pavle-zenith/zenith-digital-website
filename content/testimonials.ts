@@ -77,7 +77,7 @@ export const tHero = {
   // Every figure here already appears elsewhere on the site.
   stats: [
     { value: "5/5", label: "Rated on Clutch" },
-    { value: "150+", label: "Websites shipped" },
+    { value: "100+", label: "Websites shipped" },
     { value: "€1M+", label: "Client revenue generated" },
   ] as Metric[],
 };

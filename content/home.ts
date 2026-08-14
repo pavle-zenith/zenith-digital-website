@@ -27,7 +27,7 @@ export const hero = {
   subhead:
     "We design, build, and launch results-driven Wix Studio websites. And when you outgrow Wix, we build custom.",
   proof: {
-    label: "150+ Websites Created",
+    label: "100+ Websites Created",
     avatars: [
       "/avatars/flynn-blackie.jpg",
       "/avatars/uros-stanimirovic.jpg",
@@ -72,7 +72,7 @@ export const hero = {
     {
       client: "Scottish Luxury Experience",
       tag: "Travel",
-      metric: "€500k pipeline",
+      metric: "$521k in 7 months",
       // The Safari-chrome shot on the mountain-and-lake backdrop, 4:3.
       image: "/portfolio-blocky/scottish-luxury-experience.png",
       href: "/case-studies",
@@ -420,8 +420,8 @@ export const featuredWork = {
     {
       client: "Scottish Luxury Experience",
       industry: "Travel",
-      metric: "€500k",
-      metricLabel: "pipeline value",
+      metric: "$521k",
+      metricLabel: "revenue in 7 months",
       image: "/work/work-2.jpg",
       href: "/case-studies",
     },
@@ -1037,7 +1037,7 @@ export const caseStudiesMenu = {
     },
     {
       label: "Scottish Luxury Experience",
-      desc: "€500k travel pipeline",
+      desc: "$521k in 7 months",
       href: "/case-studies",
       tag: "",
     },

@@ -29,7 +29,7 @@ export const bookHero = {
     href: "https://cal.com/pavle-zenith/discovery-call",
   },
   proof: {
-    label: "150+ Websites Created",
+    label: "100+ Websites Created",
     avatars: [
       "/avatars/flynn-blackie.jpg",
       "/avatars/uros-stanimirovic.jpg",

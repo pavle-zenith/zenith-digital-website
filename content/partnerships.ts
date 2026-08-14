@@ -53,7 +53,7 @@ export const pHero = {
   heading:
     "White label website development services for digital agencies and consultants",
   subhead:
-    "Partner with the team behind 150+ launches. Unbranded Wix Studio and custom builds, delivered under your agency's name, with the quality your clients think you built in-house.",
+    "Partner with the team behind 100+ launches. Unbranded Wix Studio and custom builds, delivered under your agency's name, with the quality your clients think you built in-house.",
   ctas: [
     {
       label: "Apply to partner",

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Section } from "@/components/ui/Section";
 import type { CaseStudyDetail } from "@/content/case-studies";
 
@@ -57,14 +59,30 @@ export function CaseStudyIntro({ study }: { study: CaseStudyDetail }) {
               Scope
             </h2>
             <ul className="mt-6 border-t border-light-border">
-              {scope.map((item) => (
-                <li
-                  key={item}
-                  className="border-b border-light-border py-3.5 font-display font-medium"
-                >
-                  {item}
-                </li>
-              ))}
+              {scope.map((item) => {
+                const label = typeof item === "string" ? item : item.label;
+                const href = typeof item === "string" ? null : item.href;
+                return (
+                  <li
+                    key={label}
+                    className="border-b border-light-border py-3.5 font-display font-medium"
+                  >
+                    {href ? (
+                      <Link
+                        href={href}
+                        className="group inline-flex items-center gap-1.5 transition hover:text-accent"
+                      >
+                        {label}
+                        <span aria-hidden className="btn-arrow">
+                          &rarr;
+                        </span>
+                      </Link>
+                    ) : (
+                      label
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ) : null}

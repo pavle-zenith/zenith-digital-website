@@ -96,7 +96,12 @@ export type ServicePageContent = {
 
   related: {
     heading: string;
-    items: { label: string; href: string; desc: string }[];
+    /**
+     * The sibling services render as homepage-style cards and need `image`.
+     * The single hub item (href "/services") renders as the full-width strip
+     * CTA instead and carries no image.
+     */
+    items: { label: string; href: string; desc: string; image?: string }[];
   };
 
   finalCta: {

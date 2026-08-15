@@ -224,11 +224,13 @@ export const seoAeoPpc: ServicePageContent = {
       {
         label: "Landing pages",
         href: "/services/landing-pages",
+        image: "/services/landing-pages.webp",
         desc: "The dedicated pages campaign traffic converts on, built in about a week.",
       },
       {
         label: "Website migration",
         href: "/services/website-migration",
+        image: "/services/migrations.jpg",
         desc: "Changing platform without handing back the rankings you've built.",
       },
       {

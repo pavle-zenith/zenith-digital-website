@@ -239,11 +239,13 @@ export const websiteMigration: ServicePageContent = {
       {
         label: "Wix Studio website design",
         href: "/services/wix-studio-website-design",
+        image: "/services/web-design.webp",
         desc: "No existing site worth carrying over? Start from a blank canvas instead.",
       },
       {
         label: "SEO, AEO & PPC",
         href: "/services/seo-aeo-ppc",
+        image: "/services/seo-aeo.webp",
         desc: "Protecting rankings is the floor. This is the work that grows them afterwards.",
       },
       {

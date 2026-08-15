@@ -249,11 +249,13 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       {
         label: "Website migration",
         href: "/services/website-migration",
+        image: "/services/migrations.jpg",
         desc: "Already have a site with rankings worth protecting? Move it across without losing them.",
       },
       {
         label: "SEO, AEO & PPC",
         href: "/services/seo-aeo-ppc",
+        image: "/services/seo-aeo.webp",
         desc: "Once the site is live, the campaigns and search work that bring people to it.",
       },
       {

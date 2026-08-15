@@ -218,11 +218,13 @@ export const landingPages: ServicePageContent = {
       {
         label: "SEO, AEO & PPC",
         href: "/services/seo-aeo-ppc",
+        image: "/services/seo-aeo.webp",
         desc: "The campaigns that send traffic to the page, managed alongside it.",
       },
       {
         label: "Wix Studio website design",
         href: "/services/wix-studio-website-design",
+        image: "/services/web-design.webp",
         desc: "When the whole site needs the treatment, not just one campaign page.",
       },
       {

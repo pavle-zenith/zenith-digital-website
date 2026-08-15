@@ -463,7 +463,7 @@ export const caseStudies = {
       client: "MOD Digital",
       slug: "mod-digital",
       logo: "/logos-white/mod.png",
-      thumb: "/case-study-grid/mod-digital.webp",
+      thumb: "/portfolio-blocky/mod-digital.webp",
       title:
         "Three years as the build team behind a UK growth agency's campaigns",
       stats: [

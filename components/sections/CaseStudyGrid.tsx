@@ -56,9 +56,20 @@ function GridInner({
   industry: IndustrySlug | null;
   onSelect: ((slug: IndustrySlug | null) => void) | null;
 }) {
-  const visible = industry
-    ? caseStudyCards.filter((c) => c.industry === industry)
-    : caseStudyCards;
+  // Studies with a written detail page lead the grid, in every filtered view
+  // too: those cards say "Read the case study" and keep the reader on the site,
+  // where the rest send them straight out to the client's domain. Sorting here
+  // rather than hand-ordering the data means shipping a new study promotes it
+  // automatically. `sort` is stable, so the data order holds within each group.
+  const visible = (
+    industry
+      ? caseStudyCards.filter((c) => c.industry === industry)
+      : caseStudyCards
+  )
+    .slice()
+    .sort(
+      (a, b) => Number(detailSlugs.has(b.slug)) - Number(detailSlugs.has(a.slug)),
+    );
 
   return (
     <Section tone="light" frameClassName="!py-12 md:!py-20">

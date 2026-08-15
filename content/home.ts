@@ -1056,11 +1056,14 @@ export const caseStudiesMenu = {
       tag: "New",
     },
   ],
+  // Only ever point this at a study with a shipped detail page. It pointed at
+  // /case-studies/mod-digital, which 404s: MOD has a grid card but no page.
   featured: {
     label: "Featured case study",
-    title: "How we became the build team behind MOD Digital's campaigns.",
-    image: "/work/work-1.jpg",
-    href: "/case-studies/mod-digital",
+    title:
+      "How Bel'Istria went from losing local search to the answer AI recommends.",
+    image: "/portfolio-blocky/belistria.png",
+    href: "/case-studies/belistria",
   },
 };
 

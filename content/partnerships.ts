@@ -282,7 +282,9 @@ export const pPricing = {
       name: "Fixed",
       icon: "file-check",
       badge: "Per project",
-      price: "From €1,250",
+      // Owner decision (Aug 2026): partner rate moved from €1,250 to €1,000
+      // when the €1,250 retail price went live on /services/landing-pages.
+      price: "From €1,000",
       priceNote: "per build",
       summary:
         "Overflow work priced per project. Scope, price, and timeline agreed in writing before we start.",
@@ -333,7 +335,7 @@ export const pBenefits = {
     {
       icon: "gem",
       title: "Premium build quality",
-      body: "The same team and standard behind Knode's $10M raise site and 220% booking growth for MOD Digital. Not template flips.",
+      body: "The same team and standard behind Knode's $10M raise site and Scottish Luxury Experience's $521k launch. Not template flips.",
     },
     {
       icon: "eyeOff",

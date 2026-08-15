@@ -7,15 +7,9 @@ import type { ServicePageContent } from "./types";
  * Targets: landing page design agency · wix landing page · campaign landing
  * pages.
  *
- * NOT PUBLISHED YET. `publish: false` keeps this page out of routing, the
- * services hub, and the sitemap until the owner sets the retail price below.
- * Shipping a page whose pricing block reads "€[to set]" would undercut the
- * published-pricing argument the whole page rests on.
- *
- * OWNER — to ship this page:
- *   1. set `pricing.from` and `schema.priceFrom` to the retail landing-page
- *      price (must sit ABOVE the €1,250 partner rate quoted on /partnerships)
- *   2. flip `publish` to true
+ * PUBLISHED Aug 2026. Retail price set by owner: €1,250 fixed per page, with
+ * the partner rate on /partnerships moved down to €1,000 in the same decision,
+ * so the retail floor sits above the partner rate as designed.
  *
  * Testimonial note: the handoff asked for a second Flynn pull here, but there
  * is only one real Flynn quote on record and page 3 uses it. Rather than split
@@ -34,7 +28,7 @@ const ctas: CtaLink[] = [
 
 export const landingPages: ServicePageContent = {
   slug: "landing-pages",
-  publish: false,
+  publish: true,
   seo: {
     title: "High-converting landing pages, live in a week | Zenith Digital",
     description:
@@ -144,8 +138,7 @@ export const landingPages: ServicePageContent = {
 
   pricing: {
     heading: "What a landing page costs",
-    // OWNER: set this and `schema.priceFrom`, then flip `publish` to true.
-    from: "From €[retail price to set]",
+    from: "From €1,250",
     fromNote: "fixed, per page",
     note: "One page, one fixed number, agreed before the brief call ends. Agencies reselling under their own brand pay the partner rate published on the partnerships page instead.",
     drivers: [
@@ -252,6 +245,6 @@ export const landingPages: ServicePageContent = {
   schema: {
     description:
       "Conversion-first campaign landing page design and build on Wix Studio. Copy, design, integrations, analytics events, and a speed pass, live in about a week.",
-    // OWNER: set alongside pricing.from before publishing.
+    priceFrom: "1250",
   },
 };

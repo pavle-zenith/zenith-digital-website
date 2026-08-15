@@ -9,10 +9,10 @@ import { whyWixItem } from "./faq";
  * zero content rework.
  *
  * OWNER — still to set (visible [bracketed] placeholders until then):
- *   - retail landing-page price (must sit ABOVE the €1,250 partner rate)
  *   - typical build start window (FAQ "How fast can we start?")
- * Partner prices (€1,250 / €1,099) appear ONLY in the white-label teaser,
- * framed as partner pricing.
+ * Retail landing-page price set Aug 2026: €1,250 (partner rate moved to
+ * €1,000). Partner prices (€1,000 / €1,099) appear ONLY in the white-label
+ * teaser, framed as partner pricing.
  */
 
 // 1. Hero (dark, compact) + numbered anchor index
@@ -199,8 +199,7 @@ export const sServices: ServiceEntry[] = [
     ],
     meta: [
       { label: "Timeline: from 1 week" },
-      // OWNER: retail landing-page price — must sit above the €1,250 partner rate.
-      { label: "From €[retail price to set]", href: "/#pricing" },
+      { label: "From €1,250", href: "/services/landing-pages" },
     ],
     cta: { label: "Brief a landing page", href: "/book-a-call" },
     slides: [
@@ -343,7 +342,7 @@ export const sServices: ServiceEntry[] = [
     when: "You're an agency or freelancer with more demand than build capacity. We build under your brand; your client never hears our name.",
     deliverables: [
       "Unbranded deliverables & NDA",
-      "Landing pages from €1,250 (partner pricing)",
+      "Landing pages from €1,000 (partner pricing)",
       "Production retainers from €1,099/mo (30 hrs)",
       "1–2 week turnarounds",
       "Dedicated partner channel",
@@ -428,7 +427,7 @@ export const sFaq = {
     },
     {
       q: "What does it cost?",
-      a: "Fixed prices, published: sites from €2,500, landing pages from €[retail price to set], full tiers on the pricing page. No retainers required, no surprise invoices.",
+      a: "Fixed prices, published: sites from €2,500, landing pages from €1,250, full tiers on the pricing page. No retainers required, no surprise invoices.",
     },
   ],
 };

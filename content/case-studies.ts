@@ -128,13 +128,14 @@ export const caseStudyCards: CaseStudyCard[] = [
       "Booking and lead-capture ecosystem for Florida's premier dock charter",
     thumb: "/portfolio-slider/fort-lauderdale-dock-rental.jpg",
     logo: "/logos-white/foxstays.png",
-    liveUrl: "https://fortlauderdaledockrental.com",
+    // No live link by choice: the client has since redesigned the site, so
+    // the shots here are the Zenith build, not what's live today.
   },
   {
     client: "MOD Digital",
     slug: "mod-digital",
     industry: "agencies",
-    metric: "220% more bookings",
+    metric: "10+ brands shipped together",
     story: "15+ landing pages driving €1M+ in client campaign revenue",
     thumb: "/case-study-grid/mod-digital.webp",
     logo: "/logos-white/mod.png",
@@ -144,7 +145,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     client: "Hunting Brook Gardens",
     slug: "hunting-brook-gardens",
     industry: "courses",
-    metric: "€200k+ course earnings",
+    metric: "€140k in course sales",
     story:
       "Landing pages and course infrastructure for an award-winning gardener",
     thumb: "/case-study-grid/hunting-brook.webp",
@@ -195,9 +196,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     client: "Genroks AI",
     slug: "genroks-ai",
     industry: "saas",
-    metric: "Conversion skyrocketed post-rebrand",
-    metricIsQuote: true,
-    story: "Two web identities for an AI compliance startup",
+    metric: "10+ ISO deals since launch",
+    story: "Custom-coded rebrand and AEO for an AI compliance startup",
     thumb: "/case-study-grid/genroks.webp",
     logo: "/logos-white/genroks.png",
     liveUrl: "https://www.genroks.com",
@@ -231,8 +231,9 @@ export const caseStudyCards: CaseStudyCard[] = [
     client: "Just Stay",
     slug: "just-stay",
     industry: "travel",
-    metric: "Booking and property management build",
-    story: "Short-let and contractor stays platform for a UK Airbnb superhost",
+    metric: "Two funnels, live in 4 weeks",
+    story:
+      "Short-let booking funnel and landlord pipeline for a UK Airbnb superhost",
     thumb: "/case-study-grid/just-stay.webp",
     liveUrl: "https://www.juststaytoday.co.uk",
   },
@@ -385,7 +386,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     client: "Katie Hailey",
     slug: "katie-hailey",
     industry: "coaches",
-    metric: "Practitioner booking site",
+    metric: "Figma to live in 1.5 weeks",
     story: "Yoga, sound healing, and retreat bookings for a UK practitioner",
     thumb: "/case-study-grid/katie-hailey.webp",
     liveUrl: "https://www.katiehailey.com",
@@ -459,18 +460,19 @@ export const caseStudies = {
       panel: "#0e2a1f",
     },
     {
-      client: "Fort Lauderdale Dock Rentals",
-      slug: "fort-lauderdale-dock-rentals",
-      logo: "/logos-white/foxstays.png",
-      thumb: "/casestudies/fortlauderdale.jpg",
+      client: "MOD Digital",
+      slug: "mod-digital",
+      logo: "/logos-white/mod.png",
+      thumb: "/case-study-grid/mod-digital.webp",
       title:
-        "Building a booking and lead-capture website ecosystem for Florida's premier yacht and dock charter",
+        "Three years as the build team behind a UK growth agency's campaigns",
       stats: [
-        { value: "30+", label: "Warm leads" },
-        { value: "50+", label: "Docks available" },
+        { value: "€1M+", label: "Campaign revenue" },
+        { value: "10+", label: "Brands shipped" },
       ],
-      liveUrl: "https://foxstays.com",
-      panel: "#3a2410",
+      liveUrl: "https://www.moddigital.co.uk",
+      // OWNER: confirm MOD brand hex for the panel; placeholder navy for now.
+      panel: "#0f1c2e",
     },
     {
       client: "Scottish Luxury Experience",
@@ -952,6 +954,459 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         "Yacht Junky case study | A marketplace built in Wix Studio | Zenith Digital",
       description:
         "How Zenith Digital built a multi-seller boat and yacht marketplace natively in Wix Studio: Velo-powered search and filters, seller notifications, enquiry history, and currency conversion, with no external stack.",
+    },
+  },
+  {
+    ...cardOf("mod-digital"),
+    // Partnership facts confirmed by owner (Aug 2026): met 2022, working
+    // officially since 2023, per-project basis, MOD owns strategy/ads/client
+    // comms, Zenith owns design/build/technical. Project list from owner.
+    // 220% bookings figure retired by owner decision; quantity of work leads.
+    headline:
+      "How MOD Digital ships premium websites without an in-house build team",
+    stats: [
+      { value: "3 years", label: "As MOD Digital's build partner" },
+      { value: "10+", label: "Client brands shipped together" },
+      { value: "€1M+", label: "Campaign revenue on partnership builds" },
+    ],
+    meta: {
+      industry: INDUSTRIES.agencies,
+      engagementType: "Agency production partnership",
+      timeline: "Since 2023, ongoing",
+      platform: "Wix Studio + Velo",
+      liveUrl: "https://www.moddigital.co.uk",
+    },
+    challenge: [
+      "MOD Digital is a UK growth marketing agency. Its campaigns live or die on the pages they land on, and every new engagement needs those pages designed, built, and live before the first pound of ad spend. That leaves a growing agency with two bad options: carry the overhead of an in-house build team, or gamble the campaign calendar on freelancers who might not answer next month.",
+      "The two teams met in 2022 and started working officially in 2023. The brief has stayed the same since: MOD sells and runs the growth, Zenith builds everything the growth runs on, and no client ever feels a gap between the two.",
+    ],
+    heroShot: {
+      src: "/case-study-grid/mod-digital.webp",
+      alt: "MOD Digital's AI-ready websites landing page in a browser window, one of the pages Zenith built for the agency itself",
+    },
+    introduction:
+      "MOD Digital is a UK growth marketing agency. Since 2023, Zenith Digital has been its web design and development partner, building the landing pages, e-commerce stores, full websites, and custom platforms its campaigns run on. Three years in, that covers 10+ client brands, 15+ landing pages, and a set of pages for MOD itself, most of it built in Wix Studio.",
+    approach: [
+      {
+        heading: "A fractional team, not a vendor",
+        body: "The arrangement works because it doesn't feel like outsourcing from the inside. Zenith joins MOD's client meetings and leads the web parts of them when that's useful. Briefs get challenged, not just executed. The lanes are clean: MOD owns strategy, ads, and the client relationship, Zenith owns design, build, and everything technical. After three years the handoff between the two has no visible join, which is the entire point.",
+      },
+      {
+        heading: "Whatever the campaign needs built",
+        body: "There's no retainer and no fixed scope. Each project arrives on its own terms: campaign landing pages, e-commerce stores, full site builds, and custom Velo code when a brief outgrows the page. Under the partnership Zenith has built for Hunting Brook Gardens, Issipay, Cognifit, Kevan Christie, JMJ Financials, Coastal Oak Insurance, Bradsells, and MOD's own landing pages, among others. The range is the feature: MOD can say yes to a brief knowing the build side is covered.",
+      },
+      {
+        heading: "Proof you can click through",
+        body: "Two partnership builds have their own case studies on this site. Scottish Luxury Experience is the flagship: a luxury travel site built in four weeks that fronts $521k of booked trips in its first seven months. Yacht Junky is the technical one: a multi-seller boat marketplace built natively in Wix Studio with Velo. Both shipped under the same division of labour described here.",
+      },
+      {
+        heading: "Whose numbers are whose",
+        body: "An honest line matters more in a partnership study than anywhere else. The campaign revenue below belongs to MOD's campaigns; Zenith built the pages those campaigns land on, and claims exactly that. We don't run the ads, and MOD doesn't build the sites. Three years in, neither side has needed to blur that line to look good.",
+      },
+    ],
+    results: [
+      {
+        value: "€1M+",
+        label: "Client campaign revenue on pages built under the partnership",
+        positive: true,
+      },
+      { value: "10+", label: "Client brands designed and built for MOD" },
+      { value: "15+", label: "Landing pages shipped" },
+      { value: "3 years", label: "Running, still per-project" },
+    ],
+    resultsNote:
+      "Three years after MOD Digital first handed Zenith Digital a build, the partnership has shipped 10+ client brands and the pages behind €1M+ of campaign revenue, still on a per-project basis, with no retainer holding it together.",
+    gallery: [
+      {
+        src: "/case-study-grid/mod-digital.webp",
+        alt: "MOD Digital AI-ready websites page in a browser window, built by Zenith under the partnership",
+      },
+      // OWNER: 2-3 lander screenshots (Hunting Brook, Issipay, MOD's own
+      // pages) would show the range here instead of one shot.
+    ],
+    testimonial: quoteOf("flynn-blackie"),
+    techUsed: [
+      { label: "Landing pages", href: "/services/landing-pages" },
+      {
+        label: "Wix Studio design & build",
+        href: "/services/wix-studio-website-design",
+      },
+      "E-commerce builds",
+      "Velo custom code",
+      { label: "White-label partnership", href: "/partnerships" },
+    ],
+    publishedAt: "2026-08-14",
+    cta: {
+      heading: ["Running an agency", "without a build team?"],
+      paragraph:
+        "This is what our partner tracks exist for. A free 20-minute call, and we'll walk you through how white-label production works and what your calendar could hand off first.",
+    },
+    seo: {
+      title: "MOD Digital case study | Agency build partner | Zenith Digital",
+      description:
+        "How Zenith Digital became MOD Digital's web build partner: 10+ client brands, 15+ landing pages, and €1M+ in campaign revenue since 2023, most of it on Wix Studio.",
+    },
+  },
+  {
+    ...cardOf("hunting-brook-gardens"),
+    // Facts from owner (Aug 2026): 7-8 landing pages so far for course
+    // launches and in-person events; courses on Wix Courses; custom Typeform
+    // itinerary signup forms; ongoing 2025-2026; old site was bare bones and
+    // not focused on the course offer; €140k in course sales since the
+    // collaboration started; MOD partnership, Flynn as testimonial voice.
+    headline: "From a bare-bones site to €140k in course sales",
+    stats: [
+      { value: "€140k", label: "Course sales since the collaboration began" },
+      { value: "7+", label: "Landing pages built so far" },
+      { value: "2 years", label: "Of ongoing launch work" },
+    ],
+    meta: {
+      industry: INDUSTRIES.courses,
+      engagementType: "Partnership build with MOD Digital",
+      timeline: "Ongoing, 2025 to 2026",
+      platform: "Wix Courses + Typeform",
+      liveUrl: "https://unlimited.huntingbrookgardens.com/plantsperson-course",
+    },
+    challenge: [
+      "Jimi Blake had the following most course creators would kill for: the reputation of Hunting Brook Gardens, sold-out in-person teaching, and gardeners around the world who wanted more of it. The website wasn't built to carry any of that. It existed, but it was bare bones, and the course offer, the thing the audience actually wanted to buy, was nowhere near the centre of it.",
+      "MOD Digital came in to run the growth around the offer. The brief to Zenith was the build side of that: give every course launch and live event a page built to sell it, and infrastructure a gardener can run without a developer on call.",
+    ],
+    heroShot: {
+      src: "/case-study-grid/hunting-brook.webp",
+      alt: "Hunting Brook Gardens plantsperson course landing page in a browser window, with Jimi Blake's course offer front and centre",
+    },
+    introduction:
+      "Hunting Brook Gardens is where Irish gardener Jimi Blake grows, teaches, and runs his plantsperson courses. Since 2025, Zenith Digital has designed and built the landing pages his course launches and in-person events sell through, seven and counting, hosted on Wix Courses with custom Typeform signup flows, inside the growth system MOD Digital runs. Since the collaboration began, those launches have sold €140k of courses and events.",
+    approach: [
+      {
+        heading: "One launch, one page",
+        body: "Instead of one site asked to sell everything, every course launch and in-person event gets its own landing page, built to match the campaign that feeds it. Seven or eight have shipped so far and the count keeps rising, because the model is repeatable: MOD plans the launch, Zenith builds the page, and the audience lands on something written for exactly the offer they clicked on.",
+      },
+      {
+        heading: "Courses that run themselves",
+        body: "The online courses are hosted on Wix Courses, so the sales page, checkout, and course delivery live in one system the team manages like any other content. No plugin stack to babysit and no developer needed to enrol a student, which matters when the business is a working garden, not a software company.",
+      },
+      {
+        heading: "Typeform where forms need to think",
+        body: "In-person events need more from a signup than a name and an email. The itinerary signup flows are custom-built in Typeform, gathering what each event actually needs ahead of time and keeping the booking experience as considered as the teaching it leads to.",
+      },
+      {
+        heading: "Built launch by launch",
+        body: "This was never a big-bang rebuild. The work has run continuously through 2025 and 2026, page by page, and it has deliberately gone where the revenue is: the launch pages, not a wall-to-wall redesign. Every hour spent has gone into pages that sell something specific. The €140k below belongs to the full system, MOD's campaigns and Zenith's pages together.",
+      },
+    ],
+    results: [
+      {
+        value: "€140k",
+        label:
+          "Course and event sales since the collaboration began (full system, MOD + Zenith)",
+        positive: true,
+      },
+      { value: "7+", label: "Landing pages shipped, more with every launch" },
+    ],
+    resultsNote:
+      "Since the collaboration began, the landing pages Zenith Digital builds inside MOD Digital's Hunting Brook campaigns have carried €140k of course and event sales for Jimi Blake.",
+    gallery: [
+      {
+        src: "/case-study-grid/hunting-brook.webp",
+        alt: "Hunting Brook Gardens course landing page in a browser window, built to sell Jimi Blake's plantsperson course",
+      },
+    ],
+    beforeAfter: {
+      before: "/before-after/huntingbrook-before.jpg",
+      after: "/before-after/huntingbrook-after.jpg",
+    },
+    // Flynn as partner voice, per owner. His signoff covers MOD projects.
+    testimonial: quoteOf("flynn-blackie"),
+    techUsed: [
+      { label: "Landing pages", href: "/services/landing-pages" },
+      "Wix Courses setup",
+      "Typeform signup flows",
+      { label: "Partnership build", href: "/partnerships" },
+    ],
+    publishedAt: "2026-08-14",
+    cta: {
+      heading: ["Selling a course", "from a page that doesn't?"],
+      paragraph:
+        "A free 20-minute call. We'll tell you honestly whether your launch pages are doing the selling, and what it would take to fix them.",
+    },
+    seo: {
+      title:
+        "Hunting Brook case study | €140k in course sales | Zenith Digital",
+      description:
+        "How Zenith Digital builds the landing pages behind Jimi Blake's Hunting Brook courses: 7+ pages on Wix Courses with Typeform signups, and €140k in sales inside MOD Digital's campaigns.",
+    },
+  },
+  {
+    ...cardOf("katie-hailey"),
+    // Facts from owner (Aug 2026): full Wix Studio build from a Figma design
+    // in 1.5 weeks; client handoff sections for self-maintenance; Wix Events
+    // for event booking; CMS/CRM setup.
+    // Framing confirmed by owner (Aug 2026): the Figma design came from
+    // Katie's side; Zenith built it. Development-engagement story stands.
+    headline: "From a finished Figma file to a live site in a week and a half",
+    stats: [
+      { value: "1.5 weeks", label: "Figma to launch" },
+      { value: "3", label: "Systems handed over: CMS, CRM, events" },
+      { value: "100%", label: "Owner-run after handoff" },
+    ],
+    meta: {
+      industry: INDUSTRIES.coaches,
+      engagementType: "Development build",
+      timeline: "1.5 weeks",
+      platform: "Wix Studio",
+      liveUrl: "https://www.katiehailey.com",
+    },
+    challenge: [
+      "Katie Hailey teaches yoga and sound healing and runs retreats and events, and her website design was already done, sitting in Figma. That's where a lot of projects stall: a finished design doesn't take a single booking, and the usual routes from file to live site are a slow dev quote or a rebuild into whatever a template allows.",
+      "The brief was to close that gap without compromising either side of it: build the design as designed, get it live fast, and leave behind a site Katie runs herself, because a solo practitioner shouldn't need a developer on call to update a class schedule.",
+    ],
+    heroShot: {
+      src: "/case-study-grid/katie-hailey.webp",
+      alt: "Katie Hailey website in a browser window, showing yoga and sound healing offerings with retreat booking",
+    },
+    introduction:
+      "Katie Hailey is a yoga and sound healing practitioner who runs classes, retreats, and events. Zenith Digital took her finished Figma design and built it as a full Wix Studio site in a week and a half, with Wix Events handling event bookings, and CMS and CRM systems set up and handed over so she maintains the site herself.",
+    approach: [
+      {
+        heading: "The design as designed",
+        body: "A build from someone else's design file is a discipline of its own: the job is fidelity, not reinterpretation. The Figma file was treated as the contract, and the Wix Studio build matches it, responsive behavior included, rather than bending the design toward whatever would have been quickest to assemble.",
+      },
+      {
+        heading: "Bookings without a booking stack",
+        body: "Classes, retreats, and events book through Wix Events, native to the platform the site already runs on. No third-party booking widget bolted on, no separate subscription to manage, and every booking lands in the same CRM the rest of the site feeds.",
+      },
+      {
+        heading: "Handed over, not held hostage",
+        body: "Self-maintenance was scoped as a deliverable, not left as an afterthought. The build includes dedicated handoff sections Katie edits directly, a CMS structured around the content she actually changes, and a CRM that collects enquiries and attendees in one place. The honest trade-off of building this way: it takes longer than locking everything down, and it's the reason the engagement ends with the client needing us less, not more.",
+      },
+    ],
+    results: [
+      { value: "1.5 weeks", label: "From Figma file to live site" },
+      {
+        value: "3",
+        label: "Systems set up and handed over: CMS, CRM, and event booking",
+      },
+      { value: "0", label: "Developer needed to run it since" },
+    ],
+    resultsNote:
+      "Zenith Digital turned Katie Hailey's finished Figma design into a live Wix Studio site in a week and a half, with event booking, CMS, and CRM set up and handed over for her to run herself.",
+    gallery: [
+      {
+        src: "/case-study-grid/katie-hailey.webp",
+        alt: "Katie Hailey site in a browser window, yoga and retreat pages built in Wix Studio from the Figma design",
+      },
+    ],
+    techUsed: [
+      {
+        label: "Wix Studio development",
+        href: "/services#wix-studio-development",
+      },
+      "Figma to Wix Studio build",
+      "Wix Events booking",
+      "CMS & CRM setup",
+      "Client handoff & training",
+    ],
+    publishedAt: "2026-08-14",
+    cta: {
+      heading: ["Have a design", "that needs building?"],
+      paragraph:
+        "A free 20-minute call. Bring the Figma file, and we'll tell you honestly what it takes to make it live, and how fast.",
+    },
+    seo: {
+      title:
+        "Katie Hailey case study | Figma to live in 1.5 weeks | Zenith Digital",
+      description:
+        "How Zenith Digital built Katie Hailey's yoga and retreat site in Wix Studio from a finished Figma design in 1.5 weeks, with event booking, CMS, and CRM handed over.",
+    },
+  },
+  {
+    ...cardOf("just-stay"),
+    // Facts from owner (Aug 2026): 1-month delivery, January 2026; short-let
+    // property business; Bookeddirectly integration via Zapier pulling latest
+    // properties; location-based SEO pages; lead magnet forms; Airbnb
+    // superhost; site is a funnel to booking + landlord info collection.
+    // Platform (Wix Studio) and testimonial (Jack Shorrock) confirmed by
+    // owner, Aug 2026.
+    headline: "One website, two funnels: guest bookings and landlord leads",
+    stats: [
+      { value: "4 weeks", label: "Kickoff to launch" },
+      { value: "2", label: "Funnels: stays booked, properties signed" },
+      { value: "0", label: "Manual property updates needed" },
+    ],
+    meta: {
+      industry: INDUSTRIES.travel,
+      engagementType: "New build",
+      timeline: "4 weeks, January 2026",
+      platform: "Wix Studio",
+      liveUrl: "https://www.juststaytoday.co.uk",
+    },
+    challenge: [
+      "Just Stay runs a short-let property business with Airbnb superhost status, which is both the proof of how well they host and a description of the problem: every booking that comes through a platform pays commission and belongs, as a relationship, to the platform. Growing the business also means more than filling the properties they have. It means convincing landlords to hand theirs over.",
+      "So the brief wasn't a brochure site. It was a machine with two intakes: send guests into the direct booking service, and turn property owners into landlord enquiries, live within a month.",
+    ],
+    heroShot: {
+      src: "/case-study-grid/just-stay.webp",
+      alt: "Just Stay website in a browser window, showing short-let properties with direct booking calls to action",
+    },
+    introduction:
+      "Just Stay is a UK short-let property business and Airbnb superhost. In January 2026, Zenith Digital designed and built its website in four weeks as a two-sided funnel: guests route into direct booking, with the property list synced automatically from Bookeddirectly through Zapier, and landlords route into a lead pipeline for letting their properties through Just Stay.",
+    approach: [
+      {
+        heading: "Built as a funnel, not a brochure",
+        body: "Every page has a job and both jobs are measurable: book a stay, or start a landlord conversation. Lead magnet forms capture the visitors who aren't ready for either yet, so the site earns something from every kind of arrival instead of only the ones ready to transact today.",
+      },
+      {
+        heading: "Properties that update themselves",
+        body: "The property list syncs from Bookeddirectly through Zapier, so what's live on the site is what's actually bookable, without anyone re-uploading listings. For a portfolio that changes as landlords join, that's the difference between a site that stays accurate and one that quietly rots.",
+      },
+      {
+        heading: "SEO by location, where guests actually search",
+        body: "Nobody searches for a short-let company by name until they already know it. They search by place. The build includes location-based SEO pages, each targeting the searches for its own area, the same one-page-per-cluster architecture we run on travel builds like Bel'Istria.",
+      },
+      {
+        heading: "The landlord side",
+        body: "The quieter funnel matters more long-term: landlord acquisition is how the portfolio grows. The site collects landlord information through dedicated capture flows and hands it to the team ready to work. One honest caveat on this study: the site launched in January 2026, and we'd rather publish its booking and landlord numbers when they've matured than dress the page with early ones.",
+      },
+    ],
+    results: [
+      { value: "4 weeks", label: "Kickoff to launch, January 2026" },
+      {
+        value: "2",
+        label: "Funnels on one site: guest bookings and landlord leads",
+      },
+      {
+        value: "0",
+        label: "Manual property updates: listings sync from Bookeddirectly",
+      },
+    ],
+    resultsNote:
+      "Zenith Digital built Just Stay's short-let website as a two-sided funnel in four weeks: guests into direct booking, landlords into a lead pipeline, and location pages targeting the searches each area serves. Performance numbers will follow as they mature.",
+    gallery: [
+      {
+        src: "/case-study-grid/just-stay.webp",
+        alt: "Just Stay short-let website in a browser window, property grid synced from Bookeddirectly",
+      },
+    ],
+    testimonial: quoteOf("jack-shorrock"),
+    techUsed: [
+      {
+        label: "Wix Studio design & build",
+        href: "/services/wix-studio-website-design",
+      },
+      "Bookeddirectly + Zapier integration",
+      { label: "Location SEO pages", href: "/services/seo-aeo-ppc" },
+      "Lead magnet funnels",
+      "Landlord lead capture",
+    ],
+    publishedAt: "2026-08-14",
+    cta: {
+      heading: ["Depending on a platform", "for every booking?"],
+      paragraph:
+        "A free 20-minute call. We'll tell you honestly what a direct booking funnel would take for your properties, and whether it's worth it yet.",
+    },
+    seo: {
+      title: "Just Stay case study | Two-funnel booking site | Zenith Digital",
+      description:
+        "How Zenith Digital built Just Stay's short-let website in 4 weeks: direct bookings synced from Bookeddirectly via Zapier, location SEO pages, and a landlord lead funnel.",
+    },
+  },
+  {
+    ...cardOf("genroks-ai"),
+    // Facts from owner (Aug 2026): summer 2025 (July-August); old site was a
+    // dismantled Framer template used mid-sales-process, conflicting brand
+    // identities; rebuilt in custom code with Sanity CMS, custom animations,
+    // interactive lead magnets, intake forms, booking funnel; Zenith scope =
+    // design, copywriting, SEO/AEO; since launch 10+ ISO projects closed,
+    // 3+ consulting houses reselling, Helsinki conference presented via site.
+    // Product line confirmed by owner (Aug 2026): "AI-powered ISO compliance
+    // platform for startups."
+    headline: "From a falling-apart template to 10+ ISO deals closed",
+    stats: [
+      { value: "10+", label: "ISO certification projects closed since launch" },
+      { value: "3+", label: "Consulting houses reselling the software" },
+      { value: "100%", label: "Custom code, no template" },
+    ],
+    meta: {
+      industry: INDUSTRIES.saas,
+      engagementType: "Rebrand & custom build",
+      timeline: "July to August 2025",
+      platform: "Custom code + Sanity CMS",
+      liveUrl: "https://www.genroks.com",
+    },
+    challenge: [
+      "Genroks sells an AI-powered ISO compliance platform to startups, and its sales process leaned on the website hard: prospects got sent the link mid-conversation, as the credibility check between a good call and a signed deal. What they landed on was a Framer template coming apart at the seams, carrying two conflicting brand identities and a choppy, assembled look. For a company selling rigour, the site was arguing against the pitch.",
+      "The brief covered the whole surface: one brand instead of two, copy that sells the product, and a build that matches how Genroks positions itself, which meant no template of any kind this time.",
+    ],
+    heroShot: {
+      src: "/case-study-grid/genroks.webp",
+      alt: "Genroks AI website in a browser window, showing the rebranded compliance software homepage",
+    },
+    introduction:
+      "Genroks is an AI-powered ISO compliance platform for startups. In July and August 2025, Zenith Digital redesigned, rewrote, and rebuilt the Genroks website in custom code with Sanity CMS, replacing the Framer template its sales process had outgrown. Since launch, Genroks has closed 10+ ISO certification projects and signed 3+ consulting houses to resell the software.",
+    approach: [
+      {
+        heading: "Custom code, on principle",
+        body: "Genroks positions itself as agent-native, so its website couldn't be a template with the seams showing. The rebuild is custom code end to end, with custom-built animations doing the demonstrating: the site moves the way the product thinks. It's the same up-tier we apply to our own site, and Genroks is the proof it sells: this is what we build when the platform ceiling is the wrong ceiling.",
+      },
+      {
+        heading: "One brand, written to close",
+        body: "The old site's two conflicting identities got resolved into one, and the copywriting was part of the engagement, not an afterthought. Every page now argues the same case in the same voice, which matters most in exactly the moment Genroks uses the site: forwarded to a prospect who's deciding whether this company is rigorous enough to run their certification.",
+      },
+      {
+        heading: "Sanity behind everything",
+        body: "The content layer runs on Sanity CMS, so the Genroks team edits pages, publishes changes, and keeps the site current without touching the codebase. Custom code with an editable back end is the combination that makes a custom build livable for a startup team.",
+      },
+      {
+        heading: "A site that opens conversations",
+        body: "The rebuild treats the site as sales infrastructure, not a brochure. Interactive lead magnets earn contact details, intake forms qualify prospects before anyone gets on a call, and a booking funnel turns interest into scheduled conversations. SEO and AEO work runs underneath, so the site surfaces for the compliance questions its buyers ask, including the ones they now ask AI assistants.",
+      },
+    ],
+    results: [
+      {
+        value: "10+",
+        label: "ISO certification projects closed since launch",
+        positive: true,
+      },
+      {
+        value: "3+",
+        label: "Consulting houses signed to resell the software",
+        positive: true,
+      },
+      {
+        value: "Conversion skyrocketed",
+        label: "Uroš Stanimirović, Genroks founder, on the rebrand",
+        isQuote: true,
+      },
+    ],
+    resultsNote:
+      "Since Zenith Digital shipped the rebuild, Genroks has closed 10+ ISO certification projects, signed 3+ consulting houses to resell its software, and presented at a Helsinki industry conference using the site itself as the deck.",
+    gallery: [
+      {
+        src: "/case-study-grid/genroks.webp",
+        alt: "Genroks AI rebranded website in a browser window, custom-coded with Sanity CMS behind it",
+      },
+    ],
+    testimonial: quoteOf("uros-stanimirovic"),
+    techUsed: [
+      "Custom code build",
+      "Sanity CMS",
+      "Brand & web design",
+      "Copywriting",
+      { label: "SEO & AEO", href: "/services/seo-aeo-ppc" },
+      "Lead magnets & booking funnel",
+    ],
+    publishedAt: "2026-08-14",
+    cta: {
+      heading: ["Outgrown the template", "your site started on?"],
+      paragraph:
+        "A free 20-minute call. We'll tell you honestly whether your site needs a refresh, a rebrand, or a custom build, and when custom code is actually worth it.",
+    },
+    seo: {
+      title:
+        "Genroks case study | 10+ ISO deals after a rebrand | Zenith Digital",
+      description:
+        "How Zenith Digital rebuilt Genroks' site in custom code with Sanity CMS in summer 2025: one brand, new copy, SEO and AEO, and 10+ ISO certification deals closed since launch.",
     },
   },
 ];

@@ -8,7 +8,7 @@ import type { ServicePageContent } from "./types";
  * designer · wix studio expert.
  *
  * Every figure here already exists elsewhere on the site (Top 1% Wix Partner,
- * 150+ sites, €2,500 floor, Knode's raise, Scottish Luxury's pipeline). No new
+ * 100+ sites, €2,500 floor, Knode's raise, Scottish Luxury's pipeline). No new
  * numbers were invented for this page.
  */
 
@@ -28,7 +28,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     title:
       "Wix Studio website design by a Top 1% Wix Partner | Zenith Digital",
     description:
-      "Custom Wix Studio website design from a Top 1% Wix Partner. Conversion-first builds launched in 2 to 5 weeks, from €2,500 fixed. 150+ sites shipped.",
+      "Custom Wix Studio website design from a Top 1% Wix Partner. Conversion-first builds launched in 2 to 5 weeks, from €2,500 fixed. 100+ sites shipped.",
   },
 
   hero: {
@@ -36,7 +36,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     h1: "Wix Studio website design that pays for itself",
     subhead:
       "Custom-designed, conversion-first Wix Studio websites from a Top 1% Wix Partner. Launched in 2 to 5 weeks, from €2,500 fixed.",
-    chips: ["Top 1% Wix Partner", "150+ sites shipped", "3 to 4 week launch"],
+    chips: ["Top 1% Wix Partner", "100+ sites shipped", "3 to 4 week launch"],
     ctas,
   },
 

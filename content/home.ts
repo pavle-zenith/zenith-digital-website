@@ -408,14 +408,16 @@ export const crossIndustry = {
 export const featuredWork = {
   eyebrow: "Selected work",
   heading: "Real businesses. Real numbers.",
+  // Deep links: every named client points at their own study now that the
+  // detail pages exist (service/home proof → study is the SEO circuitry).
   cases: [
     {
-      client: "Flynn Blackie",
+      client: "MOD Digital",
       industry: "Marketing",
-      metric: "220%",
-      metricLabel: "more bookings",
+      metric: "15+",
+      metricLabel: "landing pages shipped",
       image: "/work/work-1.jpg",
-      href: "/case-studies",
+      href: "/case-studies/mod-digital",
     },
     {
       client: "Scottish Luxury Experience",
@@ -423,7 +425,7 @@ export const featuredWork = {
       metric: "$521k",
       metricLabel: "revenue in 7 months",
       image: "/work/work-2.jpg",
-      href: "/case-studies",
+      href: "/case-studies/scottish-luxury-experience",
     },
     {
       client: "Bel'Istria",
@@ -431,15 +433,15 @@ export const featuredWork = {
       metric: "257%",
       metricLabel: "more impressions",
       image: "/work/work-3.jpg",
-      href: "/case-studies",
+      href: "/case-studies/belistria",
     },
     {
       client: "Hunting Brook",
       industry: "Courses",
-      metric: "€200k+",
+      metric: "€140k",
       metricLabel: "in course sales",
       image: "/work/work-4.jpg",
-      href: "/case-studies",
+      href: "/case-studies/hunting-brook-gardens",
     },
   ],
 };
@@ -781,7 +783,7 @@ export const testimonials = {
    */
   items: [
     featuredTestimonial("flynn-blackie", {
-      result: "Grew bookings 220% with a rebuilt Wix Studio site",
+      result: "10+ brands shipped as MOD Digital's build partner",
       emphasis: "pride, enthusiasm and extreme passion",
       logo: "/logos-dark/mod.png",
     }),
@@ -1032,33 +1034,33 @@ export const caseStudiesMenu = {
     {
       label: "Knode",
       desc: "SaaS site that raised a $10M round",
-      href: "/case-studies",
+      href: "/case-studies/knode-ai",
       tag: "",
     },
     {
       label: "Scottish Luxury Experience",
       desc: "$521k in 7 months",
-      href: "/case-studies",
+      href: "/case-studies/scottish-luxury-experience",
       tag: "",
     },
     {
       label: "Bel'Istria",
       desc: "257% more impressions",
-      href: "/case-studies",
+      href: "/case-studies/belistria",
       tag: "",
     },
     {
       label: "Hunting Brook",
-      desc: "€200k+ in course sales",
-      href: "/case-studies",
+      desc: "€140k in course sales",
+      href: "/case-studies/hunting-brook-gardens",
       tag: "New",
     },
   ],
   featured: {
     label: "Featured case study",
-    title: "How we helped Flynn Blackie grow bookings 220%.",
+    title: "How we became the build team behind MOD Digital's campaigns.",
     image: "/work/work-1.jpg",
-    href: "/case-studies",
+    href: "/case-studies/mod-digital",
   },
 };
 

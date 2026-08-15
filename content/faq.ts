@@ -85,7 +85,7 @@ export const fCategories: FaqCategory[] = [
     items: [
       {
         q: "How much does a website cost?",
-        a: `Fixed and published: The Minimum ${pricing.tiers[0].price.toLowerCase()} (5 pages, 2 weeks), The Studio at ${pricing.tiers[1].price} (12 pages, full copy and SEO stack, 5 weeks), custom scopes above that. Landing pages from €[retail price to set]. No retainers required, no surprise invoices.`,
+        a: `Fixed and published: The Minimum ${pricing.tiers[0].price.toLowerCase()} (5 pages, 2 weeks), The Studio at ${pricing.tiers[1].price} (12 pages, full copy and SEO stack, 5 weeks), custom scopes above that. Landing pages from €1,250. No retainers required, no surprise invoices.`,
       },
       {
         q: "Do prices change after we start?",
@@ -97,7 +97,7 @@ export const fCategories: FaqCategory[] = [
       },
       {
         q: "How do payments work?",
-        a: "[Retail payment terms to set: e.g. 50% to start, 50% at launch.]",
+        a: "The standard structure is a 50% deposit to start, with the balance at launch. If a payment plan fits your cash flow better, tell us on the call. We're flexible on the structure, not on the scope.",
       },
     ],
   },
@@ -151,7 +151,7 @@ export const fCategories: FaqCategory[] = [
     items: [
       {
         q: "How does white-label work?",
-        a: "You sell and own the client relationship; we build under your brand. Unbranded deliverables, NDA, landing pages from €1,250, production retainers from €1,099/mo. Your client never hears our name.",
+        a: "You sell and own the client relationship; we build under your brand. Unbranded deliverables, NDA, landing pages from €1,000, production retainers from €1,099/mo. Your client never hears our name.",
       },
       {
         q: "How do referrals work?",

@@ -1,9 +1,8 @@
 /**
  * Cookie/consent banner copy. Shown once per visitor until they answer.
  *
- * OWNER: `privacyHref` should point at the privacy policy once /privacy
- * exists. While it's null the banner renders without the link rather than
- * sending people to a 404.
+ * The privacy link is required here, not decorative: consent is only informed
+ * if the visitor can read what they're agreeing to before they agree.
  */
 export const consentBanner = {
   heading: "Cookies",
@@ -11,5 +10,5 @@ export const consentBanner = {
   accept: "Accept",
   decline: "Decline",
   privacyLabel: "Privacy policy",
-  privacyHref: null as string | null,
+  privacyHref: "/privacy" as string | null,
 };

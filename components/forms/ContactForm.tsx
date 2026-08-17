@@ -1,12 +1,13 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 
 import {
   submitContact,
   type ContactFormState,
 } from "@/app/book-a-call/actions";
 import { bookContact } from "@/content/book-a-call";
+import { trackLead } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 const initialState: ContactFormState = { status: "idle" };
@@ -24,6 +25,10 @@ export function ContactForm() {
     submitContact,
     initialState,
   );
+
+  useEffect(() => {
+    if (state.status === "success") trackLead("contact");
+  }, [state.status]);
 
   if (state.status === "success") {
     return (

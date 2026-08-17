@@ -34,6 +34,21 @@ const nextConfig: NextConfig = {
         destination: "/book-a-call",
         permanent: true,
       },
+      // /contact-us has no 1:1 target: /book-a-call is the live page that
+      // carries the call, the audit offer and every contact method.
+      {
+        source: "/contact-us",
+        destination: "/book-a-call",
+        permanent: true,
+      },
+      // Legacy Wix path for the white-label page, seen in the indexed footprint.
+      {
+        source: "/white-label-partnerships",
+        destination: "/partnerships",
+        permanent: true,
+      },
+      // /embed-test is deliberately NOT redirected. It was a scratch page with
+      // no equity, so a 404 is the correct signal to drop it from the index.
     ];
   },
 };

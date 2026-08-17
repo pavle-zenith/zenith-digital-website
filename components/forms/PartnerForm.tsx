@@ -1,13 +1,14 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useActionState } from "react";
+import { Suspense, useActionState, useEffect } from "react";
 
 import {
   submitPartnerApplication,
   type PartnerFormState,
 } from "@/app/partnerships/actions";
 import { pApply } from "@/content/partnerships";
+import { trackLead } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 const initialState: PartnerFormState = { status: "idle" };
@@ -49,6 +50,10 @@ function FormInner({ preselect }: { preselect: string | null }) {
     submitPartnerApplication,
     initialState,
   );
+
+  useEffect(() => {
+    if (state.status === "success") trackLead("partner-application");
+  }, [state.status]);
 
   if (state.status === "success") {
     return (

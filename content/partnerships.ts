@@ -335,7 +335,7 @@ export const pBenefits = {
     {
       icon: "gem",
       title: "Premium build quality",
-      body: "The same team and standard behind Knode's $10M raise site and Scottish Luxury Experience's $521k launch. Not template flips.",
+      body: "The same team and standard behind Knode's $10M Series A site and Scottish Luxury Experience's $521k launch. Not template flips.",
     },
     {
       icon: "eyeOff",

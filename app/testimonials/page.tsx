@@ -7,7 +7,6 @@ import { WallOfLove } from "@/components/sections/WallOfLove";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import {
-  allTestimonials,
   tFinalCta,
   tVideos,
   VIDEO_TRACK_ID,
@@ -36,29 +35,16 @@ const breadcrumbSchema = {
   ],
 };
 
-// Review markup for every quote actually shown on this page. The wall carries
-// all of them in full, so the schema and the visible text match one-for-one. No
-// AggregateRating until the live Clutch profile supplies a real rating value
-// and count.
-const reviewSchema = {
-  "@context": "https://schema.org",
-  "@graph": allTestimonials.map((t) => ({
-    "@type": "Review",
-    author: { "@type": "Person", name: t.name },
-    reviewBody: t.quote,
-    itemReviewed: {
-      "@type": "Organization",
-      name: "Zenith Digital",
-      url: SITE,
-    },
-  })),
-};
+// No Review or AggregateRating markup on this page. Reviews a business
+// publishes about itself are self-serving: Google excludes them from review
+// rich results, and emitting one node per quote reads as an attempt to farm
+// stars. The quotes render as visible proof, which is what they are for.
+// Third-party ratings belong on the Trustpilot profile linked from the footer.
 
 export default function TestimonialsPage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
-      <JsonLd data={reviewSchema} />
 
       <TestimonialsHero />
       <VideoTestimonials

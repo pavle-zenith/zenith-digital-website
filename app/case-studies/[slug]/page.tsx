@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/JsonLd";
+import { ORG_ID } from "@/lib/schema";
 import { CaseStudyDetailHero } from "@/components/sections/CaseStudyDetailHero";
 import { CaseStudyMetaStrip } from "@/components/sections/CaseStudyMetaStrip";
 import { CaseStudyShot } from "@/components/sections/CaseStudyShot";
@@ -68,7 +69,6 @@ export default async function CaseStudyPage({ params }: Props) {
 
   const url = `${SITE}/case-studies/${study.slug}`;
   const image = study.gallery?.[0]?.src ?? study.thumb;
-  const zenith = { "@type": "Organization", name: "Zenith Digital", url: SITE };
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -76,8 +76,8 @@ export default async function CaseStudyPage({ params }: Props) {
     headline: study.headline,
     ...(image ? { image: [`${SITE}${image}`] } : {}),
     datePublished: study.publishedAt,
-    author: zenith,
-    publisher: zenith,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
     about: { "@type": "Organization", name: study.client },
     mainEntityOfPage: url,
   };
@@ -97,23 +97,13 @@ export default async function CaseStudyPage({ params }: Props) {
     ],
   };
 
-  // Review markup rides with the visible quote — it ships only when the
-  // testimonial section actually renders.
-  const reviewSchema = study.testimonial
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Review",
-        itemReviewed: zenith,
-        author: { "@type": "Person", name: study.testimonial.name },
-        reviewBody: study.testimonial.quote,
-      }
-    : null;
-
+  // No Review markup here. A review Zenith publishes about Zenith is
+  // self-serving: ineligible for Google review rich results and a needless
+  // manual-action risk. The testimonial still renders as visible proof.
   return (
     <>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
-      {reviewSchema ? <JsonLd data={reviewSchema} /> : null}
 
       <CaseStudyDetailHero study={study} />
       <CaseStudyMetaStrip study={study} />

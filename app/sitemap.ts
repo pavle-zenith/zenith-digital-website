@@ -26,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/book-a-call", priority: 0.7, changeFrequency: "monthly" },
     { path: "/testimonials", priority: 0.6, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/privacy", priority: 0.2, changeFrequency: "yearly" },
+    { path: "/terms", priority: 0.2, changeFrequency: "yearly" },
   ];
 
   return [

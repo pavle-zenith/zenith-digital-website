@@ -141,7 +141,7 @@ export const fCategories: FaqCategory[] = [
       },
       {
         q: "What if something breaks?",
-        a: "In seven years we've never had a production site go down. If anything's wrong in your support window, we fix it, no invoice.",
+        a: "No site we've built has gone down in production, going back to the first ones in 2019. If anything's wrong in your support window, we fix it, no invoice.",
       },
     ],
   },

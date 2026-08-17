@@ -44,7 +44,13 @@ export const organizationSchema = {
   // Google's Organization rich result and knowledge panel both read `logo`.
   // Points at the App Router icon so there's one brand mark, not two.
   logo: `${SITE}/icon.png`,
+  // Owner-confirmed 17 Aug 2026. Stated once, sitewide, so the company's age
+  // can't be inferred differently from page to page.
+  foundingDate: "2021",
   areaServed: ["United Kingdom", "European Union", "United States"],
+  // Wix's official partner tier. A named, checkable credential beats the
+  // derived "top 1%" phrasing: the Wix profile in `sameAs` confirms it.
+  award: "Wix Legend Partner",
   founder: { "@id": PERSON_ID },
   address: {
     "@type": "PostalAddress",

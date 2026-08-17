@@ -15,7 +15,7 @@ import { founderFreeAudit } from "@/content/founder";
 export const metadata: Metadata = {
   title: "Free Website Audit: SEO & Speed Review | Zenith Digital",
   description:
-    "A free hand-reviewed website audit from a Top 1% Wix Partner. Short video walkthrough of what's costing you leads, rankings, and speed.",
+    "A free hand-reviewed website audit from a Wix Legend Partner. Short video walkthrough of what's costing you leads, rankings, and speed.",
   alternates: { canonical: "/free-website-audit" },
 };
 

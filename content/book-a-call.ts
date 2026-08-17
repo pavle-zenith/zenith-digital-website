@@ -23,10 +23,12 @@ export const bookHero = {
   subhead:
     "Book a slot and we'll review your current site live on the call: what's working, what's quietly costing you leads, and what we'd change. Everything we cover is yours, whether we work together or not.",
   calLink: "pavle-zenith/discovery-call",
+  // Sits under the calendar and points down to the contact form, so there's a
+  // path for people who won't book a slot (and if the embed ever fails).
   fallback: {
-    text: "Calendar not loading?",
-    label: "Book directly on Cal.com",
-    href: "https://cal.com/pavle-zenith/discovery-call",
+    text: "No time for a call?",
+    label: "Fill out the contact form",
+    href: "#contact",
   },
   proof: {
     label: "100+ Websites Created",
@@ -154,7 +156,44 @@ export const bookFaq = {
   ],
 };
 
-// 6. Final CTA band (anchors back up to the calendar, not a page reload)
+// 6. Contact form, below the FAQ. The out for anyone who won't book a slot:
+// the calendar's fallback line points down here.
+export const bookContact = {
+  heading: "Would rather not book a call?",
+  paragraph:
+    "Send the details instead. Tell us what you're working on and we'll come back with a written answer, usually the same day.",
+  // Direct routes for people who won't use a form either. Rendered as icon
+  // chips; `label` becomes the accessible name.
+  direct: [
+    {
+      icon: "email" as const,
+      label: "hello@thezenithdigital.com",
+      href: "mailto:hello@thezenithdigital.com",
+    },
+    {
+      icon: "whatsapp" as const,
+      label: "WhatsApp",
+      href: "https://wa.me/381649760617",
+    },
+  ],
+  fields: {
+    name: { label: "Your name", placeholder: "Jane Doe" },
+    email: { label: "Email", placeholder: "jane@company.com" },
+    phone: { label: "Phone (optional)", placeholder: "+381 64 123 4567" },
+    website: { label: "Website (optional)", placeholder: "yourcompany.com" },
+    message: {
+      label: "What do you need?",
+      placeholder:
+        "A rebuild, a migration off WordPress, help with rankings. A sentence or two is plenty.",
+    },
+  },
+  submit: "Send message",
+  success:
+    "Got it. We'll reply to the email address you gave us, usually the same day.",
+  errorFallback: "You can also email hello@thezenithdigital.com directly.",
+};
+
+// 7. Final CTA band (anchors back up to the calendar, not a page reload)
 export const bookFinalCta = {
   heading: ["Ready when", "you are"],
   paragraph:

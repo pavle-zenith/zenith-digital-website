@@ -25,6 +25,33 @@ export type WhoForCard = {
   rows: { text: string; state: "bad" | "warn" | "good" }[];
 };
 
+/**
+ * The animated scenes the whoFor panel can show instead of the card, one per
+ * situation across the four service pages. Every name needs a matching entry
+ * in components/sections/service/who-for-scenes.
+ */
+export type WhoForAnim =
+  // wix-studio-website-design
+  | "template"
+  | "agency"
+  | "launch"
+  // seo-aeo-ppc
+  | "serp"
+  | "adspend"
+  | "ai-answer"
+  // website-migration
+  | "upkeep"
+  | "stack-cost"
+  | "edit-queue"
+  // landing-pages
+  | "ad-mismatch"
+  | "campaign-date"
+  | "build-queue"
+  // wix-studio-development
+  | "no-button"
+  | "quoted-stack"
+  | "manual-handling";
+
 /** A process step carries its own duration; the timeline is the proof. */
 export type ProcessStep = TitledBlock & {
   duration: string;
@@ -85,7 +112,12 @@ export type ServicePageContent = {
   whoFor: {
     heading: string;
     intro: string;
-    items: (TitledBlock & { card: WhoForCard })[];
+    /**
+     * `anim` swaps the static diagnostic card for the matching animated
+     * scene (components/sections/service/WhoForScenes). Items without one
+     * keep rendering their `card`.
+     */
+    items: (TitledBlock & { card: WhoForCard; anim?: WhoForAnim })[];
   };
   /**
    * Slugs into caseStudyCards for the featured-work slider between the
@@ -94,20 +126,46 @@ export type ServicePageContent = {
    */
   workSlugs?: string[];
 
-  /** The cost-of-inaction section: why "later" is the expensive choice. */
+  /**
+   * The cost-of-inaction section: why "later" is the expensive choice.
+   * `icon` names an entry in components/ui/FeatureIcon.
+   */
   stakes?: {
     heading: string;
     intro?: string;
-    items: { title: string; body: string }[];
+    items: { title: string; body: string; icon?: string }[];
+  };
+  /**
+   * The plain-terms benefits section: what actually changes for the reader
+   * once this is done. Sits between `stakes` (what staying still costs) and
+   * `included` (what we hand over), so the page runs where you are, what it
+   * costs to stay, what life looks like after, then how we get you there.
+   *
+   * These are OUTCOMES, never deliverables: "your team can change things
+   * without you" rather than "CMS setup and a Loom handover". If an item
+   * could sit in `included` unchanged, it's written wrong.
+   *
+   * `image` is optional on purpose. The section reads fine as text cards, and
+   * visuals get added per card as the owner supplies them (the live Wix site's
+   * "difference a proper website makes" section is the reference).
+   */
+  outcomes?: {
+    heading: string;
+    intro?: string;
+    items: { title: string; body: string; image?: string; imageAlt?: string }[];
   };
   /**
    * Renders as icon cards, so each item names an icon from
    * components/ui/FeatureIcon. An unknown name falls back to a circle.
+   *
+   * `group` is the tab an item sits under (homepage "Everything you'd expect"
+   * register); tabs appear in the order their first item does. Items without
+   * a group render as a single untabbed grid.
    */
   included: {
     heading: string;
     intro: string;
-    items: (TitledBlock & { icon?: string })[];
+    items: (TitledBlock & { icon?: string; group?: string })[];
   };
   /**
    * `image` switches the section to the split showcase layout: heading, photo,

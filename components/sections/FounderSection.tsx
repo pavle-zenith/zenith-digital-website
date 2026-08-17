@@ -3,11 +3,17 @@ import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
-import { founderCore } from "@/content/founder";
+import { cn } from "@/lib/utils";
 import type { CtaLink } from "@/lib/types";
 import type { FounderLink } from "@/content/founder";
 
-type PhotoBadges = typeof founderCore.photoBadges;
+/**
+ * Pavle's signature. Decorative in both placements (the name and role are
+ * always stated in text beside it), so it ships with an empty alt.
+ * `brightness-0` flattens the source file's blue gradient to black through its
+ * alpha, so the asset itself stays untouched.
+ */
+const SIGNATURE = { src: "/signature-pavle.png", width: 473, height: 255 };
 
 type FounderData = {
   name: string;
@@ -16,7 +22,6 @@ type FounderData = {
   imageAlt: string;
   stats: { value: string; label: string }[];
   links: FounderLink[];
-  photoBadges: PhotoBadges;
   heading: string;
   paragraphs: string[];
   cta?: { label: string; href: string };
@@ -44,8 +49,10 @@ const isResolvable = (l: FounderLink) => !l.href.includes("[");
  * "why" checklist right. No CTA by design: the calendar and the audit form sit
  * directly beside it and own the conversion.
  *
- * `surface` tints the section with --light-surface where two light sections
- * would otherwise run together.
+ * `surface` tints the block with --light-surface where two light sections
+ * would otherwise run together. The tint sits on the frame column, not the
+ * section element, so the grey band stops at the side rails instead of running
+ * the full viewport width.
  */
 export function FounderSection({
   data,
@@ -60,7 +67,7 @@ export function FounderSection({
 
   if (size === "expert") {
     return (
-      <Section tone="light" className={tint} frameClassName="!py-14 md:!py-24">
+      <Section tone="light" frameClassName={cn("!py-14 md:!py-24", tint)}>
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           <BadgedPortrait data={data} />
 
@@ -112,7 +119,7 @@ export function FounderSection({
   const links = data.links.filter(isResolvable);
 
   return (
-    <Section tone="light" className={tint} frameClassName="!py-14 md:!py-24">
+    <Section tone="light" frameClassName={cn("!py-14 md:!py-24", tint)}>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
         {/* Portrait first on phones: the face is the point of the section. */}
         <div className="order-1 lg:order-2">
@@ -177,11 +184,24 @@ export function FounderSection({
             </ul>
           ) : null}
 
+          {/* items-start on the stacked layout: a column flex container
+              stretches children across, which would override the signature's
+              auto width and blow it up to the button's. */}
           {data.cta ? (
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
               <Button
                 cta={{ ...data.cta, variant: "primary" } as CtaLink}
                 tone="light"
+              />
+              {/* Faded back here so it reads as an ink mark beside the button
+                  rather than a second logo. */}
+              <Image
+                src={SIGNATURE.src}
+                alt=""
+                width={SIGNATURE.width}
+                height={SIGNATURE.height}
+                className="h-16 w-auto opacity-50 brightness-0 sm:h-[70px]"
+                aria-hidden
               />
             </div>
           ) : null}
@@ -192,17 +212,14 @@ export function FounderSection({
 }
 
 /**
- * Portrait with the three floating chips: rating top-left, platform mark
- * lower-left, stat over the bottom-right corner. Chips are translucent navy
- * with a hairline, which is also why the white Wix mark reads on a light
- * section: the chip under it is dark.
+ * Portrait with the signature over its bottom-right corner (owner decision,
+ * Aug 2026: the three floating navy chips came off, the signature replaced
+ * them). Only the right side is inset, so the photo still sits flush with the
+ * column's left edge while the chip overhangs.
  */
 function BadgedPortrait({ data }: { data: FounderData }) {
-  const { rating, platformLogo, stat } = data.photoBadges;
-
   return (
-    // Inset so the chips that hang off the photo still sit inside the column.
-    <div className="relative mx-auto w-full max-w-md px-5 sm:px-8 lg:mx-0">
+    <div className="relative mx-auto w-full max-w-md pr-5 sm:pr-8 lg:mx-0">
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card border border-light-border bg-light-bg">
         <Image
           src={data.image}
@@ -213,38 +230,16 @@ function BadgedPortrait({ data }: { data: FounderData }) {
         />
       </div>
 
-      {/* Rating, top-left */}
-      <div className="absolute left-0 top-8 flex items-center gap-2 rounded-[6px] border border-white/15 bg-bg/70 px-3 py-2 text-white backdrop-blur-md">
-        <span className="flex gap-0.5 text-accent" aria-hidden>
-          {Array.from({ length: 5 }, (_, i) => (
-            <Star key={i} />
-          ))}
-        </span>
-        <span className="text-body font-medium">
-          <span className="sr-only">{rating.score} rated on </span>
-          {rating.platform}
-        </span>
-      </div>
-
-      {/* Platform mark, lower-left */}
-      <div className="absolute bottom-28 left-0 flex h-14 w-14 items-center justify-center rounded-[6px] border border-white/15 bg-bg/70 backdrop-blur-md">
+      {/* White glass so the ink reads against the photo underneath it. */}
+      <div className="absolute bottom-8 right-0 rounded-[6px] border border-white/60 bg-white/70 px-4 py-2 backdrop-blur-md">
         <Image
-          src={platformLogo.src}
-          alt={platformLogo.alt}
-          width={80}
-          height={24}
-          className="h-4 w-auto object-contain"
+          src={SIGNATURE.src}
+          alt=""
+          width={SIGNATURE.width}
+          height={SIGNATURE.height}
+          className="h-12 w-auto brightness-0 opacity-80 sm:h-14"
+          aria-hidden
         />
-      </div>
-
-      {/* Stat, over the bottom-right corner */}
-      <div className="absolute bottom-8 right-0 rounded-[6px] border border-white/15 bg-bg/70 px-4 py-3 text-white backdrop-blur-md">
-        <span className="block font-display text-h3 font-medium leading-none">
-          {stat.value}
-        </span>
-        <span className="mt-1.5 block font-mono text-[11px] uppercase track-label leading-tight text-white/70">
-          {stat.label}
-        </span>
       </div>
     </div>
   );
@@ -260,14 +255,6 @@ function CheckMark() {
       aria-hidden
     >
       <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm5.03 7.53-6 6a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l2.47 2.47 5.47-5.47a.75.75 0 1 1 1.06 1.06z" />
-    </svg>
-  );
-}
-
-function Star() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
-      <path d="M12 2l2.92 6.26 6.58.57-5 4.73 1.5 6.44L12 16.77 6 20l1.5-6.44-5-4.73 6.58-.57z" />
     </svg>
   );
 }
@@ -292,6 +279,10 @@ const PROFILE_ICONS: Record<string, React.ReactNode> = {
       strokeLinecap="round"
       strokeLinejoin="round"
     />
+  ),
+  // simple-icons:whatsapp
+  WhatsApp: (
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.83 9.83 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.8 11.8 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.9 11.9 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413Z" />
   ),
 };
 

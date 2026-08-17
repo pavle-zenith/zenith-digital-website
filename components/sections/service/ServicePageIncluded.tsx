@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 
 import { Section } from "@/components/ui/Section";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
@@ -6,70 +8,96 @@ import { cn } from "@/lib/utils";
 import type { ServicePageContent } from "@/content/service-pages";
 
 /**
- * "What's included" — dark, textured, in the PartnerServices bento register:
- * one hairline-bounded grid (1px gaps over a rule-colored background render as
- * shared rules), each cell leading with a line icon in a hairline square.
- * Span classes on the tail cells keep the grid flush whatever the item count
- * (pages carry six to eight deliverables).
+ * "What's included" — the homepage "Everything you'd expect" register:
+ * centered heading and intro, a row of tabs (active = accent fill, inactive =
+ * hairline outline), then the boxes for the open tab with the icon in an
+ * accent square. One component register for both, so the two can't drift.
+ *
+ * Tabs come from each item's `group`, in first-seen order. A page whose items
+ * carry no group renders the boxes with no tab row rather than one dead tab.
  */
 export function ServicePageIncluded({ data }: { data: ServicePageContent }) {
-  const items = data.included.items;
-  const count = items.length;
-  const last = count - 1;
+  const groups = groupItems(data.included.items);
+  const [active, setActive] = useState(0);
+  const tab = groups[Math.min(active, groups.length - 1)];
+  const showTabs = groups.length > 1;
 
   return (
-    <div className="relative isolate overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-bg">
-        <Image
-          src="/textures/studio-texture.jpg"
-          alt=""
-          fill
-          className="object-cover opacity-[0.16]"
-          aria-hidden
-        />
+    <Section tone="light" frameClassName="!py-14 md:!py-24">
+      <div className="mx-auto mb-8 max-w-2xl text-center md:mb-12">
+        <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+          {data.included.heading}
+        </h2>
+        <p className="mt-4 text-body-lg font-medium text-light-muted md:mt-5">
+          {data.included.intro}
+        </p>
       </div>
 
-      <Section
-        tone="dark"
-        className="bg-transparent"
-        frameClassName="!py-14 md:!py-24"
-      >
-        <div className="mb-8 grid gap-8 md:mb-12 md:grid-cols-2 md:items-end">
-          <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-            {data.included.heading}
-          </h2>
-          <p className="max-w-md text-body-lg font-medium text-text-muted md:justify-self-end md:text-right">
-            {data.included.intro}
-          </p>
-        </div>
-
-        {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines. */}
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
-          {items.map((item, i) => (
-            <article
-              key={item.title}
+      {showTabs ? (
+        <div
+          className={cn(
+            "mb-6 grid gap-4",
+            groups.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3",
+          )}
+        >
+          {groups.map((g, i) => (
+            <button
+              key={g.label}
+              type="button"
+              onClick={() => setActive(i)}
+              aria-pressed={i === active}
               className={cn(
-                "flex flex-col bg-bg p-8",
-                // Close the grid flush on both breakpoints: an odd count spans
-                // the last cell across md's two columns (which also fills lg's
-                // 4+3 row), and a remainder of two on lg spans the final pair.
-                count % 2 === 1 && i === last && "md:col-span-2",
-                count % 4 === 2 && i >= count - 2 && "lg:col-span-2",
+                "rounded-[6px] border px-6 py-4 text-center font-display text-body-lg font-medium transition",
+                i === active
+                  ? "border-accent bg-accent text-accent-ink"
+                  : "border-light-border text-light-text hover:bg-light-surface",
               )}
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-border bg-surface text-text">
-                <FeatureIcon name={item.icon ?? ""} />
-              </span>
-              <h3 className="mt-8 font-display text-body-lg font-medium">
-                {item.title}
-              </h3>
-              <p className="mt-2 max-w-md text-body leading-snug text-text-muted">
-                {item.body}
-              </p>
-            </article>
+              {g.label}
+            </button>
           ))}
         </div>
-      </Section>
-    </div>
+      ) : null}
+
+      {/* Boxes for the open tab. Two-item tabs run two across rather than
+          leaving a hole in a three-column row. */}
+      <div
+        className={cn(
+          "grid gap-4",
+          tab.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3",
+        )}
+      >
+        {tab.items.map((item) => (
+          <div
+            key={item.title}
+            className="flex flex-col rounded-[8px] border border-light-border bg-light-surface p-8"
+          >
+            <span className="flex h-11 w-11 items-center justify-center rounded-[6px] bg-accent text-accent-ink">
+              <FeatureIcon name={item.icon ?? ""} />
+            </span>
+            <h3 className="mt-10 font-display text-body-lg font-medium">
+              {item.title}
+            </h3>
+            <p className="mt-2 text-body leading-snug text-light-muted">
+              {item.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Section>
   );
+}
+
+type IncludedItem = ServicePageContent["included"]["items"][number];
+
+/** Bucket items by `group`, preserving the order they appear in content. */
+function groupItems(items: IncludedItem[]) {
+  const groups: { label: string; items: IncludedItem[] }[] = [];
+  for (const item of items) {
+    const label = item.group ?? "";
+    const existing = groups.find((g) => g.label === label);
+    if (existing) existing.items.push(item);
+    else groups.push({ label, items: [item] });
+  }
+  return groups;
 }

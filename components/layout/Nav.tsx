@@ -127,49 +127,67 @@ export function Nav() {
         className={cn(
           "absolute inset-x-0 top-full hidden overflow-hidden border-b border-[var(--rule)] bg-light-bg transition-[max-height,opacity] duration-200 md:block",
           menuOpen
-            ? "max-h-[520px] opacity-100"
+            ? "max-h-[620px] opacity-100"
             : "pointer-events-none max-h-0 opacity-0",
         )}
       >
         <div className="mx-auto grid max-w-[var(--container-site)] grid-cols-3 divide-x divide-light-border border-x border-light-border">
-          {/* Cols 1 and 2 — the services themselves. No horizontal padding on
-              the column so the row hairlines run edge to edge, touching the
-              vertical dividers. */}
-          {(
-            [
-              { label: "Design & build", items: servicesMenu.build },
-              { label: "Grow & scale", items: servicesMenu.grow },
-            ] as const
-          ).map((col) => (
-            <div key={col.label} className="py-8">
-              <p className="mb-4 px-6 font-mono text-label uppercase track-label text-light-muted">
-                {col.label}
-              </p>
-              <DividedList tone="light">
-                {col.items.map((it) => (
-                  <DividedRow key={it.href} className="px-6">
-                    <Link
-                      href={it.href}
-                      className="group flex items-start gap-3"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-surface text-light-text transition group-hover:border-accent group-hover:text-accent">
-                        <FeatureIcon name={it.icon} className="h-4 w-4" />
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block font-display font-medium group-hover:text-accent">
-                          {it.label}
-                        </span>
-                        <span className="mt-0.5 block text-[0.8125rem] tracking-normal text-light-muted">
-                          {it.desc}
-                        </span>
-                      </span>
-                    </Link>
-                  </DividedRow>
-                ))}
-              </DividedList>
+          {/* Cols 1 and 2 — the services themselves, closed off by a single
+              full-width row spanning both. */}
+          <div className="col-span-2 flex flex-col">
+            <div className="grid flex-1 grid-cols-2 divide-x divide-light-border">
+              {/* No horizontal padding on the column so the row hairlines run
+                  edge to edge, touching the vertical dividers. */}
+              {(
+                [
+                  { label: "Design & build", items: servicesMenu.build },
+                  { label: "Grow & scale", items: servicesMenu.grow },
+                ] as const
+              ).map((col) => (
+                <div key={col.label} className="py-8">
+                  <p className="mb-4 px-6 font-mono text-label uppercase track-label text-light-muted">
+                    {col.label}
+                  </p>
+                  <DividedList tone="light">
+                    {col.items.map((it) => (
+                      <DividedRow key={it.href} className="px-6">
+                        <Link
+                          href={it.href}
+                          className="group flex items-start gap-3"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-surface text-light-text transition group-hover:border-accent group-hover:text-accent">
+                            <FeatureIcon name={it.icon} className="h-4 w-4" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block font-display font-medium group-hover:text-accent">
+                              {it.label}
+                            </span>
+                            <span className="mt-0.5 block text-[0.8125rem] tracking-normal text-light-muted">
+                              {it.desc}
+                            </span>
+                          </span>
+                        </Link>
+                      </DividedRow>
+                    ))}
+                  </DividedList>
+                </div>
+              ))}
             </div>
-          ))}
+
+            {/* Secondary CTA closing both columns. Owns its top rule; the
+                dropdown's bottom border sits under it. */}
+            <Link
+              href={servicesMenu.viewAll.href}
+              className="group flex items-center justify-center gap-2 border-t border-light-border bg-light-surface px-6 py-4 text-body font-medium text-light-text transition hover:bg-light-border"
+              onClick={() => setMenuOpen(false)}
+            >
+              {servicesMenu.viewAll.label}
+              <span aria-hidden className="btn-arrow">
+                &rarr;
+              </span>
+            </Link>
+          </div>
 
           {/* Col 3 — Featured case study. Image fills the column height, caption pins bottom. */}
           <Link

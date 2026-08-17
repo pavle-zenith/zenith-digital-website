@@ -13,10 +13,9 @@ import { Faq } from "@/components/sections/Faq";
 import { caseStudyCards, csFinalCta } from "@/content/case-studies";
 
 export const metadata: Metadata = {
-  title:
-    "Case studies | Wix Studio websites with real results | Zenith Digital",
+  title: "Wix Studio Website Examples & Case Studies | Zenith Digital",
   description:
-    "150+ websites shipped. Browse Zenith Digital's case studies: Wix Studio and custom builds with the revenue, bookings, and traffic numbers behind each one.",
+    "Real Wix Studio and custom builds from a Top 1% Wix Partner: a $10M raise, $521k in bookings, 257% impression growth. 100+ websites shipped.",
   alternates: { canonical: "/case-studies" },
 };
 

@@ -477,30 +477,26 @@ export const pStories = {
     {
       name: "LMF HR",
       logo: "/logos-blue/lmfhr.avif",
-      relationship: "Fractional web & IT partner",
+      relationship: "Fractional web & IT partner since 2023",
       title:
         "Fractional web design & IT for consulting-firm clients in Indianapolis",
       story:
         "Web design and IT handled as a standing fractional arrangement for LMF HR's consulting-firm clients in Indianapolis.",
-      // OWNER: replace with real figures.
-      stats: [{ value: "[n]", label: "client sites delivered" }],
+      stats: [{ value: "15+", label: "websites delivered" }],
       image: "/partners/lmf-hr.webp",
       // OWNER: mock quote — replace with a real attributed one before launch.
       quote: partnerQuote("les-marie"),
     },
     {
-      // OWNER: fill in the WellingtonWebCo relationship — every bracketed
-      // value below is a placeholder. A wordmark renders until a logo is added.
+      // OWNER: a wordmark renders until a logo file is added.
       name: "WellingtonWebCo",
       logo: "",
-      // OWNER: relationship + stats still to set. "Dozens" is Finlay's own
-      // word from his quote; swap in the real count when you have it.
-      relationship: "[relationship to set]",
+      relationship: "Fulfilment partner since 2025",
       title:
         "Web design and hosting fulfillment for Scotland's local businesses",
       story:
         "Wellington Web Co owns the client relationship and the local market. We design, build, and host the sites behind it, under their brand. One introductory call has since run to dozens of local business websites across Scotland.",
-      stats: [{ value: "[n]", label: "[metric to set]" }],
+      stats: [{ value: "10", label: "projects delivered" }],
       image: "/partners/wellington-web-co.webp",
       quote: partnerQuote("finlay-wellington"),
     },

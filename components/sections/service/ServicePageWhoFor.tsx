@@ -3,14 +3,15 @@
 import { useEffect, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
+import { WhoForScene } from "@/components/sections/service/who-for-scenes";
 import { cn } from "@/lib/utils";
 import type { ServicePageContent, WhoForCard } from "@/content/service-pages";
 
 const CYCLE_MS = 6000;
 
 const DOT: Record<string, string> = {
-  bad: "bg-[#E5484D]",
-  warn: "bg-[#F5A623]",
+  bad: "bg-negative",
+  warn: "bg-warning",
   good: "bg-positive",
 };
 
@@ -26,13 +27,16 @@ export function ServicePageWhoFor({ data }: { data: ServicePageContent }) {
   const [paused, setPaused] = useState(false);
   const count = data.whoFor.items.length;
 
+  // `open` is a dependency so clicking a tab restarts the clock: the scene
+  // that opens gets a full cycle to play rather than whatever was left of the
+  // previous tab's.
   useEffect(() => {
     if (paused || count < 2) return;
     const id = setInterval(() => setOpen((o) => (o + 1) % count), CYCLE_MS);
     return () => clearInterval(id);
-  }, [paused, count]);
+  }, [paused, count, open]);
 
-  const card = data.whoFor.items[open]?.card;
+  const item = data.whoFor.items[open];
 
   return (
     <Section tone="light" frameClassName="!py-14 md:!py-24">
@@ -61,7 +65,9 @@ export function ServicePageWhoFor({ data }: { data: ServicePageContent }) {
                     aria-expanded={isOpen}
                     className={cn(
                       "flex w-full items-center border-l-2 py-5 pl-5 pr-4 text-left transition",
-                      isOpen ? "border-accent" : "border-light-border hover:pl-6",
+                      isOpen
+                        ? "border-accent"
+                        : "border-light-border hover:pl-6",
                     )}
                   >
                     <span
@@ -91,9 +97,15 @@ export function ServicePageWhoFor({ data }: { data: ServicePageContent }) {
           </div>
         </div>
 
-        {/* Right: the diagnostic card for the open situation */}
+        {/* Right: the open situation's animated scene where content names
+            one (keyed by tab so it replays per reveal), else its static
+            diagnostic card. */}
         <div className="flex items-center justify-center rounded-[8px] bg-light-surface p-5 sm:p-8 lg:p-12">
-          {card ? <SituationCard card={card} /> : null}
+          {item?.anim ? (
+            <WhoForScene key={open} name={item.anim} />
+          ) : item?.card ? (
+            <SituationCard card={item.card} />
+          ) : null}
         </div>
       </div>
     </Section>

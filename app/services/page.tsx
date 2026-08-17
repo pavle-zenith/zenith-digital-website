@@ -13,9 +13,9 @@ import { logos } from "@/content/home";
 import { sFaq, sFinalCta, sServices } from "@/content/services";
 
 export const metadata: Metadata = {
-  title: "Services | Wix Studio design, migrations, SEO & white-label | Zenith Digital",
+  title: "Wix Studio Design, Migration & SEO | Zenith Digital",
   description:
-    "Website design & development, migrations with zero ranking loss, landing pages, SEO/AEO/PPC, Wix Studio development, and white-label production for agencies. Fixed prices, published.",
+    "Wix Studio web design, migrations with zero ranking loss, landing pages, SEO and AEO, and white-label production. Fixed prices from €2,500.",
   alternates: { canonical: "/services" },
 };
 

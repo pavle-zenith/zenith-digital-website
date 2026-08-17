@@ -8,8 +8,9 @@ import { bookHero } from "@/content/book-a-call";
  * /book-a-call hero — light, single centered column: badge pill, H1, three
  * check items, then the Cal.com embed as a bordered card. Below the calendar
  * (live-site order): overlapping avatar proof row + label, the subhead, and
- * the partner logo strip. The fallback link under the embed guarantees a
- * booking path if the iframe ever fails.
+ * the partner logo strip. The line under the embed sends anyone who won't book
+ * a slot down to the contact form, which doubles as the path out if the iframe
+ * ever fails to load.
  */
 export function BookHero() {
   return (
@@ -83,8 +84,6 @@ export function BookHero() {
         {bookHero.fallback.text}{" "}
         <a
           href={bookHero.fallback.href}
-          target="_blank"
-          rel="noopener"
           className="font-medium text-light-text underline underline-offset-4 transition hover:text-light-muted"
         >
           {bookHero.fallback.label}

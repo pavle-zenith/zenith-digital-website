@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
+import { hero as homeHero } from "@/content/home";
 import type { ServicePageContent } from "@/content/service-pages";
 
 /**
@@ -37,13 +38,16 @@ export function ServicePageHero({ data }: { data: ServicePageContent }) {
         <div
           className="absolute inset-0"
           style={{
+            // Symmetric now the copy is centered: heaviest through the middle
+            // where the text sits, easing off so the texture still reads at
+            // both edges. The old wash was weighted for left-aligned copy.
             background:
-              "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
+              "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 45%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 88%, transparent) 50%, color-mix(in srgb, var(--color-light-bg) 45%, transparent) 100%)",
           }}
         />
       </div>
 
-      <div className="relative">
+      <div className="relative text-center">
         <nav
           aria-label="Breadcrumb"
           className="font-mono text-label uppercase track-label text-light-muted"
@@ -57,21 +61,45 @@ export function ServicePageHero({ data }: { data: ServicePageContent }) {
           <span className="text-light-text">{data.hero.name}</span>
         </nav>
 
-        <div className="mt-10 max-w-4xl md:mt-14">
+        <div className="mx-auto mt-10 max-w-4xl md:mt-14">
           <h1 className="font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
             {data.hero.h1}
           </h1>
-          <p className="mt-6 max-w-2xl text-body-lg font-medium leading-relaxed text-light-muted">
+          <p className="mx-auto mt-6 max-w-2xl text-body-lg font-medium leading-relaxed text-light-muted">
             {data.hero.subhead}
           </p>
 
           {/* On white the accent fill reads, so both CTAs are the shared
               Button. The white-filled primary this hero used was a navy-only
               workaround (§15). */}
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
             {data.hero.ctas.map((cta) => (
               <Button key={cta.href} cta={cta} tone="light" />
             ))}
+          </div>
+
+          {/* Same trust signal as the homepage hero, read from the same
+              content so the count and the faces can't drift apart. */}
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <div className="flex -space-x-3">
+              {homeHero.proof.avatars.map((src) => (
+                <span
+                  key={src}
+                  className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-light-bg"
+                >
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="36px"
+                    className="object-cover"
+                  />
+                </span>
+              ))}
+            </div>
+            <span className="font-display font-medium text-light-text">
+              {homeHero.proof.label}
+            </span>
           </div>
         </div>
       </div>

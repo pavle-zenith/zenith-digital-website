@@ -91,19 +91,26 @@ export const sServices: ServiceEntry[] = [
       {
         title:
           "Scottish Luxury Experience turned its new site into $521k of booked trips in seven months.",
-        image: "/casestudies/scottishluxury.jpg",
+        // Slide images live in /service-slides and are cropped to 2:1, the
+        // ratio ServiceShowcase renders (aspect-[2/1] from md up, 16/9 below,
+        // object-cover object-top). The originals elsewhere in /public are
+        // square or 4:3, so top-anchored cover cropping showed only their top
+        // half. Framing rule: browser chrome intact at the top edge, the
+        // window bleeding off the bottom, subject clear of the outer 10% on
+        // each side (mobile's 16:9 crop takes that).
+        image: "/service-slides/design-sle.webp",
         client: "Scottish Luxury Experience",
       },
       {
-        title: "Knode AI went live with a full SaaS site in 3 weeks.",
-        image: "/casestudies/knode.jpg",
-        client: "Knode AI",
-        logo: "/logos-blue/knode.avif",
+        title: "ATW Trucking's freight and logistics site, rebuilt end to end.",
+        image: "/service-slides/design-atw-trucking.webp",
+        client: "ATW Trucking",
       },
       {
-        title: "Hunting Brook Gardens, redesigned end to end.",
-        image: "/casestudies/huntingbrook.jpg",
-        client: "Hunting Brook Gardens",
+        title:
+          "Bianomics' brand, events, and operations offer, pulled into one site.",
+        image: "/service-slides/design-bianomics.webp",
+        client: "Bianomics",
       },
     ],
     usps: [
@@ -151,14 +158,27 @@ export const sServices: ServiceEntry[] = [
     slides: [
       {
         title: "Bel'Istria moved 35+ pages and grew impressions 257% YoY.",
-        image: "/casestudies/belistria.jpg",
+        image: "/service-slides/migration-belistria.webp",
         client: "Bel'Istria",
         logo: "/logos-white/belistria.png",
       },
       {
-        title: "MindEd, moved off its legacy site onto Wix Studio.",
-        image: "/casestudies/minded.jpg",
-        client: "MindEd",
+        title: "Genroks left a Framer template for a custom-coded site.",
+        image: "/service-slides/migration-genroks.webp",
+        client: "Genroks AI",
+        logo: "/logos-white/genroks.png",
+      },
+      {
+        title:
+          "Katie Hailey's site, built from her Figma design in a week and a half.",
+        image: "/service-slides/migration-katie-hailey.webp",
+        client: "Katie Hailey",
+      },
+      {
+        title:
+          "An illustrated brand site and gift ordering for Destilerija Maodus.",
+        image: "/service-slides/migration-destilerija-maodus.webp",
+        client: "Destilerija Maodus",
       },
     ],
     usps: [
@@ -205,15 +225,14 @@ export const sServices: ServiceEntry[] = [
     slides: [
       {
         title: "15+ landing pages behind MOD Digital's client campaigns.",
-        image: "/partners/mod-digital.webp",
+        image: "/service-slides/landing-mod-digital.webp",
         client: "MOD Digital",
         logo: "/logos-blue/mod.avif",
       },
       {
-        title: "Knode AI's launch landing page shipped alongside the main site.",
-        image: "/before-after/knode-after.jpg",
-        client: "Knode AI",
-        logo: "/logos-blue/knode.avif",
+        title: "Course and event launch pages for Hunting Brook Gardens.",
+        image: "/service-slides/landing-hunting-brook.webp",
+        client: "Hunting Brook Gardens",
       },
     ],
     usps: [
@@ -254,14 +273,15 @@ export const sServices: ServiceEntry[] = [
     cta: { label: "Scope a campaign", href: "/book-a-call" },
     slides: [
       {
-        title: "€1M+ in client campaign revenue with MOD Digital.",
-        image: "/partners/mod-digital.webp",
-        client: "MOD Digital",
-        logo: "/logos-white/mod.png",
+        title:
+          "Location pages built to catch the searches Just Stay's guests actually make.",
+        image: "/service-slides/seo-just-stay.webp",
+        client: "Just Stay",
+        logo: "/logos-blue/juststay.png",
       },
       {
         title: "257% YoY growth in search impressions for Bel'Istria.",
-        image: "/casestudies/belistria.jpg",
+        image: "/service-slides/seo-belistria.webp",
         client: "Bel'Istria",
         logo: "/logos-white/belistria.png",
       },
@@ -286,6 +306,7 @@ export const sServices: ServiceEntry[] = [
   },
   {
     id: "wix-studio-development",
+    pageSlug: "wix-studio-development",
     title: "Wix Studio development",
     when: "You've hit the edge of what standard Wix can do. Custom features, complex CMS, automations, or a web app alongside the marketing site.",
     deliverables: [
@@ -306,16 +327,17 @@ export const sServices: ServiceEntry[] = [
     cta: { label: "Scope your build", href: "/book-a-call" },
     slides: [
       {
-        title: "FoxStays runs bookings on 10+ automation sequences.",
-        image: "/before-after/foxstays-after.jpg",
-        client: "FoxStays",
-        logo: "/logos-blue/foxstays.avif",
+        title:
+          "A multi-seller boat and yacht marketplace, built native in Wix Studio.",
+        image: "/service-slides/dev-yacht-junky.webp",
+        client: "Yacht Junky",
       },
       {
-        title: "2 web apps shipped behind Techtonnik's client work.",
-        image: "/partners/techtonnik.webp",
-        client: "Techtonnik",
-        logo: "/logos-blue/techtonnik.png",
+        title:
+          "Just Stay's property list syncs itself from Bookeddirectly via Zapier.",
+        image: "/service-slides/dev-just-stay.webp",
+        client: "Just Stay",
+        logo: "/logos-blue/juststay.png",
       },
     ],
     usps: [
@@ -358,19 +380,19 @@ export const sServices: ServiceEntry[] = [
     slides: [
       {
         title: "10+ websites and 2 web apps under Techtonnik's brand.",
-        image: "/partners/techtonnik.webp",
+        image: "/service-slides/wl-techtonnik.webp",
         client: "Techtonnik",
         logo: "/logos-white/techtonnik.png",
       },
       {
         title: "Campaign landing pages delivered under MOD Digital's brand.",
-        image: "/partners/mod-digital.webp",
+        image: "/service-slides/wl-mod-digital.webp",
         client: "MOD Digital",
         logo: "/logos-white/mod.png",
       },
       {
         title: "A standing fractional team behind Capacity's consulting clients.",
-        image: "/partners/capacity.webp",
+        image: "/service-slides/wl-capacity.webp",
         client: "Capacity",
         logo: "/logos-white/capacity.png",
       },
@@ -423,7 +445,7 @@ export const sFaq = {
     },
     {
       q: "How fast can we start?",
-      a: "Free 20-minute call, same-day proposal, and most builds start within [start window to set: e.g. 1–2 weeks].",
+      a: "Free 20-minute call, same-day proposal, and most builds start within a week.",
     },
     {
       q: "What does it cost?",

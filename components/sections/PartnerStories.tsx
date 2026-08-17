@@ -49,8 +49,9 @@ export function PartnerStories() {
                   className="object-cover"
                 />
               ) : null}
+              {/* Two stats max in the blur bar; three crowds the shot. */}
               <div className="absolute inset-x-4 bottom-4 flex flex-wrap gap-x-10 gap-y-3 rounded-[8px] border border-white/15 bg-bg/55 p-4 backdrop-blur-md">
-                {s.stats.map((st) => (
+                {s.stats.slice(0, 2).map((st) => (
                   <div key={st.label}>
                     <div className="font-display text-h3 font-medium leading-none tracking-tight text-white">
                       {st.value}
@@ -167,4 +168,3 @@ export function PartnerStories() {
     </Section>
   );
 }
-

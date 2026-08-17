@@ -24,10 +24,9 @@ export const seoAeoPpc: ServicePageContent = {
   slug: "seo-aeo-ppc",
   publish: true,
   seo: {
-    title:
-      "Wix SEO, AEO & PPC campaigns that pay for themselves | Zenith Digital",
+    title: "Wix SEO Agency: Search, AEO & PPC | Zenith Digital",
     description:
-      "SEO, answer-engine optimization, and Google and Meta campaign management for Wix Studio sites. 5.96x average ROAS and €1M+ in client revenue generated.",
+      "Wix SEO, answer-engine optimization, and Google and Meta campaigns. 5.96x average ROAS and €1M+ in client revenue across managed campaigns.",
   },
 
   hero: {
@@ -51,6 +50,7 @@ export const seoAeoPpc: ServicePageContent = {
       {
         title: "The site is live and nobody sees it",
         body: "It launched, it looks fine, and it sits on page four. Organic traffic is flat or drifting down, and the only visitors arriving are the ones who already knew your name.",
+        anim: "serp",
         card: {
           label: "Search position",
           value: "Page 4",
@@ -65,6 +65,7 @@ export const seoAeoPpc: ServicePageContent = {
       {
         title: "Ad spend goes out, conversions don't come back",
         body: "Campaigns are running and the click cost is climbing, but the leads aren't tracking with the budget. Usually the ads aren't the problem, the page they land on is.",
+        anim: "adspend",
         card: {
           label: "Cost per lead",
           value: "Climbing",
@@ -79,6 +80,7 @@ export const seoAeoPpc: ServicePageContent = {
       {
         title: "You're invisible when someone asks an AI",
         body: "Buyers now ask ChatGPT and Perplexity for shortlists before they ever open Google. If your business isn't in the source material those tools read, you're not in the answer.",
+        anim: "ai-answer",
         card: {
           label: "AI answer visibility",
           value: "Absent",
@@ -104,16 +106,51 @@ export const seoAeoPpc: ServicePageContent = {
       "Visibility work punishes waiting more than almost any other spend, because the results compound.",
     items: [
       {
+        icon: "chart",
         title: "Rankings compound, in both directions",
         body: "Search is a queue you move up by being useful for months in a row. Every month outside it is a head start handed to whoever's in it, and catching up always costs more than keeping up would have.",
       },
       {
+        icon: "answer",
         title: "The AI answers are being written now",
         body: "Assistants are already answering your buyers' questions and citing somebody. The window where your market's AI answers are still unclaimed closes at the speed of your competitors' content calendars.",
       },
       {
+        icon: "megaphone",
         title: "Ad spend without a system leaks",
         body: "Running ads onto pages nobody optimized is paying full price for traffic and keeping a fraction of it. The spend shows up in reports as activity. The leak never reports at all.",
+      },
+    ],
+  },
+
+  outcomes: {
+    heading: "What changes when people can find you",
+    intro:
+      "Rankings and visibility scores are the mechanism. This is what they turn into.",
+    items: [
+      {
+        title: "Buyers arrive already looking for what you sell",
+        body: "Not people who knew your name and typed it in. People with the problem you solve, who found you while comparing options. That's the traffic that turns into work rather than a bounce.",
+        image: "/portfolio/scottishluxury.jpg",
+        imageAlt: "The Scottish Luxury Experience site",
+      },
+      {
+        title: "You get named when someone asks an AI",
+        body: "A growing share of buyers ask an assistant for a shortlist before they open Google. Being in that answer is the modern version of ranking, and right now most of your competitors aren't structured for it.",
+        image: "/portfolio/belistria.jpg",
+        imageAlt: "The Bel'Istria site",
+      },
+      {
+        title: "Your ad budget stretches further",
+        body: "The same spend brings back more, because the pages behind the ads are built to convert and the messages match. Nothing about the budget changes. The share of it you waste does.",
+        image: "/services/landing-pages.webp",
+        imageAlt: "A campaign page built around a single action",
+      },
+      {
+        title: "You can finally tell what's working",
+        body: "One report a month in plain language: what moved, what it earned, what happens next. When something isn't working it says so, which is the part most agencies leave out.",
+        image: "/services/web-design.webp",
+        imageAlt: "The ATW Trucking site",
       },
     ],
   },
@@ -126,36 +163,43 @@ export const seoAeoPpc: ServicePageContent = {
       {
         icon: "search",
         title: "Technical and on-page SEO",
+        group: "Search & AI visibility",
         body: "Crawlability, index coverage, heading structure, internal linking, page speed, and the metadata on every URL. The unglamorous layer that decides whether anything else you do can work.",
       },
       {
         icon: "braces",
         title: "Schema and structured data",
+        group: "Search & AI visibility",
         body: "Organization, Service, FAQ, Review, and Breadcrumb markup implemented and validated, so search engines and language models both get an explicit description of what your business does.",
       },
       {
         icon: "answer",
         title: "Answer-engine optimization",
+        group: "Search & AI visibility",
         body: "Content structured to be quotable: direct answers near the top of a page, clear question headings, and factual claims tied to specifics that a model can cite without hedging.",
       },
       {
         icon: "pen",
         title: "Keyword and content strategy",
+        group: "Content & keywords",
         body: "A ranked list of what your buyers actually search, split into what you can win this quarter and what needs a year. You'll know why each page exists before it's written.",
       },
       {
         icon: "megaphone",
         title: "Google and Meta campaign management",
+        group: "Campaigns & reporting",
         body: "Build, launch, and ongoing optimization of paid campaigns, including audience and creative testing. Budget moves toward whatever produces revenue and away from whatever doesn't.",
       },
       {
         icon: "split",
         title: "Landing page alignment",
+        group: "Content & keywords",
         body: "Ads pointed at pages that match the promise in the ad. Message match is the cheapest conversion improvement available and the one most often skipped.",
       },
       {
         icon: "chart",
         title: "Monthly reporting in plain language",
+        group: "Campaigns & reporting",
         body: "One report a month you can read in five minutes: what moved, what it earned, what happens next. Revenue and enquiries first, vanity metrics nowhere.",
       },
     ],
@@ -165,45 +209,52 @@ export const seoAeoPpc: ServicePageContent = {
     heading: "How a campaign starts",
     intro:
       "The first month is diagnosis and groundwork. Nobody spends your ad budget in week one.",
+    image: "/services/seo-aeo.webp",
+    imageAlt:
+      "Site analytics beside an AI visibility report showing which questions a client is cited in",
+    cta: { label: "Book a call", href: "/book-a-call", variant: "primary" },
     steps: [
       {
         title: "Audit and baseline",
+        focus: ["Technical crawl", "Ranking baseline", "Index coverage"],
         duration: "Week 1",
         body: "Technical crawl, current rankings, index coverage, and existing campaign performance captured as a baseline. Everything afterwards gets measured against these numbers.",
       },
       {
         title: "Strategy and fix list",
+        focus: ["Prioritised fixes", "Keyword plan", "Two-quarter roadmap"],
         duration: "Week 2",
         body: "A prioritised list of what's costing you visibility, ordered by impact against effort, plus the keyword and content plan for the next two quarters.",
       },
       {
         title: "Implementation",
+        focus: ["Technical fixes", "Schema markup", "Priority pages"],
         duration: "Weeks 2 to 4",
         body: "Technical fixes shipped, schema added, priority pages rewritten or restructured. This is where most of the compounding value gets created.",
       },
       {
         title: "Campaigns live",
+        focus: [
+          "Google and Meta",
+          "Conversion tracking",
+          "Verified before spend",
+        ],
         duration: "Week 4 onward",
         body: "Paid campaigns launch once the pages behind them are worth sending traffic to. Conversion tracking is verified before the first euro is spent.",
       },
       {
         title: "Optimize and report",
+        focus: ["Ad testing", "Monthly report", "Budget shifts"],
         duration: "Monthly",
         body: "Continuous testing on ads and content, with a monthly report and a call. Budget shifts follow the data rather than the calendar.",
       },
     ],
   },
 
-  // Featured-work slider picks: the page's headline cases first, then
-  // adjacent builds relevant to this service.
-  workSlugs: [
-    "mod-digital",
-    "hunting-brook-gardens",
-    "belistria",
-    "scottish-luxury-experience",
-    "knode-ai",
-    "just-stay",
-  ],
+  // Case-study rows: four per page, each with real stats and a distinct
+  // client voice (see the wix-studio page's note). Bel'Istria (257% YoY
+  // impressions) and Genroks (AEO rebrand) are the search-shaped picks.
+  workSlugs: ["mod-digital", "belistria", "genroks-ai", "knode-ai"],
 
   pricing: {
     heading: "Why this one isn't a fixed price",

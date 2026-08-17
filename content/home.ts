@@ -129,7 +129,7 @@ export const whyZenith = {
     },
     {
       icon: "award",
-      title: "Wix Professionals since 2019",
+      title: "Wix Professionals since 2021",
       body: "We've been building on the platform since before most agencies knew it existed which means we know exactly what it can do, and exactly where its limits are.",
     },
     {
@@ -723,7 +723,7 @@ export const founder = {
   eyebrow: "Who you're hiring",
   heading: "The adults in the room.",
   story:
-    "Zenith exists because too many businesses get burned by agencies that overpromise and freelancers who disappear. We're Wix Studio experts who've shipped 100+ sites since 2019, and we build fully custom when you outgrow the platform. This site is the proof.",
+    "Zenith exists because too many businesses get burned by agencies that overpromise and freelancers who disappear. We're Wix Studio experts who've shipped 100+ sites since 2021, and we build fully custom when you outgrow the platform. This site is the proof.",
   signoff: "Pavle Maoduš, Founder",
 };
 
@@ -771,14 +771,14 @@ export const testimonials = {
     { value: "€1M+", label: "Client revenue generated" },
   ],
   /**
-   * Display-only rating row (no CTA — the nav already routes to
-   * /testimonials). `score` is deliberately empty: see content/founder.ts for
-   * why the site names Trustpilot without publishing a number. The component
-   * should render the platform alone when `score` is blank.
+   * Rating row. The platform is named only because this row links out to the
+   * profile (owner decision, Aug 2026 — see content/founder.ts); it is never
+   * loose body copy. `score` is deliberately empty: no number is published.
    */
   rating: {
     platform: "Trustpilot",
     score: "",
+    href: "https://www.trustpilot.com/review/thezenithdigital.com",
   },
   /**
    * Featured tabs. Only the outcome headline and the phrase to emphasise are

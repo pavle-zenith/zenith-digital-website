@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
+import { Button } from "@/components/ui/Button";
 import { ServiceShowcase } from "@/components/sections/ServiceShowcase";
 import { cn } from "@/lib/utils";
 import { servicePageSlugs } from "@/content/service-pages";
@@ -42,10 +43,11 @@ export function ServiceSection({
             {data.when}
           </p>
 
-          {/* Section CTA — primary button (white fill on dark sections, the
-              animated accent fill on light ones), plus the deep-dive link
-              where this service has a published page of its own. */}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
+          {/* Section CTAs — primary button (white fill on dark sections, the
+              animated accent fill on light ones), plus the outlined secondary
+              where this service has a published page of its own. Both go
+              full-width and stack on phones. */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href={data.cta.href}
               className={cn(
@@ -62,18 +64,14 @@ export function ServiceSection({
             </Link>
 
             {data.pageSlug && servicePageSlugs.has(data.pageSlug) ? (
-              <Link
-                href={`/services/${data.pageSlug}`}
-                className={cn(
-                  "group inline-flex items-center gap-2 font-display font-medium transition",
-                  dark ? "hover:text-text-muted" : "hover:text-accent",
-                )}
-              >
-                How {data.title.toLowerCase()} works{" "}
-                <span aria-hidden className="btn-arrow">
-                  &rarr;
-                </span>
-              </Link>
+              <Button
+                cta={{
+                  label: `How ${data.title.toLowerCase()} works`,
+                  href: `/services/${data.pageSlug}`,
+                  variant: "secondary",
+                }}
+                tone={dark ? "dark" : "light"}
+              />
             ) : null}
           </div>
         </div>

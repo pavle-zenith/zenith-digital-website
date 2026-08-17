@@ -99,7 +99,7 @@ export const founderServices = {
   ),
   heading: "Who actually builds your site?",
   paragraphs: [
-    "Zenith Digital is run by Pavle Maodus, a Belgrade-based web designer and developer ranked in the top 1% of Wix Partners worldwide. Ten years of building for businesses across the UK, EU, and US: 100+ websites shipped, from five-page service sites to custom-coded platforms.",
+    "Zenith Digital is run by Pavle Maodus, a Belgrade-based web designer and developer ranked in the top 1% of Wix Partners worldwide. Building for businesses across the UK, EU, and US since 2019: 100+ websites shipped, from five-page service sites to custom-coded platforms.",
     "There's no account manager between you and the work. The person on your discovery call is the person designing your pages, writing your proposal, and answering when something needs fixing. That's most of why projects here move in weeks, not quarters.",
     "The rest of the proof is public: €1M+ in tracked client revenue and the case studies on this site, with every number in them real.",
   ],
@@ -115,7 +115,7 @@ export const founderBookACall = {
   ...founderCore,
   heading: "Hi, I'm Pavle",
   paragraphs: [
-    "Ten years of building websites, 100+ shipped, and every discovery call at Zenith is with me: the person who would actually design and build yours. Bring your current site and twenty minutes.",
+    "Seven years of building websites, 100+ shipped, and every discovery call at Zenith is with me: the person who would actually design and build yours. Bring your current site and twenty minutes.",
   ],
   whyHeading: "Why book a call with me?",
   whyPoints: [

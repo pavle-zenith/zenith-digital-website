@@ -58,7 +58,7 @@ export const hero = {
     {
       client: "Knode AI",
       tag: "SaaS",
-      metric: "$10M Series A raised",
+      metric: "Raising a $10M Series A",
       image: "/portfolio-blocky/knode.png",
       href: "/case-studies",
     },
@@ -318,7 +318,7 @@ export const caseStudiesCta = {
 // 6c. Cross-industry client grid (copied 1:1 from the live site)
 export const crossIndustry = {
   heading:
-    "We leverage our 10 years of expertise from cross-industry projects for our clients",
+    "Seven years of cross-industry projects, put to work on yours",
   // logo paths are placeholders; swap for the real marks. Names kept so it's clear which logo goes where.
   items: [
     {
@@ -449,65 +449,67 @@ export const featuredWork = {
 // 8. Industries served — horizontal card slider (Stripe "startups" carousel style).
 // Images are placeholders (swap for real client shots). Industries are drawn from
 // the portfolio; the blurb names the kind of work delivered in each vertical.
+// The /industries/[slug] template is not built yet, so every card points at
+// the work index until it is. Repoint when those routes ship.
 export const industries = {
   heading: "Industries we work with",
   intro:
-    "Ten years of cross-industry builds. We know the buyers, the objections, and the pages that convert in each of these markets.",
+    "Seven years of cross-industry builds. We know the buyers, the objections, and the pages that convert in each of these markets.",
   items: [
     {
       name: "SaaS & tech",
       blurb:
-        "Product sites and web apps that turn launches into pipeline. Knode raised $10M with theirs.",
-      href: "/industries/saas-tech",
+        "Product sites and web apps that turn launches into pipeline. Knode's carried them into a $10M Series A.",
+      href: "/case-studies",
       image: "/industries/saas-tech.jpg",
     },
     {
       name: "Travel & hospitality",
       blurb:
         "Booking-ready sites for transfers, stays, and experiences. Bel'Istria grew impressions 257%.",
-      href: "/industries/travel-hospitality",
+      href: "/case-studies",
       image: "/industries/travel-hospitality.jpg",
     },
     {
       name: "Coaches & speakers",
       blurb:
         "Lead-capture pages built to sell seats and sessions for experts and public speakers.",
-      href: "/industries/coaches-speakers",
+      href: "/case-studies",
       image: "/industries/coaches-speakers.jpg",
     },
     {
       name: "Marketing & agencies",
       blurb:
         "Campaign landing pages and white-label builds. MOD's drove €1M+ in client revenue.",
-      href: "/industries/marketing-agencies",
+      href: "/case-studies",
       image: "/industries/marketing-agencies.jpg",
     },
     {
       name: "E-commerce & retail",
       blurb:
         "Storefronts and brand sites built to convert, launched across new markets.",
-      href: "/industries/ecommerce-retail",
+      href: "/case-studies",
       image: "/industries/ecommerce-retail.jpg",
     },
     {
       name: "Clothing & fashion brands",
       blurb:
         "Brand-led storefronts and lookbooks that make new labels look established from day one.",
-      href: "/industries/clothing-fashion",
+      href: "/case-studies",
       image: "/industries/clothing.jpg",
     },
     {
       name: "Creatives & personal brands",
       blurb:
         "Portfolio and personal-brand sites for videographers, photographers, and creators who need to stand out.",
-      href: "/industries/creatives",
+      href: "/case-studies",
       image: "/industries/creatives.jpg", // TODO: image coming later
     },
     {
       name: "Professional services",
       blurb:
         "Credible, conversion-ready sites for firms that win work on trust and expertise.",
-      href: "/industries/professional-services",
+      href: "/case-studies",
       image: "/industries/professional-services.jpg",
     },
   ],
@@ -973,7 +975,7 @@ export const footer = {
         { label: "Services", href: "/services" },
         { label: "Case studies", href: "/case-studies" },
         { label: "Partnerships", href: "/partnerships" },
-        { label: "Pricing", href: "/pricing" },
+        { label: "About", href: "/about" },
       ],
     },
     {
@@ -981,8 +983,7 @@ export const footer = {
       links: [
         { label: "Free website audit", href: "/free-website-audit" },
         { label: "FAQ", href: "/faq" },
-        { label: "Blog", href: "/blog" },
-        { label: "About", href: "/about" },
+        { label: "Testimonials", href: "/testimonials" },
       ],
     },
   ],

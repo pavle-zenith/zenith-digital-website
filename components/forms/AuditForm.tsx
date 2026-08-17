@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 
 import {
   submitAudit,
   type AuditFormState,
 } from "@/app/free-website-audit/actions";
 import { auditForm } from "@/content/free-website-audit";
+import { trackLead } from "@/lib/analytics";
 
 const initialState: AuditFormState = { status: "idle" };
 
@@ -25,6 +26,10 @@ export function AuditForm({ id }: { id?: string }) {
     submitAudit,
     initialState,
   );
+
+  useEffect(() => {
+    if (state.status === "success") trackLead("free-website-audit");
+  }, [state.status]);
 
   if (state.status === "success") {
     return (

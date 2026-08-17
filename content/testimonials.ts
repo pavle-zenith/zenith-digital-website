@@ -132,7 +132,7 @@ export type WallCard =
 
 /** Outcome tags on the few clients with a published number attached. */
 const TAGS: Record<string, { label: string; href: string }> = {
-  "gemma-sole": { label: "$10M raised", href: "/case-studies/knode-ai" },
+  "gemma-sole": { label: "$10M Series A", href: "/case-studies/knode-ai" },
   "ivan-belobrajdic": { label: "257% YoY impressions", href: "/case-studies" },
   "flynn-blackie": { label: "€1M+ campaign revenue", href: "/case-studies" },
   "les-marie": { label: "12+ sites delivered", href: "/case-studies" },

@@ -31,7 +31,7 @@ export const websiteMigration: ServicePageContent = {
 
   hero: {
     name: "Website migration",
-    h1: "Move to Wix Studio without losing a single ranking",
+    h1: "Move to Wix Studio and keep your rankings",
     subhead:
       "Full-service migration from WordPress, Squarespace, Webflow, or Framer. Every URL mapped, every ranking protected, in writing.",
     chips: [

@@ -22,9 +22,16 @@ export const WEBSITE_ID = `${SITE}/#website`;
  * placeholder and must never reach the markup: a `sameAs` pointing at
  * "[clutch profile URL]" is worse than a short list.
  */
+// sameAs takes identity profiles, not ways to contact him, so the mailto and
+// the wa.me link are filtered out alongside unfilled placeholders.
 export const founderSameAs = founderCore.links
   .map((l) => l.href)
-  .filter((href) => !href.includes("[") && !href.startsWith("mailto:"));
+  .filter(
+    (href) =>
+      !href.includes("[") &&
+      !href.startsWith("mailto:") &&
+      !href.startsWith("https://wa.me/"),
+  );
 
 export const organizationSchema = {
   "@context": "https://schema.org",
@@ -34,6 +41,10 @@ export const organizationSchema = {
   url: SITE,
   description:
     "Zenith Digital is a Wix Studio web design agency based in Belgrade, Serbia, serving clients across the UK, EU, and US.",
+  // Google's Organization rich result and knowledge panel both read `logo`.
+  // Points at the App Router icon so there's one brand mark, not two.
+  logo: `${SITE}/icon.png`,
+  areaServed: ["United Kingdom", "European Union", "United States"],
   founder: { "@id": PERSON_ID },
   address: {
     "@type": "PostalAddress",

@@ -38,6 +38,11 @@
      on white, under the 3:1 floor for meaningful graphics). */
   --color-positive-ink: #1e9e6a;
   --color-negative: #e5484d;
+  /* Same rule as positive-ink: the fill colour clears 3:1 for graphics but not
+     4.5:1 for text, so red/amber *text* on light fills uses the -ink variant. */
+  --color-negative-ink: #c2262b;
+  --color-warning: #f5a623;
+  --color-warning-ink: #a2650a;
 
   /* Typography */
   --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
@@ -318,5 +323,277 @@ body {
 @media (min-width: 768px) {
   .frame-bleed-md {
     margin-inline: calc(-1 * clamp(20px, 4vw, 64px));
+  }
+}
+
+/* "Who this is for" tab scenes (service pages). Each scene plays once per
+   tab reveal (the panel remounts on tab change) and settles into its end
+   state, which is also every element's base style, so the global
+   reduced-motion guard above snaps straight to the finished composition.
+   Generic entrances first, then per-scene choreography. */
+@keyframes wf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes wf-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes wf-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes wf-exit {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+/* Scene 1 (template): three rigid equal boxes hold, the content block
+   outgrows its cell and clips, then the boxes reflow into the asymmetric
+   custom layout where it fits. */
+@keyframes wf-box-a {
+  0%,
+  55% {
+    left: 0;
+    top: 44px;
+    width: 31.5%;
+    height: 104px;
+  }
+  78%,
+  100% {
+    left: 0;
+    top: 44px;
+    width: 65%;
+    height: 172px;
+  }
+}
+@keyframes wf-box-b {
+  0%,
+  55% {
+    left: 34.25%;
+    top: 44px;
+    height: 104px;
+  }
+  78%,
+  100% {
+    left: 68.5%;
+    top: 44px;
+    height: 82px;
+  }
+}
+@keyframes wf-box-c {
+  0%,
+  55% {
+    left: 68.5%;
+    top: 44px;
+    height: 104px;
+  }
+  78%,
+  100% {
+    left: 68.5%;
+    top: 134px;
+    height: 82px;
+  }
+}
+@keyframes wf-strain {
+  0%,
+  12% {
+    height: 40px;
+  }
+  45%,
+  100% {
+    height: 128px;
+  }
+}
+@keyframes wf-flash {
+  0%,
+  32% {
+    opacity: 0;
+  }
+  40%,
+  52% {
+    opacity: 1;
+  }
+  62%,
+  100% {
+    opacity: 0;
+  }
+}
+/* Scene 2 (agency): the launch pill abandons two dates, sliding further
+   right while the progress bar crawls after it. */
+@keyframes wf-flag {
+  0%,
+  38% {
+    transform: translateX(0);
+  }
+  46%,
+  70% {
+    transform: translateX(34px);
+  }
+  78%,
+  100% {
+    transform: translateX(72px);
+  }
+}
+@keyframes wf-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes wf-dot {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+/* Scene 3 (launch): the founding-date pill cedes prominence once the proof
+   arrives around it. */
+@keyframes wf-dim {
+  0%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+/* A reading that is replaced by the next one: every value but the last uses
+   this, so the readout steps 2 days -> 6 days -> 11 days in place. */
+@keyframes wf-blip {
+  0% {
+    opacity: 0;
+  }
+  10%,
+  70% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    opacity: 0;
+  }
+}
+/* Column charts grow from their baseline; segmented bars use wf-grow. */
+@keyframes wf-grow-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+/* A row joining a queue from the left. */
+@keyframes wf-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* SEO scene 1: the results list scrolls past pages two and three to find you.
+   The percentage in translateY resolves against the track's own height, so
+   `-100% + <viewport>` lands its last row flush with the bottom of the
+   196px window whatever the rows measure. */
+@keyframes wf-serp {
+  0%,
+  52% {
+    transform: translateY(0);
+  }
+  74%,
+  100% {
+    transform: translateY(calc(-100% + 196px));
+  }
+}
+/* Landing scene 1: a cursor hunting around a general-purpose page, never
+   landing on the thing the ad promised. */
+@keyframes wf-hunt {
+  0%,
+  8% {
+    transform: translate(10px, 6px);
+  }
+  24% {
+    transform: translate(104px, 14px);
+  }
+  40% {
+    transform: translate(44px, 60px);
+  }
+  56% {
+    transform: translate(158px, 52px);
+  }
+  72% {
+    transform: translate(78px, 92px);
+  }
+  86%,
+  100% {
+    transform: translate(140px, 96px);
+  }
+}
+/* Development scene 1: the editor's element list scrolls looking for a
+   control that isn't in it. */
+@keyframes wf-hunt-list {
+  0%,
+  10% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-52px);
+  }
+  70%,
+  100% {
+    transform: translateY(-104px);
+  }
+}
+/* Development scene 3: a record moving from the form to the system that
+   should have collected it, over and over. */
+@keyframes wf-carry {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  15%,
+  55% {
+    opacity: 1;
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: translateX(118px);
+  }
+}
+/* Landing scene 3: overflow work above the capacity line changes hands and
+   gets built under the partner's brand. */
+@keyframes wf-absorb {
+  0%,
+  58% {
+    background-color: var(--color-warning);
+  }
+  76%,
+  100% {
+    background-color: var(--color-accent);
   }
 }

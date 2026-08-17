@@ -770,10 +770,15 @@ export const testimonials = {
     { value: "5.96x", label: "Average ROAS" },
     { value: "€1M+", label: "Client revenue generated" },
   ],
-  // Display-only rating row (no CTA — the nav already routes to /testimonials).
+  /**
+   * Display-only rating row (no CTA — the nav already routes to
+   * /testimonials). `score` is deliberately empty: see content/founder.ts for
+   * why the site names Trustpilot without publishing a number. The component
+   * should render the platform alone when `score` is blank.
+   */
   rating: {
-    platform: "Clutch",
-    score: "5/5",
+    platform: "Trustpilot",
+    score: "",
   },
   /**
    * Featured tabs. Only the outcome headline and the phrase to emphasise are
@@ -1060,7 +1065,7 @@ export const servicesMenu = {
       icon: "code",
       label: "Wix Studio development",
       desc: "Custom code, CMS architecture, and integrations",
-      href: "/services",
+      href: "/services/wix-studio-development",
     },
     {
       icon: "layers",
@@ -1069,6 +1074,8 @@ export const servicesMenu = {
       href: "/partnerships",
     },
   ],
+  // Full-width row closing off the two service columns.
+  viewAll: { label: "View all services", href: "/services" },
   // Only ever point this at a study with a shipped detail page.
   featured: {
     label: "Featured case study",

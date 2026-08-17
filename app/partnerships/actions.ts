@@ -1,9 +1,15 @@
 "use server";
 
 import { headers } from "next/headers";
-import { Resend } from "resend";
 
 import { pApply } from "@/content/partnerships";
+import {
+  isEmail,
+  normalizeUrl,
+  notify,
+  rateLimited,
+  storeSubmission,
+} from "@/lib/forms";
 
 export type PartnerFormState =
   | { status: "idle" }
@@ -13,36 +19,11 @@ export type PartnerFormState =
 // Whitelist comes from the same content the form renders its radios from.
 const TRACKS: string[] = pApply.fields.track.options;
 
-// Basic in-memory rate limit: max 5 submissions per IP per hour. Resets on
-// deploy, which is fine for a spam speed bump (not a security boundary).
-const WINDOW_MS = 60 * 60 * 1000;
-const MAX_PER_WINDOW = 5;
-const submissions = new Map<string, number[]>();
-
-function rateLimited(ip: string): boolean {
-  const now = Date.now();
-  const recent = (submissions.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  if (recent.length >= MAX_PER_WINDOW) return true;
-  recent.push(now);
-  submissions.set(ip, recent);
-  return false;
-}
-
-/** Normalize a user-typed site into a URL; null if it can't be one. */
-function normalizeUrl(raw: string): string | null {
-  let value = raw.trim();
-  if (!value) return null;
-  if (!/^https?:\/\//i.test(value)) value = `https://${value}`;
-  try {
-    const url = new URL(value);
-    // require a dot so bare words ("test") don't pass
-    if (!url.hostname.includes(".")) return null;
-    return url.href;
-  } catch {
-    return null;
-  }
-}
-
+/**
+ * Partner application form. Stores the row in Supabase and sends the
+ * notification; delivered if either leg succeeds. `agency` and `track` have no
+ * column of their own, so they ride along in the row's `payload`.
+ */
 export async function submitPartnerApplication(
   _prev: PartnerFormState,
   formData: FormData,
@@ -76,7 +57,7 @@ export async function submitPartnerApplication(
   if (!name) {
     return { status: "error", message: "Add your name." };
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!isEmail(email)) {
     return {
       status: "error",
       message: "That doesn't look like an email address.",
@@ -92,47 +73,34 @@ export async function submitPartnerApplication(
     return { status: "error", message: "Pick a partnership track." };
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error(
-      "submitPartnerApplication: RESEND_API_KEY is not set; submission not delivered",
-      {
-        agency,
-        email,
-      },
-    );
-    return {
-      status: "error",
-      message: "Something went wrong sending your application.",
-    };
-  }
+  const stored = await storeSubmission({
+    source: "partnerships",
+    name,
+    email,
+    website,
+    message: need || null,
+    payload: { agency, track },
+  });
 
-  try {
-    const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send({
-      from:
-        process.env.AUDIT_FROM_EMAIL ??
-        "Zenith Digital <onboarding@resend.dev>",
-      to:
-        process.env.PARTNER_TO_EMAIL ??
-        process.env.AUDIT_TO_EMAIL ??
-        "hello@thezenithdigital.com",
-      replyTo: email,
-      subject: `Partner application: ${agency}`,
-      text: [
-        `Agency: ${agency}`,
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Website: ${website}`,
-        `Track: ${track}`,
-        need && `What they need: ${need}`,
-      ]
-        .filter(Boolean)
-        .join("\n"),
+  const emailed = await notify({
+    subject: `Partner application: ${agency}`,
+    replyTo: email,
+    to: process.env.PARTNER_TO_EMAIL,
+    lines: [
+      `Agency: ${agency}`,
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Website: ${website}`,
+      `Track: ${track}`,
+      need && `What they need: ${need}`,
+    ],
+  });
+
+  if (!stored && !emailed) {
+    console.error("submitPartnerApplication: submission not delivered", {
+      agency,
+      email,
     });
-    if (error) throw new Error(error.message);
-  } catch (err) {
-    console.error("submitPartnerApplication: send failed", err);
     return {
       status: "error",
       message: "Something went wrong sending your application.",

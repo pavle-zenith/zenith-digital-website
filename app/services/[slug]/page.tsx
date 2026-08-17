@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/JsonLd";
-import { personSchema } from "@/lib/schema";
+import { ORG_ID, personSchema } from "@/lib/schema";
 import { ServicePageHero } from "@/components/sections/service/ServicePageHero";
 import { ServicePageWhoFor } from "@/components/sections/service/ServicePageWhoFor";
 import { ServicePageStakes } from "@/components/sections/service/ServicePageStakes";
+import { ServicePageOutcomes } from "@/components/sections/service/ServicePageOutcomes";
 import { ServicePageIncluded } from "@/components/sections/service/ServicePageIncluded";
 import { ServicePageProcess } from "@/components/sections/service/ServicePageProcess";
 import { ServicePagePricing } from "@/components/sections/service/ServicePagePricing";
@@ -59,11 +60,9 @@ export default async function ServiceDetailPage({ params }: Props) {
     description: page.schema.description,
     url,
     serviceType: page.hero.name,
-    provider: {
-      "@type": "Organization",
-      name: "Zenith Digital",
-      url: SITE,
-    },
+    // Reference the sitewide Organization node by @id rather than declaring a
+    // second one, so the entity graph stays single-rooted.
+    provider: { "@id": ORG_ID },
     areaServed: ["United Kingdom", "European Union", "United States"],
     // Only published prices become offers; a page priced per project says so
     // in copy rather than asserting a number in markup.
@@ -117,13 +116,14 @@ export default async function ServiceDetailPage({ params }: Props) {
       <ProjectsSlider stats={page.hero.chips} />
       <ServicePageWhoFor data={page} />
       <ClientLogos />
-      {/* Prices staying put, between the reader's situation and the answer. */}
-      <ServicePageStakes data={page} />
+      {/* The arc: where you are, proof it works, what changes, what we do,
+          how it runs, then what staying put costs. Per-service case studies
+          as partner-story rows, under the sitewide "Real examples" heading. */}
+      <WorkStrip slugs={page.workSlugs} />
+      <ServicePageOutcomes data={page} />
       <ServicePageIncluded data={page} />
       <ServicePageProcess data={page} />
-      {/* Per-service case studies as partner-story rows, under the sitewide
-          "Real examples" heading. */}
-      <WorkStrip slugs={page.workSlugs} />
+      <ServicePageStakes data={page} />
       {/* Full stats + testimonials, same as the homepage. */}
       <Testimonials />
       <ServicePagePricing data={page} />

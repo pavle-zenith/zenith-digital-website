@@ -24,8 +24,7 @@ export const websiteMigration: ServicePageContent = {
   slug: "website-migration",
   publish: true,
   seo: {
-    title:
-      "Website migration to Wix Studio with zero ranking loss | Zenith Digital",
+    title: "WordPress to Wix Studio Migration | Zenith Digital",
     description:
       "Migrate from WordPress, Squarespace, Webflow, or Framer to Wix Studio. Full URL inventory, 1:1 redirect map, and zero ranking loss in writing. From €2,500.",
   },
@@ -51,6 +50,7 @@ export const websiteMigration: ServicePageContent = {
       {
         title: "Maintenance has become someone's job",
         body: "Plugin updates, security patches, a theme that breaks when PHP moves, and a developer on retainer to keep it all standing. The site isn't growing the business, it's consuming a budget line.",
+        anim: "upkeep",
         card: {
           label: "Upkeep",
           value: "Ongoing",
@@ -68,6 +68,7 @@ export const websiteMigration: ServicePageContent = {
       {
         title: "The platform bill keeps climbing",
         body: "Hosting, the page builder licence, the forms add-on, the SEO plugin, the backup service. Stack the annual renewals together and the number gets uncomfortable to defend.",
+        anim: "stack-cost",
         card: {
           label: "Annual stack cost",
           value: "Rising",
@@ -82,6 +83,7 @@ export const websiteMigration: ServicePageContent = {
       {
         title: "Nobody in-house can change anything",
         body: "Marketing wants to publish a page and has to file a request. Every small edit queues behind a developer, so the site drifts out of date while everyone waits.",
+        anim: "edit-queue",
         card: {
           label: "Time to publish a page",
           value: "Queued",
@@ -104,16 +106,51 @@ export const websiteMigration: ServicePageContent = {
       "Staying on the old platform feels like the safe option. Run the numbers on it.",
     items: [
       {
+        icon: "card",
         title: "The bill that renews either way",
         body: "The maintenance retainer, the plugin renewals, the hosting: they invoice whether you move or not. A year of waiting costs roughly a migration, except at the end of it you still own the problem.",
       },
       {
+        icon: "chart",
         title: "Rankings erode in place",
         body: "The rankings you're afraid of losing in a move are already at risk where they are. Slow pages and stale content slide without anyone touching them. Staying put isn't the safe option, it's the slow version of the same loss.",
       },
       {
+        icon: "redirect",
         title: "The pages that never ship",
         body: "Every page marketing didn't publish while waiting on a developer is a search term you don't rank for and a campaign that ran without its landing page. That backlog is invisible on any invoice, and it's the expensive part.",
+      },
+    ],
+  },
+
+  outcomes: {
+    heading: "What life looks like on the other side",
+    intro:
+      "Migrations are judged on what didn't break. These are the things that actually improve.",
+    items: [
+      {
+        title: "The maintenance bill stops",
+        body: "No plugin renewals, no security patching, no developer on standby for the update that breaks the layout. The platform handles its own upkeep, and that line comes off your budget permanently.",
+        image: "/portfolio/knode.jpg",
+        imageAlt: "The Knode AI site",
+      },
+      {
+        title: "Your rankings arrive with you",
+        body: "Traffic continues the week after launch rather than recovering for three months. Everything you spent years earning in search is mapped across before cutover, which is most of what you're paying for.",
+        image: "/portfolio/scottishluxury.jpg",
+        imageAlt: "The Scottish Luxury Experience site",
+      },
+      {
+        title: "Marketing stops queueing",
+        body: "A page goes live the day someone decides it should, by the person who wrote it. The backlog of things nobody bothered requesting because it wasn't worth the wait quietly disappears.",
+        image: "/services/landing-pages.webp",
+        imageAlt: "A campaign page built around a single action",
+      },
+      {
+        title: "One less thing that can break at 2am",
+        body: "Hosting, uptime, security, and updates become someone else's job. Not a smaller version of the problem, an entire category of Saturday-morning emergency you no longer have.",
+        image: "/portfolio/fortlauderdale.jpg",
+        imageAlt: "The FoxStays dock rental site",
       },
     ],
   },
@@ -126,36 +163,43 @@ export const websiteMigration: ServicePageContent = {
       {
         icon: "clipboard",
         title: "Pre-migration SEO audit and URL inventory",
+        group: "Before the move",
         body: "Before anything is designed, we crawl the current site and export every live URL with its traffic, rankings, and inbound links. That inventory is the contract the rest of the project is checked against.",
       },
       {
         icon: "redirect",
         title: "1:1 redirect map",
+        group: "Before the move",
         body: "Every old address gets a permanent redirect to its new equivalent. Not a blanket rule pointing everything at the homepage, which is the single most common way migrations lose rankings.",
       },
       {
         icon: "transfer",
         title: "Content and CMS migration",
+        group: "The move itself",
         body: "Pages, posts, categories, tags, images, and CMS collections moved across with structure intact, so a blog with four years of archive arrives as a blog rather than a folder of loose pages.",
       },
       {
         icon: "tags",
         title: "Metadata and schema parity",
+        group: "The move itself",
         body: "Titles, descriptions, canonical tags, Open Graph data, and structured data carried over field by field, then diffed against the old site before launch.",
       },
       {
         icon: "palette",
         title: "Design refresh in Wix Studio",
+        group: "The move itself",
         body: "Most clients take the opportunity to rebuild the front end rather than clone a dated design. The rebuild happens inside the migration, not as a second project afterwards.",
       },
       {
         icon: "gauge",
         title: "Speed pass",
+        group: "After the move",
         body: "Image formats, loading order, and Core Web Vitals checked on the new build. A faster site after the move is part of the argument for making it.",
       },
       {
         icon: "radar",
         title: "Post-launch index monitoring",
+        group: "After the move",
         body: "We watch Search Console for 30 days after cutover: coverage, impressions, and any URL that 404s or drops out. Anything that moves gets fixed while we're still on it.",
       },
     ],
@@ -165,44 +209,53 @@ export const websiteMigration: ServicePageContent = {
     heading: "How a migration runs",
     intro:
       "Five stages with real durations. Your existing site stays live and serving traffic through every one of them.",
+    // Bel'Istria after the move: this page's own proof case, 35+ pages off
+    // Wix Classic with impressions up rather than down.
+    image: "/portfolio/belistria.jpg",
+    imageAlt: "The Bel'Istria site after its migration to Wix Studio",
+    cta: { label: "Book a call", href: "/book-a-call", variant: "primary" },
     steps: [
       {
         title: "Audit and URL inventory",
+        focus: ["Full crawl", "URL inventory", "Ranking baseline"],
         duration: "2 to 3 days",
         body: "Full crawl, export of every indexed URL, and a ranking baseline captured before a single thing changes. Without the baseline there's no way to prove what happened.",
       },
       {
         title: "Redirect and SEO plan",
+        focus: ["1:1 redirect map", "Backlinked URLs", "The awkward cases"],
         duration: "2 to 3 days",
         body: "The 1:1 map gets written and reviewed, including the awkward cases: retired pages, duplicate URLs, parameter strings, and anything with backlinks pointing at it.",
       },
       {
         title: "Build and migrate",
+        focus: ["Wix Studio build", "Content transfer", "Staging review"],
         duration: "1 to 2 weeks",
         body: "The new site gets built in Wix Studio on a staging URL and content moves across. You review a working site, not a slide of screenshots.",
       },
       {
         title: "Launch and validation",
+        focus: ["Controlled cutover", "Redirects tested", "Search Console"],
         duration: "2 days",
         body: "One controlled cutover. Redirects tested line by line against the inventory, sitemap resubmitted, Search Console and analytics reconnected the same day.",
       },
       {
         title: "Index monitoring",
+        focus: ["Coverage watch", "Impressions", "Fixes included"],
         duration: "30 days",
         body: "Coverage and impressions watched daily at first, then weekly. If a URL misbehaves we fix it inside this window at no extra cost.",
       },
     ],
   },
 
-  // Featured-work slider picks: the page's headline cases first, then
-  // adjacent builds relevant to this service.
+  // Case-study rows: four per page, each with real stats and a distinct
+  // client voice (see the wix-studio page's note). Fort Lauderdale returns
+  // once it has a detail page with real results and a quote.
   workSlugs: [
     "belistria",
-    "fort-lauderdale-dock-rentals",
     "scottish-luxury-experience",
-    "knode-ai",
+    "just-stay",
     "genroks-ai",
-    "mod-digital",
   ],
 
   pricing: {

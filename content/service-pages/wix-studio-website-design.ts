@@ -24,7 +24,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
   slug: "wix-studio-website-design",
   publish: true,
   seo: {
-    title: "Wix Studio website design by a Top 1% Wix Partner | Zenith Digital",
+    title: "Wix Studio Website Design Services | Zenith Digital",
     description:
       "Custom Wix Studio website design from a Top 1% Wix Partner. Conversion-first builds launched in 2 to 5 weeks, from €2,500 fixed. 100+ sites shipped.",
   },
@@ -46,6 +46,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       {
         title: "You've outgrown the template",
         body: "The DIY build got the business online and did its job. Now every change is a workaround, the layout fights the content you actually have, and the design is recognisably the same one a few hundred other companies bought.",
+        anim: "template",
         card: {
           label: "Current build",
           value: "Template",
@@ -63,6 +64,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       {
         title: "The last agency burned you",
         body: "Weeks of silence, a launch date that kept sliding, and a finished site nobody on your team can edit. What you want now is a fixed scope, a fixed price, and a reply inside a working day.",
+        anim: "agency",
         card: {
           label: "Last engagement",
           value: "Overran",
@@ -77,6 +79,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       {
         title: "You're launching and it has to look established",
         body: "A new company, a raise in progress, or a first serious product. The site has to carry more credibility than the founding date does, and it has to be live before the conversations start.",
+        anim: "launch",
         card: {
           label: "Company age",
           value: "New",
@@ -102,16 +105,51 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       "A dated site doesn't send an invoice, which is why it feels free. It isn't.",
     items: [
       {
+        icon: "card",
         title: "The quiet discount",
         body: "An outdated site doesn't lose deals loudly. Prospects arrive pre-negotiated: they've seen the site, priced you as the cheap option, and opened with a lower number. You never find out what they would have paid.",
       },
       {
+        icon: "layers",
         title: "The comparison you don't see",
         body: "Buyers open three tabs and yours is one of them. The competitor with worse work and a better website wins the call, and no report ever tells you it happened.",
       },
       {
+        icon: "gauge",
         title: "The head start you're gifting",
         body: "Every month the site stays as it is, somebody else's site is collecting the rankings, reviews, and referrals in your market. The gap isn't static. It accrues.",
+      },
+    ],
+  },
+
+  outcomes: {
+    heading: "What actually changes once the site is live",
+    intro:
+      "Not the deliverables list. The things you notice in the months afterwards.",
+    items: [
+      {
+        title: "You stop apologising for your website",
+        body: "Sending the link becomes something you do early in a conversation instead of late, without the caveat about how a redesign is coming. The site does the introduction it was supposed to be doing all along.",
+        image: "/services/web-design.webp",
+        imageAlt: "The ATW Trucking site Zenith built",
+      },
+      {
+        title: "The same traffic starts converting",
+        body: "Nothing about your marketing has to change for this to work. The visitors you already get land on pages built to move them toward one action, and more of them take it.",
+        image: "/services/landing-pages.webp",
+        imageAlt: "A campaign page built around a single action",
+      },
+      {
+        title: "Your team can change things without you",
+        body: "A new service page, a swapped photo, an updated price. Same day, by whoever needs it done, on your own Wix account. No developer, no ticket, no waiting for someone to have a free afternoon.",
+        image: "/before-after/huntingbrook-after.jpg",
+        imageAlt: "The Hunting Brook site after its rebuild",
+      },
+      {
+        title: "You look established to people who've never heard of you",
+        body: "Cold prospects, investors, and partners arrive with no context and decide fast. A site built to carry your actual credibility means that decision goes your way before you've said a word.",
+        image: "/portfolio/fortlauderdale.jpg",
+        imageAlt: "The FoxStays dock rental site",
       },
     ],
   },
@@ -124,41 +162,49 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       {
         icon: "compass",
         title: "Strategy and structure",
+        group: "Strategy & design",
         body: "We work out who is buying, what they need to see, and the order they need to see it in before anyone opens a design file. The sitemap comes out of that conversation rather than out of a template's page list.",
       },
       {
         icon: "type",
         title: "Conversion copywriting",
+        group: "Strategy & design",
         body: "Words written to sell rather than to fill a layout, included from The Studio tier upward. Bring your own copy if you have it and we'll structure the design around it instead.",
       },
       {
         icon: "palette",
         title: "Custom Wix Studio design",
+        group: "Strategy & design",
         body: "Designed from a blank canvas in Wix Studio. No purchased theme, no reskinned template, so a competitor can't buy the same starting point you did.",
       },
       {
         icon: "responsive",
         title: "Responsive build",
+        group: "Build & search",
         body: "Laid out for phones first, where most of your traffic already is, then scaled up through tablet and desktop breakpoints and checked on real devices before launch.",
       },
       {
         icon: "search",
         title: "On-page SEO and schema",
+        group: "Build & search",
         body: "Titles, meta descriptions, heading hierarchy, internal links, and structured data set on every page before you go live, so the site is indexable on day one instead of month three.",
       },
       {
         icon: "chart",
         title: "Analytics and lead capture",
+        group: "Build & search",
         body: "Forms, booking, and conversion events wired into your CRM and analytics, so you can see which pages produce enquiries and which ones only produce traffic.",
       },
       {
         icon: "video",
         title: "Loom handover",
+        group: "After launch",
         body: "A recorded walkthrough of your own site: editing pages, swapping images, publishing changes. Your team runs the site after we step away, without a support ticket.",
       },
       {
         icon: "support",
         title: "30 to 60 days of support",
+        group: "After launch",
         body: "We stay on after launch to fix anything that surfaces once real traffic and real users arrive, because that's when the edge cases show up.",
       },
     ],
@@ -206,15 +252,14 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     ],
   },
 
-  // Featured-work slider picks: the page's headline cases first, then
-  // adjacent builds relevant to this service.
+  // Case-study rows: four per page, each with real stats and a distinct
+  // client voice. Flynn's is the only quote on the four MOD-partnership
+  // builds, so a page carries at most one of those studies.
   workSlugs: [
     "scottish-luxury-experience",
     "knode-ai",
     "belistria",
-    "mod-digital",
     "genroks-ai",
-    "yacht-junky",
   ],
 
   pricing: {

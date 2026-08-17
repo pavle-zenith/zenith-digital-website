@@ -1,46 +1,60 @@
 import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
+import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import { Button } from "@/components/ui/Button";
 import {
   INDUSTRIES,
   caseStudies,
   caseStudyCards,
+  caseStudyDetails,
   detailSlugs,
 } from "@/content/case-studies";
 
 /**
  * Per-service case studies in the PartnerStories row register, under the
  * sitewide "Real examples" heading: each case is a full-width row under
- * shared hairlines. Site shot left with the stats riding its bottom edge in
- * a translucent blur bar; right: client wordmark + industry pill, headline,
- * one-line story, then the case-study CTA with "Book a call" as the
- * secondary. Rows resolve from the shared case-study content (the featured
- * panel set first, the grid card as fallback) via each page's `workSlugs`,
- * headline cases leading — nothing is retyped here. Falls back to the
- * sitewide featured four when a page names none.
+ * shared hairlines. Site shot left with the labelled stats riding its bottom
+ * edge in a translucent blur bar; right: client wordmark + industry pill,
+ * outcome headline, one-line story, the case-study CTA with "Book a call" as
+ * the secondary, and the client's quote card pinned to the row bottom.
+ *
+ * Rows resolve from the shared case-study content via each page's
+ * `workSlugs` — featured panel first, then the detail study (headline,
+ * stats, testimonial), then the grid card — nothing is retyped here. Content
+ * picks slugs whose studies carry real stats and a quote, so rows arrive
+ * fully dressed; a slug without them still renders with whatever it has.
+ * Falls back to the sitewide featured four when a page names none.
  */
 export function WorkStrip({ slugs }: { slugs?: string[] }) {
   const featuredBySlug = new Map(caseStudies.items.map((i) => [i.slug, i]));
+  const detailBySlug = new Map(caseStudyDetails.map((d) => [d.slug, d]));
   const wanted = slugs?.length ? slugs : caseStudies.items.map((i) => i.slug);
 
   const rows = wanted.flatMap((slug) => {
     const card = caseStudyCards.find((c) => c.slug === slug);
     if (!card) return [];
     const featured = featuredBySlug.get(slug);
+    const detail = detailBySlug.get(slug);
+    const title = featured?.title ?? detail?.headline ?? card.story;
     return [
       {
         slug,
         name: card.client,
         pill: INDUSTRIES[card.industry],
-        title: featured?.title ?? card.story,
-        story: featured ? card.story : undefined,
-        stats: featured?.stats ?? [
-          {
-            value: card.metricIsQuote ? `“${card.metric}”` : card.metric,
-            label: "",
-          },
-        ],
+        title,
+        story: title === card.story ? undefined : card.story,
+        // Two stats max in the blur bar; three crowds the shot.
+        stats: (
+          featured?.stats ??
+          detail?.stats ?? [
+            {
+              value: card.metricIsQuote ? `“${card.metric}”` : card.metric,
+              label: "",
+            },
+          ]
+        ).slice(0, 2),
+        quote: detail?.testimonial,
         image: card.thumb,
         detail: detailSlugs.has(slug),
         liveUrl: card.liveUrl,
@@ -97,7 +111,7 @@ export function WorkStrip({ slugs }: { slugs?: string[] }) {
               </div>
             </div>
 
-            {/* Details */}
+            {/* Details — a flex column so the quote can pin to the bottom */}
             <div className="flex flex-col">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="font-display text-body-lg font-medium">
@@ -146,6 +160,41 @@ export function WorkStrip({ slugs }: { slugs?: string[] }) {
                   tone="light"
                 />
               </div>
+
+              {/* Quote card — pinned to the column bottom (the spacer absorbs
+                  spare height, mt-8 keeps a minimum gap) */}
+              {row.quote ? (
+                <>
+                  <div className="flex-1" aria-hidden />
+                  <figure className="mt-8 rounded-[8px] bg-light-surface p-6">
+                    <blockquote className="text-body leading-relaxed text-light-text">
+                      &ldquo;{row.quote.quote}&rdquo;
+                    </blockquote>
+                    <figcaption className="mt-4 flex items-center gap-3">
+                      {row.quote.avatar ? (
+                        <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                          <Image
+                            src={row.quote.avatar}
+                            alt={row.quote.name}
+                            fill
+                            sizes="40px"
+                            className="object-cover"
+                          />
+                        </span>
+                      ) : null}
+                      <span>
+                        <span className="flex items-center gap-1.5 font-display font-medium">
+                          {row.quote.name}
+                          <VerifiedCheck className="text-light-text" />
+                        </span>
+                        <span className="block text-body text-light-muted">
+                          {row.quote.role}
+                        </span>
+                      </span>
+                    </figcaption>
+                  </figure>
+                </>
+              ) : null}
             </div>
           </article>
         ))}

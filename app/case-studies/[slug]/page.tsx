@@ -40,8 +40,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `${study.headline} | ${study.client} case study | Zenith Digital`,
     description: study.seo?.description ?? study.challenge[0],
     alternates: { canonical: `/case-studies/${study.slug}` },
-    // Per-study OG image (the hero screenshot), not the generic site OG.
-    ...(image ? { openGraph: { images: [image] } } : {}),
+    // Per-study OG: the hero screenshot rather than the generic site card, and
+    // `article` rather than `website`, since these are dated, authored pieces.
+    openGraph: {
+      type: "article",
+      url: `/case-studies/${study.slug}`,
+      title: study.seo?.title ?? study.headline,
+      description: study.seo?.description ?? study.challenge[0],
+      publishedTime: study.publishedAt,
+      ...(image
+        ? { images: [{ url: image, alt: study.heroShot?.alt ?? study.client }] }
+        : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: study.seo?.title ?? study.headline,
+      description: study.seo?.description ?? study.challenge[0],
+      ...(image ? { images: [image] } : {}),
+    },
   };
 }
 

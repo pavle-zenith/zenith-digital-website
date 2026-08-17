@@ -413,11 +413,10 @@ export const caseStudyCards: CaseStudyCard[] = [
     client: "MindEd",
     slug: "minded",
     industry: "courses",
-    metric: "Metric coming soon",
-    metricPending: true, // TODO(owner): supply the real metric
+    metric: "70+ pages migrated, 2 languages",
     story: "Education platform redesign for a kids learning app",
     thumb: "/portfolio-slider/mindeed.jpg",
-    // TODO(owner): confirm live URL
+    liveUrl: "https://www.minded.es",
   },
 ];
 
@@ -670,7 +669,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     ],
     publishedAt: "2026-08-11",
     seo: {
-      title: "Knode AI case study | From zero to a $10M raise | Zenith Digital",
+      title: "Knode AI: A $10M Raise in 3 Weeks | Zenith Digital",
       description:
         "How Zenith Digital designed and built Knode AI's 10-page Wix Studio site in three weeks, and how it carried the company into a $10M Series A raise.",
     },
@@ -792,9 +791,9 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Bel'Istria case study | 257% impressions & top AI recommendation | Zenith Digital",
+        "Bel'Istria: 257% More Impressions | Zenith Digital",
       description:
-        "How Zenith Digital migrated Bel'Istria from Wix Classic to Wix Studio and ran an AEO campaign: 257% impression growth, 70+ ranking pages, and the top AI recommendation for Istria luxury transfers in 8 weeks.",
+        "How Zenith Digital migrated Bel'Istria from Wix Classic to Wix Studio: 257% impression growth, 70+ ranking pages, and top billing in AI answers.",
     },
   },
   {
@@ -884,9 +883,9 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Scottish Luxury Experience case study | $521k in 7 months | Zenith Digital",
+        "Scottish Luxury: $521k in 7 Months | Zenith Digital",
       description:
-        "How Zenith Digital built the Wix Studio website fronting Scottish Luxury Experience's growth system, in partnership with MOD Digital: a 4-week build, $521k in trip revenue, and 48x ROAS within 7 months.",
+        "Zenith Digital built Scottish Luxury Experience's Wix Studio site in 4 weeks. The growth system it fronts turned paid traffic into $521k in 7 months.",
     },
   },
   {
@@ -955,7 +954,10 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     // Flynn as partner voice — this was a MOD collaboration, per owner.
     testimonial: quoteOf("flynn-blackie"),
     techUsed: [
-      { label: "Wix Studio development", href: "/services#wix-studio-development" },
+      {
+        label: "Wix Studio development",
+        href: "/services/wix-studio-development",
+      },
       "Velo custom code",
       "CMS architecture",
       "Marketplace UX",
@@ -970,9 +972,9 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Yacht Junky case study | A marketplace built in Wix Studio | Zenith Digital",
+        "Yacht Junky: A Wix Studio Marketplace | Zenith Digital",
       description:
-        "How Zenith Digital built a multi-seller boat and yacht marketplace natively in Wix Studio: Velo-powered search and filters, seller notifications, enquiry history, and currency conversion, with no external stack.",
+        "Zenith Digital built a multi-seller boat and yacht marketplace natively in Wix Studio: Velo-powered search, seller notifications, and currency conversion.",
     },
   },
   {
@@ -1061,9 +1063,9 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         "This is what our partner tracks exist for. A free 20-minute call, and we'll walk you through how white-label production works and what your calendar could hand off first.",
     },
     seo: {
-      title: "MOD Digital case study | Agency build partner | Zenith Digital",
+      title: "MOD Digital: 3 Years as Build Partner | Zenith Digital",
       description:
-        "How Zenith Digital became MOD Digital's web build partner: 10+ client brands, 15+ landing pages, and €1M+ in campaign revenue since 2023, most of it on Wix Studio.",
+        "How Zenith Digital became MOD Digital's build partner: 10+ client brands, 15+ landing pages, and €1M+ in campaign revenue since 2023.",
     },
   },
   {
@@ -1151,9 +1153,9 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Hunting Brook case study | €140k in course sales | Zenith Digital",
+        "Hunting Brook: €140k in Course Sales | Zenith Digital",
       description:
-        "How Zenith Digital builds the landing pages behind Jimi Blake's Hunting Brook courses: 7+ pages on Wix Courses with Typeform signups, and €140k in sales inside MOD Digital's campaigns.",
+        "How Zenith Digital builds the launch pages behind Jimi Blake's Hunting Brook courses: 7+ pages on Wix Courses, and €140k in course and event sales.",
     },
   },
   {
@@ -1219,7 +1221,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     techUsed: [
       {
         label: "Wix Studio development",
-        href: "/services#wix-studio-development",
+        href: "/services/wix-studio-development",
       },
       "Figma to Wix Studio build",
       "Wix Events booking",
@@ -1234,9 +1236,9 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Katie Hailey case study | Figma to live in 1.5 weeks | Zenith Digital",
+        "Katie Hailey: Figma to Live in 1.5 Weeks | Zenith Digital",
       description:
-        "How Zenith Digital built Katie Hailey's yoga and retreat site in Wix Studio from a finished Figma design in 1.5 weeks, with event booking, CMS, and CRM handed over.",
+        "Zenith Digital built Katie Hailey's yoga and retreat site in Wix Studio from a finished Figma design in 1.5 weeks, with booking, CMS, and CRM handed over.",
     },
   },
   {
@@ -1325,9 +1327,9 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         "A free 20-minute call. We'll tell you honestly what a direct booking funnel would take for your properties, and whether it's worth it yet.",
     },
     seo: {
-      title: "Just Stay case study | Two-funnel booking site | Zenith Digital",
+      title: "Just Stay: A Two-Funnel Booking Site | Zenith Digital",
       description:
-        "How Zenith Digital built Just Stay's short-let website in 4 weeks: direct bookings synced from Bookeddirectly via Zapier, location SEO pages, and a landlord lead funnel.",
+        "How Zenith Digital built Just Stay's short-let site in 4 weeks: direct bookings synced from Bookeddirectly, location SEO pages, and a landlord funnel.",
     },
   },
   {
@@ -1423,9 +1425,9 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Genroks case study | 10+ ISO deals after a rebrand | Zenith Digital",
+        "Genroks: 10+ ISO Deals After a Rebrand | Zenith Digital",
       description:
-        "How Zenith Digital rebuilt Genroks' site in custom code with Sanity CMS in summer 2025: one brand, new copy, SEO and AEO, and 10+ ISO certification deals closed since launch.",
+        "How Zenith Digital rebuilt Genroks' site in custom code with Sanity CMS: one brand, new copy, and 10+ ISO certification deals closed since launch.",
     },
   },
 ];

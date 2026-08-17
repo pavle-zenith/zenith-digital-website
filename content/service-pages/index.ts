@@ -1,4 +1,5 @@
 import { wixStudioWebsiteDesign } from "./wix-studio-website-design";
+import { wixStudioDevelopment } from "./wix-studio-development";
 import { websiteMigration } from "./website-migration";
 import { seoAeoPpc } from "./seo-aeo-ppc";
 import { landingPages } from "./landing-pages";
@@ -13,6 +14,7 @@ export type * from "./types";
  */
 export const allServicePages: ServicePageContent[] = [
   wixStudioWebsiteDesign,
+  wixStudioDevelopment,
   websiteMigration,
   seoAeoPpc,
   landingPages,

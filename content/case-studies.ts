@@ -679,9 +679,28 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     ...cardOf("belistria"),
     // OWNER — remaining items (timeline confirmed: Jan–Feb 2025 build, AEO
     // campaign through 2026; zero rankings lost is confirmed and claimed):
-    //   1. The AI visibility scores are your figures. Keep whatever tool
-    //      measured them to hand in case a prospect asks for the receipts.
-    //   2. Assets: no old-site screenshot, so there's no before/after pair yet.
+    //   1. Assets: no old-site screenshot, so there's no before/after pair yet.
+    //
+    // EVIDENCE DEBT (skill v2, Docs/zenith-case-study-SKILL-v2.md §2). This
+    // study's figures are true but not yet self-defending on the page. To
+    // close it, supply:
+    //   a. The 257% comparison: exact GSC periods compared (e.g. "Jan-Mar 2026
+    //      vs Jan-Mar 2025") and whether it's brand + non-brand combined.
+    //   b. AI visibility 30->70 / 35->75 / 30->80: which tool produced the
+    //      scores, how many prompts, language and geography, measurement date,
+    //      and what the score represents.
+    //   c. "70+ pages ranking": define ranking (indexed / receiving
+    //      impressions / top 100 / top 10).
+    //   d. "+1000% AI crawler activity": source (server logs? which bots?) and
+    //      period compared.
+    // Then add a `measurementNote` line under the results block and, per §2,
+    // either keep or soften the absolute "the answer AI recommends" claim
+    // depending on whether (b) documents a repeatable method.
+    //
+    // HEADLINE: v2 wants the client named in the H1. Proposed replacement,
+    // pending owner approval:
+    //   "How Bel'Istria went from losing local search to the answer AI
+    //    recommends"
     headline:
       "From losing local search to the answer AI recommends for Istria transfers",
     // No dark-ink Bel'Istria wordmark exists (both files in /logos-dark and

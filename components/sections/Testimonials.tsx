@@ -168,9 +168,9 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
           </div>
         </div>
 
-        {/* Clutch rating bar — full-width row, edge-to-edge top rule; content
-            inset to the frame gutter on both sides. Display only: the rating
-            speaks for itself and the nav already routes to /testimonials. */}
+        {/* Rating bar — full-width row, edge-to-edge top rule; content inset
+            to the frame gutter on both sides. The platform name links to the
+            profile: the site never names it without linking out. */}
         <div className="flex border-t border-light-border px-[clamp(20px,4vw,64px)] py-6">
           <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-body text-light-text">
             Rated{" "}
@@ -178,9 +178,14 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
               {testimonials.rating.score}
             </span>{" "}
             on{" "}
-            <span className="font-display font-medium">
+            <a
+              href={testimonials.rating.href}
+              target="_blank"
+              rel="noopener"
+              className="font-display font-medium underline underline-offset-4 transition hover:text-light-muted"
+            >
               {testimonials.rating.platform}
-            </span>
+            </a>
             <Stars />
           </p>
         </div>

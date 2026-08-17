@@ -45,12 +45,15 @@
  * OWNER — profile links are live (Wix Partner, Trustpilot, LinkedIn) and feed
  * Person/Organization `sameAs`.
  *
- * REVIEW CLAIMS (owner decision, Aug 2026): the site points at Trustpilot and
- * states no score. Every individual review there is 5 stars, but Trustpilot's
- * TrustScore weights recency and currently displays 4.6, so publishing either
- * number would contradict what a visitor sees when they click through. Naming
- * the platform and letting the profile speak is the honest version. Clutch is
- * out of the copy entirely until that profile carries real volume.
+ * REVIEW CLAIMS (owner decision, Aug 2026): no score is published anywhere.
+ * Every individual Trustpilot review is 5 stars, but the TrustScore weights
+ * recency and currently displays 4.6, so publishing either number would
+ * contradict what a visitor sees when they click through.
+ *
+ * NAMING THE PLATFORM (owner decision, Aug 2026): Trustpilot is named only
+ * where the site links out to the profile, never as loose body copy or as a
+ * stat value. Clutch is out of the copy entirely until that profile carries
+ * real volume.
  */
 
 export type FounderLink = { label: string; href: string };
@@ -64,7 +67,7 @@ export const founderCore = {
   stats: [
     { value: "100+", label: "Websites shipped" },
     { value: "Top 1%", label: "Wix Partner ranking" },
-    { value: "Trustpilot", label: "Client reviews" },
+    { value: "5+", label: "Years of experience" },
   ],
   // These double as Person schema `sameAs`. Keep only links that resolve.
   links: [
@@ -98,7 +101,7 @@ export const founderServices = {
   paragraphs: [
     "Zenith Digital is run by Pavle Maodus, a Belgrade-based web designer and developer ranked in the top 1% of Wix Partners worldwide. Ten years of building for businesses across the UK, EU, and US: 100+ websites shipped, from five-page service sites to custom-coded platforms.",
     "There's no account manager between you and the work. The person on your discovery call is the person designing your pages, writing your proposal, and answering when something needs fixing. That's most of why projects here move in weeks, not quarters.",
-    "The rest of the proof is public: €1M+ in tracked client revenue, our client reviews on Trustpilot, and the case studies on this site, with every number in them real.",
+    "The rest of the proof is public: €1M+ in tracked client revenue and the case studies on this site, with every number in them real.",
   ],
   cta: { label: "Book a call with Pavle", href: "/book-a-call" },
 };

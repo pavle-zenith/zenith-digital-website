@@ -76,7 +76,7 @@ export const tHero = {
     "No cherry-picked praise and no anonymous quotes. Real names, real companies, real outcomes.",
   // Every figure here already appears elsewhere on the site.
   stats: [
-    { value: "Trustpilot", label: "Client reviews" },
+    { value: "5+", label: "Years of experience" },
     { value: "100+", label: "Websites shipped" },
     { value: "€1M+", label: "Client revenue generated" },
   ] as Metric[],

@@ -6,7 +6,7 @@ import type { ServicePageContent } from "./types";
  * Targets: wix studio website design · wix studio agency · hire wix studio
  * designer · wix studio expert.
  *
- * Every figure here already exists elsewhere on the site (Top 1% Wix Partner,
+ * Every figure here already exists elsewhere on the site (Wix Legend Partner,
  * 100+ sites, €2,500 floor, Knode's raise, Scottish Luxury's pipeline). No new
  * numbers were invented for this page.
  */
@@ -26,15 +26,15 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
   seo: {
     title: "Wix Studio Website Design Services | Zenith Digital",
     description:
-      "Custom Wix Studio website design from a Top 1% Wix Partner. Conversion-first builds launched in 2 to 5 weeks, from €2,500 fixed. 100+ sites shipped.",
+      "Custom Wix Studio website design from a Wix Legend Partner. Conversion-first builds launched in 2 to 5 weeks, from €2,500 fixed. 100+ sites shipped.",
   },
 
   hero: {
     name: "Wix Studio website design",
     h1: "Wix Studio website design that pays for itself",
     subhead:
-      "Custom-designed, conversion-first Wix Studio websites from a Top 1% Wix Partner. Launched in 2 to 5 weeks, from €2,500 fixed.",
-    chips: ["Top 1% Wix Partner", "100+ sites shipped", "3 to 4 week launch"],
+      "Custom-designed, conversion-first Wix Studio websites from a Wix Legend Partner. Launched in 2 to 5 weeks, from €2,500 fixed.",
+    chips: ["Wix Legend Partner", "100+ sites shipped", "3 to 4 week launch"],
     ctas,
   },
 
@@ -299,7 +299,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
 
   unique: {
     kind: "comparison",
-    heading: "Why a Top 1% Wix Partner instead of a freelancer or a template",
+    heading: "Why a Wix Legend Partner instead of a freelancer or a template",
     intro:
       "All three options put a website on your domain. They differ on what happens in month six.",
     columns: [
@@ -335,8 +335,8 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       },
     ],
     footnote: {
-      title: "What Top 1% Wix Partner actually means",
-      body: "Wix ranks its partner agencies on delivered work and client outcomes, and publishes the tiers. Top 1% is the highest band. It isn't a badge you buy or apply for, which is exactly why it's worth checking on any agency that claims platform expertise, including ours.",
+      title: "What Wix Legend Partner actually means",
+      body: "Wix ranks its partner agencies on delivered work and client outcomes, and publishes the tiers. Legend is the highest band, roughly the top 1% of builders on the platform. It isn't a badge you buy or apply for, which is exactly why it's worth checking on any agency that claims platform expertise, including ours.",
     },
   },
 
@@ -411,7 +411,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
 
   schema: {
     description:
-      "Custom Wix Studio website design and build from a Top 1% Wix Partner. Strategy, conversion copywriting, responsive build, on-page SEO and schema, analytics, and handover. Launched in 2 to 5 weeks from €2,500 fixed.",
+      "Custom Wix Studio website design and build from a Wix Legend Partner. Strategy, conversion copywriting, responsive build, on-page SEO and schema, analytics, and handover. Launched in 2 to 5 weeks from €2,500 fixed.",
     priceFrom: "2500",
   },
 };

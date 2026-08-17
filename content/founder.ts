@@ -7,7 +7,7 @@
  *   1. A real, named human with a specific role and place. Search engines and
  *      AI assistants resolve "Zenith Digital" to a verifiable entity through
  *      a person, and buyers trust a face more than a logo.
- *   2. Verifiable credentials, linked out. A claim like "Top 1% Wix Partner"
+ *   2. Verifiable credentials, linked out. A claim like "Wix Legend Partner"
  *      earns weight when it points at a profile someone can check. These
  *      links double as `sameAs` in the Person schema.
  *   3. Numbers over adjectives. byCrawford's version of this block carries
@@ -62,11 +62,11 @@ export const founderCore = {
   name: "Pavle Maodus",
   role: "Founder, Zenith Digital",
   image: "/pavle.webp",
-  imageAlt: "Pavle Maodus, founder of Zenith Digital, Top 1% Wix Partner",
+  imageAlt: "Pavle Maodus, founder of Zenith Digital, Wix Legend Partner",
   // Rendered as the stat bar overlaid on the portrait.
   stats: [
     { value: "100+", label: "Websites shipped" },
-    { value: "Top 1%", label: "Wix Partner ranking" },
+    { value: "Legend", label: "Wix Partner tier" },
     { value: "5+", label: "Years of experience" },
   ],
   // These double as Person schema `sameAs`. Keep only links that resolve.
@@ -99,7 +99,7 @@ export const founderServices = {
   ),
   heading: "Who actually builds your site?",
   paragraphs: [
-    "Zenith Digital is run by Pavle Maodus, a Belgrade-based web designer and developer ranked in the top 1% of Wix Partners worldwide. Building for businesses across the UK, EU, and US since 2019: 100+ websites shipped, from five-page service sites to custom-coded platforms.",
+    "Zenith Digital is run by Pavle Maodus, a Belgrade-based web designer and developer, and a Wix Legend Partner: the top tier of the Wix Partner programme, roughly the top 1% of builders on the platform. Building for businesses across the UK, EU, and US since 2019: 100+ websites shipped, from five-page service sites to custom-coded platforms.",
     "There's no account manager between you and the work. The person on your discovery call is the person designing your pages, writing your proposal, and answering when something needs fixing. That's most of why projects here move in weeks, not quarters.",
     "The rest of the proof is public: €1M+ in tracked client revenue and the case studies on this site, with every number in them real.",
   ],
@@ -119,7 +119,7 @@ export const founderBookACall = {
   ],
   whyHeading: "Why book a call with me?",
   whyPoints: [
-    "Top 1% Wix Partner, ranked by Wix, not self-declared",
+    "Wix Legend Partner, a tier awarded by Wix, not self-declared",
     "100+ builds mean the diagnosis is fast and specific",
     "No sales rep and no handoff: you talk to the builder",
     "The advice is yours to keep, whether or not we work together",
@@ -135,7 +135,7 @@ export const founderFreeAudit = {
   ],
   whyHeading: "Why let me pick your site apart?",
   whyPoints: [
-    "Top 1% Wix Partner with 100+ sites shipped",
+    "Wix Legend Partner with 100+ sites shipped",
     "The same checklist we run on paid projects",
     "Findings in plain language, ranked by impact",
     "No obligation attached: the audit is useful by design",

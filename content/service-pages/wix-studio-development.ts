@@ -12,7 +12,7 @@ import type { ServicePageContent } from "./types";
  * Yacht Junky is the proof: a two-sided marketplace built native.
  *
  * No new numbers were invented. Every figure here already exists elsewhere on
- * the site (Yacht Junky's platform facts, Top 1% Wix Partner, 100+ sites).
+ * the site (Yacht Junky's platform facts, Wix Legend Partner, 100+ sites).
  *
  * OWNER — two things that would strengthen this page:
  *   1. `process.image` currently shows the finished Yacht Junky marketplace.
@@ -38,7 +38,7 @@ export const wixStudioDevelopment: ServicePageContent = {
   seo: {
     title: "Hire a Wix Developer: Velo & Custom Code | Zenith Digital",
     description:
-      "Wix Studio development from a Top 1% Wix Partner: Velo code, CMS architecture, integrations, and automations, including a full marketplace build.",
+      "Wix Studio development from a Wix Legend Partner: Velo code, CMS architecture, integrations, and automations, including a full marketplace build.",
   },
 
   hero: {
@@ -49,7 +49,7 @@ export const wixStudioDevelopment: ServicePageContent = {
     chips: [
       "Velo & custom code",
       "Marketplaces built native",
-      "Top 1% Wix Partner",
+      "Wix Legend Partner",
     ],
     ctas,
   },
@@ -421,6 +421,6 @@ export const wixStudioDevelopment: ServicePageContent = {
 
   schema: {
     description:
-      "Custom Wix Studio development from a Top 1% Wix Partner: Velo code, CMS architecture, API integrations, automations, member areas, and marketplace platforms built natively on Wix Studio. Scoped and fixed-priced per project.",
+      "Custom Wix Studio development from a Wix Legend Partner: Velo code, CMS architecture, API integrations, automations, member areas, and marketplace platforms built natively on Wix Studio. Scoped and fixed-priced per project.",
   },
 };

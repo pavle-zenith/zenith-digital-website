@@ -21,7 +21,7 @@ export const AUDIT: CtaLink = {
 
 // 1. Hero
 export const hero = {
-  badgePrefix: "Top 1% Partner of",
+  badgePrefix: "Legend Partner of",
   badgeBrand: "Wix Studio",
   headline: "Wix Studio websites for businesses that outgrow templates.",
   subhead:
@@ -527,7 +527,7 @@ export const included = {
         {
           icon: "server",
           title: "Zero downtime track record",
-          text: "We've never had a production site go offline in seven years.",
+          text: "No site we've built has gone offline in production, going back to 2019.",
         },
         {
           icon: "shield",

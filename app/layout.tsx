@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.thezenithdigital.com"),
   title: "Wix Studio Web Design Agency | Zenith Digital",
   description:
-    "Zenith Digital is a Wix Studio web design agency and Top 1% Wix Partner, serving the UK, EU, and US from Belgrade. 100+ websites shipped, from €2,500.",
+    "Zenith Digital is a Wix Studio web design agency and Wix Legend Partner, serving the UK, EU, and US from Belgrade. 100+ websites shipped, from €2,500.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -36,13 +35,13 @@ export const metadata: Metadata = {
     url: "/",
     title: "Wix Studio Web Design Agency | Zenith Digital",
     description:
-      "Wix Studio web design, migrations, and SEO from a Top 1% Wix Partner. 100+ websites shipped for businesses across the UK, EU, and US.",
+      "Wix Studio web design, migrations, and SEO from a Wix Legend Partner. 100+ websites shipped for businesses across the UK, EU, and US.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Wix Studio Web Design Agency | Zenith Digital",
     description:
-      "Wix Studio web design, migrations, and SEO from a Top 1% Wix Partner. 100+ websites shipped for businesses across the UK, EU, and US.",
+      "Wix Studio web design, migrations, and SEO from a Wix Legend Partner. 100+ websites shipped for businesses across the UK, EU, and US.",
   },
   robots: {
     index: true,
@@ -61,13 +60,19 @@ export default function RootLayout({
       lang="en"
       className={`${sfPro.variable} ${saansMono.variable} ${inter.variable}`}
     >
-      {/* Google Consent Mode v2 defaults. Must run before the GA tag, hence
-          beforeInteractive: until the visitor accepts, GA sends cookieless
-          pings and stores nothing. Ad storage stays denied outright, since the
-          site runs no ad products. */}
-      <Script id="consent-defaults" strategy="beforeInteractive">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments);}window.gtag=gtag;gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});`}
-      </Script>
+      <head>
+        {/* Google Consent Mode v2 defaults. A plain inline script in <head>,
+            not next/script: it has to execute synchronously in document order,
+            before the GA tag mounts in the body below. Until the visitor
+            accepts, GA sends cookieless pings and stores nothing. Ad storage
+            stays denied outright, since the site runs no ad products. */}
+        <script
+          id="consent-defaults"
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments);}window.gtag=gtag;gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});`,
+          }}
+        />
+      </head>
 
       <body>
         {/* Sitewide entity graph — one Organization and one WebSite node for
@@ -79,10 +84,10 @@ export default function RootLayout({
         <Footer />
         {/* Consent banner + route-change page views. */}
         <Analytics />
+        {/* Loaded unconditionally: the Consent Mode defaults above decide what
+            it may store. Absent env var means no tag at all (local/preview). */}
+        {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
       </body>
-      {/* Loaded unconditionally: Consent Mode above decides what it may
-          store. Absent env var means no tag at all (local/preview). */}
-      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   );
 }

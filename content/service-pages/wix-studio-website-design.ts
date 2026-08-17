@@ -1,5 +1,4 @@
 import type { CtaLink } from "@/lib/types";
-import { quoteOf } from "../testimonials-data";
 import type { ServicePageContent } from "./types";
 
 /**
@@ -25,8 +24,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
   slug: "wix-studio-website-design",
   publish: true,
   seo: {
-    title:
-      "Wix Studio website design by a Top 1% Wix Partner | Zenith Digital",
+    title: "Wix Studio website design by a Top 1% Wix Partner | Zenith Digital",
     description:
       "Custom Wix Studio website design from a Top 1% Wix Partner. Conversion-first builds launched in 2 to 5 weeks, from €2,500 fixed. 100+ sites shipped.",
   },
@@ -48,14 +46,72 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       {
         title: "You've outgrown the template",
         body: "The DIY build got the business online and did its job. Now every change is a workaround, the layout fights the content you actually have, and the design is recognisably the same one a few hundred other companies bought.",
+        card: {
+          label: "Current build",
+          value: "Template",
+          valueNote: "Bought by a few hundred other companies",
+          rows: [
+            { text: "Every layout change is a workaround", state: "bad" },
+            {
+              text: "Design fights the content you actually have",
+              state: "bad",
+            },
+            { text: "It did get the business online", state: "good" },
+          ],
+        },
       },
       {
         title: "The last agency burned you",
         body: "Weeks of silence, a launch date that kept sliding, and a finished site nobody on your team can edit. What you want now is a fixed scope, a fixed price, and a reply inside a working day.",
+        card: {
+          label: "Last engagement",
+          value: "Overran",
+          valueNote: "Launch date moved more than once",
+          rows: [
+            { text: "Weeks of silence between updates", state: "bad" },
+            { text: "Nobody in-house can edit the result", state: "bad" },
+            { text: "Scope and price were never fixed", state: "warn" },
+          ],
+        },
       },
       {
         title: "You're launching and it has to look established",
         body: "A new company, a raise in progress, or a first serious product. The site has to carry more credibility than the founding date does, and it has to be live before the conversations start.",
+        card: {
+          label: "Company age",
+          value: "New",
+          valueNote: "Site has to outrank the founding date",
+          rows: [
+            {
+              text: "A raise in progress or a first serious product",
+              state: "warn",
+            },
+            {
+              text: "Conversations start before the site is ready",
+              state: "bad",
+            },
+            { text: "Credibility is the whole job", state: "warn" },
+          ],
+        },
+      },
+    ],
+  },
+  stakes: {
+    heading: "What staying put costs",
+    intro:
+      "A dated site doesn't send an invoice, which is why it feels free. It isn't.",
+    items: [
+      {
+        title: "The quiet discount",
+        body: "An outdated site doesn't lose deals loudly. Prospects arrive pre-negotiated: they've seen the site, priced you as the cheap option, and opened with a lower number. You never find out what they would have paid.",
+      },
+      {
+        title: "The comparison you don't see",
+        body: "Buyers open three tabs and yours is one of them. The competitor with worse work and a better website wins the call, and no report ever tells you it happened.",
+      },
+      {
+        title: "The head start you're gifting",
+        body: "Every month the site stays as it is, somebody else's site is collecting the rankings, reviews, and referrals in your market. The gap isn't static. It accrues.",
       },
     ],
   },
@@ -66,34 +122,42 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       "Every build ships with all eight. Nothing here is an upsell you discover halfway through.",
     items: [
       {
+        icon: "compass",
         title: "Strategy and structure",
         body: "We work out who is buying, what they need to see, and the order they need to see it in before anyone opens a design file. The sitemap comes out of that conversation rather than out of a template's page list.",
       },
       {
+        icon: "type",
         title: "Conversion copywriting",
         body: "Words written to sell rather than to fill a layout, included from The Studio tier upward. Bring your own copy if you have it and we'll structure the design around it instead.",
       },
       {
+        icon: "palette",
         title: "Custom Wix Studio design",
         body: "Designed from a blank canvas in Wix Studio. No purchased theme, no reskinned template, so a competitor can't buy the same starting point you did.",
       },
       {
+        icon: "responsive",
         title: "Responsive build",
         body: "Laid out for phones first, where most of your traffic already is, then scaled up through tablet and desktop breakpoints and checked on real devices before launch.",
       },
       {
+        icon: "search",
         title: "On-page SEO and schema",
         body: "Titles, meta descriptions, heading hierarchy, internal links, and structured data set on every page before you go live, so the site is indexable on day one instead of month three.",
       },
       {
+        icon: "chart",
         title: "Analytics and lead capture",
         body: "Forms, booking, and conversion events wired into your CRM and analytics, so you can see which pages produce enquiries and which ones only produce traffic.",
       },
       {
+        icon: "video",
         title: "Loom handover",
         body: "A recorded walkthrough of your own site: editing pages, swapping images, publishing changes. Your team runs the site after we step away, without a support ticket.",
       },
       {
+        icon: "support",
         title: "30 to 60 days of support",
         body: "We stay on after launch to fix anything that surfaces once real traffic and real users arrive, because that's when the edge cases show up.",
       },
@@ -104,48 +168,64 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     heading: "How a build runs",
     intro:
       "Five stages, most of them measured in days. You'll know at every point what's happening and what we need from you.",
+    // The showcase layout: the editor mid-build on the left, stages right.
+    image: "/services/wix-studio.webp",
+    imageAlt: "The Wix Studio editor during a Zenith build",
+    cta: { label: "Book a call", href: "/book-a-call", variant: "primary" },
     steps: [
       {
         title: "Discovery call",
+        focus: ["Goals and fit", "Current-site review", "Twenty minutes"],
         duration: "Day 1",
         body: "Twenty free minutes on what the site has to do, who it's selling to, and what's failing on the current one. If we're not the right fit we say so on the call.",
       },
       {
         title: "Proposal",
+        focus: ["Fixed scope", "Fixed price", "Launch date in writing"],
         duration: "Same day",
         body: "Scope, fixed price, and launch date in writing, sent the same day as the call. No multi-week discovery invoice before you can see a number.",
       },
       {
         title: "Wireframes and copy",
+        focus: ["Structure first", "Conversion copy", "Greyscale sign-off"],
         duration: "Week 1",
         body: "Structure and words first, greyscale, no visual polish to hide behind. Signing off at this stage is what keeps the design phase from turning into rounds of opinion.",
       },
       {
         title: "Design and build",
+        focus: ["Designed in Wix Studio", "Reviewed on a live URL"],
         duration: "Weeks 2 to 4",
         body: "Design and build happen in Wix Studio directly, so what you review is the real site on a real URL rather than a flat mockup that still has to be rebuilt.",
       },
       {
         title: "Launch and handover",
+        focus: ["Domain and redirects", "Analytics setup", "Loom walkthrough"],
         duration: "Week 5",
         body: "Domain, redirects, analytics, and search console set up, then the Loom walkthrough. The site is yours, on your own Wix account, from that day.",
       },
     ],
   },
 
-  proof: {
-    heading: "Builds like yours",
-    intro:
-      "Two sites where the design work is directly attached to a business outcome.",
-    caseSlugs: ["scottish-luxury-experience", "knode-ai"],
-    testimonial: quoteOf("gemma-sole"),
-  },
+  // Featured-work slider picks: the page's headline cases first, then
+  // adjacent builds relevant to this service.
+  workSlugs: [
+    "scottish-luxury-experience",
+    "knode-ai",
+    "belistria",
+    "mod-digital",
+    "genroks-ai",
+    "yacht-junky",
+  ],
 
   pricing: {
-    heading: "What it costs",
+    heading: "Wix Studio website pricing",
     from: "From €2,500",
     fromNote: "fixed, one-time",
     note: "The price is agreed before we start and it doesn't move unless you add scope. Most businesses land between the €2,500 entry build and the €4,500 Studio tier.",
+    // The H1 promises "pays for itself", so the pull quote does the
+    // arithmetic rather than leaving the reader to take it on faith.
+    pullQuote:
+      "The arithmetic behind the headline is worth doing before the call: if a customer is worth €500 to you, the €2,500 build pays for itself with five enquiries the old site wasn't winning. The case studies above are how that plays out in practice.",
     drivers: [
       {
         title: "Page count",
@@ -160,7 +240,11 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
         body: "Writing every page from scratch costs more than editing copy you already have. Both are fine, and we'll tell you which one your project needs.",
       },
     ],
-    cta: { label: "Get a fixed quote", href: "/book-a-call", variant: "primary" },
+    cta: {
+      label: "Get a fixed quote",
+      href: "/book-a-call",
+      variant: "primary",
+    },
     ctaSecondary: {
       label: "See all pricing",
       href: "/#pricing",
@@ -249,7 +333,12 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       {
         label: "Website migration",
         href: "/services/website-migration",
-        image: "/services/migrations.jpg",
+        // The migration card always uses the drag-to-compare widget, same as
+        // the homepage: a static shot can't show a before and an after.
+        beforeAfter: {
+          before: "/before-after/foxstays-before.jpg",
+          after: "/before-after/foxstays-after.jpg",
+        },
         desc: "Already have a site with rankings worth protecting? Move it across without losing them.",
       },
       {

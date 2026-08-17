@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 
 import { JsonLd } from "@/components/JsonLd";
+import { personSchema } from "@/lib/schema";
 import { BookHero } from "@/components/sections/BookHero";
 import { CallCovers } from "@/components/sections/CallCovers";
 import { BeforeAfterWork } from "@/components/sections/BeforeAfterWork";
 import { QuoteBand } from "@/components/sections/QuoteBand";
+import { FounderSection } from "@/components/sections/FounderSection";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { bookFaq, bookFinalCta } from "@/content/book-a-call";
+import { founderBookACall } from "@/content/founder";
 
 export const metadata: Metadata = {
   title: "Book a free website call | Zenith Digital",
@@ -30,10 +33,14 @@ export default function BookACallPage() {
   return (
     <>
       <JsonLd data={faqSchema} />
+      <JsonLd data={personSchema} />
       <BookHero />
       <CallCovers />
       <BeforeAfterWork />
       <QuoteBand />
+      {/* Who the call is actually with, right before the questions people
+          check before picking a slot. Plain white after the dark QuoteBand. */}
+      <FounderSection data={founderBookACall} size="expert" />
       <Faq data={bookFaq} />
       <CtaBanner data={bookFinalCta} />
     </>

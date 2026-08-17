@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
+import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
 import type { ServicePageContent } from "@/content/service-pages";
 
 /**
@@ -18,7 +19,10 @@ export function ServicePageRelated({ data }: { data: ServicePageContent }) {
   const hub = data.related.items.find((i) => i.href === "/services");
 
   return (
-    <Section tone="light" frameClassName="!py-12 md:!py-20">
+    // No bottom padding: the "All services" strip is the last thing in here and
+    // sits flush against the CTA band below, the way the strip reads as a
+    // boundary rather than a floating row. Top padding is the usual rhythm.
+    <Section tone="light" frameClassName="!pt-12 !pb-0 md:!pt-20">
       <h2 className="font-display text-h2 font-medium leading-tight tracking-tight">
         {data.related.heading}
       </h2>
@@ -31,7 +35,21 @@ export function ServicePageRelated({ data }: { data: ServicePageContent }) {
               href={item.href}
               className="group flex flex-col bg-light-bg p-6 transition hover:bg-light-surface"
             >
-              {item.image ? (
+              {/* Drag-to-compare widget when the item carries a before/after
+                  pair (migration always does), otherwise the static mockup.
+                  Same rule as the homepage services grid. */}
+              {item.beforeAfter ? (
+                <div className="mb-6">
+                  <BeforeAfterSlider
+                    title={item.label}
+                    before={item.beforeAfter.before}
+                    after={item.beforeAfter.after}
+                    caption={false}
+                    labels={false}
+                    frameClassName="aspect-[16/10] rounded-[6px] border border-light-border bg-light-surface"
+                  />
+                </div>
+              ) : item.image ? (
                 <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-[6px] border border-light-border bg-light-surface">
                   <Image
                     src={item.image}

@@ -1,0 +1,26 @@
+# Zenith Digital
+
+> Zenith Digital is a Wix Studio web design agency based in Belgrade, Serbia,
+> serving clients across the UK, EU, and US. Top 1% Wix Partner. 100+ websites
+> shipped, €1M+ in tracked client revenue, 5.96x average ROAS on managed
+> campaigns. Founded and run by Pavle Maodus. The agency builds custom-coded
+> sites (Next.js) for clients who outgrow Wix Studio, including this site.
+
+## Services
+
+- [Wix Studio website design](https://www.thezenithdigital.com/services/wix-studio-website-design): custom conversion-first builds from €2,500, launched in 2 to 5 weeks
+- [Website migration](https://www.thezenithdigital.com/services/website-migration): WordPress, Squarespace, Webflow, and Framer to Wix Studio with zero ranking loss, from €2,500
+- [Landing pages](https://www.thezenithdigital.com/services/landing-pages): campaign landing pages live in about a week, from €1,250
+- [SEO, AEO & PPC](https://www.thezenithdigital.com/services/seo-aeo-ppc): search, answer-engine optimization, and paid campaigns for Wix Studio sites
+- [White-label & partnerships](https://www.thezenithdigital.com/partnerships): unbranded production for agencies, landing pages from €1,000, retainers from €1,099/mo
+
+## Proof
+
+- [Case studies](https://www.thezenithdigital.com/case-studies): Knode AI ($10M Series A site in 3 weeks), Scottish Luxury Experience ($521k in 7 months), Bel'Istria (257% impression growth, top AI recommendation for Istria transfers), MOD Digital (3-year agency build partnership, €1M+ campaign revenue)
+- [Testimonials](https://www.thezenithdigital.com/testimonials): named clients, 5/5 on Clutch
+
+## Company
+
+- Founder: Pavle Maodus, Top 1% Wix Partner, based in Belgrade with presence in Edinburgh and Liverpool
+- [Book a call](https://www.thezenithdigital.com/book-a-call)
+- [Free website audit](https://www.thezenithdigital.com/free-website-audit)

@@ -6,83 +6,75 @@ import { Button } from "@/components/ui/Button";
 import type { ServicePageContent } from "@/content/service-pages";
 
 /**
- * Service page hero — dark, on the faint studio texture. Breadcrumb, the
- * keyword-led H1, a two-line subhead, proof chips, and the two conversion
- * CTAs. Left-aligned throughout, phones included.
+ * Service page hero — white, on the inverted studio texture, the same register
+ * as the /case-studies and case-study detail heroes. Breadcrumb, the
+ * keyword-led H1, a two-line subhead, and the two conversion CTAs.
+ * Left-aligned throughout, phones included.
+ *
+ * The proof stats sit outside the hero content area: ProjectsSlider, rendered
+ * directly below, takes `hero.chips` and draws them as the meta strip heading
+ * its screenshot track.
  */
 export function ServicePageHero({ data }: { data: ServicePageContent }) {
   return (
-    <div className="relative isolate overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-bg">
+    <Section
+      tone="light"
+      divide={false}
+      frameClassName="relative !pb-14 !pt-10 md:!pb-20 md:!pt-14"
+    >
+      {/* Texture layer — fills the frame column, under the (relative) content */}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden
+      >
         <Image
           src="/textures/studio-texture.jpg"
           alt=""
           fill
-          className="object-cover opacity-[0.16]"
-          aria-hidden
+          sizes="100vw"
+          className="object-cover opacity-[0.28] invert"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
+          }}
         />
       </div>
 
-      <Section
-        tone="dark"
-        divide={false}
-        className="bg-transparent"
-        frameClassName="!pb-14 !pt-10 md:!pb-20 md:!pt-14"
-      >
+      <div className="relative">
         <nav
           aria-label="Breadcrumb"
-          className="font-mono text-label uppercase track-label text-text-muted"
+          className="font-mono text-label uppercase track-label text-light-muted"
         >
-          <Link href="/services" className="transition hover:text-text">
+          <Link href="/services" className="transition hover:text-light-text">
             Services
           </Link>
           <span aria-hidden className="mx-2">
             /
           </span>
-          <span className="text-text">{data.hero.name}</span>
+          <span className="text-light-text">{data.hero.name}</span>
         </nav>
 
         <div className="mt-10 max-w-4xl md:mt-14">
           <h1 className="font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
             {data.hero.h1}
           </h1>
-          <p className="mt-6 max-w-2xl text-body-lg font-medium leading-relaxed text-text-muted">
+          <p className="mt-6 max-w-2xl text-body-lg font-medium leading-relaxed text-light-muted">
             {data.hero.subhead}
           </p>
 
-          <ul className="mt-8 flex flex-wrap gap-2.5">
-            {data.hero.chips.map((chip) => (
-              <li
-                key={chip}
-                className="inline-flex items-center rounded-full border border-border px-4 py-2 text-body font-medium"
-              >
-                {chip}
-              </li>
-            ))}
-          </ul>
-
-          {/* The accent fill is near-invisible on navy (§15), so the primary
-              CTA is white-filled here and the secondary keeps the outline. */}
+          {/* On white the accent fill reads, so both CTAs are the shared
+              Button. The white-filled primary this hero used was a navy-only
+              workaround (§15). */}
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            {data.hero.ctas.map((cta) =>
-              (cta.variant ?? "primary") === "primary" ? (
-                <Link
-                  key={cta.href}
-                  href={cta.href}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90 sm:w-auto"
-                >
-                  {cta.label}{" "}
-                  <span aria-hidden className="btn-arrow">
-                    &rarr;
-                  </span>
-                </Link>
-              ) : (
-                <Button key={cta.href} cta={cta} tone="dark" />
-              ),
-            )}
+            {data.hero.ctas.map((cta) => (
+              <Button key={cta.href} cta={cta} tone="light" />
+            ))}
           </div>
         </div>
-      </Section>
-    </div>
+      </div>
+    </Section>
   );
 }

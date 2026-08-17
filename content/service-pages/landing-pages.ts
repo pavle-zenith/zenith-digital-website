@@ -1,5 +1,4 @@
 import type { CtaLink } from "@/lib/types";
-import { quoteOf } from "../testimonials-data";
 import type { ServicePageContent } from "./types";
 
 /**
@@ -56,14 +55,66 @@ export const landingPages: ServicePageContent = {
       {
         title: "Your ads point at the homepage",
         body: "The ad promised one specific thing and the page that opens offers eleven. Visitors who clicked with intent land somewhere general and have to hunt for what brought them there.",
+        card: {
+          label: "Ad destination",
+          value: "Homepage",
+          valueNote: "Eleven offers, one promise",
+          rows: [
+            { text: "The ad promised one specific thing", state: "warn" },
+            { text: "Visitors hunt for what brought them there", state: "bad" },
+            { text: "The intent is there on arrival", state: "good" },
+          ],
+        },
       },
       {
         title: "You're launching an offer or a campaign",
         body: "A new product, a seasonal push, a webinar, or a lead magnet. It needs a page of its own with a single argument, and it needs it before the campaign date, not after.",
+        card: {
+          label: "Campaign date",
+          value: "Fixed",
+          valueNote: "The page has to exist before it",
+          rows: [
+            { text: "A launch, a seasonal push, or a webinar", state: "warn" },
+            { text: "Needs a single argument, not a menu", state: "warn" },
+            { text: "The offer itself is decided", state: "good" },
+          ],
+        },
       },
       {
         title: "You're an agency short on build capacity",
         body: "Client campaigns are booked and the build queue is full. We produce pages under your brand at partner rates, which is covered properly on the partnerships page.",
+        card: {
+          label: "Build queue",
+          value: "Full",
+          valueNote: "Client campaigns already booked",
+          rows: [
+            { text: "More demand than production capacity", state: "warn" },
+            { text: "Pages produced under your brand", state: "good" },
+            {
+              text: "Partner rates, covered on the partnerships page",
+              state: "good",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  stakes: {
+    heading: "What the homepage is costing your campaigns",
+    intro:
+      "If ads are running, you already own this problem. The only question is its size.",
+    items: [
+      {
+        title: "You're already paying for the traffic",
+        body: "The click costs the same whether it lands on a page built to convert it or on your homepage. The only variable is how much of what you bought you keep.",
+      },
+      {
+        title: "A homepage introduces, it doesn't close",
+        body: "Every campaign click that lands on a general-purpose page has to find its own way to the offer it clicked for. Most don't, and the platform charges you for them anyway.",
+      },
+      {
+        title: "Mismatch is fined at both ends",
+        body: "Ad platforms reward pages that match the ad with cheaper clicks and better placement. A mismatched page pays more per click and converts fewer of them. Same budget, twice the penalty.",
       },
     ],
   },
@@ -74,26 +125,32 @@ export const landingPages: ServicePageContent = {
       "Six things, priced as one page. There's no separate copy invoice at the end.",
     items: [
       {
+        icon: "type",
         title: "Conversion copy and structure",
         body: "Written around one action, in the order a sceptical visitor needs it: the promise, the proof, the objection handling, then the ask. Headline language matched to the ad that sent them.",
       },
       {
+        icon: "palette",
         title: "Design matched to your brand",
         body: "Built to look like it belongs to your business, not to a page builder. Existing brand assets are used where they exist, and where they don't we work from the site you already have.",
       },
       {
+        icon: "gauge",
         title: "Build and speed pass",
         body: "Assembled in Wix Studio and compressed hard. Paid traffic is the least patient traffic you buy, and a page that loads slowly wastes the click before anyone reads it.",
       },
       {
+        icon: "plug",
         title: "Form, CRM, and booking integrations",
         body: "Submissions land where your team already works, whether that's a CRM, an inbox, a spreadsheet, or a booking calendar. Tested with real submissions before the page goes live.",
       },
       {
+        icon: "chart",
         title: "Analytics events",
         body: "Conversion tracking wired for Google and Meta so the campaign can optimise against actual leads instead of clicks, and so you can see which section people stop at.",
       },
       {
+        icon: "split",
         title: "Variant-ready structure",
         body: "Sections built to be swapped, so testing a different headline or offer means duplicating a page and changing one block rather than starting again.",
       },
@@ -128,13 +185,16 @@ export const landingPages: ServicePageContent = {
     ],
   },
 
-  proof: {
-    heading: "Pages that carried real campaigns",
-    intro:
-      "The longest-running example is an agency partnership: 15+ pages, built to a campaign calendar.",
-    caseSlugs: ["mod-digital", "knode-ai"],
-    testimonial: quoteOf("john-smyth"),
-  },
+  // Featured-work slider picks: the page's headline cases first, then
+  // adjacent builds relevant to this service.
+  workSlugs: [
+    "mod-digital",
+    "knode-ai",
+    "hunting-brook-gardens",
+    "scottish-luxury-experience",
+    "belistria",
+    "katie-hailey",
+  ],
 
   pricing: {
     heading: "What a landing page costs",
@@ -155,7 +215,11 @@ export const landingPages: ServicePageContent = {
         body: "A form to an inbox is simple. Routing to a CRM with lifecycle stages, a booking calendar, and multi-platform conversion tracking takes longer to wire and test.",
       },
     ],
-    cta: { label: "Brief a landing page", href: "/book-a-call", variant: "primary" },
+    cta: {
+      label: "Brief a landing page",
+      href: "/book-a-call",
+      variant: "primary",
+    },
     ctaSecondary: {
       label: "Partner rates for agencies",
       href: "/partnerships",

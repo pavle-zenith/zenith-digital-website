@@ -2,16 +2,23 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/JsonLd";
+import { personSchema } from "@/lib/schema";
 import { ServicePageHero } from "@/components/sections/service/ServicePageHero";
 import { ServicePageWhoFor } from "@/components/sections/service/ServicePageWhoFor";
+import { ServicePageStakes } from "@/components/sections/service/ServicePageStakes";
 import { ServicePageIncluded } from "@/components/sections/service/ServicePageIncluded";
 import { ServicePageProcess } from "@/components/sections/service/ServicePageProcess";
-import { ServicePageProof } from "@/components/sections/service/ServicePageProof";
 import { ServicePagePricing } from "@/components/sections/service/ServicePagePricing";
 import { ServicePageUnique } from "@/components/sections/service/ServicePageUnique";
 import { ServicePageRelated } from "@/components/sections/service/ServicePageRelated";
+import { founderServices } from "@/content/founder";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { FounderSection } from "@/components/sections/FounderSection";
+import { ClientLogos } from "@/components/sections/ClientLogos";
+import { ProjectsSlider } from "@/components/sections/ProjectsSlider";
+import { WorkStrip } from "@/components/sections/WorkStrip";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { getServicePage, servicePages } from "@/content/service-pages";
 
 const SITE = "https://www.thezenithdigital.com";
@@ -102,13 +109,28 @@ export default async function ServiceDetailPage({ params }: Props) {
       <JsonLd data={serviceSchema} />
       <JsonLd data={faqSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={personSchema} />
 
       <ServicePageHero data={page} />
+      {/* Completed work directly under the hero — the hero's proof stats head
+          the strip, slider arrows on their right. */}
+      <ProjectsSlider stats={page.hero.chips} />
       <ServicePageWhoFor data={page} />
+      <ClientLogos />
+      {/* Prices staying put, between the reader's situation and the answer. */}
+      <ServicePageStakes data={page} />
       <ServicePageIncluded data={page} />
       <ServicePageProcess data={page} />
-      <ServicePageProof data={page} />
+      {/* Per-service case studies as partner-story rows, under the sitewide
+          "Real examples" heading. */}
+      <WorkStrip slugs={page.workSlugs} />
+      {/* Full stats + testimonials, same as the homepage. */}
+      <Testimonials />
       <ServicePagePricing data={page} />
+      {/* The trust gap: pricing is settled, the reader now asks who these
+          people are. Light per the founder spec, tinted so it separates from
+          the white Pricing section directly above. */}
+      <FounderSection data={founderServices} surface />
       <ServicePageUnique data={page} />
       <Faq data={page.faq} />
       <ServicePageRelated data={page} />

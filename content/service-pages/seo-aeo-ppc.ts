@@ -1,5 +1,4 @@
 import type { CtaLink } from "@/lib/types";
-import { quoteOf } from "../testimonials-data";
 import type { ServicePageContent } from "./types";
 
 /**
@@ -52,14 +51,69 @@ export const seoAeoPpc: ServicePageContent = {
       {
         title: "The site is live and nobody sees it",
         body: "It launched, it looks fine, and it sits on page four. Organic traffic is flat or drifting down, and the only visitors arriving are the ones who already knew your name.",
+        card: {
+          label: "Search position",
+          value: "Page 4",
+          valueNote: "For the terms you should own",
+          rows: [
+            { text: "Organic traffic flat or drifting down", state: "bad" },
+            { text: "Arrivals already knew your name", state: "warn" },
+            { text: "The site itself looks fine", state: "good" },
+          ],
+        },
       },
       {
         title: "Ad spend goes out, conversions don't come back",
         body: "Campaigns are running and the click cost is climbing, but the leads aren't tracking with the budget. Usually the ads aren't the problem, the page they land on is.",
+        card: {
+          label: "Cost per lead",
+          value: "Climbing",
+          valueNote: "Leads aren't tracking the budget",
+          rows: [
+            { text: "Click cost rising month over month", state: "bad" },
+            { text: "The page they land on is doing the losing", state: "bad" },
+            { text: "Campaigns themselves are running fine", state: "good" },
+          ],
+        },
       },
       {
         title: "You're invisible when someone asks an AI",
         body: "Buyers now ask ChatGPT and Perplexity for shortlists before they ever open Google. If your business isn't in the source material those tools read, you're not in the answer.",
+        card: {
+          label: "AI answer visibility",
+          value: "Absent",
+          valueNote: "Not in the shortlist buyers are given",
+          rows: [
+            {
+              text: "No presence in ChatGPT or Perplexity answers",
+              state: "bad",
+            },
+            {
+              text: "Not in the source material those tools read",
+              state: "bad",
+            },
+            { text: "Competitors are already being named", state: "warn" },
+          ],
+        },
+      },
+    ],
+  },
+  stakes: {
+    heading: "What another quiet quarter costs",
+    intro:
+      "Visibility work punishes waiting more than almost any other spend, because the results compound.",
+    items: [
+      {
+        title: "Rankings compound, in both directions",
+        body: "Search is a queue you move up by being useful for months in a row. Every month outside it is a head start handed to whoever's in it, and catching up always costs more than keeping up would have.",
+      },
+      {
+        title: "The AI answers are being written now",
+        body: "Assistants are already answering your buyers' questions and citing somebody. The window where your market's AI answers are still unclaimed closes at the speed of your competitors' content calendars.",
+      },
+      {
+        title: "Ad spend without a system leaks",
+        body: "Running ads onto pages nobody optimized is paying full price for traffic and keeping a fraction of it. The spend shows up in reports as activity. The leak never reports at all.",
       },
     ],
   },
@@ -70,30 +124,37 @@ export const seoAeoPpc: ServicePageContent = {
       "Search, AI visibility, and paid campaigns run as one engagement, because splitting them across three vendors is how the handoffs get dropped.",
     items: [
       {
+        icon: "search",
         title: "Technical and on-page SEO",
         body: "Crawlability, index coverage, heading structure, internal linking, page speed, and the metadata on every URL. The unglamorous layer that decides whether anything else you do can work.",
       },
       {
+        icon: "braces",
         title: "Schema and structured data",
         body: "Organization, Service, FAQ, Review, and Breadcrumb markup implemented and validated, so search engines and language models both get an explicit description of what your business does.",
       },
       {
+        icon: "answer",
         title: "Answer-engine optimization",
         body: "Content structured to be quotable: direct answers near the top of a page, clear question headings, and factual claims tied to specifics that a model can cite without hedging.",
       },
       {
+        icon: "pen",
         title: "Keyword and content strategy",
         body: "A ranked list of what your buyers actually search, split into what you can win this quarter and what needs a year. You'll know why each page exists before it's written.",
       },
       {
+        icon: "megaphone",
         title: "Google and Meta campaign management",
         body: "Build, launch, and ongoing optimization of paid campaigns, including audience and creative testing. Budget moves toward whatever produces revenue and away from whatever doesn't.",
       },
       {
+        icon: "split",
         title: "Landing page alignment",
         body: "Ads pointed at pages that match the promise in the ad. Message match is the cheapest conversion improvement available and the one most often skipped.",
       },
       {
+        icon: "chart",
         title: "Monthly reporting in plain language",
         body: "One report a month you can read in five minutes: what moved, what it earned, what happens next. Revenue and enquiries first, vanity metrics nowhere.",
       },
@@ -133,16 +194,16 @@ export const seoAeoPpc: ServicePageContent = {
     ],
   },
 
-  proof: {
-    heading: "Campaigns with revenue attached",
-    intro:
-      "The clearest example is the agency partnership: pages plus campaigns, measured on what the client earned.",
-    // Bel'Istria's 257% impressions would fit here too, but that card belongs
-    // to the migration page. Two service pages showing the same case card is
-    // the one duplication the anti-doorway rule can't excuse.
-    caseSlugs: ["mod-digital", "hunting-brook-gardens"],
-    testimonial: quoteOf("flynn-blackie"),
-  },
+  // Featured-work slider picks: the page's headline cases first, then
+  // adjacent builds relevant to this service.
+  workSlugs: [
+    "mod-digital",
+    "hunting-brook-gardens",
+    "belistria",
+    "scottish-luxury-experience",
+    "knode-ai",
+    "just-stay",
+  ],
 
   pricing: {
     heading: "Why this one isn't a fixed price",
@@ -161,7 +222,11 @@ export const seoAeoPpc: ServicePageContent = {
         body: "Ranking for a niche service in one city is not the same task as ranking nationally against funded competitors. The keyword plan sets the shape of the engagement.",
       },
     ],
-    cta: { label: "Scope a campaign", href: "/book-a-call", variant: "primary" },
+    cta: {
+      label: "Scope a campaign",
+      href: "/book-a-call",
+      variant: "primary",
+    },
     ctaSecondary: {
       label: "Get a free audit first",
       href: "/free-website-audit",
@@ -230,7 +295,12 @@ export const seoAeoPpc: ServicePageContent = {
       {
         label: "Website migration",
         href: "/services/website-migration",
-        image: "/services/migrations.jpg",
+        // The migration card always uses the drag-to-compare widget, same as
+        // the homepage: a static shot can't show a before and an after.
+        beforeAfter: {
+          before: "/before-after/foxstays-before.jpg",
+          after: "/before-after/foxstays-after.jpg",
+        },
         desc: "Changing platform without handing back the rankings you've built.",
       },
       {

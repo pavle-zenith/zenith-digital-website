@@ -12,8 +12,25 @@ import type { CtaLink } from "@/lib/types";
 /** One titled block of prose (who-it's-for bullets, deliverables, and so on). */
 export type TitledBlock = { title: string; body: string };
 
+/**
+ * The panel beside the "Who this is for" tabs — a diagnostic card describing
+ * where the reader is now, in the same register as the homepage audit report:
+ * mono label, one headline reading, then symptom rows. `state` drives the dot
+ * colour, so a situation can show what's already working as well as what isn't.
+ */
+export type WhoForCard = {
+  label: string;
+  value: string;
+  valueNote: string;
+  rows: { text: string; state: "bad" | "warn" | "good" }[];
+};
+
 /** A process step carries its own duration; the timeline is the proof. */
-export type ProcessStep = TitledBlock & { duration: string };
+export type ProcessStep = TitledBlock & {
+  duration: string;
+  /** Chip row naming what the stage covers (showcase layout only). */
+  focus?: string[];
+};
 
 /**
  * Block 7 varies by page on purpose: it's the section that makes each page
@@ -61,17 +78,49 @@ export type ServicePageContent = {
     ctas: CtaLink[];
   };
 
-  whoFor: { heading: string; intro: string; items: TitledBlock[] };
-  included: { heading: string; intro: string; items: TitledBlock[] };
-  process: { heading: string; intro: string; steps: ProcessStep[] };
-
-  proof: {
+  /**
+   * Renders as accordion tabs with a card panel beside them, so each item needs
+   * its own `card`; the panel swaps as the reader moves between situations.
+   */
+  whoFor: {
     heading: string;
     intro: string;
-    /** Slugs into caseStudyCards — the case data itself is never duplicated. */
-    caseSlugs: string[];
-    /** Avatar is optional: we don't put a stock face on a real person's quote. */
-    testimonial: { quote: string; name: string; role: string; avatar?: string };
+    items: (TitledBlock & { card: WhoForCard })[];
+  };
+  /**
+   * Slugs into caseStudyCards for the featured-work slider between the
+   * process section and the testimonials. Picked per service so the strip
+   * shows work relevant to the page, headline cases first.
+   */
+  workSlugs?: string[];
+
+  /** The cost-of-inaction section: why "later" is the expensive choice. */
+  stakes?: {
+    heading: string;
+    intro?: string;
+    items: { title: string; body: string }[];
+  };
+  /**
+   * Renders as icon cards, so each item names an icon from
+   * components/ui/FeatureIcon. An unknown name falls back to a circle.
+   */
+  included: {
+    heading: string;
+    intro: string;
+    items: (TitledBlock & { icon?: string })[];
+  };
+  /**
+   * `image` switches the section to the split showcase layout: heading, photo,
+   * and CTA on the left, hairline-divided stages with focus chips on the
+   * right. Without it the section renders as the plain numbered column.
+   */
+  process: {
+    heading: string;
+    intro: string;
+    image?: string;
+    imageAlt?: string;
+    cta?: CtaLink;
+    steps: ProcessStep[];
   };
 
   pricing: {
@@ -80,6 +129,8 @@ export type ServicePageContent = {
     from?: string;
     fromNote?: string;
     note: string;
+    /** Lifted out of the note into the centered pull quote below it. */
+    pullQuote?: string;
     drivers: TitledBlock[];
     cta: CtaLink;
     ctaSecondary: CtaLink;
@@ -97,11 +148,19 @@ export type ServicePageContent = {
   related: {
     heading: string;
     /**
-     * The sibling services render as homepage-style cards and need `image`.
-     * The single hub item (href "/services") renders as the full-width strip
-     * CTA instead and carries no image.
+     * The sibling services render as homepage-style cards and need `image`, or
+     * `beforeAfter` for the drag-to-compare widget the migration card uses
+     * everywhere (a static shot can't show what a migration does). The single
+     * hub item (href "/services") renders as the full-width strip CTA instead
+     * and carries neither.
      */
-    items: { label: string; href: string; desc: string; image?: string }[];
+    items: {
+      label: string;
+      href: string;
+      desc: string;
+      image?: string;
+      beforeAfter?: { before: string; after: string };
+    }[];
   };
 
   finalCta: {

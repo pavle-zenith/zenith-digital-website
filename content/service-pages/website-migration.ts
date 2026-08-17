@@ -1,5 +1,4 @@
 import type { CtaLink } from "@/lib/types";
-import { quoteOf } from "../testimonials-data";
 import type { ServicePageContent } from "./types";
 
 /**
@@ -52,14 +51,69 @@ export const websiteMigration: ServicePageContent = {
       {
         title: "Maintenance has become someone's job",
         body: "Plugin updates, security patches, a theme that breaks when PHP moves, and a developer on retainer to keep it all standing. The site isn't growing the business, it's consuming a budget line.",
+        card: {
+          label: "Upkeep",
+          value: "Ongoing",
+          valueNote: "A budget line, not a growth line",
+          rows: [
+            { text: "Plugin updates and security patches", state: "bad" },
+            { text: "Theme breaks when PHP moves", state: "bad" },
+            {
+              text: "A developer on retainer to keep it standing",
+              state: "warn",
+            },
+          ],
+        },
       },
       {
         title: "The platform bill keeps climbing",
         body: "Hosting, the page builder licence, the forms add-on, the SEO plugin, the backup service. Stack the annual renewals together and the number gets uncomfortable to defend.",
+        card: {
+          label: "Annual stack cost",
+          value: "Rising",
+          valueNote: "Uncomfortable to defend",
+          rows: [
+            { text: "Hosting plus the page builder licence", state: "warn" },
+            { text: "Forms, SEO, and backup add-ons on top", state: "warn" },
+            { text: "Renewals stack up every year", state: "bad" },
+          ],
+        },
       },
       {
         title: "Nobody in-house can change anything",
         body: "Marketing wants to publish a page and has to file a request. Every small edit queues behind a developer, so the site drifts out of date while everyone waits.",
+        card: {
+          label: "Time to publish a page",
+          value: "Queued",
+          valueNote: "Behind a developer, every time",
+          rows: [
+            { text: "Marketing files a request to make an edit", state: "bad" },
+            {
+              text: "The site drifts out of date while everyone waits",
+              state: "bad",
+            },
+            { text: "The content itself is ready to go", state: "good" },
+          ],
+        },
+      },
+    ],
+  },
+  stakes: {
+    heading: "What waiting costs",
+    intro:
+      "Staying on the old platform feels like the safe option. Run the numbers on it.",
+    items: [
+      {
+        title: "The bill that renews either way",
+        body: "The maintenance retainer, the plugin renewals, the hosting: they invoice whether you move or not. A year of waiting costs roughly a migration, except at the end of it you still own the problem.",
+      },
+      {
+        title: "Rankings erode in place",
+        body: "The rankings you're afraid of losing in a move are already at risk where they are. Slow pages and stale content slide without anyone touching them. Staying put isn't the safe option, it's the slow version of the same loss.",
+      },
+      {
+        title: "The pages that never ship",
+        body: "Every page marketing didn't publish while waiting on a developer is a search term you don't rank for and a campaign that ran without its landing page. That backlog is invisible on any invoice, and it's the expensive part.",
       },
     ],
   },
@@ -70,30 +124,37 @@ export const websiteMigration: ServicePageContent = {
       "The build is the easy half. Most of this list exists to protect the search visibility you already paid for.",
     items: [
       {
+        icon: "clipboard",
         title: "Pre-migration SEO audit and URL inventory",
         body: "Before anything is designed, we crawl the current site and export every live URL with its traffic, rankings, and inbound links. That inventory is the contract the rest of the project is checked against.",
       },
       {
+        icon: "redirect",
         title: "1:1 redirect map",
         body: "Every old address gets a permanent redirect to its new equivalent. Not a blanket rule pointing everything at the homepage, which is the single most common way migrations lose rankings.",
       },
       {
+        icon: "transfer",
         title: "Content and CMS migration",
         body: "Pages, posts, categories, tags, images, and CMS collections moved across with structure intact, so a blog with four years of archive arrives as a blog rather than a folder of loose pages.",
       },
       {
+        icon: "tags",
         title: "Metadata and schema parity",
         body: "Titles, descriptions, canonical tags, Open Graph data, and structured data carried over field by field, then diffed against the old site before launch.",
       },
       {
+        icon: "palette",
         title: "Design refresh in Wix Studio",
         body: "Most clients take the opportunity to rebuild the front end rather than clone a dated design. The rebuild happens inside the migration, not as a second project afterwards.",
       },
       {
+        icon: "gauge",
         title: "Speed pass",
         body: "Image formats, loading order, and Core Web Vitals checked on the new build. A faster site after the move is part of the argument for making it.",
       },
       {
+        icon: "radar",
         title: "Post-launch index monitoring",
         body: "We watch Search Console for 30 days after cutover: coverage, impressions, and any URL that 404s or drops out. Anything that moves gets fixed while we're still on it.",
       },
@@ -133,13 +194,16 @@ export const websiteMigration: ServicePageContent = {
     ],
   },
 
-  proof: {
-    heading: "A migration that grew after the move",
-    intro:
-      "Bel'Istria moved 35 pages and came out the other side with more visibility than it went in with.",
-    caseSlugs: ["belistria", "fort-lauderdale-dock-rentals"],
-    testimonial: quoteOf("ivan-belobrajdic"),
-  },
+  // Featured-work slider picks: the page's headline cases first, then
+  // adjacent builds relevant to this service.
+  workSlugs: [
+    "belistria",
+    "fort-lauderdale-dock-rentals",
+    "scottish-luxury-experience",
+    "knode-ai",
+    "genroks-ai",
+    "mod-digital",
+  ],
 
   pricing: {
     heading: "What a migration costs",
@@ -160,7 +224,11 @@ export const websiteMigration: ServicePageContent = {
         body: "Multilingual sites multiply the URL set and the redirect map. Stilby went live in three languages, and that shape of project is scoped accordingly.",
       },
     ],
-    cta: { label: "Plan your migration", href: "/book-a-call", variant: "primary" },
+    cta: {
+      label: "Plan your migration",
+      href: "/book-a-call",
+      variant: "primary",
+    },
     ctaSecondary: {
       label: "See all pricing",
       href: "/#pricing",
@@ -176,25 +244,29 @@ export const websiteMigration: ServicePageContent = {
     items: [
       {
         name: "WordPress to Wix Studio",
-        pains: "Plugin sprawl, update anxiety, and a security surface that grows every time you add functionality. Most WordPress sites we take over are running fifteen or more plugins that nobody can safely remove.",
+        pains:
+          "Plugin sprawl, update anxiety, and a security surface that grows every time you add functionality. Most WordPress sites we take over are running fifteen or more plugins that nobody can safely remove.",
         carries:
           "Posts, pages, categories, tags, authors, and media come across with permalinks preserved. Yoast or Rank Math metadata maps field by field onto Wix Studio's SEO panel.",
       },
       {
         name: "Squarespace to Wix Studio",
-        pains: "Design control runs out exactly when the business starts needing something specific, and the template you picked at launch quietly caps what the site can become.",
+        pains:
+          "Design control runs out exactly when the business starts needing something specific, and the template you picked at launch quietly caps what the site can become.",
         carries:
           "Pages, blog collections, and product data transfer, and Squarespace's tidy URL structure maps across cleanly. Expect a genuine design upgrade rather than a like-for-like copy.",
       },
       {
         name: "Webflow to Wix Studio",
-        pains: "The build is fine, the problem is who can touch it. Editing means understanding the class system, so the marketing team stays dependent on whoever built it.",
+        pains:
+          "The build is fine, the problem is who can touch it. Editing means understanding the class system, so the marketing team stays dependent on whoever built it.",
         carries:
           "CMS collections rebuild one to one, and the design intent survives the move because Wix Studio's layout engine works on the same responsive principles.",
       },
       {
         name: "Framer to Wix Studio",
-        pains: "Fast to launch, then awkward to scale. Content grows past what the original page structure was designed to hold and there's no real CMS underneath it.",
+        pains:
+          "Fast to launch, then awkward to scale. Content grows past what the original page structure was designed to hold and there's no real CMS underneath it.",
         carries:
           "Pages and content move across into a proper collection structure, so publishing the twentieth page is the same effort as publishing the second.",
       },

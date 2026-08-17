@@ -1,14 +1,22 @@
 import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
+import { FeatureIcon } from "@/components/ui/FeatureIcon";
+import { cn } from "@/lib/utils";
 import type { ServicePageContent } from "@/content/service-pages";
 
 /**
- * "What's included" — dark, textured. The depth section: every deliverable
- * gets a numbered row and one or two sentences of explanation, as
- * hairline-divided rows rather than a card grid.
+ * "What's included" — dark, textured, in the PartnerServices bento register:
+ * one hairline-bounded grid (1px gaps over a rule-colored background render as
+ * shared rules), each cell leading with a line icon in a hairline square.
+ * Span classes on the tail cells keep the grid flush whatever the item count
+ * (pages carry six to eight deliverables).
  */
 export function ServicePageIncluded({ data }: { data: ServicePageContent }) {
+  const items = data.included.items;
+  const count = items.length;
+  const last = count - 1;
+
   return (
     <div className="relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-bg">
@@ -26,7 +34,7 @@ export function ServicePageIncluded({ data }: { data: ServicePageContent }) {
         className="bg-transparent"
         frameClassName="!py-14 md:!py-24"
       >
-        <div className="grid gap-8 md:grid-cols-2 md:items-end">
+        <div className="mb-8 grid gap-8 md:mb-12 md:grid-cols-2 md:items-end">
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {data.included.heading}
           </h2>
@@ -35,26 +43,32 @@ export function ServicePageIncluded({ data }: { data: ServicePageContent }) {
           </p>
         </div>
 
-        <ol className="mt-10 divide-y divide-border border-t border-border md:mt-12">
-          {data.included.items.map((item, i) => (
-            <li
+        {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines. */}
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+          {items.map((item, i) => (
+            <article
               key={item.title}
-              className="grid gap-3 py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] md:gap-12 md:py-8"
+              className={cn(
+                "flex flex-col bg-bg p-8",
+                // Close the grid flush on both breakpoints: an odd count spans
+                // the last cell across md's two columns (which also fills lg's
+                // 4+3 row), and a remainder of two on lg spans the final pair.
+                count % 2 === 1 && i === last && "md:col-span-2",
+                count % 4 === 2 && i >= count - 2 && "lg:col-span-2",
+              )}
             >
-              <div className="flex items-baseline gap-4">
-                <span className="font-mono text-label text-text-muted">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-display text-body-lg font-medium">
-                  {item.title}
-                </h3>
-              </div>
-              <p className="max-w-2xl text-body leading-relaxed text-text-muted">
+              <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-border bg-surface text-text">
+                <FeatureIcon name={item.icon ?? ""} />
+              </span>
+              <h3 className="mt-8 font-display text-body-lg font-medium">
+                {item.title}
+              </h3>
+              <p className="mt-2 max-w-md text-body leading-snug text-text-muted">
                 {item.body}
               </p>
-            </li>
+            </article>
           ))}
-        </ol>
+        </div>
       </Section>
     </div>
   );

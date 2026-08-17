@@ -1006,8 +1006,10 @@ export const footer = {
     text: "Hand-reviewed, with a video walkthrough of what to fix first.",
     cta: { label: "Get my free audit", href: "/free-website-audit" },
   },
+  // Founder named here as well as in the Person schema: the entity signal is
+  // stronger when the visible copy and the markup agree.
   copyright:
-    "© 2026 Zenith Digital, a Wix Studio web design agency based in Belgrade, serving the UK, EU, and US.",
+    "© 2026 Zenith Digital, a Wix Studio web design agency based in Belgrade, serving the UK, EU, and US. Founded by Pavle Maodus.",
   legal: [
     { label: "Privacy policy", href: "/privacy" },
     { label: "Terms of service", href: "/terms" },
@@ -1015,49 +1017,59 @@ export const footer = {
   wordmark: "Zenith Digital",
 };
 
-/** Mega-dropdown panel for "Case Studies" (DesignMe-style three columns). */
-export const caseStudiesMenu = {
-  ourWork: [
+/**
+ * Mega-dropdown panel for "Services". Two columns of service rows, each with an
+ * icon from the shared FeatureIcon set, plus a featured case study in the third
+ * column so the menu carries proof as well as navigation.
+ *
+ * The Case Studies item is a plain link now: its old dropdown duplicated the
+ * /case-studies page (which already filters by industry) and pointed at two
+ * studies that didn't exist yet.
+ */
+export const servicesMenu = {
+  // Left column.
+  build: [
     {
-      label: "Case studies",
-      desc: "See our latest work",
-      href: "/case-studies",
-    },
-    { label: "Industries", desc: "Who we build for", href: "/industries" },
-    {
-      label: "Clients",
-      desc: "The businesses that trusted us",
-      href: "/case-studies",
-    },
-  ],
-  recentProjects: [
-    {
-      label: "Knode",
-      desc: "SaaS site that raised a $10M round",
-      href: "/case-studies/knode-ai",
-      tag: "",
+      icon: "palette",
+      label: "Wix Studio website design",
+      desc: "Conversion-first custom builds, from €2,500",
+      href: "/services/wix-studio-website-design",
     },
     {
-      label: "Scottish Luxury Experience",
-      desc: "$521k in 7 months",
-      href: "/case-studies/scottish-luxury-experience",
-      tag: "",
+      icon: "transfer",
+      label: "Website migration",
+      desc: "Off WordPress, Squarespace, or Webflow with no ranking loss",
+      href: "/services/website-migration",
     },
     {
-      label: "Bel'Istria",
-      desc: "257% more impressions",
-      href: "/case-studies/belistria",
-      tag: "",
-    },
-    {
-      label: "Hunting Brook",
-      desc: "€140k in course sales",
-      href: "/case-studies/hunting-brook-gardens",
-      tag: "New",
+      icon: "split",
+      label: "Landing pages",
+      desc: "Campaign pages live in about a week",
+      href: "/services/landing-pages",
     },
   ],
-  // Only ever point this at a study with a shipped detail page. It pointed at
-  // /case-studies/mod-digital, which 404s: MOD has a grid card but no page.
+  // Right column.
+  grow: [
+    {
+      icon: "search",
+      label: "SEO, AEO & PPC",
+      desc: "Rank in search and get named in AI answers",
+      href: "/services/seo-aeo-ppc",
+    },
+    {
+      icon: "code",
+      label: "Wix Studio development",
+      desc: "Custom code, CMS architecture, and integrations",
+      href: "/services",
+    },
+    {
+      icon: "layers",
+      label: "White-label & partnerships",
+      desc: "Unbranded production for agencies",
+      href: "/partnerships",
+    },
+  ],
+  // Only ever point this at a study with a shipped detail page.
   featured: {
     label: "Featured case study",
     title:
@@ -1070,11 +1082,11 @@ export const caseStudiesMenu = {
 export const nav = {
   items: [
     {
-      label: "Case Studies",
-      href: "/case-studies",
-      menu: "caseStudies" as const,
+      label: "Services",
+      href: "/services",
+      menu: "services" as const,
     },
-    { label: "Services", href: "/services" },
+    { label: "Case Studies", href: "/case-studies" },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Partnerships", href: "/partnerships" },
     { label: "FAQ", href: "/faq" },

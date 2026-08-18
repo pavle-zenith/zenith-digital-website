@@ -669,7 +669,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     ],
     publishedAt: "2026-08-11",
     seo: {
-      title: "Knode AI: SaaS Site Built in 3 Weeks | Zenith Digital",
+      title: "Knode AI | SaaS Site Built in 3 Weeks | Zenith Digital",
       description:
         "How Zenith Digital designed and built Knode AI's 10-page Wix Studio site in three weeks, and how it carried the company into a $10M Series A raise.",
     },
@@ -791,7 +791,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Bel'Istria: 257% More Impressions | Zenith Digital",
+        "Bel'Istria | 257% More Impressions | Zenith Digital",
       description:
         "How Zenith Digital migrated Bel'Istria from Wix Classic to Wix Studio: 257% impression growth, 70+ ranking pages, and top billing in AI answers.",
     },
@@ -883,7 +883,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Scottish Luxury: $521k in 7 Months | Zenith Digital",
+        "Scottish Luxury | $521k in 7 Months | Zenith Digital",
       description:
         "Zenith Digital built Scottish Luxury Experience's Wix Studio site in 4 weeks. The growth system it fronts turned paid traffic into $521k in 7 months.",
     },
@@ -972,7 +972,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Yacht Junky: A Wix Studio Marketplace | Zenith Digital",
+        "Yacht Junky | A Wix Studio Marketplace | Zenith Digital",
       description:
         "Zenith Digital built a multi-seller boat and yacht marketplace natively in Wix Studio: Velo-powered search, seller notifications, and currency conversion.",
     },
@@ -1063,7 +1063,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         "This is what our partner tracks exist for. A free 20-minute call, and we'll walk you through how white-label production works and what your calendar could hand off first.",
     },
     seo: {
-      title: "MOD Digital: 3 Years as Build Partner | Zenith Digital",
+      title: "MOD Digital | 3 Years as Build Partner | Zenith Digital",
       description:
         "How Zenith Digital became MOD Digital's build partner: 10+ client brands, 15+ landing pages, and €1M+ in campaign revenue since 2023.",
     },
@@ -1153,7 +1153,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Hunting Brook: €140k in Course Sales | Zenith Digital",
+        "Hunting Brook | €140k in Course Sales | Zenith Digital",
       description:
         "How Zenith Digital builds the launch pages behind Jimi Blake's Hunting Brook courses: 7+ pages on Wix Courses, and €140k in course and event sales.",
     },
@@ -1236,7 +1236,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Katie Hailey: Figma to Live in 1.5 Weeks | Zenith Digital",
+        "Katie Hailey | Figma to Live in 1.5 Weeks | Zenith Digital",
       description:
         "Zenith Digital built Katie Hailey's yoga and retreat site in Wix Studio from a finished Figma design in 1.5 weeks, with booking, CMS, and CRM handed over.",
     },
@@ -1327,7 +1327,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         "A free 20-minute call. We'll tell you honestly what a direct booking funnel would take for your properties, and whether it's worth it yet.",
     },
     seo: {
-      title: "Just Stay: A Two-Funnel Booking Site | Zenith Digital",
+      title: "Just Stay | A Two-Funnel Booking Site | Zenith Digital",
       description:
         "How Zenith Digital built Just Stay's short-let site in 4 weeks: direct bookings synced from Bookeddirectly, location SEO pages, and a landlord funnel.",
     },
@@ -1425,7 +1425,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     },
     seo: {
       title:
-        "Genroks: 10+ ISO Deals After a Rebrand | Zenith Digital",
+        "Genroks | 10+ ISO Deals After a Rebrand | Zenith Digital",
       description:
         "How Zenith Digital rebuilt Genroks' site in custom code with Sanity CMS: one brand, new copy, and 10+ ISO certification deals closed since launch.",
     },

@@ -24,7 +24,7 @@ export const seoAeoPpc: ServicePageContent = {
   slug: "seo-aeo-ppc",
   publish: true,
   seo: {
-    title: "Wix SEO Agency: Search, AEO & PPC | Zenith Digital",
+    title: "Wix SEO Agency | Search, AEO & PPC | Zenith Digital",
     description:
       "Wix SEO, answer-engine optimization, and Google and Meta campaigns. 5.96x average ROAS and €1M+ in client revenue across managed campaigns.",
   },

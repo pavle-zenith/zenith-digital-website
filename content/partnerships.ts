@@ -24,11 +24,10 @@ function partnerQuote(id: string) {
  * full-site wholesale prices are INTERNAL (gated rate card, shared after a
  * partner applies) — never add them to this file or render them on the page.
  *
- * OWNER — still to set:
- *   postHandover   — post-handover change terms (FAQ answer)
- *   capacityPolicy — volume/capacity policy sentence (FAQ answer)
+ * OWNER — postHandover and capacityPolicy were set 18 Aug 2026. No bracketed
+ * placeholders remain in this file.
  *
- * Also confirm before launch (real copy, not bracketed):
+ * Still worth confirming (real copy, not bracketed):
  *   - the risk strip claims in pBenefits.riskStrip
  *   - the LMF HR / WellingtonWebCo story placeholders in pStories
  */
@@ -39,12 +38,13 @@ export const commercials = {
   referralPayout: "when the client pays",
   wholesaleStructure:
     "Wholesale partner rates with the full rate card shared on application",
-  postHandover: "[Post-handover terms to set: included window, then rate]",
+  postHandover:
+    "We handle them as they come, on an hourly rate or a per-project maintenance agreement, whichever suits the work",
   minimumCommitment: "No minimum commitment",
   feedbackWindow: "3 business days",
   revisionPolicy: "2 rounds included, extra rounds at €250",
   capacityPolicy:
-    "[Capacity policy to set: e.g. parallel partner builds you take]",
+    "We run up to four partner builds in parallel, and we tell you where a new one lands before you commit to your client.",
 };
 
 // 1. Hero

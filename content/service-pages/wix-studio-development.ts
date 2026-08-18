@@ -36,7 +36,7 @@ export const wixStudioDevelopment: ServicePageContent = {
   slug: "wix-studio-development",
   publish: true,
   seo: {
-    title: "Hire a Wix Developer: Velo & Custom Code | Zenith Digital",
+    title: "Hire a Wix Developer | Velo & Custom Code | Zenith Digital",
     description:
       "Wix Studio development from a Wix Legend Partner: Velo code, CMS architecture, integrations, and automations, including a full marketplace build.",
   },

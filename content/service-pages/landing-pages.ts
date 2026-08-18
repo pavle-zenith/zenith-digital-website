@@ -29,7 +29,7 @@ export const landingPages: ServicePageContent = {
   slug: "landing-pages",
   publish: true,
   seo: {
-    title: "Wix Landing Page Design, Live in a Week | Zenith Digital",
+    title: "Wix Landing Page Design | Live in a Week | Zenith Digital",
     description:
       "Conversion-first Wix landing pages designed, written, and live in about a week, from €1,250. 15+ built for MOD Digital's campaigns.",
   },

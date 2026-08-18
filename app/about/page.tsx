@@ -26,14 +26,14 @@ import {
 import { ORG_ID, SITE, personSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "About Zenith Digital: Wix Studio Web Design Agency",
+  title: "About Zenith Digital | Wix Studio Web Design Agency",
   description:
     "Zenith Digital is a Wix Studio web design agency in Belgrade, run by Pavle Maodus. Wix Legend Partner, 100+ websites shipped for UK, EU and US clients.",
   alternates: { canonical: "/about" },
   openGraph: {
     type: "profile",
     url: "/about",
-    title: "About Zenith Digital: Wix Studio Web Design Agency",
+    title: "About Zenith Digital | Wix Studio Web Design Agency",
     description:
       "A Wix Studio web design agency in Belgrade, run by Pavle Maodus. Wix Legend Partner, 100+ websites shipped.",
   },

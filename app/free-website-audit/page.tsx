@@ -13,7 +13,7 @@ import { auditCta, auditFaq } from "@/content/free-website-audit";
 import { founderFreeAudit } from "@/content/founder";
 
 export const metadata: Metadata = {
-  title: "Free Website Audit: SEO & Speed Review | Zenith Digital",
+  title: "Free Website Audit | SEO & Speed Review | Zenith Digital",
   description:
     "A free hand-reviewed website audit from a Wix Legend Partner. Short video walkthrough of what's costing you leads, rankings, and speed.",
   alternates: { canonical: "/free-website-audit" },

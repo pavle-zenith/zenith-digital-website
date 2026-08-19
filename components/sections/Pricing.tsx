@@ -13,7 +13,16 @@ import { pricing } from "@/content/home";
  * white for the entry tier, navy + texture for the featured tier, grey surface
  * for the retainer tier. Nothing is transparent over the section texture.
  */
-export function Pricing() {
+export function Pricing({
+  showWhiteLabel = true,
+}: {
+  /**
+   * The agency white-label band. On by default (homepage, /services); the
+   * migration guides switch it off, because a reader part-way through choosing
+   * a platform move is not the audience for a reseller pitch.
+   */
+  showWhiteLabel?: boolean;
+} = {}) {
   return (
     <div className="relative isolate overflow-hidden">
       {/* Faint texture background */}
@@ -103,9 +112,7 @@ export function Pricing() {
                   <div className="relative p-8">
                     <div className="flex h-8 items-center justify-between">
                       <span
-                        className={
-                          featured ? "text-white" : "text-light-muted"
-                        }
+                        className={featured ? "text-white" : "text-light-muted"}
                       >
                         <TierIcon name={tier.icon} />
                       </span>
@@ -183,54 +190,56 @@ export function Pricing() {
             The studio texture is CSS-inverted (mainly light, dark streak
             shading); the tint gradient keeps the copy on the left readable
             while the shading opens up on the right. */}
-        <div className="relative mt-4 overflow-hidden rounded-[8px] bg-light-bg text-light-text">
-          <Image
-            src="/textures/studio-texture.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="pointer-events-none object-cover opacity-[0.45] invert"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
-            }}
-            aria-hidden
-          />
-          <div className="relative flex min-h-[300px] flex-col justify-end gap-10 px-8 py-10 md:min-h-[380px] md:flex-row md:items-end md:justify-between md:px-12 md:py-12">
-            <div className="max-w-3xl">
-              <h3 className="font-display text-h3 font-medium leading-tight tracking-tight text-balance md:text-[1.75rem]">
-                {pricing.whiteLabel.heading}
-              </h3>
-              <p className="mt-4 max-w-2xl text-body-lg font-medium text-light-muted">
-                {pricing.whiteLabel.paragraph}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={pricing.whiteLabel.ctas[0].href}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] btn-animated px-6 py-3 sm:w-auto text-body font-medium text-accent-ink"
-              >
-                {pricing.whiteLabel.ctas[0].label}{" "}
-                <span aria-hidden className="btn-arrow">
-                  &rarr;
-                </span>
-              </Link>
-              <Link
-                href={pricing.whiteLabel.ctas[1].href}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] border border-light-border bg-white px-6 py-3 sm:w-auto text-body font-medium text-light-text transition hover:bg-light-surface"
-              >
-                {pricing.whiteLabel.ctas[1].label}{" "}
-                <span aria-hidden className="btn-arrow">
-                  &rarr;
-                </span>
-              </Link>
+        {showWhiteLabel ? (
+          <div className="relative mt-4 overflow-hidden rounded-[8px] bg-light-bg text-light-text">
+            <Image
+              src="/textures/studio-texture.jpg"
+              alt=""
+              fill
+              sizes="100vw"
+              className="pointer-events-none object-cover opacity-[0.45] invert"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 55%, transparent) 60%, color-mix(in srgb, var(--color-light-bg) 20%, transparent) 100%)",
+              }}
+              aria-hidden
+            />
+            <div className="relative flex min-h-[300px] flex-col justify-end gap-10 px-8 py-10 md:min-h-[380px] md:flex-row md:items-end md:justify-between md:px-12 md:py-12">
+              <div className="max-w-3xl">
+                <h3 className="font-display text-h3 font-medium leading-tight tracking-tight text-balance md:text-[1.75rem]">
+                  {pricing.whiteLabel.heading}
+                </h3>
+                <p className="mt-4 max-w-2xl text-body-lg font-medium text-light-muted">
+                  {pricing.whiteLabel.paragraph}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href={pricing.whiteLabel.ctas[0].href}
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] btn-animated px-6 py-3 sm:w-auto text-body font-medium text-accent-ink"
+                >
+                  {pricing.whiteLabel.ctas[0].label}{" "}
+                  <span aria-hidden className="btn-arrow">
+                    &rarr;
+                  </span>
+                </Link>
+                <Link
+                  href={pricing.whiteLabel.ctas[1].href}
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] border border-light-border bg-white px-6 py-3 sm:w-auto text-body font-medium text-light-text transition hover:bg-light-surface"
+                >
+                  {pricing.whiteLabel.ctas[1].label}{" "}
+                  <span aria-hidden className="btn-arrow">
+                    &rarr;
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </Section>
     </div>
   );

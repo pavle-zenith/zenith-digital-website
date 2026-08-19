@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { AskAi } from "@/components/layout/AskAi";
 import { FooterClock } from "@/components/layout/FooterClock";
 import { footer } from "@/content/home";
 
@@ -56,90 +57,95 @@ export function Footer() {
         </div>
 
         <div className="frame frame-divide relative py-12">
-          <div className="grid max-w-3xl grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-3">
-            {footer.columns.map((col) => (
-              <div key={col.heading}>
+          <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
+            <div className="grid max-w-3xl grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-3">
+              {footer.columns.map((col) => (
+                <div key={col.heading}>
+                  <h3 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
+                    {col.heading}
+                  </h3>
+                  <ul className="space-y-3">
+                    {col.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="font-display font-medium transition hover:text-accent"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+              {/* Contact information */}
+              <div>
                 <h3 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
-                  {col.heading}
+                  {footer.contact.heading}
                 </h3>
-                <ul className="space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="font-display font-medium transition hover:text-accent"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
+                <ul className="space-y-3 font-display font-medium">
+                  <li>
+                    <a
+                      href={`mailto:${footer.contact.email}`}
+                      className="transition hover:text-accent"
+                    >
+                      {footer.contact.email}
+                    </a>
+                  </li>
+                  <li>{footer.contact.city}</li>
+                  <li>
+                    <a
+                      href={`tel:${footer.contact.phone.replace(/\s/g, "")}`}
+                      className="transition hover:text-accent"
+                    >
+                      {footer.contact.phone}
+                    </a>
+                  </li>
                 </ul>
               </div>
-            ))}
-
-            {/* Contact information */}
-            <div>
-              <h3 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
-                {footer.contact.heading}
-              </h3>
-              <ul className="space-y-3 font-display font-medium">
-                <li>
-                  <a
-                    href={`mailto:${footer.contact.email}`}
-                    className="transition hover:text-accent"
-                  >
-                    {footer.contact.email}
-                  </a>
-                </li>
-                <li>{footer.contact.city}</li>
-                <li>
-                  <a
-                    href={`tel:${footer.contact.phone.replace(/\s/g, "")}`}
-                    className="transition hover:text-accent"
-                  >
-                    {footer.contact.phone}
-                  </a>
-                </li>
-              </ul>
             </div>
+
+            {/* Ask AI about Zenith — fourth column on the right */}
+            <AskAi />
           </div>
         </div>
 
         {/* Partners + audit box */}
         <div className="frame relative flex flex-col justify-between gap-10 pb-14 pt-6 lg:flex-row lg:items-center">
-        <div>
-          <p className="text-body-lg font-medium">{footer.partnersLabel}</p>
-          <div className="mt-6 flex flex-wrap items-center gap-x-12 gap-y-6">
-            {footer.partners.map((p) => (
-              <Image
-                key={p.alt}
-                src={p.src}
-                alt={p.alt}
-                width={180}
-                height={40}
-                className={`${p.className} w-auto object-contain invert`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Audit box (in place of socials) */}
-        <Link
-          href={footer.audit.cta.href}
-          className="group flex shrink-0 items-center justify-between gap-8 rounded-[8px] border border-light-border bg-light-bg p-6 transition hover:bg-light-surface lg:max-w-sm"
-        >
           <div>
-            <p className="font-display text-body-lg font-medium">
-              {footer.audit.heading}
-            </p>
-            <p className="mt-1 text-body text-light-muted">
-              {footer.audit.text}
-            </p>
+            <p className="text-body-lg font-medium">{footer.partnersLabel}</p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-12 gap-y-6">
+              {footer.partners.map((p) => (
+                <Image
+                  key={p.alt}
+                  src={p.src}
+                  alt={p.alt}
+                  width={180}
+                  height={40}
+                  className={`${p.className} w-auto object-contain invert`}
+                />
+              ))}
+            </div>
           </div>
-          <span className="font-display text-h3 font-medium text-accent transition group-hover:translate-x-1">
-            <span aria-hidden>&rarr;</span>
-          </span>
-        </Link>
+
+          {/* Audit box (in place of socials) */}
+          <Link
+            href={footer.audit.cta.href}
+            className="group flex shrink-0 items-center justify-between gap-8 rounded-[8px] border border-light-border bg-light-bg p-6 transition hover:bg-light-surface lg:max-w-sm"
+          >
+            <div>
+              <p className="font-display text-body-lg font-medium">
+                {footer.audit.heading}
+              </p>
+              <p className="mt-1 text-body text-light-muted">
+                {footer.audit.text}
+              </p>
+            </div>
+            <span className="font-display text-h3 font-medium text-accent transition group-hover:translate-x-1">
+              <span aria-hidden>&rarr;</span>
+            </span>
+          </Link>
         </div>
       </div>
 

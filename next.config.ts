@@ -8,6 +8,19 @@ const nextConfig: NextConfig = {
   // unaffected: unset, this stays .next.
   distDir: process.env.NEXT_DIST_DIR || ".next",
 
+  // Blog post images are served from the Sanity CDN and resized by next/image.
+  // Scoped to the project's own asset path so this cannot become an open
+  // image proxy for the whole of cdn.sanity.io.
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/nfi9edhy/**",
+      },
+    ],
+  },
+
   // 301s preserving URL equity from the legacy Wix site (CLAUDE.md §8).
   // The three service orphans now land on their dedicated /services/[slug]
   // pages; /contact-us stays unmapped until a contact target ships.

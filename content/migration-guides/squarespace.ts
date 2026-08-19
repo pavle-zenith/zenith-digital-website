@@ -13,8 +13,13 @@ import type { MigrationGuideContent } from "./types";
  *
  * OWNER — verify before launch. Every row in the transfers table is a testable
  * claim. The Squarespace-side rows are sourced to Squarespace's help centre and
- * the Wix-side rows to Wix's, all linked in `sources` and checked 19 Aug 2026.
- * Re-check if Squarespace changes its export scope.
+ * the Wix-side rows to Wix's, and were checked 19 Aug 2026. Re-check if
+ * Squarespace changes its export scope.
+ *
+ * TODO, to match the Wix Classic template: this guide has no `glance`,
+ * `benefits`, `cost` or `sources` block yet, so it renders without them and
+ * falls back to the sitewide pricing tiers. The source URLs above belong in a
+ * `sources` block once written.
  *
  * Client facts: Hunting Brook Gardens was on Squarespace before the Wix Studio
  * work (owner-confirmed) and has €140k in course sales since. MindEd is cited
@@ -384,25 +389,6 @@ export const squarespace: MigrationGuideContent = {
         variant: "primary",
       },
       { label: "Book a call", href: "/book-a-call", variant: "secondary" },
-    ],
-  },
-
-  logistics: {
-    heading: "Timeline and cost",
-    priceFrom: "From €1,750",
-    timeline: "3 to 5 weeks, plus 30 days of monitoring",
-    note: "Flat pricing, the same number regardless of which platform you're leaving. What moves it on a Squarespace move specifically is the size of the blog archive, because every post needs a redirect row, and the size of the store, because the products CSV arrives incomplete and the gaps are filled by hand. Page count matters far less than either. A brochure site with a short blog sits at the bottom of the range; a multi-blog site with a catalogue behind it sits at the top.",
-    ctas: [
-      {
-        label: "Get a fixed quote",
-        href: "/book-a-call",
-        variant: "primary",
-      },
-      {
-        label: "See migration pricing",
-        href: "/services/website-migration",
-        variant: "secondary",
-      },
     ],
   },
 

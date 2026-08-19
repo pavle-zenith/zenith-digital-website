@@ -10,7 +10,10 @@
 ## Services
 
 - [Wix Studio website design](https://www.thezenithdigital.com/services/wix-studio-website-design): custom conversion-first builds from €1,750, launched in 2 to 5 weeks
-- [Website migration](https://www.thezenithdigital.com/services/website-migration): WordPress, Squarespace, Webflow, and Framer to Wix Studio with zero ranking loss, from €1,750
+- [Website migration](https://www.thezenithdigital.com/services/website-migration): hub for moving to Wix Studio from Wix Classic, Squarespace, WordPress, Webflow, Framer, or Wix Harmony, with zero ranking loss, from €1,750
+  - [Wix Classic to Wix Studio](https://www.thezenithdigital.com/services/wix-classic-to-wix-studio): Wix cannot convert a Wix Editor site to Studio, so it is rebuilt. Full table of what carries over, what is rebuilt, and what does not move (site members, order history), sourced to Wix documentation
+  - [Squarespace to Wix Studio](https://www.thezenithdigital.com/services/squarespace-to-wix-studio): what Squarespace's WordPress-format XML export actually contains and the page types, blocks, products, and settings it omits, plus why every blog post URL changes
+  - [Wix Harmony to Wix Studio](https://www.thezenithdigital.com/services/wix-harmony-to-wix-studio): Wix states a Harmony site cannot be transferred to the Wix Editor or Studio Editor, and Harmony ships without the CMS and Wix Multilingual. Guide to the rebuild and to choosing between Harmony and Studio up front
 - [Landing pages](https://www.thezenithdigital.com/services/landing-pages): campaign landing pages live in about a week, from €1,250
 - [Wix Studio development](https://www.thezenithdigital.com/services/wix-studio-development): Velo custom code, CMS architecture, integrations, automations, and marketplace platforms built natively on Wix Studio, quoted per project
 - [SEO, AEO & PPC](https://www.thezenithdigital.com/services/seo-aeo-ppc): search, answer-engine optimization, and paid campaigns for Wix Studio sites

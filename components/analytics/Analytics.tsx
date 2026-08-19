@@ -12,10 +12,12 @@ const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 // without the vars), so the banner stays off rather than asking about tracking
 // that isn't happening.
 const ANALYTICS_CONFIGURED = Boolean(GA_ID || POSTHOG_KEY);
-// EU cloud by default: the audience is UK/EU, so data stays in-region unless
-// the project is explicitly on US cloud.
-const POSTHOG_HOST =
-  process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com";
+// The host MUST match the region the PostHog project actually lives in. A key
+// from a US project sent to the EU ingest endpoint (or vice versa) is dropped
+// silently: no console error, no events, and it looks exactly like the consent
+// gate is working. So there is no region default. If the key is set without a
+// host, PostHog does not start and says why.
+const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 
 let posthogReady = false;
 
@@ -23,6 +25,14 @@ let posthogReady = false;
  *  initial bundle for visitors who never accept. */
 async function startPostHog() {
   if (posthogReady || !POSTHOG_KEY) return;
+  if (!POSTHOG_HOST) {
+    console.warn(
+      "[analytics] NEXT_PUBLIC_POSTHOG_KEY is set but NEXT_PUBLIC_POSTHOG_HOST is not. " +
+        "PostHog will not start. Set it to the region of the project the key belongs to, " +
+        "e.g. https://us.i.posthog.com or https://eu.i.posthog.com.",
+    );
+    return;
+  }
   posthogReady = true;
   const posthog = (await import("posthog-js")).default;
   posthog.init(POSTHOG_KEY, {

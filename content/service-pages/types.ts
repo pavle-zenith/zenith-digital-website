@@ -76,7 +76,31 @@ export type UniqueBlock =
       kind: "platforms";
       heading: string;
       intro: string;
-      items: { name: string; pains: string; carries: string }[];
+      /**
+       * Directory cards, one per source platform: mark, platform name, one
+       * sentence, and a link to that platform's guide.
+       *
+       * DELIBERATELY ONE SENTENCE. This block is a signpost, not a section of
+       * reading. The detail lives on the spoke it points at, and two
+       * paragraphs per card turned the hub into a page people finished
+       * instead of a page they left through.
+       *
+       * `href` points at the migration guide spoke
+       * (/services/wix-classic-to-wix-studio and siblings). Items without one
+       * render as a plain card, so a platform can be listed before its guide
+       * is written. Guided platforms are authored first so they fill the top
+       * row of the grid.
+       *
+       * `logo` is optional for the same reason: a platform with no mark on
+       * file still renders, with the badge space reserved so the grid stays
+       * aligned.
+       */
+      items: {
+        name: string;
+        logo?: string;
+        desc: string;
+        href?: string;
+      }[];
     }
   | {
       kind: "explainer";

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { caseStudyDetails } from "@/content/case-studies";
+import { migrationGuides } from "@/content/migration-guides";
 import { servicePages } from "@/content/service-pages";
 
 const SITE = "https://www.thezenithdigital.com";
@@ -8,8 +9,9 @@ const SITE = "https://www.thezenithdigital.com";
 /**
  * sitemap.xml, generated from the same content the pages render from, so a new
  * case study or service page appears here by existing rather than by someone
- * remembering to add it. Unpublished service pages are already filtered out of
- * `servicePages`, so they can't leak in.
+ * remembering to add it. Unpublished service pages and migration guides are
+ * already filtered out of `servicePages` and `migrationGuides`, so they can't
+ * leak in.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: {
@@ -40,6 +42,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE}/services/${p.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.9,
+    })),
+    // Migration guide spokes. Same route, lower priority than the core
+    // services: they're decision-stage entry points rather than the pages the
+    // whole site points at.
+    ...migrationGuides.map((g) => ({
+      url: `${SITE}/services/${g.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
     })),
     ...caseStudyDetails.map((c) => ({
       url: `${SITE}/case-studies/${c.slug}`,

@@ -6,9 +6,17 @@ import type { ServicePageContent } from "./types";
  * Targets: migrate to wix studio · wordpress to wix migration · wix studio
  * migration · migrate website without losing seo.
  *
- * The platform blocks in `unique` are the long-tail net ("migrate wordpress to
- * wix studio" and siblings). Figures are Bel'Istria's real ones: 35+ pages,
- * 257% YoY impressions.
+ * THIS PAGE IS THE HUB. The platform blocks in `unique` are its spokes: each
+ * one that carries an `href` links to a full migration guide under
+ * content/migration-guides. The hub owns the category term ("website
+ * migration", "migrate to wix studio") and the spokes own their platform
+ * terms, so the two don't compete for the same query. That's why the meta
+ * title here is no longer WordPress-led: it was competing with its own child.
+ *
+ * Platforms are ordered by proof. Wix Classic and Squarespace lead because we
+ * have client evidence on both; Framer trails because it has neither a guide
+ * nor a case. Figures are Bel'Istria's real ones: 35+ pages, 257% YoY
+ * impressions.
  */
 
 const ctas: CtaLink[] = [
@@ -24,16 +32,16 @@ export const websiteMigration: ServicePageContent = {
   slug: "website-migration",
   publish: true,
   seo: {
-    title: "WordPress to Wix Studio Migration | Zenith Digital",
+    title: "Website Migration to Wix Studio | Zenith Digital",
     description:
-      "Migrate from WordPress, Squarespace, Webflow, or Framer to Wix Studio. Full URL inventory, 1:1 redirect map, and zero ranking loss in writing. From €1,750.",
+      "Migrate to Wix Studio from Wix Classic, Squarespace, WordPress, Webflow, Framer, or Harmony. Full URL inventory, 1:1 redirect map, and zero ranking loss in writing. From €1,750.",
   },
 
   hero: {
     name: "Website migration",
     h1: "Move to Wix Studio and keep your rankings",
     subhead:
-      "Full-service migration from WordPress, Squarespace, Webflow, or Framer. Every URL mapped, every ranking protected, in writing.",
+      "Full-service migration from Wix Classic, Squarespace, WordPress, and more. Every URL mapped, every ranking protected, in writing.",
     chips: [
       "Zero ranking loss, in writing",
       "35+ pages migrated for Bel'Istria",
@@ -293,35 +301,40 @@ export const websiteMigration: ServicePageContent = {
     kind: "platforms",
     heading: "Moving from your platform",
     intro:
-      "Each platform has its own reasons people leave and its own migration traps. Here's what the move looks like from where you are.",
+      "Every platform has its own reasons people leave and its own migration traps. Pick yours for the full breakdown of what carries across.",
     items: [
       {
-        name: "WordPress to Wix Studio",
-        pains:
-          "Plugin sprawl, update anxiety, and a security surface that grows every time you add functionality. Most WordPress sites we take over are running fifteen or more plugins that nobody can safely remove.",
-        carries:
-          "Posts, pages, categories, tags, authors, and media come across with permalinks preserved. Yoast or Rank Math metadata maps field by field onto Wix Studio's SEO panel.",
+        name: "Wix Classic",
+        logo: "/platforms/wix.svg",
+        href: "/services/wix-classic-to-wix-studio",
+        desc: "Wix can't convert a Classic site to Studio, so see exactly what carries across and what gets rebuilt.",
       },
       {
-        name: "Squarespace to Wix Studio",
-        pains:
-          "Design control runs out exactly when the business starts needing something specific, and the template you picked at launch quietly caps what the site can become.",
-        carries:
-          "Pages, blog collections, and product data transfer, and Squarespace's tidy URL structure maps across cleanly. Expect a genuine design upgrade rather than a like-for-like copy.",
+        name: "Squarespace",
+        logo: "/platforms/squarespace.svg",
+        href: "/services/squarespace-to-wix-studio",
+        desc: "What Squarespace's export actually contains, why every blog URL changes, and what the move costs.",
       },
       {
-        name: "Webflow to Wix Studio",
-        pains:
-          "The build is fine, the problem is who can touch it. Editing means understanding the class system, so the marketing team stays dependent on whoever built it.",
-        carries:
-          "CMS collections rebuild one to one, and the design intent survives the move because Wix Studio's layout engine works on the same responsive principles.",
+        name: "Wix Harmony",
+        logo: "/platforms/wix.svg",
+        href: "/services/wix-harmony-to-wix-studio",
+        desc: "Harmony has no CMS and can't be transferred to Studio, so here's how the rebuild works.",
       },
       {
-        name: "Framer to Wix Studio",
-        pains:
-          "Fast to launch, then awkward to scale. Content grows past what the original page structure was designed to hold and there's no real CMS underneath it.",
-        carries:
-          "Pages and content move across into a proper collection structure, so publishing the twentieth page is the same effort as publishing the second.",
+        name: "WordPress",
+        logo: "/platforms/wordpress.svg",
+        desc: "Leave the plugin updates, security patching, and hosting behind without losing a ranking.",
+      },
+      {
+        name: "Webflow",
+        logo: "/platforms/webflow.svg",
+        desc: "Keep the design quality and hand editing back to the people who write the content.",
+      },
+      {
+        name: "Framer",
+        logo: "/platforms/framer.webp",
+        desc: "Move onto a real CMS, so publishing the twentieth page costs what the second one did.",
       },
     ],
   },
@@ -392,7 +405,7 @@ export const websiteMigration: ServicePageContent = {
 
   schema: {
     description:
-      "Full-service website migration to Wix Studio from WordPress, Squarespace, Webflow, or Framer. SEO audit and URL inventory, 1:1 redirect mapping, content and CMS migration, metadata parity, and 30 days of post-launch index monitoring.",
+      "Full-service website migration to Wix Studio from Wix Classic, Squarespace, WordPress, Webflow, Framer, or Wix Harmony. SEO audit and URL inventory, 1:1 redirect mapping, content and CMS migration, metadata parity, and 30 days of post-launch index monitoring.",
     priceFrom: "1750",
   },
 };

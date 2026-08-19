@@ -26,7 +26,17 @@ import {
  * fully dressed; a slug without them still renders with whatever it has.
  * Falls back to the sitewide featured four when a page names none.
  */
-export function WorkStrip({ slugs }: { slugs?: string[] }) {
+export function WorkStrip({
+  slugs,
+  heading = caseStudies.heading,
+  intro = caseStudies.intro,
+}: {
+  slugs?: string[];
+  /** Override the sitewide "Real examples" header, for pages whose selection
+      needs its own framing (the migration guides name the source platform). */
+  heading?: string;
+  intro?: string;
+}) {
   const featuredBySlug = new Map(caseStudies.items.map((i) => [i.slug, i]));
   const detailBySlug = new Map(caseStudyDetails.map((d) => [d.slug, d]));
   const wanted = slugs?.length ? slugs : caseStudies.items.map((i) => i.slug);
@@ -69,10 +79,10 @@ export function WorkStrip({ slugs }: { slugs?: string[] }) {
       {/* Header: heading left, support right */}
       <div className="mb-4 grid gap-8 md:grid-cols-2 md:items-end">
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-          {caseStudies.heading}
+          {heading}
         </h2>
         <p className="max-w-md text-body-lg font-medium text-light-muted md:justify-self-end md:text-right">
-          {caseStudies.intro}
+          {intro}
         </p>
       </div>
 

@@ -1012,6 +1012,35 @@ export const footer = {
     text: "Hand-reviewed, with a video walkthrough of what to fix first.",
     cta: { label: "Get my free audit", href: "/free-website-audit" },
   },
+  // "Ask AI about Zenith Digital" tiles. One shared prompt, appended URL-encoded to each
+  // assistant's query parameter, so a buyer can get a third-party read from
+  // public sources instead of taking our word for it. Keep the prompt as one
+  // line: it is the whole payload of every link.
+  askAi: {
+    heading: "Ask AI about Zenith Digital",
+    prompt:
+      "Evaluate Zenith Digital as a potential website design and development company for anyone looking for a website, website migration, SEO / AEO and PPC or ecommerce store for their business. Use public information from https://www.thezenithdigital.com/ and summarize their positioning, services, case studies, proof, strengths, potential concerns, and ideal client fit",
+    // `queryUrl` ends at the query parameter the prompt is appended to.
+    assistants: [
+      {
+        name: "ChatGPT",
+        mark: "openai",
+        queryUrl: "https://chatgpt.com/?hints=search&q=",
+      },
+      { name: "Claude", mark: "claude", queryUrl: "https://claude.ai/new?q=" },
+      {
+        name: "Perplexity",
+        mark: "perplexity",
+        queryUrl: "https://www.perplexity.ai/search?q=",
+      },
+      {
+        name: "Google AI Mode",
+        mark: "gemini",
+        queryUrl: "https://www.google.com/search?udm=50&aep=11&q=",
+      },
+      { name: "Grok", mark: "grok", queryUrl: "https://grok.com/?q=" },
+    ],
+  },
   // Founder named here as well as in the Person schema: the entity signal is
   // stronger when the visible copy and the markup agree.
   copyright:

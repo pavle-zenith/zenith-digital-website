@@ -20,8 +20,12 @@ import type { MigrationGuideContent } from "./types";
  * OWNER — this page has the shortest shelf life on the site. Wix lists the CMS
  * and Wix Multilingual as features it is actively adding to Harmony. When
  * either ships, the ceiling argument changes and this page needs rewriting,
- * not patching. All claims checked against Wix support docs 19 Aug 2026 and
- * linked in `sources`.
+ * not patching. All claims were checked against Wix support docs 19 Aug 2026.
+ *
+ * TODO, to match the Wix Classic template: this guide has no `glance`,
+ * `benefits`, `cost` or `sources` block yet, so it renders without them and
+ * falls back to the sitewide pricing tiers. Harmony's claims lean hardest on
+ * Wix's own documentation, so a `sources` block matters most here.
  */
 
 const ctas: CtaLink[] = [
@@ -355,25 +359,6 @@ export const wixHarmony: MigrationGuideContent = {
         variant: "primary",
       },
       { label: "Book a call", href: "/book-a-call", variant: "secondary" },
-    ],
-  },
-
-  logistics: {
-    heading: "Timeline and cost",
-    priceFrom: "From €1,750",
-    timeline: "2 to 4 weeks, plus 30 days of monitoring",
-    note: "Flat pricing, the same figure whichever platform you're coming from. Harmony rebuilds tend to sit at the lower end for a structural reason rather than a discount: the sites are young, so there's a short URL inventory, a small redirect list, little archive to carry, and a media library already sitting in your Wix account. What moves the number is what you're building toward, not what you're leaving. A multilingual site or one with several CMS collections is a bigger project than the Harmony site it replaces ever was.",
-    ctas: [
-      {
-        label: "Get a fixed quote",
-        href: "/book-a-call",
-        variant: "primary",
-      },
-      {
-        label: "See migration pricing",
-        href: "/services/website-migration",
-        variant: "secondary",
-      },
     ],
   },
 

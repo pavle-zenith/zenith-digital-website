@@ -3,39 +3,51 @@ import type { MigrationGuideContent } from "./types";
 
 /**
  * /services/wix-classic-to-wix-studio
- * Targets: wix classic to wix studio · migrate wix editor to studio editor ·
- * is wix studio better than wix · wix studio migration.
+ * Targets: wix classic to wix studio · migrate wix editor to studio ·
+ * wix studio branch · is wix studio better than wix.
  *
- * FRAMING (revised 19 Aug 2026). The first draft led with "this is a rebuild,
- * not a migration". Accurate, and it argued against the service: the reader
- * arrived wanting Studio and left being told it was hard and lossy. The facts
- * are unchanged here. The order isn't. Studio's capability leads, the rebuild
- * is presented as the mechanism that delivers it, and the constraints land as
- * planning guidance from someone who has run the move rather than as warnings.
+ * P0 CORRECTION (19 Aug 2026). The previous version of this file described the
+ * move as a fresh rebuild in every case and stated the Premium plan simply
+ * carries over. Both were wrong, and the second was wrong in a way a client
+ * discovers at the point of payment.
+ *
+ * Wix documents TWO routes in two articles that never reference each other:
+ *   1. "Creating a Studio Version of a Wix Editor Site" — a Studio branch off
+ *      an eligible Premium Editor site. Shares the dashboard, so products and
+ *      contacts are automatically available. Design is not carried over.
+ *      Publishing requires upgrading to a Studio plan and permanently
+ *      unpublishes the Editor branch.
+ *   2. "Rebuilding Your Site in the Studio Editor" — a fresh Studio site,
+ *      which is what you do when the branch route isn't available or wanted.
+ *
+ * A reader has found one article or the other and has no way to tell which
+ * applies to them. Resolving that is the entire reason this page should exist,
+ * and no competitor has written it.
+ *
+ * PREMIUM PLAN, corrected: you upgrade the Premium plan to a Studio plan.
+ * Remaining value is credited pro rata, and only when the original plan was
+ * bought in the same Wix account. It is not a free carry-over.
+ *
+ * MEMBERS, deliberately unresolved: Wix names "products, contacts, etc." as
+ * shared on the branch and says only that "some parts of the site cannot be
+ * transferred" without enumerating them. The separate members article governs
+ * moves between distinct sites, not branches. So this page tells the reader to
+ * verify it in their own account rather than guessing on their behalf. Saying
+ * "check this before you commit" is more useful than a confident wrong answer,
+ * and it is the honest expert position.
  *
  * VOICE. Second person, teaching. The reader is shopping around and wants to
- * understand their options, not read about our process. Where we use our own
- * projects it is to answer a question the reader already has, never as a
- * credentials list, and never with a project count attached.
- *
- * AUTHORITY. Wix's documentation is cited for platform constraints because a
- * linked primary source is what makes a claim checkable. Everything about
- * sequencing, what to carry, and where these projects actually go wrong is
- * first-hand and appears nowhere in those docs. That split is deliberate: the
- * docs establish the facts, we supply the judgement.
+ * understand their options. Our projects appear only to answer a question they
+ * already have, never as a credentials list, never with a project count.
  *
  * FAQ RULE. Every question is a standalone natural-language query carrying
  * both platform names, because it has to survive being lifted out of the page
- * by FAQPage markup or quoted by an answer engine. "Will I lose my rankings?"
- * matches nothing. "Will I lose my Google rankings moving from Wix Classic to
- * Wix Studio?" matches the query someone actually types.
+ * by FAQPage markup or quoted by an answer engine.
  *
- * OWNER — verify before launch. The transfers table is a set of testable
- * technical claims and a wrong row is worse than a missing page. Rows drawn
- * from project experience rather than documentation: apps, Velo, SEO settings.
- * Client facts are owner-confirmed: Bel'Istria carried 35+ pages with full URL
- * mapping and lost no rankings (257% YoY impressions after); Knode AI and
- * Katie Hailey were both on Wix Classic and were rebuilt rather than carried.
+ * OWNER — client facts are owner-confirmed: Bel'Istria carried 35+ pages with
+ * full URL mapping and lost no rankings (257% YoY impressions after); Knode AI
+ * and Katie Hailey were both on Wix Classic and were rebuilt rather than
+ * carried. Re-verify the Wix constraints if Wix changes the branch workflow.
  */
 
 const ctas: CtaLink[] = [
@@ -54,61 +66,190 @@ export const wixClassic: MigrationGuideContent = {
   seo: {
     title: "Wix Classic to Wix Studio: Migration Guide | Zenith Digital",
     description:
-      "What Wix Studio does that the Classic editor can't, what carries across when you move, what gets rebuilt, and how long it takes. A practical guide from a Wix Legend Partner.",
+      "Two ways to move from the Wix Editor to Wix Studio, what each one carries across, what your Premium plan actually costs to bring, and how long it takes. From a Wix Legend Partner.",
   },
 
   hero: {
     name: "Wix Classic to Wix Studio migration",
     h1: "Wix Classic to Wix Studio: the complete migration guide",
     subhead:
-      "Studio replaces the fixed canvas with responsive layouts, a CMS that scales, and a design system you change once. Moving means rebuilding, and most of your content, URLs, and settings come with you. Here's exactly what happens to each part of your site.",
+      "There are two routes, and Wix documents them in separate articles that never mention each other. This page explains which one applies to you, what each carries across, and what the move actually costs.",
     chips: [
+      "Two routes, explained",
       "35+ pages carried for Bel'Istria",
       "0 rankings lost in that move",
-      "Your URLs can stay exactly as they are",
     ],
     ctas,
   },
 
-  fit: {
-    heading: "What Wix Studio gives you that Classic can't",
+  glance: {
+    heading: "Wix Classic to Wix Studio at a glance",
     intro:
-      "Studio isn't a newer version of the editor you're using. It's a different product with a different layout engine, built for sites that need to grow. These are the capabilities people actually move for, and the situations where staying put is the better call.",
-    goodFit: [
-      "A separate mobile version that keeps drifting out of sync",
-      "Pages that follow a pattern, built by hand every time",
-      "A layout that fights you every time the site grows",
-      "More than one person needing to edit the site",
-      "A redesign you keep postponing anyway",
-      "Content that has outgrown a fixed canvas",
+      "The short answers, before the detail. Every one of these is expanded further down the page.",
+    items: [
+      {
+        label: "Can the design be converted?",
+        value:
+          "No. Wix states the design is not carried over on either route, so the site is rebuilt visually.",
+      },
+      {
+        label: "What comes with you",
+        value:
+          "On a Studio branch: the dashboard, so products and contacts are already there. On a fresh build: whatever you export.",
+      },
+      {
+        label: "What happens to your URLs",
+        value:
+          "They can stay exactly as they are. Neither editor imposes a path structure, so redirects are usually optional.",
+      },
+      {
+        label: "What it costs",
+        value:
+          "From €1,750 for the work, plus a Wix Studio plan. Remaining Premium value is credited pro rata.",
+      },
+      {
+        label: "How long it takes",
+        value:
+          "Two to five weeks, plus 30 days of index monitoring after launch.",
+      },
+      {
+        label: "DIY difficulty",
+        value:
+          "Medium. The build is approachable; the URL mapping and metadata transfer are where people lose traffic.",
+      },
     ],
-    notAFit: [
-      "A five-page site that works and still ranks",
-      "Budget for the rebuild but nothing after it",
-      "A large members list that can't be asked to re-register",
-      "No specific thing Classic is actually blocking",
-      "A launch deadline inside the next fortnight",
+  },
+
+  benefits: {
+    heading: "What you get on Wix Studio",
+    intro:
+      "Studio is a different product, not a newer editor. These are the capabilities that make the rebuild worth paying for, and they're the reason to move rather than the fact that it's newer.",
+    items: [
+      {
+        title: "One layout instead of two",
+        body: "Studio lays out with responsive grids and breakpoints, so a page adapts to any screen. Classic maintains a separate mobile view that drifts out of sync, and every fix gets made twice.",
+      },
+      {
+        title: "Pages that build themselves",
+        body: "Model services, locations, properties or team members as CMS collections and the twentieth page costs what the second did. Classic builds each one by hand.",
+      },
+      {
+        title: "Change once, change everywhere",
+        body: "Global text themes, colour and spacing mean a brand update propagates across the site instead of being repeated page by page.",
+      },
+      {
+        title: "Your team can publish",
+        body: "Studio supports multiple editors with real roles and permissions, so adding a case study stops being a ticket for whoever built the site.",
+      },
+      {
+        title: "Room to grow custom",
+        body: "Dev mode gives you a proper code environment with npm packages, so the site can grow features rather than hitting a ceiling and needing another platform move.",
+      },
+      {
+        title: "SEO controls without a plugin stack",
+        body: "Metadata, redirects and structured data are managed natively, including bulk redirect import, rather than assembled from third-party tools.",
+      },
+    ],
+  },
+
+  routes: {
+    heading: "There are two ways to do this",
+    intro:
+      "This is the part almost nobody explains, because Wix's own help centre covers the routes in separate articles that never reference each other. Which one applies to you depends on your current plan.",
+    items: [
+      {
+        title: "Create a Studio version of your existing site",
+        navLabel: "The Studio branch route",
+        eligibility: "Wix Editor sites on a Premium plan",
+        body: "Wix creates a Studio branch alongside your live site. The branch shares the original's dashboard, so your business data is already there when you open it.",
+        lead: "What that means in practice:",
+        points: [
+          {
+            label: "Products and contacts are already in place",
+            body: "Wix states the site's business tools and data are automatically available in the Studio version, so there's no CSV round trip for them.",
+          },
+          {
+            label: "Your live site keeps running",
+            body: "Creating the branch doesn't unpublish or affect the original, so there's no downtime and no gap in enquiries while you build.",
+          },
+          {
+            label: "The design still gets rebuilt",
+            body: "Wix is explicit that the design of the site is not carried over to the Studio branch, so this is not a conversion.",
+          },
+          {
+            label: "Publishing is one-way",
+            body: "Once you publish the Studio branch, Wix says you cannot go back and republish the original Editor branch. Plan the cutover as a decision, not an experiment.",
+          },
+          {
+            label: "Some apps can't come",
+            body: "Wix notes that some apps are unsupported in Studio and therefore cannot be added to the branch, so audit your app list before starting.",
+          },
+        ],
+      },
+      {
+        title: "Build a fresh Studio site",
+        navLabel: "The fresh build route",
+        eligibility:
+          "Any site, and often the better choice even when the branch is available",
+        body: "A new Studio site with no relationship to the old one. Everything arrives by export and import, or gets rebuilt.",
+        lead: "Why you'd choose this deliberately:",
+        points: [
+          {
+            label: "You want a clean structure",
+            body: "Inheriting a dashboard also means inheriting years of accumulated settings, and sometimes a fresh start is genuinely cheaper to maintain.",
+          },
+          {
+            label: "You're not on a Premium plan",
+            body: "The branch route requires one, so a site on a free plan takes this path by default.",
+          },
+          {
+            label: "You want the old site kept",
+            body: "Publishing a branch permanently retires the Editor version. A separate site leaves the original intact and unpublished as a reference.",
+          },
+        ],
+      },
     ],
     footnote:
-      "Three of our four Wix Classic projects were rebuilt from scratch rather than carried across, because a rebuild was genuinely cheaper. We'll tell you which one you are before you commit.",
+      "Which route you're on changes what you have to export, so it's the first thing to establish rather than something to discover mid-build. If you're not sure whether your site is eligible, that's checkable inside your Wix account in a couple of minutes and we'll do it with you on a call.",
+    cta: {
+      heading: "Not sure which route you're eligible for?",
+      paragraph:
+        "It's checkable inside your Wix account in a couple of minutes. We'll do it with you on a call and tell you which one is cheaper for your site.",
+      cta: { label: "Book a call", href: "/book-a-call", variant: "primary" },
+    },
+  },
+
+  fit: {
+    heading: "Who should move, and who shouldn't",
+    intro:
+      "Studio's advantages compound through content and scale. If neither is growing, the rebuild buys you headroom you won't use, and that's worth saying before you spend anything.",
+    goodFit: [
+      "Your mobile view has drifted out of sync with desktop and every fix has to be made twice.",
+      "You're adding pages that follow a pattern, and building each one by hand is starting to hurt.",
+      "More than one person needs to edit the site, and Classic's workflow has become a scheduling problem.",
+      "You're postponing a redesign, or calling a developer for changes your team should be making.",
+      "The site needs to grow past what a fixed canvas holds, and every new section fights the layout.",
+    ],
+    notAFit: [
+      "A five-page brochure site that works, ranks, and hasn't needed a change in a year.",
+      "A budget that covers the rebuild and nothing after it. A Studio site nobody uses the CMS on is a Classic site that cost more.",
+      "A members area you can't disrupt, until you've confirmed what happens to your member list on your chosen route.",
+      "Wanting something newer. That isn't a reason, and you'll hear that from us on the call rather than after the invoice.",
+    ],
+    footnote:
+      "The honest test: name the thing Classic is stopping you doing. If you can, the rebuild has a payback you can point at. If you can't, wait until you can.",
   },
 
   transfers: {
     heading: "What carries across, and what gets rebuilt",
     intro:
-      "Studio can't open a Classic file, so the site is built new. That sounds worse than it is: most of what you own is account-level or exportable, and it comes with you. Row by row, starting with the good news.",
+      "Where the answer depends on which route you're taking, the row says so. Where it doesn't, it holds either way. Starting with the good news.",
     rows: [
-      {
-        item: "Your domain and Premium plan",
-        icon: "globe",
-        status: "carries",
-        note: "Both reassign to the new site inside your Wix account, so there's no second subscription and no registrar transfer.",
-      },
       {
         item: "Page URLs",
         icon: "redirect",
         status: "carries",
-        note: "Neither editor imposes a path structure, so a page at /about stays at /about and a tidy Classic site needs almost no redirect work.",
+        note: "Neither editor imposes a path structure, so a page at /about stays at /about and a tidy site needs almost no redirect work.",
       },
       {
         item: "Images, video and files",
@@ -117,10 +258,37 @@ export const wixClassic: MigrationGuideContent = {
         note: "Your Media Manager is account-level, so everything you've uploaded is already there when the new site opens.",
       },
       {
+        item: "Products and store catalogue",
+        icon: "cart",
+        status: "carries",
+        route: "branch",
+        note: "The branch shares the original's dashboard, so Wix states products are automatically available without an export.",
+      },
+      {
+        item: "Contacts and CRM records",
+        icon: "users",
+        status: "carries",
+        route: "branch",
+        note: "Same dashboard, same contacts. This is the single biggest practical advantage of the branch route.",
+      },
+      {
+        item: "Products and contacts",
+        icon: "layers",
+        status: "rebuilt",
+        route: "fresh",
+        note: "On a separate site there's no shared dashboard, so both move by CSV export and import and any layered automations get re-applied.",
+      },
+      {
         item: "CMS collections",
         icon: "server",
         status: "carries",
         note: "Collections export to CSV and import with field types intact, up to 50,000 items per file, which is why a site already on the CMS is far cheaper to move.",
+      },
+      {
+        item: "Blog posts",
+        icon: "pen",
+        status: "carries",
+        note: "Wix Blog runs on both editors and keeps the /post/ prefix, so post addresses survive unchanged.",
       },
       {
         item: "Existing 301 redirects",
@@ -129,22 +297,16 @@ export const wixClassic: MigrationGuideContent = {
         note: "Whatever you've built up in the URL Redirect Manager exports and re-imports in CSV batches, so years of tidying aren't re-derived.",
       },
       {
-        item: "Blog posts",
-        icon: "pen",
+        item: "Your domain",
+        icon: "globe",
         status: "carries",
-        note: "Wix Blog runs on both editors and keeps the /post/ prefix, so post addresses survive the move unchanged.",
+        note: "Reassigns inside your Wix account, so there's no transfer to another registrar and no DNS gap.",
       },
       {
-        item: "Contacts",
-        icon: "users",
+        item: "Your Premium plan",
+        icon: "card",
         status: "rebuilt",
-        note: "The records export and import by CSV; labels, segments and automations layered on top get re-applied on the new site.",
-      },
-      {
-        item: "Store products",
-        icon: "cart",
-        status: "rebuilt",
-        note: "Products move by CSV using the same tool Wix documents for moving between its own stores. Digital products aren't covered and get re-created.",
+        note: "Not a free carry-over: you upgrade the Premium plan to a Studio plan, and remaining value is credited pro rata when the original was bought in the same Wix account.",
       },
       {
         item: "Velo custom code",
@@ -159,32 +321,43 @@ export const wixClassic: MigrationGuideContent = {
         note: "These are per-page settings rather than content, so they're re-entered and then diffed field by field against the old site before cutover.",
       },
       {
-        item: "Bookings, Events and Pricing Plans",
-        icon: "calendar",
+        item: "Apps and their configuration",
+        icon: "plug",
         status: "replaced",
-        note: "The same apps exist in Studio, so the functionality is there on day one; services, staff, session types and plans get configured again.",
+        note: "Most apps carry, but Wix states some are unsupported in Studio and cannot be added at all, so the app list gets audited before anything starts.",
       },
       {
         item: "Page layouts",
         icon: "responsive",
         status: "lost",
-        note: "Nothing about a fixed-canvas layout survives, and that's the point: the rebuild is what buys you layouts that adapt instead of layouts positioned twice.",
+        note: "Wix states the design is not carried over on either route, and that's the point: the rebuild is what buys you layouts that adapt rather than layouts positioned twice.",
+      },
+      {
+        item: "The ability to go back",
+        icon: "ban",
+        status: "lost",
+        route: "branch",
+        note: "Wix states that once the Studio branch is published you cannot republish the original Editor branch, so the cutover is a one-way door.",
       },
       {
         item: "Site members",
         icon: "lock",
-        status: "lost",
-        note: "Wix doesn't allow member lists to move between sites, citing privacy, so members re-register and the heads-up email is planned before cutover.",
-      },
-      {
-        item: "Order history",
-        icon: "receipt",
-        status: "lost",
-        note: "Orders export for your records but can't be imported, so the new store starts its numbering fresh.",
+        status: "replaced",
+        note: "Verify this one in your own account before committing. Wix names products and contacts as shared on a branch but doesn't enumerate the rest, and member lists definitively cannot move between separate sites.",
       },
     ],
     footnote:
-      "The pattern underneath the rows: structured content moves, presentation gets rebuilt, and identity-bound data stays behind. Two of the three losses are things you'd replace anyway.",
+      "The pattern underneath the rows: structured content moves, presentation gets rebuilt, and anything tied to a person's identity needs checking rather than assuming. If a row matters to your business, we check it against your actual account before quoting.",
+    cta: {
+      heading: "Not sure which of these apply to your site?",
+      paragraph:
+        "Send us the URL and we'll check your account, your app list and your page count before you commit to anything.",
+      cta: {
+        label: "Free migration check",
+        href: "/free-website-audit",
+        variant: "primary",
+      },
+    },
   },
 
   steps: {
@@ -194,6 +367,7 @@ export const wixClassic: MigrationGuideContent = {
     items: [
       {
         title: "Decide what's worth carrying",
+        navLabel: "Deciding what to carry",
         duration: "1 day",
         body: "The call that sets the budget, so it happens before anything gets built. The question is whether your search equity sits in a handful of pages or spreads across dozens.",
         lead: "What that means in practice:",
@@ -218,6 +392,7 @@ export const wixClassic: MigrationGuideContent = {
       },
       {
         title: "Crawl and inventory",
+        navLabel: "URL inventory",
         duration: "1 to 2 days",
         body: "Every live URL exported with its traffic, position, inbound links and current metadata. Classic sites accumulate pages nobody remembers publishing, and this is where they surface.",
         lead: "The inventory captures:",
@@ -238,6 +413,7 @@ export const wixClassic: MigrationGuideContent = {
       },
       {
         title: "Design the structure and the CMS",
+        navLabel: "CMS and structure",
         duration: "2 to 4 days",
         body: "The stage that justifies the whole exercise. Anything repeating on the old site gets modelled as a collection, so publishing becomes filling in a form rather than building a page.",
         lead: "Where the gain comes from:",
@@ -258,6 +434,7 @@ export const wixClassic: MigrationGuideContent = {
       },
       {
         title: "Build in Studio",
+        navLabel: "The Studio build",
         duration: "1 to 3 weeks",
         body: "Responsive layouts with real breakpoints, collections populated from the CSV exports, apps reconfigured. You review a working site on a staging URL from your own phone, not a slide of screenshots.",
         lead: "What you get to look at:",
@@ -278,6 +455,7 @@ export const wixClassic: MigrationGuideContent = {
       },
       {
         title: "Move the content and the metadata",
+        navLabel: "Content and metadata",
         duration: "2 to 5 days",
         body: "Copy, posts and every per-page SEO field transferred, then checked against the stage-two inventory rather than eyeballed.",
         lead: "Checked field by field:",
@@ -298,6 +476,7 @@ export const wixClassic: MigrationGuideContent = {
       },
       {
         title: "Cut over",
+        navLabel: "Cutover day",
         duration: "1 day",
         body: "Domain repointed and Premium plan reassigned from inside your Wix account. One afternoon, not a state the business sits in for a month.",
         lead: "The cutover sequence:",
@@ -318,6 +497,7 @@ export const wixClassic: MigrationGuideContent = {
       },
       {
         title: "Watch it land",
+        navLabel: "Post-launch monitoring",
         duration: "30 days",
         body: "Coverage and impressions checked daily for the first fortnight, then weekly. This is the stage most quotes leave out, and it's the one that decides whether a migration held.",
         lead: "What's monitored:",
@@ -338,23 +518,22 @@ export const wixClassic: MigrationGuideContent = {
   seoMechanics: {
     heading: "What happens to your search rankings",
     intro:
-      "Moving between Wix editors is unusually low-risk compared with leaving the platform entirely. Knowing why tells you where the real risk actually sits, which isn't where most people look.",
+      "Moving between Wix editors is unusually low-risk compared with leaving the platform. Knowing why tells you where the real risk sits, which isn't where most people look.",
     items: [
       {
         title: "Your URLs don't have to change",
-        body: "Both editors run on Wix hosting and neither forces a path structure, so addresses carry unchanged. Compare that with leaving Squarespace or WordPress, where the platform's conventions guarantee a full redirect map. Here, redirects exist only where you choose to restructure. That turns restructuring into a deliberate decision with a visible cost rather than something the move imposes on you.",
+        navLabel: "URLs and redirects",
+        body: "Both editors run on Wix hosting and neither forces a path structure, so addresses carry unchanged. Compare that with leaving Squarespace or WordPress, where the platform's conventions guarantee a full redirect map. Here redirects exist only where you choose to restructure, which makes restructuring a deliberate decision with a visible cost rather than something the move imposes on you.",
       },
       {
         title: "The real risk is empty metadata, not broken links",
-        body: "Because URLs hold, the failure mode isn't 404s. It's a new site launching with blank SEO fields, because titles and descriptions are per-page settings that don't travel with the content. Traffic then drifts down over weeks instead of dropping on day one, which makes it far harder to diagnose. This is why the field-by-field diff is a stage in the process rather than a line on a checklist.",
+        navLabel: "Where the risk actually is",
+        body: "Because URLs hold, the failure mode isn't 404s. It's a new site launching with blank SEO fields, because titles and descriptions are per-page settings that don't travel with the content. Traffic then drifts down over weeks instead of dropping on day one, which makes it far harder to diagnose. That's why a field-by-field diff before cutover is a stage in the process rather than a line on a checklist.",
       },
       {
-        title: "Restructuring is where redirects earn their keep",
-        body: "Most Classic sites worth rebuilding also deserve a better structure, and that's where URLs genuinely change. Each old address gets a permanent redirect to its nearest new equivalent, uploaded in CSV batches. Never a blanket rule pointing everything at the homepage, which is the fastest way to turn a ranking page into a bounce.",
-      },
-      {
-        title: "The gain nobody prices in",
-        body: "Studio sites are responsive by construction rather than by maintaining a second mobile layout. Classic's separate mobile view is a common source of mismatch between what Google indexes on mobile and what desktop visitors see. Collapsing that into one layout removes a category of ranking problem that stays invisible until someone runs a mobile usability report.",
+        title: "What we can and can't promise",
+        navLabel: "What we guarantee",
+        body: "Nobody can guarantee an external algorithm's output, and Google says plainly that following its guidance doesn't guarantee crawling, indexing or ranking. What we can guarantee is our own work: every indexed URL mapped, redirects tested against the inventory, metadata recreated and diffed, launch validated, and search performance monitored for 30 days. If a migration-caused technical problem appears in that window, we fix it at no extra cost.",
       },
     ],
   },
@@ -366,15 +545,18 @@ export const wixClassic: MigrationGuideContent = {
     items: [
       {
         title: "Whether you rebuild the old site or replace it",
+        navLabel: "Rebuild or replace",
         body: "Recreating a fixed-canvas layout section by section inside Studio looks like diligence and produces a site that costs more and does the same things. If the structure comes across unchanged, Studio was the wrong purchase. Decide up front which repeating content becomes collections, because that's the difference between a redesign and a capability upgrade.",
       },
       {
         title: "Whether the CMS gets modelled during the build or after it",
+        navLabel: "When to model the CMS",
         body: "Studio's value compounds through the CMS, and a build that defers it ships a better-looking site with the same bottleneck: marketing still can't publish without a designer. Modelling collections during the build is a design decision. Doing it later is a second project.",
       },
       {
-        title: "When the domain moves",
-        body: "Redirects go up and get tested against the inventory before the domain points anywhere. Repointing first and importing redirects afterwards leaves a window where changed URLs serve 404s to visitors and crawlers alike, and that window doesn't need to be long to get a page dropped. Keep the old site unpublished afterwards too. It costs nothing and it's the only reference for what a page said when something surfaces three weeks later.",
+        title: "When you publish, and what that closes off",
+        navLabel: "The cutover decision",
+        body: "On the branch route, publishing permanently retires the Editor version, so redirects go up and get tested against the inventory before anything goes live. On either route, keep the old site accessible afterwards. It's the only reference for what a page said or how an app was configured when something surfaces three weeks later.",
       },
     ],
   },
@@ -393,21 +575,46 @@ export const wixClassic: MigrationGuideContent = {
     ],
   },
 
-  logistics: {
-    heading: "Timeline and cost",
-    priceFrom: "From €1,750",
-    timeline: "2 to 5 weeks, plus 30 days of monitoring",
-    note: "One flat starting price across every platform we migrate from. What moves the number on a Classic move is whether you're carrying content or starting fresh, how many pages hold search equity worth mapping, how much repeating content becomes CMS collections, and how much configuration lives inside Bookings, Stores or Events. A brochure rebuild sits at the bottom of that range. Bel'Istria's 35+ page carry with a full URL map ran eight weeks end to end.",
-    ctas: [
+  sources: {
+    heading: "Sources",
+    intro:
+      "Platform constraints on this page link to Wix's own documentation, so you can check them rather than take our word for it.",
+    verified: "2026-08-19",
+    items: [
       {
-        label: "Get a fixed quote",
-        href: "/book-a-call",
-        variant: "primary",
+        label: "Studio Editor: Creating a Studio Version of a Wix Editor Site",
+        href: "https://support.wix.com/en/article/studio-editor-creating-a-studio-version-of-a-wix-editor-site",
+        note: "The branch route. Shares the dashboard, does not carry the design, and publishing permanently retires the Editor branch.",
       },
       {
-        label: "See migration pricing",
-        href: "/services/website-migration",
-        variant: "secondary",
+        label: "Wix Editor: Rebuilding Your Site in the Studio Editor",
+        href: "https://support.wix.com/en/article/wix-editor-rebuilding-your-site-in-the-studio-editor",
+        note: "The fresh-build route, which Wix documents separately without reference to the branch workflow.",
+      },
+      {
+        label: "Wix Studio: Assigning a Wix Premium Plan to a Wix Studio Site",
+        href: "https://support.wix.com/en/article/wix-studio-assigning-a-wix-premium-plan-to-a-wix-studio-site",
+        note: "Premium upgrades to a Studio plan, with remaining value credited pro rata in the same Wix account.",
+      },
+      {
+        label: "CMS: Importing Content into a Collection",
+        href: "https://support.wix.com/en/article/cms-formerly-content-manager-importing-content-into-a-collection",
+        note: "CSV import into a collection, capped at 50,000 items per file.",
+      },
+      {
+        label: "Importing or Exporting URL Redirects with a CSV File",
+        href: "https://support.wix.com/en/article/importing-or-exporting-url-redirects-with-a-csv-file",
+        note: "Bulk redirect import, up to 500 rows at a time.",
+      },
+      {
+        label: "Site Members: Moving Members Between Sites",
+        href: "https://support.wix.com/en/article/request-moving-members-from-one-site-to-another-in-your-wix-account",
+        note: "Member lists cannot move between separate sites. Wix does not state whether a Studio branch behaves the same way, which is why this page says to verify it in your account.",
+      },
+      {
+        label: "Copying and Deleting Coded Sites, Pages, and Elements",
+        href: "https://dev.wix.com/docs/develop-websites/articles/coding-with-velo/overview/copying-and-deleting-coded-sites-pages-and-elements",
+        note: "Velo event code added via the Properties and Events panel stops working when copied to another site.",
       },
     ],
   },
@@ -450,8 +657,8 @@ export const wixClassic: MigrationGuideContent = {
         a: "Two to five weeks from kickoff to launch for most sites, followed by 30 days of index monitoring. A tight brochure rebuild can run a week and a half. A larger site carrying content across with a full URL map runs longer: Bel'Istria's 35+ page move took eight weeks end to end. Your existing site stays live for all of it.",
       },
       {
-        q: "Does my Wix Premium plan and domain carry over to a Wix Studio site?",
-        a: "Yes. Both reassign to the new site from inside your Wix account, so there's no second subscription to buy and no domain transfer to another registrar. It's also why your Classic site can keep serving traffic right up to the moment you cut over.",
+        q: "Does my Wix Premium plan carry over to a Wix Studio site?",
+        a: "Not as-is. You upgrade your existing Premium plan to a Wix Studio plan, and Wix credits the remaining value of the old plan against the price of the upgrade, calculated pro rata across the days left in your subscription. That credit only applies when the original plan was bought in the same Wix account as the Studio site. Your domain is simpler: it reassigns inside your account with no registrar transfer, which is why the old site can keep serving traffic right up to cutover.",
       },
       {
         q: "What happens to my site members when I move from Wix Classic to Wix Studio?",

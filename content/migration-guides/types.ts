@@ -12,9 +12,9 @@ import type { CtaLink } from "@/lib/types";
  * guide is content that could not appear on a sibling.
  *
  * THE ANTI-DOORWAY RULE, restated for this type: if a sentence would read the
- * same on another guide, it gets rewritten or cut. Only `logistics` may repeat,
- * because the price genuinely is one flat number across source platforms, and
- * even its note references platform-specific effort.
+ * same on another guide, it gets rewritten or cut. Pricing is the one thing
+ * these pages don't author at all: they render the sitewide tier table, so the
+ * reader gets the real numbers rather than a per-platform paraphrase of them.
  */
 
 /** One titled block of prose. Same shape as the service pages use. */
@@ -37,12 +37,39 @@ export type Point = { label: string; body: string };
  * detail belongs in `points` where it can be scanned, not in a longer
  * paragraph. Density was the failure mode of the first draft of these pages.
  */
+/**
+ * A contextual ask, rendered as a slim inset band immediately after the block
+ * that earned it. Placed where the reader has just felt the difficulty rather
+ * than on a fixed rhythm, and never two in a row.
+ */
+export type ContextualCta = {
+  heading: string;
+  paragraph: string;
+  cta: CtaLink;
+};
+
+/**
+ * A primary source backing a technical claim. Linking the vendor's own
+ * documentation is what separates a citable page from an opinion, and it is
+ * the page's moat: every competitor reviewed cites nothing.
+ */
+export type GuideSource = { label: string; href: string; note: string };
+
 export type LongFormBlock = TitledBlock & {
+  /**
+   * Short functional label for the sticky section navigator, used when `title`
+   * is editorial. A nav label has to say where you land: "Watch it land" is a
+   * good heading and useless navigation, so it carries the navLabel
+   * "Post-launch monitoring". Falls back to `title` when absent.
+   */
+  navLabel?: string;
   /** Stage duration, rendered as a chip beside the heading. Steps only. */
   duration?: string;
   /** The line that introduces the points, e.g. "Here's what that covers:". */
   lead?: string;
   points?: Point[];
+  /** A contextual ask rendered immediately after this block. */
+  cta?: ContextualCta;
 };
 
 /**
@@ -72,6 +99,29 @@ export type TransferRow = {
   status: TransferStatus;
   /** One specific sentence. Never a synonym swap of a sibling guide's row. */
   note: string;
+  /**
+   * Which route this row describes, when the answer differs between them. Wix
+   * Classic genuinely has two: a Studio branch off an eligible Premium Editor
+   * site, and a fresh Studio site. Products and contacts ride along on the
+   * first and need exporting on the second, so one answer would be wrong on
+   * one of them. Omit when the row holds either way.
+   */
+  route?: "branch" | "fresh";
+};
+
+/**
+ * One available way of getting from the source platform to Wix Studio.
+ *
+ * This exists because Wix Classic has two, and Wix's help centre documents
+ * them in separate articles without reconciling them: one describes rebuilding
+ * from scratch, another describes creating a Studio branch off an existing
+ * Premium Editor site. Readers arrive having found one or the other and no way
+ * to tell which applies to them. Where a source platform offers a single
+ * route, omit the block rather than inventing a choice.
+ */
+export type MigrationRoute = LongFormBlock & {
+  /** Who can actually use this route, in one line. */
+  eligibility: string;
 };
 
 export type MigrationGuideContent = {
@@ -110,12 +160,48 @@ export type MigrationGuideContent = {
     footnote?: string;
   };
 
+  /**
+   * "Migration at a glance": labelled facts, high on the page. Explicitly
+   * labelled key/value pairs are the most extractable thing on a guide, so
+   * this earns its place for skim-readers and answer engines at once.
+   *
+   * Optional ONLY while the Squarespace and Harmony guides are brought up to
+   * this template. Every published guide should carry one.
+   */
+  glance?: {
+    heading: string;
+    intro?: string;
+    items: { label: string; value: string }[];
+  };
+
+  /**
+   * What the destination platform actually gives you, in the source
+   * platform's terms. Emphasis shifts per guide: a WordPress reader cares
+   * about maintenance ending, a Classic reader about responsive control and
+   * the design system. Same destination, different argument.
+   */
+  benefits?: {
+    heading: string;
+    intro: string;
+    items: TitledBlock[];
+  };
+
+  /** Available routes, where the source platform genuinely offers more than one. */
+  routes?: {
+    heading: string;
+    intro: string;
+    items: MigrationRoute[];
+    footnote?: string;
+    cta?: ContextualCta;
+  };
+
   /** THE CORE ASSET. See TransferStatus. */
   transfers: {
     heading: string;
     intro: string;
     rows: TransferRow[];
     footnote?: string;
+    cta?: ContextualCta;
   };
 
   /** The bulk of the word count: 6 to 8 stages, each with a real duration. */
@@ -138,13 +224,36 @@ export type MigrationGuideContent = {
    */
   auditCta: { heading: string; paragraph: string; ctas: CtaLink[] };
 
-  /** Timeline and price. The only genuinely shared block on these pages. */
-  logistics: {
+  /**
+   * The commercial block. A migration guide can't answer its cost question
+   * with the sitewide package tiers: the reader doesn't know whether they're
+   * buying a migration, a redesign or a new website, so this states what the
+   * fee buys and what moves it, then links out to the full tiers.
+   *
+   * Optional ONLY while the Squarespace and Harmony guides are brought up to
+   * this template; guides without one fall back to the sitewide tiers.
+   */
+  cost?: {
     heading: string;
     priceFrom: string;
     timeline: string;
+    /** What the fee actually buys. */
+    included: string[];
+    /** What moves the number, in the reader's terms. */
+    drivers: string[];
     note: string;
     ctas: CtaLink[];
+  };
+
+  /**
+   * Primary sources, rendered rather than buried in a comment. `verified` is
+   * an ISO date and also drives the byline under the H1.
+   */
+  sources?: {
+    heading: string;
+    intro: string;
+    verified: string;
+    items: GuideSource[];
   };
 
   /**

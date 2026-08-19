@@ -62,3 +62,26 @@ export const transferStatusLabels: Record<
     legend: "Nothing carries. Plan for what you do instead.",
   },
 };
+
+/**
+ * The page-level navigator's sections, in page order, keyed by the section id
+ * each one anchors to. Labels live here rather than in the component because
+ * they're reader-facing copy (CLAUDE.md §15), and here rather than per guide
+ * because the navigator is part of the template, not of any one platform.
+ *
+ * Rendered only for the sections a given guide actually has, so a guide
+ * without `routes` simply drops that entry.
+ */
+export const GUIDE_NAV_SECTIONS: { id: string; label: string }[] = [
+  { id: "at-a-glance", label: "At a glance" },
+  { id: "what-you-get", label: "What you get" },
+  { id: "case-studies", label: "Case studies" },
+  { id: "the-two-routes", label: "The two routes" },
+  { id: "who-should-move", label: "Who should move" },
+  { id: "what-carries-across", label: "What carries across" },
+  { id: "how-the-move-runs", label: "How the move runs" },
+  { id: "search-rankings", label: "Search rankings" },
+  { id: "three-decisions", label: "Three decisions" },
+  { id: "cost", label: "Cost" },
+  { id: "faq", label: "FAQ" },
+];

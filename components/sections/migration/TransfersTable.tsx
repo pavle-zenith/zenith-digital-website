@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/Section";
+import { Button } from "@/components/ui/Button";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import {
   GUIDE_ASIDE_GRID,
@@ -68,7 +69,12 @@ const STATUS_ORDER: TransferStatus[] = [
   "lost",
 ];
 
-function StatusChip({ status }: { status: TransferStatus }) {
+/**
+ * Exported so a blog `comparisonTable` row can carry the same chip. The four
+ * states have to mean one thing across the site, which means one renderer for
+ * them rather than a second set of styles that agree by coincidence.
+ */
+export function StatusChip({ status }: { status: TransferStatus }) {
   const style = STATUS_STYLES[status];
   return (
     <span
@@ -94,7 +100,11 @@ export function TransfersTable({ data }: { data: MigrationGuideContent }) {
   const { transfers } = data;
 
   return (
-    <Section tone="light" frameClassName={GUIDE_SECTION_FRAME}>
+    <Section
+      tone="light"
+      frameClassName={GUIDE_SECTION_FRAME}
+      id="what-carries-across"
+    >
       <div className={GUIDE_ASIDE_GRID}>
         {/* Content column: heading and the stacked rows, flush left on the
             same line, matching the long-form sections. */}
@@ -136,6 +146,22 @@ export function TransfersTable({ data }: { data: MigrationGuideContent }) {
             <p className="mt-10 text-body-lg leading-relaxed text-light-muted">
               {transfers.footnote}
             </p>
+          ) : null}
+
+          {/* The ask lands here because the reader has just been handed a list
+              of things that may or may not apply to their own site. */}
+          {transfers.cta ? (
+            <div className="mt-10 rounded-card border border-light-border bg-light-surface p-6 md:p-7">
+              <p className="font-display text-body-lg font-medium">
+                {transfers.cta.heading}
+              </p>
+              <p className="mt-2 text-body leading-relaxed text-light-muted">
+                {transfers.cta.paragraph}
+              </p>
+              <div className="mt-5">
+                <Button cta={transfers.cta.cta} tone="light" />
+              </div>
+            </div>
           ) : null}
         </GuideContentCol>
 

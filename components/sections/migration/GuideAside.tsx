@@ -34,24 +34,43 @@ export const GUIDE_SECTION_FRAME = "!py-0";
 /** The gutter, re-applied inside bled elements so rules span the full width. */
 const GUTTER = "px-[clamp(20px,4vw,64px)]";
 
+/** The column gutter, for children of a `flush` content column. */
+export function guideContentInset() {
+  return cn(GUTTER, "lg:pr-14");
+}
+
 /**
  * Content column: gutter restored, reading measure, room before the divider.
  *
  * `wide` drops the measure cap for columns that hold a grid rather than prose.
  * A reading measure is for reading; cards should fill the column they're in.
+ *
+ * `flush` drops the column's own horizontal padding so its children can draw
+ * hairlines that run from the rail to the vertical divider. Children then
+ * re-apply the gutter with `guideContentInset()`, inside their own border box,
+ * exactly as the aside rows do.
  */
 export function GuideContentCol({
   children,
   wide = false,
+  flush = false,
 }: {
   children: React.ReactNode;
   wide?: boolean;
+  flush?: boolean;
 }) {
   return (
     <div
-      className={cn("order-2 py-14 md:py-24 lg:order-none lg:pr-14", GUTTER)}
+      className={cn(
+        "order-2 py-14 md:py-24 lg:order-none",
+        !flush && guideContentInset(),
+      )}
     >
-      <div className={wide ? undefined : "max-w-[68ch]"}>{children}</div>
+      {wide || flush ? (
+        children
+      ) : (
+        <div className="max-w-[68ch]">{children}</div>
+      )}
     </div>
   );
 }

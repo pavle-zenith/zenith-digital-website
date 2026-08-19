@@ -1,0 +1,51 @@
+import { cn } from "@/lib/utils";
+import type { Tone } from "@/lib/types";
+
+/**
+ * The bold-label bullet list. A reader skimming gets the whole block from the
+ * labels alone, and each pair is a self-contained statement an answer engine
+ * can lift without the surrounding paragraph. The colon is inserted here, so
+ * labels stay free of trailing punctuation in content.
+ */
+export function PointList({
+  points,
+  tone,
+}: {
+  points: { label: string; body: string }[];
+  tone: Tone;
+}) {
+  const dark = tone === "dark";
+  return (
+    <ul className="mt-4 flex flex-col gap-4">
+      {points.map((point) => (
+        <li key={point.label} className="flex gap-3">
+          {/* The accent is a near-black that vanishes on navy (CLAUDE.md §15),
+              so the marker takes the section's own text colour on dark. */}
+          <span
+            aria-hidden
+            className={cn(
+              "mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full",
+              dark ? "bg-text" : "bg-accent",
+            )}
+          />
+          <p
+            className={cn(
+              "text-body leading-relaxed",
+              dark ? "text-text-muted" : "text-light-text",
+            )}
+          >
+            <strong
+              className={cn(
+                "font-medium",
+                dark ? "text-text" : "text-light-text",
+              )}
+            >
+              {`${point.label}:`}
+            </strong>{" "}
+            {point.body}
+          </p>
+        </li>
+      ))}
+    </ul>
+  );
+}

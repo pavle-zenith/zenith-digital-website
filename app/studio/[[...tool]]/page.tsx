@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { NextStudio, viewport as studioViewport } from "next-sanity/studio";
+import { viewport as studioViewport } from "next-sanity/studio";
 
-import config from "@/sanity.config";
+import Studio from "./Studio";
 
 /**
  * The embedded Sanity Studio (CLAUDE.md §4). The catch-all segment lets the
@@ -15,15 +15,14 @@ import config from "@/sanity.config";
 export const metadata: Metadata = {
   title: "Studio | Zenith Digital",
   robots: { index: false, follow: false, nocache: true },
-  alternates: { canonical: undefined },
 };
 
 // next-sanity types `viewportFit` as a plain string; Next wants the union.
 export const viewport: Viewport = studioViewport as Viewport;
 
-/** The Studio bundle is large and entirely client-side; never prerender it. */
+/** The Studio bundle is entirely client-side; there is nothing to prerender. */
 export const dynamic = "force-static";
 
 export default function StudioPage() {
-  return <NextStudio config={config} />;
+  return <Studio />;
 }

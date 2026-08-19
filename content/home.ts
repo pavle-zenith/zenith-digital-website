@@ -981,6 +981,7 @@ export const footer = {
     {
       heading: "Zenith resources",
       links: [
+        { label: "Blog", href: "/blog" },
         { label: "Free website audit", href: "/free-website-audit" },
         { label: "FAQ", href: "/faq" },
         { label: "Testimonials", href: "/testimonials" },

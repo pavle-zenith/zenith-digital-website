@@ -9,8 +9,8 @@
 
 ## Services
 
-- [Wix Studio website design](https://www.thezenithdigital.com/services/wix-studio-website-design): custom conversion-first builds from €2,500, launched in 2 to 5 weeks
-- [Website migration](https://www.thezenithdigital.com/services/website-migration): WordPress, Squarespace, Webflow, and Framer to Wix Studio with zero ranking loss, from €2,500
+- [Wix Studio website design](https://www.thezenithdigital.com/services/wix-studio-website-design): custom conversion-first builds from €1,750, launched in 2 to 5 weeks
+- [Website migration](https://www.thezenithdigital.com/services/website-migration): WordPress, Squarespace, Webflow, and Framer to Wix Studio with zero ranking loss, from €1,750
 - [Landing pages](https://www.thezenithdigital.com/services/landing-pages): campaign landing pages live in about a week, from €1,250
 - [Wix Studio development](https://www.thezenithdigital.com/services/wix-studio-development): Velo custom code, CMS architecture, integrations, automations, and marketplace platforms built natively on Wix Studio, quoted per project
 - [SEO, AEO & PPC](https://www.thezenithdigital.com/services/seo-aeo-ppc): search, answer-engine optimization, and paid campaigns for Wix Studio sites

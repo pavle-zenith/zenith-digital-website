@@ -214,7 +214,7 @@ Ordered modules (each a Sanity module in `homePage`):
 5. **Featured case studies** — media-led cards, one hard metric each, industry visible.
 6. **Named process** — the 4 steps, branded (give the process a name).
 7. **Proof band** — €1M+ revenue · 5.96x ROAS · 7yr zero downtime · review count.
-8. **Pricing preview** — three tiers with timelines, "from €2,500".
+8. **Pricing preview** — three tiers with timelines, "from €1,750".
 9. **Founder / team** — faces + the human story (new; from DesignMe/Crawford/Squareblack).
 10. **Testimonials** — headshots + outcomes.
 11. **Free audit** — lead-magnet callout.

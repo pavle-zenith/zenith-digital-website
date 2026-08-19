@@ -26,7 +26,7 @@ export const websiteMigration: ServicePageContent = {
   seo: {
     title: "WordPress to Wix Studio Migration | Zenith Digital",
     description:
-      "Migrate from WordPress, Squarespace, Webflow, or Framer to Wix Studio. Full URL inventory, 1:1 redirect map, and zero ranking loss in writing. From €2,500.",
+      "Migrate from WordPress, Squarespace, Webflow, or Framer to Wix Studio. Full URL inventory, 1:1 redirect map, and zero ranking loss in writing. From €1,750.",
   },
 
   hero: {
@@ -260,7 +260,7 @@ export const websiteMigration: ServicePageContent = {
 
   pricing: {
     heading: "What a migration costs",
-    from: "From €2,500",
+    from: "From €1,750",
     fromNote: "fixed, one-time",
     note: "Priced as one project covering the audit, the redirect work, the rebuild, and the monitoring window. You get the number before we touch anything.",
     drivers: [
@@ -393,6 +393,6 @@ export const websiteMigration: ServicePageContent = {
   schema: {
     description:
       "Full-service website migration to Wix Studio from WordPress, Squarespace, Webflow, or Framer. SEO audit and URL inventory, 1:1 redirect mapping, content and CMS migration, metadata parity, and 30 days of post-launch index monitoring.",
-    priceFrom: "2500",
+    priceFrom: "1750",
   },
 };

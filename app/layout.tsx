@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { inter, saansMono, sfPro } from "./fonts";
@@ -87,6 +88,8 @@ export default function RootLayout({
         {/* Loaded unconditionally: the Consent Mode defaults above decide what
             it may store. Absent env var means no tag at all (local/preview). */}
         {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
+        {/* Vercel Web Analytics */}
+        <VercelAnalytics />
       </body>
     </html>
   );

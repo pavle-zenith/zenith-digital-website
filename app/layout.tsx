@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.thezenithdigital.com"),
   title: "Wix Studio Web Design Agency | Zenith Digital",
   description:
-    "Zenith Digital is a Wix Studio web design agency and Wix Legend Partner, serving the UK, EU, and US from Belgrade. 100+ websites shipped, from €2,500.",
+    "Zenith Digital is a Wix Studio web design agency and Wix Legend Partner, serving the UK, EU, and US from Belgrade. 100+ websites shipped, from €1,750.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

@@ -84,7 +84,7 @@ export const sServices: ServiceEntry[] = [
     ],
     meta: [
       { label: "Timeline: 2–5 weeks" },
-      { label: "From €2,500", href: "/#pricing" },
+      { label: "From €1,750", href: "/#pricing" },
     ],
     cta: { label: "Start a build", href: "/book-a-call" },
     slides: [
@@ -152,7 +152,7 @@ export const sServices: ServiceEntry[] = [
     ],
     meta: [
       { label: "Timeline: 2–4 weeks" },
-      { label: "From €2,500", href: "/#pricing" },
+      { label: "From €1,750", href: "/#pricing" },
     ],
     cta: { label: "Plan your migration", href: "/book-a-call" },
     slides: [
@@ -449,7 +449,7 @@ export const sFaq = {
     },
     {
       q: "What does it cost?",
-      a: "Fixed prices, published: sites from €2,500, landing pages from €1,250, full tiers on the pricing page. No retainers required, no surprise invoices.",
+      a: "Fixed prices, published: sites from €1,750, landing pages from €1,250, full tiers on the pricing page. No retainers required, no surprise invoices.",
     },
   ],
 };

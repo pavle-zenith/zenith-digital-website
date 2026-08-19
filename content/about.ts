@@ -87,7 +87,7 @@ export const aboutHow = {
     },
     {
       title: "Fixed price, fixed timeline.",
-      body: "You get a number and a date before we start. From €2,500, most builds live in 2 to 5 weeks.",
+      body: "You get a number and a date before we start. From €1,750, most builds live in 2 to 5 weeks.",
     },
     {
       title: "Wix Studio by default, custom when you outgrow it.",
@@ -174,7 +174,7 @@ export const aboutFaq = {
     },
     {
       q: "What does a website cost?",
-      a: "From €2,500 for a Wix Studio build, with landing pages from €1,250. Every project is quoted with a fixed price and a fixed timeline before work starts.",
+      a: "From €1,750 for a Wix Studio build, with landing pages from €1,250. Every project is quoted with a fixed price and a fixed timeline before work starts.",
     },
     {
       q: "How long does a build take?",

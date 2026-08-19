@@ -48,7 +48,7 @@ export const fCategories: FaqCategory[] = [
       },
       {
         q: "We're tiny / just starting out. Too small?",
-        a: "If a €2,500 site is a stretch, wait until it isn't. A website pays for itself when there's a real business behind it. Start with the free audit; it costs nothing and tells you what to do either way.",
+        a: "If a €1,750 site is a stretch, wait until it isn't. A website pays for itself when there's a real business behind it. Start with the free audit; it costs nothing and tells you what to do either way.",
       },
       {
         q: "Do you work with agencies?",

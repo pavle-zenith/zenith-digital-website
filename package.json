@@ -12,6 +12,7 @@
     "@calcom/embed-react": "^1.5.3",
     "@next/third-parties": "^15.5.23",
     "@supabase/supabase-js": "^2.112.3",
+    "@vercel/analytics": "^2.0.1",
     "next": "15.5.21",
     "posthog-js": "^1.417.3",
     "react": "19.1.0",

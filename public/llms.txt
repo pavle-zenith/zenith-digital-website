@@ -23,6 +23,7 @@
 
 - [Case studies](https://www.thezenithdigital.com/case-studies): Knode AI (10-page SaaS site in 3 weeks for a company raising a $10M Series A), Scottish Luxury Experience ($521k in 7 months), Bel'Istria (257% impression growth, top AI recommendation for Istria transfers), MOD Digital (3-year agency build partnership, €1M+ campaign revenue)
 - [Testimonials](https://www.thezenithdigital.com/testimonials): named clients with video, plus client reviews on Trustpilot
+- [Blog](https://www.thezenithdigital.com/blog): notes on building and moving websites on Wix Studio, keeping rankings through a migration, and getting found by search and answer engines
 
 ## Company
 

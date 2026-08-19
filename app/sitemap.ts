@@ -3,6 +3,9 @@ import type { MetadataRoute } from "next";
 import { caseStudyDetails } from "@/content/case-studies";
 import { migrationGuides } from "@/content/migration-guides";
 import { servicePages } from "@/content/service-pages";
+import { sanityFetch } from "@/sanity/lib/client";
+import { postSlugsQuery } from "@/sanity/lib/queries";
+import type { PostSitemapEntry } from "@/sanity/lib/types";
 
 const SITE = "https://www.thezenithdigital.com";
 
@@ -12,8 +15,15 @@ const SITE = "https://www.thezenithdigital.com";
  * remembering to add it. Unpublished service pages and migration guides are
  * already filtered out of `servicePages` and `migrationGuides`, so they can't
  * leak in.
+ *
+ * Blog posts come from Sanity on the same principle: a new post appears here
+ * by existing rather than by someone remembering to add it. The query excludes
+ * drafts, so an unpublished post cannot be listed. /studio is deliberately
+ * absent: it is an editing tool and is noindexed on the route itself.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await sanityFetch<PostSitemapEntry[]>(postSlugsQuery);
+
   const staticRoutes: {
     path: string;
     priority: number;
@@ -26,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/partnerships", priority: 0.8, changeFrequency: "monthly" },
     { path: "/free-website-audit", priority: 0.8, changeFrequency: "monthly" },
     { path: "/book-a-call", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
     { path: "/testimonials", priority: 0.6, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
     { path: "/privacy", priority: 0.2, changeFrequency: "yearly" },
@@ -56,6 +67,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(c.publishedAt),
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+    ...posts.map((p) => ({
+      url: `${SITE}/blog/${p.slug}`,
+      lastModified: new Date(p.lastVerified ?? p.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
   ];
 }

@@ -124,9 +124,11 @@ function components(byKey: Record<string, string>): PortableTextComponents {
       ),
       number: ({ children, index }) => (
         <li className="flex gap-3 text-body leading-relaxed text-light-muted">
+          {/* Body-sized rather than a mono label: an inline marker has to sit
+              on the same baseline as the sentence it numbers. */}
           <span
             aria-hidden
-            className="w-5 shrink-0 font-mono text-label text-light-text"
+            className="w-5 shrink-0 text-body font-medium leading-relaxed text-light-text"
           >
             {`${(index ?? 0) + 1}.`}
           </span>

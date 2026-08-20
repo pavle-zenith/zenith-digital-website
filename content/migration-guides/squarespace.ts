@@ -60,7 +60,7 @@ export const squarespace: MigrationGuideContent = {
 
   hero: {
     name: "Squarespace to Wix Studio migration",
-    h1: "Squarespace to Wix Studio: what the export actually contains",
+    h1: "Squarespace to Wix Studio: the complete migration guide",
     subhead:
       "Squarespace exports one WordPress-format XML file, and its own documentation lists more things left out than taken. Here's what really moves, which URLs change, and what it costs to do it without dropping rankings.",
     chips: [
@@ -450,7 +450,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         label: "Squarespace: Importing and exporting content",
-        href: "https://support.squarespace.com/hc/en-us/articles/205814028-Importing-and-exporting-content",
+        href: "https://support.squarespace.com/hc/en-us/articles/205814028-Import-to-and-export-from-your-site",
         note: "Confirms the export is a WordPress-format XML, and states that images can't be exported in bulk and uploaded video can't be exported at all.",
       },
       {
@@ -460,7 +460,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         label: "Squarespace: Export Commerce orders",
-        href: "https://support.squarespace.com/hc/en-us/articles/206540677-Exporting-orders",
+        href: "https://support.squarespace.com/hc/en-us/articles/206540677-Export-Commerce-orders",
         note: "Orders export for analysing sales outside Squarespace. No import path is documented.",
       },
       {
@@ -469,9 +469,9 @@ export const squarespace: MigrationGuideContent = {
         note: "Customer list exports to CSV. Notes are excluded and account logins are not covered.",
       },
       {
-        label: "Squarespace: Formatting your site's URLs",
-        href: "https://support.squarespace.com/hc/en-us/articles/206543597",
-        note: "How Squarespace builds page and blog post paths, which is what determines how much of your URL structure survives.",
+        label: "Squarespace: URL slugs",
+        href: "https://support.squarespace.com/hc/en-us/articles/205814578-URL-slugs",
+        note: "Blog post URLs always begin with the blog page's own slug, which is what determines how much of your URL structure survives.",
       },
       {
         label: "Wix Blog: About blog post web addresses",
@@ -568,10 +568,10 @@ export const squarespace: MigrationGuideContent = {
         desc: "The Wix-to-Wix move, where the URLs mostly hold and the layout has to be rebuilt anyway.",
       },
       {
-        label: "Wix Harmony to Wix Studio",
-        logo: "/platforms/wix.svg",
-        href: "/services/wix-harmony-to-wix-studio",
-        desc: "Weighing Harmony against Studio for a new build? Read this before you pick, because the choice is one-way.",
+        label: "WordPress to Wix Studio",
+        logo: "/platforms/wordpress.svg",
+        href: "/services/wordpress-to-wix-studio",
+        desc: "The other platform people weigh against Squarespace, and the only one Wix built an importer for.",
       },
       {
         label: "SEO, AEO & PPC",

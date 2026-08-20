@@ -6,10 +6,22 @@ import type { MigrationGuideContent } from "./types";
  * Targets: wix harmony to wix studio · wix harmony vs wix studio · does wix
  * harmony have a cms · can i upgrade wix harmony later.
  *
- * THE ANGLE, and it writes itself from Wix's own documentation: Harmony is a
- * one-way door with no CMS and no multilingual. Wix states both plainly. A
- * dozen partner blogs have written "Harmony vs Studio" comparison posts;
- * nobody has published a service page for moving off it, which is the gap.
+ * THE THESIS, and it writes itself from Wix's own documentation: Harmony is
+ * the only Wix editor with a documented one-way door, and its ceiling is
+ * architectural rather than cosmetic. No CMS, no multilingual, and no site
+ * code at all. A dozen partner blogs have written "Harmony vs Studio"
+ * comparison posts; nobody has published a service page for moving off it,
+ * which is the gap.
+ *
+ * VERIFICATION STATUS (20 Aug 2026). Every platform claim is quoted from Wix
+ * and linked in `sources`. The two load-bearing ones: "Once you have created a
+ * site with the Wix Harmony Editor, it is not possible to transfer the site to
+ * either the Wix Editor or the Studio Editor", and the published in-development
+ * list naming the CMS, Wix Multilingual, Donations, Hotels, Music and Referral
+ * Programs. Wix's developer docs add the code ceiling: "Wix Harmony doesn't
+ * support site code", with page code, backend code, custom CSS, HTTP
+ * functions, routers, data hooks, event handlers, web modules and scheduled
+ * jobs all listed as unsupported.
  *
  * NO PROOF BLOCK ON PURPOSE. Harmony is Wix's newest editor, so no agency has
  * a Harmony migration case study and pretending otherwise would be the one
@@ -18,16 +30,10 @@ import type { MigrationGuideContent } from "./types";
  * never as a Harmony client.
  *
  * OWNER — this page has the shortest shelf life on the site. Wix lists the CMS
- * and Wix Multilingual as features it is actively adding to Harmony. When
- * either ships, the ceiling argument changes and this page needs rewriting,
- * not patching. All claims were checked against Wix support docs 19 Aug 2026.
- *
- * TODO, to match the Wix Classic template: this guide has no `glance`,
- * `benefits`, `cost` or `sources` block yet, so it renders without them and
- * falls back to the sitewide pricing tiers. Harmony's claims lean hardest on
- * Wix's own documentation, so a `sources` block matters most here.
+ * and Wix Multilingual as features it is actively adding. When either ships,
+ * the ceiling argument changes and this page needs rewriting, not patching.
+ * Re-check the in-development list quarterly.
  */
-
 const ctas: CtaLink[] = [
   { label: "Book a call", href: "/book-a-call", variant: "primary" },
   {
@@ -49,15 +55,85 @@ export const wixHarmony: MigrationGuideContent = {
 
   hero: {
     name: "Wix Harmony to Wix Studio migration",
-    h1: "Wix Harmony to Wix Studio: the move Wix doesn't let you make",
+    h1: "Wix Harmony to Wix Studio: the complete migration guide",
     subhead:
       "Wix states it plainly: once a site is built in Harmony, it can't be transferred to the Wix Editor or the Studio Editor. Harmony also ships without a CMS and without multilingual. Here's what that costs you, and how to decide before it's a rebuild.",
     chips: [
       "Harmony to Studio is a rebuild, per Wix",
-      "No CMS, no multilingual in Harmony",
+      "No CMS, no multilingual, no site code",
       "Every claim linked to Wix's docs",
     ],
     ctas,
+  },
+
+  glance: {
+    heading: "Wix Harmony to Wix Studio, at a glance",
+    intro:
+      "The short answers, taken from Wix's own documentation rather than from anyone's opinion about which editor is better.",
+    items: [
+      {
+        label: "Can the site be converted",
+        value:
+          "No. Wix states a Harmony site can't be transferred to the Wix Editor or the Studio Editor, so you build a new Studio site.",
+      },
+      {
+        label: "What comes with you",
+        value:
+          "Your media library, domain, Premium plan and contacts all sit at account level and follow you across.",
+      },
+      {
+        label: "What happens to your URLs",
+        value:
+          "They hold. Both editors run on Wix hosting and neither forces a path structure, so /services stays /services.",
+      },
+      {
+        label: "What it costs",
+        value:
+          "From €1,750, and Harmony rebuilds land at the lower end because the inventory and redirect list are short.",
+      },
+      {
+        label: "How long it takes",
+        value:
+          "Two to four weeks, plus 30 days of index monitoring while you're already live.",
+      },
+      {
+        label: "DIY difficulty",
+        value:
+          "The most DIY-able move we document. Nothing to export, no redirect map to speak of, and the work is the rebuild itself.",
+      },
+    ],
+  },
+
+  benefits: {
+    heading: "What you get on Wix Studio",
+    intro:
+      "Harmony's limits aren't design limits. Wix's automatic responsive layout does a good job. The limits are structural, and these are the ones that lift.",
+    items: [
+      {
+        title: "A CMS, which is the whole reason most people move",
+        body: "Harmony has no CMS, so every page is built by hand. In Studio, repeating content becomes one collection and one dynamic layout, and the fiftieth service page costs what the second did. That's the difference between a site targeting eight search terms and one targeting eighty.",
+      },
+      {
+        title: "A second language with its own URLs",
+        body: "Wix Multilingual is on Harmony's in-development list, so there's no native way to serve one. Studio has it, with per-language URLs and hreflang, which is why a site that needs two languages was never a Harmony site.",
+      },
+      {
+        title: "The code ceiling disappears",
+        body: "Wix's developer docs are blunt: Harmony doesn't support site code. No page code, no backend code, no custom CSS, no routers, no scheduled jobs. Studio gives you Velo, the JavaScript SDK and a real dev environment, so the day you need something custom you're not rebuilding again.",
+      },
+      {
+        title: "Breakpoint control instead of automatic decisions",
+        body: "Harmony makes the responsive calls for you and they're usually fine. Studio hands them back, which matters the moment a layout has to do something specific at one screen size and not the others.",
+      },
+      {
+        title: "The apps Harmony doesn't carry yet",
+        body: "Donations, Hotels, Music and Referral Programs are all on Wix's in-development list. In Studio they're installed and configured properly rather than worked around with a form and a manual process.",
+      },
+      {
+        title: "No second one-way door",
+        body: "This is the part worth sitting with. Studio is where the Wix ceiling actually is, so moving here ends the platform question rather than deferring it. There's no third editor above it to migrate to later.",
+      },
+    ],
   },
 
   fit: {
@@ -86,89 +162,105 @@ export const wixHarmony: MigrationGuideContent = {
   transfers: {
     heading: "What moves from Harmony to Studio",
     intro:
-      "The honest headline first: the site itself doesn't. Wix states that a site created in the Harmony Editor can't be transferred to either the Wix Editor or the Studio Editor. So this is a rebuild, and the table below is about what survives the rebuild rather than what transfers.",
+      "One thing to get out of the way first: the site itself doesn't move. Wix states that a site created in the Harmony Editor can't be transferred to either the Wix Editor or the Studio Editor. So this is a rebuild, and the table below is about what survives one. More of it than you'd think.",
     rows: [
-      {
-        item: "The Harmony site itself",
-        icon: "ban",
-        status: "lost",
-        note: "There's no conversion path in either direction. Wix's documentation is unambiguous: once you've created a site with the Harmony Editor, it can't be transferred to the Wix Editor or the Studio Editor, and you create a new site on the platform you want instead.",
-      },
-      {
-        item: "Page layouts and design",
-        icon: "responsive",
-        status: "lost",
-        note: "Nothing about a Harmony layout carries. In practice this matters less than it sounds: Harmony sites tend to be recent, so you're rebuilding months of work rather than years, and Studio gives you breakpoint-level control Harmony's automatic responsive behaviour doesn't expose.",
-      },
       {
         item: "Text, images, and media files",
         icon: "image",
         status: "carries",
-        note: "Your Media Manager sits at account level, so every image and file you've uploaded is already available inside the new Studio site. Copy moves across as content. This is the part that makes a Harmony rebuild much cheaper than it first sounds.",
+        note: "Your Media Manager sits at account level, so every image and file you've uploaded is already available inside the new Studio site.",
       },
       {
         item: "Page URLs",
         icon: "redirect",
         status: "carries",
-        note: "Both editors run on Wix hosting and neither forces a path structure on standard pages, so you set the same slugs on the new site and the addresses hold. A page at /services stays at /services, and there's little to redirect unless you're deliberately restructuring.",
-      },
-      {
-        item: "Blog posts",
-        icon: "pen",
-        status: "rebuilt",
-        note: "Wix Blog keeps its /post/ prefix on both, so post addresses hold. The posts themselves are re-created on the new site with their publish dates and per-post SEO fields re-entered. On a Harmony site that's usually a short archive.",
-      },
-      {
-        item: "CMS collections and dynamic pages",
-        icon: "server",
-        status: "replaced",
-        note: "There's nothing to carry, because Harmony doesn't have a CMS yet. Wix lists it among the apps it's currently adding. Everything on your Harmony site is a hand-built page, and the rebuild is where the repeating ones become one collection and one dynamic layout.",
-      },
-      {
-        item: "A second language",
-        icon: "languages",
-        status: "replaced",
-        note: "Same shape of answer. Wix lists Wix Multilingual among the apps still being added to Harmony, so there's no native multilingual layer to move. Studio has one, which is why a site that needs two languages was never a Harmony site.",
-      },
-      {
-        item: "Accordions, tabs, audio players, glass effect, text mask",
-        icon: "puzzle",
-        status: "replaced",
-        note: "Wix names all of these, plus hover state customization, as elements and effects it's adding to Harmony. They're native in Studio, so anything you built a workaround for in Harmony gets thrown away rather than ported.",
-      },
-      {
-        item: "Donations, Hotels, Music, and Referral Programs",
-        icon: "plug",
-        status: "replaced",
-        note: "All four are on Wix's list of apps not yet available in Harmony. If your business needs one of them, the app gets added and configured properly on the Studio build rather than worked around.",
-      },
-      {
-        item: "Contacts and form submissions",
-        icon: "users",
-        status: "rebuilt",
-        note: "Contacts export from the old site as a CSV and import into the new one, which is the route Wix documents for moving contacts between sites in an account. Forms themselves get rebuilt, and it's worth exporting submissions before the old site is retired.",
-      },
-      {
-        item: "Site members",
-        icon: "lock",
-        status: "lost",
-        note: "Same rule as everywhere else on Wix: member lists can't be exported or imported between sites, and Wix cites privacy as the reason. Anyone signed up re-registers on the new site. Harmony sites are young enough that this is usually a small list, which is an argument for moving sooner rather than later.",
-      },
-      {
-        item: "Store products",
-        icon: "cart",
-        status: "rebuilt",
-        note: "Products export from the old store as a CSV and import into the new one, the same tool Wix documents for moving products between its own stores. Digital products aren't covered by it. Order history exports for your records and can't be imported.",
+        note: "Both editors run on Wix hosting and neither forces a path structure on standard pages, so you set the same slugs and /services stays /services.",
       },
       {
         item: "Premium plan and domain",
         icon: "globe",
         status: "carries",
-        note: "Both reassign to the new site from inside your Wix account, which is exactly what Wix points you to when it tells you a Harmony site can't be transferred. No second subscription, no registrar change, and the Harmony site stays live until you switch.",
+        note: "Both reassign to the new site from inside your Wix account, which is exactly what Wix points you to when it tells you a Harmony site can't be transferred.",
+      },
+      {
+        item: "Blog posts",
+        icon: "pen",
+        status: "rebuilt",
+        note: "Wix Blog keeps its /post/ prefix on both editors, so post addresses hold while the posts themselves are re-created with their publish dates and SEO fields.",
+      },
+      {
+        item: "Contacts and form submissions",
+        icon: "users",
+        status: "rebuilt",
+        note: "Contacts export as a CSV and import into the new site, which is the route Wix documents for moving contacts between sites in an account, while form submissions are worth exporting before the old site retires.",
+      },
+      {
+        item: "Store products",
+        icon: "cart",
+        status: "rebuilt",
+        note: "Products export and import by CSV using the same tool Wix documents for moving between its own stores, though digital products aren't covered and order history exports for your records only.",
+      },
+      {
+        item: "CMS collections and dynamic pages",
+        icon: "server",
+        status: "replaced",
+        note: "There's nothing to carry, because Harmony has no CMS, and the rebuild is where your hand-built repeating pages become one collection and one layout.",
+      },
+      {
+        item: "A second language",
+        icon: "languages",
+        status: "replaced",
+        note: "Wix lists Wix Multilingual among the apps still being added to Harmony, so there's no native multilingual layer to move and Studio's gets built during the project.",
+      },
+      {
+        item: "Custom code and Velo",
+        icon: "code",
+        status: "replaced",
+        note: "Wix's developer docs state Harmony doesn't support site code, so anything you achieved with embedded HTML or JavaScript snippets gets rebuilt properly in Studio's dev environment rather than ported.",
+      },
+      {
+        item: "Accordions, tabs, audio players, glass effect, text mask",
+        icon: "puzzle",
+        status: "replaced",
+        note: "Wix names all of these, plus hover state customization, as elements it's adding to Harmony, so any workaround you built for one gets thrown away rather than carried.",
+      },
+      {
+        item: "Donations, Hotels, Music, and Referral Programs",
+        icon: "plug",
+        status: "replaced",
+        note: "All four are on Wix's list of apps not yet available in Harmony, and each gets installed and configured properly on the Studio build.",
+      },
+      {
+        item: "The Harmony site itself",
+        icon: "ban",
+        status: "lost",
+        note: "Wix's wording is unambiguous: once you've created a site with the Harmony Editor, it can't be transferred to the Wix Editor or the Studio Editor, and you create a new site on the platform you want instead.",
+      },
+      {
+        item: "Page layouts and design",
+        icon: "responsive",
+        status: "lost",
+        note: "Nothing about a Harmony layout carries, which matters less than it sounds because Harmony sites are recent and you're rebuilding months of work rather than years.",
+      },
+      {
+        item: "Site members",
+        icon: "lock",
+        status: "lost",
+        note: "Member lists can't be exported or imported between Wix sites and Wix cites privacy as the reason, so anyone signed up re-registers, which is an argument for moving while the list is short.",
       },
     ],
     footnote:
       "Read it as two lists. Everything that lives in your Wix account (media, domain, plan, contacts) follows you. Everything that lives inside the Harmony site gets built again. The gap between those two lists is the cost of the move, and it's smaller on a young site than on any other migration we do.",
+    cta: {
+      heading: "Started the rebuild yourself and stalled?",
+      paragraph:
+        "You don't have to restart. Send us the Studio site you've begun and the Harmony one it's replacing, and we'll finish it and handle the cutover.",
+      cta: {
+        label: "Free website audit",
+        href: "/free-website-audit",
+        variant: "primary",
+      },
+    },
   },
 
   steps: {
@@ -178,6 +270,7 @@ export const wixHarmony: MigrationGuideContent = {
     items: [
       {
         title: "Confirm you actually need to move",
+        navLabel: "Wait or move",
         duration: "1 day",
         body: "The cheapest outcome of this call is that you don't. Wix publishes what it's adding to Harmony, so the question is whether your blocker is on that list.",
         lead: "How we tell the two apart:",
@@ -198,6 +291,7 @@ export const wixHarmony: MigrationGuideContent = {
       },
       {
         title: "Inventory the Harmony site",
+        navLabel: "Inventory",
         duration: "1 day",
         body: "Shorter than on any other platform, because Harmony sites are young. Often the useful finding is how little there is to protect.",
         lead: "What gets captured:",
@@ -218,6 +312,7 @@ export const wixHarmony: MigrationGuideContent = {
       },
       {
         title: "Model what Harmony couldn't hold",
+        navLabel: "Structure and CMS",
         duration: "2 to 4 days",
         body: "The reason you're moving, so it gets designed rather than assumed. This is the stage the whole project exists for.",
         lead: "What gets built into the structure:",
@@ -238,6 +333,7 @@ export const wixHarmony: MigrationGuideContent = {
       },
       {
         title: "Build in Studio",
+        navLabel: "The Studio build",
         duration: "1 to 3 weeks",
         body: "Built on its own staging URL with the Harmony site untouched and still live. Your media library is already there, sitting at account level.",
         lead: "What the build adds:",
@@ -258,6 +354,7 @@ export const wixHarmony: MigrationGuideContent = {
       },
       {
         title: "Move the content, then cut over",
+        navLabel: "Content and cutover",
         duration: "2 to 3 days",
         body: "Copy placed, posts re-created with their dates, SEO fields entered and diffed. Then the domain and Premium plan reassign from inside your Wix account.",
         lead: "What cutover involves:",
@@ -278,6 +375,7 @@ export const wixHarmony: MigrationGuideContent = {
       },
       {
         title: "Watch the index for 30 days",
+        navLabel: "Post-launch monitoring",
         duration: "30 days",
         body: "Daily at first, then weekly. On a young site the useful signal isn't protecting what you had, it's watching the new structure get found.",
         lead: "What we're looking for:",
@@ -299,55 +397,6 @@ export const wixHarmony: MigrationGuideContent = {
     ],
   },
 
-  seoMechanics: {
-    heading: "What the search side looks like",
-    intro:
-      "This is the gentlest migration we run, and for one reason: a Harmony site hasn't been around long enough to have much to lose.",
-    items: [
-      {
-        title: "Your equity is measured in months, not years",
-        body: "Harmony is Wix's newest editor, so every Harmony site is young. A page that's been indexed for four months has a fraction of the authority of one that's been ranking for four years, which means the calculus flips. On most migrations you pay to preserve structure. Here it's usually cheaper and better to fix the structure, because there's little worth preserving and a great deal worth building. Check Search Console before deciding: if the site has genuinely earned positions, treat it like any other migration and map carefully.",
-      },
-      {
-        title: "URLs hold, so redirects are the small job",
-        body: "Both editors run on Wix hosting and neither imposes a path structure on standard pages, so you set the new site's slugs to match and the addresses carry. Blog posts keep the /post/ prefix Wix Blog uses everywhere. What's left is whatever you deliberately restructure, which on this move is usually the point rather than an accident, and it gets a mapped redirect like anything else.",
-      },
-      {
-        title: "The CMS is the actual SEO upgrade",
-        body: "The reason this move tends to grow traffic rather than just preserve it. Hand-built pages cap how many search-intent pages you'll realistically publish, because each one is a design job. Collection-driven pages don't: one layout serves fifty items, and publishing the fiftieth costs what the second did. That's the difference between a site with eight pages targeting eight terms and one with eighty targeting eighty. Bel'Istria went from a handful of pages to 70+ ranking ones on exactly that change, and impressions grew 257% year on year.",
-      },
-      {
-        title: "Multilingual multiplies the URL set, so plan it before launch",
-        body: "If a second language is coming, structure it during the build. Adding one later means every page gains a language variant, every variant needs its own URL and hreflang, and the sitemap doubles. Doing that as a retrofit is meaningfully more expensive than doing it once at the start, and it's the most common reason a site gets rebuilt twice.",
-      },
-    ],
-  },
-
-  mistakes: {
-    heading: "Four ways this decision goes wrong",
-    intro:
-      "Three of these are avoidable by reading Wix's documentation before you build. The fourth is avoidable by being honest about what the site needs to become.",
-    items: [
-      {
-        title: "Assuming you can upgrade to Studio later",
-        body: "The single most expensive assumption available on this topic, and an entirely reasonable one to make: every other tier of every other tool lets you upgrade. Wix states that once a site is created in the Harmony Editor it can't be transferred to the Wix Editor or the Studio Editor. Building on Harmony because you'll move up when you outgrow it means committing to a full rebuild at the exact moment the business is busiest.",
-      },
-      {
-        title: "Building a content-heavy site on an editor with no CMS",
-        body: "Harmony has no CMS yet. Wix says so, and lists it among the apps being added. If your site is a directory, a catalogue, a course library, or anything where one layout should serve many items, you're signing up to build each item as its own page by hand. That's tolerable at five items and untenable at fifty, and the point where it becomes untenable arrives faster than anyone plans for.",
-      },
-      {
-        title:
-          "Starting on Harmony when a second language is already on the roadmap",
-        body: "Wix Multilingual is on the list of apps not yet available in Harmony. Teams who know they'll need a second language within the year still start on Harmony because the first language ships faster, then rebuild. The site that eventually needed two languages was never a Harmony site, and the fast launch bought a few weeks in exchange for the whole build.",
-      },
-      {
-        title: "Rebuilding the Harmony site page for page",
-        body: "If you're paying for a rebuild, spend it on the structure rather than the appearance. Recreating the same hand-built pages in Studio delivers a site that looks similar and has the same ceiling one level up. The repeating content becomes collections during the build or it doesn't happen, and a Studio site whose CMS is empty is a more expensive Harmony site.",
-      },
-    ],
-  },
-
   auditCta: {
     heading: "Not sure whether to move off Harmony yet?",
     paragraph:
@@ -362,6 +411,50 @@ export const wixHarmony: MigrationGuideContent = {
     ],
   },
 
+  sources: {
+    heading: "Sources",
+    intro:
+      "Harmony is new enough that most of what's written about it is guesswork. Every limit on this page is Wix's own published position, linked so you can check it rather than take our word for it.",
+    verified: "2026-08-20",
+    items: [
+      {
+        label: "Wix: Introducing the Wix Harmony Editor",
+        href: "https://support.wix.com/en/article/introducing-the-wix-harmony-editor",
+        note: "The one-way door, in Wix's words: once you've created a site with the Harmony Editor, it can't be transferred to the Wix Editor or the Studio Editor.",
+      },
+      {
+        label: "Wix: The difference between Wix Editor and Wix Harmony",
+        href: "https://support.wix.com/en/article/wix-harmony-editor-the-difference-between-wix-editor-and-wix-harmony",
+        note: "The in-development list naming the CMS, Wix Multilingual, Donations, Hotels, Music and Referral Programs, plus the accordion, tabs, audio player, glass effect, text mask and hover state elements.",
+      },
+      {
+        label: "Wix for Developers: About Wix Harmony",
+        href: "https://dev.wix.com/docs/develop-websites/articles/get-started/about-wix-harmony",
+        note: "The code ceiling: Harmony doesn't support site code, and page code, backend code, custom CSS, HTTP functions, routers, data hooks, event handlers, web modules and scheduled jobs are all listed as unsupported.",
+      },
+      {
+        label: "Wix: Assigning a Premium plan to a different site in your Wix account",
+        href: "https://support.wix.com/en/article/assigning-a-premium-plan-to-a-different-site-in-your-wix-account",
+        note: "How the plan moves to the new Studio site, which is the route Wix points you to when it says a Harmony site can't be transferred.",
+      },
+      {
+        label: "Wix Contacts: Importing contacts by uploading a CSV file",
+        href: "https://support.wix.com/en/article/wix-contacts-importing-contacts-by-uploading-a-csv-file",
+        note: "The documented path for moving contacts between sites in the same account.",
+      },
+      {
+        label: "Wix Stores: Updating products by exporting and importing them",
+        href: "https://support.wix.com/en/article/wix-stores-updating-products-by-exporting-and-importing-them",
+        note: "Product CSV transfer between Wix stores, and what it doesn't cover.",
+      },
+      {
+        label: "Wix: Moving members from one site to another in your Wix account",
+        href: "https://support.wix.com/en/article/request-moving-members-from-one-site-to-another-in-your-wix-account",
+        note: "Wix's own answer on the one row with no workaround: due to privacy concerns, it isn't possible to export and import your member list.",
+      },
+    ],
+  },
+
   faq: {
     heading: ["Wix Harmony questions,", "answered from the docs"],
     subhead:
@@ -373,11 +466,11 @@ export const wixHarmony: MigrationGuideContent = {
         a: "No. Wix states that once you've created a site with the Harmony Editor, it isn't possible to transfer it to either the Wix Editor or the Studio Editor, and that you need to create a new site on the platform you want. Your Premium plan and domain can be reassigned to that new site, but the site itself is rebuilt. This is the single most important thing to know before choosing Harmony, because it makes the choice one-way.",
       },
       {
-        q: "Does Wix Harmony have a CMS?",
+        q: "Does Wix Harmony have a CMS, and does Wix Studio?",
         a: "Not yet. Wix lists the CMS among the apps it's currently adding to Harmony, alongside Wix Multilingual, Donations, Hotels, Music, and Referral Programs. Until it ships, every page on a Harmony site is built by hand, which means no dynamic pages, no collection-driven layouts, and no way to publish fifty items against one template. For a brochure site that's fine. For a directory, catalogue, or course library it's the whole problem.",
       },
       {
-        q: "Should I start on Harmony or Wix Studio?",
+        q: "Should I start on Wix Harmony or Wix Studio?",
         a: "Start on Harmony if the site is small, the content doesn't repeat, one language is enough, and speed matters more than headroom. Start on Studio if you can already name something that needs a CMS, a second language, or one of the apps Harmony doesn't carry yet. The asymmetry is what should decide it: a Studio site can be simple, but a Harmony site can never become a Studio one without a rebuild.",
       },
       {
@@ -385,28 +478,28 @@ export const wixHarmony: MigrationGuideContent = {
         a: "Wix hasn't said so, and its documentation points the other way: it states that existing sites aren't being migrated to Harmony and that it isn't currently possible to migrate a Wix Editor site into it. Harmony is a third editor sitting alongside the Wix Editor and Wix Studio, not a successor to either. If you're on the classic Wix Editor, Harmony isn't where you're being pushed, and our Wix Classic guide covers the move that's actually worth considering.",
       },
       {
-        q: "Can I run a multilingual site on Harmony?",
+        q: "Can I run a multilingual site on Wix Harmony, or do I need Wix Studio?",
         a: "Not natively. Wix Multilingual is on the list of apps still being added to Harmony, so there's no built-in way to serve a second language with its own URLs and hreflang. If a second language is anywhere on your roadmap, that's the clearest possible signal to build on Studio from the start, because retrofitting a language after launch means revisiting every page and doubling the URL set.",
       },
       {
-        q: "Will I lose rankings moving from Harmony to Studio?",
+        q: "Will I lose my Google rankings moving from Wix Harmony to Wix Studio?",
         a: "Less than on any other migration, for two reasons. Your page URLs can stay identical, since both editors run on Wix hosting and neither forces a path structure, and Harmony sites are young enough that there's usually limited authority to protect. We still run the full process: URL inventory, ranking baseline, mapped redirects for anything that changes, and 30 days of Search Console monitoring after cutover. On this move that discipline is mostly there to catch the metadata, not the addresses.",
       },
       {
-        q: "How long does a Harmony to Studio rebuild take?",
+        q: "How long does a Wix Harmony to Wix Studio rebuild take?",
         a: "Two to four weeks of active work, plus the 30-day monitoring window after you're live. It's quicker than most migrations because there's a short URL inventory, a small archive, and a media library that's already sitting in your Wix account. The variable isn't what you're leaving, it's what you're building: a multilingual site with several CMS collections takes longer than the Harmony site it replaces ever did.",
       },
       {
-        q: "What does it cost?",
+        q: "How much does a Wix Harmony to Wix Studio migration cost?",
         a: "From €1,750, the same flat starting figure as every other platform we migrate from. Harmony rebuilds tend to land at the lower end because of the short inventory and small redirect list. You get the number before anything starts, and it covers the inventory, the build, the redirect work, and the monitoring window.",
       },
       {
-        q: "My Harmony site is only a few weeks old. Is it too late?",
-        a: "It's the best possible moment, and the opposite of too late. Nothing has been indexed long enough to matter, there's no archive to carry, and the copy and images you've already written are the expensive part and they come with you. The cost of this move only goes up from here, which is worth weighing if you already know the CMS is coming.",
+        q: "Can I migrate my Wix Harmony site to Wix Studio myself?",
+        a: "More easily than from any other platform, and often yes. There's nothing to export, your media library and domain are already in your Wix account, and because both editors run on Wix hosting you can set the new slugs to match and skip most of the redirect work. What you're really taking on is the rebuild. A handful of hand-built pages moved into Studio is a genuine weekend project. It turns when the reason you're moving is structural: modelling CMS collections properly, planning a second language before launch rather than after, or a site with enough indexed pages that the metadata needs diffing rather than eyeballing. The reliable signal is whether you can name the collections your content should live in. If you can't, that's the part worth handing over, because a Studio site with an empty CMS is just a more expensive Harmony site.",
       },
       {
-        q: "Should I just wait for Wix to add the CMS to Harmony?",
-        a: "Depends on what's blocking you. Wix publishes what it's adding, so if you're waiting on an accordion or a tabs element, waiting is free and a rebuild isn't. The CMS and Wix Multilingual are different: they're structural, there's no shipping date attached to either, and building fifty pages by hand while you wait is its own cost. If the gap is a widget, wait. If the gap is the architecture, the wait is the expensive option.",
+        q: "Should I wait for Wix to add the CMS to Harmony instead of moving to Wix Studio?",
+        a: "Depends on what's blocking you. Wix publishes what it's adding, so if you're waiting on an accordion or a tabs element, waiting is free and a rebuild isn't. The CMS and Wix Multilingual are different: they're structural, there's no shipping date attached to either, and building fifty pages by hand while you wait is its own cost. If the gap is a widget, wait. If the gap is the architecture, the wait is the expensive option, and it gets more expensive every month: a Harmony site that's a few weeks old has nothing indexed long enough to matter and no archive to carry, which is the cheapest this move will ever be.",
       },
     ],
   },

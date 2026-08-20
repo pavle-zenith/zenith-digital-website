@@ -39,7 +39,7 @@ export function Hero() {
         </div>
 
         <div className="relative flex flex-col justify-end pb-10 pt-10 md:pb-14 md:pt-20">
-        {/* Eyebrow: "Top 1% Partner of" + the Wix Studio lockup */}
+        {/* Eyebrow: the partner badge prefix + the Wix Studio lockup */}
         <div className="mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-light-surface px-3 py-1.5 text-label font-medium">
           <span className="text-light-muted">{hero.badgePrefix}</span>
           <Image

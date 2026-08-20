@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { caseStudyDetails } from "@/content/case-studies";
 import { migrationGuides } from "@/content/migration-guides";
 import { servicePages } from "@/content/service-pages";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetchSafe } from "@/sanity/lib/client";
 import { postSlugsQuery } from "@/sanity/lib/queries";
 import type { PostSitemapEntry } from "@/sanity/lib/types";
 
@@ -22,7 +22,7 @@ const SITE = "https://www.thezenithdigital.com";
  * absent: it is an editing tool and is noindexed on the route itself.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await sanityFetch<PostSitemapEntry[]>(postSlugsQuery);
+  const posts = await sanityFetchSafe<PostSitemapEntry[]>(postSlugsQuery, []);
 
   const staticRoutes: {
     path: string;

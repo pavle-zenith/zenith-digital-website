@@ -13,7 +13,7 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { post as furniture } from "@/content/blog";
 import { headingAnchors } from "@/lib/blog";
 import { ORG_ID, PERSON_ID, SITE, personSchema } from "@/lib/schema";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch, sanityFetchSafe } from "@/sanity/lib/client";
 import {
   postQuery,
   postSlugsQuery,
@@ -31,7 +31,7 @@ import type { Post, PostCard, PostSitemapEntry } from "@/sanity/lib/types";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const posts = await sanityFetch<PostSitemapEntry[]>(postSlugsQuery);
+  const posts = await sanityFetchSafe<PostSitemapEntry[]>(postSlugsQuery, []);
   return posts.map((p) => ({ slug: p.slug }));
 }
 

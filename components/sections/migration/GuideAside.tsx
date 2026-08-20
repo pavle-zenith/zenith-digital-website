@@ -18,6 +18,14 @@ import type { Tone } from "@/lib/types";
  * Below lg the aside moves above the content and its divider rotates to a
  * bottom rule, so it reads as a contents list rather than a stranded sidebar.
  *
+ * MIN-WIDTH. Both columns carry `min-w-0`, and it is load-bearing rather than
+ * defensive. A grid item's `min-width` defaults to `auto`, which means it will
+ * NOT shrink below the widest min-content inside it. The lg template already
+ * guards the content column with `minmax(0,1fr)`; below lg there is no explicit
+ * template at all, so the implicit `auto` column inherited that floor and both
+ * items blew out to their content width. Measured on a 390px viewport: the
+ * columns were 586px and the page scrolled sideways by 200px.
+ *
  * INSETS. Below lg the aside is a full-width block above the content, so it
  * keeps the site gutter like any other block (CLAUDE.md §15). From lg it stops
  * borrowing that gutter: it is a 320-380px column, and a 64px inset on the rail
@@ -87,7 +95,9 @@ export function GuideContentCol({
   return (
     <div
       className={cn(
-        "order-2 py-14 md:py-24 lg:order-none",
+        // `min-w-0`: see MIN-WIDTH above. Without it this column refuses to
+        // shrink below its widest content and the whole page scrolls.
+        "order-2 min-w-0 py-14 md:py-24 lg:order-none",
         !flush && guideContentInset(),
         className,
       )}
@@ -107,6 +117,7 @@ export function GuideAside({
   children,
   className,
   stickyClassName,
+  bodyClassName,
 }: {
   label: string;
   tone: Tone;
@@ -119,6 +130,12 @@ export function GuideAside({
    * scrolls internally instead of running off the bottom of a short viewport.
    */
   stickyClassName?: string;
+  /**
+   * Overrides for the box holding `children`, under the label. Exists so a
+   * caller can make it the flex track of a capped sticky column: the list
+   * scrolls, the block after it stays put.
+   */
+  bodyClassName?: string;
 }) {
   const rule = tone === "dark" ? "border-border" : "border-light-border";
   const muted = tone === "dark" ? "text-text-muted" : "text-light-muted";
@@ -130,7 +147,7 @@ export function GuideAside({
     // travels the height of that box.
     <aside
       className={cn(
-        "order-1 border-b py-14 md:py-24 lg:order-none lg:border-b-0 lg:border-l",
+        "order-1 min-w-0 border-b py-14 md:py-24 lg:order-none lg:border-b-0 lg:border-l",
         rule,
         className,
       )}
@@ -147,7 +164,9 @@ export function GuideAside({
         >
           {label}
         </p>
-        <div className={cn("mt-6 border-t", rule)}>{children}</div>
+        <div className={cn("mt-6 border-t", rule, bodyClassName)}>
+          {children}
+        </div>
       </div>
     </aside>
   );

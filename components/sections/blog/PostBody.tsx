@@ -154,10 +154,13 @@ export function PostBody({
           tone="light"
           className={COLUMN_PAD}
           // A post is longer than a guide section, so the sticky box caps
-          // itself to the viewport and scrolls internally rather than running
-          // its last chapters, the CTA and the share row off the bottom of a
-          // short screen.
-          stickyClassName="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          // itself to the viewport height. It is a flex COLUMN rather than one
+          // scrolling box: scrolling the whole thing took the CTA with it, so
+          // a long enough contents list pushed the ask off screen and it never
+          // came back. Now only the list scrolls (see PostChapters) and the CTA
+          // is pinned under it.
+          stickyClassName="lg:flex lg:max-h-[calc(100vh-8rem)] lg:flex-col"
+          bodyClassName="lg:flex lg:min-h-0 lg:flex-1 lg:flex-col"
         >
           <PostChapters items={chapters} />
         </GuideAside>
@@ -412,7 +415,13 @@ function ComparisonBlock({ value }: { value: PostComparisonTableBlock }) {
 
   return (
     <figure className="mt-10">
-      <div className="overflow-x-auto rounded-card border border-light-border">
+      {/* `contain:paint` alongside the scroll. Measured on a 390px viewport: a
+          table forced to 34rem leaked 15px of scrollable overflow past every
+          ancestor, so the whole PAGE scrolled sideways. `overflow-x:auto` on
+          this wrapper did not stop it and neither did `overflow:hidden` on the
+          figure; only paint containment did, which is the declaration that
+          actually says "descendants do not paint outside this box". */}
+      <div className="overflow-x-auto rounded-card border border-light-border [contain:paint]">
         <table className="w-full min-w-[34rem] border-collapse text-left">
           <thead>
             <tr className="border-b border-light-border bg-light-surface">

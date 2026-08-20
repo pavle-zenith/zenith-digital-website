@@ -59,7 +59,10 @@ export function PostChapters({
 
   return (
     <>
-      <ul>
+      {/* The only part that scrolls. `min-h-0` is what lets a flex child shrink
+          below its content height; without it the list keeps its full height,
+          the column overflows, and the CTA below is pushed out of view. */}
+      <ul className="lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:[scrollbar-width:thin]">
         {items.map((item, i) => (
           <li
             key={item.id}
@@ -98,7 +101,8 @@ export function PostChapters({
       <div
         className={cn(
           guideAsideRow("light"),
-          "relative isolate hidden overflow-hidden py-7 lg:block",
+          // `shrink-0` keeps it at full height while the list above gives way.
+          "relative isolate hidden overflow-hidden py-7 lg:block lg:shrink-0",
         )}
       >
         {/* The hero's inverted texture wash, so the one loud cell in a column

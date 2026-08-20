@@ -45,7 +45,11 @@ export function Nav() {
           logo lines up with section content on every breakpoint. */}
       <div className="mx-auto flex h-16 max-w-[var(--container-site)] items-center justify-between px-[clamp(20px,4vw,64px)] md:px-0">
         {/* Left cluster: logo + nav items sitting next to it */}
-        <div className="flex items-center gap-8">
+        {/* Tighter between the logo and the links from md to lg, full spacing
+            from lg. Six nav items plus two CTAs is exactly at the limit of a
+            768px row: measured, the header overflowed the viewport by 22px and
+            scrolled the whole page sideways. */}
+        <div className="flex items-center gap-5 lg:gap-8">
           <Link
             href="/"
             className="font-display text-body-lg font-medium lowercase tracking-tight"
@@ -54,7 +58,7 @@ export function Nav() {
             zenith digital
           </Link>
 
-          <ul className="hidden items-center gap-6 md:flex">
+          <ul className="hidden items-center gap-4 md:flex lg:gap-6">
             {nav.items.map((item) => {
               const hasMenu = "menu" in item && item.menu === "services";
               return (

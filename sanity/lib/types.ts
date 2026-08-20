@@ -18,6 +18,8 @@ export type PostCard = {
   category: BlogCategory;
   publishedAt: string;
   featured?: boolean;
+  /** Plain-text length of the body, for the read-time estimate. */
+  bodyChars?: number;
 };
 
 export type PostSource = { label: string; href: string; note: string };

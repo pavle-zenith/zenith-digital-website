@@ -4,27 +4,39 @@ import type { MigrationGuideContent } from "./types";
 /**
  * /services/squarespace-to-wix-studio
  * Targets: squarespace to wix studio · migrate off squarespace · squarespace
- * export limitations · squarespace alternative for agencies.
+ * export limitations · squarespace alternative.
  *
- * THE ANGLE: the design ceiling. Squarespace sites rarely fail, they stop
- * being able to become the next thing. The technical spine of the page is
- * Squarespace's own export documentation, which is unusually specific about
- * what it leaves behind, and almost nobody writing on this topic quotes it.
+ * THE THESIS: the export file is the whole story. Squarespace exports a single
+ * WordPress-format XML, and its own documentation lists more page types left
+ * behind than taken. Almost nobody writing on this topic quotes it, which is
+ * why a reader arrives believing "export" means "backup". Correcting that is
+ * the page.
  *
- * OWNER — verify before launch. Every row in the transfers table is a testable
- * claim. The Squarespace-side rows are sourced to Squarespace's help centre and
- * the Wix-side rows to Wix's, and were checked 19 Aug 2026. Re-check if
- * Squarespace changes its export scope.
+ * Verified against Squarespace's own help centre, 19 Aug 2026. Exports: layout
+ * pages, ONE blog page with its posts, text blocks, image blocks, and gallery
+ * pages on 7.0. Does not export: album, cover, index, info, calendar,
+ * portfolio and store pages; content in page-specific headers, footers and
+ * sidebars; additional blog pages; dropdowns, audio, product and video blocks;
+ * drafts; style settings; custom CSS.
  *
- * TODO, to match the Wix Classic template: this guide has no `glance`,
- * `benefits`, `cost` or `sources` block yet, so it renders without them and
- * falls back to the sitewide pricing tiers. The source URLs above belong in a
- * `sources` block once written.
+ * Client facts, owner-confirmed: Hunting Brook Gardens was on Squarespace
+ * before the Wix Studio work and has €140k in course sales since. MindEd was
+ * also a Squarespace site, migrated at 70+ pages across two languages.
  *
- * Client facts: Hunting Brook Gardens was on Squarespace before the Wix Studio
- * work (owner-confirmed) and has €140k in course sales since. MindEd is cited
- * for SCALE ONLY (70+ pages, 2 languages); its source platform is deliberately
- * not stated anywhere on this page, because it hasn't been confirmed.
+ * VERIFICATION STATUS (19 Aug 2026, re-checked after a full docs search).
+ * Documented by Squarespace and linked in `sources`: export scope, the product
+ * CSV exclusions, no bulk image export, no video export, order export with no
+ * import path, and customer list export by CSV.
+ *
+ * NOT documented anywhere, despite searching: per-form submission export
+ * behaviour, member area export, and whether digital products export at all.
+ * Those three are written from our own experience or hedged as "check your
+ * account", and the copy says so. Do not harden them into vendor-backed claims
+ * unless a Squarespace source appears.
+ *
+ * OWNER — publish is false until the transfers table is verified row by row.
+ * Squarespace-side rows are sourced to Squarespace's help centre and Wix-side
+ * rows to Wix's. Re-check if Squarespace changes its export scope.
  */
 
 const ctas: CtaLink[] = [
@@ -57,6 +69,70 @@ export const squarespace: MigrationGuideContent = {
       "70+ page migrations delivered",
     ],
     ctas,
+  },
+
+  glance: {
+    heading: "Squarespace to Wix Studio at a glance",
+    intro:
+      "The short answers, before the detail. Every one of these is expanded further down the page.",
+    items: [
+      {
+        label: "Can the design be converted?",
+        value: "No. Squarespace exports content, never styling, and its own docs confirm style settings and custom CSS are excluded.",
+      },
+      {
+        label: "What the export actually contains",
+        value: "Layout pages, one blog page with its posts, text and image blocks, and gallery pages on 7.0. That is the full list.",
+      },
+      {
+        label: "What happens to your URLs",
+        value: "Standard pages keep their paths. Blog posts depend on the build: Wix's Blog app forces a /post/ prefix, a CMS-built blog keeps your existing paths.",
+      },
+      {
+        label: "What it costs",
+        value: "From €1,750, quoted as a fixed price once the page and product count is known.",
+      },
+      {
+        label: "How long it takes",
+        value: "Two to five weeks, plus 30 days of index monitoring after launch.",
+      },
+      {
+        label: "DIY difficulty",
+        value: "High. The export looks complete and isn't, so the risk is in what you never notice was missing.",
+      },
+    ],
+  },
+
+  benefits: {
+    heading: "What you get on Wix Studio",
+    intro:
+      "Squarespace sites rarely fail. They stop being able to become the next thing. These are the ceilings Studio removes, in the order Squarespace users tend to hit them.",
+    items: [
+      {
+        title: "Layouts that aren't the template's",
+        body: "Squarespace's design system is generous until the moment you need something it didn't anticipate. Studio's grid and breakpoints let you build the layout the brief actually calls for rather than the nearest available approximation.",
+      },
+      {
+        title: "A real CMS underneath the content",
+        body: "Squarespace collections are tied to page types with fixed shapes. Studio's CMS lets you define your own fields and relationships, so a directory, a resource library and a product catalogue can each be the thing they are.",
+      },
+      {
+        title: "More than one blog",
+        body: "Squarespace allows several blog pages but exports only one, and that constraint reflects how it treats them. In Studio, news, resources and case studies are separate collections with their own templates and their own URLs.",
+      },
+      {
+        title: "Multilingual without a workaround",
+        body: "Running a second language on Squarespace means duplicating pages or paying for a third-party layer. Studio handles translation natively, which is why a 70+ page site across two languages is a normal project rather than an exception.",
+      },
+      {
+        title: "Design once, apply everywhere",
+        body: "Global text themes, colour and spacing mean a brand change is one edit. Squarespace's style editor gets you part of the way, then per-page custom CSS starts accumulating and nobody remembers what it targets.",
+      },
+      {
+        title: "Roles for the people who edit",
+        body: "Studio supports multiple editors with real permissions, so a marketing team can publish without the account password being shared around or a designer becoming the bottleneck.",
+      },
+    ],
   },
 
   fit: {
@@ -94,64 +170,40 @@ export const squarespace: MigrationGuideContent = {
         note: "Layout pages come through the XML with their text and image blocks intact. Other block types export with what Squarespace calls minimum structure, meaning the text survives and the arrangement doesn't, so pages get re-laid rather than re-typed.",
       },
       {
-        item: "Blog posts",
-        icon: "pen",
-        status: "rebuilt",
-        note: "Only one blog page exports. If you run more than one, Squarespace makes you pick a primary and the others are on you. The chosen blog brings its posts and up to 1,000 comments per post; drafts don't come at all.",
-      },
-      {
-        item: "Blog post URLs",
-        icon: "redirect",
-        status: "lost",
-        note: "Every one of them changes. Squarespace posts sit under the blog page's own slug, /blog-name/post-name, while Wix Blog puts posts under a /post/ prefix that can't be removed. There's no configuration that makes these match, so every post URL needs a mapped redirect. On a long archive this is the single biggest line of work in the project.",
-      },
-      {
         item: "Standard page URLs",
         icon: "transfer",
         status: "carries",
         note: "Ordinary pages keep their slugs. A page at /about stays at /about, so the redirect work concentrates on blog posts, products, and anything that lived under a page type Wix structures differently.",
       },
       {
+        item: "Domain and email",
+        icon: "globe",
+        status: "carries",
+        note: "A domain registered with Squarespace transfers out, or stays where it is and just repoints, which is faster and what we usually do. Google Workspace bought through Squarespace is a separate billing relationship to move, and it's worth handling before launch week rather than during it.",
+      },
+      {
+        item: "Blog posts",
+        icon: "pen",
+        status: "rebuilt",
+        note: "Only one blog page exports. If you run more than one, Squarespace makes you pick a primary and the others are on you. The chosen blog brings its posts and up to 1,000 comments per post; drafts don't come at all.",
+      },
+      {
         item: "Images and media files",
         icon: "image",
         status: "rebuilt",
-        note: "The XML references images by their Squarespace URL rather than bundling the files, so media gets pulled down and re-uploaded to Wix's Media Manager. Alt text is re-applied during that pass, which is also the cheapest moment to fix the images that never had any.",
-      },
-      {
-        item: "Index, portfolio, gallery, album, and cover pages",
-        icon: "layers",
-        status: "lost",
-        note: "Squarespace lists all of these as not included in the export, along with info pages and calendar pages. In practice this is where a design-led Squarespace site keeps most of its personality, so it's the bulk of what gets rebuilt. Gallery pages are the one partial exception: on 7.0 they export, including York project pages.",
+        note: "Squarespace states you can't export images in bulk and can't export uploaded video at all, so media comes down one at a time or by crawl and gets re-uploaded, with alt text re-applied on the way through.",
       },
       {
         item: "Store pages and products",
         icon: "cart",
         status: "rebuilt",
-        note: "Store pages aren't in the XML and product blocks don't export with it. Products come out through a separate CSV covering physical and service products, and that CSV leaves out additional product info, customer reviews, featured images, product image alt text, and variant images. Digital products have no export at all.",
-      },
-      {
-        item: "Orders and customer accounts",
-        icon: "receipt",
-        status: "lost",
-        note: "Orders export for your own records and don't import anywhere. Customer accounts stay with Squarespace. The new store starts clean, so if you rely on repeat customers having a login, that's a change to communicate rather than absorb.",
+        note: "Store pages aren't in the XML and product blocks don't export with it. Products come out through a separate CSV covering physical and service products, and that CSV leaves out additional product info, customer reviews, featured images, product image alt text, and variant images. Digital products aren't covered by that CSV and their export path isn't documented, so check yours in the account before you plan around it.",
       },
       {
         item: "Form submissions",
         icon: "form",
         status: "rebuilt",
-        note: "Each form block exports its own submissions to CSV from its Storage tab, one file per form rather than one dataset for the site. Uploaded files aren't in the export, though the CSV carries direct links you can download from before you switch off. Forms themselves get rebuilt in Wix.",
-      },
-      {
-        item: "Member areas and paywalled content",
-        icon: "lock",
-        status: "lost",
-        note: "Member areas aren't part of the export, and Wix doesn't accept imported member lists in any case. Anyone with a login signs up again on the new site. If your business runs on gated content, this is the constraint that sets the launch date.",
-      },
-      {
-        item: "Custom CSS and style settings",
-        icon: "brush",
-        status: "lost",
-        note: "Squarespace names both explicitly as excluded, which sounds worse than it is. Custom CSS on a Squarespace site is usually there to push a template past what it was built to do. In Studio that behaviour is native, so the CSS isn't ported, it stops being necessary.",
+        note: "In our experience each form block exports its own submissions separately rather than as one dataset for the site, so budget a file per form and pull any uploaded files before the plan lapses.",
       },
       {
         item: "SEO titles, descriptions, and redirects",
@@ -160,14 +212,49 @@ export const squarespace: MigrationGuideContent = {
         note: "Per-page SEO fields don't ride along in the XML and get re-entered on the new site, then diffed against the old ones before cutover. Any URL mappings you've already built up in Squarespace are worth exporting first: they're a ready-made list of addresses people still reach the site through.",
       },
       {
-        item: "Domain and email",
-        icon: "globe",
-        status: "carries",
-        note: "A domain registered with Squarespace transfers out, or stays where it is and just repoints, which is faster and what we usually do. Google Workspace bought through Squarespace is a separate billing relationship to move, and it's worth handling before launch week rather than during it.",
+        item: "Blog post URLs",
+        icon: "redirect",
+        status: "rebuilt",
+        note: "It depends on how the blog gets built: Wix's Blog app forces a /post/ prefix that can't be removed, so every post changes and needs a mapped redirect, while a blog built on the Wix CMS lets you set the prefix yourself and keep your existing /blog-name/post-name paths intact."
+      },
+      {
+        item: "Index, portfolio, gallery, album, and cover pages",
+        icon: "layers",
+        status: "lost",
+        note: "Squarespace lists all of these as not included in the export, along with info pages and calendar pages. In practice this is where a design-led Squarespace site keeps most of its personality, so it's the bulk of what gets rebuilt. Gallery pages are the one partial exception: on 7.0 they export, including York project pages.",
+      },
+      {
+        item: "Customer list",
+        icon: "receipt",
+        status: "rebuilt",
+        note: "Squarespace exports customers to CSV with names, emails, order totals, addresses and tags, so the list comes with you even though the accounts don't.",
+      },
+      {
+        item: "Order history and customer logins",
+        icon: "receipt",
+        status: "lost",
+        note: "Squarespace documents order export as a way to analyse sales outside Squarespace with no import path, and saved logins stay behind, so the new store starts clean.",
+      },
+      {
+        item: "Member areas and paywalled content",
+        icon: "lock",
+        status: "lost",
+        note: "Member areas aren't part of the export, and Wix doesn't accept imported member lists in any case. Anyone with a login signs up again on the new site. If your business runs on gated content, this is the constraint that sets the launch date.",
+      },
+      {
+        item: "Uploaded video",
+        status: "lost",
+        note: "Squarespace documents no export path for uploaded video, so anything hosted natively is re-sourced from your originals or re-recorded.",
+      },
+      {
+        item: "Custom CSS and style settings",
+        icon: "brush",
+        status: "lost",
+        note: "Squarespace names both explicitly as excluded, which sounds worse than it is. Custom CSS on a Squarespace site is usually there to push a template past what it was built to do. In Studio that behaviour is native, so the CSS isn't ported, it stops being necessary.",
       },
     ],
     footnote:
-      "The one-line summary: your words and your standard pages come with you, your structure and your design don't, and your blog URLs all change. Everything in the project plan follows from that last one.",
+      "Read the pattern rather than the rows: the XML carries structured text, everything visual gets rebuilt, and anything tied to a person stays behind. Already part-way through one of these yourself? You don't have to restart. Send us the Squarespace site and whatever you've built in Studio and we'll tell you what's missing from the export and finish it.",
   },
 
   steps: {
@@ -177,6 +264,7 @@ export const squarespace: MigrationGuideContent = {
     items: [
       {
         title: "Crawl before you export",
+        navLabel: "Crawl first",
         duration: "1 to 2 days",
         body: "The XML tells you what Squarespace is willing to hand over. The crawl tells you what you actually have. The gap between the two is the project.",
         lead: "What the crawl captures:",
@@ -197,6 +285,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         title: "Pull everything the XML doesn't cover",
+        navLabel: "What the XML misses",
         duration: "2 to 3 days",
         body: "A Squarespace migration is four or five exports, not one. Each lives in a different part of the admin and each has its own gaps.",
         lead: "The full set:",
@@ -221,6 +310,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         title: "Design the structure Squarespace couldn't hold",
+        navLabel: "Structure and CMS",
         duration: "3 to 5 days",
         body: "The stage that makes the move worth paying for. The ceiling you're leaving is structural, so the fix has to be structural too.",
         lead: "What gets modelled:",
@@ -241,6 +331,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         title: "Build in Studio",
+        navLabel: "The Studio build",
         duration: "1 to 3 weeks",
         body: "The new site goes up on a staging URL while Squarespace keeps serving your domain. No maintenance page, no gap in enquiries or sales.",
         lead: "What changes in the build:",
@@ -261,6 +352,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         title: "Move the content, media and metadata",
+        navLabel: "Content and metadata",
         duration: "3 to 5 days",
         body: "Text into the new layouts, images re-uploaded, products imported. Products need the most attention, because the CSV arrives with holes in it.",
         lead: "The parts that need hand-work:",
@@ -281,13 +373,14 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         title: "Map the redirects, then cut over",
+        navLabel: "Redirects and cutover",
         duration: "2 days",
-        body: "The map is written and tested before the domain moves, never after. Every blog post needs a row, because every blog post URL changes.",
+        body: "The map is written and tested before the domain moves, never after. How long it runs was decided at the build stage, when the blog was either put on Wix's Blog app or modelled in the CMS.",
         lead: "How cutover runs:",
         points: [
           {
             label: "One row per post, mapped by hand",
-            body: "Squarespace nests posts under the blog page slug and Wix puts them under a /post/ prefix, so there's no pattern rule that does this correctly.",
+            body: "Where post paths do change, Squarespace nests them under the blog page slug and the Blog app puts them under /post/, so no pattern rule does this correctly.",
           },
           {
             label: "Imported in batches and tested",
@@ -301,6 +394,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         title: "Watch the index for 30 days",
+        navLabel: "Post-launch monitoring",
         duration: "30 days",
         body: "Coverage and impressions daily for the first fortnight, then weekly. Blog URLs get watched hardest, because they're the ones that changed.",
         lead: "What gets fixed inside the window:",
@@ -311,69 +405,13 @@ export const squarespace: MigrationGuideContent = {
           },
           {
             label: "Pages dropping out of coverage",
-            body: "Caught and resubmitted while we're still on the project, at no extra cost.",
+            body: "Caught and resubmitted while we're still on the project, at no extra cost, against a price fixed before the work began.",
           },
           {
             label: "Positions sliding on mapped URLs",
             body: "A redirect that resolves isn't proof the mapping was right. Position data over four weeks is.",
           },
         ],
-      },
-    ],
-  },
-
-  seoMechanics: {
-    heading: "The URL problem, in detail",
-    intro:
-      "Almost all the SEO risk in this move sits in one place. Understanding exactly where makes the rest of the project straightforward.",
-    items: [
-      {
-        title: "Blog URLs change and there's no way around it",
-        body: "Squarespace nests posts under the blog page's slug: /journal/spring-planting. Wix Blog puts every post under a /post/ prefix that its documentation confirms can't be removed: /post/spring-planting. Neither platform lets you configure your way to a match. So on a site with two hundred posts, that's two hundred redirect rows, and there is no shortcut that doesn't cost you the archive's rankings. Anyone quoting a Squarespace migration without a per-post redirect map either hasn't looked at your blog or is planning to point it all at the homepage.",
-      },
-      {
-        title: "Your standard pages are the easy part",
-        body: "Ordinary pages keep their slugs, so /about, /contact, and /services move across unchanged. That's useful for scoping: the size of a Squarespace migration is almost entirely a function of how much you've blogged and how many products you sell, not how many pages the navigation has.",
-      },
-      {
-        title: "Export your existing URL mappings first",
-        body: "Squarespace's URL mappings feature is where previous site changes were papered over, and most long-running sites have accumulated a list. Those old addresses still have links pointing at them, and if they only survive because of a mapping on the old platform, they die the day it's switched off. Capture the list and fold it into the new redirect map, so a URL that's been redirected twice still resolves.",
-      },
-      {
-        title: "Metadata doesn't ride along in the XML",
-        body: "Titles, descriptions, and social images are per-page settings that the export doesn't carry, so they get re-entered on the new site. The failure mode is a site launching with Wix's default title pattern on forty pages and nobody noticing for a month, because the traffic decays gradually instead of dropping. We export the old metadata during the crawl specifically so there's something to diff against before cutover.",
-      },
-      {
-        title: "Product URLs deserve their own pass",
-        body: "Store pages aren't in the export and product URLs are structured differently on each platform, so every product needs mapping alongside the blog. Products also tend to attract the links you'd least like to break, from suppliers, directories, and press. Worth checking by hand rather than pattern-matching, especially where you've retired lines and the old product pages are still indexed.",
-      },
-    ],
-  },
-
-  mistakes: {
-    heading: "Five ways a Squarespace move goes wrong",
-    intro:
-      "Four of these come from trusting the export. The fifth comes from rebuilding the same ceiling in a new place.",
-    items: [
-      {
-        title: "Treating the XML as a complete backup",
-        body: "It isn't, and Squarespace never claims it is. Index pages, portfolio pages, album pages, cover pages, info pages, calendar pages, store pages, audio blocks, video blocks, drafts, style settings, and custom CSS are all named as excluded. A team that exports the XML, cancels the plan, and then starts building has lost the reference for most of the site. Keep Squarespace running until the new site is live and verified.",
-      },
-      {
-        title: "Missing the second blog",
-        body: "Only one blog page exports. Sites that ran a news feed and a separate case-study or resources feed lose everything on the secondary ones from the export, and it's easy to miss because the file looks complete. If your site has more than one blog page, capture the others by crawl before you touch anything.",
-      },
-      {
-        title: "Assuming products came across intact",
-        body: "The products CSV omits additional product info, customer reviews, featured images, product image alt text, and variant images, and digital products aren't in it at all. A store that imports the CSV and calls it done ships with missing hero images and no alt text, right when product pages are the ones you most want indexed. Budget a pass to re-attach all of it.",
-      },
-      {
-        title: "Pointing the whole blog at one page",
-        body: "The lazy version of this migration redirects every /journal/* URL to the new blog index. Google treats a redirect to an irrelevant page as a soft 404, so the archive's rankings go rather than transfer. It's more work to map two hundred posts one to one, and it's the work you're actually paying a migration for.",
-      },
-      {
-        title: "Rebuilding the template you were trying to escape",
-        body: "The reason to leave is the ceiling, so recreating the same page-by-page structure in Studio spends the budget and keeps the problem. If the courses are still individual pages and the team page is still hand-laid, you've bought a redesign. Model what repeats as collections during the build, when it's a design decision, rather than afterwards, when it's a second project.",
       },
     ],
   },
@@ -393,14 +431,78 @@ export const squarespace: MigrationGuideContent = {
   },
 
   proof: {
-    heading: "Migrations of this shape",
+    heading: "Why hand this one over",
     intro:
-      "Hunting Brook Gardens came to us off Squarespace and now runs its course business on Wix Studio, with €140k in course sales since the work began. MindEd is here for scale rather than platform: 70+ pages across two languages, which is the size of project the redirect discipline above exists for.",
+      "The parts that cost people money here aren't the rebuild. They're the pages Squarespace never put in the export file, the second blog nobody remembered, and the post URLs mapped to one landing page instead of one by one, so we crawl the live site before anything is exported.",
     workSlugs: ["hunting-brook-gardens", "minded"],
   },
 
+  sources: {
+    heading: "Sources",
+    intro:
+      "Every platform limit on this page links to the vendor's own documentation, so you can check it rather than take our word for it.",
+    verified: "2026-08-19",
+    items: [
+      {
+        label: "Squarespace: Exporting your site",
+        href: "https://support.squarespace.com/hc/en-us/articles/206566687-Exporting-your-site",
+        note: "The definitive list. Exports layout pages, one blog page and its posts, text and image blocks, and gallery pages on 7.0. Excludes album, cover, index, info, calendar, portfolio and store pages, page-specific headers, footers and sidebars, additional blog pages, dropdowns, audio, product and video blocks, drafts, style settings and custom CSS.",
+      },
+      {
+        label: "Squarespace: Importing and exporting content",
+        href: "https://support.squarespace.com/hc/en-us/articles/205814028-Importing-and-exporting-content",
+        note: "Confirms the export is a WordPress-format XML, and states that images can't be exported in bulk and uploaded video can't be exported at all.",
+      },
+      {
+        label: "Squarespace: Export products to a .csv",
+        href: "https://support.squarespace.com/hc/en-us/articles/360000694948-Export-products-to-a-csv",
+        note: "Names exactly what the product CSV leaves out: additional product information, customer reviews, featured images, product image alt text and variant images.",
+      },
+      {
+        label: "Squarespace: Export Commerce orders",
+        href: "https://support.squarespace.com/hc/en-us/articles/206540677-Exporting-orders",
+        note: "Orders export for analysing sales outside Squarespace. No import path is documented.",
+      },
+      {
+        label: "Squarespace: Managing customers",
+        href: "https://support.squarespace.com/hc/en-us/articles/229497568-Managing-customers",
+        note: "Customer list exports to CSV. Notes are excluded and account logins are not covered.",
+      },
+      {
+        label: "Squarespace: Formatting your site's URLs",
+        href: "https://support.squarespace.com/hc/en-us/articles/206543597",
+        note: "How Squarespace builds page and blog post paths, which is what determines how much of your URL structure survives.",
+      },
+      {
+        label: "Wix Blog: About blog post web addresses",
+        href: "https://support.wix.com/en/article/wix-blog-about-blog-post-web-addresses-urls",
+        note: "The /post/ prefix on Wix Blog URLs, which can't be removed, and why the blog build decision drives the redirect map."
+      },
+      {
+        label: "Wix: Making dynamic page URLs meaningful with prefixes",
+        href: "https://dev.wix.com/docs/develop-websites/articles/databases/wix-data/dynamic-pages/making-dynamic-page-urls-meaningful-with-prefixes",
+        note: "The collection name is only a suggested default prefix and can be edited, which is how a CMS-built blog keeps existing Squarespace post paths.",
+      },
+      {
+        label: "Wix CMS: Importing content into a collection",
+        href: "https://support.wix.com/en/article/cms-formerly-content-manager-importing-content-into-a-collection",
+        note: "CSV import into a collection, capped at 50,000 items per file.",
+      },
+      {
+        label: "Wix: Importing or exporting URL redirects with a CSV file",
+        href: "https://support.wix.com/en/article/importing-or-exporting-url-redirects-with-a-csv-file",
+        note: "Bulk redirect import, up to 500 rows at a time, which is how a few hundred mapped blog posts get loaded.",
+      },
+      {
+        label: "Google Search Central: Site moves with URL changes",
+        href: "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+        note: "Google's own guidance on URL-changing moves, and its statement that following it does not guarantee crawling, indexing or ranking.",
+      },
+    ],
+  },
+
   faq: {
-    heading: ["Squarespace to Wix Studio,", "answered properly"],
+    heading: ["Squarespace to Wix Studio,", "answered"],
     subhead:
       "What people ask on these calls once they've read the export documentation.",
     ctas,
@@ -410,39 +512,39 @@ export const squarespace: MigrationGuideContent = {
         a: "Partly. Squarespace gives you one .xml file in WordPress format containing your layout pages, one blog and its posts, and your text and image blocks. It leaves out index, portfolio, album, cover, info, calendar, and store pages, plus audio and video blocks, drafts, style settings, and custom CSS. So the words come across and the site doesn't. Everything the XML omits gets rebuilt, which is most of the visual design.",
       },
       {
-        q: "Will I lose my Google rankings?",
-        a: "Not if the redirect map is done properly, and on this move that map is the project. Standard pages keep their slugs, so /about stays /about. Blog posts all change, because Squarespace nests them under the blog page's slug and Wix puts them under a /post/ prefix that can't be removed. Every post gets a one-to-one redirect, tested against the URL inventory before the domain moves, then watched in Search Console for 30 days after.",
+        q: "Will I lose my Google rankings moving from Squarespace to Wix Studio?",
+        a: "Not if the URLs are handled deliberately, and fewer of them have to change than most people assume. Standard pages keep their slugs, so /about stays /about. Blog posts come down to one build decision: Wix's Blog app forces a /post/ prefix that can't be removed, while a blog modelled on the Wix CMS lets you set the prefix and keep your existing /blog-name/post-name paths. Whatever does change gets a one-to-one redirect, tested against the URL inventory before the domain moves, then watched in Search Console for 30 days after.",
       },
       {
-        q: "What happens to my blog if I have more than one?",
+        q: "What happens to multiple Squarespace blog pages when I move to Wix Studio?",
         a: "Only one exports. Squarespace prompts you to select a primary blog page and the rest aren't in the file. We capture the others by crawling the live site before anything is switched off, which works fine but has to happen while the site is still up. It's the most common thing to discover too late on this migration.",
       },
       {
-        q: "Do my products transfer?",
+        q: "Do Squarespace store products transfer to Wix Studio?",
         a: "Physical and service products come across through a separate CSV export, not through the XML. The CSV leaves out additional product information, customer reviews, featured images, product image alt text, and variant images, so budget a pass to re-attach those. Digital products have no export at all and get rebuilt by hand. Orders export for your records but can't be imported anywhere.",
       },
       {
-        q: "What about my form submissions?",
-        a: "Each form block exports its own submissions to CSV from its Storage tab, so a site with six forms means six files rather than one dataset. Uploaded files aren't in the export, but the CSV includes direct links, so you can pull them down before the plan lapses. New forms get built in Wix and can post to the same places the old ones did.",
-      },
-      {
-        q: "Can I keep my domain?",
-        a: "Yes. If the domain is registered with Squarespace you can transfer it out, or leave it registered there and repoint it, which is faster and what we usually do. Either way the Squarespace site stays live until the switch. Google Workspace bought through Squarespace is a separate billing relationship and worth sorting out before launch week rather than during it.",
-      },
-      {
-        q: "How long does it take?",
+        q: "How long does a Squarespace to Wix Studio migration take?",
         a: "Three to five weeks of active work for most sites, then a 30-day monitoring window that runs after you're already live. The blog archive is what moves that number: a site with fifteen posts and one with four hundred are different projects, because every post needs a mapped redirect either way.",
       },
       {
-        q: "Why Wix Studio rather than WordPress or Webflow?",
+        q: "Can I migrate my Squarespace site to Wix Studio myself?",
+        a: "For a small site with a short blog, yes. The trap is that the export looks like a complete backup and isn't, so the DIY question here is really \"how much of my site is in the file?\" A five-page brochure site with no store is a reasonable weekend project. A single blog with thirty posts is manageable, though on the Blog app you'll be mapping thirty redirects by hand. Beyond that it turns: a second blog page, an index or portfolio page, a store, a members area, or a few hundred posts each move it into territory where what you don't notice missing costs more than the help. The reliable signal is your blog archive. If it earns traffic, the URL decision is the one worth getting help with, and it's the part people skip.",
+      },
+      {
+        q: "Will my URLs change moving from Squarespace to Wix Studio?",
+        a: "Your standard pages keep their addresses. Squarespace uses clean, flat paths for regular pages and Wix Studio imposes no structure of its own, so /about stays /about and a brochure site needs almost no redirect work. Your blog depends on how it gets built. Wix's Blog app puts every post under a /post/ prefix that can't be removed, so on a site with two hundred posts that's two hundred mapped redirects. A blog modelled on the Wix CMS lets you set the prefix and the slug, which is how an existing /blog-name/post-name structure survives the move untouched. The quieter risk is metadata, which doesn't travel in the XML at all, so titles and descriptions get re-entered and diffed against the old site before the domain moves.",
+      },
+      {
+        q: "How much does a Squarespace to Wix Studio migration cost?",
+        a: "From €1,750, quoted as a fixed price before any work starts. What moves the number is almost entirely the blog: every post needs its own mapped redirect, so a fifteen-post site and a four-hundred-post site are different projects. After that it's the store, since products come across by CSV and then need their reviews, alt text and variant images re-attached by hand, and any page types Squarespace refuses to export at all.",
+      },
+      {
+        q: "Why move from Squarespace to Wix Studio rather than WordPress or Webflow?",
         a: "WordPress solves the ceiling by handing you a maintenance job: plugin updates, security patching, hosting. Webflow solves it but leaves editing to whoever understands the class system, which recreates the bottleneck you're leaving. Studio gives you the responsive control and the CMS without either, and the people who write your content can publish it. If you want the custom-code answer instead, we build those too, and we'll say so if that's what your case actually calls for.",
       },
       {
-        q: "Is my custom CSS lost?",
-        a: "It's excluded from the export, yes, and mostly that's fine. Custom CSS on a Squarespace site is usually there to push a template past what it was designed to do. In Studio that control is native, so the CSS isn't ported across, it stops being needed. Send it over anyway before we quote: it's the fastest way to see what the site was trying to be.",
-      },
-      {
-        q: "Can I run the two sites side by side?",
+        q: "Can my Squarespace site stay live while the Wix Studio site is built?",
         a: "Yes, and it's the default. The Studio build lives on a staging URL while Squarespace keeps serving your domain, so there's no maintenance page and no gap in enquiries or sales. You sign off on a working site you can open on your own phone. The domain moves in a single afternoon at the end, once the redirect map has been tested.",
       },
     ],

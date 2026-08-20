@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { Section } from "@/components/ui/Section";
-import { DividedList, DividedRow } from "@/components/ui/DividedList";
-import { FeaturedPost, PostRow } from "@/components/sections/blog/PostCard";
+import { FilterTab } from "@/components/ui/FilterTab";
+import { FeaturedPost, PostTile } from "@/components/sections/blog/PostCard";
 import { BLOG_CATEGORIES, blogIndex } from "@/content/blog";
 import { cn } from "@/lib/utils";
 import type { PostCard } from "@/sanity/lib/types";
@@ -57,33 +57,21 @@ export function BlogIndex({ posts }: { posts: PostCard[] }) {
         />
       ) : null}
 
-      {/* Filter row. A radio group rather than a row of buttons: these are one
-          exclusive choice, and screen readers should hear it that way. */}
+      {/* The same tabs the case studies grid uses, so the two filter bars are
+          one control rather than two that resemble each other. */}
       <div
-        role="radiogroup"
         aria-label={blogIndex.filterLabel}
         className="flex flex-wrap items-center gap-2"
       >
-        {filters.map((item) => {
-          const active = item === category;
-          return (
-            <button
-              key={item}
-              type="button"
-              role="radio"
-              aria-checked={active}
-              onClick={() => pick(item)}
-              className={cn(
-                "inline-flex items-center rounded-full border px-3 py-1 font-mono text-label uppercase track-label transition",
-                active
-                  ? "border-accent-line bg-accent-subtle text-accent"
-                  : "border-light-border text-light-muted hover:bg-light-surface hover:text-light-text",
-              )}
-            >
-              {item}
-            </button>
-          );
-        })}
+        {filters.map((item) => (
+          <FilterTab
+            key={item}
+            active={item === category}
+            onClick={() => pick(item)}
+          >
+            {item}
+          </FilterTab>
+        ))}
       </div>
 
       {/* The empty line is about the FILTER finding nothing, so it stays quiet
@@ -93,16 +81,21 @@ export function BlogIndex({ posts }: { posts: PostCard[] }) {
       {matching.length === 0 && !lead ? (
         <p className="mt-12 text-body-lg text-light-muted">{blogIndex.empty}</p>
       ) : (
-        <DividedList tone="light" className="mt-10 md:mt-12">
+        /* Two across with a real gap between separate bordered cards, the
+           same grid the case studies page uses. */
+        <div className="mt-10 grid grid-cols-1 gap-6 md:mt-12 md:grid-cols-2">
           {listed.map((post) => (
-            <DividedRow
+            <div
               key={post._id}
-              className={cn("!py-0", !shownIds.has(post._id) && "hidden")}
+              className={cn(
+                "flex flex-col",
+                !shownIds.has(post._id) && "hidden",
+              )}
             >
-              <PostRow post={post} />
-            </DividedRow>
+              <PostTile post={post} />
+            </div>
           ))}
-        </DividedList>
+        </div>
       )}
 
       {hasMore ? (

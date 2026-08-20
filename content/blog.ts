@@ -47,6 +47,8 @@ export const blogIndex = {
   allLabel: "All",
   featuredLabel: "Featured",
   loadMoreLabel: "Load more",
+  // Suffix on every card's read-time chip.
+  readTimeSuffix: "min read",
   pageSize: 10,
   empty: "Nothing here yet under that topic. Try another one.",
   cta: {
@@ -117,3 +119,29 @@ export const post = {
     image: "/textures/studio-texture.jpg",
   },
 };
+
+/* ------------------------------------------------------------------ *
+ * TEMPORARY — DESIGN SCAFFOLDING, DELETE BEFORE LAUNCH
+ * ------------------------------------------------------------------ *
+ *
+ * `post` has no cover image field (owner decision, blog brief §3), so a card
+ * normally draws its own typographic cover. These borrowed case-study
+ * thumbnails exist only so the card grid can be judged with real imagery in
+ * it. They are keyed to the four mock posts and nothing else, so a real post
+ * is unaffected.
+ *
+ * Two ways out of here, both one job:
+ *   keep image covers  -> add a `coverImage` field to the post schema and
+ *                         read it in the card, then delete this map.
+ *   keep typographic   -> delete this map and the mock posts.
+ */
+const MOCK_COVERS: Record<string, string> = {
+  "mock-wordpress-to-wix-studio": "/case-study-grid/hunting-brook.webp",
+  "mock-what-answer-engines-read": "/case-study-grid/capacity.webp",
+  "mock-squarespace-export": "/case-study-grid/genroks.webp",
+  "mock-design-system-limits": "/case-study-grid/bianomics.webp",
+};
+
+export function mockCover(slug: string): string | undefined {
+  return MOCK_COVERS[slug];
+}

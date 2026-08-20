@@ -1,6 +1,5 @@
 import { Section } from "@/components/ui/Section";
-import { DividedList, DividedRow } from "@/components/ui/DividedList";
-import { PostRow } from "@/components/sections/blog/PostCard";
+import { PostTile } from "@/components/sections/blog/PostCard";
 import { post as furniture } from "@/content/blog";
 import type { PostCard } from "@/sanity/lib/types";
 
@@ -24,13 +23,12 @@ export function PostRelated({ posts }: { posts: PostCard[] }) {
         </p>
       </div>
 
-      <DividedList tone="light" className="mt-10">
+      {/* Same cards as the index, so the blog has one card and not two. */}
+      <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
         {posts.map((post) => (
-          <DividedRow key={post._id} className="!py-0">
-            <PostRow post={post} />
-          </DividedRow>
+          <PostTile key={post._id} post={post} />
         ))}
-      </DividedList>
+      </div>
     </Section>
   );
 }

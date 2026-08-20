@@ -69,10 +69,70 @@ export const blogIndex = {
  */
 export const post = {
   breadcrumbLabel: "Blog",
-  authorLine: "Written by Zenith Digital",
-  reviewedByPrefix: "Reviewed by",
-  verifiedPrefix: "Last verified",
-  navLabel: "In this article",
+
+  /**
+   * The byline, as the facts strip under the title rather than a run-on line
+   * of dot-separated text. Same object the case studies use for their project
+   * facts, and the same argument for it: who wrote this, when, and how long it
+   * takes to read are separate facts, so they get labelled cells rather than
+   * one sentence.
+   *
+   * The author is the FOUNDER, not the agency (owner decision, 20 August 2026),
+   * and he sits in the strip with his photo rather than up in the hero. The
+   * name and photo are read from `founderCore` rather than repeated here, so
+   * the byline, the founder section and the Person schema can never end up
+   * naming three slightly different people. Posts have no per-post author
+   * field: there is one author on this blog.
+   *
+   * Because the visible byline now names a person, `BlogPosting.author` points
+   * at the Person node rather than the Organization, and the post page emits
+   * that node. A byline and its markup disagreeing is the thing Google asks
+   * you not to do.
+   *
+   * "Reviewed by" and "Last verified" were dropped from the strip. The
+   * document still carries both fields: `lastVerified` continues to drive
+   * `dateModified` in the BlogPosting markup and `modifiedTime` in the Open
+   * Graph tags, so the freshness signal survives even though the line no
+   * longer prints.
+   */
+  meta: {
+    writtenByLabel: "Written by",
+    publishedLabel: "Published",
+    readTimeLabel: "Read time",
+  },
+
+  /**
+   * Share. Copy link leads because it is the one people use; the rest are
+   * plain links to each platform's own share URL, so no third-party script
+   * loads to draw a button.
+   */
+  share: {
+    label: "Share this article",
+    copy: "Copy link to this article",
+    copied: "Link copied",
+    facebook: "Share on Facebook",
+    x: "Share on X",
+    linkedin: "Share on LinkedIn",
+  },
+
+  /**
+   * The sticky chapters column beside the body. The label names the object
+   * (a post has chapters, a guide has sections), and the CTA is the standing
+   * ask that travels the whole article.
+   *
+   * It asks for the CALL, deliberately. The audit block further down the page
+   * asks for the audit, so the two are different offers rather than the same
+   * one printed twice. Desktop only: see PostChapters.
+   */
+  chapters: {
+    label: "Chapters",
+    cta: {
+      heading: "Rather just ask us?",
+      paragraph:
+        "Twenty minutes, an honest read on your site, and a fixed-price proposal the same day.",
+      cta: { label: "Book a call", href: "/book-a-call" } as CtaLink,
+    },
+  },
 
   sources: {
     heading: "Sources",
@@ -99,10 +159,67 @@ export const post = {
    * second form: one funnel, one Supabase write, one place to change the copy.
    */
   audit: {
-    heading: "Want this checked on your own site?",
+    heading: "A free audit that actually tells you something",
     paragraph:
-      "Send us the URL. We'll tell you what's holding it back, in plain language, and what we'd fix first. Free, and useful whether or not you hire us.",
-    cta: { label: "Get a free website audit", href: "/free-website-audit" },
+      "Drop your site in and we'll review it by hand, then send a short video walkthrough of the highest-impact fixes. No auto-generated PDF, no obligation.",
+    cta: { label: "Get my free audit", href: "/free-website-audit" },
+
+    /**
+     * The three promises, as an accordion. They are the audit page's own
+     * claims rather than new ones (see content/free-website-audit.ts): a human
+     * review, six named problems on video, and no strings. If that page's
+     * offer changes, these change with it.
+     */
+    points: [
+      {
+        title: "Reviewed by a human, not a bot",
+        body: "Someone opens your site and records what they find. No automated score, no templated PDF with your logo dropped into it.",
+      },
+      {
+        title: "Six things costing you the most",
+        body: "Conversion leaks, search and AI visibility, speed, design and trust, copy and positioning, and the order we would fix them in.",
+      },
+      {
+        title: "Yours to keep, no strings",
+        body: "You get the walkthrough whether or not we ever work together. No pitch, no obligation, and it lands within 2 business days.",
+      },
+    ],
+
+    /**
+     * The handoff field. It does NOT submit an audit: the real form needs an
+     * email too, and a second form would mean a second Supabase write and two
+     * places to change the copy. It carries the URL to /free-website-audit,
+     * which prefills it, so the reader arrives one field down rather than
+     * starting again.
+     */
+    form: {
+      placeholder: "yourwebsite.com",
+      label: "Your website",
+    },
+
+    /**
+     * THE SAMPLE REPORT rendered beside the ask.
+     *
+     * Showing the deliverable converts better than describing it, which is the
+     * whole reason this block exists rather than another line of copy. The
+     * findings are the kind the audit really reports; the numbers are
+     * illustrative, which is why the card says "sample" on it. A mock that
+     * presents itself as a real result is a fabricated record. Swap in a
+     * screenshot of a real anonymised report when there is one.
+     */
+    report: {
+      label: "Sample site audit",
+      score: "62",
+      outOf: "/100",
+      scoreLabel: "Performance score",
+      issues: "18 issues found",
+      findingsLabel: "Top findings",
+      findings: [
+        { label: "Largest Contentful Paint over 4s", severity: "high" },
+        { label: "Missing meta descriptions on 9 pages", severity: "medium" },
+        { label: "No structured data for search", severity: "medium" },
+      ] as { label: string; severity: "high" | "medium" }[],
+    },
   },
 
   related: {
@@ -136,6 +253,7 @@ export const post = {
  *   keep typographic   -> delete this map and the mock posts.
  */
 const MOCK_COVERS: Record<string, string> = {
+  "redesign-without-losing-rankings": "/case-study-grid/advantage-media.webp",
   "mock-wordpress-to-wix-studio": "/case-study-grid/hunting-brook.webp",
   "mock-what-answer-engines-read": "/case-study-grid/capacity.webp",
   "mock-squarespace-export": "/case-study-grid/genroks.webp",

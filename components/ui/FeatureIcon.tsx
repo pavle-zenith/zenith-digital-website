@@ -33,6 +33,13 @@ const PATHS: Record<string, React.ReactNode> = {
   ),
   // lucide:code
   code: <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />,
+  // lucide:sparkles — the AI-builder category has no brand mark of its own.
+  sparkles: (
+    <>
+      <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+      <path d="M20 2v4M22 4h-4M4 17v2M5 18H3" />
+    </>
+  ),
   // lucide:layers
   layers: (
     <>

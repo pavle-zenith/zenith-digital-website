@@ -2,12 +2,11 @@ import { cn } from "@/lib/utils";
 import type { Tone } from "@/lib/types";
 
 /**
- * THE SHARED ASIDE SYSTEM for the migration guides.
+ * THE SHARED ASIDE SYSTEM for the migration guides and the blog.
  *
  * Every section that pairs a body of text with a reference list uses this: the
- * jump-to lists beside the three long-form sections, and the status legend
- * beside the transfers rows. One component so they cannot drift into four
- * slightly different sidebars.
+ * status legend beside the transfers rows, and the blog's chapters column. One
+ * component so they cannot drift into several slightly different sidebars.
  *
  * THE RULE IS THE LAYOUT, AND IT RUNS EDGE TO EDGE. The grid bleeds to the
  * frame rails and the section's vertical padding moves into the columns
@@ -19,7 +18,14 @@ import type { Tone } from "@/lib/types";
  * Below lg the aside moves above the content and its divider rotates to a
  * bottom rule, so it reads as a contents list rather than a stranded sidebar.
  *
- * Callers supply the list element itself (`ul` for jump links, `dl` for the
+ * WIDTHS. Two literal grid strings rather than one parameterised helper:
+ * Tailwind only generates an arbitrary value it can see written out, so a
+ * template literal would compile to nothing. The guides use the narrow column
+ * for a four-item legend; the blog's chapters take the wide one, because a
+ * chapter label is a sentence fragment and 320px wrapped most of them onto
+ * three lines.
+ *
+ * Callers supply the list element itself (`ul` for chapters, `dl` for the
  * status legend) so each keeps the semantics its content deserves; the shared
  * parts are the label, the rules, the sticky behaviour, and the row rhythm.
  */
@@ -27,6 +33,10 @@ import type { Tone } from "@/lib/types";
 /** Section wrapper: bleeds to the rails so the rules can reach them. */
 export const GUIDE_ASIDE_GRID =
   "frame-bleed grid lg:grid-cols-[minmax(0,1fr)_320px]";
+
+/** The same grid with room for prose in the aside. See WIDTHS above. */
+export const GUIDE_ASIDE_GRID_WIDE =
+  "frame-bleed grid lg:grid-cols-[minmax(0,1fr)_380px]";
 
 /** Sections on this system carry their padding in the columns, not the frame. */
 export const GUIDE_SECTION_FRAME = "!py-0";
@@ -36,6 +46,7 @@ const GUTTER = "px-[clamp(20px,4vw,64px)]";
 
 /** The column gutter, for children of a `flush` content column. */
 export function guideContentInset() {
+  // The breathing room goes on the edge that meets the divider.
   return cn(GUTTER, "lg:pr-14");
 }
 
@@ -54,16 +65,24 @@ export function GuideContentCol({
   children,
   wide = false,
   flush = false,
+  className,
 }: {
   children: React.ReactNode;
   wide?: boolean;
   flush?: boolean;
+  /**
+   * Padding overrides for callers whose column opens directly under a hero
+   * rather than after a section rule (the blog body). Use the `!` prefix so
+   * the override beats the default block padding.
+   */
+  className?: string;
 }) {
   return (
     <div
       className={cn(
         "order-2 py-14 md:py-24 lg:order-none",
         !flush && guideContentInset(),
+        className,
       )}
     >
       {wide || flush ? (
@@ -79,26 +98,37 @@ export function GuideAside({
   label,
   tone,
   children,
+  className,
+  stickyClassName,
 }: {
   label: string;
   tone: Tone;
   children: React.ReactNode;
+  /** Padding overrides, kept in step with the content column's. */
+  className?: string;
+  /**
+   * Overrides for the sticky box itself. The blog's chapters column travels a
+   * whole article rather than one section, so it caps its own height and
+   * scrolls internally instead of running off the bottom of a short viewport.
+   */
+  stickyClassName?: string;
 }) {
   const rule = tone === "dark" ? "border-border" : "border-light-border";
   const muted = tone === "dark" ? "text-text-muted" : "text-light-muted";
 
   return (
     // The <aside> is the grid item and stretches to the full row height, so
-    // its left border draws a rule the whole depth of the section. Its own
+    // its divider border draws a rule the whole depth of the section. Its own
     // vertical padding keeps the rhythm; the sticky wrapper sits inside it and
     // travels the height of that box.
     <aside
       className={cn(
         "order-1 border-b py-14 md:py-24 lg:order-none lg:border-b-0 lg:border-l",
         rule,
+        className,
       )}
     >
-      <div className="lg:sticky lg:top-24">
+      <div className={cn("lg:sticky lg:top-24", stickyClassName)}>
         {/* Horizontal insets sit on the label and the rows, never on the
             column, so every hairline runs from the vertical rule to the rail. */}
         <p

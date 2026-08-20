@@ -146,6 +146,7 @@ export const squarespace: MigrationGuideContent = {
       "A template quietly deciding how the site looks",
       "Writers waiting on a designer to publish",
       "A blog that has outgrown its template",
+      "A renewal quote that went up in 2026 and prompted a rethink",
     ],
     notAFit: [
       "A portfolio site that looks good and ranks",
@@ -469,6 +470,11 @@ export const squarespace: MigrationGuideContent = {
         note: "Customer list exports to CSV. Notes are excluded and account logins are not covered.",
       },
       {
+        label: "TechRadar: Squarespace users aren't happy with recent price hikes",
+        href: "https://www.techradar.com/pro/im-paying-for-things-i-sincerely-did-not-ask-for-squarespace-users-arent-happy-with-recent-price-hikes",
+        note: "The July 2026 increase and Squarespace's response. Trade press rather than a vendor source, because Squarespace published no announcement and notified customers by email.",
+      },
+      {
         label: "Squarespace: URL slugs",
         href: "https://support.squarespace.com/hc/en-us/articles/205814578-URL-slugs",
         note: "Blog post URLs always begin with the blog page's own slug, which is what determines how much of your URL structure survives.",
@@ -508,8 +514,12 @@ export const squarespace: MigrationGuideContent = {
     ctas,
     items: [
       {
-        q: "Can I export my Squarespace site and import it into Wix?",
+        q: "Can I export my Squarespace site and import it into Wix Studio?",
         a: "Partly. Squarespace gives you one .xml file in WordPress format containing your layout pages, one blog and its posts, and your text and image blocks. It leaves out index, portfolio, album, cover, info, calendar, and store pages, plus audio and video blocks, drafts, style settings, and custom CSS. So the words come across and the site doesn't. Everything the XML omits gets rebuilt, which is most of the visual design.",
+      },
+      {
+        q: "Squarespace put its prices up in 2026. Is that a reason to move to Wix Studio?",
+        a: "On its own, no, and it's worth being precise about what happened because the reporting was messy. In July 2026 Squarespace raised annual list prices by up to around 26%, with Core going from $23 to $29 a month and Plus from $39 to $49, according to trade press including PetaPixel and TechRadar. Squarespace published no announcement and told customers by email, then later apologised for what it called a pricing implementation error that overstated the increase for some plans, saying no customer was incorrectly charged. It told TechRadar it had recently added capabilities to every plan that were previously on higher tiers. So the honest read is a real increase, imprecisely communicated. A price rise is a good moment to reassess and a bad reason to rebuild on its own. What makes the move worth it is everything else on this page: what your export doesn't contain, and what your template stops you doing.",
       },
       {
         q: "Will I lose my Google rankings moving from Squarespace to Wix Studio?",
@@ -562,10 +572,10 @@ export const squarespace: MigrationGuideContent = {
         desc: "The hub: what a migration to Wix Studio covers, what it costs, and every platform we move sites from.",
       },
       {
-        label: "Wix Classic to Wix Studio",
+        label: "Wix Harmony to Wix Studio",
         logo: "/platforms/wix.svg",
-        href: "/services/wix-classic-to-wix-studio",
-        desc: "The Wix-to-Wix move, where the URLs mostly hold and the layout has to be rebuilt anyway.",
+        href: "/services/wix-harmony-to-wix-studio",
+        desc: "Weighing Wix's newest editor against Studio for a rebuild? The choice is one-way, so read this first.",
       },
       {
         label: "WordPress to Wix Studio",

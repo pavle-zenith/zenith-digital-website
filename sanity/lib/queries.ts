@@ -12,9 +12,39 @@ import { groq } from "next-sanity";
 const notDraft = `!(_id in path("drafts.**"))`;
 
 /**
+ * Read-time input: the plain-text LENGTH of a post's body, never the body.
+ *
+ * WHY THIS IS NOT JUST `pt::text(body)`. That helper only sees standard
+ * Portable Text blocks. Everything the post schema adds (points lists,
+ * comparison tables, in-body FAQs) is invisible to it, so a post built out of
+ * those blocks reported roughly a third of its real length: the first
+ * long-form post on this template showed "6 min read" for a ten-minute
+ * article. The custom blocks are added back by hand here.
+ *
+ * Deliberately NOT counted: `calloutCta` (an ask, not reading), `codeBlock`
+ * (scanned far faster than prose, so counting it at prose speed overstates)
+ * and image alt text. Each `coalesce` guards the case where a post carries
+ * none of that block type, since `array::join` over nothing returns null and
+ * one null would poison the whole sum.
+ *
+ * Shared by the cards and the single post so an index card and the article's
+ * own byline can never quote two different read times.
+ */
+const bodyChars = groq`
+  "bodyChars": coalesce(length(pt::text(body)), 0)
+    + coalesce(length(array::join(body[_type == "pointsList"].points[].label, " ")), 0)
+    + coalesce(length(array::join(body[_type == "pointsList"].points[].body, " ")), 0)
+    + coalesce(length(array::join(body[_type == "comparisonTable"].rows[].cells[], " ")), 0)
+    + coalesce(length(array::join(body[_type == "faqBlock"].items[].q, " ")), 0)
+    + coalesce(length(array::join(body[_type == "faqBlock"].items[].a, " ")), 0)
+`;
+
+/**
  * Everything the index cards and the related rail need. The body is NOT
- * projected: `pt::text()` flattens it to plain text server-side and only its
- * length travels, so a card knows its read time without shipping the article.
+ * projected: the text is flattened server-side and only its LENGTH travels, so
+ * a card knows its read time without shipping the article.
+ *
+ * The read time comes from `bodyChars` above.
  */
 const cardFields = groq`
   _id,
@@ -24,7 +54,7 @@ const cardFields = groq`
   category,
   publishedAt,
   featured,
-  "bodyChars": length(pt::text(body))
+  ${bodyChars}
 `;
 
 export const postsQuery = groq`
@@ -59,6 +89,7 @@ export const postQuery = groq`
     lastVerified,
     reviewedBy,
     seo,
+    ${bodyChars},
     body[] {
       ...,
       _type == "image" => {

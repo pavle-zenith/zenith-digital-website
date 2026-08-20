@@ -317,8 +317,7 @@ export const caseStudiesCta = {
 
 // 6c. Cross-industry client grid (copied 1:1 from the live site)
 export const crossIndustry = {
-  heading:
-    "Seven years of cross-industry projects, put to work on yours",
+  heading: "Seven years of cross-industry projects, put to work on yours",
   // logo paths are placeholders; swap for the real marks. Names kept so it's clear which logo goes where.
   items: [
     {
@@ -1042,10 +1041,11 @@ export const footer = {
       { name: "Grok", mark: "grok", queryUrl: "https://grok.com/?q=" },
     ],
   },
-  // Founder named here as well as in the Person schema: the entity signal is
-  // stronger when the visible copy and the markup agree.
+  // The entity qualifier stays (CLAUDE.md §8): "Zenith Digital" alone collides
+  // with other companies of that name, so the footer always pairs it with what
+  // the company is and where it is.
   copyright:
-    "© 2026 Zenith Digital, a Wix Studio web design agency based in Belgrade, serving the UK, EU, and US. Founded by Pavle Maodus.",
+    "© 2026 Zenith Digital, a Wix Studio web design agency based in Belgrade, serving the UK, EU, and US.",
   legal: [
     { label: "Privacy policy", href: "/privacy" },
     { label: "Terms of service", href: "/terms" },

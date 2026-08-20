@@ -1,5 +1,5 @@
 import { Section } from "@/components/ui/Section";
-import { CtaBand } from "@/components/sections/migration/CtaBand";
+import { AuditPanel } from "@/components/sections/blog/AuditPanel";
 import { post as furniture } from "@/content/blog";
 
 /**
@@ -11,18 +11,23 @@ import { post as furniture } from "@/content/blog";
  * funnel, one Supabase write, one place to change the copy, and no second form
  * to keep in sync with the first.
  *
- * Rendered as the in-body CtaBand, not CtaBanner: the page still closes on a
- * full banner, and two of those in a row would read as a wall of asks.
+ * Rendered as the light AuditPanel, so the one ask that gives something away
+ * looks like an offer rather than another closing banner.
+ *
+ * NOTE: a post whose body already carries an audit `calloutCta` now shows this
+ * panel twice, since those render the same component. If that is one too many,
+ * this section is the one to drop: the in-body ask is placed at a friction
+ * point the reader has just felt, and this one is on a fixed rhythm.
  */
 export function PostAudit() {
   const { audit } = furniture;
   return (
     <Section tone="light" frameClassName="!py-10 md:!py-14">
-      <CtaBand
+      <AuditPanel
         heading={audit.heading}
         paragraph={audit.paragraph}
-        ctas={[audit.cta]}
-        tone="light"
+        ctaLabel={audit.cta.label}
+        ctaHref={audit.cta.href}
       />
     </Section>
   );

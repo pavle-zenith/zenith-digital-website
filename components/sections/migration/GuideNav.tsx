@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useActiveSection } from "@/lib/useActiveSection";
 import { cn } from "@/lib/utils";
 
 /**
@@ -24,30 +25,11 @@ export function GuideNav({
 }: {
   items: { id: string; label: string }[];
 }) {
-  const [active, setActive] = useState<string | null>(null);
+  // Shared with the blog's chapters column so the two cannot disagree
+  // about which section the reader is on.
+  const active = useActiveSection(items);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const targets = items
-      .map((i) => document.getElementById(i.id))
-      .filter((el): el is HTMLElement => el !== null);
-    if (targets.length === 0) return;
-
-    // Nearest section whose top has passed the sticky bar wins, so the label
-    // matches what's actually under the reader rather than what's entering.
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      { rootMargin: "-96px 0px -60% 0px", threshold: 0 },
-    );
-    targets.forEach((t) => observer.observe(t));
-    return () => observer.disconnect();
-  }, [items]);
 
   useEffect(() => {
     const faq = document.getElementById("faq");

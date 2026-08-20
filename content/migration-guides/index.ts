@@ -1,6 +1,7 @@
 import { wixClassic } from "./wix-classic";
 import { squarespace } from "./squarespace";
 import { wixHarmony } from "./wix-harmony";
+import { wordpress } from "./wordpress";
 import type { MigrationGuideContent } from "./types";
 
 export type * from "./types";
@@ -13,14 +14,16 @@ export type * from "./types";
  * authored and reviewable in the repo but are excluded from routing, the hub
  * links, and the sitemap, so an unverified transfers table can't be indexed.
  *
- * WordPress and Webflow spokes are deliberately absent rather than stubbed.
- * Four strong pages beat nine thin ones (handoff §7), and a guide that can't be
- * filled with real platform-specific technical detail is a doorway page.
+ * The Webflow, Framer and HTML spokes are deliberately absent rather than
+ * stubbed. Four strong pages beat nine thin ones (handoff §7), and a guide that
+ * can't be filled with real platform-specific technical detail is a doorway
+ * page.
  */
 export const allMigrationGuides: MigrationGuideContent[] = [
   wixClassic,
   squarespace,
   wixHarmony,
+  wordpress,
 ];
 
 export const migrationGuides = allMigrationGuides.filter((g) => g.publish);

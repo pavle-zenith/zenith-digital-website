@@ -81,7 +81,10 @@ export function WorkStrip({
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {heading}
         </h2>
-        <p className="max-w-md text-body-lg font-medium text-light-muted md:justify-self-end md:text-right">
+        {/* max-w-md left a 50-word intro running six short lines against the
+            heading. 2xl fills the column it already sits in, so it settles to
+            three or four. */}
+        <p className="max-w-2xl text-body-lg font-medium text-light-muted md:justify-self-end md:text-right">
           {intro}
         </p>
       </div>

@@ -78,3 +78,16 @@ export function headingAnchors(
  * nothing to orient in, and a sticky bar over a short post is just a bar.
  */
 export const NAV_MIN_SECTIONS = 3;
+
+/**
+ * Read time from the body's plain-text length, which is what the card query
+ * projects (`length(pt::text(body))`). 200 words a minute at roughly 5.5
+ * characters a word including the space, so ~1,100 characters a minute.
+ *
+ * Rounded up to a floor of one minute: "0 min read" is not a thing, and a
+ * reader treats this as a rough shape of the article rather than a promise.
+ */
+export function readingMinutes(bodyChars: number | undefined): number {
+  if (!bodyChars) return 1;
+  return Math.max(1, Math.round(bodyChars / 1100));
+}

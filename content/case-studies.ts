@@ -93,7 +93,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     slug: "knode-ai",
     industry: "saas",
     metric: "Raising a $10M Series A",
-    story: "Full SaaS site and landing page from scratch in 3 weeks",
+    story: "Off Wix Classic onto a new Studio site in 3 weeks",
     thumb: "/portfolio-slider/knode-ai.jpg",
     logo: "/logos-white/knode.png",
     liveUrl: "https://www.knode.ai",
@@ -177,7 +177,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     slug: "techtonnik",
     industry: "services",
     metric: "10+ projects delivered",
-    story: "Web fulfillment partner since 2023 across 7+ industries",
+    story: "Their own site moved off WordPress, and fulfillment partner since 2023",
     thumb: "/case-study-grid/techtonnik.webp",
     logo: "/logos-white/techtonnik.png",
     liveUrl: "https://www.techtonnik.com",
@@ -607,9 +607,11 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     ],
     meta: {
       industry: INDUSTRIES.saas,
-      engagementType: "New build",
+      // Owner-confirmed and matching the public Wix Marketplace listing,
+      // which describes this as a re-design and migration from Classic Wix.
+      engagementType: "Migration & rebuild",
       timeline: "3 weeks",
-      platform: "Wix Studio",
+      platform: "Wix Classic to Wix Studio",
       liveUrl: "https://knode.ai",
     },
     challenge: [

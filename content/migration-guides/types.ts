@@ -212,10 +212,23 @@ export type MigrationGuideContent = {
   };
 
   /** Platform-specific URL and indexing mechanics. The part that gets skipped. */
-  seoMechanics: { heading: string; intro: string; items: LongFormBlock[] };
+  /**
+   * Optional. Dropped from the Wix Classic guide (owner decision, Aug 2026):
+   * too technical for a reader who mostly wants to know whether their URLs
+   * survive. That answer lives in `glance` and the rankings FAQ instead, and
+   * the 30-day guarantee moved into `proof`. Use it only where a platform has
+   * genuinely platform-specific indexing mechanics worth a section.
+   */
+  seoMechanics?: { heading: string; intro: string; items: LongFormBlock[] };
 
   /** Cheap to write, high citation value, and it demonstrates having done this. */
-  mistakes: { heading: string; intro: string; items: LongFormBlock[] };
+  /**
+   * Optional. Dropped from the Wix Classic guide (owner decision, Aug 2026):
+   * framed as abstract decisions, it read as advice for someone running the
+   * project rather than someone buying it. The substance sits in `steps` and
+   * the transfers notes.
+   */
+  mistakes?: { heading: string; intro: string; items: LongFormBlock[] };
 
   /**
    * The mid-page lead magnet, sitting between two of the long-form sections.

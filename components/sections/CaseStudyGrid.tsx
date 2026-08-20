@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 import { Section } from "@/components/ui/Section";
+import { FilterTab } from "@/components/ui/FilterTab";
 import { cn } from "@/lib/utils";
 import {
   INDUSTRIES,
@@ -68,7 +69,8 @@ function GridInner({
   )
     .slice()
     .sort(
-      (a, b) => Number(detailSlugs.has(b.slug)) - Number(detailSlugs.has(a.slug)),
+      (a, b) =>
+        Number(detailSlugs.has(b.slug)) - Number(detailSlugs.has(a.slug)),
     );
 
   return (
@@ -82,17 +84,17 @@ function GridInner({
           that class is unlayered CSS, so an xl:mx-0 utility could never outrank
           it and the rail would go on ignoring the section gutter on desktop. */}
       <div className="mb-10 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] max-xl:mx-[calc(-1*clamp(20px,4vw,64px))] max-xl:px-[clamp(20px,4vw,64px)] xl:overflow-visible xl:pb-0 [&::-webkit-scrollbar]:hidden">
-        <FilterPill active={industry === null} onClick={() => onSelect?.(null)}>
+        <FilterTab active={industry === null} onClick={() => onSelect?.(null)}>
           All
-        </FilterPill>
+        </FilterTab>
         {(Object.keys(INDUSTRIES) as IndustrySlug[]).map((slug) => (
-          <FilterPill
+          <FilterTab
             key={slug}
             active={industry === slug}
             onClick={() => onSelect?.(slug)}
           >
             {INDUSTRY_FILTER_LABELS[slug]}
-          </FilterPill>
+          </FilterTab>
         ))}
       </div>
 
@@ -183,34 +185,5 @@ function GridInner({
         ))}
       </div>
     </Section>
-  );
-}
-
-function FilterPill({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={cn(
-        // shrink-0 so the rail scrolls on phones instead of squeezing every
-        // pill onto one line. No scroll snapping: snap-start would align the
-        // first pill to the scrollport edge and swallow the rail's gutter.
-        "shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-body font-medium transition",
-        active
-          ? "border-accent bg-accent text-accent-ink"
-          : "border-light-border text-light-text hover:bg-light-surface",
-      )}
-    >
-      {children}
-    </button>
   );
 }

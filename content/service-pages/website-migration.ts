@@ -313,7 +313,7 @@ export const websiteMigration: ServicePageContent = {
         name: "Squarespace",
         logo: "/platforms/squarespace.svg",
         href: "/services/squarespace-to-wix-studio",
-        desc: "What Squarespace's export actually contains, why every blog URL changes, and what the move costs.",
+        desc: "What Squarespace's export actually contains, what it silently leaves behind, and what the move costs.",
       },
       {
         name: "Wix Harmony",
@@ -324,7 +324,8 @@ export const websiteMigration: ServicePageContent = {
       {
         name: "WordPress",
         logo: "/platforms/wordpress.svg",
-        desc: "Leave the plugin updates, security patching, and hosting behind without losing a ranking.",
+        href: "/services/wordpress-to-wix-studio",
+        desc: "What Wix's WordPress importer actually takes, what it leaves behind, and what the plugins become.",
       },
       {
         name: "Webflow",

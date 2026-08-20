@@ -11,7 +11,11 @@ import { groq } from "next-sanity";
  */
 const notDraft = `!(_id in path("drafts.**"))`;
 
-/** Everything the index cards and the related rail need. No body. */
+/**
+ * Everything the index cards and the related rail need. The body is NOT
+ * projected: `pt::text()` flattens it to plain text server-side and only its
+ * length travels, so a card knows its read time without shipping the article.
+ */
 const cardFields = groq`
   _id,
   title,
@@ -19,7 +23,8 @@ const cardFields = groq`
   excerpt,
   category,
   publishedAt,
-  featured
+  featured,
+  "bodyChars": length(pt::text(body))
 `;
 
 export const postsQuery = groq`

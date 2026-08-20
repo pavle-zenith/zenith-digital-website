@@ -73,8 +73,8 @@ export function MigrationGuide({ data }: { data: MigrationGuideContent }) {
     ID.fit,
     ID.transfers,
     ID.steps,
-    ID.seo,
-    ID.mistakes,
+    ...(data.seoMechanics ? [ID.seo] : []),
+    ...(data.mistakes ? [ID.mistakes] : []),
     ...(data.cost ? [ID.cost] : []),
     ...(data.proof ? [ID.proof] : []),
     ID.faq,
@@ -123,36 +123,44 @@ export function MigrationGuide({ data }: { data: MigrationGuideContent }) {
       <Testimonials />
       <ClientLogos />
 
-      <LongForm
-        id={ID.seo}
-        heading={data.seoMechanics.heading}
-        intro={data.seoMechanics.intro}
-        items={data.seoMechanics.items}
-        tone="light"
-      />
+      {data.seoMechanics ? (
+        <LongForm
+          id={ID.seo}
+          heading={data.seoMechanics.heading}
+          intro={data.seoMechanics.intro}
+          items={data.seoMechanics.items}
+          tone="light"
+        />
+      ) : null}
 
       <GuideAuditCta data={data} />
 
       {/* Tabs rather than a stack: this block is a small closed set of
           decisions to pick between, not a sequence to read through, and it
           breaks up a page that is otherwise divided prose. */}
-      <GuideTabs
-        id={ID.mistakes}
-        heading={data.mistakes.heading}
-        intro={data.mistakes.intro}
-        items={data.mistakes.items}
-      />
+      {data.mistakes ? (
+        <GuideTabs
+          id={ID.mistakes}
+          heading={data.mistakes.heading}
+          intro={data.mistakes.intro}
+          items={data.mistakes.items}
+        />
+      ) : null}
 
       <GuideCost data={data} />
 
-      <GuideSources data={data} />
-
+      {/* The ask lands straight off the back of the FAQ, while the reader is
+          still in decision mode. Sources and further reading follow it: both
+          are reference material, and putting them between the questions and
+          the ask made the reader step over two speed-bumps to convert. */}
       <div id={ID.faq}>
         <Faq data={data.faq} />
       </div>
 
-      <GuideRelated data={data} />
       <CtaBanner data={data.finalCta} />
+
+      <GuideSources data={data} />
+      <GuideRelated data={data} />
     </>
   );
 }
@@ -824,7 +832,7 @@ function GuideAuditCta({ data }: { data: MigrationGuideContent }) {
  * is currently every guide including this one.
  */
 function GuideCost({ data }: { data: MigrationGuideContent }) {
-  if (!data.cost) return <Pricing showWhiteLabel={false} />;
+  if (!data.cost) return <Pricing showWhiteLabel={false} tone="light" />;
   const { cost } = data;
 
   return (

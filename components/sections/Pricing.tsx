@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
+import type { Tone } from "@/lib/types";
 import { pricing } from "@/content/home";
 
 /**
@@ -15,6 +16,7 @@ import { pricing } from "@/content/home";
  */
 export function Pricing({
   showWhiteLabel = true,
+  tone = "dark",
 }: {
   /**
    * The agency white-label band. On by default (homepage, /services); the
@@ -22,39 +24,77 @@ export function Pricing({
    * a platform move is not the audience for a reseller pitch.
    */
   showWhiteLabel?: boolean;
+  /**
+   * Section shell only. The tier cards are solid white either way, so this
+   * swaps the ground behind them: navy with a faint texture, or white with the
+   * same texture inverted, matching the page heroes. The migration guides use
+   * the light shell so the pricing block sits in their white rhythm.
+   */
+  tone?: Tone;
 } = {}) {
+  const dark = tone === "dark";
+
   return (
-    <div className="relative isolate overflow-hidden">
-      {/* Faint texture background */}
-      <div className="absolute inset-0 -z-10 bg-bg">
+    <Section
+      tone={tone}
+      frameClassName="relative !pt-0 !pb-14 md:!pb-24"
+      id="pricing"
+    >
+      {/* Texture confined to the frame column, not the viewport, the same
+          treatment the page heroes use: the ground stops at the side rails
+          rather than bleeding past them. */}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden
+      >
         <Image
           src="/textures/studio-texture.jpg"
           alt=""
           fill
-          className="object-cover opacity-[0.16]"
-          aria-hidden
+          sizes="100vw"
+          className={cn(
+            "object-cover",
+            dark ? "opacity-[0.16]" : "opacity-[0.28] invert",
+          )}
         />
+        {dark ? null : (
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, color-mix(in srgb, var(--color-light-bg) 45%, transparent) 0%, color-mix(in srgb, var(--color-light-bg) 88%, transparent) 50%, color-mix(in srgb, var(--color-light-bg) 45%, transparent) 100%)",
+            }}
+          />
+        )}
       </div>
 
-      <Section
-        tone="dark"
-        className="bg-transparent"
-        frameClassName="!pt-0 !pb-14 md:!pb-24"
-        id="pricing"
-      >
+      <div className="relative">
         {/* Header band: heading + intro left, CTA right */}
         <div className="flex flex-col gap-8 py-16 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <h2 className="font-display text-h2 font-medium leading-tight tracking-tight">
               {pricing.heading}
             </h2>
-            <p className="mt-4 text-body-lg font-medium text-text-muted">
+            <p
+              className={cn(
+                "mt-4 text-body-lg font-medium",
+                dark ? "text-text-muted" : "text-light-muted",
+              )}
+            >
               {pricing.intro}
             </p>
           </div>
           <Link
             href={pricing.cta.href}
-            className="group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-[6px] bg-white px-6 py-3 sm:w-auto text-body font-medium text-bg transition hover:bg-white/90"
+            className={cn(
+              "group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium transition sm:w-auto",
+              // The accent is invisible on navy (CLAUDE.md §15), so the dark
+              // shell keeps the white-filled button and the light shell takes
+              // the standard accent fill.
+              dark
+                ? "bg-white text-bg hover:bg-white/90"
+                : "btn-animated text-accent-ink",
+            )}
           >
             {pricing.cta.label}{" "}
             <span aria-hidden className="btn-arrow">
@@ -74,11 +114,16 @@ export function Pricing({
                   "flex flex-col overflow-hidden rounded-[8px] bg-light-bg text-light-text",
                   // White outline so the featured card's dark header keeps a
                   // defined edge against the dark section behind it.
-                  featured && "ring-1 ring-white/60",
+                  // The featured card's dark header needs a defined edge
+                  // against whichever ground it sits on.
+                  featured &&
+                    (dark
+                      ? "ring-1 ring-white/60"
+                      : "ring-1 ring-light-border"),
                 )}
               >
                 {/* Header zone — the tier's identity block. Alternating solid
-                    treatments: white / navy + texture (featured) / grey. */}
+                      treatments: white / navy + texture (featured) / grey. */}
                 <div
                   className={cn(
                     "relative overflow-hidden",
@@ -187,9 +232,9 @@ export function Pricing({
         </div>
 
         {/* White-label band — a full-width light card below the tier grid.
-            The studio texture is CSS-inverted (mainly light, dark streak
-            shading); the tint gradient keeps the copy on the left readable
-            while the shading opens up on the right. */}
+              The studio texture is CSS-inverted (mainly light, dark streak
+              shading); the tint gradient keeps the copy on the left readable
+              while the shading opens up on the right. */}
         {showWhiteLabel ? (
           <div className="relative mt-4 overflow-hidden rounded-[8px] bg-light-bg text-light-text">
             <Image
@@ -240,8 +285,8 @@ export function Pricing({
             </div>
           </div>
         ) : null}
-      </Section>
-    </div>
+      </div>
+    </Section>
   );
 }
 

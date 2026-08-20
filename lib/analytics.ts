@@ -12,7 +12,18 @@ declare global {
   }
 }
 
-export type LeadForm = "contact" | "free-website-audit" | "partner-application";
+export type LeadForm =
+  | "contact"
+  | "free-website-audit"
+  | "partner-application"
+  /**
+   * A completed Cal.com booking. Deliberately the same `generate_lead` event
+   * as the three forms rather than an event of its own: it is the same thing
+   * happening (a stranger became a lead), the key event is already marked, and
+   * the `Form` custom dimension separates them in reporting. One event, four
+   * sources, no extra GA4 configuration.
+   */
+  | "book-a-call";
 
 /**
  * A form was submitted successfully. `generate_lead` is a GA4 recommended

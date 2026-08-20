@@ -1127,6 +1127,11 @@ export const nav = {
     { label: "Case Studies", href: "/case-studies" },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Partnerships", href: "/partnerships" },
+    // Grouped with the FAQ rather than up beside Case Studies: the footer
+    // already files Blog under "Zenith resources" with the FAQ and the
+    // testimonials, so the two menus sort the site the same way. The
+    // commercial items keep the front of the row.
+    { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
   ],
   ctas: [

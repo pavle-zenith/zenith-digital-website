@@ -8,12 +8,17 @@ import { cn } from "@/lib/utils";
 /**
  * Share this article.
  *
+ * It lives in the facts strip under the hero, at the right-hand end, so it is
+ * available before the read rather than only after it. No visible title: four
+ * recognisable marks in a byline row do not need a label telling you they are
+ * share buttons, and the group carries an accessible name for anyone who
+ * cannot see them.
+ *
  * Icon chips in the same register as the founder section's profile links:
  * inline SVG paths in a local map, no icon package, accessible name carried by
  * `aria-label` so a screen reader hears "Share on LinkedIn" rather than
- * "link". Circles rather than the site's usual 6px squares, which is the one
- * place round wins: these are brand marks, and every platform's own share
- * button is round.
+ * "link". Rounded squares at the sitewide 6px, not circles: every other icon
+ * chip here is a square, and these sit in a strip beside one.
  *
  * COPY LINK IS FIRST because it is the one people actually use. It reads the
  * live URL from the browser rather than taking a prop, so a preview deploy
@@ -63,7 +68,7 @@ const ICONS: Record<string, React.ReactNode> = {
 };
 
 const CHIP =
-  "flex h-11 w-11 items-center justify-center rounded-full border border-light-border bg-light-bg text-light-text transition hover:border-accent hover:text-accent";
+  "flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text transition hover:border-accent hover:text-accent";
 
 function Glyph({ name }: { name: string }) {
   return (
@@ -130,33 +135,32 @@ export function PostShare({ title }: { title: string }) {
   ];
 
   return (
-    <div>
-      <p className="font-mono text-label uppercase track-label text-light-muted">
-        {share.label}
-      </p>
-      <div className="mt-4 flex flex-wrap gap-3 border-t border-light-border pt-5">
-        <button
-          type="button"
-          onClick={copy}
-          aria-label={copied ? share.copied : share.copy}
-          className={cn(CHIP, copied && "border-accent text-accent")}
-        >
-          <Glyph name={copied ? "check" : "link"} />
-        </button>
+    <div
+      role="group"
+      aria-label={share.label}
+      className="flex shrink-0 flex-wrap items-center gap-2"
+    >
+      <button
+        type="button"
+        onClick={copy}
+        aria-label={copied ? share.copied : share.copy}
+        className={cn(CHIP, copied && "border-accent text-accent")}
+      >
+        <Glyph name={copied ? "check" : "link"} />
+      </button>
 
-        {targets.map((t) => (
-          <a
-            key={t.key}
-            href={t.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t.label}
-            className={CHIP}
-          >
-            <Glyph name={t.key} />
-          </a>
-        ))}
-      </div>
+      {targets.map((t) => (
+        <a
+          key={t.key}
+          href={t.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={t.label}
+          className={CHIP}
+        >
+          <Glyph name={t.key} />
+        </a>
+      ))}
       {/* The confirmation is announced rather than drawn: the chip already
           swaps to a tick, and a visible toast beside four small buttons is
           more furniture than the interaction deserves. */}

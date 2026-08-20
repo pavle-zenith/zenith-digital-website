@@ -126,10 +126,18 @@ export const post = {
    */
   chapters: {
     label: "Chapters",
+    /**
+     * The standing ask in the sidebar. It travels the whole article, so it
+     * carries proof rather than just a button: real client faces, the sitewide
+     * count, and what we actually are. Every claim here is one the rest of the
+     * site already makes (see content/home.ts), so nothing new is asserted in
+     * a sidebar where nobody would think to check it.
+     */
     cta: {
-      heading: "Rather just ask us?",
+      stat: "100+ websites built",
+      heading: "Your Wix Studio build partner",
       paragraph:
-        "Twenty minutes, an honest read on your site, and a fixed-price proposal the same day.",
+        "Design, build, migration and search, handled by one senior team. Top 1% Wix Partner, shipping since 2021.",
       cta: { label: "Book a call", href: "/book-a-call" } as CtaLink,
     },
   },

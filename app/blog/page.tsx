@@ -5,7 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { BlogIndex } from "@/components/sections/blog/BlogIndex";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { blogIndex } from "@/content/blog";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetchSafe } from "@/sanity/lib/client";
 import { postsQuery } from "@/sanity/lib/queries";
 import type { PostCard } from "@/sanity/lib/types";
 
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
  * them.
  */
 export default async function BlogPage() {
-  const posts = await sanityFetch<PostCard[]>(postsQuery);
+  const posts = await sanityFetchSafe<PostCard[]>(postsQuery, []);
 
   return (
     <>

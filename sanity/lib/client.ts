@@ -39,6 +39,41 @@ export const POST_TAG = "post";
  * missed, the site catches up within the hour rather than serving a stale post
  * until the next deploy.
  */
+/**
+ * The build-time variant, for the paths that run during `next build`.
+ *
+ * WHY THIS EXISTS. `generateStaticParams`, the blog index and the sitemap all
+ * fetch from Sanity while the site is being built. A throw in any of them fails
+ * the WHOLE deploy, not just the blog: the homepage, the services pages and the
+ * eight migration guides all stop shipping because a CMS the commercial pages
+ * never touch was briefly unreachable. Observed for real: a build died at
+ * "Collecting page data" on a network that couldn't reach the Sanity host.
+ *
+ * So these callers degrade instead. An unreachable Sanity means a site that
+ * deploys with an empty blog and a sitemap missing its posts, both of which
+ * self-heal on the next revalidation. That is strictly better than no deploy.
+ *
+ * Only for build-time paths. A single post page still throws, because there
+ * the honest response to "we cannot load this" is an error, not a silent 404
+ * on a URL that really exists.
+ */
+export async function sanityFetchSafe<T>(
+  query: string,
+  fallback: T,
+  params: Record<string, unknown> = {},
+): Promise<T> {
+  try {
+    return await sanityFetch<T>(query, params);
+  } catch (error) {
+    // Loud in the build log, non-fatal to the build.
+    console.error(
+      "[sanity] build-time fetch failed, continuing without it:",
+      error instanceof Error ? error.message : error,
+    );
+    return fallback;
+  }
+}
+
 export async function sanityFetch<T>(
   query: string,
   params: Record<string, unknown> = {},

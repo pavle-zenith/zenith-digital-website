@@ -137,7 +137,7 @@ export const post = {
       stat: "100+ websites built",
       heading: "Your Wix Studio build partner",
       paragraph:
-        "Design, build, migration and search, handled by one senior team. Top 1% Wix Partner, shipping since 2021.",
+        "Design, build, migration and search, handled by one senior team. Wix Legend Partner, shipping since 2021.",
       cta: { label: "Book a call", href: "/book-a-call" } as CtaLink,
     },
   },

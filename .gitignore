@@ -33,6 +33,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# ...except the template, which documents every var the app reads and
+# carries no secrets. Without this negation the '.env*' rule above hides
+# it from git and a fresh clone has no record of what needs setting.
+!.env.local.example
 
 # vercel
 .vercel
@@ -41,3 +45,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 site asset dump/client headshots/Contract PDF formatting.pdf
+
+# Scratch folder for files the remote-device bridge cannot delete (it has no
+# rm), so they get moved here instead. Never meant to be committed.
+_to_delete/

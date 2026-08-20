@@ -12,7 +12,6 @@ import {
   GuideContentCol,
 } from "@/components/sections/migration/GuideAside";
 import { PostChapters } from "@/components/sections/blog/PostChapters";
-import { PostShare } from "@/components/sections/blog/PostShare";
 import { PostCover } from "@/components/sections/blog/PostCover";
 import { AuditPanel } from "@/components/sections/blog/AuditPanel";
 import { CtaBand } from "@/components/sections/migration/CtaBand";
@@ -64,6 +63,17 @@ const MEASURE = "max-w-[78ch]";
 const ANCHOR_OFFSET = "scroll-mt-32";
 
 /**
+ * BODY PROSE IS 18px HERE, one step up from the sitewide 16px.
+ *
+ * `body-lg` rather than an off-scale value, so this stays inside the §7 type
+ * scale. A post is a thousand words of continuous reading in a single column;
+ * the rest of the site is short blocks of copy inside layouts, where 16px is
+ * right. Only running prose moves: table cells, captions and code keep 16px,
+ * because those are scanned rather than read and denser suits them.
+ */
+const PROSE = "text-body-lg";
+
+/**
  * The article now follows the byline strip rather than sitting straight under
  * the hero, so it opens on a rule and takes the padding that goes with one.
  */
@@ -102,7 +112,7 @@ export function PostBody({
           hero. One step up in size from the body and nothing else: it is the
           same sentence a reader met on the index card, so it introduces the
           piece instead of competing with the title above it. */}
-      <p className="text-body-lg leading-relaxed text-light-text">
+      <p className="text-body-lg font-medium leading-relaxed text-light-text">
         {post.excerpt}
       </p>
       {cut > 0 ? (
@@ -120,17 +130,11 @@ export function PostBody({
 
   // Under three chapters there is nothing to orient in and the column would be
   // a column for its own sake, so the body keeps the full frame to itself.
-  // Same threshold, and the same reasoning, as the guides' navigator. With no
-  // sidebar there is nowhere else for the share row, so it always renders.
+  // Same threshold, and the same reasoning, as the guides' navigator.
   if (chapters.length < NAV_MIN_SECTIONS) {
     return (
       <Section tone="light" frameClassName="!py-14 md:!py-20">
-        <div className={MEASURE}>
-          {article}
-          <div className="mt-14">
-            <PostShare title={post.title} />
-          </div>
-        </div>
+        <div className={MEASURE}>{article}</div>
       </Section>
     );
   }
@@ -143,12 +147,6 @@ export function PostBody({
       <div className={GUIDE_ASIDE_GRID_WIDE}>
         <GuideContentCol wide className={COLUMN_PAD}>
           {article}
-          {/* Phones only: the sidebar's share row is desktop-only, and asking
-              someone to share an article they have not opened yet is the wrong
-              order. Here it lands on the last paragraph instead. */}
-          <div className="mt-14 lg:hidden">
-            <PostShare title={post.title} />
-          </div>
         </GuideContentCol>
 
         <GuideAside
@@ -161,7 +159,7 @@ export function PostBody({
           // short screen.
           stickyClassName="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          <PostChapters items={chapters} title={post.title} />
+          <PostChapters items={chapters} />
         </GuideAside>
       </div>
     </Section>
@@ -177,7 +175,7 @@ function components(byKey: Record<string, string>): PortableTextComponents {
   return {
     block: {
       normal: ({ children }) => (
-        <p className="mt-6 text-body leading-relaxed text-light-text">
+        <p className={cn("mt-6 leading-relaxed text-light-text", PROSE)}>
           {children}
         </p>
       ),
@@ -225,21 +223,24 @@ function components(byKey: Record<string, string>): PortableTextComponents {
       // Same marker as PointList, so a plain bullet and a labelled point read
       // as one list system rather than two.
       bullet: ({ children }) => (
-        <li className="flex gap-3 text-body leading-relaxed text-light-text">
+        <li className={cn("flex gap-3 leading-relaxed text-light-text", PROSE)}>
           <span
             aria-hidden
-            className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+            className="mt-[0.7rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
           />
           <span>{children}</span>
         </li>
       ),
       number: ({ children, index }) => (
-        <li className="flex gap-3 text-body leading-relaxed text-light-text">
+        <li className={cn("flex gap-3 leading-relaxed text-light-text", PROSE)}>
           {/* Body-sized rather than a mono label: an inline marker has to sit
               on the same baseline as the sentence it numbers. */}
           <span
             aria-hidden
-            className="w-5 shrink-0 text-body font-medium leading-relaxed text-light-text"
+            className={cn(
+              "w-5 shrink-0 font-medium leading-relaxed text-light-text",
+              PROSE,
+            )}
           >
             {`${(index ?? 0) + 1}.`}
           </span>
@@ -281,11 +282,11 @@ function components(byKey: Record<string, string>): PortableTextComponents {
       pointsList: ({ value }: { value: PostPointsListBlock }) => (
         <div className="mt-8">
           {value.lead ? (
-            <p className="text-body leading-relaxed text-light-text">
+            <p className={cn("leading-relaxed text-light-text", PROSE)}>
               {value.lead}
             </p>
           ) : null}
-          <PointList points={value.points ?? []} tone="light" />
+          <PointList points={value.points ?? []} tone="light" size="body-lg" />
         </div>
       ),
 
@@ -297,10 +298,31 @@ function components(byKey: Record<string, string>): PortableTextComponents {
         const isAudit = value.ctaHref.startsWith("/free-website-audit");
         const cta = { label: value.ctaLabel, href: value.ctaHref };
 
+        // THE AUDIT PANEL DOES NOT BLEED, the dark band does. A photo band
+        // gains from running to the rail: the image is the point and it has
+        // its own generous inset. The audit panel is a column of type, and
+        // bleeding it put the heading hard against the frame rail with nothing
+        // between them. It keeps the column's padding and spans the text
+        // column instead.
+        if (isAudit) {
+          return (
+            // `!max-w-none` still opts it out of the per-child reading measure,
+            // so it fills the column rather than stopping at 78ch.
+            <div className="mt-12 !max-w-none">
+              <AuditPanel
+                heading={value.heading}
+                paragraph={value.paragraph}
+                ctaLabel={value.ctaLabel}
+                ctaHref={value.ctaHref}
+              />
+            </div>
+          );
+        }
+
         return (
           // Two escapes, both needed. `!max-w-none` opts the block out of the
           // per-child reading measure, and the negative margins cancel the
-          // column's own padding so the block runs from the frame rail to the
+          // column's own padding so the band runs from the frame rail to the
           // vertical divider instead of stopping inside the text column.
           //
           // NOT `frame-bleed`. That utility is declared unlayered in
@@ -311,22 +333,13 @@ function components(byKey: Record<string, string>): PortableTextComponents {
           // sat on top of the chapters column. Both sides are plain utilities
           // here so they sort in the same layer and the override actually wins.
           <div className="mt-12 !max-w-none mx-[calc(clamp(20px,4vw,64px)*-1)] lg:mr-[-3.5rem]">
-            {isAudit ? (
-              <AuditPanel
-                heading={value.heading}
-                paragraph={value.paragraph}
-                ctaLabel={value.ctaLabel}
-                ctaHref={value.ctaHref}
-              />
-            ) : (
-              <CtaBand
-                heading={value.heading}
-                paragraph={value.paragraph}
-                ctas={[cta]}
-                tone="light"
-                variant="banner"
-              />
-            )}
+            <CtaBand
+              heading={value.heading}
+              paragraph={value.paragraph}
+              ctas={[cta]}
+              tone="light"
+              variant="banner"
+            />
           </div>
         );
       },

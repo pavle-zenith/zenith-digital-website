@@ -149,6 +149,12 @@ export default async function BlogPostPage({ params }: Props) {
           vertical list handles and an equal-width rail does not. */}
       <PostBody post={data} chapters={sections} />
 
+      {/* The main ask sits ABOVE the FAQ (owner decision, 20 August 2026).
+          The questions are objection handling: a reader still working through
+          them has not decided, and a reader who has decided should not have to
+          scroll past eight of them to find the button. */}
+      <CtaBanner data={furniture.cta} />
+
       {/* The chapters column ends with the body it sits beside, so nothing has
           to retire here. The id stays as a stable anchor for the FAQ. */}
       {hasFaq ? (
@@ -166,7 +172,6 @@ export default async function BlogPostPage({ params }: Props) {
 
       <PostAudit />
       <PostRelated posts={related} />
-      <CtaBanner data={furniture.cta} />
 
       {/* Sources close the page, below the asks. They are the citability moat
           rather than part of the read: a visitor who wants them is checking

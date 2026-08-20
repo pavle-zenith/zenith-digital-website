@@ -15,6 +15,11 @@ import { cn } from "@/lib/utils";
  * left, and the deliverable drawn on the right. Showing what you get converts
  * better than describing it, and it is our own output rather than stock art.
  *
+ * SIZED FOR AN ARTICLE COLUMN, not a page. It renders inside a post body at
+ * roughly half the width a full section gets, so the heading is h3 rather than
+ * h2 and every inset is a notch tighter. At page scale it was the loudest
+ * thing on the article and pushed its own two columns into wrapping.
+ *
  * NOT a CtaBand variant. A two-column split with a rendered artefact and a
  * field in it is a different object from a photograph with text on top, and
  * folding it into CtaBand would give that component two layouts and one name.
@@ -36,12 +41,12 @@ export function AuditPanel({
   const { points, form, report } = furniture.audit;
 
   return (
-    <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
+    <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-10">
       <div>
-        <p className="font-display text-h2 font-medium leading-tight tracking-tight text-balance text-light-text">
+        <p className="font-display text-h3 font-medium leading-snug tracking-tight text-balance text-light-text">
           {heading}
         </p>
-        <p className="mt-4 max-w-md text-body-lg leading-relaxed text-light-muted">
+        <p className="mt-3 max-w-md text-body leading-relaxed text-light-muted">
           {paragraph}
         </p>
 
@@ -56,15 +61,17 @@ export function AuditPanel({
 
       {/* The artefact. Two stacked white cards on a tinted ground, which is
           the site's surface-over-surface elevation rather than a shadow. */}
-      <div className="rounded-card bg-light-surface p-5 md:p-7">
-        <div className="rounded-[10px] border border-light-border bg-light-bg p-6">
+      <div className="rounded-card bg-light-surface p-4 md:p-5">
+        <div className="rounded-[10px] border border-light-border bg-light-bg p-5">
           <p className="font-mono text-label uppercase track-label text-light-muted">
             {report.label}
           </p>
-          <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-3">
             <p className="font-display font-medium leading-none tracking-tight text-light-text">
-              <span className="text-display tabular-nums">{report.score}</span>
-              <span className="text-h3 text-light-muted">{report.outOf}</span>
+              <span className="text-h1 tabular-nums">{report.score}</span>
+              <span className="text-body-lg text-light-muted">
+                {report.outOf}
+              </span>
             </p>
             {/* Amber, not red: the palette has a warning token and no danger
                 one, and inventing a hue for a mock is not worth a new token. */}
@@ -72,10 +79,10 @@ export function AuditPanel({
               {report.issues}
             </span>
           </div>
-          <p className="mt-3 text-body text-light-muted">{report.scoreLabel}</p>
+          <p className="mt-2 text-body text-light-muted">{report.scoreLabel}</p>
         </div>
 
-        <div className="mt-4 rounded-[10px] border border-light-border bg-light-bg p-6">
+        <div className="mt-3 rounded-[10px] border border-light-border bg-light-bg p-5">
           <p className="font-mono text-label uppercase track-label text-light-muted">
             {report.findingsLabel}
           </p>
@@ -116,7 +123,7 @@ function PromiseList({
   const [open, setOpen] = useState(0);
 
   return (
-    <div className="mt-8 divide-y divide-light-border rounded-card border border-light-border">
+    <div className="mt-6 divide-y divide-light-border rounded-card border border-light-border">
       {points.map((point, i) => {
         const isOpen = open === i;
         return (
@@ -131,7 +138,7 @@ function PromiseList({
               type="button"
               aria-expanded={isOpen}
               onClick={() => setOpen(i)}
-              className="w-full px-5 py-4 text-left"
+              className="w-full px-4 py-3.5 text-left"
             >
               <span
                 className={cn(
@@ -151,7 +158,7 @@ function PromiseList({
               )}
             >
               <div className="overflow-hidden">
-                <p className="px-5 pb-5 text-body leading-relaxed text-light-muted">
+                <p className="px-4 pb-4 text-body leading-relaxed text-light-muted">
                   {point.body}
                 </p>
               </div>
@@ -197,7 +204,7 @@ function HandoffField({
         e.preventDefault();
         router.push(target);
       }}
-      className="mt-6 flex flex-col gap-2 rounded-card border border-light-border bg-light-bg p-2 sm:flex-row sm:items-center"
+      className="mt-5 flex flex-col gap-2 rounded-card border border-light-border bg-light-bg p-2 sm:flex-row sm:items-center"
     >
       <label className="sr-only" htmlFor="audit-panel-site">
         {label}
@@ -211,13 +218,13 @@ function HandoffField({
         value={site}
         onChange={(e) => setSite(e.target.value)}
         placeholder={placeholder}
-        className="min-w-0 flex-1 bg-transparent px-3 py-3 text-body text-light-text outline-none placeholder:text-light-muted"
+        className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-body text-light-text outline-none placeholder:text-light-muted"
       />
       {/* Matches the shared Button's primary face. It cannot BE that component:
           Button renders a link, and this has to submit. */}
       <button
         type="submit"
-        className="group btn-animated inline-flex w-full items-center justify-center gap-2 rounded-[6px] px-6 py-3 text-body font-medium text-accent-ink transition active:scale-[.99] sm:w-auto"
+        className="group btn-animated inline-flex w-full items-center justify-center gap-2 rounded-[6px] px-5 py-2.5 text-body font-medium text-accent-ink transition active:scale-[.99] sm:w-auto"
       >
         {ctaLabel}
         <span aria-hidden className="btn-arrow">

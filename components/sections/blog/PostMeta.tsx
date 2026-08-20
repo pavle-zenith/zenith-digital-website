@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { MetaStrip } from "@/components/sections/MetaStrip";
+import { PostShare } from "@/components/sections/blog/PostShare";
 import { blogIndex, post as furniture } from "@/content/blog";
 import { founderCore } from "@/content/founder";
 import { readingMinutes } from "@/lib/blog";
@@ -15,6 +16,10 @@ import type { Post } from "@/sanity/lib/types";
  * The author leads, with his photo: name and photo come from `founderCore`,
  * the same record the founder section and the Person schema read, so the three
  * cannot drift.
+ *
+ * Share sits in the strip's trailing slot, the same one the case studies use
+ * for their live-site link, so a reader can pass an article on before reading
+ * it rather than only after.
  *
  * "Reviewed by" and "Last verified" were dropped (owner decision, 20 August
  * 2026). The document keeps `lastVerified` and it still feeds `dateModified`
@@ -52,6 +57,8 @@ export function PostMeta({ data }: { data: Post }) {
           value: `${readingMinutes(data.bodyChars)} ${blogIndex.readTimeSuffix}`,
         },
       ]}
-    />
+    >
+      <PostShare title={data.title} />
+    </MetaStrip>
   );
 }

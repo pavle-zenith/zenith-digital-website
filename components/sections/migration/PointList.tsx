@@ -10,9 +10,16 @@ import type { Tone } from "@/lib/types";
 export function PointList({
   points,
   tone,
+  size = "body",
 }: {
   points: { label: string; body: string }[];
   tone: Tone;
+  /**
+   * Body copy size. The guides set prose at 16px; the blog reads at 18px, and
+   * a points list sitting between two paragraphs has to match whichever it is
+   * embedded in or the block reads as a pasted-in fragment.
+   */
+  size?: "body" | "body-lg";
 }) {
   const dark = tone === "dark";
   return (
@@ -24,13 +31,17 @@ export function PointList({
           <span
             aria-hidden
             className={cn(
-              "mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full",
+              // Optical centring on the first line, so the offset tracks the
+              // line height the copy is actually set at.
+              size === "body-lg" ? "mt-[0.7rem]" : "mt-[0.55rem]",
+              "h-1.5 w-1.5 shrink-0 rounded-full",
               dark ? "bg-text" : "bg-accent",
             )}
           />
           <p
             className={cn(
-              "text-body leading-relaxed",
+              size === "body-lg" ? "text-body-lg" : "text-body",
+              "leading-relaxed",
               dark ? "text-text-muted" : "text-light-text",
             )}
           >

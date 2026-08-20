@@ -18,6 +18,13 @@ import type { Tone } from "@/lib/types";
  * Below lg the aside moves above the content and its divider rotates to a
  * bottom rule, so it reads as a contents list rather than a stranded sidebar.
  *
+ * INSETS. Below lg the aside is a full-width block above the content, so it
+ * keeps the site gutter like any other block (CLAUDE.md §15). From lg it stops
+ * borrowing that gutter: it is a 320-380px column, and a 64px inset on the rail
+ * side of it was spending a fifth of the column on air and wrapping labels that
+ * would otherwise fit. Desktop takes a flat, symmetric 32px instead, measured
+ * from the divider on one side and the frame rail on the other.
+ *
  * WIDTHS. Two literal grid strings rather than one parameterised helper:
  * Tailwind only generates an arbitrary value it can see written out, so a
  * template literal would compile to nothing. The guides use the narrow column
@@ -133,9 +140,8 @@ export function GuideAside({
             column, so every hairline runs from the vertical rule to the rail. */}
         <p
           className={cn(
-            "font-mono text-label uppercase track-label lg:pl-10",
+            "font-mono text-label uppercase track-label lg:px-8",
             GUTTER,
-            "lg:pr-[clamp(20px,4vw,64px)]",
             muted,
           )}
         >
@@ -155,7 +161,7 @@ export function GuideAside({
  */
 export function guideAsideRow(tone: Tone) {
   return cn(
-    "border-b lg:pl-10 lg:pr-[clamp(20px,4vw,64px)]",
+    "border-b lg:px-8",
     GUTTER,
     tone === "dark" ? "border-border" : "border-light-border",
   );

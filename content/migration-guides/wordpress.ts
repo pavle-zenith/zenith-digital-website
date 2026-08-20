@@ -92,11 +92,13 @@ export const wordpress: MigrationGuideContent = {
       },
       {
         label: "What it costs",
-        value: "From €1,750, quoted as a fixed price once the page and post count is known.",
+        value:
+          "From €1,750, quoted as a fixed price once the page and post count is known.",
       },
       {
         label: "How long it takes",
-        value: "Two to five weeks, plus 30 days of index monitoring after launch.",
+        value:
+          "Two to five weeks, plus 30 days of index monitoring after launch.",
       },
       {
         label: "DIY difficulty",
@@ -165,81 +167,97 @@ export const wordpress: MigrationGuideContent = {
     rows: [
       {
         item: "Blog post text, images and video",
+        icon: "pen",
         status: "carries",
         note: "Wix's importer brings post content across with its images, video, original publish dates and any alt text you had entered.",
       },
       {
         item: "Blog categories",
+        icon: "layers",
         status: "carries",
         note: "Categories migrate and stay linked to their posts, which is the one taxonomy that survives the trip.",
       },
       {
         item: "Your domain",
+        icon: "globe",
         status: "carries",
         note: "Points at the new site with no registrar transfer, so the WordPress site keeps serving traffic until the afternoon you cut over.",
       },
       {
         item: "Static page content",
+        icon: "type",
         status: "rebuilt",
         note: "The importer covers blog posts only, so About, Services and every other page is rebuilt with its copy moved across by hand.",
       },
       {
         item: "Media library",
+        icon: "image",
         status: "rebuilt",
         note: "The WordPress export file references media rather than containing it, so anything outside a blog post is pulled down and re-uploaded.",
       },
       {
         item: "Custom post types and custom fields",
+        icon: "server",
         status: "rebuilt",
         note: "They're in the WordPress export as data but nothing renders them on the other side, so they're remodelled as Wix CMS collections.",
       },
       {
         item: "SEO titles, descriptions and schema",
+        icon: "tags",
         status: "rebuilt",
         note: "Yoast or Rank Math settings live in the plugin rather than the post, so they're re-entered on the new site and diffed before cutover.",
       },
       {
         item: "Post formatting",
+        icon: "brush",
         status: "rebuilt",
         note: "Wix says some but possibly not all of your formatting survives the import, so posts get a manual pass rather than a spot check.",
       },
       {
         item: "Blog post URLs",
+        icon: "redirect",
         status: "rebuilt",
         note: "Wix's Blog app forces a /post/ prefix that can't be removed, but a CMS-built blog lets you set the prefix yourself, so your existing post paths can be kept exactly.",
       },
       {
         item: "Contact forms",
+        icon: "form",
         status: "replaced",
         note: "Wix names contact forms in the importer's exclusion list, so forms are rebuilt natively and pointed at the same destinations.",
       },
       {
         item: "Plugin functionality",
+        icon: "plug",
         status: "replaced",
         note: "Bookings, memberships, events and SEO tooling exist as native Wix features, so the job is matching behaviour rather than porting code.",
       },
       {
         item: "WooCommerce",
+        icon: "cart",
         status: "replaced",
         note: "Wix Stores covers the same ground but no WordPress product import path is documented, so check what your catalogue export gives you before planning around it.",
       },
       {
         item: "Tags, author names and comments",
+        icon: "users",
         status: "lost",
         note: "Wix lists all three as excluded from the import, so tags go, every post arrives under your name, and comments stay on the old site.",
       },
       {
         item: "Custom code and PDFs",
+        icon: "braces",
         status: "lost",
         note: "Manually inserted HTML and CSS snippets, custom plugins, and attached documents like PDFs are all named exclusions and get re-added deliberately.",
       },
       {
         item: "Drafts and scheduled posts",
+        icon: "calendar",
         status: "lost",
         note: "Only published posts import, and password-protected ones need unlocking first, so anything unpublished is copied across manually.",
       },
       {
         item: "Your theme",
+        icon: "palette",
         status: "lost",
         note: "Nothing about a WordPress theme survives, and that's the point of moving: the rebuild is what removes the layer you were maintaining.",
       },

@@ -5,10 +5,21 @@ import type { PortableTextBlock } from "@portabletext/types";
 
 import { Section } from "@/components/ui/Section";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
+import {
+  GUIDE_ASIDE_GRID_WIDE,
+  GUIDE_SECTION_FRAME,
+  GuideAside,
+  GuideContentCol,
+} from "@/components/sections/migration/GuideAside";
+import { PostChapters } from "@/components/sections/blog/PostChapters";
+import { PostShare } from "@/components/sections/blog/PostShare";
+import { PostCover } from "@/components/sections/blog/PostCover";
+import { AuditPanel } from "@/components/sections/blog/AuditPanel";
 import { CtaBand } from "@/components/sections/migration/CtaBand";
 import { StatusChip } from "@/components/sections/migration/TransfersTable";
 import { PointList } from "@/components/sections/migration/PointList";
-import { headingAnchors } from "@/lib/blog";
+import { post as furniture } from "@/content/blog";
+import { headingAnchors, NAV_MIN_SECTIONS } from "@/lib/blog";
 import { cn, isInternal } from "@/lib/utils";
 import type {
   Post,
@@ -30,28 +41,128 @@ import type {
  * reader moving from a migration guide to a post cannot tell that one is a
  * file and the other is a CMS document.
  *
- * The measure and rhythm are the guides' long-form treatment: a single 68ch
- * column, H2s opening a new stretch of reading at 64px, and hairlines only
- * where a block genuinely ends a thought.
+ * The measure and rhythm are the guides' long-form treatment: a single
+ * reading column, H2s opening a new stretch of reading at 64px, and hairlines
+ * only where a block genuinely ends a thought.
  */
 
-/** Reading measure, shared by the body and the blocks that sit inside it. */
-const MEASURE = "max-w-[68ch]";
+/**
+ * Reading measure, shared by the body and the blocks that sit inside it.
+ *
+ * WIDER THAN THE §7 DEFAULT OF 68ch, and only here. A post's column has the
+ * chapters sidebar beside it, which already narrows the text; capping the
+ * prose at 68ch on top of that left a band of dead space between the last
+ * word and the divider. 78ch closes most of it and still stops well short of
+ * the full column. Pages without a sidebar keep 68ch.
+ *
+ * Kept as a literal rather than composed, because Tailwind only generates an
+ * arbitrary value it can read in the source.
+ */
+const MEASURE = "max-w-[78ch]";
 
 /** Clears the sticky site header plus the article navigator when jumping. */
 const ANCHOR_OFFSET = "scroll-mt-32";
 
-export function PostBody({ post }: { post: Post }) {
+/**
+ * The article now follows the byline strip rather than sitting straight under
+ * the hero, so it opens on a rule and takes the padding that goes with one.
+ */
+const COLUMN_PAD = "!pt-10 !pb-14 md:!pt-14 md:!pb-20";
+
+export function PostBody({
+  post,
+  chapters,
+}: {
+  post: Post;
+  chapters: { id: string; label: string }[];
+}) {
   const { byKey } = headingAnchors(post.body);
 
+  // The body is rendered in two passes so the lead image can land between the
+  // opening paragraphs and the first section. The cut is the first H2, which
+  // is the document telling us where the introduction ends: no marker block to
+  // author, and no per-post configuration to keep in step with the prose. A
+  // post with no H2 at all has no introduction to sit under, so the image
+  // leads (cut of 0) rather than being stranded at the end.
+  const firstH2 = post.body.findIndex(
+    (block) =>
+      block._type === "block" && (block as PortableTextBlock).style === "h2",
+  );
+  const cut = firstH2 === -1 ? 0 : firstH2;
+  const serializers = components(byKey);
+
+  const article = (
+    // THE MEASURE MOVED OFF THE COLUMN AND ONTO EACH CHILD. The column now
+    // runs full width, and every direct child of this div is capped at the
+    // reading measure instead. That lets one block opt out with `!max-w-none`
+    // and span the whole column, which is what the CTA banners do: an ask
+    // reads as a band across the article rather than a box inside the text.
+    <div className="[&>*:first-child]:mt-0 [&>*]:max-w-[78ch]">
+      {/* The excerpt as a standfirst, opening the article rather than the
+          hero. One step up in size from the body and nothing else: it is the
+          same sentence a reader met on the index card, so it introduces the
+          piece instead of competing with the title above it. */}
+      <p className="text-body-lg leading-relaxed text-light-text">
+        {post.excerpt}
+      </p>
+      {cut > 0 ? (
+        <PortableText
+          value={post.body.slice(0, cut)}
+          components={serializers}
+        />
+      ) : null}
+      <PostCover slug={post.slug} title={post.title} />
+      {/* Second pass, same serializers and the same `byKey` map, so every
+          heading keeps the id the chapters column is pointing at. */}
+      <PortableText value={post.body.slice(cut)} components={serializers} />
+    </div>
+  );
+
+  // Under three chapters there is nothing to orient in and the column would be
+  // a column for its own sake, so the body keeps the full frame to itself.
+  // Same threshold, and the same reasoning, as the guides' navigator. With no
+  // sidebar there is nowhere else for the share row, so it always renders.
+  if (chapters.length < NAV_MIN_SECTIONS) {
+    return (
+      <Section tone="light" frameClassName="!py-14 md:!py-20">
+        <div className={MEASURE}>
+          {article}
+          <div className="mt-14">
+            <PostShare title={post.title} />
+          </div>
+        </div>
+      </Section>
+    );
+  }
+
   return (
-    <Section
-      tone="light"
-      divide={false}
-      frameClassName="!pb-14 !pt-4 md:!pb-20"
-    >
-      <div className={cn(MEASURE, "[&>*:first-child]:mt-0")}>
-        <PortableText value={post.body} components={components(byKey)} />
+    <Section tone="light" frameClassName={GUIDE_SECTION_FRAME}>
+      {/* The guides' aside system, unchanged: article left at the reading
+          measure, chapters right, one hairline running the full height between
+          them, and the whole thing stacked below lg. */}
+      <div className={GUIDE_ASIDE_GRID_WIDE}>
+        <GuideContentCol wide className={COLUMN_PAD}>
+          {article}
+          {/* Phones only: the sidebar's share row is desktop-only, and asking
+              someone to share an article they have not opened yet is the wrong
+              order. Here it lands on the last paragraph instead. */}
+          <div className="mt-14 lg:hidden">
+            <PostShare title={post.title} />
+          </div>
+        </GuideContentCol>
+
+        <GuideAside
+          label={furniture.chapters.label}
+          tone="light"
+          className={COLUMN_PAD}
+          // A post is longer than a guide section, so the sticky box caps
+          // itself to the viewport and scrolls internally rather than running
+          // its last chapters, the CTA and the share row off the bottom of a
+          // short screen.
+          stickyClassName="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          <PostChapters items={chapters} title={post.title} />
+        </GuideAside>
       </div>
     </Section>
   );
@@ -66,7 +177,7 @@ function components(byKey: Record<string, string>): PortableTextComponents {
   return {
     block: {
       normal: ({ children }) => (
-        <p className="mt-6 text-body leading-relaxed text-light-muted">
+        <p className="mt-6 text-body leading-relaxed text-light-text">
           {children}
         </p>
       ),
@@ -114,7 +225,7 @@ function components(byKey: Record<string, string>): PortableTextComponents {
       // Same marker as PointList, so a plain bullet and a labelled point read
       // as one list system rather than two.
       bullet: ({ children }) => (
-        <li className="flex gap-3 text-body leading-relaxed text-light-muted">
+        <li className="flex gap-3 text-body leading-relaxed text-light-text">
           <span
             aria-hidden
             className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
@@ -123,7 +234,7 @@ function components(byKey: Record<string, string>): PortableTextComponents {
         </li>
       ),
       number: ({ children, index }) => (
-        <li className="flex gap-3 text-body leading-relaxed text-light-muted">
+        <li className="flex gap-3 text-body leading-relaxed text-light-text">
           {/* Body-sized rather than a mono label: an inline marker has to sit
               on the same baseline as the sentence it numbers. */}
           <span
@@ -170,22 +281,55 @@ function components(byKey: Record<string, string>): PortableTextComponents {
       pointsList: ({ value }: { value: PostPointsListBlock }) => (
         <div className="mt-8">
           {value.lead ? (
-            <p className="text-body text-light-muted">{value.lead}</p>
+            <p className="text-body leading-relaxed text-light-text">
+              {value.lead}
+            </p>
           ) : null}
           <PointList points={value.points ?? []} tone="light" />
         </div>
       ),
 
-      calloutCta: ({ value }: { value: PostCalloutCtaBlock }) => (
-        <div className="mt-10">
-          <CtaBand
-            heading={value.heading}
-            paragraph={value.paragraph}
-            ctas={[{ label: value.ctaLabel, href: value.ctaHref }]}
-            tone="light"
-          />
-        </div>
-      ),
+      calloutCta: ({ value }: { value: PostCalloutCtaBlock }) => {
+        // THE AUDIT ASK GETS ITS OWN TREATMENT, chosen by where it points
+        // rather than by a field an editor has to remember to tick. Any
+        // callout aimed at the audit funnel renders as the light panel with
+        // the sample report in it; everything else is the dark band.
+        const isAudit = value.ctaHref.startsWith("/free-website-audit");
+        const cta = { label: value.ctaLabel, href: value.ctaHref };
+
+        return (
+          // Two escapes, both needed. `!max-w-none` opts the block out of the
+          // per-child reading measure, and the negative margins cancel the
+          // column's own padding so the block runs from the frame rail to the
+          // vertical divider instead of stopping inside the text column.
+          //
+          // NOT `frame-bleed`. That utility is declared unlayered in
+          // globals.css, so it outranks every Tailwind margin utility no matter
+          // what order they are written in, and the `lg` override that should
+          // have pulled the right edge back to the column's narrower pr-14
+          // padding silently lost. The band then ran 8px past the divider and
+          // sat on top of the chapters column. Both sides are plain utilities
+          // here so they sort in the same layer and the override actually wins.
+          <div className="mt-12 !max-w-none mx-[calc(clamp(20px,4vw,64px)*-1)] lg:mr-[-3.5rem]">
+            {isAudit ? (
+              <AuditPanel
+                heading={value.heading}
+                paragraph={value.paragraph}
+                ctaLabel={value.ctaLabel}
+                ctaHref={value.ctaHref}
+              />
+            ) : (
+              <CtaBand
+                heading={value.heading}
+                paragraph={value.paragraph}
+                ctas={[cta]}
+                tone="light"
+                variant="banner"
+              />
+            )}
+          </div>
+        );
+      },
 
       faqBlock: ({ value }: { value: PostFaqBlock }) => (
         <div className="mt-10">
@@ -207,7 +351,7 @@ function components(byKey: Record<string, string>): PortableTextComponents {
                 alt={value.alt ?? ""}
                 width={value.width ?? 1600}
                 height={value.height ?? 900}
-                sizes="(max-width: 768px) 100vw, 68ch"
+                sizes="(max-width: 1024px) 100vw, 700px"
                 className="h-auto w-full"
                 {...(value.lqip
                   ? { placeholder: "blur" as const, blurDataURL: value.lqip }
@@ -283,9 +427,12 @@ function ComparisonBlock({ value }: { value: PostComparisonTableBlock }) {
                     key={ci}
                     className={cn(
                       "px-5 py-4 align-top text-body leading-relaxed",
+                      // Table cells are prose too, so the row's first column
+                      // is distinguished by weight rather than by being the
+                      // only legible one.
                       ci === 0
                         ? "font-medium text-light-text"
-                        : "text-light-muted",
+                        : "text-light-text",
                     )}
                   >
                     {cell}

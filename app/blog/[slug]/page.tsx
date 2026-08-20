@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/JsonLd";
-import { GuideNav } from "@/components/sections/migration/GuideNav";
 import { PostHero } from "@/components/sections/blog/PostHero";
+import { PostMeta } from "@/components/sections/blog/PostMeta";
 import { PostBody } from "@/components/sections/blog/PostBody";
 import { PostAudit } from "@/components/sections/blog/PostAudit";
 import { PostRelated } from "@/components/sections/blog/PostRelated";
@@ -11,8 +11,8 @@ import { SourcesGrid } from "@/components/sections/SourcesGrid";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { post as furniture } from "@/content/blog";
-import { headingAnchors, NAV_MIN_SECTIONS } from "@/lib/blog";
-import { ORG_ID, SITE } from "@/lib/schema";
+import { headingAnchors } from "@/lib/blog";
+import { ORG_ID, PERSON_ID, SITE, personSchema } from "@/lib/schema";
 import { sanityFetch } from "@/sanity/lib/client";
 import {
   postQuery,
@@ -89,9 +89,12 @@ export default async function BlogPostPage({ params }: Props) {
     // `lastVerified` is the honest modified date: it is the day a human
     // re-checked the claims, which is what dateModified is asking about.
     dateModified: data.lastVerified ?? data.publishedAt,
-    // Author is the agency, never a person: there is no author document type,
-    // and `reviewedBy` names the human in the visible byline instead.
-    author: { "@id": ORG_ID },
+    // The visible byline names the founder, so the markup names him too: a
+    // byline and its author markup disagreeing is exactly what Google's
+    // guidance on bylines asks you to avoid. The Person node is emitted on
+    // this page (below), so the @id resolves here rather than pointing at
+    // something that only exists on /about.
+    author: { "@id": PERSON_ID },
     publisher: { "@id": ORG_ID },
     mainEntityOfPage: url,
     articleSection: data.category,
@@ -129,28 +132,25 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <>
       <JsonLd data={blogPostingSchema} />
+      {/* The author node BlogPosting.author points at. */}
+      <JsonLd data={personSchema} />
       <JsonLd data={breadcrumbSchema} />
       {faqSchema ? <JsonLd data={faqSchema} /> : null}
 
-      {/* The guides' navigator, fed by the post's own H2 anchors. Short posts
-          skip it: a sticky bar over two sections is a bar, not orientation. */}
-      {sections.length >= NAV_MIN_SECTIONS ? (
-        <GuideNav items={sections} />
-      ) : null}
-
       <PostHero data={data} />
-      <PostBody post={data} />
+      {/* The byline as a facts strip, the same object the case studies use.
+          It sits between the hero and the article so the title gets the full
+          frame and the facts get their own band. */}
+      <PostMeta data={data} />
+      {/* The post's own H2 anchors feed the chapters column beside the body.
+          A post replaces the guides' sticky top rail with that column: the
+          rail is sized for a guide's eight fixed sections, and a post's
+          chapters vary in count and label length per document, which is what a
+          vertical list handles and an equal-width rail does not. */}
+      <PostBody post={data} chapters={sections} />
 
-      {data.sources && data.sources.length > 0 ? (
-        <SourcesGrid
-          heading={furniture.sources.heading}
-          intro={furniture.sources.intro}
-          items={data.sources}
-        />
-      ) : null}
-
-      {/* id="faq" is what tells GuideNav to retire: everything below this is
-          conversion furniture rather than reading. */}
+      {/* The chapters column ends with the body it sits beside, so nothing has
+          to retire here. The id stays as a stable anchor for the FAQ. */}
       {hasFaq ? (
         <div id="faq">
           <Faq
@@ -167,6 +167,19 @@ export default async function BlogPostPage({ params }: Props) {
       <PostAudit />
       <PostRelated posts={related} />
       <CtaBanner data={furniture.cta} />
+
+      {/* Sources close the page, below the asks. They are the citability moat
+          rather than part of the read: a visitor who wants them is checking
+          the article, and a visitor who does not should meet the CTA first.
+          Putting them mid-page pushed the conversion furniture below a wall of
+          links nobody was scrolling past. */}
+      {data.sources && data.sources.length > 0 ? (
+        <SourcesGrid
+          heading={furniture.sources.heading}
+          intro={furniture.sources.intro}
+          items={data.sources}
+        />
+      ) : null}
     </>
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
+import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import { cn } from "@/lib/utils";
 import type { ServicePageContent } from "@/content/service-pages";
@@ -143,13 +144,37 @@ export function ServicePageUnique({ data }: { data: ServicePageContent }) {
  * differentiator.
  *
  * Cards are deliberately thin: mark, platform name, one sentence, link. The
- * detail belongs on the spoke. Platforms that have a guide are authored first,
- * so on a three-column grid the top row carries all the links and the bottom
- * row carries none, which reads as intentional rather than patchy.
+ * detail belongs on the spoke.
+ *
+ * The grid is 6 columns at lg and 4 at md, with each card spanning 2, which
+ * renders as the 3-up and 2-up it looks like. The reason for the indirection
+ * is the last row: a card count that isn't a multiple of the column count used
+ * to leave the remaining cells empty, and because the cards are separated by
+ * `gap-px` over a `bg-light-border` fill, an empty cell reads as a grey hole
+ * rather than as whitespace. Spanning the trailing orphans across the leftover
+ * columns closes it, so the block stays whole at any number of platforms.
  */
 export function ServicePagePlatforms({ data }: { data: ServicePageContent }) {
   const { unique } = data;
   if (unique.kind !== "platforms") return null;
+
+  // Trailing cards stretch to fill the last row. Class strings are written out
+  // in full rather than composed, so Tailwind's scanner can see them.
+  const total = unique.items.length;
+  const lgOrphans = total % 3;
+  const mdOrphans = total % 2;
+  const spanClass = (i: number) => {
+    const fromEnd = total - i;
+    const md =
+      mdOrphans === 1 && fromEnd === 1 ? "md:col-span-4" : "md:col-span-2";
+    const lg =
+      lgOrphans === 1 && fromEnd === 1
+        ? "lg:col-span-6"
+        : lgOrphans === 2 && fromEnd <= 2
+          ? "lg:col-span-3"
+          : "lg:col-span-2";
+    return `${md} ${lg}`;
+  };
 
   return (
     <Section tone="light" frameClassName="relative !py-14 md:!py-24">
@@ -185,17 +210,20 @@ export function ServicePagePlatforms({ data }: { data: ServicePageContent }) {
           </p>
         </div>
 
-        <ul className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2 lg:grid-cols-3">
-          {unique.items.map((item) => {
+        <ul className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-4 lg:grid-cols-6">
+          {unique.items.map((item, index) => {
             const body = (
               <>
                 {/* Rounded-square chip, the sitewide icon-container shape
                     (CLAUDE.md §15). White fill rather than the surface tint:
                     these marks are drawn for white, and the Wix one carries a
-                    light knockout that would vanish on a grey chip. The space
-                    is reserved even with no logo, so a mark-less card still
-                    lines up with its row. */}
-                <span className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-[6px] border border-light-border bg-light-bg">
+                    light knockout that would vanish on a grey chip.
+
+                    A real brand mark wins; entries that are not a brand ("HTML",
+                    "AI builders") carry a line glyph instead. The space is
+                    reserved even with neither, so a mark-less card still lines
+                    up with its row. */}
+                <span className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-[6px] border border-light-border bg-light-bg text-light-text">
                   {item.logo ? (
                     <Image
                       src={item.logo}
@@ -204,6 +232,8 @@ export function ServicePagePlatforms({ data }: { data: ServicePageContent }) {
                       height={32}
                       className="h-8 w-8 object-contain"
                     />
+                  ) : item.icon ? (
+                    <FeatureIcon name={item.icon} />
                   ) : null}
                 </span>
 
@@ -229,7 +259,7 @@ export function ServicePagePlatforms({ data }: { data: ServicePageContent }) {
             );
 
             return (
-              <li key={item.name} className="flex">
+              <li key={item.name} className={`flex ${spanClass(index)}`}>
                 {item.href ? (
                   <Link
                     href={item.href}

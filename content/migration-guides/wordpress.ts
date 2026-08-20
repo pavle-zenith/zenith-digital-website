@@ -149,6 +149,7 @@ export const wordpress: MigrationGuideContent = {
       "Plugin updates have broken something more than once and nobody wants to run them.",
       "Publishing a page means asking a developer, because the theme or builder needs handling.",
       "The site is a brochure, a blog and some forms, and the WordPress underneath it is overkill.",
+      "It was built in Elementor or another page builder and nothing renders without it.",
     ],
     notAFit: [
       "You run a large WooCommerce store with complex fulfilment or subscriptions.",
@@ -224,6 +225,12 @@ export const wordpress: MigrationGuideContent = {
         icon: "form",
         status: "replaced",
         note: "Wix names contact forms in the importer's exclusion list, so forms are rebuilt natively and pointed at the same destinations.",
+      },
+      {
+        item: "Elementor and page builder layouts",
+        icon: "layers",
+        status: "rebuilt",
+        note: "Page builders store their layouts as their own markup inside the post content, so deactivating the plugin leaves unusable shortcode rather than clean text, and the copy is extracted from the rendered page instead.",
       },
       {
         item: "Plugin functionality",
@@ -511,6 +518,10 @@ export const wordpress: MigrationGuideContent = {
         a: "Wix lists the exclusions explicitly: contact forms, author names, tags, custom plugins, manually inserted HTML and CSS, PDFs and other attached documents, and comments. It also imports published posts only, so drafts and scheduled posts are copied manually, and password-protected posts need unlocking first. Wix also warns that some but possibly not all of your formatting survives, which is why posts get checked individually rather than sampled.",
       },
       {
+        q: "My WordPress site was built in Elementor. Does that change the move to Wix Studio?",
+        a: "It changes what your export is worth, so it's worth knowing early. Page builders like Elementor don't store your page as clean content plus a template. They store their own layout markup inside the post content, which is why deactivating the plugin leaves a page of unusable shortcode rather than readable text. So a WXR export of an Elementor site contains builder markup wrapped around your copy, and the practical extraction is done from the rendered pages instead. Two knock-on effects. The blog importer handles posts, not builder-made pages, so those are rebuilt regardless. And builder-heavy sites are usually the WordPress installs with the worst Core Web Vitals, which means the rebuild tends to show up in performance as well as in how easily the site can be edited afterwards.",
+      },
+      {
         q: "Will I lose my Google rankings moving from WordPress to Wix Studio?",
         a: "Not if the URLs are handled deliberately, and on this move most of them don't have to change at all. Static pages keep their paths. Blog posts depend on one build decision: Wix's Blog app puts every post under a /post/ prefix that can't be removed, while a blog built on the CMS lets you set the prefix yourself, so a WordPress site already publishing at /blog/post-name can keep exactly that. The quieter risk is metadata: Yoast and Rank Math settings live in the plugin, not the post, so titles and descriptions get re-entered and diffed against the crawl before the domain moves.",
       },
@@ -561,9 +572,10 @@ export const wordpress: MigrationGuideContent = {
         desc: "What the Squarespace export actually contains, and the page types it silently leaves behind.",
       },
       {
-        label: "Wix Classic to Wix Studio",
-        href: "/services/wix-classic-to-wix-studio",
-        desc: "The Wix-to-Wix move, and the two documented routes Wix never reconciles.",
+        label: "Webflow to Wix Studio",
+        logo: "/platforms/webflow.svg",
+        href: "/services/webflow-to-wix-studio",
+        desc: "The other platform teams weigh against WordPress, and the one whose editing model just changed.",
       },
       {
         label: "Wix Studio development",

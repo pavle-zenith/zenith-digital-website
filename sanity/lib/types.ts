@@ -96,6 +96,8 @@ export type Post = {
   lastVerified?: string;
   reviewedBy?: string;
   seo?: { title?: string; description?: string };
+  /** Plain-text length of the body, for the byline's read-time estimate. */
+  bodyChars?: number;
   body: PostBodyBlock[];
   sources?: PostSource[];
   faq?: PostFaqItem[];

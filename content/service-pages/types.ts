@@ -94,10 +94,17 @@ export type UniqueBlock =
        * `logo` is optional for the same reason: a platform with no mark on
        * file still renders, with the badge space reserved so the grid stays
        * aligned.
+       *
+       * `icon` names an entry in components/ui/FeatureIcon, for entries that
+       * have no brand mark to show because they are not a brand: "HTML" and
+       * "AI builders" are a format and a category. `logo` wins where both are
+       * set, because a real mark beats a generic glyph. Same rule the
+       * migration guides' related cards follow.
        */
       items: {
         name: string;
         logo?: string;
+        icon?: string;
         desc: string;
         href?: string;
       }[];

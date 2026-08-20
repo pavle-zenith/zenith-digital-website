@@ -522,10 +522,10 @@ export const wixHarmony: MigrationGuideContent = {
         desc: "On the classic Wix Editor rather than Harmony? Different constraints, and Wix won't convert that one either.",
       },
       {
-        label: "Squarespace to Wix Studio",
-        logo: "/platforms/squarespace.svg",
-        href: "/services/squarespace-to-wix-studio",
-        desc: "What Squarespace's export actually contains, and the four things it silently leaves behind.",
+        label: "Framer to Wix Studio",
+        logo: "/platforms/framer.webp",
+        href: "/services/framer-to-wix-studio",
+        desc: "Another design-first tool with ceilings you meet later, and no way to export the site at all.",
       },
       {
         label: "Wix Studio website design",

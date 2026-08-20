@@ -330,12 +330,26 @@ export const websiteMigration: ServicePageContent = {
       {
         name: "Webflow",
         logo: "/platforms/webflow.svg",
-        desc: "Keep the design quality and hand editing back to the people who write the content.",
+        href: "/services/webflow-to-wix-studio",
+        desc: "Webflow retired the legacy Editor in August 2026. What that changed, what exports, and what a move costs.",
       },
       {
         name: "Framer",
         logo: "/platforms/framer.webp",
-        desc: "Move onto a real CMS, so publishing the twentieth page costs what the second one did.",
+        href: "/services/framer-to-wix-studio",
+        desc: "Framer doesn't export your site's HTML. What you can actually carry out, and what gets rebuilt.",
+      },
+      {
+        name: "HTML",
+        icon: "code",
+        href: "/services/html-to-wix-studio",
+        desc: "A hand-coded static site has no export button because you already own every file. What that means in practice.",
+      },
+      {
+        name: "AI builders",
+        icon: "sparkles",
+        href: "/services/ai-website-builder-to-wix-studio",
+        desc: "Built it with Lovable, Bolt, v0 or Replit? You own the code. That isn't the same as owning a website.",
       },
     ],
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 
 import {
   submitAudit,
@@ -26,10 +26,28 @@ export function AuditForm({ id }: { id?: string }) {
     submitAudit,
     initialState,
   );
+  const siteRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (state.status === "success") trackLead("free-website-audit");
   }, [state.status]);
+
+  /**
+   * Prefill from `?site=`, which the blog's audit panel sets when a reader
+   * types their URL there and is handed off here.
+   *
+   * Read from `window` rather than `useSearchParams` on purpose: that hook
+   * opts the whole route out of static rendering unless it is wrapped in a
+   * Suspense boundary, and this page is worth more as a static page than the
+   * prefill is worth as server-rendered HTML. Writing to the ref rather than
+   * holding the value in state also keeps the field uncontrolled, so nothing
+   * about the existing submit path changes.
+   */
+  useEffect(() => {
+    const site = new URLSearchParams(window.location.search).get("site");
+    const input = siteRef.current;
+    if (site && input && !input.value) input.value = site;
+  }, []);
 
   if (state.status === "success") {
     return (
@@ -61,6 +79,7 @@ export function AuditForm({ id }: { id?: string }) {
             {auditForm.fields.website.label}
           </span>
           <input
+            ref={siteRef}
             type="text"
             name="website"
             required

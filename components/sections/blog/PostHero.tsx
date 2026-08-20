@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
-import { Pill } from "@/components/ui/Pill";
-import { formatLongDate } from "@/lib/utils";
 import { post as furniture } from "@/content/blog";
 import type { Post } from "@/sanity/lib/types";
 
@@ -11,21 +9,23 @@ import type { Post } from "@/sanity/lib/types";
  * Post hero, on the same inverted studio texture the migration guides use, so
  * the two content systems open identically.
  *
- * THE BYLINE IS THE POINT. "Written by Zenith Digital, reviewed by a named
- * human, last verified on a date" is an E-E-A-T signal, not decoration: it is
- * what separates a maintained reference from an undated blog post, and it is
- * the same line the guides carry. The author is the agency and never a person,
- * so `reviewedBy` is where the human name goes.
+ * THE TITLE RUNS THE FULL FRAME, and it is the only thing here. A measure is
+ * for reading paragraphs; a headline is one line of type and can have the
+ * whole column.
+ *
+ * Everything else moved out. The byline is the facts strip below (PostMeta),
+ * author photo included, and the excerpt now opens the article as a standfirst
+ * where the reading actually starts. What is left is a breadcrumb and a title.
+ *
+ * The breadcrumb stays. It is navigation rather than content, it is the only
+ * way back up to /blog from here, and the page emits BreadcrumbList markup:
+ * shipping that markup with nothing visible behind it is the pattern this
+ * codebase refuses everywhere else.
+ *
+ * The category is stated once, in the breadcrumb. A pill repeating it directly
+ * underneath was the same word twice in two shapes.
  */
 export function PostHero({ data }: { data: Post }) {
-  const byline = [
-    furniture.authorLine,
-    data.reviewedBy ? `${furniture.reviewedByPrefix} ${data.reviewedBy}` : null,
-    data.lastVerified
-      ? `${furniture.verifiedPrefix} ${formatLongDate(data.lastVerified)}`
-      : null,
-  ].filter(Boolean) as string[];
-
   return (
     <Section
       tone="light"
@@ -52,9 +52,7 @@ export function PostHero({ data }: { data: Post }) {
         />
       </div>
 
-      {/* Left-aligned at the body's measure rather than centred: the reader's
-          eye starts where the first paragraph will start. */}
-      <div className="relative max-w-[68ch]">
+      <div className="relative">
         <nav
           aria-label="Breadcrumb"
           className="font-mono text-label uppercase track-label text-light-muted"
@@ -68,36 +66,9 @@ export function PostHero({ data }: { data: Post }) {
           <span className="text-light-text">{data.category}</span>
         </nav>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Pill tone="light">{data.category}</Pill>
-          <time
-            dateTime={data.publishedAt}
-            className="font-mono text-label uppercase track-label text-light-muted"
-          >
-            {formatLongDate(data.publishedAt)}
-          </time>
-        </div>
-
-        <h1 className="mt-5 font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
+        <h1 className="mt-8 font-display text-h1 font-medium leading-[1.05] tracking-tight text-balance">
           {data.title}
         </h1>
-
-        <p className="mt-5 text-body-lg font-medium leading-relaxed text-light-muted">
-          {data.excerpt}
-        </p>
-
-        <p className="mt-8 border-t border-light-border pt-5 text-body text-light-muted">
-          {byline.map((part, i) => (
-            <span key={part}>
-              {i > 0 ? (
-                <span aria-hidden className="mx-2">
-                  ·
-                </span>
-              ) : null}
-              {part}
-            </span>
-          ))}
-        </p>
       </div>
     </Section>
   );

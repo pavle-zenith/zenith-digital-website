@@ -1,7 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+import { useAutoCycle } from "@/lib/useAutoCycle";
 
 import { Section } from "@/components/ui/Section";
 import { AuditReport } from "@/components/ui/AuditReport";
@@ -17,24 +19,34 @@ const CYCLE_MS = 5000;
  * beneath both cells. Light mode, no background image.
  */
 export function Audit() {
-  const [open, setOpen] = useState(0);
-  const [paused, setPaused] = useState(false);
   const [url, setUrl] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const count = audit.tabs.length;
-
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => setOpen((o) => (o + 1) % count), CYCLE_MS);
-    return () => clearInterval(id);
-  }, [paused, count]);
+  const { active: open, select: setOpen, setPaused } = useAutoCycle(
+    count,
+    CYCLE_MS,
+  );
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const q = url.trim();
-    router.push(
-      q ? `${audit.cta.href}?url=${encodeURIComponent(q)}` : audit.cta.href,
-    );
+    // Previously an empty or malformed value routed to the bare audit page,
+    // which silently threw away whatever the visitor had typed and gave them
+    // no idea anything was wrong. Both cases now say what to fix.
+    if (!q) {
+      setError("Enter your website address so we know what to review.");
+      return;
+    }
+    // Same shape test the server-side normalizer applies: a hostname needs a
+    // dot, so a bare word can't pass as a site.
+    const host = q.replace(/^https?:\/\//i, "").split("/")[0];
+    if (!host.includes(".") || /\s/.test(host)) {
+      setError("That doesn't look like a web address. Try yourwebsite.com");
+      return;
+    }
+    setError(null);
+    router.push(`${audit.cta.href}?url=${encodeURIComponent(q)}`);
   };
 
   return (
@@ -104,17 +116,20 @@ export function Audit() {
           {/* On phones the field carries its own border and surface fill so it
               reads as an input before it's focused; from sm up the two sit in
               one bordered bar and the field goes borderless again. */}
-          <form
-            onSubmit={submit}
-            className="flex flex-col gap-3 sm:flex-row sm:items-center sm:rounded-[8px] sm:border sm:border-light-border sm:p-3"
-          >
+          <form onSubmit={submit} noValidate>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:rounded-[8px] sm:border sm:border-light-border sm:p-3">
             <input
               type="text"
               inputMode="url"
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={(e) => {
+                setUrl(e.target.value);
+                if (error) setError(null);
+              }}
               placeholder={audit.inputPlaceholder}
               aria-label="Your website URL"
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error ? "audit-url-error" : undefined}
               className="min-w-0 flex-1 rounded-[6px] border border-light-border bg-light-surface px-4 py-3 text-body text-light-text outline-none placeholder:text-light-muted sm:rounded-none sm:border-0 sm:bg-transparent sm:py-2.5"
             />
             <button
@@ -126,6 +141,18 @@ export function Audit() {
                 &rarr;
               </span>
             </button>
+            </div>
+            {/* negative-ink, not negative: #e5484d clears 3:1 for graphics but
+                not 4.5:1 for text on a light fill. */}
+            {error ? (
+              <p
+                id="audit-url-error"
+                role="alert"
+                className="mt-2 text-body text-negative-ink"
+              >
+                {error}
+              </p>
+            ) : null}
           </form>
         </div>
 

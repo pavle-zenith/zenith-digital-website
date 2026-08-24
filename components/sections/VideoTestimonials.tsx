@@ -108,15 +108,54 @@ export function VideoTestimonials({
   const ownArrows = slider && !trackId;
   const [active, setActive] = useState<number | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  // The card that opened the dialog, so focus can return to it on close.
+  const openerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (active === null) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
+
+    const dialog = dialogRef.current;
+    openerRef.current = document.activeElement as HTMLElement | null;
+
+    const focusables = () =>
+      Array.from(
+        dialog?.querySelectorAll<HTMLElement>(
+          'button, [href], video[controls], [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      ).filter((el) => el.offsetParent !== null);
+
+    // Move focus into the dialog; without this the keyboard user is still
+    // outside it and Tab walks the page behind the scrim.
+    focusables()[0]?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActive(null);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      // Trap: wrap at both ends so Tab and Shift+Tab stay inside the dialog.
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const current = document.activeElement;
+      if (e.shiftKey && (current === first || !dialog?.contains(current))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && current === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      openerRef.current?.focus();
     };
   }, [active]);
 
@@ -140,6 +179,7 @@ export function VideoTestimonials({
             src="/textures/studio-texture.jpg"
             alt=""
             fill
+            sizes="100vw"
             className="object-cover opacity-[0.16]"
             aria-hidden
           />
@@ -280,18 +320,33 @@ export function VideoTestimonials({
       {/* Blurred video overlay */}
       {activeItem ? (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-6 backdrop-blur-xl"
+          ref={dialogRef}
+          // tone-dark: the scrim is near-black, so the dialog owns the
+          // near-white focus ring rather than inheriting the section's accent.
+          className="tone-dark fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-6 backdrop-blur-xl"
           onClick={() => setActive(null)}
           role="dialog"
           aria-modal="true"
+          aria-label={`Video testimonial from ${activeItem.name}`}
         >
           <button
             type="button"
-            aria-label="Close"
-            className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-text hover:bg-white/10"
+            aria-label="Close video"
+            className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-[6px] border border-white/20 text-text transition hover:bg-white/10"
             onClick={() => setActive(null)}
           >
-            ✕
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
           </button>
           <div
             className="relative aspect-[9/16] h-[80vh] max-w-full overflow-hidden rounded-[8px] border border-white/15 bg-surface"
@@ -310,6 +365,9 @@ export function VideoTestimonials({
                 src={activeItem.poster}
                 alt={activeItem.name}
                 fill
+                // The dialog frame is a 9/16 box at 80vh, so the widest it
+                // ever renders is roughly 45vh. 50vh covers it with headroom.
+                sizes="50vh"
                 className="object-cover"
               />
             ) : (

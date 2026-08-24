@@ -111,7 +111,11 @@ export function Pricing({
               <div
                 key={tier.name}
                 className={cn(
-                  "flex flex-col overflow-hidden rounded-[8px] bg-light-bg text-light-text",
+                  // tone-light: the card is a white ground inside a dark
+                  // section, so it owns the light focus-ring colour. Without
+                  // it the CTAs below inherit the section's near-white ring
+                  // and focus is invisible on white.
+                  "tone-light flex flex-col overflow-hidden rounded-[8px] bg-light-bg text-light-text",
                   // White outline so the featured card's dark header keeps a
                   // defined edge against the dark section behind it.
                   // The featured card's dark header needs a defined edge
@@ -127,8 +131,10 @@ export function Pricing({
                 <div
                   className={cn(
                     "relative overflow-hidden",
+                    // The featured header is a navy ground inside the white
+                    // card, so it takes the dark tone back for its focus ring.
                     featured
-                      ? "bg-bg text-white"
+                      ? "tone-dark bg-bg text-white"
                       : i > 1
                         ? "bg-light-surface"
                         : "bg-light-bg",
@@ -162,7 +168,7 @@ export function Pricing({
                         <TierIcon name={tier.icon} />
                       </span>
                       {tier.badge ? (
-                        <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 font-mono text-[10px] uppercase track-label text-bg">
+                        <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 font-mono text-label uppercase track-label text-bg">
                           {tier.badge}
                         </span>
                       ) : null}
@@ -236,7 +242,7 @@ export function Pricing({
               shading); the tint gradient keeps the copy on the left readable
               while the shading opens up on the right. */}
         {showWhiteLabel ? (
-          <div className="relative mt-4 overflow-hidden rounded-[8px] bg-light-bg text-light-text">
+          <div className="tone-light relative mt-4 overflow-hidden rounded-[8px] bg-light-bg text-light-text">
             <Image
               src="/textures/studio-texture.jpg"
               alt=""

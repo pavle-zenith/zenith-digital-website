@@ -1,0 +1,16 @@
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "48px",
+        "createdAt": "2026-08-21T20:00:10.003Z",
+        "reason": "Footer clipped wordmark: a one-off display object, not type on a shared ramp. Its clamp(48px,12vw,186px) is capped so the mark never outgrows the 1440px frame column. Assessment B judged this a false positive in the 2026-08-21 critique. Scoped to Footer.tsx on 2026-08-23: the original value-only entry suppressed every 48px font-size in the tree.",
+        "file": "components/layout/Footer.tsx"
+      }
+    ]
+  }
+}

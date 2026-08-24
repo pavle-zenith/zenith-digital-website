@@ -107,6 +107,29 @@ export const founderServices = {
 };
 
 /**
+ * Homepage block. Sits between the testimonials and the closing CTA, where
+ * "who am I actually hiring" is the last objection left standing. Shorter than
+ * the services variant: by this point the visitor has already seen the work,
+ * the prices, and the reviews, so this only has to answer the person question.
+ *
+ * Dates match /about and the Organization schema exactly: building since 2019,
+ * Zenith Digital since 2021. The homepage previously had no founder block at
+ * all and named Pavle exactly once, inside somebody else's testimonial quote.
+ */
+export const founderHome = {
+  ...founderCore,
+  links: founderCore.links.filter(
+    (l) => l.label !== "Trustpilot" && l.label !== "Email",
+  ),
+  heading: "Who you're actually hiring",
+  paragraphs: [
+    "Zenith Digital is run by Pavle Maodus, a Belgrade-based designer and developer, and a Wix Legend Partner: the top tier of the Wix Partner programme. Building for businesses since 2019, Zenith Digital since 2021, 100+ websites shipped across the UK, EU, and US.",
+    "There's no account manager between you and the work. The person on your call is the person designing your pages, writing your proposal, and answering when something needs fixing. That's most of why projects here move in weeks rather than quarters.",
+  ],
+  cta: { label: "Book a call with Pavle", href: "/book-a-call" },
+};
+
+/**
  * Expert block for /book-a-call (owner decision, Aug 2026: NOT a slim
  * signature row — the full byCrawford-style expert section, first person,
  * with the badged portrait and a "why book a call with me?" checklist).

@@ -27,6 +27,10 @@ export function Hero() {
             alt=""
             fill
             sizes="100vw"
+            // Above the fold and behind the H1, so it is the LCP candidate.
+            // Without priority it sat in the lazy queue with all 88 other
+            // images and was invisible to the browser's preload scanner.
+            priority
             className="object-cover opacity-[0.28] invert"
           />
           <div
@@ -39,8 +43,14 @@ export function Hero() {
         </div>
 
         <div className="relative flex flex-col justify-end pb-10 pt-10 md:pb-14 md:pt-20">
-        {/* Eyebrow: the partner badge prefix + the Wix Studio lockup */}
-        <div className="mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-light-surface px-3 py-1.5 text-label font-medium">
+        {/* Eyebrow: the partner badge, linking out to the Wix Partner
+            directory so the tier can be verified rather than just asserted. */}
+        <a
+          href={hero.badgeHref}
+          target="_blank"
+          rel="noopener"
+          className="group mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-light-surface px-3 py-1.5 text-label font-medium transition hover:bg-light-border"
+        >
           <span className="text-light-muted">{hero.badgePrefix}</span>
           <Image
             src="/logos-white/wix-studio.png"
@@ -49,7 +59,10 @@ export function Hero() {
             height={24}
             className="h-7 w-auto object-contain invert"
           />
-        </div>
+          <span aria-hidden className="btn-arrow text-light-muted">
+            &rarr;
+          </span>
+        </a>
 
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           {/* Left: headline, subhead, CTAs */}
@@ -103,7 +116,7 @@ export function Hero() {
           the section and shows a navy strip of <body> between sections. */}
       <div className="max-md:py-6">
       <div className="frame-bleed-md grid grid-cols-1 gap-px bg-light-border max-md:overflow-hidden max-md:rounded-card max-md:border max-md:border-light-border sm:grid-cols-2 md:border-t md:border-light-border">
-        {hero.featured.map((c) => (
+        {hero.featured.map((c, i) => (
           <Link
             key={c.client}
             href={c.href}
@@ -115,6 +128,9 @@ export function Hero() {
                 alt={`${c.client} website`}
                 fill
                 sizes="(max-width: 640px) 100vw, 50vw"
+                // The top row of the 2x2 is above the fold on desktop and is
+                // the first card on phones. The bottom row stays lazy.
+                priority={i < 2}
                 className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
               />
             </div>

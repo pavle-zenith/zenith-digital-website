@@ -22,7 +22,7 @@ type BannerData = {
 export function CtaBanner({ data }: { data: BannerData }) {
   return (
     <Section tone="light" frameClassName="!py-0">
-      <div className="frame-bleed relative overflow-hidden">
+      <div className="tone-dark frame-bleed relative overflow-hidden">
         {/* Background image */}
         <Image
           src={data.image}
@@ -80,16 +80,16 @@ export function CtaBanner({ data }: { data: BannerData }) {
             <div className="flex w-full shrink-0 flex-col gap-3 self-start sm:w-auto sm:flex-row sm:flex-wrap md:self-end">
               <Link
                 href={data.cta.href}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90 sm:w-auto"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] bg-white px-6 py-3 text-body font-medium text-bg transition hover:bg-white/90 sm:w-auto"
               >
-                {data.cta.label} <span aria-hidden>&rsaquo;</span>
+                {data.cta.label} <span aria-hidden className="btn-arrow">&rarr;</span>
               </Link>
               {data.ctaSecondary ? (
                 <Link
                   href={data.ctaSecondary.href}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-[6px] border border-white/30 px-6 py-3 text-body font-medium text-white transition hover:bg-white/10 sm:w-auto"
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] border border-white/30 px-6 py-3 text-body font-medium text-white transition hover:bg-white/10 sm:w-auto"
                 >
-                  {data.ctaSecondary.label} <span aria-hidden>&rsaquo;</span>
+                  {data.ctaSecondary.label} <span aria-hidden className="btn-arrow">&rarr;</span>
                 </Link>
               ) : null}
             </div>

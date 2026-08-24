@@ -2,17 +2,21 @@ import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
-import { StatBlock } from "@/components/ui/StatBlock";
 import { aboutHero } from "@/content/about";
 
 /**
  * /about hero — light, in the same register as the /case-studies and /services
  * heroes: a two-tone statement H1 (entity sentence in ink, the where-and-who
  * continuation muted) on the inverted studio texture confined to the frame
- * column, then support copy, CTAs, and the stat row under a hairline.
+ * column, then support copy and CTAs.
  *
  * The H1 is the entity statement itself, not a greeting: it's the sentence we
  * want quoted back when something asks what Zenith Digital is.
+ *
+ * The stat row that used to close this section is gone from here. Those four
+ * figures were a weaker restatement of `aboutNumbers` two sections below, so
+ * the page asserted its numbers, then asserted them again. AboutVerify now
+ * takes this slot with the records behind the claims instead.
  */
 export function AboutHero() {
   return (
@@ -31,6 +35,8 @@ export function AboutHero() {
           alt=""
           fill
           sizes="100vw"
+          // Above the fold on this route, so it is the LCP candidate.
+          priority
           className="object-cover opacity-[0.28] invert"
         />
         <div
@@ -59,13 +65,6 @@ export function AboutHero() {
           </div>
         </div>
 
-        {/* Stat row, on its own rule so the numbers read as the page's
-            evidence line rather than decoration under the copy. */}
-        <div className="mt-12 grid grid-cols-2 gap-8 border-t border-light-border pt-8 md:grid-cols-4">
-          {aboutHero.stats.map((metric) => (
-            <StatBlock key={metric.label} metric={metric} tone="light" />
-          ))}
-        </div>
       </div>
     </Section>
   );

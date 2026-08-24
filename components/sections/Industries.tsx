@@ -23,6 +23,21 @@ export function Industries() {
     // step = width of the first card + the flex gap (32px)
     const card = track.querySelector<HTMLElement>("[data-card]");
     const step = card ? card.offsetWidth + 32 : track.clientWidth * 0.8;
+
+    // Wrap instead of dead-ending. Previously both arrows stayed enabled at the
+    // ends and a press did nothing at all, so the control silently stopped
+    // responding. Now the track returns to the opposite end (DESIGN.md: sliders
+    // loop rather than dead-ending). The 2px tolerance absorbs sub-pixel
+    // scrollLeft values that never quite reach the computed maximum.
+    const max = track.scrollWidth - track.clientWidth;
+    if (dir === 1 && track.scrollLeft >= max - 2) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+      return;
+    }
+    if (dir === -1 && track.scrollLeft <= 2) {
+      track.scrollTo({ left: max, behavior: "smooth" });
+      return;
+    }
     track.scrollBy({ left: dir * step, behavior: "smooth" });
   };
 
@@ -71,6 +86,10 @@ export function Industries() {
             data-card
             className="w-[280px] shrink-0 snap-start sm:w-[320px] lg:w-[340px]"
           >
+            {/* The heading sits INSIDE the link. Previously the link wrapped
+                only the image, which is alt="" and aria-hidden, so all eight
+                cards announced as an unnamed "link" (WCAG 2.4.4). The name is
+                what gives each card its accessible name now. */}
             <Link href={it.href} className="group block">
               <div className="relative aspect-[3/4] overflow-hidden rounded-[8px] bg-light-surface">
                 <Image
@@ -82,10 +101,10 @@ export function Industries() {
                   aria-hidden
                 />
               </div>
+              <h3 className="mt-5 font-display text-body-lg font-medium tracking-tight text-light-text transition group-hover:text-accent">
+                {it.name}
+              </h3>
             </Link>
-            <h3 className="mt-5 font-display text-body-lg font-medium tracking-tight text-light-text">
-              {it.name}
-            </h3>
             <p className="mt-2 text-body leading-snug text-light-muted">
               {it.blurb}
             </p>

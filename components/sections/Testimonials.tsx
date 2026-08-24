@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
+
+import { useAutoCycle } from "@/lib/useAutoCycle";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
@@ -19,17 +21,15 @@ const CYCLE_MS = 6000;
  * `showStats={false}` drops the stats cell and lets the testimonial run full width.
  */
 export function Testimonials({ showStats = true }: { showStats?: boolean }) {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
   const count = testimonials.items.length;
+  const {
+    active,
+    select: setActive,
+    paused,
+    setPaused,
+    stopped,
+  } = useAutoCycle(count, CYCLE_MS);
 
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % count), CYCLE_MS);
-    return () => clearInterval(id);
-  }, [paused, count]);
-
-  const t = testimonials.items[active];
 
   return (
     <Section tone="light" frameClassName="!py-0" divide={false}>
@@ -73,41 +73,63 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
+            {/* Every testimonial is in the markup; the inactive ones are
+                hidden with CSS. Mounting one at a time meant four of the five
+                quotes and outcome headlines never reached the server-rendered
+                HTML, so an answer engine reading this page saw a fifth of the
+                social proof. The panels share one grid cell, so the band is as
+                tall as its longest quote and nothing reflows on advance.
+
+                Each panel is a <figure> wrapping its own <blockquote> and
+                <figcaption>: the caption previously sat with no figure parent,
+                which is an invalid content model and left the attribution
+                programmatically unconnected to the quote it attributes. */}
             <div
               className={cn(
-                "flex min-h-[320px] flex-1 flex-col justify-center py-10 text-center",
+                "grid min-h-[320px] flex-1 py-10 text-center",
                 showStats
                   ? "pl-8 pr-[clamp(20px,4vw,64px)] lg:pl-12"
                   : "px-[clamp(20px,4vw,64px)]",
               )}
             >
-              <h3 className="mx-auto max-w-xl font-display text-h3 font-medium leading-tight tracking-tight text-balance">
-                {t.result}
-              </h3>
-              <blockquote className="mx-auto mt-6 max-w-2xl text-body-lg leading-snug text-light-muted text-balance">
-                <RichQuote text={t.quote} />
-              </blockquote>
+              {testimonials.items.map((item, i) => (
+                <figure
+                  key={item.name}
+                  className={cn(
+                    "col-start-1 row-start-1 m-0 flex flex-col justify-center transition-opacity duration-300 motion-reduce:transition-none",
+                    i === active ? "opacity-100" : "pointer-events-none opacity-0",
+                  )}
+                  aria-hidden={i !== active}
+                >
+                  <h3 className="mx-auto max-w-xl font-display text-h3 font-medium leading-tight tracking-tight text-balance">
+                    {item.result}
+                  </h3>
+                  <blockquote className="mx-auto mt-6 max-w-2xl text-body-lg leading-snug text-light-muted text-balance">
+                    <RichQuote text={item.quote} />
+                  </blockquote>
 
-              <figcaption className="mt-8 flex items-center justify-center gap-3">
-                <span className="relative h-11 w-11 overflow-hidden rounded-[6px] border border-light-border">
-                  <Image
-                    src={t.avatar}
-                    alt={t.name}
-                    fill
-                    sizes="44px"
-                    className="object-cover"
-                  />
-                </span>
-                <span className="text-left">
-                  <span className="flex items-center gap-1.5 font-display font-medium">
-                    {t.name}
-                    <VerifiedCheck className="text-light-text" />
-                  </span>
-                  <span className="block text-body text-light-muted">
-                    {t.role}
-                  </span>
-                </span>
-              </figcaption>
+                  <figcaption className="mt-8 flex items-center justify-center gap-3">
+                    <span className="relative h-11 w-11 overflow-hidden rounded-[6px] border border-light-border">
+                      <Image
+                        src={item.avatar}
+                        alt={item.name}
+                        fill
+                        sizes="44px"
+                        className="object-cover"
+                      />
+                    </span>
+                    <span className="text-left">
+                      <span className="flex items-center gap-1.5 font-display font-medium">
+                        {item.name}
+                        <VerifiedCheck className="text-light-text" />
+                      </span>
+                      <span className="block text-body text-light-muted">
+                        {item.role}
+                      </span>
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
 
             {/* Logo tabs with fill bars. Phones scroll them as a rail with a
@@ -153,10 +175,18 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
                       style={
                         i === active
                           ? {
-                              animation: paused
-                                ? "none"
-                                : `tab-fill ${CYCLE_MS}ms linear forwards`,
-                              width: paused ? "0%" : undefined,
+                              animation:
+                                paused || stopped
+                                  ? "none"
+                                  : `tab-fill ${CYCLE_MS}ms linear forwards`,
+                              // Stopped means the visitor picked this tab, so
+                              // the bar sits full rather than empty: it reads
+                              // as "this one", not "about to advance".
+                              width: stopped
+                                ? "100%"
+                                : paused
+                                  ? "0%"
+                                  : undefined,
                             }
                           : { width: i < active ? "100%" : "0%" }
                       }
@@ -172,22 +202,45 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
             to the frame gutter on both sides. The platform name links to the
             profile: the site never names it without linking out. */}
         <div className="flex border-t border-light-border px-[clamp(20px,4vw,64px)] py-6">
-          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-body text-light-text">
-            Rated{" "}
-            <span className="font-display font-medium">
-              {testimonials.rating.score}
-            </span>{" "}
-            on{" "}
+          {/* Two variants, chosen by whether a score is actually published.
+              The stars only ever appear NEXT TO a number: five filled stars
+              with no figure behind them is the unbacked claim this site exists
+              to avoid, and with score:"" the old markup also rendered the
+              literal sentence "Rated  on Trustpilot". When the owner publishes
+              a score, the rated variant returns on its own. */}
+          {testimonials.rating.score ? (
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-body text-light-text">
+              Rated{" "}
+              <span className="font-display font-medium">
+                {testimonials.rating.score}
+              </span>{" "}
+              on{" "}
+              <a
+                href={testimonials.rating.href}
+                target="_blank"
+                rel="noopener"
+                className="font-display font-medium underline underline-offset-4 transition hover:text-light-muted"
+              >
+                {testimonials.rating.platform}
+              </a>
+              <Stars />
+            </p>
+          ) : (
             <a
               href={testimonials.rating.href}
               target="_blank"
               rel="noopener"
-              className="font-display font-medium underline underline-offset-4 transition hover:text-light-muted"
+              className="group inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-body text-light-text transition hover:text-light-muted"
             >
-              {testimonials.rating.platform}
+              Read our reviews on{" "}
+              <span className="font-display font-medium underline underline-offset-4">
+                {testimonials.rating.platform}
+              </span>
+              <span aria-hidden className="btn-arrow">
+                &rarr;
+              </span>
             </a>
-            <Stars />
-          </p>
+          )}
         </div>
       </div>
     </Section>

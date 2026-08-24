@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useAutoCycle } from "@/lib/useAutoCycle";
 
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
@@ -38,21 +38,11 @@ const fullCurve = `M ${samples(0, VIEW_W).join(" L ")}`;
 const fullFill = `M ${samples(0, VIEW_W).join(" L ")} L ${VIEW_W} ${VIEW_H} L 0 ${VIEW_H} Z`;
 
 export function Process() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const { active, select: setActive, setPaused } = useAutoCycle(
+    processSection.steps.length,
+    STEP_MS,
+  );
 
-  useEffect(() => {
-    if (paused) return;
-    timer.current = setInterval(() => {
-      setActive((a) => (a + 1) % processSection.steps.length);
-    }, STEP_MS);
-    return () => {
-      if (timer.current) clearInterval(timer.current);
-    };
-  }, [paused]);
-
-  const step = processSection.steps[active];
   // Highlight everything up to (and including) the active step's column —
   // progress accumulates. The clip on the highlight layer animates the sweep.
   const hiddenRight = 100 - ((active + 1) / processSection.steps.length) * 100;
@@ -75,27 +65,51 @@ export function Process() {
         </Link>
       </div>
 
-      {/* Curve + grid */}
-      <div className="relative">
-        {/* Active step's text overlay, top-left */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 max-w-sm">
-          <p className="font-mono text-label uppercase track-label text-light-muted">
-            {step.step} · {step.label}
-          </p>
-          <h3 className="mt-3 font-display text-h3 font-medium leading-tight text-light-text text-balance">
-            {step.heading}
-          </h3>
-          <ul className="mt-5 flex flex-col gap-2">
-            {step.points.map((p) => (
-              <li
-                key={p}
-                className="flex items-center gap-3 text-body text-light-muted"
-              >
-                <span className="h-2 w-2 shrink-0 bg-accent" />
-                {p}
-              </li>
-            ))}
-          </ul>
+      {/* Curve + grid. Hover pause lives here, not on the step buttons: the
+          text that mutates is the overlay below, so pausing only when the
+          buttons are hovered meant the copy still changed under the reader. */}
+      <div
+        className="relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/* Step text overlays, top-left. EVERY step is in the markup and the
+            inactive ones are hidden with CSS, rather than mounting one at a
+            time: previously four of the five headings and all their bullets
+            never reached the server-rendered HTML, so the answer engines this
+            site is explicitly built for could read one fifth of the process.
+            The panels stack in the same grid cell so they occupy one footprint. */}
+        <div className="pointer-events-none absolute left-0 top-0 z-10 grid max-w-sm">
+          {processSection.steps.map((s, i) => (
+            <div
+              key={s.label}
+              // Same cell for every panel, so the block is as tall as its
+              // tallest step and the curve never shifts as steps change.
+              className={cn(
+                "col-start-1 row-start-1 transition-opacity duration-300 motion-reduce:transition-none",
+                i === active ? "opacity-100" : "opacity-0",
+              )}
+              aria-hidden={i !== active}
+            >
+              <p className="font-mono text-label uppercase track-label text-light-muted">
+                {s.step} · {s.label}
+              </p>
+              <h3 className="mt-3 font-display text-h3 font-medium leading-tight text-light-text text-balance">
+                {s.heading}
+              </h3>
+              <ul className="mt-5 flex flex-col gap-2">
+                {s.points.map((p) => (
+                  <li
+                    key={p}
+                    className="flex items-center gap-3 text-body text-light-muted"
+                  >
+                    <span className="h-2 w-2 shrink-0 bg-accent" />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         {/* Chart area */}
@@ -177,8 +191,7 @@ export function Process() {
                 key={s.label}
                 type="button"
                 onClick={() => setActive(i)}
-                onMouseEnter={() => setPaused(true)}
-                onMouseLeave={() => setPaused(false)}
+                aria-pressed={i === active}
                 className="group min-w-0 border-t-2 pt-4 text-left transition-colors duration-500"
                 style={{
                   borderColor: lit ? "var(--color-accent)" : "transparent",

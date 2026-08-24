@@ -147,7 +147,7 @@ function FormInner({ preselect }: { preselect: string | null }) {
       </button>
 
       {state.status === "error" ? (
-        <p className="mt-4 text-body text-[#E5484D]" role="alert">
+        <p className="mt-4 text-body text-negative-ink" role="alert">
           {state.message} {pApply.errorFallback}
         </p>
       ) : null}

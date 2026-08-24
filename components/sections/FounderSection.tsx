@@ -143,7 +143,7 @@ export function FounderSection({
                       <span className="block font-display text-body-lg font-medium leading-none sm:text-h3">
                         {s.value}
                       </span>
-                      <span className="mt-1.5 block font-mono text-[11px] uppercase track-label leading-tight text-white/70">
+                      <span className="mt-1.5 block font-mono text-label uppercase track-label leading-tight text-white/70">
                         {s.label}
                       </span>
                     </dd>

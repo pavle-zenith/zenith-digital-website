@@ -45,7 +45,7 @@ export function CaseStudies() {
 
             {/* Right card: panel with a texture image under a navy gradient
                 tint. Taller on phones so the stacked content breathes. */}
-            <div className="relative flex min-h-[420px] flex-col justify-between gap-8 overflow-hidden rounded-[8px] bg-bg p-8 text-white lg:min-h-0">
+            <div className="tone-dark relative flex min-h-[420px] flex-col justify-between gap-8 overflow-hidden rounded-[8px] bg-bg p-8 text-white lg:min-h-0">
               {/* The sitewide studio texture, same as every other dark band.
                   Carried at 0.3 rather than the usual 0.14 because the gradient
                   below mutes it again, hard at the bottom where the text sits. */}

@@ -94,10 +94,10 @@ export function BeforeAfterSlider({
         {/* Corner labels */}
         {labels ? (
           <>
-            <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-[11px] uppercase track-label text-white backdrop-blur-sm">
+            <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-label uppercase track-label text-white backdrop-blur-sm">
               Before
             </span>
-            <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-[11px] uppercase track-label text-white backdrop-blur-sm">
+            <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-label uppercase track-label text-white backdrop-blur-sm">
               After
             </span>
           </>

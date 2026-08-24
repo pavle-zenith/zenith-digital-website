@@ -8,10 +8,16 @@ type Report = {
   findings: { text: string; severity: string }[];
 };
 
+/**
+ * Severity dots. The -ink variants, not the base feedback colours: these are
+ * meaningful graphics on a white card, and the base values (#e5484d 3.91:1,
+ * #f5a623 2.03:1, #35c88c 2.14:1) do not all clear the 3:1 floor. The -ink
+ * tokens exist for exactly this case.
+ */
 const SEVERITY: Record<string, string> = {
-  high: "bg-[#E5484D]",
-  med: "bg-[#F5A623]",
-  low: "bg-positive",
+  high: "bg-negative-ink",
+  med: "bg-warning-ink",
+  low: "bg-positive-ink",
 };
 
 /**
@@ -35,7 +41,7 @@ export function AuditReport({ report }: { report: Report }) {
           </p>
           <p className="mt-2 text-body text-light-muted">{report.scoreLabel}</p>
         </div>
-        <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded-full bg-[#E5484D]/10 px-3 py-1 font-mono text-label uppercase track-label text-[#E5484D]">
+        <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded-full bg-negative-ink/10 px-3 py-1 font-mono text-label uppercase track-label text-negative-ink">
           {report.delta}
         </span>
       </div>

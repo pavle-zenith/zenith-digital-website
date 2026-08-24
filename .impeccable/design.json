@@ -1,0 +1,489 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-21T00:00:00.000Z",
+  "title": "Design System: Zenith Digital",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Midnight Ink",
+        "canonical": "#02013a",
+        "tonalRamp": [
+          "#010023",
+          "#02013a",
+          "#14134f",
+          "#232263",
+          "#3d3c85",
+          "#6a69a8",
+          "#a3a2ca",
+          "#dedeed"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Midnight Ink Raised",
+        "canonical": "#14134f",
+        "tonalRamp": [
+          "#0a0929",
+          "#14134f",
+          "#201e6b",
+          "#302e88",
+          "#4f4da5",
+          "#7b7ac0",
+          "#aeaedb",
+          "#e3e3f2"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Deep Navy",
+        "canonical": "#0a1020",
+        "tonalRamp": [
+          "#05080f",
+          "#0a1020",
+          "#111a2e",
+          "#1a2540",
+          "#2c3b60",
+          "#59637a",
+          "#97a3bc",
+          "#e6e9f1"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Navy Surface",
+        "canonical": "#111a2e",
+        "tonalRamp": [
+          "#080c16",
+          "#111a2e",
+          "#1a2540",
+          "#243052",
+          "#3a4a73",
+          "#63719a",
+          "#9fabc6",
+          "#e8ecf4"
+        ]
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Navy Surface Raised",
+        "canonical": "#1a2540",
+        "tonalRamp": [
+          "#0c1120",
+          "#1a2540",
+          "#243156",
+          "#31406c",
+          "#4a5c8f",
+          "#7181b0",
+          "#a8b3cf",
+          "#eaedf6"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Near White",
+        "canonical": "#f6f8fc"
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Cool Grey-Blue",
+        "canonical": "#97a3bc"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Rail White",
+        "canonical": "rgba(255, 255, 255, 0.09)"
+      },
+      "light-bg": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff"
+      },
+      "light-surface": {
+        "role": "neutral",
+        "displayName": "Paper Grey",
+        "canonical": "#f4f6fa"
+      },
+      "light-text": {
+        "role": "neutral",
+        "displayName": "Deep Navy",
+        "canonical": "#0a1020"
+      },
+      "light-muted": {
+        "role": "neutral",
+        "displayName": "Slate Muted",
+        "canonical": "#59637a"
+      },
+      "light-border": {
+        "role": "neutral",
+        "displayName": "Paper Rule",
+        "canonical": "#e6e9f1"
+      },
+      "accent-subtle": {
+        "role": "primary",
+        "displayName": "Ink Wash",
+        "canonical": "rgba(2, 1, 58, 0.06)"
+      },
+      "accent-line": {
+        "role": "primary",
+        "displayName": "Ink Hairline",
+        "canonical": "rgba(2, 1, 58, 0.18)"
+      },
+      "positive": {
+        "role": "tertiary",
+        "displayName": "Signal Green",
+        "canonical": "#35c88c"
+      },
+      "positive-ink": {
+        "role": "tertiary",
+        "displayName": "Signal Green Ink",
+        "canonical": "#187e55"
+      },
+      "negative": {
+        "role": "tertiary",
+        "displayName": "Signal Red",
+        "canonical": "#e5484d"
+      },
+      "negative-ink": {
+        "role": "tertiary",
+        "displayName": "Signal Red Ink",
+        "canonical": "#c2262b"
+      },
+      "warning": {
+        "role": "tertiary",
+        "displayName": "Signal Amber",
+        "canonical": "#f5a623"
+      },
+      "warning-ink": {
+        "role": "tertiary",
+        "displayName": "Signal Amber Ink",
+        "canonical": "#9f630a"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline only. One per page, SF Pro Display Medium at -0.02em."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Interior page H1, and the value in every StatBlock, so a metric reads with the weight of a page title."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings via SectionHeader, set with text-balance."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All paragraph copy plus every button and tab label. Inter Display at 1.6."
+      },
+      "body-lg": {
+        "displayName": "Body Large",
+        "purpose": "Section intros and lead paragraphs, always in the muted token rather than full-strength ink."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Saans Mono, uppercase, 0.04em. Eyebrows, stat captions, pill text, nav column headers. Labels only, never speech."
+      }
+    },
+    "shadows": [
+      {
+        "name": "none",
+        "value": "none",
+        "purpose": "The system's only hand-written shadow value. No component casts a shadow for lift. Tailwind ring-* also compiles to box-shadow and is used as a hairline where border cannot reach (featured pricing card edge, overlapping hero avatars), never as elevation."
+      },
+      {
+        "name": "overlay-scrim",
+        "value": "background: rgba(0,0,0,0.7); backdrop-filter: blur(24px)",
+        "purpose": "Full-screen overlays only (video lightbox, testimonial modal). The escape hatch from The Zero Lift Rule."
+      },
+      {
+        "name": "glass-bar",
+        "value": "background: rgba(10,16,32,0.55); backdrop-filter: blur(12px)",
+        "purpose": "Caption and stat bars sitting over photography or video, where text needs separation from moving content."
+      },
+      {
+        "name": "nav-scrolled",
+        "value": "background: rgba(255,255,255,0.7); backdrop-filter: blur(24px)",
+        "purpose": "The sticky header once the page has scrolled. Returns to solid while the mobile drawer is open."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-pan",
+        "value": "background-position 0.5s ease",
+        "purpose": "The primary button's single-hue gradient panning across a 220% fill on hover. The one permitted gradient-like effect."
+      },
+      {
+        "name": "arrow-swap",
+        "value": "transform 0.3s ease-out",
+        "purpose": "The resting arrow exits right at 170% while a second enters from -170%, clipped by an overflow-hidden span."
+      },
+      {
+        "name": "media-settle",
+        "value": "transform 500ms",
+        "purpose": "Card and nav-panel imagery scaling to 1.02 on group hover. The only transform inside a card."
+      },
+      {
+        "name": "nav-tone",
+        "value": "background-color 300ms",
+        "purpose": "The header crossing from solid to translucent-blurred on scroll."
+      },
+      {
+        "name": "marquee",
+        "value": "translateX(-50%) over 35s linear infinite",
+        "purpose": "Client logo strips. A 70s variant slows the case-study logo rows; reverse variants run the opposite direction."
+      },
+      {
+        "name": "drift",
+        "value": "translateY(-50%) over 40s linear infinite",
+        "purpose": "The hero montage columns, drifting up and down against each other."
+      },
+      {
+        "name": "chart-draw",
+        "value": "stroke-dashoffset 8000 → 0 over 1.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "The cross-industry graph curve drawing itself in, with the fill fading up 0.8s behind it."
+      },
+      {
+        "name": "press",
+        "value": "scale(0.99)",
+        "purpose": "Active state on every button."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration: 0.01ms; transition-duration: 0.01ms; scroll-behavior: auto",
+        "purpose": "Global override under prefers-reduced-motion. Every scene animation is authored so its end state is also its base style, so the override snaps to the finished composition rather than an empty one."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
+        "name": "container-site",
+        "value": "1440px"
+      }
+    ],
+    "layout": [
+      {
+        "name": "section-py",
+        "value": "clamp(56px, 10vw, 160px)"
+      },
+      {
+        "name": "frame-padding",
+        "value": "clamp(20px, 4vw, 64px)"
+      },
+      {
+        "name": "gutter",
+        "value": "24px"
+      },
+      {
+        "name": "measure",
+        "value": "68ch"
+      },
+      {
+        "name": "rule-dark",
+        "value": "rgba(255, 255, 255, 0.1)"
+      },
+      {
+        "name": "rule-light",
+        "value": "rgba(10, 16, 32, 0.1)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The site's CTA. A single-hue gradient pans across the fill on hover while the arrow swaps out and back in.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Book a call<span class=\"ds-btn-arrow\" aria-hidden=\"true\"><span class=\"ds-btn-arrow-out\">&rarr;</span><span class=\"ds-btn-arrow-in\">&rarr;</span></span></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 6px; font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1rem; font-weight: 500; color: #ffffff; text-decoration: none; background-image: linear-gradient(110deg, #02013a 0%, #14134f 100%); background-size: 220% 100%; background-position: 0% 50%; transition: background-position 0.5s ease, transform 0.15s ease; } .ds-btn-primary:hover { background-position: 100% 50%; } .ds-btn-primary:active { transform: scale(0.99); } .ds-btn-primary:focus-visible { outline: 2px solid #02013a; outline-offset: 2px; } .ds-btn-arrow { position: relative; display: inline-block; overflow: hidden; font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); } .ds-btn-arrow-out { display: inline-block; transition: transform 0.3s ease-out; } .ds-btn-arrow-in { position: absolute; inset-block: 0; left: 0; display: inline-block; transform: translateX(-170%); transition: transform 0.3s ease-out; } .ds-btn-primary:hover .ds-btn-arrow-out { transform: translateX(170%); } .ds-btn-primary:hover .ds-btn-arrow-in { transform: translateX(0); }"
+    },
+    {
+      "name": "Secondary Button (light)",
+      "kind": "button",
+      "refersTo": "button-secondary-light",
+      "description": "Outline CTA on white sections. Fills with Paper Grey on hover. The dark-tone sibling swaps to the dark token family.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">See our work<span class=\"ds-btn-arrow-simple\" aria-hidden=\"true\">&rarr;</span></a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 6px; border: 1px solid #e6e9f1; background: transparent; font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1rem; font-weight: 500; color: #0a1020; text-decoration: none; transition: background-color 0.2s ease, transform 0.15s ease; } .ds-btn-secondary:hover { background-color: #f4f6fa; } .ds-btn-secondary:active { transform: scale(0.99); } .ds-btn-secondary:focus-visible { outline: 2px solid #02013a; outline-offset: 2px; } .ds-btn-arrow-simple { display: inline-block; transition: transform 0.3s ease; } .ds-btn-secondary:hover .ds-btn-arrow-simple { transform: translateX(4px); }"
+    },
+    {
+      "name": "Pill",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "Mono label chip for partner badges, industry tags and service tags. Fully rounded so it reads as a label, never a control.",
+      "html": "<span class=\"ds-pill\">Wix Legend Partner</span> <span class=\"ds-pill ds-pill-accent\">Travel</span>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 9999px; border: 1px solid #e6e9f1; font-family: var(--font-mono, 'Saans Mono', ui-monospace, monospace); font-size: 0.8125rem; line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase; color: #59637a; } .ds-pill-accent { border-color: transparent; background-color: rgba(2, 1, 58, 0.06); color: #02013a; }"
+    },
+    {
+      "name": "Filter Tab",
+      "kind": "chip",
+      "refersTo": "filter-tab",
+      "description": "One tab in the case-study and blog filter rows. A 6px rectangle, not a pill, because it is a control you click.",
+      "html": "<button class=\"ds-tab ds-tab-active\" aria-pressed=\"true\">All work</button> <button class=\"ds-tab\" aria-pressed=\"false\">SaaS</button>",
+      "css": ".ds-tab { flex-shrink: 0; white-space: nowrap; padding: 8px 16px; border-radius: 6px; border: 1px solid #e6e9f1; background: transparent; font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1rem; font-weight: 500; color: #0a1020; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; } .ds-tab:hover { background-color: #f4f6fa; } .ds-tab-active { border-color: #02013a; background-color: #02013a; color: #ffffff; } .ds-tab-active:hover { background-color: #02013a; } .ds-tab:focus-visible { outline: 2px solid #02013a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Case Study Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Media-forward work card. Flat at rest, separated from its ground by a hairline and a fill; the only motion is the image settling to 1.02 on hover.",
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-media\"><span class=\"ds-card-media-inner\"></span></span><span class=\"ds-card-body\"><span class=\"ds-card-tag\">Travel</span><span class=\"ds-card-title\">Scottish Luxury Experience</span><span class=\"ds-card-metric\">$521k in 7 months</span></span></a>",
+      "css": ".ds-card { display: flex; flex-direction: column; overflow: hidden; border-radius: 8px; border: 1px solid #e6e9f1; background-color: #ffffff; text-decoration: none; color: #0a1020; } .ds-card-media { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid #e6e9f1; background-color: #0a1020; } .ds-card-media-inner { position: absolute; inset: 0; background: linear-gradient(135deg, #111a2e 0%, #1a2540 100%); transition: transform 500ms ease; } .ds-card:hover .ds-card-media-inner { transform: scale(1.02); } .ds-card-body { display: flex; flex-direction: column; gap: 8px; padding: 24px; } .ds-card-tag { font-family: var(--font-mono, 'Saans Mono', ui-monospace, monospace); font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase; color: #59637a; } .ds-card-title { font-family: var(--font-display, 'SF Pro Display', system-ui, sans-serif); font-size: 1.5rem; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; } .ds-card-metric { font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1rem; color: #59637a; } .ds-card:focus-visible { outline: 2px solid #02013a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form field used across the contact, audit and partner-application forms. Border shifts on focus; the global focus ring adds the ink outline.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Work email</span><input class=\"ds-input\" type=\"email\" placeholder=\"you@company.com\" /></label>",
+      "css": ".ds-field { display: block; } .ds-field-label { display: block; margin-bottom: 6px; font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1rem; font-weight: 500; color: #0a1020; } .ds-input { width: 100%; padding: 12px 16px; border-radius: 6px; border: 1px solid #e6e9f1; background-color: #ffffff; font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1rem; color: #0a1020; outline: none; transition: border-color 0.2s ease; } .ds-input::placeholder { color: #59637a; } .ds-input:focus { border-color: #59637a; } .ds-input:focus-visible { outline: 2px solid #02013a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Stat Block",
+      "kind": "custom",
+      "refersTo": "typography.headline",
+      "description": "A metric set in the display face at headline scale with a caption beneath. Numbers are the loudest typography on the page after the hero.",
+      "html": "<div class=\"ds-stat\"><span class=\"ds-stat-value\">5.96x</span><span class=\"ds-stat-label\">Average ROAS</span></div>",
+      "css": ".ds-stat { display: flex; flex-direction: column; gap: 4px; } .ds-stat-value { font-family: var(--font-display, 'SF Pro Display', system-ui, sans-serif); font-size: clamp(2.25rem, 4.5vw, 3.75rem); font-weight: 500; line-height: 1; letter-spacing: -0.02em; color: #0a1020; } .ds-stat-label { font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1rem; color: #59637a; }"
+    },
+    {
+      "name": "Divided List",
+      "kind": "custom",
+      "refersTo": "layout.rule-light",
+      "description": "The recurring ruled-row pattern. Every row takes a top border including the first, so the stack reads as a divided block rather than a card grid.",
+      "html": "<ul class=\"ds-divided\"><li>Structure and wireframes built around your buyers</li><li>Wix Studio design and build</li><li>Analytics and lead capture wired in</li></ul>",
+      "css": ".ds-divided { list-style: none; margin: 0; padding: 0; } .ds-divided > li { border-top: 1px solid #e6e9f1; padding: 16px 0; font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1rem; line-height: 1.6; color: #0a1020; }"
+    },
+    {
+      "name": "Slider Arrows",
+      "kind": "nav",
+      "refersTo": "slider-arrow",
+      "description": "Prev/next controls for snap-scroll tracks. Bordered 40px squares with a solid fill so sliding content cannot show through them.",
+      "html": "<div class=\"ds-arrows\"><button class=\"ds-arrow\" aria-label=\"Previous case study\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"transform: rotate(180deg)\"><path d=\"M5 12h14m0 0l-6-6m6 6l-6 6\"/></svg></button><button class=\"ds-arrow\" aria-label=\"Next case study\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14m0 0l-6-6m6 6l-6 6\"/></svg></button></div>",
+      "css": ".ds-arrows { display: flex; flex-shrink: 0; gap: 8px; } .ds-arrow { display: flex; align-items: center; justify-content: center; height: 40px; width: 40px; border-radius: 6px; border: 1px solid #e6e9f1; background-color: #ffffff; color: #0a1020; cursor: pointer; transition: background-color 0.2s ease; } .ds-arrow:hover { background-color: #f4f6fa; } .ds-arrow:focus-visible { outline: 2px solid #02013a; outline-offset: 2px; } .ds-arrow svg { height: 16px; width: 16px; }"
+    },
+    {
+      "name": "Hairline Frame",
+      "kind": "custom",
+      "refersTo": "layout.frame-padding",
+      "description": "The system's spine. Every section's content sits in a centered column with visible side rails and a top rule; the rule color is set by the section's tone.",
+      "html": "<section class=\"ds-tone-light\"><div class=\"ds-frame ds-frame-divide\"><h2 class=\"ds-frame-heading\">Transparent, fixed pricing</h2><p class=\"ds-frame-intro\">Fixed scope, fixed price, fixed timeline.</p></div></section>",
+      "css": ".ds-tone-light { --ds-rule: rgba(10, 16, 32, 0.1); background-color: #ffffff; color: #0a1020; } .ds-frame { margin-inline: auto; width: 100%; max-width: 1440px; padding-inline: clamp(20px, 4vw, 64px); padding-block: clamp(56px, 10vw, 160px); border-inline: 1px solid var(--ds-rule); } .ds-frame-divide { border-top: 1px solid var(--ds-rule); } .ds-frame-heading { margin: 0; font-family: var(--font-display, 'SF Pro Display', system-ui, sans-serif); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance; } .ds-frame-intro { margin: 16px 0 0; max-width: 68ch; font-family: var(--font-body, 'Inter Display', system-ui, sans-serif); font-size: 1.125rem; line-height: 1.6; color: #59637a; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Drafting Table",
+    "overview": "Every section on this site is a measured column pinned between two visible rails, with a hairline rule drawn across the top. Nothing floats, nothing lifts, nothing casts a shadow. The frame is not decoration around the content; the frame is the evidence that the content was measured. A visitor scrolling the homepage is reading a drawing set, and the registration marks stay visible on purpose.\n\nThe palette is two grounds and one ink. White is the working ground and deep navy is the emphasis ground, spent deliberately rather than alternated on a beat: it marks the sections that carry proof and price. A near-black indigo does the pointing: a button fill, an active tab, the one figure in a section that matters. That ink is so dark it reads as authority rather than as color, which is exactly the register an agency selling checkable results should sit in. Where competitors reach for a bright accent to feel energetic, this system reaches for restraint and lets the numbers carry the volume.\n\nAgainst all that geometry sits one material: a photographic studio texture, held at 28% and inverted on white, grounding the page heroes and the pricing band. It is the only softness in the system, and it works because everything around it is ruled and squared. Real client screenshots, real logos, real headshots do the rest. Nothing here is illustrated, stylized, or stood in for.",
+    "keyCharacteristics": [
+      "Hairline frame on every section: side rails plus a top rule, tone-aware so the lines read on navy and on white",
+      "Absolute flatness at rest; depth is tonal fill and 1px borders, never elevation",
+      "Two grounds, one ink (#02013a): white (#ffffff) is the default, navy (#0a1020) is reserved emphasis, not a rhythm",
+      "SF Pro Display set tight (-0.02em) at Medium for headings; Saans Mono, uppercase, for labels only",
+      "Restrained radii: 6px on controls, 8px on surfaces, full-round reserved for pills",
+      "Numbers are typographic events, set in the display face at headline scale",
+      "Motion is slow and mechanical: 35–70s marquees, 0.5s gradient pans, 0.3s arrow nudges"
+    ],
+    "rules": [
+      {
+        "name": "The One Ink Rule",
+        "body": "There is exactly one accent and it has no scale. Midnight Ink appears on the CTA, the active state, and one figure per section. If a design needs a second color to separate two things, it changes ground (navy to white) or changes weight, never hue.",
+        "section": "colors"
+      },
+      {
+        "name": "The -ink Split Rule",
+        "body": "Every feedback color ships as a pair: the base value clears 3:1 and is for fills and meaningful graphics; the -ink value is the only one permitted on text over a light fill. The -ink values clear 4.5:1 against BOTH light grounds, white and light-surface. Measured (white / #f4f6fa): green 5.05 / 4.67, red 5.82 / 5.38, amber 4.93 / 4.55. A value can pass on white and fail on the tinted surface: green (#1e9e6a) and amber (#a2650a) both did until they were darkened. Re-measure against both after any change.",
+        "section": "colors"
+      },
+      {
+        "name": "The Spent Ground Rule",
+        "body": "Navy is emphasis, not alternation. It is reserved for the sections that carry proof and price, and a long white run between them is the intended state rather than a defect: the emphasis only works because it is rare. A ground change is a decision about what the section is doing, never a decision about visual variety.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reciprocal Ground Rule",
+        "body": "#0a1020 is the dark background and the light foreground; #ffffff is the light background. The two grounds are one relationship inverted, so a component written for one tone maps to the other by swapping token families, never by inventing new values.",
+        "section": "colors"
+      },
+      {
+        "name": "The Annotation Rule",
+        "body": "Saans Mono is uppercase, small, and letterspaced, and it only ever labels something else. It never sets a heading, a paragraph, a button, or a tab. A control is something you click, so it takes the body face; a caption is something you read off a drawing, so it takes mono.",
+        "section": "typography"
+      },
+      {
+        "name": "The Earned Eyebrow Rule",
+        "body": "Eyebrow returns null when empty, and that is the default state. A label goes above a heading only when it genuinely orients the reader. \"Our Services\" above a services section is the exact failure this rule exists to prevent.",
+        "section": "typography"
+      },
+      {
+        "name": "The Numbers-Are-Headings Rule",
+        "body": "A metric is set in the display face at headline scale with leading-none, and its caption sits directly beneath in mono. Numbers are the loudest typography on the page after the hero, because the proof is the pitch.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Double Hairline Rule",
+        "body": "A band sitting on a section boundary draws only its top rule. The element below it owns the separator. border-y on a boundary band produces two 1px lines with a hair of ground between them, and it is always wrong.",
+        "section": "layout"
+      },
+      {
+        "name": "The Rails Are Always On Rule",
+        "body": "The side rails are not a section treatment; they are the page's spine. A full-bleed background may extend past them, but content does not, and no section opts out of the frame.",
+        "section": "layout"
+      },
+      {
+        "name": "The Zero Lift Rule",
+        "body": "No component casts a shadow for lift, at rest or on hover. If a design feels like it needs elevation, it needs a hairline or a surface tint instead. Tailwind ring-* compiles to box-shadow but is used only as a hairline where border cannot reach; a ring at rest, in a rule colour, at hairline width is a border, not elevation. The only things allowed above the page plane are true overlays, and they announce themselves with a scrim.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Glass Is For Media Rule",
+        "body": "backdrop-blur exists to keep text legible over a photograph or over scrolling content. It is never a surface treatment on a card, a section, or a panel over flat color.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Squares-Not-Circles Rule",
+        "body": "Interactive controls are rounded rectangles at 6px. Slider arrows in particular are bordered 40px squares with a solid section-background fill, so sliding content cannot show through them. Circular buttons read as consumer-app furniture and do not belong on this drawing. One exception, and only this one: the before/after comparison handle is a rounded-full 44px thumb, because it is a draggable affordance on a track rather than a button.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do wrap every section in Section with a tone, and put content in the .frame column. Override rhythm through frameClassName, never by abandoning the frame.",
+      "Do express depth with a surface tint and a 1px hairline. bg → surface → surface-2 on dark; light-bg → light-surface on light.",
+      "Do build grids as grid gap-px over a rule-colored background with solid-filled cells, so the gaps become the rules.",
+      "Do use .frame-bleed for continuous strips (rules, marquees, image tracks, CTA banners) and .frame-bleed-md for anything card-, tab-, or grid-shaped, so phones keep the gutter.",
+      "Do pass tone down to every component that renders on both grounds. A component with hardcoded light colors will break the moment it lands on navy.",
+      "Do reference tokens through Tailwind utilities (bg-bg, text-text-muted, border-light-border) or var(--token). In Tailwind v4 arbitrary values, use parens (px-(--gutter)), never brackets, which silently emit nothing.",
+      "Do set metrics in the display face at headline scale with a mono caption beneath.",
+      "Do use a white-filled button on navy sections, where the Midnight Ink fill is invisible.",
+      "Do ship the -ink variant of any feedback color the moment it becomes text on a light fill.",
+      "Do inline icons as Lucide SVG paths in a local map per component."
+    ],
+    "donts": [
+      "Don't add a box-shadow. Not on cards, not on hover, not \"subtle.\" Overlays get a scrim and a blur; everything else stays flat.",
+      "Don't use decorative gradients: no multi-stop or purple/blue \"AI\" gradients, no gradient text, no mesh gradients, no glowing orbs, no aurora or starfield grounds, no glassmorphism as a surface treatment. The single-hue button pan and the texture's ground scrim are the only exceptions.",
+      "Don't put border-y on a band that sits at a section boundary. Top rule only; the element below owns the separator.",
+      "Don't default to three equal cards in a row. Vary composition, use the divided-list row pattern where the content is list-shaped, and prefer editorial asymmetry over centered-everything.",
+      "Don't ship stock-AI visuals: no floating 3D shapes, isometric illustrations, neon grids, generic stock hero photography, or emoji as icons. Real client screenshots, real logos, real team photos only.",
+      "Don't put an eyebrow above a section by reflex. Eyebrow renders nothing when empty and that is the intended default.",
+      "Don't set mono anywhere except small uppercase labels and captions. Buttons, tabs, headings, and paragraphs take the body or display face.",
+      "Don't use a > chevron for an inline arrow, and don't set an arrow in the display face. Always the body-face &rarr; with .btn-arrow or .arrow-glyph.",
+      "Don't make interactive controls circular. 6px squares, including slider arrows.",
+      "Don't introduce a second accent hue or an accent tonal scale. Change ground or change weight instead.",
+      "Don't let a section use the same vertical padding on phone and desktop."
+    ]
+  }
+}

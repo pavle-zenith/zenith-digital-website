@@ -79,8 +79,18 @@ export default function RootLayout({
             the whole site, so page-level schema only adds what's page-specific. */}
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
+        {/* Skip link — first focusable element in the document, so a keyboard
+            user can clear the sticky header and its mega-menu in one press.
+            tone-dark because the pill's own ground is the near-black accent:
+            the default accent-coloured focus ring would be invisible on it. */}
+        <a
+          href="#main"
+          className="tone-dark sr-only rounded-[6px] font-medium focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-accent focus:px-4 focus:py-2 focus:text-body focus:text-accent-ink"
+        >
+          Skip to content
+        </a>
         <Nav />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <Footer />
         {/* Consent banner + route-change page views. */}
         <Analytics />

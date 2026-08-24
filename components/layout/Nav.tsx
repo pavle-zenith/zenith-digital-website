@@ -58,7 +58,10 @@ export function Nav() {
             zenith digital
           </Link>
 
-          <ul className="hidden items-center gap-4 md:flex lg:gap-6">
+          {/* Wrapped in <nav> so primary navigation is exposed as a landmark;
+              the header alone is not one. */}
+          <nav aria-label="Primary" className="hidden md:block">
+          <ul className="flex items-center gap-4 lg:gap-6">
             {nav.items.map((item) => {
               const hasMenu = "menu" in item && item.menu === "services";
               return (
@@ -68,6 +71,10 @@ export function Nav() {
                 >
                   <Link
                     href={item.href}
+                    // onFocus mirrors onMouseEnter: the panel was mouse-only, so
+                    // a keyboard user tabbing to Services never saw its contents.
+                    onFocus={() => setMenuOpen(hasMenu ? true : false)}
+                    aria-expanded={hasMenu ? menuOpen : undefined}
                     className="flex items-center gap-1.5 py-2 text-body font-medium text-light-text transition hover:text-accent"
                   >
                     {item.label}
@@ -93,6 +100,7 @@ export function Nav() {
               );
             })}
           </ul>
+          </nav>
         </div>
 
         {/* Right cluster: CTAs. Free audit = filled white, Get a quote = accent. */}
@@ -126,8 +134,14 @@ export function Nav() {
         </button>
       </div>
 
-      {/* Services mega-dropdown */}
+      {/* Services mega-dropdown.
+          `inert` while closed. max-h-0 + opacity-0 clips the panel visually but
+          leaves its eight links in the tab order, so a keyboard user collected
+          eight stops on things they could not see. pointer-events-none never
+          blocked the keyboard. inert removes the subtree from both the tab
+          order and the accessibility tree, which is what closed actually means. */}
       <div
+        inert={!menuOpen}
         className={cn(
           "absolute inset-x-0 top-full hidden overflow-hidden border-b border-[var(--rule)] bg-light-bg transition-[max-height,opacity] duration-200 md:block",
           menuOpen
@@ -225,26 +239,37 @@ export function Nav() {
           containing block for fixed children, which collapsed the drawer to
           zero height). Hairline-divided rows up top, sign-off + CTAs pinned
           to the bottom. */}
+      {/* `inert` rather than aria-hidden. The drawer is hidden by opacity alone,
+          so its eight links stayed focusable while closed: aria-hidden over
+          focusable descendants is the axe `aria-hidden-focus` violation, and on
+          phones it also meant eight tab stops on an invisible panel. inert
+          covers both, so aria-hidden is no longer needed here. */}
       <div
+        inert={!open}
         className={cn(
           "absolute inset-x-0 top-full z-40 flex h-[calc(100dvh-4rem)] flex-col bg-light-bg transition-opacity duration-200 md:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
-        aria-hidden={!open}
       >
-        <ul className="flex flex-col overflow-y-auto border-t border-light-border px-[clamp(20px,4vw,64px)]">
-          {nav.items.map((item) => (
-            <li key={item.href} className="border-b border-light-border">
-              <Link
-                href={item.href}
-                className="block py-5 font-display text-h3 font-medium"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/* Same landmark label as the desktop list: the two are mutually
+            exclusive by viewport (this is md:hidden, that one is hidden md:block)
+            and this one is inert while closed, so exactly one is ever exposed
+            to the accessibility tree. */}
+        <nav aria-label="Primary">
+          <ul className="flex flex-col overflow-y-auto border-t border-light-border px-[clamp(20px,4vw,64px)]">
+            {nav.items.map((item) => (
+              <li key={item.href} className="border-b border-light-border">
+                <Link
+                  href={item.href}
+                  className="block py-5 font-display text-h3 font-medium"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {/* Sign-off + CTAs pinned to the bottom */}
         <div className="mt-auto flex flex-col gap-4 border-t border-light-border px-[clamp(20px,4vw,64px)] py-8">

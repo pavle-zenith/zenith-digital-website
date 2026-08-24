@@ -136,7 +136,7 @@ export function AuditForm({ id }: { id?: string }) {
       </button>
 
       {state.status === "error" ? (
-        <p className="mt-4 text-body text-[#E5484D]" role="alert">
+        <p className="mt-4 text-body text-negative-ink" role="alert">
           {state.message} {auditForm.errorFallback}
         </p>
       ) : null}

@@ -28,6 +28,7 @@ export function ComparisonTable() {
           src="/textures/studio-texture.jpg"
           alt=""
           fill
+          sizes="100vw"
           className="object-cover opacity-[0.16]"
           aria-hidden
         />

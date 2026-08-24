@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
 /*
- * Zenith Digital — design tokens (CLAUDE.md §7).
- * This @theme block is the single source of truth for the design system.
+ * Zenith Digital design tokens. This @theme block is the single source of
+ * truth for the values; DESIGN.md at the repo root documents what they mean
+ * and the rules governing their use. CLAUDE.md §7 is a superseded draft: its
+ * accent and font choices never shipped, so read DESIGN.md instead.
+ *
  * Never hardcode a hex value in a component; reference these tokens via Tailwind
  * utilities (bg-bg, text-text-muted, text-accent, border-border) or var(--token).
  *
- * The accent (#4E7CFF) is a PLACEHOLDER close to the real brand blue. Finalizing
- * the brand accent is a one-line change here; re-verify contrast after the swap.
+ * The accent is #02013a, "Midnight Ink": a near-black indigo carrying white
+ * text. It is the system's only accent and has no tonal scale. Changing it is a
+ * one-line change here; re-verify contrast on both grounds after any swap.
  */
 @theme {
   /* Dark (deep navy) — primary dark sections */
@@ -32,17 +36,22 @@
   --color-accent-subtle: rgba(2, 1, 58, 0.06);
   --color-accent-line: rgba(2, 1, 58, 0.18);
 
-  /* Feedback */
+  /* Feedback.
+     Each colour ships as a pair. The base value is for fills and meaningful
+     graphics and clears 3:1. The -ink value is the only one permitted on TEXT
+     over a light fill and clears 4.5:1 against BOTH light grounds (#ffffff and
+     #f4f6fa). Measured, white / light-surface:
+       positive-ink #187e55  5.05 / 4.67
+       negative-ink #c2262b  5.82 / 5.38
+       warning-ink  #9f630a  4.93 / 4.55
+     positive-ink was #1e9e6a (3.41 / 3.15) and warning-ink was #a2650a
+     (4.77 / 4.41): both were documented as clearing 4.5:1 and did not. */
   --color-positive: #35c88c;
-  /* Deeper green for positive marks on light fills (#35c88c only reaches ~2:1
-     on white, under the 3:1 floor for meaningful graphics). */
-  --color-positive-ink: #1e9e6a;
+  --color-positive-ink: #187e55;
   --color-negative: #e5484d;
-  /* Same rule as positive-ink: the fill colour clears 3:1 for graphics but not
-     4.5:1 for text, so red/amber *text* on light fills uses the -ink variant. */
   --color-negative-ink: #c2262b;
   --color-warning: #f5a623;
-  --color-warning-ink: #a2650a;
+  --color-warning-ink: #9f630a;
 
   /* Typography */
   --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
@@ -116,11 +125,25 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Accent focus ring for keyboard nav (§7 accessibility) */
+/*
+ * Focus ring for keyboard nav. Tone-aware by necessity: the accent is #02013a,
+ * which measures 1.04:1 against the navy ground and 1.13:1 against --surface,
+ * so an accent ring is invisible on every dark section. Each tone sets its own
+ * ring colour below (see .tone-dark / .tone-light); --focus-ring here is the
+ * fallback for anything outside a toned section.
+ *
+ * Deliberately no border-radius: `outline` already follows the element's own
+ * corners. Setting one here (this rule is unlayered, so it outranks every
+ * Tailwind utility) squared every 6px button and every rounded-full pill down
+ * to 2px the moment it took focus.
+ */
+:root {
+  --focus-ring: var(--color-accent);
+}
+
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 
 /* Respect reduced motion (§7, §14) */
@@ -290,9 +313,13 @@ body {
  */
 .tone-dark {
   --rule: rgba(255, 255, 255, 0.1);
+  /* Near-white ring: 17.8:1 on --bg, 15.4:1 on --surface-2. */
+  --focus-ring: var(--color-text);
 }
 .tone-light {
   --rule: rgba(10, 16, 32, 0.1);
+  /* Accent ring: 19.7:1 on white. */
+  --focus-ring: var(--color-accent);
 }
 
 .frame {

@@ -115,7 +115,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "257% YoY impressions",
     story:
       "AI-first migration from Wix Classic. 70+ pages ranking, top spot in AI answers.",
-    thumb: "/portfolio-blocky/belistria.png",
+    thumb: "/portfolio-blocky/belistria.webp",
     logo: "/logos-white/belistria.png",
     liveUrl: "https://www.belistria.eu",
   },
@@ -448,7 +448,7 @@ export const caseStudies = {
       client: "Bel'Istria",
       slug: "belistria",
       logo: "/logos-white/belistria.png",
-      thumb: "/portfolio-blocky/belistria.png",
+      thumb: "/portfolio-blocky/belistria.webp",
       title:
         "Crafting an immersive Croatia private transfer and travel booking experience in Wix Studio",
       stats: [
@@ -723,7 +723,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "The timing forced the decision. A new season was coming, and every booking it would bring was going to start with a search or, increasingly, a question typed into an AI assistant. The brief was direct: stop losing the searches Bel'Istria should own, and be ready before the season started.",
     ],
     heroShot: {
-      src: "/portfolio-blocky/belistria.png",
+      src: "/portfolio-blocky/belistria.webp",
       alt: "Bel'Istria homepage: luxury travel experiences in Croatia, with chauffeur service and trip planning calls to action",
     },
     introduction:

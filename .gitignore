@@ -49,3 +49,20 @@ site asset dump/client headshots/Contract PDF formatting.pdf
 # Scratch folder for files the remote-device bridge cannot delete (it has no
 # rm), so they get moved here instead. Never meant to be committed.
 _to_delete/
+
+# Source material, not application code. These stay on disk and out of git:
+# together they are ~800MB, which every clone and every Vercel build would
+# otherwise pull down to ship a site that never reads a byte of them.
+#
+# The fonts the app actually loads live in app/fonts/ (see app/fonts/index.ts).
+# The folders below are the raw downloads they were extracted from.
+Inspiration/
+site asset dump/
+team section/
+inter-display/
+saans-font-family/
+sf-pro-display (1)/
+
+# Claude Code local settings: machine-specific absolute paths, per-developer.
+# The shared .claude/settings.json (if one exists) is still tracked.
+.claude/settings.local.json

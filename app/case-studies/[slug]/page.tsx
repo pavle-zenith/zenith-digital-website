@@ -9,6 +9,7 @@ import { CaseStudyShot } from "@/components/sections/CaseStudyShot";
 import { CaseStudyIntro } from "@/components/sections/CaseStudyIntro";
 import { CaseStudyMedia } from "@/components/sections/CaseStudyMedia";
 import { CaseStudyStory } from "@/components/sections/CaseStudyStory";
+import { CaseStudyScrollShot } from "@/components/sections/CaseStudyScrollShot";
 import { CaseStudyTestimonial } from "@/components/sections/CaseStudyTestimonial";
 import { CaseStudyRelated } from "@/components/sections/CaseStudyRelated";
 import { CtaBanner } from "@/components/sections/CtaBanner";
@@ -111,6 +112,11 @@ export default async function CaseStudyPage({ params }: Props) {
       <CaseStudyIntro study={study} />
       <CaseStudyMedia study={study} />
       <CaseStudyStory study={study} />
+
+      {/* The whole design in one band, after the numbers that justify it and
+          before the client says it in their own words. */}
+      {study.scrollShot ? <CaseStudyScrollShot {...study.scrollShot} /> : null}
+
       {study.testimonial ? (
         <CaseStudyTestimonial testimonial={study.testimonial} />
       ) : null}

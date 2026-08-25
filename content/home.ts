@@ -90,10 +90,10 @@ export const hero = {
 
 // 2. Stat strip
 export const stats: Metric[] = [
-  { value: "100+", label: "Websites shipped" },
+  { value: "100+", label: "Websites shipped since 2019" },
   { value: "3-4 wks", label: "Average launch" },
-  { value: "€1M+", label: "Client revenue generated" },
-  { value: "5.96x", label: "Average ROAS" },
+  { value: "€1M+", label: "Campaign revenue, MOD Digital" },
+  { value: "5.96x", label: "Average ROAS, managed campaigns" },
 ];
 
 // 3. Client logo strip

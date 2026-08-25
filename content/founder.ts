@@ -81,6 +81,19 @@ export const founderCore = {
       label: "Trustpilot",
       href: "https://www.trustpilot.com/review/thezenithdigital.com",
     },
+    // Google Business Profile. Third-party review surfaces are the ones answer
+    // engines actually read, so every profile Zenith Digital owns is asserted
+    // here and reaches `sameAs`, which is also what ties the six unrelated
+    // companies called Zenith apart from this one.
+    //
+    // The ?cid= form, not the /maps/place/ URL the browser shows: the long
+    // one carries a viewport, a session token and a dated `g_ep` param, none
+    // of which identify the listing and all of which rot. The CID is the
+    // listing's permanent numeric ID, so this link resolves for good.
+    {
+      label: "Google Business Profile",
+      href: "https://maps.google.com/?cid=7242476783263314018",
+    },
     { label: "Email", href: "mailto:hello@thezenithdigital.com" },
     // The contact number already published in the footer and FAQ, in the
     // digits-only form wa.me expects.
@@ -92,10 +105,16 @@ export const founderCore = {
 export const founderServices = {
   ...founderCore,
   // Display chips only: LinkedIn, email, WhatsApp (owner decision, Aug 2026).
-  // The Wix Partner and Trustpilot profiles stay in `founderCore.links`, so
-  // they still feed Person/Organization `sameAs`; they're just not shown.
+  // The Wix Partner, Trustpilot and Google profiles stay in
+  // `founderCore.links`, so they still feed Person/Organization `sameAs`;
+  // they're just not shown as chips. Listed by exclusion rather than by
+  // allow-list so a new proof profile reaches `sameAs` by default and only
+  // becomes a visible chip on purpose.
   links: founderCore.links.filter(
-    (l) => l.label !== "Wix Partner profile" && l.label !== "Trustpilot",
+    (l) =>
+      l.label !== "Wix Partner profile" &&
+      l.label !== "Trustpilot" &&
+      l.label !== "Google Business Profile",
   ),
   heading: "Who actually builds your site?",
   paragraphs: [

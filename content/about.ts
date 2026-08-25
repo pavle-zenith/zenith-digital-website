@@ -85,7 +85,7 @@ export const aboutNumbers = {
   heading: "The record, in numbers",
   stats: [
     { value: "100+", label: "Websites shipped since 2019" },
-    { value: "€1M+", label: "Client revenue tracked" },
+    { value: "€1M+", label: "Campaign revenue, MOD Digital" },
     { value: "5.96x", label: "Average ROAS on managed campaigns" },
     { value: "Since 2019", label: "Without a production site going down" },
   ] as Metric[],

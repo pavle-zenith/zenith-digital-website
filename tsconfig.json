@@ -31,11 +31,17 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    ".next-about/types/**/*.ts",
+    ".next-band/types/**/*.ts",
+    ".next-pair/types/**/*.ts",
+    ".next-peek/types/**/*.ts",
     ".next-scan/types/**/*.ts",
+    ".next-shot/types/**/*.ts",
+    ".next-sle/types/**/*.ts",
     ".next-verify/types/**/*.ts",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".next-about/types/**/*.ts"
+    ".next-tex/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

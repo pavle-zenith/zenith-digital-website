@@ -21,9 +21,9 @@ export const whyWixItem = {
 
 // 1. Hero (dark, compact). Anchor pills derive from the categories below.
 export const fHero = {
-  heading: "Before you book that call, read this.",
+  heading: "What to ask a Wix agency before you hire one",
   support:
-    "Hiring a web team can feel risky, especially if you've been burned before. Here's where we stand on everything people ask us, in plain language.",
+    "Hiring a web team can feel risky, especially if you've been burned before. These are the questions worth putting to any agency you're considering, and where Zenith Digital stands on each of them, in plain language.",
 };
 
 // 2. The six categories. `id` doubles as the anchor target for the hero pills.

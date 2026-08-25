@@ -7,9 +7,10 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { fCategories, fFinalCta } from "@/content/faq";
 
 export const metadata: Metadata = {
-  title: "FAQ | pricing, process, and straight answers | Zenith Digital",
+  title:
+    "What to ask a Wix agency before you hire one | Zenith Digital",
   description:
-    "Everything people ask before working with Zenith Digital: real prices, timelines, who we're a fit for (and who we're not), and what happens after launch.",
+    "The questions worth asking any Wix Studio agency before you sign, answered in full: real prices, timelines, who owns the site, who can edit it after launch, and what happens if you outgrow the scope.",
   alternates: { canonical: "/faq" },
 };
 

@@ -72,17 +72,19 @@ export type CaseStudyCard = {
 /**
  * Full project grid.
  *
- * OWNER — read before launch. Two kinds of card live here:
+ * Two kinds of card live here, and the difference is what the `metric` says.
  *
- * 1. The first eleven carry REAL figures ported from the live site.
- * 2. Everything below "Wellington Web Co" is COPY WRITTEN TO FILL THE GRID at
- *    your request. The `story` lines are invented. The `metric` lines are
- *    deliberately NOT invented numbers: each one states the scope of the build
- *    ("Boat and yacht marketplace") rather than a result ("+240% bookings"),
- *    because a fabricated percentage on a named client's card is a claim about
- *    that client's business and reads as real. Send me the actual numbers and
- *    I'll swap them in. Anything still describing scope at launch is a card
- *    that never got its figure.
+ * 1. The first eleven carry REAL figures ported from the live site: an outcome
+ *    ("$521k in 7 months", "257% YoY impressions").
+ * 2. Everything below "Wellington Web Co" states the SCOPE of the build
+ *    instead ("Boat and yacht marketplace", "Direct booking site"), because no
+ *    outcome figure exists for it yet. Owner-confirmed as factually accurate,
+ *    Aug 2026. A fabricated percentage on a named client's card is a claim
+ *    about that client's business and reads as real, so scope is the honest
+ *    placeholder. Send the actual numbers and any card upgrades in place.
+ *
+ * The rule that matters: a `metric` describing scope means the figure never
+ * arrived, not that the project is unverified.
  *
  * Thumbs are the 4:3 shots from /case-study-grid. Cards with no shot fall back
  * to their white wordmark, then to the client name set in the display face.
@@ -379,7 +381,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     slug: "bianomics",
     industry: "services",
     metric: "Consultancy positioning site",
-    story: "Brand, events, and operations offer pulled into one narrative",
+    story:
+      "Brand, PR, events, operations, and workforce programmes in one offer",
     thumb: "/case-study-grid/bianomics.webp",
   },
   {
@@ -564,6 +567,12 @@ export type CaseStudyDetail = CaseStudyCard & {
   results: CaseStudyResultMetric[];
   /** One qualitative line under the numbers. */
   resultsNote?: string;
+  /**
+   * Full-page screenshot panned inside a CSS laptop bezel, between the intro
+   * and the gallery. RAW capture only, no browser chrome baked in, and the
+   * pixel size is required: the component derives the pan distance from it.
+   */
+  scrollShot?: CaseStudyGalleryImage & { width: number; height: number };
   /** First image illustrates the challenge; the rest feed the gallery. */
   gallery?: CaseStudyGalleryImage[];
   beforeAfter?: { before: string; after: string };
@@ -821,9 +830,22 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "Scottish Luxury Experience sells bespoke luxury trips across Scotland, priced from £15k to £100k per journey. Its three founders had the heritage, the supplier network, and a genuinely premium product. What they didn't have was a website worthy of it, and the constraint that shaped the whole build came straight from the price tag: a brand selling £100k journeys cannot look mass-market at any touchpoint.",
       "The deadline was just as fixed. MOD Digital was building the growth engine around the brand, the ad calendar was already set, and the site had to be live before the first campaign spent a pound. Four weeks, no slack.",
     ],
+    // Format test (owner, 25 Aug 2026): 5760x2880 source, exactly the 2:1 this
+    // band renders at from md up, so the desktop crop takes the whole frame
+    // rather than a slice of it.
     heroShot: {
-      src: "/casestudies/scottishluxury.jpg",
+      src: "/ScottishLuxuryTest.webp",
       alt: "Scottish Luxury Experience homepage: Discover Scotland, with a Highland cow hero and bespoke trip planning prompts",
+    },
+    // 2880x14802 capture, downsampled to 1440 wide. The full-size version was
+    // 42.6 megapixels, past what iOS Safari will decode; 1440 against a screen
+    // rendering ~1,070px is still sharper than 1:1, and the file drops from
+    // 13MB to 355KB.
+    scrollShot: {
+      src: "/scroll-shots/scottish-luxury-experience.webp",
+      alt: "The full Scottish Luxury Experience homepage in one pass: the Discover Scotland hero, tailored trip cards, the experience builder, Why Scotland, the team film, and the travel stories footer",
+      width: 1440,
+      height: 7401,
     },
     introduction:
       "Zenith Digital designed and built the Scottish Luxury Experience website in Wix Studio in four weeks, launching in December 2025: the layer every client sees first, in front of the demand and sales system MOD Digital runs behind it. Within seven months of launch, the engine the site fronts had turned paid traffic into $521k of booked trips.",
@@ -1516,14 +1538,14 @@ export const csGallery = {
 export const csHero = {
   // H1 carries the "Wix Studio website examples" search intent the meta title
   // targets; the brand sentence moved down into `support`.
-  heading: "Wix Studio website examples",
-  headingMuted: "with the business results attached.",
+  heading: "See how Zenith Digital",
+  headingMuted: "turns websites into revenue.",
   support:
     "We partner with founders, marketing teams, and small businesses, turning websites and SEO into assets that compound. These aren't showcase sites built to impress other designers. They're working websites built for real businesses, with specific problems to solve and real outcomes attached.",
   stats: [
-    { value: "100+", label: "Websites" },
-    { value: "€1M+", label: "Client revenue" },
-    { value: "5.96x", label: "Average ROAS" },
+    { value: "100+", label: "Websites since 2019" },
+    { value: "€1M+", label: "Campaign revenue, MOD Digital" },
+    { value: "5.96x", label: "Average ROAS, managed campaigns" },
     { value: "7+", label: "Industries" },
   ],
   ctas: [

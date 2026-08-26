@@ -96,7 +96,7 @@ export function BookHero() {
           {bookHero.proof.avatars.map((src) => (
             <span
               key={src}
-              className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-light-bg"
+              className="relative h-10 w-10 overflow-hidden rounded-[6px] ring-2 ring-light-bg"
             >
               <Image
                 src={src}

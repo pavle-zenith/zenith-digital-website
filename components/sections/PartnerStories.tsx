@@ -135,7 +135,7 @@ export function PartnerStories() {
                     {s.quote.name ? (
                       <figcaption className="mt-4 flex items-center gap-3">
                         {s.quote.avatar ? (
-                          <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                          <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-[6px]">
                             <Image
                               src={s.quote.avatar}
                               alt={s.quote.name}

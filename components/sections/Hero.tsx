@@ -86,7 +86,7 @@ export function Hero() {
               {hero.proof.avatars.map((src) => (
                 <span
                   key={src}
-                  className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-light-bg"
+                  className="relative h-9 w-9 overflow-hidden rounded-[6px] ring-2 ring-light-bg"
                 >
                   <Image
                     src={src}

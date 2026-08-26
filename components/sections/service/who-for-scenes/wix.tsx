@@ -134,7 +134,7 @@ export function LaunchScene() {
       }
     >
       <div className="mt-5 flex items-center gap-3">
-        <span className="h-9 w-9 rounded-full bg-bg" />
+        <span className="h-9 w-9 rounded-[6px] bg-bg" />
         <span>
           <Line className="w-24 bg-light-text" />
           <Line className="mt-2 w-16 bg-light-border" />

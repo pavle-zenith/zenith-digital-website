@@ -165,7 +165,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
       <figure className="rounded-[8px] border border-light-border bg-light-bg p-6">
         <figcaption className="flex items-center gap-3">
           {card.avatar ? (
-            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full">
+            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[6px]">
               <Image
                 src={card.avatar}
                 alt={card.name}
@@ -176,7 +176,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
             </span>
           ) : (
             <span
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent font-display font-medium text-accent-ink"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] bg-accent font-display font-medium text-accent-ink"
               aria-hidden
             >
               {card.name

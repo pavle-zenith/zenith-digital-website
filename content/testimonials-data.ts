@@ -9,7 +9,7 @@
  * mid-sentence with commas (CLAUDE.md §14 keeps dashes off the site). No
  * sentence was reworded, shortened, or invented.
  *
- * OWNER — headshots: 27 of the 31 use their real photo, copied out of
+ * OWNER — headshots: 28 of the 32 use their real photo, copied out of
  * "site asset dump/client headshots" into /public/avatars and renamed to match
  * the ids below. Four have no usable photo and fall back to
  * PLACEHOLDER_AVATAR: Marko Georgievski, Christopher Barone, Tom H, and
@@ -354,6 +354,15 @@ export const allTestimonials: Testimonial[] = [
     quote:
       "It's all about style and efficiency for us. Gorska is no ordinary rakija, so we needed an extraordinary team. That team happens to be the Zenith team.",
     avatar: "/avatars/ivana-lesevic.avif",
+  },
+  {
+    id: "david-connel",
+    name: "David Connel",
+    company: "Pressure Test Scotland",
+    role: "Director",
+    quote:
+      "Top guys, I would highly recommend. Went over and above my expectations. If you want a good site, give these guys a try.",
+    avatar: "/avatars/david-connel.jpeg",
   },
 ];
 

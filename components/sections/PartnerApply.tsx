@@ -36,7 +36,7 @@ export function PartnerApply() {
             </p>
             <div className="mt-5 flex items-center gap-3 border-t border-light-border pt-5">
               {founder.photo ? (
-                <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full">
+                <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[6px]">
                   <Image
                     src={founder.photo}
                     alt={founder.name}
@@ -47,7 +47,7 @@ export function PartnerApply() {
                 </span>
               ) : (
                 <span
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent font-display font-medium text-accent-ink"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] bg-accent font-display font-medium text-accent-ink"
                   aria-hidden
                 >
                   PM

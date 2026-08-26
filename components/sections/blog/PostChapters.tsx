@@ -136,7 +136,7 @@ export function PostChapters({
                 alt=""
                 width={64}
                 height={64}
-                className="h-8 w-8 rounded-full border-2 border-light-bg object-cover"
+                className="h-8 w-8 rounded-[6px] border-2 border-light-bg object-cover"
               />
             ))}
           </div>

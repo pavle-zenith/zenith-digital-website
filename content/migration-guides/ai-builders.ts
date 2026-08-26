@@ -67,7 +67,7 @@ export const aiBuilders: MigrationGuideContent = {
   seo: {
     title: "AI Builder to Wix Studio | Lovable, Bolt, v0 | Zenith Digital",
     description:
-      "Moving a site built with Lovable, Bolt, v0 or Replit to Wix Studio. What exports, why SEO tools see an empty page, and what a rebuild costs. From €1,750.",
+      "Moving a site built with Lovable, Bolt, v0 or Replit to Wix Studio. What exports, why SEO tools see an empty page, and what a rebuild costs. From €1,250.",
   },
 
   hero: {
@@ -106,7 +106,7 @@ export const aiBuilders: MigrationGuideContent = {
       {
         label: "What it costs",
         value:
-          "From €1,750, quoted as a fixed price once the page count and the content model are known.",
+          "From €1,250, quoted as a fixed price once the page count and the content model are known.",
       },
       {
         label: "How long it takes",
@@ -582,7 +582,7 @@ export const aiBuilders: MigrationGuideContent = {
       },
       {
         q: "How much does an AI builder to Wix Studio migration cost, and how long does it take?",
-        a: "From €1,750, quoted as a fixed price before anything starts, and two to five weeks from kickoff to launch plus a 30-day monitoring window that runs while you're already live. These are usually the fastest migrations we do, because the sites are young, the route list is short and there's rarely much indexed history to protect. The variables are how much content has to be lifted out of components into a CMS, and whether there's a provisioned backend whose data needs to come with you. Worth weighing against it: what you currently spend on credits and hosting.",
+        a: "From €1,250, quoted as a fixed price before anything starts, and two to five weeks from kickoff to launch plus a 30-day monitoring window that runs while you're already live. These are usually the fastest migrations we do, because the sites are young, the route list is short and there's rarely much indexed history to protect. The variables are how much content has to be lifted out of components into a CMS, and whether there's a provisioned backend whose data needs to come with you. Worth weighing against it: what you currently spend on credits and hosting.",
       },
       {
         q: "Can I migrate my AI-built site to Wix Studio myself?",
@@ -635,6 +635,6 @@ export const aiBuilders: MigrationGuideContent = {
   schema: {
     description:
       "AI website builder to Wix Studio migration, covering Lovable, Bolt, v0 and Replit. Rendering and index audit, content extraction into a Wix CMS content model, database migration, responsive Studio build, form rebuild, redirect mapping, and 30 days of post-launch index monitoring. From a Wix Legend Partner.",
-    priceFrom: "1750",
+    priceFrom: "1250",
   },
 };

@@ -6,8 +6,8 @@ import type { ServicePageContent } from "./types";
  * Targets: landing page design agency · wix landing page · campaign landing
  * pages.
  *
- * PUBLISHED Aug 2026. Retail price set by owner: €1,250 fixed per page, with
- * the partner rate on /partnerships moved down to €1,000 in the same decision,
+ * PUBLISHED Aug 2026. Retail price set by owner (26 Aug 2026): €750 fixed per page, with
+ * the partner rate on /partnerships moved down to €600 on 26 Aug 2026,
  * so the retail floor sits above the partner rate as designed.
  *
  * Testimonial note: the handoff asked for a second Flynn pull here, but there
@@ -31,7 +31,7 @@ export const landingPages: ServicePageContent = {
   seo: {
     title: "Wix Landing Page Design | Live in a Week | Zenith Digital",
     description:
-      "Conversion-first Wix landing pages designed, written, and live in about a week, from €1,250. 15+ built for MOD Digital's campaigns.",
+      "Conversion-first Wix landing pages designed, written, and live in about a week, from €750. 15+ built for MOD Digital's campaigns.",
   },
 
   hero: {
@@ -243,7 +243,7 @@ export const landingPages: ServicePageContent = {
 
   pricing: {
     heading: "What a landing page costs",
-    from: "From €1,250",
+    from: "From €750",
     fromNote: "fixed, per page",
     note: "One page, one fixed number, agreed before the brief call ends. Agencies reselling under their own brand pay the partner rate published on the partnerships page instead.",
     drivers: [
@@ -356,6 +356,6 @@ export const landingPages: ServicePageContent = {
   schema: {
     description:
       "Conversion-first campaign landing page design and build on Wix Studio. Copy, design, integrations, analytics events, and a speed pass, live in about a week.",
-    priceFrom: "1250",
+    priceFrom: "750",
   },
 };

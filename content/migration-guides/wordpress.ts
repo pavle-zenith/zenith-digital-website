@@ -93,7 +93,7 @@ export const wordpress: MigrationGuideContent = {
       {
         label: "What it costs",
         value:
-          "From €1,750, quoted as a fixed price once the page and post count is known.",
+          "From €1,250, quoted as a fixed price once the page and post count is known.",
       },
       {
         label: "How long it takes",
@@ -531,7 +531,7 @@ export const wordpress: MigrationGuideContent = {
       },
       {
         q: "How much does a WordPress to Wix Studio migration cost?",
-        a: "From €1,750, quoted as a fixed price before any work starts. The number moves on your post count first, since every post gets a formatting pass after import, then on how many plugins were doing real work that has to be rebuilt rather than replaced, and whether custom post types need modelling as CMS collections. A five-page brochure site with a dormant blog sits at the bottom of that range.",
+        a: "From €1,250, quoted as a fixed price before any work starts. The number moves on your post count first, since every post gets a formatting pass after import, then on how many plugins were doing real work that has to be rebuilt rather than replaced, and whether custom post types need modelling as CMS collections. A five-page brochure site with a dormant blog sits at the bottom of that range.",
       },
       {
         q: "How long does a WordPress to Wix Studio migration take?",
@@ -597,6 +597,6 @@ export const wordpress: MigrationGuideContent = {
   schema: {
     description:
       "WordPress to Wix Studio migration. Blog import, plugin audit, CMS collection modelling, responsive Studio build, URL and redirect mapping, and 30 days of post-launch index monitoring. From a Wix Legend Partner.",
-    priceFrom: "1750",
+    priceFrom: "1250",
   },
 };

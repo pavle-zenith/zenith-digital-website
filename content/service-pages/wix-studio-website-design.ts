@@ -7,7 +7,7 @@ import type { ServicePageContent } from "./types";
  * designer · wix studio expert.
  *
  * Every figure here already exists elsewhere on the site (Wix Legend Partner,
- * 100+ sites, €1,750 floor, Knode's raise, Scottish Luxury's pipeline). No new
+ * 100+ sites, €1,250 floor, Knode's raise, Scottish Luxury's pipeline). No new
  * numbers were invented for this page.
  */
 
@@ -26,14 +26,14 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
   seo: {
     title: "Wix Studio Website Design Services | Zenith Digital",
     description:
-      "Custom Wix Studio website design from a Wix Legend Partner. Conversion-first builds launched in 2 to 5 weeks, from €1,750 fixed. 100+ sites shipped.",
+      "Custom Wix Studio website design from a Wix Legend Partner. Conversion-first builds launched in 2 to 5 weeks, from €1,250 fixed. 100+ sites shipped.",
   },
 
   hero: {
     name: "Wix Studio website design",
     h1: "Wix Studio website design that pays for itself",
     subhead:
-      "Custom-designed, conversion-first Wix Studio websites from a Wix Legend Partner. Launched in 2 to 5 weeks, from €1,750 fixed.",
+      "Custom-designed, conversion-first Wix Studio websites from a Wix Legend Partner. Launched in 2 to 5 weeks, from €1,250 fixed.",
     chips: ["Wix Legend Partner", "100+ sites shipped", "3 to 4 week launch"],
     ctas,
   },
@@ -264,13 +264,13 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
 
   pricing: {
     heading: "Wix Studio website pricing",
-    from: "From €1,750",
+    from: "From €1,250",
     fromNote: "fixed, one-time",
-    note: "The price is agreed before we start and it doesn't move unless you add scope. Most businesses land between the €1,750 entry build and the €3,750 Studio tier.",
+    note: "The price is agreed before we start and it doesn't move unless you add scope. Most businesses land between the €1,250 entry build and the €2,350 Studio tier.",
     // The H1 promises "pays for itself", so the pull quote does the
     // arithmetic rather than leaving the reader to take it on faith.
     pullQuote:
-      "The arithmetic behind the headline is worth doing before the call: if a customer is worth €500 to you, the €1,750 build pays for itself with four enquiries the old site wasn't winning. The case studies above are how that plays out in practice.",
+      "The arithmetic behind the headline is worth doing before the call: if a customer is worth €500 to you, the €1,250 build pays for itself with three enquiries the old site wasn't winning. The case studies above are how that plays out in practice.",
     drivers: [
       {
         title: "Page count",
@@ -347,7 +347,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     items: [
       {
         q: "How much does a Wix Studio website cost?",
-        a: "From €1,750 for a build of up to five pages, and €3,750 for the twelve-page Studio tier with custom functionality and full copywriting. The figure is fixed before we start, so the number in the proposal is the number you pay.",
+        a: "From €1,250 for a build of up to five pages, and €2,350 for the twelve-page Studio tier with custom functionality and full copywriting. The figure is fixed before we start, so the number in the proposal is the number you pay.",
       },
       {
         q: "How long does a Wix Studio website take?",
@@ -411,7 +411,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
 
   schema: {
     description:
-      "Custom Wix Studio website design and build from a Wix Legend Partner. Strategy, conversion copywriting, responsive build, on-page SEO and schema, analytics, and handover. Launched in 2 to 5 weeks from €1,750 fixed.",
-    priceFrom: "1750",
+      "Custom Wix Studio website design and build from a Wix Legend Partner. Strategy, conversion copywriting, responsive build, on-page SEO and schema, analytics, and handover. Launched in 2 to 5 weeks from €1,250 fixed.",
+    priceFrom: "1250",
   },
 };

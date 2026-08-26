@@ -105,7 +105,7 @@ export const wixClassic: MigrationGuideContent = {
       {
         label: "What it costs",
         value:
-          "From €1,750 for the work, plus a Wix Studio plan. Remaining Premium value is credited pro rata.",
+          "From €1,250 for the work, plus a Wix Studio plan. Remaining Premium value is credited pro rata.",
       },
       {
         label: "How long it takes",
@@ -605,7 +605,7 @@ export const wixClassic: MigrationGuideContent = {
       },
       {
         q: "How much does a Wix Classic to Wix Studio migration cost?",
-        a: "From €1,750, quoted as a fixed price before the work starts. The number moves on whether you're carrying content across or starting fresh, how many pages hold search equity worth mapping, how much repeating content becomes CMS collections, and how much configuration sits inside apps like Bookings or Stores. A brochure rebuild sits at the bottom of that range.",
+        a: "From €1,250, quoted as a fixed price before the work starts. The number moves on whether you're carrying content across or starting fresh, how many pages hold search equity worth mapping, how much repeating content becomes CMS collections, and how much configuration sits inside apps like Bookings or Stores. A brochure rebuild sits at the bottom of that range.",
       },
       {
         q: "How long does it take to move from Wix Classic to Wix Studio?",
@@ -666,6 +666,6 @@ export const wixClassic: MigrationGuideContent = {
   schema: {
     description:
       "Wix Classic to Wix Studio migration. Responsive rebuild in Wix Studio with CMS collection design, URL and ranking inventory, content and metadata transfer, redirect mapping, and 30 days of post-launch index monitoring. From a Wix Legend Partner.",
-    priceFrom: "1750",
+    priceFrom: "1250",
   },
 };

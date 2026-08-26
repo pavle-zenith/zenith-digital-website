@@ -172,7 +172,7 @@ export const comparison = {
         mixed("Cheap, until it isn't"),
         mixed("Unpredictable"),
         bad("€15k–50k+"),
-        good("From €1,750, fixed"),
+        good("From €1,250, fixed"),
       ],
     },
     {
@@ -667,7 +667,7 @@ export const pricing = {
     {
       name: "The Minimum",
       icon: "pen",
-      price: "From €1,750",
+      price: "From €1,250",
       priceNote: "one-time",
       summary:
         "A clean, credible build for businesses that need to launch fast.",
@@ -688,7 +688,7 @@ export const pricing = {
     {
       name: "The Studio",
       icon: "layers",
-      price: "€3,750",
+      price: "€2,350",
       priceNote: "one-time",
       summary:
         "Custom functionality, a CMS your team can run, and the full SEO and copy stack.",
@@ -1071,7 +1071,7 @@ export const servicesMenu = {
     {
       icon: "palette",
       label: "Wix Studio website design",
-      desc: "Conversion-first custom builds, from €1,750",
+      desc: "Conversion-first custom builds, from €1,250",
       href: "/services/wix-studio-website-design",
     },
     {

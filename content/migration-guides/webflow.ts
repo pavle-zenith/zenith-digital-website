@@ -58,7 +58,7 @@ export const webflow: MigrationGuideContent = {
   seo: {
     title: "Webflow to Wix Studio | Migration Guide | Zenith Digital",
     description:
-      "Webflow retired the legacy Editor in August 2026 and content editing now sits behind seats and roles. What exports, what doesn't, and what a move to Wix Studio involves. From €1,750.",
+      "Webflow retired the legacy Editor in August 2026 and content editing now sits behind seats and roles. What exports, what doesn't, and what a move to Wix Studio involves. From €1,250.",
   },
 
   hero: {
@@ -97,7 +97,7 @@ export const webflow: MigrationGuideContent = {
       {
         label: "What it costs",
         value:
-          "From €1,750, quoted as a fixed price once the page count and CMS collections are known.",
+          "From €1,250, quoted as a fixed price once the page count and CMS collections are known.",
       },
       {
         label: "How long it takes",
@@ -567,7 +567,7 @@ export const webflow: MigrationGuideContent = {
       },
       {
         q: "How much does a Webflow to Wix Studio migration cost, and how long does it take?",
-        a: "From €1,750, quoted as a fixed price before anything starts, and two to five weeks from kickoff to launch plus a 30-day monitoring window that runs while you're already live. The number moves on how many CMS collections need modelling, how much interaction work has to be rebuilt rather than simplified, and whether there's a store. A brochure site with one collection sits at the bottom of that range. Worth putting against it: what you currently pay for Webflow plans and seats, plus anything you added after the User Accounts sunset.",
+        a: "From €1,250, quoted as a fixed price before anything starts, and two to five weeks from kickoff to launch plus a 30-day monitoring window that runs while you're already live. The number moves on how many CMS collections need modelling, how much interaction work has to be rebuilt rather than simplified, and whether there's a store. A brochure site with one collection sits at the bottom of that range. Worth putting against it: what you currently pay for Webflow plans and seats, plus anything you added after the User Accounts sunset.",
       },
       {
         q: "Can I migrate my Webflow site to Wix Studio myself?",
@@ -620,6 +620,6 @@ export const webflow: MigrationGuideContent = {
   schema: {
     description:
       "Webflow to Wix Studio migration. CMS collection export and remodelling, product and order transfer, redirect map import, responsive Studio build, form and interaction rebuild, metadata parity, and 30 days of post-launch index monitoring. From a Wix Legend Partner.",
-    priceFrom: "1750",
+    priceFrom: "1250",
   },
 };

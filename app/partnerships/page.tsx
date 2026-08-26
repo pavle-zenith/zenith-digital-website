@@ -17,7 +17,7 @@ import { pFaq } from "@/content/partnerships";
 export const metadata: Metadata = {
   title: "White-Label Wix Web Design for Agencies | Zenith Digital",
   description:
-    "Resell Wix Studio and custom builds under your own brand. Unbranded deliverables, NDA, partner pricing from €1,000, and 100+ launches behind us.",
+    "Resell Wix Studio and custom builds under your own brand. Unbranded deliverables, NDA, partner pricing from €600, and 100+ launches behind us.",
   alternates: { canonical: "/partnerships" },
 };
 

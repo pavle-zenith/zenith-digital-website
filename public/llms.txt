@@ -2,22 +2,23 @@
 
 > Zenith Digital is a Wix Studio web design agency based in Belgrade, Serbia,
 > serving clients across the UK, EU, and US. Wix Legend Partner, the top tier of
-> the Wix Partner programme. 100+ websites shipped, €1M+ in tracked client
-> revenue, 5.96x average ROAS on managed campaigns. Founded in 2021 and run by
+> the Wix Partner programme. 100+ websites shipped since 2019, €1M+ in campaign
+> revenue across the MOD Digital partnership, 5.96x average ROAS on managed
+> campaigns. Founded in 2021 and run by
 > Pavle Maodus. The agency builds custom-coded sites (Next.js) for clients who
 > outgrow Wix Studio, including this site.
 
 ## Services
 
-- [Wix Studio website design](https://www.thezenithdigital.com/services/wix-studio-website-design): custom conversion-first builds from €1,750, launched in 2 to 5 weeks
-- [Website migration](https://www.thezenithdigital.com/services/website-migration): hub for moving to Wix Studio from Wix Classic, Squarespace, WordPress, Webflow, Framer, or Wix Harmony, with zero ranking loss, from €1,750
+- [Wix Studio website design](https://www.thezenithdigital.com/services/wix-studio-website-design): custom conversion-first builds from €1,250, launched in 2 to 5 weeks
+- [Website migration](https://www.thezenithdigital.com/services/website-migration): hub for moving to Wix Studio from Wix Classic, Squarespace, WordPress, Webflow, Framer, or Wix Harmony, with zero ranking loss, from €1,250
   - [Wix Classic to Wix Studio](https://www.thezenithdigital.com/services/wix-classic-to-wix-studio): Wix cannot convert a Wix Editor site to Studio, so it is rebuilt. Full table of what carries over, what is rebuilt, and what does not move (site members, order history), sourced to Wix documentation
   - [Squarespace to Wix Studio](https://www.thezenithdigital.com/services/squarespace-to-wix-studio): what Squarespace's WordPress-format XML export actually contains and the page types, blocks, products, and settings it omits, plus why every blog post URL changes
   - [Wix Harmony to Wix Studio](https://www.thezenithdigital.com/services/wix-harmony-to-wix-studio): Wix states a Harmony site cannot be transferred to the Wix Editor or Studio Editor, and Harmony ships without the CMS and Wix Multilingual. Guide to the rebuild and to choosing between Harmony and Studio up front
-- [Landing pages](https://www.thezenithdigital.com/services/landing-pages): campaign landing pages live in about a week, from €1,250
+- [Landing pages](https://www.thezenithdigital.com/services/landing-pages): campaign landing pages live in about a week, from €750
 - [Wix Studio development](https://www.thezenithdigital.com/services/wix-studio-development): Velo custom code, CMS architecture, integrations, automations, and marketplace platforms built natively on Wix Studio, quoted per project
 - [SEO, AEO & PPC](https://www.thezenithdigital.com/services/seo-aeo-ppc): search, answer-engine optimization, and paid campaigns for Wix Studio sites
-- [White-label & partnerships](https://www.thezenithdigital.com/partnerships): unbranded production for agencies, landing pages from €1,000, retainers from €1,099/mo
+- [White-label & partnerships](https://www.thezenithdigital.com/partnerships): unbranded production for agencies, landing pages from €600, retainers from €1,099/mo
 
 ## Proof
 

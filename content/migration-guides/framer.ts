@@ -67,7 +67,7 @@ export const framer: MigrationGuideContent = {
   seo: {
     title: "Framer to Wix Studio | Migration Guide | Zenith Digital",
     description:
-      "Framer doesn't export your site's HTML, so a move is measured by what you can carry. What comes out, what has to be rebuilt, and what it costs. From €1,750.",
+      "Framer doesn't export your site's HTML, so a move is measured by what you can carry. What comes out, what has to be rebuilt, and what it costs. From €1,250.",
   },
 
   hero: {
@@ -106,7 +106,7 @@ export const framer: MigrationGuideContent = {
       {
         label: "What it costs",
         value:
-          "From €1,750, quoted as a fixed price once the page count and CMS collections are known.",
+          "From €1,250, quoted as a fixed price once the page count and CMS collections are known.",
       },
       {
         label: "How long it takes",
@@ -570,7 +570,7 @@ export const framer: MigrationGuideContent = {
       },
       {
         q: "How much does a Framer to Wix Studio migration cost, and how long does it take?",
-        a: "From €1,750, quoted as a fixed price before anything starts, and two to five weeks from kickoff to launch plus a 30-day monitoring window that runs while you're already live. The number moves on page count first, because with no code export every page is rebuilt from the live site, then on how many CMS collections need modelling and how much of the motion work has to be recreated rather than simplified. Worth putting against it: your current Framer plan, any add-ons you bought to raise a ceiling, and what you pay per editor seat.",
+        a: "From €1,250, quoted as a fixed price before anything starts, and two to five weeks from kickoff to launch plus a 30-day monitoring window that runs while you're already live. The number moves on page count first, because with no code export every page is rebuilt from the live site, then on how many CMS collections need modelling and how much of the motion work has to be recreated rather than simplified. Worth putting against it: your current Framer plan, any add-ons you bought to raise a ceiling, and what you pay per editor seat.",
       },
       {
         q: "Can I migrate my Framer site to Wix Studio myself?",
@@ -623,6 +623,6 @@ export const framer: MigrationGuideContent = {
   schema: {
     description:
       "Framer to Wix Studio migration. Full site crawl and content capture, CMS collection export and remodelling, responsive Studio build, form and animation rebuild, redirect mapping, metadata parity, and 30 days of post-launch index monitoring. From a Wix Legend Partner.",
-    priceFrom: "1750",
+    priceFrom: "1250",
   },
 };

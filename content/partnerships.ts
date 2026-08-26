@@ -282,9 +282,10 @@ export const pPricing = {
       name: "Fixed",
       icon: "file-check",
       badge: "Per project",
-      // Owner decision (Aug 2026): partner rate moved from €1,250 to €1,000
-      // when the €1,250 retail price went live on /services/landing-pages.
-      price: "From €1,000",
+      // Owner decision (26 Aug 2026): partner rate €600, set alongside the
+      // €750 retail price on /services/landing-pages so wholesale stays below
+      // retail. (History: €1,250 -> €1,000 -> €600.)
+      price: "From €600",
       priceNote: "per build",
       summary:
         "Overflow work priced per project. Scope, price, and timeline agreed in writing before we start.",

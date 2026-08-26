@@ -50,7 +50,7 @@ export const wixHarmony: MigrationGuideContent = {
   seo: {
     title: "Wix Harmony to Wix Studio | Migration Guide | Zenith Digital",
     description:
-      "Wix Harmony sites can't be transferred to Wix Studio, and Harmony has no CMS or multilingual yet. What that means, what a rebuild involves, and how to decide before you start. From €1,750.",
+      "Wix Harmony sites can't be transferred to Wix Studio, and Harmony has no CMS or multilingual yet. What that means, what a rebuild involves, and how to decide before you start. From €1,250.",
   },
 
   hero: {
@@ -89,7 +89,7 @@ export const wixHarmony: MigrationGuideContent = {
       {
         label: "What it costs",
         value:
-          "From €1,750, and Harmony rebuilds land at the lower end because the inventory and redirect list are short.",
+          "From €1,250, and Harmony rebuilds land at the lower end because the inventory and redirect list are short.",
       },
       {
         label: "How long it takes",
@@ -491,7 +491,7 @@ export const wixHarmony: MigrationGuideContent = {
       },
       {
         q: "How much does a Wix Harmony to Wix Studio migration cost?",
-        a: "From €1,750, the same flat starting figure as every other platform we migrate from. Harmony rebuilds tend to land at the lower end because of the short inventory and small redirect list. You get the number before anything starts, and it covers the inventory, the build, the redirect work, and the monitoring window.",
+        a: "From €1,250, the same flat starting figure as every other platform we migrate from. Harmony rebuilds tend to land at the lower end because of the short inventory and small redirect list. You get the number before anything starts, and it covers the inventory, the build, the redirect work, and the monitoring window.",
       },
       {
         q: "Can I migrate my Wix Harmony site to Wix Studio myself?",
@@ -548,6 +548,6 @@ export const wixHarmony: MigrationGuideContent = {
   schema: {
     description:
       "Wix Harmony to Wix Studio migration. Wix does not allow a Harmony site to be transferred to the Studio Editor, so the site is rebuilt: URL inventory, CMS collection and multilingual structure design, responsive Studio build, content and metadata transfer, redirect mapping, and 30 days of post-launch index monitoring.",
-    priceFrom: "1750",
+    priceFrom: "1250",
   },
 };

@@ -265,7 +265,7 @@ export const wixStudioDevelopment: ServicePageContent = {
 
   pricing: {
     heading: "What custom development costs",
-    note: "A booking integration and a two-sided marketplace are different orders of work, so this is the one service without a published starting price. You get a fixed number in the technical proposal, before any work starts. Custom functionality inside a website build is part of the €3,750 Studio tier; standalone platform work is quoted on its own.",
+    note: "A booking integration and a two-sided marketplace are different orders of work, so this is the one service without a published starting price. You get a fixed number in the technical proposal, before any work starts. Custom functionality inside a website build is part of the €2,350 Studio tier; standalone platform work is quoted on its own.",
     pullQuote:
       "The scoping call is free, and it ends with a straight answer on whether Wix Studio should be doing this at all. We've talked people out of custom builds they didn't need, and we've told others the platform genuinely isn't the right home for their idea.",
     drivers: [
@@ -391,7 +391,7 @@ export const wixStudioDevelopment: ServicePageContent = {
         label: "Wix Studio website design",
         href: "/services/wix-studio-website-design",
         image: "/services/web-design.webp",
-        desc: "Need the site itself as well as the functionality? The full design and build, from €1,750.",
+        desc: "Need the site itself as well as the functionality? The full design and build, from €1,250.",
       },
       {
         label: "Website migration",

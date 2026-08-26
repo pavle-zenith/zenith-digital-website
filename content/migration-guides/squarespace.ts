@@ -55,7 +55,7 @@ export const squarespace: MigrationGuideContent = {
   seo: {
     title: "Squarespace to Wix Studio | Migration Guide | Zenith Digital",
     description:
-      "Squarespace's export is one WordPress XML file and it leaves more behind than it takes. Exactly what transfers, what doesn't, how the URLs change, and what the move costs. From €1,750.",
+      "Squarespace's export is one WordPress XML file and it leaves more behind than it takes. Exactly what transfers, what doesn't, how the URLs change, and what the move costs. From €1,250.",
   },
 
   hero: {
@@ -90,7 +90,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         label: "What it costs",
-        value: "From €1,750, quoted as a fixed price once the page and product count is known.",
+        value: "From €1,250, quoted as a fixed price once the page and product count is known.",
       },
       {
         label: "How long it takes",
@@ -547,7 +547,7 @@ export const squarespace: MigrationGuideContent = {
       },
       {
         q: "How much does a Squarespace to Wix Studio migration cost?",
-        a: "From €1,750, quoted as a fixed price before any work starts. What moves the number is almost entirely the blog: every post needs its own mapped redirect, so a fifteen-post site and a four-hundred-post site are different projects. After that it's the store, since products come across by CSV and then need their reviews, alt text and variant images re-attached by hand, and any page types Squarespace refuses to export at all.",
+        a: "From €1,250, quoted as a fixed price before any work starts. What moves the number is almost entirely the blog: every post needs its own mapped redirect, so a fifteen-post site and a four-hundred-post site are different projects. After that it's the store, since products come across by CSV and then need their reviews, alt text and variant images re-attached by hand, and any page types Squarespace refuses to export at all.",
       },
       {
         q: "Why move from Squarespace to Wix Studio rather than WordPress or Webflow?",
@@ -604,6 +604,6 @@ export const squarespace: MigrationGuideContent = {
   schema: {
     description:
       "Squarespace to Wix Studio migration. Full URL inventory and ranking baseline, capture of everything Squarespace's XML export omits, CMS collection design, responsive Studio build, per-post redirect mapping, and 30 days of post-launch index monitoring.",
-    priceFrom: "1750",
+    priceFrom: "1250",
   },
 };

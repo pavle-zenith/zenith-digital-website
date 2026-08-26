@@ -10,8 +10,8 @@ import { whyWixItem } from "./faq";
  *
  * OWNER — still to set (visible [bracketed] placeholders until then):
  *   - typical build start window (FAQ "How fast can we start?")
- * Retail landing-page price set Aug 2026: €1,250 (partner rate moved to
- * €1,000). Partner prices (€1,000 / €1,099) appear ONLY in the white-label
+ * Retail landing-page price set 26 Aug 2026: €750 (partner rate moved to
+ * €600). Partner prices (€600 / €1,099) appear ONLY in the white-label
  * teaser, framed as partner pricing.
  */
 
@@ -84,7 +84,7 @@ export const sServices: ServiceEntry[] = [
     ],
     meta: [
       { label: "Timeline: 2–5 weeks" },
-      { label: "From €1,750", href: "/#pricing" },
+      { label: "From €1,250", href: "/#pricing" },
     ],
     cta: { label: "Start a build", href: "/book-a-call" },
     slides: [
@@ -152,7 +152,7 @@ export const sServices: ServiceEntry[] = [
     ],
     meta: [
       { label: "Timeline: 2–4 weeks" },
-      { label: "From €1,750", href: "/#pricing" },
+      { label: "From €1,250", href: "/#pricing" },
     ],
     cta: { label: "Plan your migration", href: "/book-a-call" },
     slides: [
@@ -219,7 +219,7 @@ export const sServices: ServiceEntry[] = [
     ],
     meta: [
       { label: "Timeline: from 1 week" },
-      { label: "From €1,250", href: "/services/landing-pages" },
+      { label: "From €750", href: "/services/landing-pages" },
     ],
     cta: { label: "Brief a landing page", href: "/book-a-call" },
     slides: [
@@ -364,7 +364,7 @@ export const sServices: ServiceEntry[] = [
     when: "You're an agency or freelancer with more demand than build capacity. We build under your brand; your client never hears our name.",
     deliverables: [
       "Unbranded deliverables & NDA",
-      "Landing pages from €1,000 (partner pricing)",
+      "Landing pages from €600 (partner pricing)",
       "Production retainers from €1,099/mo (30 hrs)",
       "1–2 week turnarounds",
       "Dedicated partner channel",
@@ -449,7 +449,7 @@ export const sFaq = {
     },
     {
       q: "What does it cost?",
-      a: "Fixed prices, published: sites from €1,750, landing pages from €1,250, full tiers on the pricing page. No retainers required, no surprise invoices.",
+      a: "Fixed prices, published: sites from €1,250, landing pages from €750, full tiers on the pricing page. No retainers required, no surprise invoices.",
     },
   ],
 };

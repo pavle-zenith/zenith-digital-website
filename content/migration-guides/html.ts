@@ -54,7 +54,7 @@ export const html: MigrationGuideContent = {
   seo: {
     title: "HTML to Wix Studio | Migration Guide | Zenith Digital",
     description:
-      "Moving a static or hand-coded HTML site to Wix Studio. What can be reused from your existing markup, what has to be rebuilt, and what it costs. From €1,750.",
+      "Moving a static or hand-coded HTML site to Wix Studio. What can be reused from your existing markup, what has to be rebuilt, and what it costs. From €1,250.",
   },
 
   hero: {
@@ -93,7 +93,7 @@ export const html: MigrationGuideContent = {
       {
         label: "What it costs",
         value:
-          "From €1,750, quoted as a fixed price once the page count and the repeating patterns are known.",
+          "From €1,250, quoted as a fixed price once the page count and the repeating patterns are known.",
       },
       {
         label: "How long it takes",
@@ -535,7 +535,7 @@ export const html: MigrationGuideContent = {
       },
       {
         q: "How much does an HTML to Wix Studio migration cost, and how long does it take?",
-        a: "From €1,750, quoted as a fixed price before anything starts, and two to five weeks from kickoff to launch plus a 30-day monitoring window that runs while you're already live. The number is driven less by page count than by how much of the site follows a pattern. Forty pages that are really four templates is a smaller project than fifteen pages that share nothing. Server-side functionality is the other variable, and anything doing real work gets scoped before the quote rather than discovered halfway through.",
+        a: "From €1,250, quoted as a fixed price before anything starts, and two to five weeks from kickoff to launch plus a 30-day monitoring window that runs while you're already live. The number is driven less by page count than by how much of the site follows a pattern. Forty pages that are really four templates is a smaller project than fifteen pages that share nothing. Server-side functionality is the other variable, and anything doing real work gets scoped before the quote rather than discovered halfway through.",
       },
       {
         q: "Can I migrate my HTML site to Wix Studio myself?",
@@ -588,6 +588,6 @@ export const html: MigrationGuideContent = {
   schema: {
     description:
       "Static HTML to Wix Studio migration. Full site crawl and source inventory, programmatic content extraction, CMS collection modelling, responsive Studio build, form rebuild, .htaccess redirect translation and mapping, metadata parity, and 30 days of post-launch index monitoring. From a Wix Legend Partner.",
-    priceFrom: "1750",
+    priceFrom: "1250",
   },
 };

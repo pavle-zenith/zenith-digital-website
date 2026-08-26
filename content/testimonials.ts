@@ -52,7 +52,7 @@ const homepageVideoIds = [
 ];
 
 export const videoTestimonials = {
-  heading: "Hear directly from business owners that gave us their trust",
+  heading: "Hear it from the business owners who hired us",
   intro:
     "We don't ask for testimonials until the work is done and the results are in. These are real clients who came to us with a site that wasn't even pulling its weight, and left with one that does.",
   items: homepageVideoIds.map((id) => {

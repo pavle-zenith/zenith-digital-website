@@ -12,7 +12,6 @@ import {
   GuideContentCol,
 } from "@/components/sections/migration/GuideAside";
 import { PostChapters } from "@/components/sections/blog/PostChapters";
-import { PostCover } from "@/components/sections/blog/PostCover";
 import { AuditPanel } from "@/components/sections/blog/AuditPanel";
 import { CtaBand } from "@/components/sections/migration/CtaBand";
 import { StatusChip } from "@/components/sections/migration/TransfersTable";
@@ -121,7 +120,6 @@ export function PostBody({
           components={serializers}
         />
       ) : null}
-      <PostCover slug={post.slug} title={post.title} />
       {/* Second pass, same serializers and the same `byKey` map, so every
           heading keeps the id the chapters column is pointing at. */}
       <PortableText value={post.body.slice(cut)} components={serializers} />

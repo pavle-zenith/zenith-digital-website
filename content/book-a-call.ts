@@ -38,7 +38,7 @@ export const bookHero = {
       "/avatars/ivan-belobrajdic.jpg",
     ],
   },
-  partnersLabel: "Partnered with industry-leading companies:",
+  partnersLabel: "Partnered with:",
   // Per-logo heights balance the marks optically (lockups with small type
   // render taller than heavy full-height wordmarks).
   partners: [

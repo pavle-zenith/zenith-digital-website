@@ -234,9 +234,9 @@ export const comparison = {
 
 // 6. Services (bento grid)
 export const services = {
-  heading: "Everything you need to design, build, and grow online.",
+  heading: "One team for the build and everything after",
   intro:
-    "One team for the whole journey. From a first Wix Studio build to migrations, campaigns, and white-label work for agencies.",
+    "From a first Wix Studio build to migrations, campaigns, and white-label work for agencies.",
   cta: {
     label: "All services",
     href: "/services",
@@ -996,7 +996,7 @@ export const footer = {
     city: "Belgrade - Serbia",
     phone: "+381 64 97 60617",
   },
-  partnersLabel: "Partnered with industry-leading companies:",
+  partnersLabel: "Partnered with:",
   // White marks inverted on the light footer; per-logo heights balance the
   // marks optically (same set as the /book-a-call partner strip).
   partners: [

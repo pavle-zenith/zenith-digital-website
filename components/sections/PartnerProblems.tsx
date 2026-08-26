@@ -35,7 +35,7 @@ export function PartnerProblems() {
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(0deg, #010020 18%, rgba(1,0,32,0.75) 48%, rgba(1,0,32,0.25) 100%)",
+                  "linear-gradient(0deg, var(--color-scrim) 18%, color-mix(in srgb, var(--color-scrim) 75%, transparent) 48%, color-mix(in srgb, var(--color-scrim) 25%, transparent) 100%)",
               }}
               aria-hidden
             />

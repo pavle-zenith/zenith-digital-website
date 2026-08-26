@@ -56,7 +56,7 @@ export function QuoteBand({ data = quoteBand }: { data?: QuoteBandData }) {
           {data.items.map((item) => (
             <figure
               key={item.name}
-              className="flex flex-col bg-surface bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent p-8"
+              className="flex flex-col bg-surface p-8"
             >
               <Image
                 src={item.logo}

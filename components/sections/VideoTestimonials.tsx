@@ -274,8 +274,8 @@ export function VideoTestimonials({
               )}
 
               {/* Legibility gradient — hard at the bottom for the text, clear up top.
-                  Base #010020 matches the case-study panel gradient. */}
-              <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-[#010020] via-[#010020]/80 to-transparent" />
+                  Base --color-scrim matches the case-study panel gradient. */}
+              <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-scrim via-scrim/80 to-transparent" />
 
               {/* Top row: logo left, play right */}
               <div className="relative flex items-start justify-between p-5">

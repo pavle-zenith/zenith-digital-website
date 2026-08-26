@@ -63,7 +63,7 @@ export function CaseStudies() {
                 className="pointer-events-none absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(0deg, #010020 9.76905153508772%, rgba(3,1,58,0.3) 100%)",
+                    "linear-gradient(0deg, var(--color-scrim) 9.76905153508772%, color-mix(in srgb, var(--color-accent) 30%, transparent) 100%)",
                 }}
                 aria-hidden
               />

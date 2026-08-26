@@ -106,7 +106,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "travel",
     metric: "$521k in 7 months",
     story: "The UK's best-looking travel website, live in 4 weeks",
-    thumb: "/case-study-grid/scottish-luxury-experience.webp",
+    thumb: "/case-studies/scottish-luxury-experience/card.webp",
     logo: "/logos-white/sle.avif",
     liveUrl: "https://www.scottishluxuryexperience.com",
   },
@@ -127,7 +127,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "marine",
     metric: "30+ warm leads",
     story:
-      "Booking and lead-capture ecosystem for Florida's premier dock charter",
+      "Booking and lead-capture ecosystem for a Florida dock charter",
     thumb: "/portfolio-slider/fort-lauderdale-dock-rental.jpg",
     logo: "/logos-white/foxstays.png",
     // No live link by choice: the client has since redesigned the site, so
@@ -139,7 +139,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "agencies",
     metric: "10+ brands shipped together",
     story: "15+ landing pages driving €1M+ in client campaign revenue",
-    thumb: "/case-study-grid/mod-digital.webp",
+    thumb: "/case-studies/mod-digital/card.webp",
     logo: "/logos-white/mod.png",
     liveUrl: "https://www.moddigital.co.uk/ai-ready-websites",
   },
@@ -149,8 +149,8 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "courses",
     metric: "€140k in course sales",
     story:
-      "Landing pages and course infrastructure for an award-winning gardener",
-    thumb: "/case-study-grid/hunting-brook.webp",
+      "Landing pages and course infrastructure for an Irish gardening school",
+    thumb: "/case-studies/hunting-brook-gardens/card.webp",
     liveUrl: "https://unlimited.huntingbrookgardens.com/plantsperson-course",
   },
   {
@@ -160,7 +160,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "10+ venues interested",
     story:
       "Marketing page and lead-capture ecosystem for a UK motivational speaker",
-    thumb: "/case-study-grid/jim-steele.webp",
+    thumb: "/case-studies/jim-steele/card.webp",
     logo: "/logos-white/jimsteele.png",
     liveUrl: "https://www.jimsteelespeaker.com",
   },
@@ -170,7 +170,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "ecommerce",
     metric: "3 languages, 2-week launch",
     story: "Multilingual sites to expand into Montenegro and Slovakia",
-    thumb: "/case-study-grid/stilby.webp",
+    thumb: "/case-studies/stilby/card.webp",
     logo: "/logos-white/stilby.png",
     liveUrl: "https://www.stilby.eu",
   },
@@ -180,7 +180,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "services",
     metric: "10+ projects delivered",
     story: "Their own site moved off WordPress, and fulfillment partner since 2023",
-    thumb: "/case-study-grid/techtonnik.webp",
+    thumb: "/case-studies/techtonnik/card.webp",
     logo: "/logos-white/techtonnik.png",
     liveUrl: "https://www.techtonnik.com",
   },
@@ -190,7 +190,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "agencies",
     metric: "5+ consulting projects",
     story: "Fractional web design team leading design & dev operations",
-    thumb: "/case-study-grid/capacity.webp",
+    thumb: "/case-studies/capacity/card.webp",
     logo: "/logos-white/capacity.png",
     liveUrl: "https://www.wearecapacity.co",
   },
@@ -200,7 +200,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "saas",
     metric: "10+ ISO deals since launch",
     story: "Custom-coded rebrand and AEO for an AI compliance startup",
-    thumb: "/case-study-grid/genroks.webp",
+    thumb: "/case-studies/genroks-ai/card.webp",
     logo: "/logos-white/genroks.png",
     liveUrl: "https://www.genroks.com",
   },
@@ -225,7 +225,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "agencies",
     metric: "White-label production partner",
     story: "Conversion-driven small business sites shipped under their brand",
-    thumb: "/case-study-grid/advantage-media.webp",
+    thumb: "/case-studies/advantage-media/card.webp",
     logo: "/logos-white/advantage.png",
     liveUrl: "https://www.advantage-media-marketing.com",
   },
@@ -236,7 +236,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "Two funnels, live in 4 weeks",
     story:
       "Short-let booking funnel and landlord pipeline for a UK Airbnb superhost",
-    thumb: "/case-study-grid/just-stay.webp",
+    thumb: "/case-studies/just-stay/card.webp",
     liveUrl: "https://www.juststaytoday.co.uk",
   },
   {
@@ -245,7 +245,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "marine",
     metric: "Boat and yacht marketplace",
     story: "Multi-seller listing platform for private sellers and dealers",
-    thumb: "/case-study-grid/yacht-junky.webp",
+    thumb: "/case-studies/yacht-junky/card.webp",
     liveUrl: "https://moddigital.wixstudio.com/yacht-junky",
   },
   {
@@ -254,7 +254,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "travel",
     metric: "Adventure booking platform",
     story: "Bungee and adrenaline experience bookings across Scotland",
-    thumb: "/case-study-grid/highland-fling.webp",
+    thumb: "/case-studies/highland-fling/card.webp",
     liveUrl: "https://moddigital.wixstudio.com/highlandfling",
   },
   {
@@ -263,7 +263,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "travel",
     metric: "Direct booking site",
     story: "Riverside apartments and rooms taking bookings without the OTAs",
-    thumb: "/case-study-grid/villa-maria.webp",
+    thumb: "/case-studies/villa-maria/card.webp",
     liveUrl: "https://villamarijakanjiza.rs",
   },
   {
@@ -272,7 +272,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "property",
     metric: "Development launch site",
     story: "Sales site for a luxury apartment development in Boka Kotorska",
-    thumb: "/case-study-grid/st-matthew-place.webp",
+    thumb: "/case-studies/st-matthew-place/card.webp",
     liveUrl: "https://www.saintmatthewplace.com",
   },
   {
@@ -281,7 +281,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "property",
     metric: "Property listing portal",
     story: "Searchable listings and enquiry routing for an estate agency",
-    thumb: "/case-study-grid/superstan.webp",
+    thumb: "/case-studies/superstan/card.webp",
     liveUrl: "https://superstanbg.rs",
   },
   {
@@ -290,7 +290,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "ecommerce",
     metric: "Streetwear storefront",
     story: "Drop-driven store and lookbook for a creative apparel label",
-    thumb: "/case-study-grid/notyou-brand.webp",
+    thumb: "/case-studies/notyou-brand/card.webp",
     liveUrl: "https://notyoubrand.com",
   },
   {
@@ -300,7 +300,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     // Marko's testimonial calls it a prestige Shopify site, so this much is real.
     metric: "Prestige Shopify storefront",
     story: "Made-to-order couture catalogue with per-piece sizing",
-    thumb: "/case-study-grid/lepa-couture.webp",
+    thumb: "/case-studies/lepa-couture/card.webp",
     liveUrl: "https://www.lepacouture.com",
   },
   {
@@ -309,7 +309,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "ecommerce",
     metric: "Craft spirits brand site",
     story: "Scottish coffee liqueur brand story and direct sales",
-    thumb: "/case-study-grid/bradsells.webp",
+    thumb: "/case-studies/bradsells/card.webp",
     liveUrl: "https://distilnation.com/bradsells",
   },
   {
@@ -318,7 +318,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "ecommerce",
     metric: "Distillery brand and shop",
     story: "Illustrated brand site and gift ordering for a rakija distillery",
-    thumb: "/case-study-grid/destilerija-maodus.webp",
+    thumb: "/case-studies/destilerija-maodus/card.webp",
     liveUrl: "https://destilerija-maodus-website.vercel.app",
   },
   {
@@ -327,7 +327,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "ecommerce",
     metric: "Distillery brand site",
     story: "Product storytelling for a small-batch fruit brandy producer",
-    thumb: "/case-study-grid/destilerija-gorska.webp",
+    thumb: "/case-studies/destilerija-gorska/card.webp",
     liveUrl: "https://destilerijagorska.rs",
   },
   {
@@ -336,7 +336,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "services",
     metric: "Logistics site rebuild",
     story: "Freight, logistics, and heavy equipment shipping for an Indiana carrier",
-    thumb: "/case-study-grid/atw-trucking.webp",
+    thumb: "/case-studies/atw-trucking/card.webp",
     liveUrl: "https://www.atwtrucking.com",
   },
   {
@@ -346,7 +346,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     // Les Marie's testimonial supplies this one.
     metric: "12+ client sites delivered",
     story: "HR and staffing site, plus the home care sites built alongside it",
-    thumb: "/case-study-grid/lmfhr.webp",
+    thumb: "/case-studies/lmf-hr/card.webp",
     liveUrl: "https://www.lmfhr.com",
   },
   {
@@ -355,7 +355,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "services",
     metric: "Instant-quote lead capture",
     story: "Quote form and service pages for a Scotland-wide pipe testing firm",
-    thumb: "/case-study-grid/pressure-test-scotland.webp",
+    thumb: "/case-studies/pressure-test-scotland/card.webp",
     liveUrl: "https://www.pressuretestscotland.co.uk",
   },
   {
@@ -364,7 +364,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "services",
     metric: "Production company portfolio",
     story: "Reel-led portfolio and case studies for a film production crew",
-    thumb: "/case-study-grid/lorak-films.webp",
+    thumb: "/case-studies/lorak-films/card.webp",
     liveUrl: "https://www.lorakfilms.com",
   },
   {
@@ -373,7 +373,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "agencies",
     metric: "Creative studio portfolio",
     story: "Selected work site for a fashion, lifestyle, and automotive studio",
-    thumb: "/case-study-grid/creatify-collective.webp",
+    thumb: "/case-studies/creatify-collective/card.webp",
     liveUrl: "https://www.creatifycollective.co",
   },
   {
@@ -383,7 +383,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     metric: "Consultancy positioning site",
     story:
       "Brand, PR, events, operations, and workforce programmes in one offer",
-    thumb: "/case-study-grid/bianomics.webp",
+    thumb: "/case-studies/bianomics/card.webp",
   },
   {
     client: "Katie Hailey",
@@ -391,7 +391,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "coaches",
     metric: "Figma to live in 1.5 weeks",
     story: "Yoga, sound healing, and retreat bookings for a UK practitioner",
-    thumb: "/case-study-grid/katie-hailey.webp",
+    thumb: "/case-studies/katie-hailey/card.webp",
     liveUrl: "https://www.katiehailey.com",
   },
   {
@@ -400,7 +400,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "coaches",
     metric: "Author and book launch site",
     story: "Debut novel launch, archives, and press for an Edinburgh journalist",
-    thumb: "/case-study-grid/kevan-christie.webp",
+    thumb: "/case-studies/kevan-christie/card.webp",
     liveUrl: "https://www.kevanchristie.com",
   },
   {
@@ -409,7 +409,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     industry: "saas",
     metric: "App landing and onboarding",
     story: "Landing page and store funnel for a quit-smoking tracker app",
-    thumb: "/case-study-grid/iskra.webp",
+    thumb: "/case-studies/iskra/card.webp",
     liveUrl: "https://www.iskraclub.com",
   },
   {
@@ -687,6 +687,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("belistria"),
+    scrollShot: {
+      src: "/case-studies/belistria/full-page.webp",
+      alt: "The full Bel'Istria homepage: the luxury Istria hero, the transfer and tour offer, the fleet, and the enquiry footer",
+      width: 1440,
+      height: 13248,
+    },
     // OWNER — remaining items (timeline confirmed: Jan–Feb 2025 build, AEO
     // campaign through 2026; zero rankings lost is confirmed and claimed):
     //   1. Assets: no old-site screenshot, so there's no before/after pair yet.
@@ -732,7 +738,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "The timing forced the decision. A new season was coming, and every booking it would bring was going to start with a search or, increasingly, a question typed into an AI assistant. The brief was direct: stop losing the searches Bel'Istria should own, and be ready before the season started.",
     ],
     heroShot: {
-      src: "/portfolio-blocky/belistria.webp",
+      src: "/case-studies/belistria/hero.webp",
       alt: "Bel'Istria homepage: luxury travel experiences in Croatia, with chauffeur service and trip planning calls to action",
     },
     introduction:
@@ -780,10 +786,24 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         alt: "Bel'Istria site in a browser window, showing the Croatia luxury travel homepage",
       },
       {
-        src: "/portfolio-slider/belistria.jpg",
-        alt: "Bel'Istria luxury vehicle fleet page, listing chauffeur-driven Mercedes classes with passenger and luggage capacity",
-        caption:
-          "One page per service cluster, each targeting its own searches.",
+        src: "/case-studies/belistria/supporting-1.webp",
+        alt: "Design detail from the Bel'Istria build (1 of 5)",
+      },
+      {
+        src: "/case-studies/belistria/supporting-2.webp",
+        alt: "Design detail from the Bel'Istria build (2 of 5)",
+      },
+      {
+        src: "/case-studies/belistria/supporting-3.webp",
+        alt: "Design detail from the Bel'Istria build (3 of 5)",
+      },
+      {
+        src: "/case-studies/belistria/supporting-4.webp",
+        alt: "Design detail from the Bel'Istria build (4 of 5)",
+      },
+      {
+        src: "/case-studies/belistria/supporting-5.webp",
+        alt: "Design detail from the Bel'Istria build (5 of 5)",
       },
     ],
     testimonial: quoteOf("ivan-belobrajdic"),
@@ -809,6 +829,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("scottish-luxury-experience"),
+    scrollShot: {
+      src: "/case-studies/scottish-luxury-experience/full-page.webp",
+      alt: "The full Scottish Luxury Experience homepage in one pass: the Discover Scotland hero, tailored trip cards, the experience builder, Why Scotland, the team film, and the travel stories footer",
+      width: 1440,
+      height: 7402,
+    },
     // All confirmed (Aug 2026): $521k metric sitewide, name = Scottish Luxury
     // Experience, launched December 2025, Flynn signed off on Zenith as
     // development partner on this and all MOD-related projects. Flynn's quote
@@ -834,18 +860,8 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     // band renders at from md up, so the desktop crop takes the whole frame
     // rather than a slice of it.
     heroShot: {
-      src: "/ScottishLuxuryTest.webp",
+      src: "/case-studies/scottish-luxury-experience/hero.webp",
       alt: "Scottish Luxury Experience homepage: Discover Scotland, with a Highland cow hero and bespoke trip planning prompts",
-    },
-    // 2880x14802 capture, downsampled to 1440 wide. The full-size version was
-    // 42.6 megapixels, past what iOS Safari will decode; 1440 against a screen
-    // rendering ~1,070px is still sharper than 1:1, and the file drops from
-    // 13MB to 355KB.
-    scrollShot: {
-      src: "/scroll-shots/scottish-luxury-experience.webp",
-      alt: "The full Scottish Luxury Experience homepage in one pass: the Discover Scotland hero, tailored trip cards, the experience builder, Why Scotland, the team film, and the travel stories footer",
-      width: 1440,
-      height: 7401,
     },
     introduction:
       "Zenith Digital designed and built the Scottish Luxury Experience website in Wix Studio in four weeks, launching in December 2025: the layer every client sees first, in front of the demand and sales system MOD Digital runs behind it. Within seven months of launch, the engine the site fronts had turned paid traffic into $521k of booked trips.",
@@ -888,6 +904,22 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         src: "/case-study-grid/scottish-luxury-experience.webp",
         alt: "Scottish Luxury Experience site in a browser window, Discover Scotland hero with trip planning prompts",
       },
+      {
+        src: "/case-studies/scottish-luxury-experience/supporting-1.webp",
+        alt: "Design detail from the Scottish Luxury Experience build (1 of 4)",
+      },
+      {
+        src: "/case-studies/scottish-luxury-experience/supporting-2.webp",
+        alt: "Design detail from the Scottish Luxury Experience build (2 of 4)",
+      },
+      {
+        src: "/case-studies/scottish-luxury-experience/supporting-3.webp",
+        alt: "Design detail from the Scottish Luxury Experience build (3 of 4)",
+      },
+      {
+        src: "/case-studies/scottish-luxury-experience/supporting-4.webp",
+        alt: "Design detail from the Scottish Luxury Experience build (4 of 4)",
+      },
     ],
     testimonial: quoteOf("flynn-blackie"),
     techUsed: [
@@ -914,6 +946,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("yacht-junky"),
+    scrollShot: {
+      src: "/case-studies/yacht-junky/full-page.webp",
+      alt: "The full Yacht Junky homepage: the marketplace hero, the listing search, seller categories, and the sign-up footer",
+      width: 1440,
+      height: 6906,
+    },
     // OWNER — one remaining item: no business metrics yet, so every figure
     // below is a platform fact (features, architecture), never an invented
     // outcome. When listing counts / enquiry volumes exist, send them and the
@@ -936,7 +974,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "The brief was to prove the usual answer wrong: build the whole thing as a native Wix Studio platform, so it ships at Wix Studio speed and the team runs it without a developer on retainer.",
     ],
     heroShot: {
-      src: "/case-study-grid/yacht-junky.webp",
+      src: "/case-studies/yacht-junky/hero.webp",
       alt: "Yacht Junky marketplace homepage: the ultimate boat and yacht marketplace, with category search and featured listings",
     },
     introduction:
@@ -974,6 +1012,26 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         src: "/case-study-grid/yacht-junky.webp",
         alt: "Yacht Junky marketplace in a browser window, showing the boat and yacht listing grid with search filters",
       },
+      {
+        src: "/case-studies/yacht-junky/supporting-1.webp",
+        alt: "Design detail from the Yacht Junky build (1 of 5)",
+      },
+      {
+        src: "/case-studies/yacht-junky/supporting-2.webp",
+        alt: "Design detail from the Yacht Junky build (2 of 5)",
+      },
+      {
+        src: "/case-studies/yacht-junky/supporting-3.webp",
+        alt: "Design detail from the Yacht Junky build (3 of 5)",
+      },
+      {
+        src: "/case-studies/yacht-junky/supporting-4.webp",
+        alt: "Design detail from the Yacht Junky build (4 of 5)",
+      },
+      {
+        src: "/case-studies/yacht-junky/supporting-5.webp",
+        alt: "Design detail from the Yacht Junky build (5 of 5)",
+      },
     ],
     // Flynn as partner voice — this was a MOD collaboration, per owner.
     testimonial: quoteOf("flynn-blackie"),
@@ -1003,6 +1061,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("mod-digital"),
+    scrollShot: {
+      src: "/case-studies/mod-digital/full-page.webp",
+      alt: "The full MOD Digital homepage: the AI-ready websites hero, the work, the process, and the enquiry footer",
+      width: 1440,
+      height: 13295,
+    },
     // Partnership facts confirmed by owner (Aug 2026): met 2022, working
     // officially since 2023, per-project basis, MOD owns strategy/ads/client
     // comms, Zenith owns design/build/technical. Project list from owner.
@@ -1026,7 +1090,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "The two teams met in 2022 and started working officially in 2023. The brief has stayed the same since: MOD sells and runs the growth, Zenith builds everything the growth runs on, and no client ever feels a gap between the two.",
     ],
     heroShot: {
-      src: "/case-study-grid/mod-digital.webp",
+      src: "/case-studies/mod-digital/hero.webp",
       alt: "MOD Digital's AI-ready websites landing page in a browser window, one of the pages Zenith built for the agency itself",
     },
     introduction:
@@ -1068,6 +1132,18 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       },
       // OWNER: 2-3 lander screenshots (Hunting Brook, Issipay, MOD's own
       // pages) would show the range here instead of one shot.
+      {
+        src: "/case-studies/mod-digital/supporting-1.webp",
+        alt: "Design detail from the MOD Digital build (1 of 3)",
+      },
+      {
+        src: "/case-studies/mod-digital/supporting-2.webp",
+        alt: "Design detail from the MOD Digital build (2 of 3)",
+      },
+      {
+        src: "/case-studies/mod-digital/supporting-3.webp",
+        alt: "Design detail from the MOD Digital build (3 of 3)",
+      },
     ],
     testimonial: quoteOf("flynn-blackie"),
     techUsed: [
@@ -1094,6 +1170,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("hunting-brook-gardens"),
+    scrollShot: {
+      src: "/case-studies/hunting-brook-gardens/full-page.webp",
+      alt: "The full Hunting Brook Gardens homepage: the garden hero, visiting details, the courses and events calendar, and the booking footer",
+      width: 1440,
+      height: 10169,
+    },
     // Facts from owner (Aug 2026): 7-8 landing pages so far for course
     // launches and in-person events; courses on Wix Courses; custom Typeform
     // itinerary signup forms; ongoing 2025-2026; old site was bare bones and
@@ -1117,7 +1199,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "MOD Digital came in to run the growth around the offer. The brief to Zenith was the build side of that: give every course launch and live event a page built to sell it, and infrastructure a gardener can run without a developer on call.",
     ],
     heroShot: {
-      src: "/case-study-grid/hunting-brook.webp",
+      src: "/case-studies/hunting-brook-gardens/hero.webp",
       alt: "Hunting Brook Gardens plantsperson course landing page in a browser window, with Jimi Blake's course offer front and centre",
     },
     introduction:
@@ -1156,6 +1238,18 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         src: "/case-study-grid/hunting-brook.webp",
         alt: "Hunting Brook Gardens course landing page in a browser window, built to sell Jimi Blake's plantsperson course",
       },
+      {
+        src: "/case-studies/hunting-brook-gardens/supporting-1.webp",
+        alt: "Design detail from the Hunting Brook Gardens build (1 of 3)",
+      },
+      {
+        src: "/case-studies/hunting-brook-gardens/supporting-2.webp",
+        alt: "Design detail from the Hunting Brook Gardens build (2 of 3)",
+      },
+      {
+        src: "/case-studies/hunting-brook-gardens/supporting-3.webp",
+        alt: "Design detail from the Hunting Brook Gardens build (3 of 3)",
+      },
     ],
     beforeAfter: {
       before: "/before-after/huntingbrook-before.jpg",
@@ -1184,6 +1278,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("katie-hailey"),
+    scrollShot: {
+      src: "/case-studies/katie-hailey/full-page.webp",
+      alt: "The full Katie Hailey homepage: the yoga and sound healing hero, class types, the retreat offer, and the booking footer",
+      width: 1440,
+      height: 9030,
+    },
     // Facts from owner (Aug 2026): full Wix Studio build from a Figma design
     // in 1.5 weeks; client handoff sections for self-maintenance; Wix Events
     // for event booking; CMS/CRM setup.
@@ -1207,7 +1307,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "The brief was to close that gap without compromising either side of it: build the design as designed, get it live fast, and leave behind a site Katie runs herself, because a solo practitioner shouldn't need a developer on call to update a class schedule.",
     ],
     heroShot: {
-      src: "/case-study-grid/katie-hailey.webp",
+      src: "/case-studies/katie-hailey/hero.webp",
       alt: "Katie Hailey website in a browser window, showing yoga and sound healing offerings with retreat booking",
     },
     introduction:
@@ -1241,6 +1341,26 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         src: "/case-study-grid/katie-hailey.webp",
         alt: "Katie Hailey site in a browser window, yoga and retreat pages built in Wix Studio from the Figma design",
       },
+      {
+        src: "/case-studies/katie-hailey/supporting-1.webp",
+        alt: "Design detail from the Katie Hailey build (1 of 5)",
+      },
+      {
+        src: "/case-studies/katie-hailey/supporting-2.webp",
+        alt: "Design detail from the Katie Hailey build (2 of 5)",
+      },
+      {
+        src: "/case-studies/katie-hailey/supporting-3.webp",
+        alt: "Design detail from the Katie Hailey build (3 of 5)",
+      },
+      {
+        src: "/case-studies/katie-hailey/supporting-4.webp",
+        alt: "Design detail from the Katie Hailey build (4 of 5)",
+      },
+      {
+        src: "/case-studies/katie-hailey/supporting-5.webp",
+        alt: "Design detail from the Katie Hailey build (5 of 5)",
+      },
     ],
     techUsed: [
       {
@@ -1267,6 +1387,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("just-stay"),
+    scrollShot: {
+      src: "/case-studies/just-stay/full-page.webp",
+      alt: "The full Just Stay homepage: the short-let booking hero, featured properties, the direct booking pitch, and the landlord enquiry footer",
+      width: 1440,
+      height: 9127,
+    },
     // Facts from owner (Aug 2026): 1-month delivery, January 2026; short-let
     // property business; Bookeddirectly integration via Zapier pulling latest
     // properties; location-based SEO pages; lead magnet forms; Airbnb
@@ -1291,7 +1417,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "So the brief wasn't a brochure site. It was a machine with two intakes: send guests into the direct booking service, and turn property owners into landlord enquiries, live within a month.",
     ],
     heroShot: {
-      src: "/case-study-grid/just-stay.webp",
+      src: "/case-studies/just-stay/hero.webp",
       alt: "Just Stay website in a browser window, showing short-let properties with direct booking calls to action",
     },
     introduction:
@@ -1332,6 +1458,26 @@ export const caseStudyDetails: CaseStudyDetail[] = [
         src: "/case-study-grid/just-stay.webp",
         alt: "Just Stay short-let website in a browser window, property grid synced from Bookeddirectly",
       },
+      {
+        src: "/case-studies/just-stay/supporting-1.webp",
+        alt: "Design detail from the Just Stay build (1 of 5)",
+      },
+      {
+        src: "/case-studies/just-stay/supporting-2.webp",
+        alt: "Design detail from the Just Stay build (2 of 5)",
+      },
+      {
+        src: "/case-studies/just-stay/supporting-3.webp",
+        alt: "Design detail from the Just Stay build (3 of 5)",
+      },
+      {
+        src: "/case-studies/just-stay/supporting-4.webp",
+        alt: "Design detail from the Just Stay build (4 of 5)",
+      },
+      {
+        src: "/case-studies/just-stay/supporting-5.webp",
+        alt: "Design detail from the Just Stay build (5 of 5)",
+      },
     ],
     testimonial: quoteOf("jack-shorrock"),
     techUsed: [
@@ -1358,6 +1504,12 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
   {
     ...cardOf("genroks-ai"),
+    scrollShot: {
+      src: "/case-studies/genroks-ai/full-page.webp",
+      alt: "The full Genroks AI homepage: the ISO certification offer, the process, the standards covered, and the consultation footer",
+      width: 1440,
+      height: 11441,
+    },
     // Facts from owner (Aug 2026): summer 2025 (July-August); old site was a
     // dismantled Framer template used mid-sales-process, conflicting brand
     // identities; rebuilt in custom code with Sanity CMS, custom animations,
@@ -1384,7 +1536,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       "The brief covered the whole surface: one brand instead of two, copy that sells the product, and a build that matches how Genroks positions itself, which meant no template of any kind this time.",
     ],
     heroShot: {
-      src: "/case-study-grid/genroks.webp",
+      src: "/case-studies/genroks-ai/hero.webp",
       alt: "Genroks AI website in a browser window, showing the rebranded compliance software homepage",
     },
     introduction:
@@ -1430,6 +1582,22 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       {
         src: "/case-study-grid/genroks.webp",
         alt: "Genroks AI rebranded website in a browser window, custom-coded with Sanity CMS behind it",
+      },
+      {
+        src: "/case-studies/genroks-ai/supporting-1.webp",
+        alt: "Design detail from the Genroks AI build (1 of 4)",
+      },
+      {
+        src: "/case-studies/genroks-ai/supporting-2.webp",
+        alt: "Design detail from the Genroks AI build (2 of 4)",
+      },
+      {
+        src: "/case-studies/genroks-ai/supporting-3.webp",
+        alt: "Design detail from the Genroks AI build (3 of 4)",
+      },
+      {
+        src: "/case-studies/genroks-ai/supporting-4.webp",
+        alt: "Design detail from the Genroks AI build (4 of 4)",
       },
     ],
     testimonial: quoteOf("uros-stanimirovic"),

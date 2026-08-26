@@ -181,7 +181,7 @@ export function Footer() {
             // Bottom 22% is clipped by the footer edge, so keep the ink strong
             // through the visible bottom and fade out toward the top.
             backgroundImage:
-              "linear-gradient(to top, rgba(2,1,58,0.5) 0%, rgba(2,1,58,0.44) 30%, rgba(2,1,58,0.12) 68%, rgba(2,1,58,0) 92%)",
+              "linear-gradient(to top, color-mix(in srgb, var(--color-accent) 50%, transparent) 0%, color-mix(in srgb, var(--color-accent) 44%, transparent) 30%, color-mix(in srgb, var(--color-accent) 12%, transparent) 68%, transparent 92%)",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
           }}

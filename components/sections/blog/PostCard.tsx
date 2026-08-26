@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { blogIndex, mockCover } from "@/content/blog";
+import { blogIndex } from "@/content/blog";
 import { readingMinutes } from "@/lib/blog";
 import { cn, formatLongDate } from "@/lib/utils";
 import type { PostCard as PostCardData } from "@/sanity/lib/types";
@@ -27,10 +27,6 @@ function PostThumb({
   post: PostCardData;
   className?: string;
 }) {
-  // TEMPORARY: borrowed case-study thumbnails so the grid can be judged with
-  // real imagery. See MOCK_COVERS in content/blog.ts. Delete with it.
-  const photo = mockCover(post.slug);
-
   return (
     <div
       className={cn(
@@ -38,31 +34,26 @@ function PostThumb({
         className,
       )}
     >
-      {photo ? (
-        <Image
-          src={photo}
-          alt=""
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover object-center transition duration-500 group-hover:scale-[1.02]"
-        />
-      ) : (
-        <>
-          <Image
-            src="/textures/studio-texture.jpg"
-            alt=""
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover opacity-[0.22]"
-            aria-hidden
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-body-lg font-medium lowercase tracking-tight text-text">
-              zenith digital
-            </span>
-          </div>
-        </>
-      )}
+      {/* Posts carry no cover image (blog brief §3), so every card draws the
+          same typographic panel: the studio texture with the wordmark over it.
+          This is deliberately the only treatment. An earlier pass mapped a few
+          slugs to borrowed case-study thumbnails, which put a client's site on
+          an article that had nothing to do with them and left the grid mixing
+          two unrelated cover styles. If covers are wanted back, the fix is a
+          real `coverImage` field on the post schema, not a lookup table. */}
+      <Image
+        src="/textures/studio-texture.jpg"
+        alt=""
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover opacity-[0.22]"
+        aria-hidden
+      />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="font-display text-body-lg font-medium lowercase tracking-tight text-text">
+          zenith digital
+        </span>
+      </div>
 
       {/* The category lives here and nowhere else on the card, so the meta row
           below carries the date and the read time only. */}

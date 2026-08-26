@@ -5,21 +5,26 @@ import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
 import type { CaseStudyDetail } from "@/content/case-studies";
 
 /**
- * Two-up project media, between the introduction and the written story. A
- * before/after slider takes the first slot when the study has one, and
- * screenshot stills fill whatever is left, so a study ships either as
- * before/after plus a still or as two stills. Renders nothing without media.
+ * Project media grid, between the introduction and the written story. Two
+ * columns from md up, a single stacked column on mobile: every image is
+ * simply on the page, nothing scrolls sideways and nothing hides behind a
+ * control. A before/after slider takes the first cell when the study has
+ * one; the gallery stills fill the rest. Renders nothing without media.
+ *
+ * An odd image count leaves the last cell empty rather than stretching the
+ * final image to full width: a 4:3 still blown up to double width reads as
+ * an error, an empty cell reads as whitespace.
+ *
+ * Cards keep the 4:3 crop the gallery assets are shot for (supporting images
+ * live in /public/case-studies/<slug>/, see the README there).
  *
  * Sits on the inverted studio texture, the ground the page heroes and the
  * scroll-shot band use. The cells themselves are opaque, so the texture reads
- * in the section's padding and the gap between them rather than behind the
- * screenshots.
+ * in the section's padding and the gaps rather than behind the screenshots.
  */
 export function CaseStudyMedia({ study }: { study: CaseStudyDetail }) {
   const stills = study.gallery ?? [];
-  const stillCount = study.beforeAfter ? 1 : 2;
-  const shown = stills.slice(0, stillCount);
-  if (!study.beforeAfter && shown.length === 0) return null;
+  if (!study.beforeAfter && stills.length === 0) return null;
 
   return (
     <Section tone="light" frameClassName="relative !py-12 md:!py-20">
@@ -44,7 +49,7 @@ export function CaseStudyMedia({ study }: { study: CaseStudyDetail }) {
         />
       </div>
 
-      <div className="relative grid gap-6 md:grid-cols-2 md:gap-8">
+      <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
         {study.beforeAfter ? (
           <BeforeAfterSlider
             title={study.client}
@@ -55,7 +60,7 @@ export function CaseStudyMedia({ study }: { study: CaseStudyDetail }) {
           />
         ) : null}
 
-        {shown.map((image) => (
+        {stills.map((image) => (
           <figure key={image.src} className="flex flex-col gap-4">
             <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface">
               <Image

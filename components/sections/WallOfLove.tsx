@@ -60,7 +60,18 @@ export function WallOfLove() {
             className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-[6px] border border-white/20 text-white hover:bg-white/10"
             onClick={() => setActive(null)}
           >
-            ✕
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
           </button>
           <div
             className="relative aspect-[9/16] h-[80vh] max-w-full overflow-hidden rounded-[8px] border border-white/15 bg-surface"
@@ -119,7 +130,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
         )}
 
         {/* Legibility gradient + centered play */}
-        <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-[#010020] via-[#010020]/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-scrim via-scrim/70 to-transparent" />
         <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[6px] bg-black/40 backdrop-blur transition group-hover:bg-black/60">
           <span className="ml-0.5 border-y-[6px] border-l-[10px] border-y-transparent border-l-white" />
         </span>

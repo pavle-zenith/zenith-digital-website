@@ -74,6 +74,13 @@ const SCREEN = {
 export function CaseStudyScrollShot({
   src,
   alt,
+  /**
+   * Sits above the frame. It earns its place as an affordance, not a label: a
+   * static picture of a laptop gives no sign that the screen inside it moves,
+   * and the reader has to be told before they will try. Overridable per study
+   * for a site where "finished" is the wrong word.
+   */
+  caption = "Scroll the finished site",
   /** Natural pixel size of the capture, so Next reserves the right box. */
   width,
   height,
@@ -81,6 +88,7 @@ export function CaseStudyScrollShot({
 }: {
   src: string;
   alt: string;
+  caption?: string;
   width: number;
   height: number;
   tone?: "light" | "dark";
@@ -111,6 +119,24 @@ export function CaseStudyScrollShot({
           }}
         />
       </div>
+
+      {/* Affordance line. Mono label, the register every other caption on the
+          site uses, with a scroll cue drawn rather than set as a glyph. */}
+      <p className="relative mb-6 flex items-center justify-center gap-2 font-mono text-label uppercase track-label text-light-muted md:mb-8">
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4 shrink-0"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
+          <path d="M12 5v14m0 0l-5-5m5 5l5-5" />
+        </svg>
+        {caption}
+      </p>
 
       {/* The clip window: the artwork is drawn at full height inside it and
           the last 4% falls outside, so the machine is cut by the section edge

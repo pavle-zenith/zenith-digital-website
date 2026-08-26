@@ -38,10 +38,11 @@
     ".next-scan/types/**/*.ts",
     ".next-shot/types/**/*.ts",
     ".next-sle/types/**/*.ts",
+    ".next-tex/types/**/*.ts",
     ".next-verify/types/**/*.ts",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".next-tex/types/**/*.ts"
+    ".next-cap/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

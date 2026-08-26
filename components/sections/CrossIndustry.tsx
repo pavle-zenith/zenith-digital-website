@@ -37,8 +37,8 @@ export function CrossIndustry() {
           >
             <defs>
               <linearGradient id="cs-curve-grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1633bd" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#1633bd" stopOpacity="0" />
+                <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
               </linearGradient>
             </defs>
             <path
@@ -49,7 +49,7 @@ export function CrossIndustry() {
             <path
               className="chart-line"
               fill="none"
-              stroke="#1633bd"
+              stroke="var(--color-accent)"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"

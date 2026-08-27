@@ -347,7 +347,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     items: [
       {
         q: "How much does a Wix Studio website cost?",
-        a: "From €1,250 for a build of up to five pages, and €2,350 for the twelve-page Studio tier with custom functionality and full copywriting. The figure is fixed before we start, so the number in the proposal is the number you pay.",
+        a: "From €1,250 for a build of up to five pages, and €2,350 for the twelve-page Studio tier with custom functionality and full copywriting. The figure is fixed before we start, so the number in the proposal is the number you pay, and both tiers can be paid in instalments: two for The Minimum, two or three for The Studio, tied to project milestones.",
       },
       {
         q: "How long does a Wix Studio website take?",

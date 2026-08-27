@@ -668,7 +668,7 @@ export const pricing = {
       name: "The Minimum",
       icon: "pen",
       price: "From €1,250",
-      priceNote: "one-time",
+      priceNote: "one-time, 2 instalments",
       summary:
         "A clean, credible build for businesses that need to launch fast.",
       timeline: "2-week delivery",
@@ -689,7 +689,7 @@ export const pricing = {
       name: "The Studio",
       icon: "layers",
       price: "€2,350",
-      priceNote: "one-time",
+      priceNote: "one-time, 2 to 3 instalments",
       summary:
         "Custom functionality, a CMS your team can run, and the full SEO and copy stack.",
       timeline: "5-week delivery",

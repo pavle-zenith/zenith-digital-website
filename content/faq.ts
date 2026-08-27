@@ -8,9 +8,8 @@ import { pricing } from "./home";
  * import from here (services re-uses `whyWixItem`; partner numbers come from
  * content/partnerships.ts commercials, tier prices from content/home.ts).
  *
- * OWNER — still to set (visible [bracketed] placeholders until then):
- *   - landing-page retail price (shared with /services)
- *   - retail payment terms ("How do payments work?")
+ * Payment terms and the landing-page retail price were both set by the owner
+ * on 26 Aug 2026; no bracketed placeholders remain.
  */
 
 // Shared with /services (single source, no drift).
@@ -97,7 +96,7 @@ export const fCategories: FaqCategory[] = [
       },
       {
         q: "How do payments work?",
-        a: "The standard structure is a 50% deposit to start, with the balance at launch. If a payment plan fits your cash flow better, tell us on the call. We're flexible on the structure, not on the scope.",
+        a: "In instalments, not one lump sum. The Minimum is two payments: 50% to start, 50% at launch. The Studio can be split into two or three, tied to milestones: kickoff, design approval, launch. No financing, no interest, no card tricks, just the project cost spread across the project. The structure is flexible; the scope is not.",
       },
     ],
   },

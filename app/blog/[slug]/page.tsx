@@ -11,6 +11,7 @@ import { SourcesGrid } from "@/components/sections/SourcesGrid";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { post as furniture } from "@/content/blog";
+import { blogOgImage } from "@/content/blog-covers";
 import { headingAnchors } from "@/lib/blog";
 import { ORG_ID, PERSON_ID, SITE, personSchema } from "@/lib/schema";
 import { sanityFetch, sanityFetchSafe } from "@/sanity/lib/client";
@@ -44,6 +45,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = data.seo?.title ?? `${data.title} | Zenith Digital`;
   const description = data.seo?.description ?? data.excerpt;
+  // Cover art ships with the repo (content/blog-covers.ts), so the share
+  // image is a static file, not a Sanity asset.
+  const ogImage = blogOgImage(data.slug);
 
   return {
     title,
@@ -56,8 +60,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       publishedTime: data.publishedAt,
       ...(data.lastVerified ? { modifiedTime: data.lastVerified } : {}),
+      ...(ogImage
+        ? { images: [{ url: ogImage, width: 1200, height: 630, alt: title }] }
+        : {}),
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(ogImage ? { images: [ogImage] } : {}),
+    },
   };
 }
 

@@ -66,7 +66,7 @@ export const hero = {
     {
       client: "Knode AI",
       tag: "SaaS",
-      metric: "Raising a $10M Series A",
+      metric: "Raising a Series A",
       image: "/portfolio-blocky/knode.webp",
       href: "/case-studies/knode-ai",
     },
@@ -331,7 +331,7 @@ export const crossIndustry = {
     {
       name: "Knode",
       logo: "/logos-blue/knode.avif",
-      text: "Full SaaS website and landing page from scratch in 3 weeks. Knode is currently raising $10M Series A.",
+      text: "Full SaaS website and landing page from scratch in 3 weeks. Knode is currently raising a Series A.",
     },
     {
       name: "Techtonnik",
@@ -466,7 +466,7 @@ export const industries = {
     {
       name: "SaaS & tech",
       blurb:
-        "Product sites and web apps that turn launches into pipeline. Knode's carried them into a $10M Series A.",
+        "Product sites and web apps that turn launches into pipeline. Knode's carried them into a Series A.",
       href: "/case-studies?industry=saas",
       image: "/industries/saas-tech.jpg",
     },

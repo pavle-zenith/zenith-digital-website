@@ -94,7 +94,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     client: "Knode AI",
     slug: "knode-ai",
     industry: "saas",
-    metric: "Raising a $10M Series A",
+    metric: "Raising a Series A",
     story: "Off Wix Classic onto a new Studio site in 3 weeks",
     thumb: "/portfolio-slider/knode-ai.jpg",
     logo: "/logos-white/knode.png",
@@ -438,9 +438,9 @@ export const caseStudies = {
       logo: "/logos-white/knode.png",
       thumb: "/casestudies/knode.jpg",
       title:
-        "A premium Wix Studio SaaS site, built in three weeks, for a company raising a $10M Series A",
+        "A premium Wix Studio SaaS site, built in three weeks, for a company raising a Series A",
       stats: [
-        { value: "$10M USD", label: "Currently raising" },
+        { value: "Series A", label: "Currently raising" },
         { value: "3 Weeks", label: "Time-to-market" },
       ],
       liveUrl: "https://knode.ai",
@@ -607,10 +607,10 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   {
     ...cardOf("knode-ai"),
     // Narrative confirmed by owner (Aug 2026): story beats match the project.
-    headline: "The site Knode took into its $10M Series A raise",
+    headline: "The site Knode took into its Series A raise",
     logoDark: "/logos-dark/knode.png",
     stats: [
-      { value: "$10M", label: "Series A, in progress" },
+      { value: "Series A", label: "Raise in progress" },
       { value: "3 weeks", label: "Kickoff to launch" },
       { value: "10", label: "Pages designed and built" },
     ],
@@ -648,7 +648,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
       },
     ],
     results: [
-      { value: "$10M", label: "Series A, in progress" },
+      { value: "Series A", label: "Raise in progress" },
       { value: "3 weeks", label: "From kickoff to live" },
     ],
     resultsNote:
@@ -682,7 +682,7 @@ export const caseStudyDetails: CaseStudyDetail[] = [
     seo: {
       title: "Knode AI | SaaS Site Built in 3 Weeks | Zenith Digital",
       description:
-        "How Zenith Digital designed and built Knode AI's 10-page Wix Studio site in three weeks, and how it carried the company into a $10M Series A raise.",
+        "How Zenith Digital designed and built Knode AI's 10-page Wix Studio site in three weeks, and how it carried the company into a Series A raise.",
     },
   },
   {

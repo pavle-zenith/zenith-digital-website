@@ -15,7 +15,7 @@ import { caseStudyCards, csFinalCta } from "@/content/case-studies";
 export const metadata: Metadata = {
   title: "Wix Studio Website Examples & Case Studies | Zenith Digital",
   description:
-    "Real Wix Studio and custom builds from a Wix Legend Partner: a $10M Series A, $521k in bookings, 257% impression growth. 100+ websites shipped.",
+    "Real Wix Studio and custom builds from a Wix Legend Partner: a Series A, $521k in bookings, 257% impression growth. 100+ websites shipped.",
   alternates: { canonical: "/case-studies" },
 };
 

@@ -255,13 +255,13 @@ export function Nav() {
             exclusive by viewport (this is md:hidden, that one is hidden md:block)
             and this one is inert while closed, so exactly one is ever exposed
             to the accessibility tree. */}
-        <nav aria-label="Primary">
-          <ul className="flex flex-col overflow-y-auto border-t border-light-border px-[clamp(20px,4vw,64px)]">
+        <nav aria-label="Primary" className="min-h-0 flex-1 overflow-y-auto">
+          <ul className="flex flex-col border-t border-light-border px-[clamp(20px,4vw,64px)]">
             {nav.items.map((item) => (
               <li key={item.href} className="border-b border-light-border">
                 <Link
                   href={item.href}
-                  className="block py-5 font-display text-h3 font-medium"
+                  className="block py-4 font-display text-body-lg font-medium"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
@@ -272,12 +272,20 @@ export function Nav() {
         </nav>
 
         {/* Sign-off + CTAs pinned to the bottom */}
-        <div className="mt-auto flex flex-col gap-4 border-t border-light-border px-[clamp(20px,4vw,64px)] py-8">
-          <p className="font-display text-h3 font-medium leading-tight text-balance">
+        <div className="mt-auto shrink-0 flex flex-col gap-3 border-t border-light-border bg-light-bg px-[clamp(20px,4vw,64px)] pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+          <p className="font-display text-body-lg font-medium leading-tight text-balance">
             {nav.drawerTagline}
           </p>
+          {/* FIX: these routed but left the drawer open, landing the visitor on
+              the new page with the menu still covering it. */}
           {nav.ctas.map((cta) => (
-            <Button key={cta.href} cta={cta} tone="light" className="w-full" />
+            <Button
+              key={cta.href}
+              cta={cta}
+              tone="light"
+              className="w-full"
+              onClick={() => setOpen(false)}
+            />
           ))}
         </div>
       </div>

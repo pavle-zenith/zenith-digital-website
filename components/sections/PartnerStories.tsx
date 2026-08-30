@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
+import { StatMedia } from "@/components/ui/StatMedia";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -37,32 +38,14 @@ export function PartnerStories() {
             key={s.name}
             className="grid gap-8 px-0 py-10 last:pb-0 md:px-[clamp(20px,4vw,64px)] md:py-14 lg:grid-cols-2 lg:gap-16"
           >
-            {/* Media: partner site shot (or the framed placeholder) with the
-                stats riding the bottom edge in a translucent blur bar */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface">
-              {s.image ? (
-                <Image
-                  src={s.image}
-                  alt={`${s.name} work`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              ) : null}
-              {/* Two stats max in the blur bar; three crowds the shot. */}
-              <div className="absolute inset-x-4 bottom-4 flex flex-wrap gap-x-10 gap-y-3 rounded-[8px] border border-white/15 bg-bg/55 p-4 backdrop-blur-md">
-                {s.stats.slice(0, 2).map((st) => (
-                  <div key={st.label}>
-                    <div className="font-display text-h3 font-medium leading-none tracking-tight text-white">
-                      {st.value}
-                    </div>
-                    <div className="mt-1.5 max-w-[22ch] text-body leading-snug text-white/70">
-                      {st.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Media: partner site shot with its numbers. Two stats max;
+                three crowds the shot. Over the shot from sm up, stacked
+                underneath on phones (see StatMedia). */}
+            <StatMedia
+              src={s.image}
+              alt={`${s.name} work`}
+              stats={s.stats.slice(0, 2)}
+            />
 
             {/* Details — a flex column so the quote can pin to the bottom */}
             <div className="flex flex-col">

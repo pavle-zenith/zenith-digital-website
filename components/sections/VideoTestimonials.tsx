@@ -246,7 +246,7 @@ export function VideoTestimonials({
               className={cn(
                 // text-white is deliberate: this content sits over video, so
                 // it must not inherit a light section's dark ink.
-                "group relative flex aspect-[3/4.4] flex-col overflow-hidden rounded-[8px] border border-border text-left text-white",
+                "group relative flex aspect-[3/3.7] flex-col sm:aspect-[3/4.4] overflow-hidden rounded-[8px] border border-border text-left text-white",
                 slider &&
                   "w-[280px] shrink-0 snap-start sm:w-[320px] lg:w-[360px]",
               )}
@@ -261,14 +261,21 @@ export function VideoTestimonials({
                   className="object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
               ) : item.video ? (
-                <video
-                  src={item.video}
-                  muted
-                  playsInline
-                  preload="metadata"
-                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                  aria-hidden
-                />
+                /* No poster: mobile browsers will not paint a frame from
+                   preload="metadata", so the branded panel sits underneath as
+                   a visible ground rather than leaving a void. Give the entry
+                   a `poster` and this branch is skipped entirely. */
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-b from-surface-2 to-surface" />
+                  <video
+                    src={item.video}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                    aria-hidden
+                  />
+                </>
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-b from-surface-2 to-surface" />
               )}
@@ -332,7 +339,7 @@ export function VideoTestimonials({
           <button
             type="button"
             aria-label="Close video"
-            className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-[6px] border border-white/20 text-text transition hover:bg-white/10"
+            className="absolute right-6 top-[max(1.5rem,env(safe-area-inset-top))] z-10 flex h-10 w-10 items-center justify-center rounded-[6px] border border-white/20 bg-black/40 text-text backdrop-blur transition hover:bg-white/10"
             onClick={() => setActive(null)}
           >
             <svg
@@ -349,7 +356,7 @@ export function VideoTestimonials({
             </svg>
           </button>
           <div
-            className="relative aspect-[9/16] h-[80vh] max-w-full overflow-hidden rounded-[8px] border border-white/15 bg-surface"
+            className="relative aspect-[9/16] h-[70dvh] max-w-full overflow-hidden rounded-[8px] border border-white/15 bg-surface"
             onClick={(e) => e.stopPropagation()}
           >
             {activeItem.video ? (

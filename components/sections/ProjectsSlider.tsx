@@ -33,8 +33,11 @@ export function ProjectsSlider({
 
   return (
     <Section tone="light" frameClassName="!pb-10 !pt-6 md:!pb-12 md:!pt-7">
-      <div className="flex items-center justify-between gap-6">
-        <ul className="flex flex-col divide-y divide-light-border sm:flex-row sm:flex-wrap sm:items-baseline sm:divide-x sm:divide-y-0">
+      {/* Phones: the stats run the full width and the arrows sit under them.
+          Side by side, the arrow block squeezed the stats column to about half
+          the screen and wrapped every figure. */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <ul className="flex w-full flex-col divide-y divide-light-border sm:w-auto sm:flex-row sm:flex-wrap sm:items-baseline sm:divide-x sm:divide-y-0">
           {stats.map((chip) => (
             <li
               key={chip}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
+import { StatMedia } from "@/components/ui/StatMedia";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import { Button } from "@/components/ui/Button";
 import {
@@ -97,32 +98,13 @@ export function WorkStrip({
             key={row.slug}
             className="grid gap-8 px-0 py-10 last:pb-0 md:px-[clamp(20px,4vw,64px)] md:py-14 lg:grid-cols-2 lg:gap-16"
           >
-            {/* Media: site shot with the stats along its bottom edge */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface">
-              {row.image ? (
-                <Image
-                  src={row.image}
-                  alt={`${row.name} website`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              ) : null}
-              <div className="absolute inset-x-4 bottom-4 flex flex-wrap gap-x-10 gap-y-3 rounded-[8px] border border-white/15 bg-bg/55 p-4 backdrop-blur-md">
-                {row.stats.map((st) => (
-                  <div key={st.value}>
-                    <div className="font-display text-h3 font-medium leading-none tracking-tight text-white">
-                      {st.value}
-                    </div>
-                    {st.label ? (
-                      <div className="mt-1.5 max-w-[22ch] text-body leading-snug text-white/70">
-                        {st.label}
-                      </div>
-                    ) : null}
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Media: site shot with its numbers. Over the shot from sm up,
+                stacked underneath on phones (see StatMedia). */}
+            <StatMedia
+              src={row.image}
+              alt={`${row.name} website`}
+              stats={row.stats}
+            />
 
             {/* Details — a flex column so the quote can pin to the bottom */}
             <div className="flex flex-col">

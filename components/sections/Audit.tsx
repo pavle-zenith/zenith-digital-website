@@ -8,6 +8,7 @@ import { useAutoCycle } from "@/lib/useAutoCycle";
 import { Section } from "@/components/ui/Section";
 import { AuditReport } from "@/components/ui/AuditReport";
 import { cn } from "@/lib/utils";
+import { useEqualPanelHeight } from "@/lib/useEqualPanelHeight";
 import { audit } from "@/content/home";
 
 const CYCLE_MS = 5000;
@@ -27,6 +28,7 @@ export function Audit() {
     count,
     CYCLE_MS,
   );
+  const panels = useEqualPanelHeight<HTMLDivElement>();
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,7 +68,7 @@ export function Audit() {
           </p>
 
           {/* Accordion tabs */}
-          <div className="mt-10 border-t border-r border-light-border">
+          <div ref={panels.ref} className="mt-10 border-t border-r border-light-border">
             {audit.tabs.map((tab, i) => {
               const isOpen = open === i;
               return (
@@ -97,8 +99,14 @@ export function Audit() {
                       isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                     )}
                   >
-                    <div className="overflow-hidden">
-                      <p className="border-l-2 border-accent pb-6 pl-5 pr-4 text-body leading-relaxed text-light-muted">
+                    <div
+                      className="overflow-hidden"
+                      style={panels.minHeight ? { minHeight: panels.minHeight } : undefined}
+                    >
+                      <p
+                        data-panel-body
+                        className="border-l-2 border-accent pb-6 pl-5 pr-4 text-body leading-relaxed text-light-muted"
+                      >
                         {tab.body}
                       </p>
                     </div>

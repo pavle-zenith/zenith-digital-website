@@ -77,7 +77,7 @@ export function ServiceShowcase({
           sliding text never shows through them. */}
       <div className={cn("frame-bleed relative border-t", rule)}>
         {slides.length > 1 ? (
-          <div className="absolute right-[clamp(20px,4vw,64px)] top-4 z-10 flex gap-2">
+          <div className="absolute bottom-4 right-[clamp(20px,4vw,64px)] z-10 flex gap-2 sm:bottom-auto sm:top-4">
             {([-1, 1] as const).map((dir) => (
               <button
                 key={dir}
@@ -120,7 +120,7 @@ export function ServiceShowcase({
               className="w-full shrink-0 snap-start"
             >
               {/* Header row: logo/wordmark + claim title, clear of the arrows */}
-              <div className="flex min-h-[72px] flex-wrap items-center gap-x-4 gap-y-2 py-4 pl-[clamp(20px,4vw,64px)] pr-[calc(clamp(20px,4vw,64px)+100px)]">
+              <div className="hidden min-h-[72px] flex-wrap items-center gap-x-4 gap-y-2 py-4 pl-[clamp(20px,4vw,64px)] pr-[calc(clamp(20px,4vw,64px)+100px)] sm:flex">
                 {slide.logo ? (
                   <Image
                     src={slide.logo}
@@ -139,8 +139,11 @@ export function ServiceShowcase({
                 </figcaption>
               </div>
 
-              {/* Rule before the image (spans the slide, reads continuous) */}
-              <div className={cn("border-t", rule)} aria-hidden />
+              {/* Rule before the image (spans the slide, reads continuous).
+                  Hidden with the header on phones: with nothing between it and
+                  the track's own top rule the two stack into a double
+                  hairline. */}
+              <div className={cn("hidden border-t sm:block", rule)} aria-hidden />
 
               {/* Image fills the slot rail to rail, flush against the rules —
                   no padding, radius, or border around it */}

@@ -75,6 +75,7 @@ export const allTestimonials: Testimonial[] = [
     logo: "/logos-white/advantage.png",
     logoDark: "/logos-blue/advantage.avif",
     video: "/testimonials/john.mov",
+    poster: "/avatars/john-smyth.jpg",
   },
   {
     id: "bates-green",

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { useEqualPanelHeight } from "@/lib/useEqualPanelHeight";
 import { pProcess } from "@/content/partnerships";
 
 const CYCLE_MS = 5000;
@@ -19,6 +20,7 @@ export function PartnerProcess() {
   const [open, setOpen] = useState(0);
   const [paused, setPaused] = useState(false);
   const count = pProcess.steps.length;
+  const panels = useEqualPanelHeight<HTMLDivElement>();
 
   useEffect(() => {
     if (paused) return;
@@ -45,7 +47,7 @@ export function PartnerProcess() {
         {/* Accordion tabs — self-contained column (items-start keeps the right
             rule from running past the last row), CTA beneath. */}
         <div>
-          <div className="border-t border-r border-light-border">
+          <div ref={panels.ref} className="border-t border-r border-light-border">
             {pProcess.steps.map((step, i) => {
               const isOpen = open === i;
               return (
@@ -79,10 +81,14 @@ export function PartnerProcess() {
                       isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                     )}
                   >
-                    <div className="overflow-hidden">
-                      {/* Fixed min-height so every expanded body occupies the
-                        same space — switching tabs never shifts the layout. */}
-                      <p className="border-l-2 border-accent pb-6 pl-5 pr-4 text-body leading-relaxed text-light-muted sm:min-h-[78px]">
+                    <div
+                      className="overflow-hidden"
+                      style={panels.minHeight ? { minHeight: panels.minHeight } : undefined}
+                    >
+                      <p
+                        data-panel-body
+                        className="border-l-2 border-accent pb-6 pl-5 pr-4 text-body leading-relaxed text-light-muted"
+                      >
                         {step.body}
                       </p>
                     </div>

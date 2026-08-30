@@ -134,15 +134,20 @@ export function Hero() {
                 className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
               />
             </div>
-            <div className="flex items-baseline justify-between gap-3">
-              <span className="font-display font-medium">{c.client}</span>
-              <span className="font-mono text-label uppercase track-label text-light-muted">
-                {c.tag}
+            {/* Title row and metric are one block so the card's gap-4 sets
+                the space below the IMAGE only. The metric reads as a caption
+                under the client name, not a second equal-weight line. */}
+            <div>
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="font-display font-medium">{c.client}</span>
+                <span className="font-mono text-label uppercase track-label text-light-muted">
+                  {c.tag}
+                </span>
+              </div>
+              <span className="mt-1 block text-label font-medium text-light-text">
+                {c.metric}
               </span>
             </div>
-            <span className="text-body font-medium text-light-text">
-              {c.metric}
-            </span>
           </Link>
         ))}
       </div>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Section } from "@/components/ui/Section";
 import { WhoForScene } from "@/components/sections/service/who-for-scenes";
 import { cn } from "@/lib/utils";
+import { useEqualPanelHeight } from "@/lib/useEqualPanelHeight";
 import type { ServicePageContent, WhoForCard } from "@/content/service-pages";
 
 const CYCLE_MS = 6000;
@@ -26,6 +27,7 @@ export function ServicePageWhoFor({ data }: { data: ServicePageContent }) {
   const [open, setOpen] = useState(0);
   const [paused, setPaused] = useState(false);
   const count = data.whoFor.items.length;
+  const panels = useEqualPanelHeight<HTMLDivElement>();
 
   // `open` is a dependency so clicking a tab restarts the clock: the scene
   // that opens gets a full cycle to play rather than whatever was left of the
@@ -54,7 +56,7 @@ export function ServicePageWhoFor({ data }: { data: ServicePageContent }) {
             {data.whoFor.intro}
           </p>
 
-          <div className="mt-10 border-r border-t border-light-border">
+          <div ref={panels.ref} className="mt-10 border-r border-t border-light-border">
             {data.whoFor.items.map((item, i) => {
               const isOpen = open === i;
               return (
@@ -85,8 +87,14 @@ export function ServicePageWhoFor({ data }: { data: ServicePageContent }) {
                       isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                     )}
                   >
-                    <div className="overflow-hidden">
-                      <p className="border-l-2 border-accent pb-6 pl-5 pr-4 text-body leading-relaxed text-light-muted">
+                    <div
+                      className="overflow-hidden"
+                      style={panels.minHeight ? { minHeight: panels.minHeight } : undefined}
+                    >
+                      <p
+                        data-panel-body
+                        className="border-l-2 border-accent pb-6 pl-5 pr-4 text-body leading-relaxed text-light-muted"
+                      >
                         {item.body}
                       </p>
                     </div>

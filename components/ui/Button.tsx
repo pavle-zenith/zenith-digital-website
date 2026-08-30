@@ -25,11 +25,18 @@ export function Button({
   tone = "dark",
   className,
   children,
+  onClick,
 }: {
   cta: CtaLink;
   tone?: Tone;
   className?: string;
   children?: React.ReactNode;
+  /**
+   * Fires alongside navigation. The mobile nav drawer needs this: a CTA that
+   * routes but leaves the drawer open drops the visitor on the new page with
+   * the menu still covering it.
+   */
+  onClick?: () => void;
 }) {
   const variant = cta.variant || "primary";
   const cls = cn(classes(variant, tone), className);
@@ -49,14 +56,20 @@ export function Button({
 
   if (isInternal(cta.href)) {
     return (
-      <Link href={cta.href} className={cls}>
+      <Link href={cta.href} className={cls} onClick={onClick}>
         {label}
         {arrow}
       </Link>
     );
   }
   return (
-    <a href={cta.href} className={cls} rel="noopener" target="_blank">
+    <a
+      href={cta.href}
+      className={cls}
+      rel="noopener"
+      target="_blank"
+      onClick={onClick}
+    >
       {label}
       {arrow}
     </a>

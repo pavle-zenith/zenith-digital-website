@@ -57,7 +57,7 @@ export function WallOfLove() {
           <button
             type="button"
             aria-label="Close"
-            className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-[6px] border border-white/20 text-white hover:bg-white/10"
+            className="absolute right-6 top-[max(1.5rem,env(safe-area-inset-top))] z-10 flex h-10 w-10 items-center justify-center rounded-[6px] border border-white/20 bg-black/40 text-white backdrop-blur transition hover:bg-white/10"
             onClick={() => setActive(null)}
           >
             <svg
@@ -74,7 +74,7 @@ export function WallOfLove() {
             </svg>
           </button>
           <div
-            className="relative aspect-[9/16] h-[80vh] max-w-full overflow-hidden rounded-[8px] border border-white/15 bg-surface"
+            className="relative aspect-[9/16] h-[70dvh] max-w-full overflow-hidden rounded-[8px] border border-white/15 bg-surface"
             onClick={(e) => e.stopPropagation()}
           >
             {activeCard.video ? (

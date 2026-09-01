@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRef } from "react";
 
 import { Section } from "@/components/ui/Section";
-import { cn } from "@/lib/utils";
+import { cn, isFlatMark } from "@/lib/utils";
 import { detailSlugs, type CaseStudyCard } from "@/content/case-studies";
 
 /** Track gap between cards, in px — also the arrow step's spacing term. */
@@ -158,6 +158,7 @@ function SliderCard({ study: c }: { study: CaseStudyCard }) {
           <div className="flex h-full w-full items-center justify-center">
             <Image
               src={c.logo}
+              unoptimized={isFlatMark(c.logo)}
               alt={c.client}
               width={220}
               height={56}

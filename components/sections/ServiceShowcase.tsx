@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn, isFlatMark } from "@/lib/utils";
 import type { ServiceSlide, ServiceUsp } from "@/content/services";
 
 /**
@@ -124,6 +124,7 @@ export function ServiceShowcase({
                 {slide.logo ? (
                   <Image
                     src={slide.logo}
+                    unoptimized={isFlatMark(slide.logo)}
                     alt={slide.client}
                     width={140}
                     height={32}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { isFlatMark } from "@/lib/utils";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
@@ -73,6 +74,7 @@ export function CaseStudies() {
                 {cs.logo ? (
                   <Image
                     src={cs.logo}
+                    unoptimized={isFlatMark(cs.logo)}
                     alt={cs.client}
                     width={220}
                     height={56}
@@ -87,7 +89,7 @@ export function CaseStudies() {
 
               {/* Title + stats + button pinned bottom */}
               <div className="relative flex flex-col gap-8">
-                <h3 className="max-w-2xl font-display text-[1.375rem] font-medium leading-[1.25] tracking-tight text-balance sm:text-[1.75rem] sm:leading-[1.2]">
+                <h3 className="max-w-2xl font-display text-h3 font-medium leading-[1.25] tracking-tight text-balance sm:text-[1.75rem] sm:leading-[1.2]">
                   {cs.title}
                 </h3>
                 <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">

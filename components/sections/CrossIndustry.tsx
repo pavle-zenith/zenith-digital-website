@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/Section";
+import { isFlatMark } from "@/lib/utils";
 import { crossIndustry } from "@/content/home";
 import Image from "next/image";
 
@@ -69,6 +70,7 @@ export function CrossIndustry() {
                 {item.logo ? (
                   <Image
                     src={item.logo}
+                    unoptimized={isFlatMark(item.logo)}
                     alt={item.name}
                     width={120}
                     height={26}

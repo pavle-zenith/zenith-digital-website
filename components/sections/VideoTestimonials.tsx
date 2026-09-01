@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
-import { cn } from "@/lib/utils";
+import { cn, isFlatMark } from "@/lib/utils";
 import type { Tone } from "@/lib/types";
 import { videoTestimonials } from "@/content/home";
 
@@ -284,11 +284,21 @@ export function VideoTestimonials({
                   Base --color-scrim matches the case-study panel gradient. */}
               <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-scrim via-scrim/80 to-transparent" />
 
+              {/* Matching scrim at the top, for the white client logo. The
+                  bottom gradient only ever covered the text, so the logo was
+                  relying on the poster happening to be dark up there. Measured
+                  across the set, every poster reads 49-119 in that corner
+                  except John Smyth's, a cutout on a white ground at 180, where
+                  the white AdVantage mark disappeared entirely. This holds for
+                  any light poster rather than special-casing one client. */}
+              <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-scrim/70 to-transparent" />
+
               {/* Top row: logo left, play right */}
               <div className="relative flex items-start justify-between p-5">
                 {item.logo ? (
                   <Image
                     src={item.logo}
+                    unoptimized={isFlatMark(item.logo)}
                     alt={item.company}
                     width={160}
                     height={40}

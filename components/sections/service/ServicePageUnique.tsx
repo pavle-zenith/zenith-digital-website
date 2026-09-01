@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
-import { cn } from "@/lib/utils";
+import { cn, isFlatMark } from "@/lib/utils";
 import type { ServicePageContent } from "@/content/service-pages";
 
 /**
@@ -227,6 +227,7 @@ export function ServicePagePlatforms({ data }: { data: ServicePageContent }) {
                   {item.logo ? (
                     <Image
                       src={item.logo}
+                      unoptimized={isFlatMark(item.logo)}
                       alt=""
                       width={32}
                       height={32}

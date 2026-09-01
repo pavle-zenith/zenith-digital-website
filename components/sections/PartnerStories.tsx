@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { StatMedia } from "@/components/ui/StatMedia";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import { cn, isFlatMark } from "@/lib/utils";
 import { pStories } from "@/content/partnerships";
 
 /**
@@ -54,6 +54,7 @@ export function PartnerStories() {
                 {s.logo ? (
                   <Image
                     src={s.logo}
+                    unoptimized={isFlatMark(s.logo)}
                     alt={s.name}
                     width={160}
                     height={40}

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
-import { cn } from "@/lib/utils";
+import { cn, isFlatMark } from "@/lib/utils";
 import { wall, type WallCard } from "@/content/testimonials";
 
 /**
@@ -149,6 +149,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
           <span className="inline-flex w-fit items-center rounded-full border border-white/15 bg-bg/55 px-3 py-1.5 backdrop-blur-md">
             <Image
               src={card.logo}
+              unoptimized={isFlatMark(card.logo)}
               alt={card.company}
               width={120}
               height={24}

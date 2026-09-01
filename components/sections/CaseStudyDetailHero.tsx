@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { isFlatMark } from "@/lib/utils";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
@@ -61,6 +62,7 @@ export function CaseStudyDetailHero({ study }: { study: CaseStudyDetail }) {
           {study.logoDark ? (
             <Image
               src={study.logoDark}
+              unoptimized={isFlatMark(study.logoDark)}
               alt={study.client}
               width={220}
               height={56}

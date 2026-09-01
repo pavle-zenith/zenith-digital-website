@@ -31,3 +31,24 @@ export function formatLongDate(iso: string): string {
   const month = MONTHS[Number(m) - 1];
   return month ? `${Number(d)} ${month} ${y}` : iso;
 }
+
+/**
+ * True for flat brand marks and credential badges: client logos and the Wix
+ * certifications.
+ *
+ * These skip Vercel's image optimizer (`unoptimized` on the Image). They are
+ * small, transparent, fixed-size assets that render between 16px and 32px tall
+ * from sources capped at 160px, so a transform costs a quota unit and saves
+ * almost nothing, while emitting a srcset that asks for the same wordmark at
+ * sixteen widths up to 3840px.
+ *
+ * DELIBERATELY NOT AVATARS. There are 34 of them, several between 200KB and
+ * 700KB, and most render at 44px. Serving those raw would ship megabytes to
+ * save quota, which is the wrong trade: there the optimizer is doing real work.
+ */
+export function isFlatMark(src: unknown): boolean {
+  return (
+    typeof src === "string" &&
+    (src.startsWith("/logos-") || src.startsWith("/certifications/"))
+  );
+}

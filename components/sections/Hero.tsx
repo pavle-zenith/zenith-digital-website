@@ -54,6 +54,7 @@ export function Hero() {
           <span className="text-light-muted">{hero.badgePrefix}</span>
           <Image
             src="/logos-white/wix-studio.png"
+            unoptimized
             alt={hero.badgeBrand}
             width={100}
             height={24}
@@ -120,7 +121,13 @@ export function Hero() {
                   alt={c.alt}
                   width={c.width}
                   height={240}
-                  sizes="80px"
+                  // Served straight from the CDN, no optimizer pass. These are
+                  // already trimmed, background-keyed WebP at 8-16KB for a box
+                  // that is never taller than 80px, so a transform costs a
+                  // quota unit and saves nothing. It also stops Next emitting a
+                  // srcset that asked for the same badge at six widths up to
+                  // 3840px.
+                  unoptimized
                   className="h-16 w-auto object-contain sm:h-20"
                 />
               </li>

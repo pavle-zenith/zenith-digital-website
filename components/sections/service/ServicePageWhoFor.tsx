@@ -89,7 +89,16 @@ export function ServicePageWhoFor({ data }: { data: ServicePageContent }) {
                   >
                     <div
                       className="overflow-hidden"
-                      style={panels.minHeight ? { minHeight: panels.minHeight } : undefined}
+                      // Only while OPEN. An unconditional min-height gives the
+                      // 0fr row a floor it cannot shrink past, which pinned
+                      // every panel open. Exactly one panel is open at a time,
+                      // so reserving the tallest on that one alone still keeps
+                      // the section a constant height as it advances.
+                      style={
+                        isOpen && panels.minHeight
+                          ? { minHeight: panels.minHeight }
+                          : undefined
+                      }
                     >
                       <p
                         data-panel-body

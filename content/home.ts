@@ -34,13 +34,42 @@ export const hero = {
   subhead:
     "We design, build, and launch results-driven Wix Studio websites. And when you outgrow Wix, we build custom.",
   proof: {
-    label: "100+ websites shipped",
+    label: "100+ websites launched",
     avatars: [
       "/avatars/flynn-blackie.jpg",
       "/avatars/uros-stanimirovic.jpg",
       "/avatars/ivan-belobrajdic.jpg",
     ],
   },
+  /**
+   * The three Wix credentials, in the hero's bottom-right proof slot. Real alt
+   * text rather than empty: these are the checkable claims the positioning
+   * rests on, so they belong in the accessibility tree and to a crawler
+   * reading the page, not just to sighted visitors.
+   *
+   * Sources were two white-background JPEGs and one transparent PNG; all three
+   * ship as trimmed WebP with the background keyed out, so they sit on the
+   * hero's texture without a white box behind them. `width` is each badge's
+   * real width at the shared 240px height, so next/image reserves the right
+   * box and nothing shifts on load.
+   */
+  certifications: [
+    {
+      src: "/certifications/wix-studio-developer.webp",
+      alt: "Wix Studio Certified Developer, Expert level, 2025",
+      width: 184,
+    },
+    {
+      src: "/certifications/wix-studio-web-designer.webp",
+      alt: "Wix Studio Certified Web Designer, Expert level, 2025",
+      width: 183,
+    },
+    {
+      src: "/certifications/wix-partner-legend.webp",
+      alt: "Wix Partner, Legend tier",
+      width: 240,
+    },
+  ],
   ctas: [
     BOOK_CALL,
     {
@@ -770,7 +799,9 @@ function featuredTestimonial(
 
 export const testimonials = {
   stats: [
-    { value: "100+", label: "Websites shipped" },
+    // "launched", matching the hero badge. The homepage carries both this cell
+    // and that badge, so the same claim was worded two ways on one screen.
+    { value: "100+", label: "Websites launched" },
     { value: "5.96x", label: "Average ROAS" },
     { value: "€1M+", label: "Client revenue generated" },
   ],

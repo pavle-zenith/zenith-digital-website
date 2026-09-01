@@ -73,35 +73,59 @@ export function Hero() {
             <p className="mt-6 max-w-xl text-body-lg font-medium leading-relaxed text-light-muted">
               {hero.subhead}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {hero.ctas.map((cta) => (
-                <Button key={cta.href} cta={cta} tone="light" />
-              ))}
+            {/* CTAs with the proof badge alongside them: the faces and the
+                count now vouch for "See our work" at the moment of the click,
+                instead of sitting off in the far corner of the hero. Phones
+                stack, so the badge lands under the two full-width buttons. */}
+            <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center">
+              <div className="flex flex-col gap-3 sm:flex-row">
+                {hero.ctas.map((cta) => (
+                  <Button key={cta.href} cta={cta} tone="light" />
+                ))}
+              </div>
+
+              {/* Avatars first, then the count. */}
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-3">
+                  {hero.proof.avatars.map((src) => (
+                    <span
+                      key={src}
+                      className="relative h-9 w-9 overflow-hidden rounded-[6px] ring-2 ring-light-bg"
+                    >
+                      <Image
+                        src={src}
+                        alt=""
+                        fill
+                        sizes="36px"
+                        className="object-cover"
+                      />
+                    </span>
+                  ))}
+                </div>
+                <span className="font-display font-medium text-light-text">
+                  {hero.proof.label}
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Bottom-right: proof badge — avatars left, label right */}
-          <div className="flex shrink-0 items-center gap-3 lg:pb-2">
-            <div className="flex -space-x-3">
-              {hero.proof.avatars.map((src) => (
-                <span
-                  key={src}
-                  className="relative h-9 w-9 overflow-hidden rounded-[6px] ring-2 ring-light-bg"
-                >
-                  <Image
-                    src={src}
-                    alt=""
-                    fill
-                    sizes="36px"
-                    className="object-cover"
-                  />
-                </span>
-              ))}
-            </div>
-            <span className="font-display font-medium text-light-text">
-              {hero.proof.label}
-            </span>
-          </div>
+          {/* Bottom-right: the Wix credentials, in the slot the proof badge
+              vacated. Backgrounds are keyed out, so they read as badges on the
+              texture rather than three white tiles. */}
+          <ul className="flex shrink-0 items-end gap-4 lg:pb-2">
+            {hero.certifications.map((c) => (
+              <li key={c.src}>
+                <Image
+                  src={c.src}
+                  alt={c.alt}
+                  width={c.width}
+                  height={240}
+                  sizes="80px"
+                  className="h-16 w-auto object-contain sm:h-20"
+                />
+              </li>
+            ))}
+          </ul>
         </div>
         </div>
       </div>

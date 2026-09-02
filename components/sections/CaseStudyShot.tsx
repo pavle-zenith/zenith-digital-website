@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { servesRaw } from "@/lib/utils";
 
 import { Section } from "@/components/ui/Section";
 import type { CaseStudyGalleryImage } from "@/content/case-studies";
@@ -15,6 +16,7 @@ export function CaseStudyShot({ image }: { image: CaseStudyGalleryImage }) {
       <div className="frame-bleed relative aspect-[16/9] overflow-hidden md:aspect-[2/1]">
         <Image
           src={image.src}
+          unoptimized={servesRaw(image.src)}
           alt={image.alt}
           fill
           sizes="(max-width: 1440px) 100vw, 1440px"

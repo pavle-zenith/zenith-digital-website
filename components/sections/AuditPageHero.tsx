@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { isFlatMark } from "@/lib/utils";
+import { servesRaw } from "@/lib/utils";
 
 import { Section } from "@/components/ui/Section";
 import { AuditForm } from "@/components/forms/AuditForm";
@@ -73,7 +73,7 @@ export function AuditPageHero() {
                 <Image
                   key={logo.src}
                   src={logo.src}
-                  unoptimized={isFlatMark(logo.src)}
+                  unoptimized={servesRaw(logo.src)}
                   alt={logo.alt}
                   width={180}
                   height={40}

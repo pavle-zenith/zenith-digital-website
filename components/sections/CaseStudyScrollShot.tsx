@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { servesRaw } from "@/lib/utils";
 
 import { Section } from "@/components/ui/Section";
 
@@ -163,6 +164,7 @@ export function CaseStudyScrollShot({
         >
           <Image
             src={src}
+            unoptimized={servesRaw(src)}
             alt={alt}
             width={width}
             height={height}

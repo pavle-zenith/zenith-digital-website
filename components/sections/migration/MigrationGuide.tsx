@@ -13,7 +13,7 @@ import { WorkStrip } from "@/components/sections/WorkStrip";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { Pricing } from "@/components/sections/Pricing";
-import { cn, isFlatMark } from "@/lib/utils";
+import { cn, servesRaw } from "@/lib/utils";
 import { CtaBand } from "./CtaBand";
 import { TransfersTable } from "./TransfersTable";
 import { GuideNav } from "./GuideNav";
@@ -968,7 +968,7 @@ function GuideRelated({ data }: { data: MigrationGuideContent }) {
               {item.logo ? (
                 <Image
                   src={item.logo}
-                  unoptimized={isFlatMark(item.logo)}
+                  unoptimized={servesRaw(item.logo)}
                   alt=""
                   width={24}
                   height={24}

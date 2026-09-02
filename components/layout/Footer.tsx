@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AskAi } from "@/components/layout/AskAi";
 import { FooterClock } from "@/components/layout/FooterClock";
 import { footer } from "@/content/home";
-import { isFlatMark } from "@/lib/utils";
+import { servesRaw } from "@/lib/utils";
 
 /**
  * Footer (light, live-site layout). Top: mission paragraph left, three live city
@@ -121,7 +121,7 @@ export function Footer() {
                 <Image
                   key={p.alt}
                   src={p.src}
-                  unoptimized={isFlatMark(p.src)}
+                  unoptimized={servesRaw(p.src)}
                   alt={p.alt}
                   width={180}
                   height={40}

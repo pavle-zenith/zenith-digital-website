@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
-import { cn, isFlatMark } from "@/lib/utils";
+import { cn, servesRaw } from "@/lib/utils";
 import type { Tone } from "@/lib/types";
 import { videoTestimonials } from "@/content/home";
 
@@ -298,7 +298,7 @@ export function VideoTestimonials({
                 {item.logo ? (
                   <Image
                     src={item.logo}
-                    unoptimized={isFlatMark(item.logo)}
+                    unoptimized={servesRaw(item.logo)}
                     alt={item.company}
                     width={160}
                     height={40}

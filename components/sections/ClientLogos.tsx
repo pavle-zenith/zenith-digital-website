@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
-import { cn, isFlatMark } from "@/lib/utils";
+import { cn, servesRaw } from "@/lib/utils";
 import { clientLogos } from "@/content/case-studies";
 
 /**
@@ -57,7 +57,7 @@ function MarqueeRow({
           <div key={i} className="flex h-8 shrink-0 items-center">
             <Image
               src={logo.src}
-              unoptimized={isFlatMark(logo.src)}
+              unoptimized={servesRaw(logo.src)}
               alt={i < logos.length ? logo.alt : ""}
               width={150}
               height={34}

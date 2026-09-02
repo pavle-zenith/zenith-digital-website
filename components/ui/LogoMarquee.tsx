@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { isFlatMark } from "@/lib/utils";
+import { servesRaw } from "@/lib/utils";
 
 type Logo = { src: string; alt: string };
 
@@ -44,7 +44,7 @@ export function LogoMarquee({
               <div key={i} className="flex h-8 shrink-0 items-center">
                 <Image
                   src={logo.src}
-                  unoptimized={isFlatMark(logo.src)}
+                  unoptimized={servesRaw(logo.src)}
                   alt={i < logos.length ? logo.alt : ""}
                   width={140}
                   height={32}

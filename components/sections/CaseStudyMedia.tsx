@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { servesRaw } from "@/lib/utils";
 
 import { Section } from "@/components/ui/Section";
 import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
@@ -65,6 +66,7 @@ export function CaseStudyMedia({ study }: { study: CaseStudyDetail }) {
             <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface">
               <Image
                 src={image.src}
+                unoptimized={servesRaw(image.src)}
                 alt={image.alt}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

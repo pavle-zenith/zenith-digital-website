@@ -7,7 +7,7 @@ import { useAutoCycle } from "@/lib/useAutoCycle";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
-import { cn, isFlatMark } from "@/lib/utils";
+import { cn, servesRaw } from "@/lib/utils";
 import { testimonials } from "@/content/home";
 
 const CYCLE_MS = 6000;
@@ -152,7 +152,7 @@ export function Testimonials({ showStats = true }: { showStats?: boolean }) {
                 >
                   <Image
                     src={item.logo}
-                    unoptimized={isFlatMark(item.logo)}
+                    unoptimized={servesRaw(item.logo)}
                     alt={item.logoAlt}
                     width={120}
                     height={26}

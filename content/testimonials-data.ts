@@ -75,7 +75,11 @@ export const allTestimonials: Testimonial[] = [
     logo: "/logos-white/advantage.png",
     logoDark: "/logos-blue/advantage.avif",
     video: "/testimonials/john.mov",
-    poster: "/avatars/john-smyth.jpg",
+    // A frame from the clip, not his headshot. The headshot is a 44px avatar:
+    // an 800x800 cutout on white, and blown up to fill a 300x394 card it was
+    // blurry, cropped through the face, and the only white card in a row of
+    // video stills, which read as a failed image rather than a thumbnail.
+    poster: "/testimonials/john-poster.webp",
   },
   {
     id: "bates-green",
@@ -89,6 +93,7 @@ export const allTestimonials: Testimonial[] = [
     avatar: PLACEHOLDER_AVATAR,
     logoDark: "/logos-blue/notyou.avif",
     video: "/testimonials/bates-green.mov",
+    poster: "/testimonials/bates-green-poster.webp",
   },
   {
     id: "alex-may",

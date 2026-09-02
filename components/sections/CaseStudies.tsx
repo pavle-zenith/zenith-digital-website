@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { isFlatMark } from "@/lib/utils";
+import { servesRaw } from "@/lib/utils";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
@@ -37,6 +37,7 @@ export function CaseStudies() {
             <div className="relative min-h-[280px] overflow-hidden rounded-[8px] border border-light-border bg-light-surface">
               <Image
                 src={cs.thumb}
+                unoptimized={servesRaw(cs.thumb)}
                 alt={`${cs.client} website`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 36vw"
@@ -74,7 +75,7 @@ export function CaseStudies() {
                 {cs.logo ? (
                   <Image
                     src={cs.logo}
-                    unoptimized={isFlatMark(cs.logo)}
+                    unoptimized={servesRaw(cs.logo)}
                     alt={cs.client}
                     width={220}
                     height={56}

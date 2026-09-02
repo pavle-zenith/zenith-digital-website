@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 import { Section } from "@/components/ui/Section";
 import { FilterTab } from "@/components/ui/FilterTab";
-import { cn, isFlatMark } from "@/lib/utils";
+import { cn, servesRaw } from "@/lib/utils";
 import {
   INDUSTRIES,
   INDUSTRY_FILTER_LABELS,
@@ -110,6 +110,7 @@ function GridInner({
               {c.thumb ? (
                 <Image
                   src={c.thumb}
+                  unoptimized={servesRaw(c.thumb)}
                   alt={`${c.client} website`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -119,7 +120,7 @@ function GridInner({
                 <div className="flex h-full w-full items-center justify-center">
                   <Image
                     src={c.logo}
-                    unoptimized={isFlatMark(c.logo)}
+                    unoptimized={servesRaw(c.logo)}
                     alt={c.client}
                     width={220}
                     height={56}

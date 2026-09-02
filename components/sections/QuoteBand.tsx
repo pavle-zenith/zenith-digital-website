@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
-import { cn, isFlatMark } from "@/lib/utils";
+import { cn, servesRaw } from "@/lib/utils";
 import { quoteBand } from "@/content/book-a-call";
 
 type QuoteItem = {
@@ -60,7 +60,7 @@ export function QuoteBand({ data = quoteBand }: { data?: QuoteBandData }) {
             >
               <Image
                 src={item.logo}
-                unoptimized={isFlatMark(item.logo)}
+                unoptimized={servesRaw(item.logo)}
                 alt={item.logoAlt}
                 width={160}
                 height={40}

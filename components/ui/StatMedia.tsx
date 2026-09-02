@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { cn } from "@/lib/utils";
+import { cn, servesRaw } from "@/lib/utils";
 
 export type MediaStat = { value: string; label?: string };
 
@@ -37,7 +37,7 @@ export function StatMedia({
     <div className={cn("relative", className)}>
       <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface">
         {src ? (
-          <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
+          <Image unoptimized={servesRaw(src)} src={src} alt={alt} fill sizes={sizes} className="object-cover" />
         ) : null}
       </div>
 

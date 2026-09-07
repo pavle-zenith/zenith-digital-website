@@ -17,7 +17,7 @@ import { whyWixItem } from "./faq";
 
 // 1. Hero (dark, compact) + numbered anchor index
 export const sHero = {
-  heading: "Every service, and exactly what's in it",
+  heading: "Wix Studio services, and exactly what's in each one",
   support:
     "One team for the whole journey. From a first Wix Studio build to migrations, campaigns, and white-label production for agencies.",
   ctas: [

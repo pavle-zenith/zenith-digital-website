@@ -263,7 +263,7 @@ export const comparison = {
 
 // 6. Services (bento grid)
 export const services = {
-  heading: "One team for the build and everything after",
+  heading: "Builds, migrations, campaigns, and white-label production",
   intro:
     "From a first Wix Studio build to migrations, campaigns, and white-label work for agencies.",
   cta: {
@@ -855,7 +855,7 @@ export const testimonials = {
 
 // 14. Partnerships band
 export const partnerships = {
-  heading: "Agency or freelancer?",
+  heading: "Sell web work you don't build",
   line: "Sell our builds under your brand. Unbranded deliverables, NDA, partner pricing.",
   cta: {
     label: "Explore partnerships",

@@ -9,6 +9,9 @@ declare global {
     // gtag is defined by the Consent Mode bootstrap in app/layout.tsx.
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
+    // Microsoft Clarity's command queue, defined by its own snippet in
+    // components/analytics/Analytics.tsx once consent is granted.
+    clarity?: ((...args: unknown[]) => void) & { q?: unknown[] };
   }
 }
 

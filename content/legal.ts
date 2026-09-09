@@ -113,6 +113,10 @@ export const privacyPolicy: LegalDocument = {
         },
         {
           type: "p",
+          text: "If you accept, we also load Microsoft Clarity, which records your session on this site: the pages you view, where you move and click, and how far you scroll. It is how we find the parts of the site people get stuck on. It never runs before you accept, and it never runs if you decline.",
+        },
+        {
+          type: "p",
           text: "Advertising and personalisation storage stay switched off permanently, whatever you choose, because this site runs no ad products.",
         },
         {
@@ -147,6 +151,11 @@ export const privacyPolicy: LegalDocument = {
               "Google Analytics",
               "Website analytics, only after you accept",
               "Google infrastructure, EU and US",
+            ],
+            [
+              "Microsoft Clarity",
+              "Session recording and heatmaps, only after you accept",
+              "Microsoft infrastructure, EU and US",
             ],
             [
               "Cal.com",

@@ -8,10 +8,16 @@ import { readConsent, writeConsent, type ConsentStatus } from "@/lib/consent";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
-// Nothing to consent to when neither tool is configured (local dev, previews
+// Microsoft Clarity. Env-first with the real project as the fallback, the same
+// pattern sanity/env.ts uses: the id is not a secret (it ships in the client
+// bundle either way), so hardcoding a fallback means a fresh checkout or a
+// preview deploy still behaves like production instead of silently not
+// recording. Override per environment with NEXT_PUBLIC_CLARITY_ID.
+const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID || "yfo4dte9rt";
+// Nothing to consent to when no tool is configured (local dev, previews
 // without the vars), so the banner stays off rather than asking about tracking
 // that isn't happening.
-const ANALYTICS_CONFIGURED = Boolean(GA_ID || POSTHOG_KEY);
+const ANALYTICS_CONFIGURED = Boolean(GA_ID || POSTHOG_KEY || CLARITY_ID);
 // The host MUST match the region the PostHog project actually lives in. A key
 // from a US project sent to the EU ingest endpoint (or vice versa) is dropped
 // silently: no console error, no events, and it looks exactly like the consent
@@ -20,6 +26,40 @@ const ANALYTICS_CONFIGURED = Boolean(GA_ID || POSTHOG_KEY);
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 
 let posthogReady = false;
+let clarityReady = false;
+
+/**
+ * Microsoft Clarity: session replay and heatmaps.
+ *
+ * Gated on consent exactly like PostHog, and for a stronger reason. Clarity
+ * records the session itself, mouse movement, clicks, scrolls and the DOM, so
+ * it is squarely `analytics_storage` and must not run for a visitor who
+ * declined or has not answered yet. Nothing loads until `accept()` fires,
+ * which also keeps the request off the critical path for everyone else.
+ *
+ * This is Microsoft's official snippet, transcribed rather than injected as
+ * raw HTML so it is typed and readable: define the command queue, then append
+ * the tag script.
+ */
+function startClarity() {
+  if (clarityReady || !CLARITY_ID) return;
+  clarityReady = true;
+
+  window.clarity =
+    window.clarity ||
+    (Object.assign(
+      function (...args: unknown[]) {
+        (window.clarity!.q = window.clarity!.q || []).push(args);
+      },
+      { q: [] as unknown[] },
+    ) as NonNullable<Window["clarity"]>);
+
+  const tag = document.createElement("script");
+  tag.async = true;
+  tag.src = "https://www.clarity.ms/tag/" + CLARITY_ID;
+  const first = document.getElementsByTagName("script")[0];
+  first?.parentNode?.insertBefore(tag, first);
+}
 
 /** Init PostHog once, and only after consent. Dynamic so it stays out of the
  *  initial bundle for visitors who never accept. */
@@ -78,6 +118,7 @@ function AnalyticsInner() {
     if (stored === "granted") {
       window.gtag?.("consent", "update", { analytics_storage: "granted" });
       void startPostHog();
+      startClarity();
     }
   }, []);
 
@@ -96,6 +137,7 @@ function AnalyticsInner() {
     setConsent("granted");
     window.gtag?.("consent", "update", { analytics_storage: "granted" });
     void startPostHog();
+    startClarity();
   }, []);
 
   const decline = useCallback(() => {

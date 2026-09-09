@@ -21,6 +21,43 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  /**
+   * Client proposal pages under /p/. These are private documents sent as a
+   * link, not site pages, and they must stay out of search results.
+   *
+   * This is one of four independent layers, because any single one can be
+   * missed. The other three: a <meta name="robots" content="noindex,nofollow">
+   * in the file itself, absence from app/sitemap.ts (which is an explicit
+   * allowlist, so a new path cannot leak in by existing), and no internal link
+   * to the URL from anywhere on the site.
+   *
+   * Deliberately NOT a robots.txt Disallow. robots.txt is public, so a rule
+   * there advertises the exact path to anyone who reads it, and a URL blocked
+   * from crawling can still be indexed from a bare link because the crawler
+   * is never allowed to fetch the page and read the noindex tag.
+   *
+   * The rewrite gives the .html file a clean, extensionless URL.
+   */
+  async headers() {
+    return [
+      {
+        source: "/p/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+    ];
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: "/p/:slug",
+        destination: "/p/:slug.html",
+      },
+    ];
+  },
+
   // 301s preserving URL equity from the legacy Wix site (CLAUDE.md §8).
   // The three service orphans now land on their dedicated /services/[slug]
   // pages; /contact-us stays unmapped until a contact target ships.

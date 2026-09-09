@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- NOINDEX CHAIN, PART 1 OF 4.
+     2: X-Robots-Tag header (next.config.ts headers()).
+     3: excluded from sitemap.xml (app/sitemap.ts is an explicit allowlist).
+     4: zero internal links to this URL anywhere on the site.
+     Deliberately NO robots.txt Disallow: robots.txt is public, so it would
+     advertise the path, and a blocked URL can still be indexed as a bare link. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+
+<title>Growth Plan for Touch of Hope | Zenith Digital</title>
+<meta property="og:title" content="Growth Plan for Touch of Hope | Zenith Digital">
+<meta property="og:description" content="Facebook Ads, Google Ads, SEO and GEO. Indianapolis home care.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+
+<style>
+:root{
+  --ink:#0a1020; --muted:#59637a; --line:#e6e9f1; --bg:#fff; --surface:#f4f6fa;
+  --accent:#02013a; --accent-ink:#fff; --positive:#187e55;
+  --gutter:clamp(20px,5vw,64px); --rail:210px;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+  font-size:18px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+h1,h2,h3{margin:0; font-weight:600; letter-spacing:-.02em; line-height:1.12}
+h1{font-size:clamp(2rem,4.4vw,3.25rem)}
+h2{font-size:clamp(1.6rem,3vw,2.35rem)}
+h3{font-size:1.25rem; letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.8125rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:600}
+.lede{font-size:1.1875rem; color:var(--muted); max-width:62ch}
+.tight{max-width:56ch}
+
+/* ---------- sticky section rail (desktop only) ---------- */
+.rail{
+  position:fixed; top:0; left:0; width:var(--rail); height:100vh; padding:32px 0 32px 24px;
+  display:none; flex-direction:column; gap:2px; border-right:1px solid var(--line);
+  background:var(--bg); z-index:20;
+}
+.rail-brand{font-weight:600; letter-spacing:-.02em; margin-bottom:20px; font-size:.9375rem}
+.rail a{
+  display:block; text-decoration:none; color:var(--muted); font-size:.875rem; line-height:1.3;
+  padding:7px 12px 7px 10px; border-left:2px solid transparent; border-radius:0 4px 4px 0;
+}
+.rail a:hover{color:var(--ink); background:var(--surface)}
+.rail a.on{color:var(--ink); border-left-color:var(--accent); font-weight:600}
+.rail a:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+@media (min-width:1100px){ .rail{display:flex} body{padding-left:var(--rail)} }
+
+/* ---------- section rhythm: roughly one screen each ---------- */
+section{
+  padding:clamp(56px,7vw,84px) var(--gutter);
+  border-top:1px solid var(--line); scroll-margin-top:0;
+}
+section:first-of-type{border-top:0}
+.wrap{max-width:1080px; margin:0 auto}
+@media (min-width:1100px){ section{min-height:92vh; display:flex; align-items:center} section>.wrap{width:100%} }
+
+/* ---------- hero ---------- */
+.hero-meta{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:18px; color:var(--muted); font-size:1rem}
+.hero-meta span{white-space:nowrap}
+.loom{
+  margin-top:36px; aspect-ratio:16/9; width:100%; background:var(--surface);
+  border:1px dashed #c9cfdc; border-radius:12px; display:flex; align-items:center;
+  justify-content:center; text-align:center; padding:24px; color:var(--muted);
+}
+.loom p{font-size:.9375rem; max-width:38ch}
+.note{
+  margin-top:22px; padding:14px 18px; background:var(--surface); border-radius:10px;
+  font-size:1rem; color:var(--muted); max-width:62ch;
+}
+
+/* ---------- stat cards ---------- */
+.stats{display:grid; gap:16px; grid-template-columns:1fr; margin:32px 0}
+@media (min-width:720px){ .stats{grid-template-columns:repeat(3,1fr)} }
+.stat{border:1px solid var(--line); border-radius:12px; padding:26px 24px; background:var(--bg)}
+.stat b{display:block; font-size:clamp(2.6rem,6vw,3.6rem); font-weight:650; letter-spacing:-.04em; line-height:1}
+.stat span{display:block; margin-top:10px; color:var(--muted); font-size:1rem}
+
+/* ---------- table ---------- */
+.tablewrap{overflow-x:auto; margin:28px 0 0; border:1px solid var(--line); border-radius:12px}
+table{width:100%; border-collapse:collapse; min-width:520px}
+th,td{text-align:left; padding:16px 20px; border-bottom:1px solid var(--line); font-size:1.0625rem}
+th{font-size:.8125rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600; background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td.fig{font-weight:650; font-size:1.1875rem; white-space:nowrap; letter-spacing:-.02em}
+td.fig em{font-style:normal; font-weight:500; color:var(--muted); font-size:.9375rem}
+.src{margin-top:12px; font-size:.875rem; color:var(--muted)}
+
+/* ---------- pull quote ---------- */
+.pull{
+  margin-top:32px; padding:26px 28px; border-left:3px solid var(--accent);
+  background:var(--surface); border-radius:0 12px 12px 0;
+}
+.pull b{display:block; font-size:clamp(1.25rem,2.4vw,1.6rem); font-weight:650; letter-spacing:-.02em; line-height:1.25}
+.pull p{margin-top:12px; color:var(--muted); max-width:62ch}
+
+/* ---------- flow ---------- */
+.flow{display:grid; gap:12px; align-items:stretch; margin:32px 0; grid-template-columns:1fr}
+@media (min-width:820px){ .flow{grid-template-columns:1fr auto 1fr auto 1fr} }
+.node{border:1px solid var(--line); border-radius:12px; padding:24px; text-align:center; background:var(--bg)}
+.node b{display:block; font-size:clamp(1.5rem,3vw,2rem); font-weight:650; letter-spacing:-.03em; line-height:1.1}
+.node span{display:block; margin-top:8px; color:var(--muted); font-size:.9375rem}
+.arrow{display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:1.5rem; line-height:1}
+.arrow::before{content:"\2193"}
+@media (min-width:820px){ .arrow::before{content:"\2192"} }
+
+.payback{display:grid; gap:14px; grid-template-columns:1fr; margin-top:8px}
+@media (min-width:720px){ .payback{grid-template-columns:repeat(2,1fr)} }
+.pb{border:1px solid var(--line); border-radius:12px; padding:20px 22px}
+.pb b{font-size:1.375rem; font-weight:650; letter-spacing:-.02em}
+.pb span{display:block; color:var(--muted); font-size:1rem; margin-top:4px}
+.closing{margin-top:26px; font-size:1.1875rem; max-width:64ch; font-weight:500}
+.flag{
+  margin-top:26px; padding:18px 20px; border:1px solid var(--line); border-radius:10px;
+  background:var(--surface); color:var(--muted); font-size:1rem; max-width:66ch;
+}
+.flag b{color:var(--ink); font-weight:600}
+
+/* ---------- plans ---------- */
+.plans{display:grid; gap:20px; grid-template-columns:1fr; margin-top:32px; align-items:start}
+@media (min-width:900px){ .plans{grid-template-columns:repeat(2,1fr)} }
+.plan{border:1px solid var(--line); border-radius:14px; padding:30px 28px; background:var(--bg); position:relative}
+.plan.rec{border:2px solid var(--accent); box-shadow:none}
+.tag{
+  position:absolute; top:-13px; left:28px; background:var(--accent); color:var(--accent-ink);
+  font-size:.75rem; letter-spacing:.07em; text-transform:uppercase; font-weight:600;
+  padding:5px 12px; border-radius:20px;
+}
+.plan h3{font-size:.8125rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); font-weight:600}
+.price{margin-top:14px; font-size:clamp(2.1rem,4.4vw,2.75rem); font-weight:650; letter-spacing:-.035em; line-height:1}
+.price small{display:block; font-size:1.0625rem; font-weight:500; letter-spacing:-.01em; color:var(--muted); margin-top:8px}
+.price em{display:block; font-style:normal; font-size:.9375rem; color:var(--muted); margin-top:4px}
+.target{margin-top:20px; padding:14px 16px; background:var(--surface); border-radius:10px; font-size:1.0625rem; font-weight:600}
+.target span{display:block; font-weight:500; color:var(--muted); font-size:.9375rem; margin-top:4px}
+.plan ul{margin:20px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+.plan li{position:relative; padding-left:26px; font-size:1.0625rem; line-height:1.5}
+.plan li::before{
+  content:""; position:absolute; left:0; top:.55em; width:7px; height:7px; border-radius:2px;
+  background:var(--accent);
+}
+.plan li b{font-weight:600}
+.plan li span{color:var(--muted)}
+.inherits{margin-top:20px; font-size:.9375rem; color:var(--muted); font-weight:600; letter-spacing:.02em}
+.bothplans{
+  margin-top:24px; padding:20px 22px; border:1px solid var(--line); border-radius:12px;
+  font-size:1.0625rem; background:var(--surface);
+}
+.bothplans b{font-weight:650}
+
+/* ---------- ad grid ---------- */
+.ads{display:grid; gap:20px; grid-template-columns:1fr; margin-top:32px}
+@media (min-width:640px){ .ads{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1000px){ .ads{grid-template-columns:repeat(3,1fr)} }
+.ad{border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; background:var(--bg)}
+.shot{aspect-ratio:4/5; background:#eef1f6; border-bottom:1px solid var(--line); position:relative}
+/* contain, never cover: the set mixes 9:16 vertical video with a 1:1 still,
+   and cropping an ad to fit a grid misrepresents the creative being shown. */
+.shot img,.shot video{width:100%; height:100%; object-fit:contain; display:block; background:#eef1f6}
+.shot .ph{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:#9aa3b5; font-size:.875rem; text-align:center; padding:18px;
+}
+.ad-body{padding:18px 20px; display:flex; flex-direction:column; gap:14px; flex:1}
+.ad-cap{font-size:1rem; color:var(--muted); flex:1}
+.ad a{
+  display:inline-flex; align-items:center; gap:7px; text-decoration:none; font-weight:600;
+  font-size:.9375rem; color:var(--ink); border:1px solid var(--line); border-radius:8px;
+  padding:10px 14px; justify-content:center;
+}
+.ad a:hover{background:var(--surface)}
+
+/* ---------- requirement cards ---------- */
+.reqs{display:grid; gap:18px; grid-template-columns:1fr; margin-top:32px}
+@media (min-width:880px){ .reqs{grid-template-columns:repeat(3,1fr)} }
+.req{border:1px solid var(--line); border-radius:12px; padding:26px 24px}
+.req .n{
+  width:32px; height:32px; border-radius:8px; background:var(--accent); color:var(--accent-ink);
+  display:flex; align-items:center; justify-content:center; font-weight:650; font-size:1rem;
+}
+.req h3{margin-top:16px; font-size:1.1875rem}
+.req p{margin-top:10px; color:var(--muted); font-size:1.0625rem}
+.req p b{color:var(--ink); font-weight:650}
+
+/* ---------- timeline ---------- */
+.tl{display:grid; gap:0; grid-template-columns:1fr; margin-top:36px}
+@media (min-width:880px){ .tl{grid-template-columns:repeat(4,1fr)} }
+.tl-node{padding:0 0 28px 26px; position:relative; border-left:1px solid var(--line)}
+.tl-node:last-child{padding-bottom:0}
+.tl-node::before{
+  content:""; position:absolute; left:-5px; top:4px; width:9px; height:9px; border-radius:50%;
+  background:var(--accent);
+}
+@media (min-width:880px){
+  .tl-node{border-left:0; border-top:1px solid var(--line); padding:28px 24px 0 0}
+  .tl-node::before{left:0; top:-5px}
+}
+.tl-when{font-size:.8125rem; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); font-weight:600}
+.tl-what{margin-top:8px; font-size:1.0625rem}
+
+/* ---------- close ---------- */
+.close-line{font-size:clamp(1.375rem,2.8vw,1.875rem); font-weight:600; letter-spacing:-.02em; line-height:1.25; max-width:24ch}
+.close-sub{margin-top:14px; color:var(--muted); font-size:1.125rem}
+.sig{margin-top:36px; padding-top:26px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; gap:24px; align-items:center; justify-content:space-between}
+.sig-who b{display:block; font-weight:650}
+.sig-who a{color:var(--muted); text-decoration:none}
+.sig-who a:hover{color:var(--ink)}
+.btn{
+  display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--accent-ink);
+  text-decoration:none; font-weight:600; font-size:1.0625rem; padding:15px 26px; border-radius:10px;
+}
+.btn:hover{opacity:.9}
+
+/* ---------- print ---------- */
+@media print{
+  :root{--gutter:0}
+  body{padding-left:0; font-size:12pt}
+  .rail,.loom{display:none !important}
+  section{min-height:0; display:block; padding:18pt 0; break-inside:avoid; border-top:1px solid #ddd}
+  .plan,.ad,.req,.stat,.pull,.flag,.bothplans{break-inside:avoid}
+  .ads{grid-template-columns:repeat(2,1fr)}
+  .btn{border:1px solid #000; color:#000; background:none}
+  a[href^="http"]::after{content:" (" attr(href) ")"; font-size:9pt; color:#666; word-break:break-all}
+}
+</style>
+</head>
+<body>
+
+<!-- Sticky section rail. Desktop only, per the brief. -->
+<nav class="rail" aria-label="Sections">
+  <div class="rail-brand">Growth Plan</div>
+  <a href="#overview">Overview</a>
+  <a href="#now">1 · Where you are</a>
+  <a href="#market">2 · The market</a>
+  <a href="#math">3 · The math</a>
+  <a href="#plans">4 · The two plans</a>
+  <a href="#examples">5 · Ad examples</a>
+  <a href="#needs">6 · What we need</a>
+  <a href="#timeline">7 · Timeline</a>
+  <a href="#next">8 · Next step</a>
+</nav>
+
+<main>
+
+<!-- 0 ───────────── HERO ───────────── -->
+<section id="overview">
+  <div class="wrap">
+    <p class="eyebrow">Prepared by Zenith Digital</p>
+    <h1 style="margin-top:16px">Growth Plan for Touch of Hope</h1>
+    <div class="hero-meta">
+      <span>Facebook Ads</span><span>·</span><span>Google Ads</span><span>·</span>
+      <span>SEO</span><span>·</span><span>GEO</span><span>·</span><span>Indianapolis</span>
+    </div>
+    <div class="hero-meta" style="margin-top:6px"><span>Prepared for Traci Alexander</span><span>·</span><span>September 9, 2026</span></div>
+
+    <!-- SWAP 1: paste the Loom <iframe> in place of this whole div. -->
+    <div class="loom" id="loom-slot">
+      <p><b>Loom embed goes here.</b><br>Replace this box with the iframe from Loom's Share &rarr; Embed.</p>
+    </div>
+
+    <p class="note">There's a Loom walkthrough at the top of this page. Watch that first - the page is just the reference.</p>
+  </div>
+</section>
+
+<!-- 1 ───────────── WHERE YOU ARE ───────────── -->
+<section id="now">
+  <div class="wrap">
+    <h2>Where you are right now</h2>
+    <div class="stats">
+      <div class="stat"><b>13</b><span>active clients today</span></div>
+      <div class="stat"><b>4&ndash;5</b><span>new clients you want</span></div>
+      <div class="stat"><b>~3.5<small style="font-size:.45em; font-weight:500; letter-spacing:0"> months</small></b><span>to do it in</span></div>
+    </div>
+    <p class="lede">You've built something that works - 13 clients and a real margin after caregiver costs. The question isn't whether the business model is sound. It's that right now new clients arrive when they arrive, and you want a system that produces them on purpose.</p>
+  </div>
+</section>
+
+<!-- 2 ───────────── MARKET ───────────── -->
+<section id="market">
+  <div class="wrap">
+    <h2>What the Indianapolis market actually costs</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">What</th><th scope="col">Where it sits in 2026</th></tr></thead>
+        <tbody>
+          <tr><td>Cost per click, home care search</td><td class="fig">~$6.30 <em>&nbsp;up 32% in a year</em></td></tr>
+          <tr><td>Cost per lead</td><td class="fig">$75&ndash;150</td></tr>
+          <tr><td>Cost per <b>signed client</b></td><td class="fig">$970&ndash;2,000</td></tr>
+          <tr><td>What the average home care agency spends on marketing</td><td class="fig">1.1% of revenue</td></tr>
+          <tr><td>What a business your size should be spending</td><td class="fig">5&ndash;8% of revenue</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Figures are 2026 industry benchmarks for US home care search advertising.</p>
+
+    <div class="pull">
+      <b>Your competitors are spending almost nothing. That's the opening.</b>
+      <p>Home care is one of the last local service categories where the ad auction isn't crowded. That won't be true in three years.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 ───────────── THE MATH ───────────── -->
+<section id="math">
+  <div class="wrap">
+    <h2>The math on 5 new clients</h2>
+
+    <div class="flow">
+      <div class="node"><b>$2,000<span style="font-size:.5em; font-weight:500">/mo</span></b><span>ad spend</span></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="node"><b>~17</b><span>leads</span></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="node"><b>~5</b><span>signed clients over the quarter</span></div>
+    </div>
+
+    <div class="payback">
+      <div class="pb"><b>$700/month</b><span>gross profit from each new client</span></div>
+      <div class="pb"><b>+$3,500/month</b><span>5 new clients, month after month</span></div>
+      <div class="pb"><b>~$15,000&ndash;17,000</b><span>total investment over the first 4 months</span></div>
+      <div class="pb"><b>~$35,000</b><span>gross profit if they stay the usual 8&ndash;12 months</span></div>
+    </div>
+
+    <p class="closing">Roughly 2x on the money - and you keep the website, the tracking, the reviews engine and the search rankings when the ads stop. That part doesn't churn.</p>
+
+    <p class="flag"><b>A straight note:</b> these are industry benchmarks, not a forecast for your account. Real numbers depend on your close rate and how fast your phone gets answered. More on that in section 6.</p>
+  </div>
+</section>
+
+<!-- 4 ───────────── PLANS ───────────── -->
+<section id="plans">
+  <div class="wrap">
+    <h2>The two plans</h2>
+
+    <div class="plans">
+      <div class="plan">
+        <h3>Foundation</h3>
+        <div class="price">$1,000<small>per month, plus $1,500&ndash;2,000/mo ad spend</small><em>Ad spend is paid direct to Google/Meta, not through us</em></div>
+        <div class="target">Target: 3&ndash;4 new clients by December 31</div>
+        <ul>
+          <li><b>Google Search campaigns</b> on high-intent local terms <span>- "home care Indianapolis", "in home senior care near me", and the suburb variants</span></li>
+          <li><b>Retargeting on Meta</b> <span>- catches the adult children who visited and didn't call</span></li>
+          <li><b>One conversion-built landing page</b> <span>- the ads point here, not at your homepage</span></li>
+          <li><b>Google Business Profile rebuilt and optimised</b> <span>- this is free traffic you're likely leaving on the table</span></li>
+          <li><b>Call tracking installed</b> <span>- so every lead is attributed to a source instead of guessed at</span></li>
+          <li><b>Monthly report</b> <span>+ a 30-minute call</span></li>
+        </ul>
+      </div>
+
+      <div class="plan rec">
+        <span class="tag">Recommended</span>
+        <h3>Growth</h3>
+        <div class="price">$1,500<small>per month, plus $2,000&ndash;2,500/mo ad spend</small><em>Ad spend is paid direct to Google/Meta, not through us</em></div>
+        <div class="target">Target: 5&ndash;6 new clients by December 31<span>Plus a compounding organic channel from month four</span></div>
+        <p class="inherits">Everything in Foundation, plus:</p>
+        <ul>
+          <li><b>Full Meta campaigns, not just retargeting</b> <span>- targeting adult daughters aged 45&ndash;65 who are researching care for a parent, which is who actually makes this decision</span></li>
+          <li><b>Caregiver recruitment ads</b> <span>- because 5 new clients needs staff to serve them, and that's usually the real bottleneck</span></li>
+          <li><b>Full local SEO</b> <span>- service pages, suburb pages, citations, and a review generation system that keeps your Google rating climbing</span></li>
+          <li><b>GEO / AEO layer</b> <span>- structured data and content built so ChatGPT, Perplexity and Google's AI Overviews cite you when someone asks them for home care in Indianapolis. Nobody in your market is doing this yet.</span></li>
+          <li><b>Bi-weekly optimisation</b> <span>instead of monthly</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="bothplans"><b>Both plans:</b> one-time setup fee of <b>$1,000</b> (landing page, tracking, GBP, schema, review system). 3-month minimum, month-to-month after that.</p>
+  </div>
+</section>
+
+<!-- 5 ───────────── AD EXAMPLES ───────────── -->
+<section id="examples">
+  <div class="wrap">
+    <h2>What good home care advertising looks like</h2>
+    <p class="lede" style="margin-top:16px">Five live examples running right now, pulled from Meta's public Ad Library. Tap any video to play it. Each card links back to the original listing.</p>
+    <div class="ads" id="ad-grid"></div>
+  </div>
+</section>
+
+<!-- 6 ───────────── WHAT WE NEED ───────────── -->
+<section id="needs">
+  <div class="wrap">
+    <h2>What we need from you</h2>
+    <div class="reqs">
+      <div class="req">
+        <div class="n">1</div>
+        <h3>Answer the phone.</h3>
+        <p>Phone leads convert at <b>41%</b>. Web form leads convert at <b>5%</b>. And <b>42%</b> of calls to senior care businesses go to voicemail. If a lead we paid $115 for hits your voicemail on a Saturday, no amount of ad budget fixes that. We'll ask you to commit to a 60-second answer target, 7 days a week.</p>
+      </div>
+      <div class="req">
+        <div class="n">2</div>
+        <h3>Have caregiver capacity ready.</h3>
+        <p>Five new clients need people to serve them. If you're short, we shift part of the Meta budget into recruitment - but we need to know before we start, not in November.</p>
+      </div>
+      <div class="req">
+        <div class="n">3</div>
+        <h3>Give SEO the right clock.</h3>
+        <p>The clients you get by December will come from paid ads. SEO and GEO are the month 4&ndash;12 layer - they're what makes your cost per client drop over time. We're being upfront so you're not judging the wrong channel on the wrong timeline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ───────────── TIMELINE ───────────── -->
+<section id="timeline">
+  <div class="wrap">
+    <h2>Timeline</h2>
+    <div class="tl">
+      <div class="tl-node"><div class="tl-when">Weeks 1&ndash;2</div><div class="tl-what">Setup: landing page, tracking, GBP, campaign build</div></div>
+      <div class="tl-node"><div class="tl-when">Weeks 3&ndash;6</div><div class="tl-what">Campaigns live, learning phase, first leads</div></div>
+      <div class="tl-node"><div class="tl-when">Weeks 7&ndash;14</div><div class="tl-what">Optimisation, cost per lead comes down, clients signing</div></div>
+      <div class="tl-node"><div class="tl-when">Month 4+</div><div class="tl-what">SEO and GEO start contributing, blended cost per client drops</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ───────────── CLOSE ───────────── -->
+<section id="next">
+  <div class="wrap">
+    <p class="close-line">Pick a plan and we can have campaigns live inside two weeks.</p>
+    <p class="close-sub">Happy to jump on a call and walk through any of this.</p>
+    <div class="sig">
+      <div class="sig-who">
+        <b>Pavle Maodus &middot; Zenith Digital</b>
+        <a href="mailto:hello@thezenithdigital.com">hello@thezenithdigital.com</a>
+      </div>
+      <!-- SWAP 5: booking link. -->
+      <a class="btn" href="#REPLACE-WITH-BOOKING-LINK">Book a call &rarr;</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+/* ───────────────────────────────────────────────────────────────
+   SWAP 2 + 3: the ad examples.
+   Add a 6th by appending one object here. Nothing else changes.
+     img     - path to the screenshot, or "" for the placeholder box
+     caption - one line on what the ad does well
+     id      - the Meta Ad Library id, used to build the link
+   ─────────────────────────────────────────────────────────────── */
+var AD_EXAMPLES = [
+  { id: "1706364970515655", type: "video", src: "/p/assets/ad-1.mp4", poster: "/p/assets/ad-1-poster.webp", caption: "[Caption - what this ad does well]" },
+  { id: "2918462545025755", type: "video", src: "/p/assets/ad-2.mp4", poster: "/p/assets/ad-2-poster.webp", caption: "[Caption - what this ad does well]" },
+  { id: "742312663588179",  type: "image", src: "/p/assets/ad-3.webp", caption: "[Caption - what this ad does well]" },
+  { id: "25513858458208171",type: "image", src: "/p/assets/ad-4.webp", caption: "[Caption - what this ad does well]" },
+  { id: "618006207558773",  type: "video", src: "/p/assets/ad-5.mp4", poster: "/p/assets/ad-5-poster.webp", caption: "[Caption - what this ad does well]" }
+];
+
+(function () {
+  var grid = document.getElementById("ad-grid");
+  if (!grid) return;
+
+  AD_EXAMPLES.forEach(function (ad, i) {
+    var card = document.createElement("div");
+    card.className = "ad";
+
+    var shot = document.createElement("div");
+    shot.className = "shot";
+
+    if (ad.type === "video" && ad.src) {
+      // preload="none" so five ads don't pull ~1.8MB of video on load. The
+      // poster is a real frame, so the card is never an empty box, and the
+      // native controls give a play affordance without custom JS.
+      var v = document.createElement("video");
+      v.src = ad.src;
+      v.poster = ad.poster || "";
+      v.controls = true;
+      v.preload = "none";
+      v.playsInline = true;
+      v.setAttribute("playsinline", "");
+      shot.appendChild(v);
+    } else if (ad.src) {
+      var img = document.createElement("img");
+      img.src = ad.src;
+      img.alt = "Home care advertisement example " + (i + 1);
+      img.loading = "lazy";
+      shot.appendChild(img);
+    } else {
+      var ph = document.createElement("div");
+      ph.className = "ph";
+      ph.textContent = "Creative " + (i + 1);
+      shot.appendChild(ph);
+    }
+
+    var body = document.createElement("div");
+    body.className = "ad-body";
+
+    var cap = document.createElement("p");
+    cap.className = "ad-cap";
+    cap.textContent = ad.caption;
+
+    // Meta sends X-Frame-Options, so the Ad Library itself cannot be iframed.
+    // The creative is self-hosted (fbcdn links are signed and expire); this
+    // link goes to the live listing.
+    var link = document.createElement("a");
+    link.href = "https://www.facebook.com/ads/library/?id=" + ad.id;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "View in Meta Ad Library →";
+
+    body.appendChild(cap);
+    body.appendChild(link);
+    card.appendChild(shot);
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+})();
+
+/* Rail active state. Highlights whichever section owns the middle of the
+   viewport, so scrolling one beat at a time keeps your place while recording. */
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll(".rail a"));
+  if (!links.length || !("IntersectionObserver" in window)) return;
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute("href").slice(1)] = a; });
+
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove("on"); });
+      var a = byId[e.target.id];
+      if (a) a.classList.add("on");
+    });
+  }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+
+  document.querySelectorAll("section[id]").forEach(function (s) { obs.observe(s); });
+})();
+</script>
+</body>
+</html>

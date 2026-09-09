@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- NOINDEX CHAIN, LAYER 1 OF 4.
+     2: X-Robots-Tag header (next.config.ts headers(), /p/:path*)
+     3: excluded from sitemap.xml (app/sitemap.ts is an explicit allowlist)
+     4: zero internal links to this URL anywhere on the site
+     Deliberately NO robots.txt Disallow: robots.txt is public so it would
+     advertise the path, and a URL blocked from crawling can still be indexed
+     from a bare link because the crawler never fetches it to read this tag. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+
+<title>Touch of Hope &times; Zenith Digital &mdash; Growth Plan</title>
+<meta property="og:title" content="Touch of Hope × Zenith Digital — Growth Plan">
+<meta property="og:description" content="Home care growth proposal. Google, Meta, SEO and GEO for Indianapolis.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+
+<style>
+:root{
+  /* ── ACCENT ────────────────────────────────────────────────────────────
+     Swap here and the whole page follows: numerals, eyebrows, stat figures,
+     badges, borders, buttons.
+
+     NOT Zenith's own #02013a. That token measures 19.66:1 against white,
+     which is black to the eye: as a 44px numeral or a 12px eyebrow it reads
+     as ordinary dark text and the accent system disappears. This is the same
+     indigo family lifted to a value that actually reads as colour, and it
+     clears 7.90:1 so it stays legible at 12px eyebrow size. The teal the
+     brief floated was measured too and rejected at 3.74:1, which fails AA
+     for small text.  ─────────────────────────────────────────────────── */
+  --accent:#4338CA;
+  --accent-soft:rgba(67,56,202,.08);
+  --accent-line:rgba(67,56,202,.22);
+
+  --ink:#0A0A0A; --body:#3F3F46; --muted:#71717A;
+  --ground:#fff; --ground-alt:#F4F4FA; --card:#fff; --border:#E7E7EF;
+  --radius:14px; --col:1440px; --gutter:clamp(24px,4vw,64px);
+  /* Running prose is capped separately from the container. At 1440 a full-width
+     paragraph runs past 150 characters a line, which is unreadable and worse
+     for the 45-60 buyer this page is written for. The container is wide; the
+     text inside it is not. */
+  --prose:68ch;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--ground); color:var(--body); font-family:var(--sans);
+  font-size:18px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{margin:0; color:var(--ink); font-weight:800; letter-spacing:-.02em; line-height:1.05}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+strong{color:var(--ink); font-weight:700}
+
+/* ── sticky header ─────────────────────────────────────────────── */
+.hdr{
+  position:sticky; top:0; z-index:50; height:72px; background:#fff;
+  border-bottom:1px solid transparent; transition:border-color .2s;
+}
+.hdr.stuck{border-bottom-color:var(--border)}
+.hdr-in{
+  max-width:var(--col); margin:0 auto; height:100%; padding:0 var(--gutter);
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.marks{display:flex; align-items:center; gap:14px; font-weight:800; letter-spacing:-.02em; color:var(--ink); font-size:15px}
+.marks .x{color:var(--muted); font-weight:500}
+.logo-slot{display:block; height:34px; width:auto}
+footer .logo-slot{height:44px}
+@media (max-width:768px){ .logo-slot{height:28px} }
+.hdr nav{display:flex; gap:26px}
+.hdr nav a{
+  text-decoration:none; color:var(--muted); font-size:14px; font-weight:600; letter-spacing:-.01em;
+}
+.hdr nav a:hover,.hdr nav a.on{color:var(--accent)}
+@media (max-width:768px){ .hdr nav{display:none} }
+
+/* ── sections ──────────────────────────────────────────────────── */
+section{padding:120px var(--gutter); background:var(--ground); --sec-bg:var(--ground)}
+section.alt{background:var(--ground-alt); --sec-bg:var(--ground-alt)}
+.wrap{max-width:var(--col); margin:0 auto}
+@media (max-width:768px){ section{padding:72px var(--gutter)} }
+
+.snum{display:flex; align-items:baseline; gap:14px; margin-bottom:28px; flex-wrap:wrap}
+.snum b{color:var(--accent); font-size:44px; font-weight:800; letter-spacing:-.03em; line-height:1}
+.snum h2{font-size:44px}
+@media (max-width:768px){ .snum b,.snum h2{font-size:30px} }
+.intro{font-size:19px; max-width:var(--prose); margin-bottom:40px}
+h3{font-size:24px; margin-bottom:14px}
+h4{font-size:18px; font-weight:750}
+.eyebrow{
+  font-size:12px; text-transform:uppercase; letter-spacing:.1em; font-weight:600;
+  color:var(--accent); margin-bottom:10px;
+}
+.cap{
+  font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted);
+  font-weight:600;
+}
+
+/* ── hero ──────────────────────────────────────────────────────── */
+.hero{padding-top:88px; padding-bottom:104px}
+.pill{
+  display:inline-block; background:var(--accent-soft); color:var(--accent);
+  font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  padding:9px 16px; border-radius:100px; margin-bottom:32px;
+}
+.hero h1{font-size:76px; line-height:1; letter-spacing:-.035em; max-width:16ch}
+.hero h1 em{font-style:normal; color:var(--accent)}
+@media (max-width:768px){ .hero h1{font-size:40px} .hero{padding-top:56px; padding-bottom:64px} }
+.hero .sub{margin-top:28px; font-size:19px; max-width:64ch}
+.watch{display:flex; align-items:center; gap:9px; margin-top:48px}
+.watch .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); flex:none}
+.loom{
+  margin-top:16px; aspect-ratio:16/9; width:100%; background:#fff;
+  border:1px solid var(--border); border-radius:var(--radius); display:flex;
+  align-items:center; justify-content:center; text-align:center; padding:24px;
+  color:var(--muted); position:relative;
+}
+/* soft accent glow beneath the embed, as the reference does */
+.loom::after{
+  content:""; position:absolute; left:6%; right:6%; bottom:-26px; height:44px;
+  background:var(--accent); filter:blur(38px); opacity:.20; z-index:-1; border-radius:50%;
+}
+.loom p{font-size:15px; max-width:40ch}
+.meta{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:64px;
+  padding-top:28px; border-top:1px solid var(--border);
+}
+.meta div span{display:block}
+.meta .k{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:600}
+.meta .v{margin-top:6px; color:var(--ink); font-weight:650; font-size:16px}
+@media (max-width:768px){ .meta{grid-template-columns:1fr; gap:18px} }
+
+/* ── cards + grids ─────────────────────────────────────────────── */
+.grid{display:grid; gap:24px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:768px){ .g2,.g3,.g4{grid-template-columns:1fr} }
+
+.card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:32px}
+.card.accent{border-color:var(--accent); border-width:2px; padding:31px}
+.badge{
+  display:inline-block; background:var(--accent); color:#fff; font-size:11px; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; padding:5px 11px; border-radius:100px; margin-bottom:14px;
+}
+.stat b{display:block; color:var(--accent); font-size:52px; font-weight:800; letter-spacing:-.04em; line-height:1}
+.stat span{display:block; margin-top:12px; font-size:12px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); font-weight:600; line-height:1.5}
+@media (max-width:768px){ .stat b{font-size:42px} }
+
+.callout{
+  border-left:3px solid var(--accent); background:var(--accent-soft);
+  border-radius:0 var(--radius) var(--radius) 0; padding:28px 32px; margin-top:40px;
+}
+.callout p{max-width:var(--prose)}
+
+.split{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start}
+@media (max-width:900px){ .split{grid-template-columns:1fr; gap:28px} }
+.split p + p{margin-top:18px}
+.split > div > p{max-width:var(--prose)}
+.split > div > h4 + p{max-width:var(--prose)}
+
+.list{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+.list li{position:relative; padding-left:22px; font-size:17px; line-height:1.55}
+.list li::before{content:""; position:absolute; left:0; top:.62em; width:6px; height:6px; border-radius:50%; background:var(--accent)}
+.card h4 + .list{margin-top:18px}
+
+.dotted{display:flex; align-items:flex-start; gap:11px}
+.dotted .d{width:8px; height:8px; border-radius:50%; background:var(--accent); flex:none; margin-top:9px}
+
+/* ── vertical timeline ─────────────────────────────────────────── */
+.tl{position:relative; padding-left:34px}
+.tl::before{content:""; position:absolute; left:5px; top:8px; bottom:8px; width:1px; background:var(--border)}
+.phase{position:relative; padding-bottom:44px}
+.phase:last-child{padding-bottom:0}
+.phase::before{content:""; position:absolute; left:-34px; top:6px; width:11px; height:11px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--sec-bg)}
+.phase h4{margin-top:6px; font-size:22px; font-weight:800; letter-spacing:-.02em}
+.phase .list{margin-top:16px}
+
+/* ── ad grid ───────────────────────────────────────────────────── */
+.ads{display:grid; gap:24px; grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){ .ads{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:640px){ .ads{grid-template-columns:1fr} }
+.ad{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column}
+.shot{aspect-ratio:4/5; background:#EDEDF4; border-bottom:1px solid var(--border); position:relative}
+/* contain, never cover: the set mixes 9:16 video with a 1:1 still, and
+   cropping an ad to fit a grid misrepresents the creative on display. */
+.shot img,.shot video{width:100%; height:100%; object-fit:contain; display:block; background:#EDEDF4}
+.shot .ph{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#9A9AAE; font-size:13px; text-align:center; padding:18px}
+.ad-body{padding:22px; display:flex; flex-direction:column; gap:16px; flex:1}
+.ad-cap{font-size:16px; flex:1; line-height:1.55}
+.ad a{
+  margin-top:auto;
+  display:inline-flex; align-items:center; justify-content:center; gap:7px; text-decoration:none;
+  font-weight:650; font-size:15px; color:var(--accent); border:1px solid var(--accent-line);
+  border-radius:9px; padding:11px 14px;
+}
+.ad a:hover{background:var(--accent-soft)}
+
+/* ── pricing ───────────────────────────────────────────────────── */
+.price-k{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:600; margin-top:22px}
+.price-k:first-of-type{margin-top:18px}
+.price{margin-top:8px; font-size:17px; color:var(--ink); font-weight:650}
+.price b{font-size:34px; font-weight:800; letter-spacing:-.03em; display:inline-block; vertical-align:-2px}
+.price .per{font-size:16px; color:var(--muted); font-weight:600}
+/* ANCHOR PRICES — off by default. The brief asked for these to be confirmed
+   before publish, so the markup is written and dormant. To switch them on,
+   change `none` to `inline` on the next line. Nothing else needs touching. */
+.anchor{display:none; color:var(--muted); font-weight:500; font-size:22px; margin-right:10px; text-decoration:line-through}
+.spend{margin-top:20px; padding:14px 16px; background:var(--ground-alt); border-radius:10px; font-size:16px}
+.card.accent .spend{background:var(--accent-soft)}
+.plan-sum{margin-top:20px; font-size:17px}
+.target{
+  margin-top:22px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:17px; font-weight:700; color:var(--ink);
+}
+.payback{margin-top:24px}
+.payback p{max-width:var(--prose)}
+.payback p + p{margin-top:16px}
+
+/* ── close + footer ────────────────────────────────────────────── */
+.close h2{font-size:40px; max-width:20ch}
+@media (max-width:768px){ .close h2{font-size:28px} }
+.btn{
+  display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:#fff;
+  text-decoration:none; font-weight:700; font-size:17px; padding:16px 30px; border-radius:10px; margin-top:32px;
+}
+.btn:hover{opacity:.92}
+footer{padding:56px var(--gutter); text-align:center; border-top:1px solid var(--border)}
+footer .marks{justify-content:center; margin-bottom:16px}
+footer .fine{font-size:14px; color:var(--muted)}
+
+/* ── print ─────────────────────────────────────────────────────── */
+@media print{
+  .hdr,.loom{display:none !important}
+  body{font-size:11pt}
+  section{padding:16pt 0; background:#fff !important; break-inside:avoid}
+  .card,.ad,.callout,.phase{break-inside:avoid}
+  .ads{grid-template-columns:repeat(2,1fr)}
+  .btn{border:1px solid #000; color:#000; background:none}
+  a[href^="http"]::after{content:" (" attr(href) ")"; font-size:8pt; color:#666; word-break:break-all}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <div class="marks">
+      <span>zenith digital</span>
+      <span class="x">&times;</span>
+      <img class="logo-slot" src="/p/assets/touch-of-hope-logo.webp" alt="Touch of Hope Home Care Services" width="345" height="120">
+    </div>
+    <nav>
+      <a href="#s01">Opportunity</a>
+      <a href="#s02">Strategy</a>
+      <a href="#s06">Examples</a>
+      <a href="#s08">Scope</a>
+      <a href="#s09">Pricing</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">Home care growth proposal &middot; September 2026</span>
+    <h1>Turn Indianapolis searches into <em>signed clients.</em></h1>
+    <p class="sub">Touch of Hope has 13 families in care and a business model that works. What's missing is a system that produces the next five on purpose instead of by luck. Here's the plan - what it costs, what it returns, and what has to be true for it to work.</p>
+
+    <div class="watch"><span class="dot"></span><span class="cap">Watch the walkthrough &middot; ~6 min</span></div>
+    <!-- SWAP 1: replace this whole div with the Loom iframe. -->
+    <div class="loom"><p><b>Loom embed goes here.</b><br>Replace this box with the iframe from Loom's Share &rarr; Embed.</p></div>
+
+    <div class="meta">
+      <div><span class="k">Prepared for</span><span class="v">Traci &middot; Touch of Hope</span></div>
+      <div><span class="k">Prepared by</span><span class="v">Zenith Digital</span></div>
+      <div><span class="k">Channels</span><span class="v">Google &middot; Meta &middot; SEO &middot; GEO</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 01 ══════════ -->
+<section class="alt" id="s01">
+  <div class="wrap">
+    <div class="snum"><b>01</b><h2>The opportunity</h2></div>
+    <p class="intro">Every week, families across Indianapolis search for someone to care for their mother. They call whoever shows up first and answers the phone. Right now Touch of Hope isn't reliably in that moment - and the agencies that are aren't spending much to hold it.</p>
+
+    <div class="grid g4">
+      <div class="card stat"><b>13</b><span>Families in care today</span></div>
+      <div class="card stat"><b>4&ndash;5</b><span>New clients by year end</span></div>
+      <div class="card stat"><b>$6.30</b><span>Cost per click, home care search (up 32% YoY)</span></div>
+      <div class="card stat"><b>1.1%</b><span>Of revenue the average home care agency spends on marketing</span></div>
+    </div>
+
+    <div class="callout">
+      <p><strong>The headline play:</strong> home care is one of the last local service categories where the ad auction isn't crowded. The average agency in this space spends 1.1% of revenue on marketing while the benchmark for a business your size is 5&ndash;8%. That gap is the opportunity - and it closes a little more every year.</p>
+    </div>
+
+    <h3 style="margin-top:56px">What we're working with</h3>
+    <div class="split">
+      <div>
+        <p>Your economics are the thing that makes this work. At roughly $1,425 a month per family and about half of that left after caregiver costs, every new client is worth around <strong>$700 a month in gross profit</strong> - and home care clients typically stay 8 to 12 months. That means a client is worth somewhere between $5,600 and $8,400 to you over their time in care.</p>
+        <p>Industry cost to acquire one through paid search runs $970 to $2,000. So the maths works with room to spare, provided two things hold: the phone gets answered fast, and there are caregivers ready to serve the new families. Both are covered further down.</p>
+      </div>
+      <div class="card">
+        <h4 class="cap" style="color:var(--accent)">Assets in play</h4>
+        <ul class="list">
+          <li>Thirteen families already in care - a review base most competitors don't have</li>
+          <li>A Google Business Profile that can rank in the local map pack with work</li>
+          <li>A market where nobody is doing AI-search optimisation yet</li>
+          <li>Adult daughters aged 45&ndash;65 make this decision, and they're reachable on Meta</li>
+          <li>Caregiver recruitment and client acquisition run on the same ad account</li>
+          <li>Word of mouth already working - paid just widens the top of it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 02 ══════════ -->
+<section id="s02">
+  <div class="wrap">
+    <div class="snum"><b>02</b><h2>The strategy &mdash; four pillars</h2></div>
+    <p class="intro">Build the foundation first, then turn on the traffic. The foundation is what makes every dollar of ad spend go further - because right now a click has nowhere good to land.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <p class="eyebrow">Pillar 1 &middot; Foundations</p>
+        <h4>Convert what you already get</h4>
+        <p style="margin-top:12px">A landing page built for one job, call tracking on every lead, and a Google Business Profile rebuilt properly. This work pays for itself before a single ad runs.</p>
+      </div>
+      <div class="card accent">
+        <span class="badge">&#9733; The big play</span>
+        <p class="eyebrow">Pillar 2 &middot; Acquisition</p>
+        <h4>Paid search &amp; social</h4>
+        <p style="margin-top:12px">Google Search for the families actively looking right now, Meta for the daughter who's started worrying but hasn't searched yet. This is what delivers clients by December.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Pillar 3 &middot; Always-on</p>
+        <h4>Local SEO &amp; reviews</h4>
+        <p style="margin-top:12px">Map pack rankings and a review engine that runs on a schedule. Slower to arrive, but it doesn't stop when the ads stop.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Pillar 4 &middot; The next search bar</p>
+        <h4>GEO / AI optimisation</h4>
+        <p style="margin-top:12px">Structured so ChatGPT, Perplexity and Google's AI Overviews name Touch of Hope when someone asks them for home care in Indianapolis. Nobody in your market is doing this yet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 03 ══════════ -->
+<section class="alt" id="s03">
+  <div class="wrap">
+    <div class="snum"><b>03</b><h2>The campaigns we build</h2></div>
+    <p class="intro">Each one targets a different person at a different moment. Set up once, optimised continuously, running every day.</p>
+    <div class="grid g2" id="campaigns"></div>
+  </div>
+</section>
+
+<!-- ══════════ 04 ══════════ -->
+<section id="s04">
+  <div class="wrap">
+    <div class="snum"><b>04</b><h2>The big play &mdash; owning &ldquo;home care Indianapolis&rdquo;</h2></div>
+    <p class="intro">The whole programme comes down to one thing: being the agency a family finds and calls at the moment they decide they need help. Here's the mechanism, start to finish.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <p class="eyebrow">Step 1 &middot; Reach</p>
+        <h4>Ads that name the fear</h4>
+        <p style="margin-top:12px">Not "quality home care since 2015". Ads written around what she's actually feeling: "Mom shouldn't be alone all day." "You can't do this by yourself anymore." Copy that names the situation converts several times better than copy that lists services.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Step 2 &middot; Land</p>
+        <h4>A page built for one job</h4>
+        <p style="margin-top:12px">Ads point at a dedicated landing page, never the homepage. Phone number above the fold, on every scroll position, tap-to-call on mobile. Real caregiver photos, real reviews, no stock imagery. One short form for people who won't call.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Step 3 &middot; Convert</p>
+        <h4>The phone call</h4>
+        <p style="margin-top:12px">Phone leads convert at 41%. Web form leads convert at 5%. Everything in the funnel is built to produce a ringing phone, not a form fill - which is also why the next section matters as much as this one.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:56px">Who does what</h3>
+    <div class="grid g2">
+      <div class="card">
+        <h4 class="cap" style="color:var(--accent)">Zenith delivers</h4>
+        <ul class="list">
+          <li><strong>Campaign build:</strong> account structure, keywords, negatives, audiences, bidding across Google and Meta</li>
+          <li><strong>Ad creative:</strong> all copy, all images, multiple variations per audience, refreshed as things fatigue</li>
+          <li><strong>Landing page:</strong> built, hosted, tested, iterated on real conversion data</li>
+          <li><strong>Tracking:</strong> call tracking, conversion tracking, so every lead is attributed rather than guessed at</li>
+          <li><strong>GBP &amp; local SEO:</strong> profile rebuild, service pages, citations, review system</li>
+          <li><strong>Reporting:</strong> a monthly report and a strategy call, in plain language</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 class="cap" style="color:var(--accent)">Touch of Hope delivers</h4>
+        <ul class="list">
+          <li><strong>Answer the phone:</strong> within 60 seconds, seven days - this is the single biggest variable</li>
+          <li><strong>Photos:</strong> real caregivers and real staff, so the ads don't look like everyone else's</li>
+          <li><strong>Caregiver capacity:</strong> people ready to serve the new families, or tell us early so we shift budget to recruitment</li>
+          <li><strong>Lead outcomes:</strong> tell us which leads signed, so we can optimise toward what actually converts, not just what calls</li>
+          <li><strong>Review permission:</strong> an okay to text past families asking for a Google review</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 05 ══════════ -->
+<section class="alt" id="s05">
+  <div class="wrap">
+    <div class="snum"><b>05</b><h2>The GEO layer &mdash; getting cited by AI</h2></div>
+    <p class="intro">A growing share of "who should I hire" research now happens inside ChatGPT, Perplexity and Google's AI Overviews rather than on a results page. Those systems don't rank ten blue links - they name two or three businesses. Nobody in Indianapolis home care is optimising for this yet, which is exactly why it's worth doing now.</p>
+
+    <div class="split">
+      <div>
+        <p>The work is unglamorous and mostly technical: structured data that tells a machine what Touch of Hope is, where it operates and what it does; content written to answer the questions families actually ask, in a format that's easy to quote; consistent business information everywhere it appears online; and reviews, which these systems read and summarise.</p>
+        <p>The honest framing: this is the compounding layer, not the December layer. It won't deliver clients this quarter. It's what makes you the default answer in 2027 while your competitors are still buying clicks.</p>
+      </div>
+      <div class="card">
+        <h4 class="cap" style="color:var(--accent)">What we build</h4>
+        <ul class="list">
+          <li><strong>Schema markup</strong> - HomeHealthCareService, service areas, hours, credentials</li>
+          <li><strong>Answer-first content</strong> - the real questions: what does home care cost in Indianapolis, when is it time, Medicare vs private pay</li>
+          <li><strong>Entity consistency</strong> - name, address, phone identical across every directory that matters</li>
+          <li><strong>Citation-friendly formatting</strong> - clear structure and specific claims a model can lift cleanly</li>
+          <li><strong>Review sentiment</strong> - these systems read and summarise reviews, so the review work feeds this directly</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 06 ══════════ -->
+<section id="s06">
+  <div class="wrap">
+    <div class="snum"><b>06</b><h2>What good looks like</h2></div>
+    <p class="intro">Examples of home care advertising that's working right now. Worth two minutes - it makes the budget conversation concrete instead of abstract. Tap any video to play it.</p>
+    <div class="ads" id="ad-grid"></div>
+  </div>
+</section>
+
+<!-- ══════════ 07 ══════════ -->
+<section class="alt" id="s07">
+  <div class="wrap">
+    <div class="snum"><b>07</b><h2>What has to be true</h2></div>
+    <div class="grid g3">
+      <div class="card">
+        <p class="eyebrow">1</p>
+        <h4>The phone gets answered</h4>
+        <p style="margin-top:12px">Phone leads convert at 41%, web forms at 5%, and 42% of calls to senior care businesses go to voicemail. A lead we paid $115 for that hits voicemail on a Saturday is money burned. We'll ask for a 60-second answer target, seven days a week - it's the highest-leverage change in the whole programme and it costs nothing.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">2</p>
+        <h4>There are caregivers ready</h4>
+        <p style="margin-top:12px">Five new families need people to serve them. If you're short, we move part of the Meta budget into recruitment - but we need to know in October, not in December.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">3</p>
+        <h4>SEO gets the right clock</h4>
+        <p style="margin-top:12px">The clients you sign by December come from paid ads. SEO and GEO are the month 4&ndash;12 layer - they're what makes your cost per client fall over time. We're saying this upfront so nobody judges the wrong channel on the wrong timeline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 08 ══════════ -->
+<section id="s08">
+  <div class="wrap">
+    <div class="snum"><b>08</b><h2>Scope of work &amp; timeline</h2></div>
+    <p class="intro">Three phases over 90 days. Campaigns go live in week three so there's time to produce signed clients before year end.</p>
+
+    <div class="tl">
+      <div class="phase">
+        <p class="eyebrow">Phase 1 &middot; Weeks 1&ndash;2 (included in setup)</p>
+        <h4>Foundations</h4>
+        <ul class="list">
+          <li>Landing page designed, built and live</li>
+          <li>Call tracking + conversion tracking installed and verified</li>
+          <li>Google Business Profile rebuilt: categories, service areas, photos, Q&amp;A</li>
+          <li>Google Ads and Meta accounts structured, audiences and keywords built</li>
+          <li>Ad creative produced: copy and images for every campaign</li>
+          <li>Review engine built and first batch of past families contacted</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <p class="eyebrow">Phase 2 &middot; Weeks 3&ndash;8</p>
+        <h4>Live &amp; learning</h4>
+        <ul class="list">
+          <li>Campaigns live across Google Search and Meta</li>
+          <li>Weekly optimisation: search terms, negatives, bids, audiences</li>
+          <li>Creative iteration against real performance data</li>
+          <li>Landing page tested and improved on actual conversion data</li>
+          <li>Local SEO foundation: service pages, suburb pages, citations</li>
+          <li>First signed clients expected from week five onward</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <p class="eyebrow">Phase 3 &middot; Weeks 9&ndash;14+</p>
+        <h4>Scale &amp; compound</h4>
+        <ul class="list">
+          <li>Budget shifted toward whatever is producing signed clients</li>
+          <li>GEO layer: schema, answer-first content, entity consistency</li>
+          <li>Review engine running on schedule, map pack position climbing</li>
+          <li>Cost per signed client trending down as organic starts contributing</li>
+          <li>Q1 plan built off real data instead of benchmarks</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 09 ══════════ -->
+<section class="alt" id="s09">
+  <div class="wrap">
+    <div class="snum"><b>09</b><h2>Investment</h2></div>
+    <p class="intro">A one-off setup that includes the first month of active management, then a single monthly fee that covers everything ongoing. Ad spend is billed direct to your card by Google and Meta - it never passes through us, so you see every dollar.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="font-size:22px">Foundation</h4>
+        <p class="price-k">One-off &middot; month 1 included</p>
+        <p class="price"><span class="anchor">$1,500</span><b>$1,000</b> &nbsp;Setup &amp; launch</p>
+        <p class="price-k">From month 2 onwards</p>
+        <p class="price"><span class="anchor">$1,500</span><b>$1,000</b> <span class="per">/mo</span> &nbsp;Management</p>
+        <p class="spend">Recommended ad spend: $1,750 Google + $750 Meta = <strong>$2,500/mo</strong></p>
+        <p class="plan-sum">The paid-first version. Everything needed to produce signed clients before year end, without the long-horizon organic work.</p>
+        <ul class="list" style="margin-top:20px">
+          <li>Landing page built, hosted and optimised</li>
+          <li>Google Search campaigns - high-intent and condition-based</li>
+          <li>Meta retargeting for visitors who didn't call</li>
+          <li>Google Business Profile rebuild</li>
+          <li>Call tracking and conversion tracking</li>
+          <li>Weekly campaign optimisation</li>
+          <li>Monthly report + 30-minute strategy call</li>
+        </ul>
+        <p class="target">Target: 3&ndash;4 new clients by December 31</p>
+      </div>
+
+      <div class="card accent">
+        <span class="badge">&#9733; Recommended</span>
+        <h4 style="font-size:22px">Growth</h4>
+        <p class="price-k">One-off &middot; month 1 included</p>
+        <p class="price"><span class="anchor">$2,250</span><b>$1,500</b> &nbsp;Setup &amp; launch</p>
+        <p class="price-k">From month 2 onwards</p>
+        <p class="price"><span class="anchor">$2,250</span><b>$1,500</b> <span class="per">/mo</span> &nbsp;Management</p>
+        <p class="spend">Recommended ad spend: $1,750 Google + $750 Meta = <strong>$2,500/mo</strong></p>
+        <p class="plan-sum">Everything in Foundation, plus the layers that keep working after the ads stop.</p>
+        <ul class="list" style="margin-top:20px">
+          <li>Everything in Foundation</li>
+          <li><strong>Full Meta campaigns</strong> - adult-daughter prospecting, not just retargeting</li>
+          <li><strong>Caregiver recruitment campaigns</strong> on the same account</li>
+          <li><strong>Full local SEO</strong> - service pages, suburb pages, citations, map pack work</li>
+          <li><strong>Review engine</strong> - automated, compliant, running on a schedule</li>
+          <li><strong>GEO / AI optimisation</strong> - schema, answer-first content, entity consistency</li>
+          <li>Bi-weekly optimisation instead of monthly</li>
+        </ul>
+        <p class="target">Target: 5&ndash;6 new clients by December 31, plus a compounding organic channel from month four</p>
+      </div>
+    </div>
+
+    <div class="card payback" style="max-width:none">
+      <h4 class="cap" style="color:var(--accent)">The payback</h4>
+      <p style="margin-top:14px">Growth over four months is about $16,000 all in, including ad spend. Five to six new clients at roughly $700 a month in gross profit, held for the usual 8&ndash;12 months, is <strong>$35,000&ndash;42,000</strong>. Call it a bit over 2x - and you keep the landing page, the tracking, the reviews and the rankings when the ads stop. That part doesn't churn.</p>
+      <p>No lock-in. Cancel any time from month two with 30 days' notice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 10 ══════════ -->
+<section id="s10">
+  <div class="wrap">
+    <div class="snum"><b>10</b><h2>What success looks like</h2></div>
+    <p class="intro">Targets for the first twelve months. Deliberately conservative - these are the numbers we'd expect to beat, not the ones we're hoping for.</p>
+    <div class="grid g3">
+      <div class="card stat"><b>5&ndash;6</b><span>New clients signed by December 31</span></div>
+      <div class="card stat"><b>$1,200</b><span>Average cost per signed client, trending down from month three</span></div>
+      <div class="card stat"><b>40+</b><span>Google reviews by end of year one, from a compliant always-on engine</span></div>
+      <div class="card stat"><b>Top 3</b><span>Map pack position for core Indianapolis home care searches</span></div>
+      <div class="card stat"><b>2x+</b><span>Return on total marketing investment inside the first year</span></div>
+      <div class="card stat"><b>90 sec</b><span>Average speed to answer an inbound lead - the metric that drives all the others</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CLOSE ══════════ -->
+<section class="close">
+  <div class="wrap">
+    <h2>Pick a plan and we can have campaigns live inside two weeks.</h2>
+    <p style="margin-top:16px; font-size:19px">Happy to jump on a call and walk through any of it.</p>
+    <!-- SWAP 5: booking link. -->
+    <a class="btn" href="#REPLACE-WITH-BOOKING-LINK">Book a call &rarr;</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="marks">
+    <span>zenith digital</span>
+    <span class="x">&times;</span>
+    <img class="logo-slot" src="/p/assets/touch-of-hope-logo.webp" alt="Touch of Hope Home Care Services" width="345" height="120">
+  </div>
+  <p class="fine">Home Care Growth Proposal &middot; September 2026 &middot; hello@thezenithdigital.com</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   SWAP 3 + 4: the ad examples. Data-driven — adding a sixth is one
+   object here and nothing else.
+     type    "video" or "image"
+     src     local file. fbcdn URLs are signed and expire within days,
+             so the creative is downloaded and self-hosted, not hotlinked.
+     poster  video only: the still shown before play
+     caption one line on what the ad does well. Empty = not rendered,
+             so a card without one shows creative + button and no gap.
+     id      Meta Ad Library id, used to build the outbound link
+   ═══════════════════════════════════════════════════════════════════ */
+var AD_EXAMPLES = [
+  { id: "1706364970515655", type: "video", src: "/p/assets/ad-1.mp4",  poster: "/p/assets/ad-1-poster.webp", caption: "" },
+  { id: "2918462545025755", type: "video", src: "/p/assets/ad-2.mp4",  poster: "/p/assets/ad-2-poster.webp", caption: "" },
+  { id: "742312663588179",  type: "image", src: "/p/assets/ad-3.webp", caption: "" },
+  { id: "25513858458208171",type: "image", src: "/p/assets/ad-4.webp", caption: "" },
+  { id: "618006207558773",  type: "video", src: "/p/assets/ad-5.mp4",  poster: "/p/assets/ad-5-poster.webp", caption: "" }
+];
+
+/* Section 03 campaign cards, same principle: data in one place. */
+var CAMPAIGNS = [
+  ["Google Search &mdash; High Intent","The families searching right now: “home care Indianapolis”, “in home senior care near me”, “elderly care [suburb]”. Highest cost per click, highest close rate, fastest to produce a signed client.","Targets &middot; Active searchers, 20-mile radius"],
+  ["Google Search &mdash; Condition &amp; Situation","“Dementia care at home”, “after hospital discharge care”, “respite care Indianapolis”. Lower competition, more specific need, cheaper clicks.","Targets &middot; Specific care situations"],
+  ["Meta &mdash; The Adult Daughter","Women 45&ndash;65 in the metro who are researching care for a parent. She's the decision maker and she's usually looking months before anyone searches Google.","Targets &middot; Family decision makers"],
+  ["Meta &mdash; Retargeting","Anyone who visited the site and didn't call. Home care is a considered decision made across weeks, not minutes - this is the cheapest conversion in the account.","Targets &middot; Past website visitors"],
+  ["Meta &mdash; Caregiver Recruitment","Five new families need people to serve them. Staffing is the real bottleneck in home care, so recruitment runs on the same account and the same budget line.","Targets &middot; CNAs &amp; HHAs, Indianapolis metro"],
+  ["Google Business Profile &amp; Map Pack","The three-result box above the organic results. Rebuilt profile, service areas, categories, photos, Q&amp;A, weekly posts. This traffic is free once you rank.","Targets &middot; “Near me” searches"]
+];
+
+(function () {
+  var cg = document.getElementById("campaigns");
+  if (cg) {
+    CAMPAIGNS.forEach(function (c) {
+      var el = document.createElement("div");
+      el.className = "card";
+      el.innerHTML =
+        '<div class="dotted"><span class="d"></span><h4>' + c[0] + "</h4></div>" +
+        '<p style="margin-top:12px">' + c[1] + "</p>" +
+        '<p class="cap" style="margin-top:18px">' + c[2] + "</p>";
+      cg.appendChild(el);
+    });
+  }
+
+  var grid = document.getElementById("ad-grid");
+  if (grid) {
+    AD_EXAMPLES.forEach(function (ad, i) {
+      var card = document.createElement("div");
+      card.className = "ad";
+
+      var shot = document.createElement("div");
+      shot.className = "shot";
+      if (ad.type === "video" && ad.src) {
+        // preload="none": five ads would otherwise pull ~1.8MB of video on
+        // load. The poster is a real frame, so a card is never an empty box.
+        var v = document.createElement("video");
+        v.src = ad.src; v.poster = ad.poster || "";
+        v.controls = true; v.preload = "none"; v.playsInline = true;
+        v.setAttribute("playsinline", "");
+        shot.appendChild(v);
+      } else if (ad.src) {
+        var img = document.createElement("img");
+        img.src = ad.src;
+        img.alt = "Home care advertisement example " + (i + 1);
+        img.loading = "lazy";
+        shot.appendChild(img);
+      } else {
+        var ph = document.createElement("div");
+        ph.className = "ph";
+        ph.textContent = "Creative " + (i + 1) + " · 4:5";
+        shot.appendChild(ph);
+      }
+
+      var body = document.createElement("div");
+      body.className = "ad-body";
+
+      // Only rendered once there is a caption. An empty one would otherwise
+      // leave a blank block, and the placeholder text was showing on the page.
+      var cap = null;
+      if (ad.caption) {
+        cap = document.createElement("p");
+        cap.className = "ad-cap";
+        cap.textContent = ad.caption;
+      }
+
+      // Meta sends X-Frame-Options, so the Ad Library cannot be iframed.
+      // Self-hosted creative plus an outbound link is the only pattern.
+      var link = document.createElement("a");
+      link.href = "https://www.facebook.com/ads/library/?id=" + ad.id;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "View in Meta Ad Library →";
+
+      if (cap) body.appendChild(cap);
+      body.appendChild(link);
+      card.appendChild(shot); card.appendChild(body);
+      grid.appendChild(card);
+    });
+  }
+
+  // Header hairline appears once the page has moved.
+  var hdr = document.getElementById("hdr");
+  var onScroll = function () { hdr.classList.toggle("stuck", window.scrollY > 8); };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Nav active state, so the header tracks position while recording.
+  var links = Array.prototype.slice.call(document.querySelectorAll(".hdr nav a"));
+  if (links.length && "IntersectionObserver" in window) {
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute("href").slice(1)] = a; });
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var a = byId[e.target.id];
+        if (!a) return;
+        links.forEach(function (l) { l.classList.remove("on"); });
+        a.classList.add("on");
+      });
+    }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+    ["s01","s02","s06","s08","s09"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>

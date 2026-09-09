@@ -130,6 +130,27 @@ h4{font-size:18px; font-weight:750}
   background:var(--accent); filter:blur(38px); opacity:.20; z-index:-1; border-radius:50%;
 }
 .loom p{font-size:15px; max-width:40ch}
+.loom iframe{width:100%; height:100%; border:0; border-radius:var(--radius); display:block}
+.v-play{
+  position:absolute; inset:0; width:100%; height:100%; padding:0; margin:0; border:0; cursor:pointer;
+  background:var(--ink); border-radius:var(--radius); overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.v-thumb{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+/* Shown only while no thumbnail has loaded, so the panel is never an empty
+   black box if YouTube has not generated one yet. */
+.v-fallback{
+  position:absolute; left:0; right:0; bottom:22px; text-align:center; color:rgba(255,255,255,.72);
+  font-size:13px; letter-spacing:.06em; text-transform:uppercase; font-weight:600; padding:0 24px;
+}
+.v-thumb:not([hidden]) ~ .v-fallback{display:none}
+.v-btn{
+  position:relative; width:76px; height:76px; border-radius:50%; background:var(--accent); color:#fff;
+  display:flex; align-items:center; justify-content:center; padding-left:4px;
+  box-shadow:0 8px 30px rgba(0,0,0,.28); transition:transform .18s;
+}
+.v-play:hover .v-btn{transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){ .v-play:hover .v-btn{transform:none} }
 .meta{
   display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:64px;
   padding-top:28px; border-top:1px solid var(--border);
@@ -276,8 +297,15 @@ footer .fine{font-size:14px; color:var(--muted)}
     <p class="sub">Touch of Hope has 13 families in care and a business model that works. What's missing is a system that produces the next five on purpose instead of by luck. Here's the plan - what it costs, what it returns, and what has to be true for it to work.</p>
 
     <div class="watch"><span class="dot"></span><span class="cap">Watch the walkthrough &middot; ~6 min</span></div>
-    <!-- SWAP 1: replace this whole div with the Loom iframe. -->
-    <div class="loom"><p><b>Loom embed goes here.</b><br>Replace this box with the iframe from Loom's Share &rarr; Embed.</p></div>
+    <div class="loom" id="video" data-yt="TVunYWnRi_4">
+      <button type="button" class="v-play" aria-label="Play the walkthrough">
+        <img class="v-thumb" alt="" hidden>
+        <span class="v-fallback">Traci &middot; TOH Marketing Proposal</span>
+        <span class="v-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+        </span>
+      </button>
+    </div>
 
     <div class="meta">
       <div><span class="k">Prepared for</span><span class="v">Traci &middot; Touch of Hope</span></div>
@@ -711,6 +739,42 @@ var CAMPAIGNS = [
       body.appendChild(link);
       card.appendChild(shot); card.appendChild(body);
       grid.appendChild(card);
+    });
+  }
+
+  /* Video facade.
+     The player is NOT loaded on page load: a YouTube iframe pulls roughly a
+     megabyte of script and sets cookies before anyone has asked to watch
+     anything, on a page that otherwise weighs about 94KB. The poster is tried
+     at runtime rather than downloaded into the repo because YouTube had not
+     generated one at build time; if it still 404s, the designed panel behind
+     it stands in. Click swaps in the real player, on the -nocookie domain. */
+  var vw = document.getElementById("video");
+  if (vw) {
+    var id = vw.getAttribute("data-yt");
+    var thumb = vw.querySelector(".v-thumb");
+    var sizes = ["maxresdefault", "hqdefault", "mqdefault"];
+    var si = 0;
+    var tryNext = function () {
+      if (si >= sizes.length) { thumb.remove(); return; }
+      thumb.src = "https://i.ytimg.com/vi/" + id + "/" + sizes[si++] + ".jpg";
+    };
+    thumb.addEventListener("load", function () {
+      // YouTube serves a 120x90 grey placeholder instead of a 404 for missing
+      // sizes, so a "successful" load still has to be size-checked.
+      if (thumb.naturalWidth > 200) thumb.hidden = false; else tryNext();
+    });
+    thumb.addEventListener("error", tryNext);
+    tryNext();
+
+    vw.querySelector(".v-play").addEventListener("click", function () {
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1";
+      f.title = "Growth plan walkthrough";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture";
+      f.allowFullscreen = true;
+      vw.innerHTML = "";
+      vw.appendChild(f);
     });
   }
 

@@ -229,11 +229,9 @@ h4{font-size:18px; font-weight:750}
 /* ── close + footer ────────────────────────────────────────────── */
 .close h2{font-size:40px; max-width:20ch}
 @media (max-width:768px){ .close h2{font-size:28px} }
-.btn{
-  display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:#fff;
-  text-decoration:none; font-weight:700; font-size:17px; padding:16px 30px; border-radius:10px; margin-top:32px;
-}
-.btn:hover{opacity:.92}
+.contact{margin-top:28px; font-size:22px; font-weight:700; letter-spacing:-.02em}
+.contact a{color:var(--accent); text-decoration:none; border-bottom:2px solid var(--accent-line); padding-bottom:2px}
+.contact a:hover{border-bottom-color:var(--accent)}
 footer{padding:56px var(--gutter); text-align:center; border-top:1px solid var(--border)}
 footer .marks{justify-content:center; margin-bottom:16px}
 footer .fine{font-size:14px; color:var(--muted)}
@@ -245,7 +243,6 @@ footer .fine{font-size:14px; color:var(--muted)}
   section{padding:16pt 0; background:#fff !important; break-inside:avoid}
   .card,.ad,.callout,.phase{break-inside:avoid}
   .ads{grid-template-columns:repeat(2,1fr)}
-  .btn{border:1px solid #000; color:#000; background:none}
   a[href^="http"]::after{content:" (" attr(href) ")"; font-size:8pt; color:#666; word-break:break-all}
 }
 </style>
@@ -601,9 +598,8 @@ footer .fine{font-size:14px; color:var(--muted)}
 <section class="close">
   <div class="wrap">
     <h2>Pick a plan and we can have campaigns live inside two weeks.</h2>
-    <p style="margin-top:16px; font-size:19px">Happy to jump on a call and walk through any of it.</p>
-    <!-- SWAP 5: booking link. -->
-    <a class="btn" href="#REPLACE-WITH-BOOKING-LINK">Book a call &rarr;</a>
+    <p style="margin-top:16px; font-size:19px">Happy to jump on a call and walk through any of it. Just reply and we'll get it booked in.</p>
+    <p class="contact"><a href="mailto:hello@thezenithdigital.com">hello@thezenithdigital.com</a></p>
   </div>
 </section>
 

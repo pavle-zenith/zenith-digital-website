@@ -651,6 +651,18 @@ export const wixClassic: MigrationGuideContent = {
         href: "/services/wix-studio-website-design",
         desc: "Not carrying anything across? This is what a Studio build looks like starting from a blank canvas.",
       },
+      {
+        label: "Wix vs Wix Studio",
+        icon: "split",
+        href: "/blog/wix-vs-wix-studio",
+        desc: "Why the Editor you're on now and Studio are two separate products rather than two tiers of one.",
+      },
+      {
+        label: "What a Wix Studio site costs",
+        icon: "receipt",
+        href: "/blog/wix-studio-pricing",
+        desc: "The Wix plan, the build fee and the ongoing bill separated out, so you can set them against your Premium renewal.",
+      },
     ],
   },
 

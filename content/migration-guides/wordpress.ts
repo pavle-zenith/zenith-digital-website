@@ -563,11 +563,13 @@ export const wordpress: MigrationGuideContent = {
     items: [
       {
         label: "Website migration",
+        icon: "transfer",
         href: "/services/website-migration",
         desc: "The hub: what a migration to Wix Studio covers, what it costs, and every platform we move sites from.",
       },
       {
         label: "Squarespace to Wix Studio",
+        logo: "/platforms/squarespace.svg",
         href: "/services/squarespace-to-wix-studio",
         desc: "What the Squarespace export actually contains, and the page types it silently leaves behind.",
       },
@@ -579,8 +581,21 @@ export const wordpress: MigrationGuideContent = {
       },
       {
         label: "Wix Studio development",
+        icon: "code",
         href: "/services/wix-studio-development",
         desc: "Custom code on Wix Studio, for the plugin functionality that has no native equivalent.",
+      },
+      {
+        label: "Is Wix Studio good for SEO?",
+        icon: "search",
+        href: "/blog/is-wix-studio-good-for-seo",
+        desc: "The straight answer for anyone who has run Yoast or Rank Math and wants to know what replaces them.",
+      },
+      {
+        label: "What a Wix Studio site costs",
+        icon: "receipt",
+        href: "/blog/wix-studio-pricing",
+        desc: "One plan against a stack of hosting, licences and plugin renewals, with both sets of numbers written out.",
       },
     ],
   },

@@ -620,6 +620,18 @@ export const aiBuilders: MigrationGuideContent = {
         href: "/services/wix-studio-development",
         desc: "Need real custom functionality on the new site? This is what development on Wix Studio involves.",
       },
+      {
+        label: "Wix vs Wix Studio",
+        icon: "split",
+        href: "/blog/wix-vs-wix-studio",
+        desc: "Wix's own AI builder and Wix Studio are not the same product. This is the point where the two part company.",
+      },
+      {
+        label: "How long a Wix Studio build takes",
+        icon: "calendar",
+        href: "/blog/wix-studio-build-time",
+        desc: "What a real build schedule looks like next to the few minutes an AI builder promises.",
+      },
     ],
   },
 

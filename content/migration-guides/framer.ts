@@ -608,6 +608,18 @@ export const framer: MigrationGuideContent = {
         href: "/services/wix-studio-website-design",
         desc: "Coming from Framer and worried the design won't hold up? This is what a Studio build involves.",
       },
+      {
+        label: "Wix Studio vs Webflow",
+        icon: "compass",
+        href: "/blog/wix-studio-vs-webflow",
+        desc: "The two platforms most Framer teams shortlist next, compared on the points that actually decide it.",
+      },
+      {
+        label: "Wix vs Wix Studio",
+        icon: "split",
+        href: "/blog/wix-vs-wix-studio",
+        desc: "If you have only ever seen the consumer Wix editor, this is why Studio is a different product with a different ceiling.",
+      },
     ],
   },
 

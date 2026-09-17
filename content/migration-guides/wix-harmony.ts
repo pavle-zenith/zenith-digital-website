@@ -533,6 +533,18 @@ export const wixHarmony: MigrationGuideContent = {
         href: "/services/wix-studio-website-design",
         desc: "Choosing between Harmony and Studio for a new build? This is what a Studio build involves.",
       },
+      {
+        label: "Wix vs Wix Studio",
+        icon: "split",
+        href: "/blog/wix-vs-wix-studio",
+        desc: "Wix ships more than one editor and calls them all Wix. This sorts out which product is which before you commit.",
+      },
+      {
+        label: "Is Wix Studio good for SEO?",
+        icon: "search",
+        href: "/blog/is-wix-studio-good-for-seo",
+        desc: "What Studio hands you at the markup and indexing level that a template editor keeps out of reach.",
+      },
     ],
   },
 

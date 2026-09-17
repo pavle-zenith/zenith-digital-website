@@ -573,6 +573,18 @@ export const html: MigrationGuideContent = {
         href: "/services/wix-studio-website-design",
         desc: "Since this is usually a redesign as well as a migration, here's what a Studio build involves.",
       },
+      {
+        label: "Wix Studio vs Webflow",
+        icon: "compass",
+        href: "/blog/wix-studio-vs-webflow",
+        desc: "The two platforms most often weighed up when a hand-built site finally needs a CMS behind it.",
+      },
+      {
+        label: "How long a Wix Studio build takes",
+        icon: "calendar",
+        href: "/blog/wix-studio-build-time",
+        desc: "Stage by stage, including where having existing markup to work from shortens the schedule.",
+      },
     ],
   },
 

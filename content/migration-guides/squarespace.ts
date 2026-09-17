@@ -589,6 +589,18 @@ export const squarespace: MigrationGuideContent = {
         href: "/services/seo-aeo-ppc",
         desc: "Protecting the rankings through a move is the floor. This is the work that grows them afterwards.",
       },
+      {
+        label: "Wix vs Wix Studio",
+        icon: "split",
+        href: "/blog/wix-vs-wix-studio",
+        desc: "Looking at Wix as the Squarespace alternative? Two products carry that name and only one of them is this.",
+      },
+      {
+        label: "What a Wix Studio site costs",
+        icon: "receipt",
+        href: "/blog/wix-studio-pricing",
+        desc: "Plan, build and running costs in full, for comparing against a Squarespace Business or Commerce renewal.",
+      },
     ],
   },
 

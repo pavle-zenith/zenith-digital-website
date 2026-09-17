@@ -605,6 +605,18 @@ export const webflow: MigrationGuideContent = {
         href: "/services/wix-studio-development",
         desc: "Coming from Webflow and worried about the ceiling? This is what custom work on Wix Studio actually looks like.",
       },
+      {
+        label: "Wix Studio vs Webflow",
+        icon: "compass",
+        href: "/blog/wix-studio-vs-webflow",
+        desc: "The same comparison from the other direction: where each platform wins before a migration is on the table at all.",
+      },
+      {
+        label: "What a Wix Studio site costs",
+        icon: "receipt",
+        href: "/blog/wix-studio-pricing",
+        desc: "Build fee, plan and running cost in full, for weighing against what Webflow seats and hosting add up to.",
+      },
     ],
   },
 

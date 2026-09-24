@@ -23,13 +23,18 @@ import {
 import type { Post, PostCard, PostSitemapEntry } from "@/sanity/lib/types";
 
 /**
- * Only published slugs get routes, matching every other templated route on the
- * site. Note the consequence: a post published in Sanity after the last build
- * needs a deploy before its URL resolves. Edits to an existing post go live on
- * the publish webhook; a brand new slug needs the build. Flip this to `true`
- * if the owner wants new posts live without a deploy.
+ * Published slugs are prerendered at build; a slug published in Sanity after
+ * the last build renders on its first request, then caches like the rest
+ * (owner decision, 24 Sep 2026, so weekly posts go live on Publish with no
+ * deploy). Unknown slugs still 404 via `notFound()` below, and the publish
+ * webhook revalidates POST_TAG, so the index, the sitemap and any 404 cached
+ * for a not-yet-published slug refresh together.
+ *
+ * Cover art is the one thing that still needs a deploy: it lives in the repo
+ * (content/blog-covers.ts). Ship covers ahead of their publish dates and a
+ * post without one falls back to the wordmark panel, never a broken image.
  */
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const posts = await sanityFetchSafe<PostSitemapEntry[]>(postSlugsQuery, []);

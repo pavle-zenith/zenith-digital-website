@@ -5,6 +5,40 @@ Queue only. Articles are written one at a time with `zenith-blog-article`, after
 
 ---
 
+## Status, 24 September 2026: six drafts written, weekly from 29 September
+
+All six are **unpublished drafts in Sanity**, `publishedAt` already set. Publish one each
+week, on its date, after the cover is in the repo. Nothing below is live yet.
+
+| Publish | Sanity ID | Title (H1 and SEO title) | Slug |
+|---|---|---|---|
+| 29 Sep | `post-outsource-web-development-or-hire` | Should you outsource web development or hire an in-house developer? (SEO: ...or hire in-house?) | `outsource-web-development-or-hire` |
+| 6 Oct | `post-website-redesign-google-rankings` | Will a website redesign hurt your Google rankings? | `website-redesign-google-rankings` |
+| 13 Oct | `post-do-i-need-a-new-website` | How do you know if your business needs a new website? | `do-i-need-a-new-website` |
+| 20 Oct | `post-traffic-but-no-enquiries` | Why does your website get traffic but no enquiries? | `traffic-but-no-enquiries` |
+| 27 Oct | `post-wix-studio-premium-brand` | Is Wix Studio good enough for a premium brand website? | `wix-studio-premium-brand` |
+| 3 Nov | `post-luxury-travel-website-design` | What makes a good luxury travel website? | `luxury-travel-website-design` |
+
+**Titling convention changed, 24 September 2026 (owner decision).** The query + payload
+convention below is superseded. Reference: broworks.net/blog/how-much-does-it-cost-to-rebuild-
+an-ai-generated-website-in-webflow. The H1 is the plain question the reader types, the SEO
+title is the same question (trimmed only if over ~60 characters), the first sentence answers
+it, a `TL;DR` H2 with three bullets follows the intro, and H2s are phrased as the follow-up
+questions people search. Sentence case and short slugs still apply.
+
+**Schedule changes from the plans below:** N1 (premium brand) moved from 3 Nov to 27 Oct to
+fill the gap, N2 (luxury travel) moved from 10 Nov to 3 Nov. The 1 November run fills from
+10 Nov onward. Post 2 uses the published 257% YoY Bel'Istria figure, not the 99%/90-day one,
+because only the 257% figure is on the site; its methodology is still an open OWNER item in
+`content/case-studies.ts`.
+
+**Publishing is scheduled, 24 September 2026.** Every public blog query now filters on
+`publishedAt <= now()`, so a post published in Sanity with a future date stays hidden and
+appears on its own within an hour of its timestamp (the fetch cache self-heals hourly). No
+deploy and no Monday click. **Order of operations matters:** push the query change and covers
+first, then publish the drafts. Publishing before that push makes them appear immediately,
+because production still has no date filter until the deploy lands.
+
 ## November 2026 — drafted 16 September 2026, ahead of the 1 November run
 
 **Why this month is only half committed.** Two posts are backed by completed work and are

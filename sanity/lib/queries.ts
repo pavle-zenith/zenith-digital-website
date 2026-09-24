@@ -12,6 +12,20 @@ import { groq } from "next-sanity";
 const notDraft = `!(_id in path("drafts.**"))`;
 
 /**
+ * THE SCHEDULE GUARD. A post published in Sanity with a future `publishedAt`
+ * stays invisible until that moment, then appears on its own: the fetch cache
+ * self-heals hourly (see `revalidate: 3600` in ./client), so a scheduled post
+ * goes live within an hour of its timestamp with no deploy and no one clicking
+ * anything (owner decision, 24 Sep 2026). `now()` is evaluated by Sanity at
+ * query time, which is why this only works because the client runs with
+ * `useCdn: false`.
+ *
+ * Every public query uses `live`, never `notDraft` alone, so a scheduled post
+ * cannot leak through the index, the sitemap, the route or the related rail.
+ */
+const live = `${notDraft} && publishedAt <= now()`;
+
+/**
  * Read-time input: the plain-text LENGTH of a post's body, never the body.
  *
  * WHY THIS IS NOT JUST `pt::text(body)`. That helper only sees standard
@@ -58,7 +72,7 @@ const cardFields = groq`
 `;
 
 export const postsQuery = groq`
-  *[_type == "post" && defined(slug.current) && ${notDraft}]
+  *[_type == "post" && defined(slug.current) && ${live}]
     | order(publishedAt desc) {
       ${cardFields}
     }
@@ -66,7 +80,7 @@ export const postsQuery = groq`
 
 /** Slugs for generateStaticParams, and dates for the sitemap. */
 export const postSlugsQuery = groq`
-  *[_type == "post" && defined(slug.current) && ${notDraft}]
+  *[_type == "post" && defined(slug.current) && ${live}]
     | order(publishedAt desc) {
       "slug": slug.current,
       publishedAt,
@@ -79,7 +93,7 @@ export const postSlugsQuery = groq`
  * dimensions and can reserve space, rather than shipping a layout shift.
  */
 export const postQuery = groq`
-  *[_type == "post" && slug.current == $slug && ${notDraft}][0] {
+  *[_type == "post" && slug.current == $slug && ${live}][0] {
     _id,
     title,
     "slug": slug.current,
@@ -102,7 +116,7 @@ export const postQuery = groq`
     },
     sources[] { label, href, note },
     faq[] { q, a },
-    "related": related[]-> { ${cardFields} }
+    "related": related[@->publishedAt <= now()]-> { ${cardFields} }
   }
 `;
 
@@ -116,7 +130,7 @@ export const relatedFallbackQuery = groq`
     && defined(slug.current)
     && category == $category
     && slug.current != $slug
-    && ${notDraft}]
+    && ${live}]
     | order(publishedAt desc)[0...3] {
       ${cardFields}
     }

@@ -20,6 +20,13 @@ const BLOG_COVERS = new Set([
   "wix-studio-pricing",
   "wix-studio-vs-webflow",
   "wix-vs-wix-studio",
+  // Scheduled weekly, 29 Sep to 3 Nov 2026. Covers ship ahead of the posts.
+  "outsource-web-development-or-hire",
+  "website-redesign-google-rankings",
+  "do-i-need-a-new-website",
+  "traffic-but-no-enquiries",
+  "wix-studio-premium-brand",
+  "luxury-travel-website-design",
 ]);
 
 /** Card thumbnail path for a post, or null when no cover art exists. */

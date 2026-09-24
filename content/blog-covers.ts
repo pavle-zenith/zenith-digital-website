@@ -20,6 +20,7 @@ const BLOG_COVERS = new Set([
   "wix-studio-pricing",
   "wix-studio-vs-webflow",
   "wix-vs-wix-studio",
+  "wix-website-not-showing-on-google",
   // Scheduled weekly, 29 Sep to 3 Nov 2026. Covers ship ahead of the posts.
   "outsource-web-development-or-hire",
   "website-redesign-google-rankings",

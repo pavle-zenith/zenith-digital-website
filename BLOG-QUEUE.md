@@ -26,6 +26,26 @@ title is the same question (trimmed only if over ~60 characters), the first sent
 it, a `TL;DR` H2 with three bullets follows the intro, and H2s are phrased as the follow-up
 questions people search. Sentence case and short slugs still apply.
 
+**Second reference, noted 24 September 2026: flowninja.com/webflow-blog.** Flow Ninja titles
+follow the same query + payload pattern as bycrawford.com (see 16 September below), so two of
+the three references use it. Their titles, as listed that day:
+
+- Webflow Pricing in 2026: A Practitioner Breakdown of Plans, Seats, and Add-Ons
+- Webflow vs WordPress: Is WF a Good WP Alternative?
+- Sanity vs Webflow: Costs, Trade-Offs, and When to Pick Each
+- Sanity vs WordPress: Headless vs Traditional CMS Compared
+- Sanity vs Contentful: Which Headless CMS to Choose
+- Sanity Pricing Explained: Full Cost Breakdown (August 2026)
+- Headless CMS vs Traditional CMS: A Clear Explainer
+- 12 Best Webflow agencies in 2026: Data-backed rankings built on verified Clutch reviews
+
+Pattern: the query first (a "vs", a "pricing", a platform name), then a colon and what the
+reader gets (breakdown, trade-offs, when to pick each). Years only on pricing and rankings,
+where the answer expires. They use title case; we keep sentence case.
+
+Open question for the owner: keep the H1 as the plain Broworks question, and write the SEO
+title (the one Google shows) as query + payload? That would follow all three references at once.
+
 **Schedule changes from the plans below:** N1 (premium brand) moved from 3 Nov to 27 Oct to
 fill the gap, N2 (luxury travel) moved from 10 Nov to 3 Nov. The 1 November run fills from
 10 Nov onward. Post 2 uses the published 257% YoY Bel'Istria figure, not the 99%/90-day one,

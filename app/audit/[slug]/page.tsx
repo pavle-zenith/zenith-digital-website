@@ -4,16 +4,17 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { audits, getAudit } from "@/content/audits";
+import { overall, tally } from "@/content/audits/score";
 import { AuditHero } from "@/components/sections/audit-page/AuditHero";
-import { AuditStats } from "@/components/sections/audit-page/AuditStats";
-import { AuditWorking } from "@/components/sections/audit-page/AuditWorking";
-import { AuditFixes } from "@/components/sections/audit-page/AuditFixes";
-import { AuditEvidence } from "@/components/sections/audit-page/AuditEvidence";
-import { AuditFindings } from "@/components/sections/audit-page/AuditFindings";
+import { AuditJumpBar } from "@/components/sections/audit-page/AuditJumpBar";
+import { AuditScorecard } from "@/components/sections/audit-page/AuditScorecard";
+import { AuditStartHere } from "@/components/sections/audit-page/AuditStartHere";
+import { AuditSegment } from "@/components/sections/audit-page/AuditSegment";
 import { AuditOffers } from "@/components/sections/audit-page/AuditOffers";
 import { AuditCeiling } from "@/components/sections/audit-page/AuditCeiling";
 import { AuditProof } from "@/components/sections/audit-page/AuditProof";
 import { AuditClose } from "@/components/sections/audit-page/AuditClose";
+import { AuditMobileBar } from "@/components/sections/audit-page/AuditMobileBar";
 
 /**
  * Private audit pages. A document sent to one client as a link, not a page of
@@ -23,10 +24,11 @@ import { AuditClose } from "@/components/sections/audit-page/AuditClose";
  *   1. the robots metadata below;
  *   2. `X-Robots-Tag: noindex, nofollow` in next.config.ts for
  *      `/audit/:slug([^./]+)` and `/audits/:path*`. The first is deliberately
- *      NOT `/audit/:path*`: that wildcard also matched public/audit/, which
- *      holds images for the public /free-website-audit page, and noindexed
- *      them. It covers one path segment, so a nested audit route needs its own
- *      entry. The second covers the PDF, which cannot carry a meta tag;
+ *      NOT `/audit/:path*` (which the handoff specifies): that wildcard also
+ *      matched public/audit/, which holds images for the public
+ *      /free-website-audit page, and noindexed them. It covers one path
+ *      segment, so a nested audit route needs its own entry. The second covers
+ *      the PDF, which cannot carry a meta tag;
  *   3. absence from app/sitemap.ts, which is an explicit allowlist;
  *   4. no link to `/audit/...` anywhere on the site.
  *
@@ -68,15 +70,14 @@ export async function generateMetadata({
       googleBot: { index: false, follow: false },
     },
     // The root layout sets `canonical: "/"`. Inherited, it would declare this
-    // private document a duplicate of the homepage: a mixed signal on a page
-    // whose whole job is to stay out of the index. Null clears it.
+    // private document a duplicate of the homepage. Null clears it.
     alternates: { canonical: null },
     openGraph: {
       title: audit.meta.title,
       description: audit.meta.description,
     },
-    // Also inherited from the layout otherwise, so a link pasted into Slack or
-    // an email would preview as the generic homepage title.
+    // Otherwise inherited from the layout, so a pasted link would preview
+    // with the generic homepage title.
     twitter: {
       title: audit.meta.title,
       description: audit.meta.description,
@@ -85,21 +86,17 @@ export async function generateMetadata({
 }
 
 /**
- * The PDF's size, read off disk at build time. Hardcoding it means the label
- * silently lies the first time the file is replaced, and this link is the main
- * thing the page asks the reader to do.
+ * The PDF's size, read off disk at build time. Size only ("191 KB"): the label
+ * already names the file type. Hardcoding it means the label silently lies the
+ * first time the file is replaced.
  */
 function pdfSize(pdfHref: string): string {
   try {
     const abs = path.join(process.cwd(), "public", pdfHref.replace(/^\//, ""));
-    const bytes = fs.statSync(abs).size;
-    const kb = bytes / 1024;
-    return kb >= 1024
-      ? `PDF, ${(kb / 1024).toFixed(1)} MB`
-      : `PDF, ${Math.round(kb)} KB`;
+    const kb = fs.statSync(abs).size / 1024;
+    return kb >= 1024 ? `${(kb / 1024).toFixed(1)} MB` : `${Math.round(kb)} KB`;
   } catch {
-    // A missing file is a content error, not a render error: the link still
-    // works and still says what it is.
+    // A missing file is a content error, not a render error.
     return "PDF";
   }
 }
@@ -113,18 +110,27 @@ export default async function AuditRoute({
   const audit = getAudit(slug);
   if (!audit) notFound();
 
+  // Scored once, here, and handed down, so the gauge, the scorecard, the jump
+  // bar and each segment's pill can never disagree.
+  const total = overall(audit);
+  const rows = audit.segments.map((s) => ({ id: s.id, name: s.name, tally: tally(s.checks) }));
+
   return (
     <>
-      <AuditHero audit={audit} pdfSize={pdfSize(audit.hero.pdfHref)} />
-      <AuditStats stats={audit.stats} />
-      <AuditWorking working={audit.working} />
-      <AuditFixes fixes={audit.fixes} />
-      <AuditEvidence evidence={audit.evidence} />
-      <AuditFindings findings={audit.findings} />
+      <AuditHero audit={audit} overall={total} pdfSize={pdfSize(audit.hero.pdfHref)} />
+      <AuditJumpBar
+        items={rows.map((r) => ({ id: r.id, name: r.name, score: r.tally.score, band: r.tally.band }))}
+      />
+      <AuditScorecard rows={rows} />
+      <AuditStartHere keyFixes={audit.keyFixes} />
+      {audit.segments.map((segment, i) => (
+        <AuditSegment key={segment.id} segment={segment} slug={audit.slug} index={i} />
+      ))}
       <AuditOffers offers={audit.offers} />
       <AuditCeiling ceiling={audit.offers.ceiling} />
       {audit.proof ? <AuditProof proof={audit.proof} /> : null}
       <AuditClose close={audit.close} cta={audit.hero.callCta} />
+      <AuditMobileBar label="See your two options" />
     </>
   );
 }

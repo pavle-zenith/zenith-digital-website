@@ -258,6 +258,25 @@ body {
     stroke-dashoffset: 0;
   }
 }
+/* Audit score gauge. Animates from an empty arc to the stroke-dashoffset set
+   inline, so the arc's final length stays owned by the score, not the keyframe.
+   The global reduced-motion rule above collapses it to its end state. */
+@keyframes gauge-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+}
+
+/* Audit anchors (segments, #options). Offsets a jump-link target by the real
+   height of the site nav plus the audit jump bar, both measured at runtime and
+   written to these vars by AuditJumpBar, so a heading never lands underneath
+   them. The fallbacks only cover the moment before hydration. */
+.audit-anchor {
+  scroll-margin-top: calc(
+    var(--audit-nav-h, 4rem) + var(--audit-jump-h, 3.25rem) + 1rem
+  );
+}
+
 @keyframes chart-fill-fade {
   from {
     opacity: 0;

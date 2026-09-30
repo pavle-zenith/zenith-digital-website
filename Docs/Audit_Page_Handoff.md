@@ -1,9 +1,13 @@
 # Private audit pages (`/audit/[slug]`): build handoff for Claude Code
 
 **For:** Zenith Digital website (Next.js 15 App Router, content in `content/`)
-**Written:** 30 September 2026
+**Written:** 30 September 2026 · **Revised:** 30 September 2026 (v2: scored, segmented layout)
 **First client:** Lifetime Learning Center (`/audit/lifetime-learning-center`)
-**Pattern references:** the `/p/` proposal pages (privacy layers, see `next.config.ts`), `/free-website-audit` (tone and components)
+**Pattern references:**
+
+- the `/p/` proposal pages (privacy layers, see `next.config.ts`);
+- `/free-website-audit` (tone and components);
+- Flow Ninja's Foresight audit report (structure only, see §1).
 
 ---
 
@@ -13,7 +17,7 @@
 
 Claude Code's job is the plumbing:
 
-- the `AuditPage` type and the collection module;
+- the `AuditPage` type, the scoring helper and the collection module;
 - the route, the components and the four noindex layers;
 - responsive behaviour, accessibility, typecheck and lint.
 
@@ -29,14 +33,27 @@ When we deliver a free audit, the prospect gets:
 - the PDF;
 - this page.
 
-The page is the short, on-brand version they can forward to a director or a board.
+The page is the version they read and forward to a director or a board.
 
 It has two jobs, in order:
 
-1. Show them clearly what is wrong. Short, and proven with screenshots.
+1. Show clearly what is wrong. It's scored, split into segments and colour-coded, so it can be scanned in a minute.
 2. Put two priced ways forward side by side:
    - **Fix what's there:** cheaper, with an honest ceiling.
    - **Rebuild for results:** the one we recommend, and why.
+
+**Structure borrowed from Flow Ninja's audit report.** It is easy to scan because it is split into segments, and every segment follows the same pattern:
+
+- a coloured score;
+- a green "working" list;
+- a red "to fix" list;
+- a one-line read of how the site comes across.
+
+**Where we deliberately differ:**
+
+- **Our score is not a black box.** It is simply the share of the listed checks that pass. Every check is on the page, so the client can recount it.
+- **A scorecard of bars instead of a radar chart.** It's faster to read and works on a phone.
+- **Built from our own system:** hairline grids, not floating cards.
 
 It is **not a site page**:
 
@@ -46,8 +63,6 @@ It is **not a site page**:
 - not in the nav.
 
 It is a private document sent as a link, exactly like `/p/`.
-
-Keep it short. The PDF is the full record. The page should take under three minutes to read, and the long findings list stays collapsed.
 
 ---
 
@@ -75,10 +90,11 @@ Every layer is required, because any single one can be missed. Copy the reasonin
 
 ```
 content/audits/types.ts                    AuditPage type
+content/audits/score.ts                    scoring + band helpers (§4)
 content/audits/index.ts                    collection + getAudit(slug)
 content/audits/lifetime-learning-center.ts §5, pasted as-is
 app/audit/[slug]/page.tsx                  route, metadata, noindex
-components/sections/audit-page/*           sections below (new folder)
+components/sections/audit-page/*           sections (new folder)
 next.config.ts                             two header entries
 app/sitemap.ts                             comment only
 ```
@@ -94,55 +110,64 @@ Use `public/audits/` (plural), never `public/audit/`. That folder holds the `/fr
 
 ---
 
-## 4. The type
+## 4. Type and scoring
 
 ```ts
+export type CheckStatus = "pass" | "partial" | "fail";
 export type AuditPriority = "high" | "medium" | "low";
 export type AuditMark = "yes" | "no" | "partial";
 
+export interface AuditCheck {
+  label: string;             // the check, phrased as the good state
+  status: CheckStatus;
+  detail: string;            // what we found, one sentence
+  priority?: AuditPriority;  // required when status !== "pass" (enforce with a dev-time assert)
+}
+
+export interface AuditImage { src: string; alt: string; caption: string; width: number; height: number }
+
+export interface AuditSegment {
+  id: string;                // anchor, e.g. "google-listing"
+  name: string;
+  googleSees: string;        // "How Google sees it" one-liner
+  checks: AuditCheck[];
+  evidence?: AuditImage[];
+}
+
 export interface AuditPage {
   slug: string;
-  client: string;              // "Lifetime Learning Center"
-  clientUrl: string;           // display only, never a followed link
-  date: string;                // "30 September 2026"
+  client: string;
+  clientUrl: string;         // display only, never a followed link
+  date: string;
   focus: string;
   meta: { title: string; description: string };
 
   hero: {
     eyebrow: string;
     heading: string;
-    lead: string[];            // paragraphs
-    loomId: string;            // "" until recorded: render nothing, no empty frame
+    verdict: string;         // one line under the H1
+    lead: string;
+    loomId: string;          // "" until recorded: render nothing
     pdfHref: string;
     pdfLabel: string;
     callCta: { label: string; href: string };
   };
 
-  stats: { value: string; label: string }[];          // exactly 4
-  working: { heading: string; items: string[] };      // 4
-  fixes: {
+  score: { heading: string; method: string };   // number is computed, never typed
+
+  keyFixes: {
     heading: string;
-    items: { title: string; why: string; fix: string; effort: string }[];  // exactly 3
+    items: { title: string; body: string; effort: string; segmentId: string }[];  // exactly 3
   };
-  evidence: {
-    heading: string;
-    items: { src: string; alt: string; caption: string; width: number; height: number }[];
-  };
-  findings: {
-    heading: string;
-    summary: string;           // shown above the collapsed list
-    groups: {
-      name: string;
-      items: { finding: string; why: string; priority: AuditPriority }[];
-    }[];
-  };
+
+  segments: AuditSegment[];
 
   offers: {
     heading: string;
     intro: string;
     options: {
       id: "fix" | "rebuild";
-      label: string;           // "Option 1"
+      label: string;
       name: string;
       price: string;
       priceNote: string;
@@ -153,23 +178,55 @@ export interface AuditPage {
     }[];
     comparison: {
       heading: string;
-      columns: [string, string];                       // option names
+      columns: [string, string];
       rows: { label: string; fix: AuditMark; rebuild: AuditMark; fixNote?: string; rebuildNote?: string }[];
     };
     ceiling: { heading: string; body: string[] };
-    credit?: string;           // optional line under the cards
+    credit?: string;
   };
 
-  proof?: {
-    eyebrow: string;
-    heading: string;
-    body: string;
-    links: { label: string; href: string }[];
-  };
-
+  proof?: { eyebrow: string; heading: string; body: string; links: { label: string; href: string }[] };
   close: { heading: string; body: string; note: string };
 }
 ```
+
+**`score.ts`.** These are pure functions, used by both the gauge and the scorecard.
+
+- **Points:** a `pass` is worth 1, a `partial` 0.5, a `fail` 0.
+- **Segment score:** `Math.round(100 * points / checks.length)`.
+- **Overall score:** computed across **all checks pooled together**, not as an average of the segment scores.
+- **Counts:** return `{ passed, partial, failed, total }` as well, for the caption under the gauge.
+- **Bands:**
+  - `good` for scores of 75 and above;
+  - `fair` for 40 to 74;
+  - `poor` for below 40.
+- **Band colours** use the existing signal tokens:
+
+  | Band | Fill | Text |
+  |---|---|---|
+  | good | `--color-positive` | `--color-positive-ink` |
+  | fair | `--color-warning` | `--color-warning-ink` |
+  | poor | `--color-negative` | `--color-negative-ink` |
+
+- **Priority colours** use the same tokens:
+  - high = negative;
+  - medium = warning;
+  - low = muted text on a surface fill.
+- **Never colour alone.** Every coloured element also prints its word: "Good", "Needs work", "Poor", "High", "Medium", "Low", "Partly".
+
+**Expected numbers for this client, to test against:**
+
+| | Score | Band |
+|---|---|---|
+| Overall | **37** (11 passed, 3 partly, 20 to fix, 34 checks) | poor |
+| Google listing | 33 | poor |
+| Page names | 8 | poor |
+| Housekeeping | 33 | poor |
+| Readable content | 25 | poor |
+| Trust and visitor details | 50 | fair |
+| Speed and mobile | 88 | good |
+
+Write a small unit test (or a dev-only assert) that these come out exactly.
 
 ---
 
@@ -180,10 +237,10 @@ import type { AuditPage } from "./types";
 
 /**
  * Lifetime Learning Center, Seattle. Free audit request, focus on SEO setup.
- * Findings checked 30 Sep 2026 against the live site, its sitemaps and Google.
- * Full record: public/audits/lifetime-learning-center/website-audit.pdf.
- * Prices are owner-set (30 Sep 2026). The credit line is an owner offer:
- * delete `credit` to withdraw it.
+ * Every check verified 30 Sep 2026 against the live site, its sitemaps and
+ * Google. Full record: public/audits/lifetime-learning-center/website-audit.pdf.
+ * Prices are owner-set (30 Sep 2026). `credit` is an owner offer: delete it to
+ * withdraw. Scores are computed from `checks`, never typed in.
  */
 export const lifetimeLearningCenter: AuditPage = {
   slug: "lifetime-learning-center",
@@ -194,147 +251,156 @@ export const lifetimeLearningCenter: AuditPage = {
   meta: {
     title: "Website audit | Lifetime Learning Center | Zenith Digital",
     description:
-      "A hand-reviewed audit of lifetimelearningcenter.org: what's holding it back in Google, the three fixes that matter most, and two ways forward.",
+      "A hand-reviewed audit of lifetimelearningcenter.org: 34 checks across six areas, the three fixes that matter most, and two ways forward.",
   },
 
   hero: {
     eyebrow: "Private website audit",
     heading: "Lifetime Learning Center",
-    lead: [
-      "Google already knows where you are. Your website just doesn't tell it what you are. Your map listing shows up when people look for learning programs for older adults in Seattle, but it doesn't appear to be managed by anyone at LLC, and the website behind it gives Google very little to work with.",
-      "Below: what we found, the three fixes that matter most, and two ways to get it done.",
-    ],
+    verdict: "Great content, weak setup. Google knows where you are, but not what you are.",
+    lead: "Your map listing already shows up when people look for learning programs for older adults in Seattle. The website behind it gives Google very little to work with. Everything below is fixable without starting over.",
     loomId: "",
     pdfHref: "/audits/lifetime-learning-center/website-audit.pdf",
     pdfLabel: "Download the full audit (PDF)",
     callCta: { label: "Book 15 minutes", href: "/book-a-call" },
   },
 
-  stats: [
-    { value: "108", label: "pages your site lists for Google" },
-    { value: "0 of 16", label: "main pages have a description" },
-    { value: "53 of 54", label: "event pages are for past events" },
-    { value: "6", label: "Google reviews, on an unclaimed listing" },
-  ],
-
-  working: {
-    heading: "What's already working",
-    items: [
-      "The site is light and loads quickly, and the phone version is easy to read.",
-      "Close to 40 written class descriptions every term: real content Google rewards.",
-      "You already appear in Google's map results for lifelong learning for older adults in Seattle.",
-      "Prices are stated plainly: $20 to register, $40 per class.",
-    ],
+  score: {
+    heading: "Your site score",
+    method: "The share of the 34 checks below that your site passes. Partly counts as half. Every check is listed, so you can recount it.",
   },
 
-  fixes: {
-    heading: "The three things we'd fix first",
+  keyFixes: {
+    heading: "Start here",
     items: [
       {
-        title: "Claim your Google Business Profile",
-        why: "It's where you already show up, and right now it offers \"Own this business?\" to anyone who searches your name.",
-        fix: "Claim it, add real class photos, term hours and a description, and ask students for a review at the end of each term.",
-        effort: "About an hour, plus a few days for Google's verification",
+        title: "Claim your Google listing",
+        body: "It's where people already find you, and right now it offers \"Own this business?\" to anyone who searches your name.",
+        effort: "About an hour",
+        segmentId: "google-listing",
       },
       {
         title: "Give every page a proper name",
-        why: "Your homepage appears in Google as \"HOME | Lifetime Learning\", and none of your main pages has a description, so Google has to guess.",
-        fix: "Titles, descriptions and one clear heading for the 16 main pages, plus one naming template each for class and event pages.",
-        effort: "A day of careful work, done once",
+        body: "Your homepage shows in Google as \"HOME | Lifetime Learning\", and none of your main pages has a description.",
+        effort: "A day, done once",
+        segmentId: "page-names",
       },
       {
         title: "Clear out what Google shouldn't see",
-        why: "Next to your real classes sit an unedited Wix template page, a test event set in Ontario, Canada, two cancelled classes and 53 past events.",
-        fix: "Remove or hide them, agree a simple rule for each new term, and connect Google Search Console.",
+        body: "A template page, a test event set in Ontario, cancelled classes and 53 past events sit next to your real classes.",
         effort: "Half a day, then ten minutes a term",
+        segmentId: "housekeeping",
       },
     ],
   },
 
-  evidence: {
-    heading: "What we saw",
-    items: [
-      {
-        src: "/audits/lifetime-learning-center/google-listing.webp",
-        alt: "Google results for Lifetime Learning Center Seattle, showing the listing with an Own this business link",
-        caption: "Searching your name: the listing offers \"Own this business?\" and shows a Street View photo. In our check, the results under it were an obituary and a boat club, not your website.",
-        width: 800,
-        height: 530,
-      },
-      {
-        src: "/audits/lifetime-learning-center/team-page.webp",
-        alt: "The team page on the LLC website showing Wix template placeholder text",
-        caption: "/team, listed for Google: the Wix template text was never replaced.",
-        width: 560,
-        height: 250,
-      },
-      {
-        src: "/audits/lifetime-learning-center/placeholder-event.webp",
-        alt: "A placeholder event page titled Event with the text event description",
-        caption: "A placeholder event, still published and still listed for Google.",
-        width: 560,
-        height: 420,
-      },
-    ],
-  },
-
-  findings: {
-    heading: "Everything we found",
-    summary: "22 findings in five groups. The PDF has the full detail on each.",
-    groups: [
-      {
-        name: "Your Google listing",
-        items: [
-          { finding: "Business profile appears unclaimed", why: "Anyone can suggest edits to your hours or phone number, and you can't reply to reviews or add photos.", priority: "high" },
-          { finding: "Listing links to the old http:// address", why: "An extra redirect on every click, and a sign the listing hasn't been touched in a while.", priority: "medium" },
-          { finding: "6 reviews", why: "Reviews are one of the main things that move you up the map results.", priority: "medium" },
-        ],
-      },
-      {
-        name: "Page names and descriptions",
-        items: [
-          { finding: "Titles like \"HOME\", \"ABOUT\", \"CLASSES\"", why: "The title is the link people click in Google, and \"HOME\" says nothing about you.", priority: "high" },
-          { finding: "No description on any main page", why: "Google fills the gap with whatever text it finds first.", priority: "high" },
-          { finding: "No main heading on 13 of 16 main pages", why: "The main heading is how Google confirms what a page is about.", priority: "medium" },
-          { finding: "Class page titles don't say what or where", why: "\"Watercolor Basics S1\" could be anywhere in the world.", priority: "medium" },
-          { finding: "Site name set to \"Lifetime Learning\"", why: "Google may show the shorter name instead of the one people search for.", priority: "low" },
-          { finding: "One class title cut short by hidden characters", why: "\"Intermediate Spanish Conversation Prac\" is how it shows in Google.", priority: "low" },
-        ],
-      },
-      {
-        name: "Pages Google shouldn't see",
-        items: [
-          { finding: "Wix template page at /team", why: "An unfinished page tells visitors, and Google, the site isn't looked after.", priority: "high" },
-          { finding: "Test and placeholder events", why: "One is set in St. Catharines, Ontario, which muddies where Google thinks you are.", priority: "high" },
-          { finding: "53 past events and 2 cancelled classes still live", why: "Old pages compete with current ones.", priority: "medium" },
-          { finding: "About and Mission & Vision are the same page", why: "Two copies split what Google credits to either.", priority: "medium" },
-          { finding: "Google still lists an old page address", why: "A sign Google hasn't revisited the site recently.", priority: "medium" },
-        ],
-      },
-      {
-        name: "Content Google can't read",
-        items: [
-          { finding: "The class schedule is embedded from another website", why: "Google and screen readers treat your most useful page as nearly empty.", priority: "high" },
-          { finding: "Photo descriptions are file names", why: "Screen readers read \"Cercile and students_edited.jpg\" aloud.", priority: "medium" },
-          { finding: "No sharing image or description", why: "Links shared by email, Facebook or Nextdoor show up blank.", priority: "medium" },
-          { finding: "Default Wix icon in browser tabs", why: "Google shows it next to your result instead of your logo.", priority: "low" },
-        ],
-      },
-      {
-        name: "Trust and details",
-        items: [
-          { finding: "\"Contact\" in the menu goes to the homepage", why: "There's no page with hours, directions, parking and accessibility.", priority: "medium" },
-          { finding: "Tax ID and \"2020-2024\" are phone links", why: "Tapping them on a phone tries to dial them.", priority: "low" },
-          { finding: "Term end date says Friday 19 November", why: "It's a Thursday, and the Register page says so.", priority: "low" },
-          { finding: "Described to Google as a generic local business", why: "Marking you as a nonprofit educational organization helps Google and AI assistants describe you correctly.", priority: "low" },
-        ],
-      },
-    ],
-  },
+  segments: [
+    {
+      id: "google-listing",
+      name: "Google listing",
+      googleSees: "A learning center at 3841 NE 123rd St, rated 4.7 from 6 reviews, that nobody has claimed.",
+      checks: [
+        { label: "Shows in Google's map results", status: "pass", detail: "Second for \"lifelong learning for older adults seattle\" when we checked." },
+        { label: "Strong rating", status: "pass", detail: "4.7 stars." },
+        { label: "Listing is claimed and managed", status: "fail", priority: "high", detail: "It shows \"Own this business?\", so anyone can suggest edits and you can't reply to reviews." },
+        { label: "Enough reviews to compete", status: "fail", priority: "medium", detail: "6 reviews. Seattle Central's continuing education listing has 13." },
+        { label: "Your own photos", status: "fail", priority: "medium", detail: "The only photo is a Street View shot of the building." },
+        { label: "Links to the secure version of your site", status: "fail", priority: "medium", detail: "The listing still links to the old http:// address." },
+      ],
+      evidence: [
+        {
+          src: "/audits/lifetime-learning-center/google-listing.webp",
+          alt: "Google results for Lifetime Learning Center Seattle, showing the listing with an Own this business link",
+          caption: "Searching your name. In our check, the results under the listing were an obituary and a boat club, not your website.",
+          width: 800,
+          height: 530,
+        },
+      ],
+    },
+    {
+      id: "page-names",
+      name: "Page names and descriptions",
+      googleSees: "A site called \"Lifetime Learning\" with pages named HOME, ABOUT and CLASSES.",
+      checks: [
+        { label: "Every page has its own title", status: "partial", priority: "low", detail: "Mostly, but two pairs of event pages share the same title." },
+        { label: "Titles say what you offer and where", status: "fail", priority: "high", detail: "Your homepage title is \"HOME | Lifetime Learning\"." },
+        { label: "Every main page has a description", status: "fail", priority: "high", detail: "None of the 16 main pages has one, so Google writes its own." },
+        { label: "One main heading per page", status: "fail", priority: "medium", detail: "Missing on 13 of the 16 main pages, including the homepage." },
+        { label: "Class pages named clearly", status: "fail", priority: "medium", detail: "\"Watercolor Basics S1\" could be anywhere, and one title is cut short to \"Spanish Conversation Prac\"." },
+        { label: "Site name matches your name", status: "fail", priority: "low", detail: "Set to \"Lifetime Learning\", not \"Lifetime Learning Center\"." },
+      ],
+    },
+    {
+      id: "housekeeping",
+      name: "Housekeeping",
+      googleSees: "108 pages, including a template page, a test event in Ontario and 53 events that already happened.",
+      checks: [
+        { label: "Sitemap in place", status: "pass", detail: "Wix generates it and lists every page." },
+        { label: "Old page addresses redirect", status: "pass", detail: "The old About copy redirects to Mission & Vision." },
+        { label: "No template or test pages", status: "fail", priority: "high", detail: "/team still says \"I'm a title. Click here to edit me.\", and two test events are published." },
+        { label: "Past events handled", status: "fail", priority: "medium", detail: "53 of 54 event pages are for events that already happened." },
+        { label: "Cancelled classes taken down", status: "fail", priority: "medium", detail: "Bridge and Authoritarian Personality still have live pages marked CLASS CANCELLED." },
+        { label: "No duplicate pages", status: "fail", priority: "medium", detail: "About and Mission & Vision are the same page." },
+      ],
+      evidence: [
+        {
+          src: "/audits/lifetime-learning-center/team-page.webp",
+          alt: "The team page on the LLC website showing Wix template placeholder text",
+          caption: "/team, listed for Google: the template text was never replaced.",
+          width: 560,
+          height: 250,
+        },
+        {
+          src: "/audits/lifetime-learning-center/placeholder-event.webp",
+          alt: "A placeholder event page titled Event with the text event description",
+          caption: "A placeholder event, still published.",
+          width: 560,
+          height: 420,
+        },
+      ],
+    },
+    {
+      id: "readable-content",
+      name: "Content Google can read",
+      googleSees: "Detailed class descriptions, and a schedule page with almost nothing on it.",
+      checks: [
+        { label: "Class descriptions in real text", status: "pass", detail: "Close to 40 written descriptions every term." },
+        { label: "Business details describe a nonprofit school", status: "partial", priority: "low", detail: "Address and phone are marked up, but as a generic local business." },
+        { label: "Class schedule readable on the page", status: "fail", priority: "high", detail: "It's embedded from another website, so Google sees the page as nearly empty." },
+        { label: "Photos described", status: "fail", priority: "medium", detail: "Descriptions are file names, like \"Cercile and students_edited.jpg\"." },
+        { label: "Sharing preview set", status: "fail", priority: "medium", detail: "Links shared by email, Facebook or Nextdoor show no image or description." },
+        { label: "Your own site icon", status: "fail", priority: "low", detail: "The default Wix icon shows in browser tabs and next to your Google result." },
+      ],
+    },
+    {
+      id: "trust",
+      name: "Trust and visitor details",
+      googleSees: "Clear prices and contact details, but no page that tells a first-time visitor how to find you.",
+      checks: [
+        { label: "Prices stated plainly", status: "pass", detail: "$20 to register, $40 per class." },
+        { label: "Address and phone on every page", status: "pass", detail: "In the footer site-wide." },
+        { label: "A word from a student", status: "pass", detail: "Cynthia Ryan's quote on the homepage." },
+        { label: "A page with hours, directions and parking", status: "fail", priority: "medium", detail: "\"Contact\" in the menu goes back to the homepage." },
+        { label: "Numbers display correctly", status: "fail", priority: "low", detail: "Your Tax ID and \"2020-2024\" become phone links on the Support page." },
+        { label: "Dates agree across pages", status: "fail", priority: "low", detail: "Class Descriptions says the term ends Friday 19 November. It's a Thursday." },
+      ],
+    },
+    {
+      id: "speed-mobile",
+      name: "Speed and mobile",
+      googleSees: "A light, quick site that reads well on phones.",
+      checks: [
+        { label: "Light pages", status: "pass", detail: "The homepage is under 200 KB." },
+        { label: "Loads quickly", status: "pass", detail: "Main content appears in under a second on a normal connection." },
+        { label: "Easy to read on a phone", status: "pass", detail: "Large text and big tap targets." },
+        { label: "Adapts to tablets", status: "partial", priority: "medium", detail: "Tablets get the desktop layout shrunk to fit." },
+      ],
+    },
+  ],
 
   offers: {
     heading: "Two ways forward",
-    intro: "You can work through everything above yourselves, and the three fixes are the place to start. If you'd rather hand it off, these are the two ways we'd do it.",
+    intro: "You can work through everything above yourselves, and \"Start here\" is the place to begin. If you'd rather hand it off, these are the two ways we'd do it.",
     options: [
       {
         id: "fix",
@@ -408,7 +474,7 @@ export const lifetimeLearningCenter: AuditPage = {
   proof: {
     eyebrow: "Done before",
     heading: "Bel'Istria: from Wix's older editor to Wix Studio",
-    body: "We moved Bel'Istria's 35+ pages across, held every tracked ranking through launch, and gave each service its own page. Search impressions are up 257% year on year.",
+    body: "We moved Bel'Istria's 35+ pages across, gave each group of services its own page, and held every tracked ranking through the 30-day window after launch. Search impressions are up 257% year on year.",
     links: [
       { label: "Read the case study", href: "/case-studies/belistria" },
       { label: "How a Wix to Wix Studio move works", href: "/services/wix-classic-to-wix-studio" },
@@ -427,74 +493,187 @@ export const lifetimeLearningCenter: AuditPage = {
 
 ## 6. Layout, top to bottom
 
-Build it from the existing system (CLAUDE.md §7 and §15). Use `Section` for every band, hairline grids, `Button`, `Eyebrow`, `SectionHeader` and `StatBlock`. **No new tokens and no new fonts.**
+Build it from the existing system (CLAUDE.md §7 and §15). Use `Section` for every band, hairline grids (`gap-px` over the rule colour, solid cells), `Button`, `Eyebrow`, `Pill` and `SectionHeader`.
 
-1. **Hero** (dark, textured like the `/free-website-audit` hero).
-   - Content: eyebrow, H1 = client name, meta line (`clientUrl · focus · date`), lead paragraphs.
-   - Buttons: PDF download (`Button`, `download` attribute) and the call CTA.
-   - Loom: if `loomId` is set, a 16:9 responsive `https://www.loom.com/embed/{id}` iframe with `title` = "Audit walkthrough for {client}" and `loading="lazy"`. If empty, render nothing: no placeholder, no empty frame.
-   - The client URL is plain text. **Never link out to the client's site.**
-2. **Stats** (light): the 4 `StatBlock`s in a hairline grid. 2×2 on phones, 4 across from `md`.
-3. **What's working** (light): a two-column list with green check icons. Use the scalloped `VerifiedCheck` or a Lucide check in the local icon map.
-4. **Three fixes** (light): numbered rows in a hairline grid.
-   - Number chip, title, then "Why:" and "Fix:" with bold labels.
-   - Effort shown as a `Pill`.
-5. **What we saw** (light, `surface` tint).
-   - Desktop: the Google screenshot large on the left, the two site screenshots stacked on the right. Phones: one column.
-   - Use `next/image` with the given width and height, a thin border, radius 6, and captions in muted small text.
-   - No lightbox needed.
-6. **Everything we found** (light).
-   - The `summary` line, then each group as a native `<details>` (closed by default) with the group name and item count in the `<summary>`.
-   - Inside each group: rows of finding / why / a priority pill. Colour the pill by priority but **always print the word too**, so it's never colour alone.
-   - A real `<table>` inside each details is fine. On phones, stack as cards.
-7. **Two ways forward** (dark, textured, same backdrop as `Pricing`).
-   - `intro`, then two option cards side by side from `md` (stacked on phones, rebuild first on phones).
-   - The recommended card gets the white fill (same treatment as the highlighted pricing tier) and a "Recommended" badge.
-   - Each card: label, name, price (display face) with `priceNote`, `bestFor` in italic muted text, the includes list, then the CTA.
-   - The `credit` line sits centred under the cards in small muted text.
-8. **Comparison** (same dark band, below the cards).
-   - A real `<table>` with the criterion column plus two option columns.
-   - Marks: `yes` = verified tick, `no` = cross, `partial` = a half/dash icon. Any note sits under its mark in small text.
-   - Scrolls horizontally inside its frame on small screens, like `ComparisonTable`.
-   - Build a small audit-specific table. **Don't reuse `ComparisonTable` itself**: it is hard-wired to `content/home`.
-9. **Ceiling** (light): `heading` plus paragraphs, max width about 68ch. Plain and calm. **No warning colours.** This is honesty, not a scare.
-10. **Proof** (light, `surface`): eyebrow, heading, body, two text links with `&rarr;` arrows.
-11. **Close** (light): heading, body, `Button` to the call CTA, then the search-results `note` in muted small text.
+- **No floating shadowed cards.** Where Flow Ninja uses cards, we use hairline-ruled panels.
+- **No new tokens and no new fonts.** Status colours are the existing signal tokens (§4).
+
+### 6.1 Hero (dark, textured like the `/free-website-audit` hero)
+
+- **Left column:**
+  - eyebrow;
+  - H1 = client name;
+  - the meta line (`clientUrl · focus · date`) in the mono caption style;
+  - `verdict` in the display face at H3 size;
+  - `lead` in muted body-large;
+  - two buttons: PDF download (`download` attribute, label plus "PDF, 190 KB", with the size computed at build via `fs.statSync`) and the call CTA.
+- **Right column:** the **score gauge** (6.2).
+- **Loom:** if `loomId` is set, a 16:9 embed sits below, full frame width, titled "Audit walkthrough for {client}", `loading="lazy"`. If it's empty, render nothing.
+- The client URL is plain text. **Never link out to the client's site.**
+
+### 6.2 Score gauge
+
+- **Shape:** an inline SVG semicircle.
+  - Track in the rule colour.
+  - Arc stroke in the overall band's fill colour, with rounded caps, proportional to the score.
+- **Centre:** the score in the display face ("37") with a small "/100".
+- **Under it:** the band word ("Poor"), then the counts line, "11 passed · 3 partly · 20 to fix", then `score.method` in small muted text.
+- **Accessibility:** the SVG is `aria-hidden`, and a visually hidden sentence carries the numbers.
+- **Motion:** the arc may draw in once on load. Skip that under reduced motion.
+
+### 6.3 Jump bar (sticky)
+
+A horizontal strip pinned under the site nav once the hero scrolls away.
+
+- **Links:** one per segment (name plus its score in a small band-coloured pill), then "Your options".
+- **Phones:** it scrolls sideways (hidden scrollbar, as in the §15 sliders).
+- **Current section:** use `IntersectionObserver` to mark it with `aria-current`.
+- **Offset:** set the sticky offset from the nav's real height, not a magic number.
+
+### 6.4 Scorecard (light)
+
+The replacement for Flow Ninja's radar chart. One row per segment, in a hairline grid:
+
+- the segment name, as a link to its anchor;
+- a horizontal bar (track plus band-coloured fill, width = score);
+- the score number and the band word.
+- Sort in content order. Don't sort by score, so the page and the scorecard agree.
+
+### 6.5 Start here (light, `surface` tint)
+
+- **The three `keyFixes`** as three numbered cells in a hairline grid: 3 across from `lg`, stacked on phones.
+- **Each cell:** number chip, title, body, effort as a `Pill`, and "See details &rarr;" linking to its segment.
+- **Why it's here:** this is the "key improvement points" block, moved up. A skimmer gets the answer before the detail.
+
+### 6.6 Segments (alternate light / light-surface per segment)
+
+For each segment, top to bottom:
+
+1. **Heading row.**
+   - H2 with the segment name.
+   - To its right, a score `Pill` coloured by band: "33 · Poor".
+   - Under the heading, "X of Y checks passed" in mono caption style.
+2. **Two panels side by side** from `md` (stacked on phones, **fixes first on phones**):
+   - **"What's working"** panel:
+     - header chip in positive ink with a small dot;
+     - each `pass` check is a row with a check icon, the label in medium weight, and the detail beneath in muted text.
+   - **"What to fix"** panel:
+     - header chip in negative ink;
+     - each `fail` and `partial` check, **sorted high → medium → low**;
+     - each row has a checkbox, the label, the detail, and a priority `Pill` (a `partial` also shows a "Partly" pill).
+   - **Checkboxes** are a client convenience: "tick them off as you fix them".
+     - Store state in `localStorage` under `audit:{slug}:{segmentId}:{index}`.
+     - Wrap every read and write in try/catch.
+     - Hydrate after mount, so the server HTML is always unchecked.
+     - Use a real `<input type="checkbox">` with a `<label>`.
+   - **Empty panels:** if a segment has no passes, show "Nothing passing here yet." Keep the panel so the layout doesn't jump.
+3. **"How Google sees it" box.** A full-width band under the panels:
+   - `accent-subtle` fill with an `accent-line` top rule;
+   - a mono caption label, then `googleSees` in body-large.
+   - This is our version of Flow Ninja's "How does AI see your…" box.
+4. **Evidence**, if present:
+   - screenshots in a row (2 across from `md`, stacked on phones);
+   - `next/image` with the given width and height, a thin border, radius 6;
+   - captions in small muted text.
+
+Rows inside panels are separated by hairlines, not gaps. Keep the check rows compact, one or two lines each.
+
+### 6.7 Two ways forward (dark, textured, same backdrop as `Pricing`), `id="options"`
+
+- **Layout:** `intro`, then the two option cards, side by side from `md`, stacked on phones with the **rebuild first**.
+- **Recommended card:** the white fill (same as the highlighted pricing tier) and a "Recommended" badge.
+- **Each card:** label, name, price (display face) with `priceNote`, `bestFor` in italic muted text, the includes list, then the CTA.
+- **Credit line:** `credit` sits centred under the cards in small muted text.
+
+### 6.8 Comparison (same dark band)
+
+- **Table:** a real `<table>` with the criterion column plus two option columns.
+- **Marks:** yes = verified tick, no = cross, partial = dash icon. Any note sits under its mark in small text.
+- **Small screens:** scrolls horizontally inside its frame.
+- **Build a small audit-specific table.** Don't reuse `ComparisonTable`: it's hard-wired to `content/home`.
+
+### 6.9 Ceiling (light)
+
+- `heading` plus paragraphs, max width about 68ch.
+- Calm. **No warning colours.** This is honesty, not a scare.
+
+### 6.10 Proof (light, `surface`)
+
+Eyebrow, heading, body, two text links with `&rarr;`.
+
+### 6.11 Close (light)
+
+Heading, body, `Button` to the call CTA, then the `note` in small muted text.
+
+### 6.12 Sticky bottom bar (phones only, below `md`)
+
+- A slim bar fixed to the bottom: "See your two options" → `#options`, as a white-on-accent `Button`, full width.
+- **Hide it** once `#options` is in view.
+- **Respect** safe-area insets.
+- **Desktop doesn't need it:** the jump bar carries "Your options".
 
 **Global chrome:**
 
-- Keep the site `Nav` and `Footer` from the root layout. Don't add the page to the nav.
-- No `JsonLd` on this page: it's not meant to be understood by search engines.
+- Keep the site `Nav` and `Footer`. Don't add the page to the nav.
+- No `JsonLd`.
 - Default site OG image. OG title = `meta.title`.
+- **No share buttons.** Flow Ninja has them, but this is a private document.
 
 ---
 
 ## 7. Behaviour and accessibility
 
-- **One H1** (client name). Section headings are H2, fix titles H3.
-- **Priority is never shown by colour alone** (see above).
-- **Contrast:** all text meets AA on both tones. Check the muted text on the dark offer band.
-- **Downloads:**
-  - The PDF link carries `download` and shows the file type and size ("PDF, 190 KB").
-  - Compute the size at build time with `fs.statSync` in the page. Don't hardcode it.
-- **Analytics:** leave PostHog's pageview as is (consent-gated). That's how we'll know the client opened it. Add no extra tracking.
-- **Motion:** none beyond what shared components already do.
+- **Headings:** one H1 (client name). Segment and section headings are H2, check labels are not headings.
+- **Colour is never the only signal.** Every band and priority prints its word, and the gauge and bars have a text equivalent.
+- **Contrast:**
+  - status text uses the `-ink` tokens, which clear AA on both white and `light-surface` (see DESIGN.md);
+  - the fill tokens are for bars and the arc only, never text;
+  - check the muted text on the dark offer band.
+- **Keyboard:**
+  - the jump bar, checkboxes and "See details" links are all reachable;
+  - focus rings use the tone-aware `--focus-ring`.
+- **Anchors:** segment anchors get `scroll-margin-top` equal to nav plus jump bar, so headings aren't hidden under them.
+- **Analytics:** leave PostHog's pageview as is (consent-gated). That's how we'll know the client opened it. Add nothing else.
+- **Motion:** the gauge draw-in, and nothing else. All of it is off under reduced motion.
 
 ---
 
 ## 8. Definition of done
 
+**Routing and privacy:**
+
 - [ ] `/audit/lifetime-learning-center` renders.
-- [ ] `/audit` and `/audit/anything-else` return 404.
-- [ ] `curl -I` on the page **and** on the PDF shows `X-Robots-Tag: noindex, nofollow`.
-- [ ] Page HTML contains the robots meta with noindex, nofollow.
-- [ ] `/sitemap.xml` contains no `/audit` URL.
+- [ ] `/audit` and unknown slugs return 404.
+- [ ] `curl -I` on the page **and** the PDF shows `X-Robots-Tag: noindex, nofollow`.
+- [ ] Page HTML has the robots meta.
+- [ ] `/sitemap.xml` has no `/audit` URL.
 - [ ] robots.txt is unchanged.
-- [ ] `grep -r "/audit/" app components content` finds only the route itself and the audit content files.
-- [ ] Copy matches §5 exactly. No em dashes, no banned words (CLAUDE.md §14).
+- [ ] `grep -r "/audit/" app components content` finds only the route and the audit content.
+
+**Scoring:**
+
+- [ ] Scores match §4 exactly: overall 37 (11 / 3 / 20 of 34), and every segment.
+- [ ] No score is typed into content.
+- [ ] A dev-time assert fails if a non-pass check lacks a priority.
+
+**Copy:**
+
+- [ ] Matches §5 exactly.
+- [ ] No em dashes, no banned words (CLAUDE.md §14).
+
+**Layout and behaviour:**
+
 - [ ] Checked at 375, 768 and 1280 widths.
-- [ ] The option cards stack with the rebuild first on phones.
-- [ ] The comparison table scrolls inside its frame.
+- [ ] Phones: segment fix panels come before working panels, and the rebuild card comes first.
+- [ ] Jump bar: sticks, scrolls sideways on phones, and marks the current segment.
+- [ ] Mobile bottom bar hides at `#options`.
+- [ ] Checkboxes persist across reloads, and the page still works with storage blocked.
 - [ ] Empty `loomId` renders no video block.
-- [ ] Adding a second audit needs only a new content file plus one line in `content/audits/index.ts`.
+
+**Template:**
+
+- [ ] A second audit needs only a new content file plus one line in `content/audits/index.ts`.
+
+**Build:**
+
 - [ ] `npx tsc --noEmit`, `npx eslint .` and `next build` are clean.

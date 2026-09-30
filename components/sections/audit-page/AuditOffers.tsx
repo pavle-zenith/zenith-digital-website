@@ -34,7 +34,9 @@ export function AuditOffers({ offers }: { offers: AuditPage["offers"] }) {
   const { comparison } = offers;
 
   return (
-    <div className="relative isolate overflow-hidden">
+    // #options: the target of the jump bar's "Your options" and the phone
+    // bottom bar. audit-anchor offsets it below the two sticky bars.
+    <div id="options" className="audit-anchor relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-bg">
         <Image
           src="/textures/studio-texture.jpg"

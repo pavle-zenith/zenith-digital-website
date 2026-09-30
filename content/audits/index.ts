@@ -1,4 +1,5 @@
 import type { AuditPage } from "./types";
+import { assertAudit } from "./score";
 import { lifetimeLearningCenter } from "./lifetime-learning-center";
 
 /**
@@ -9,6 +10,11 @@ import { lifetimeLearningCenter } from "./lifetime-learning-center";
  * Deliberately NOT in `app/sitemap.ts`. These are private documents.
  */
 export const audits: AuditPage[] = [lifetimeLearningCenter];
+
+// Validated at module load, which `next build` runs, so a malformed content
+// file (a failing check with no priority, a key fix pointing at a segment that
+// doesn't exist) breaks the build instead of shipping a page with a hole in it.
+audits.forEach(assertAudit);
 
 export function getAudit(slug: string): AuditPage | undefined {
   return audits.find((a) => a.slug === slug);

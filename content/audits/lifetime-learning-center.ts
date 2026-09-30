@@ -2,10 +2,10 @@ import type { AuditPage } from "./types";
 
 /**
  * Lifetime Learning Center, Seattle. Free audit request, focus on SEO setup.
- * Findings checked 30 Sep 2026 against the live site, its sitemaps and Google.
- * Full record: public/audits/lifetime-learning-center/website-audit.pdf.
- * Prices are owner-set (30 Sep 2026). The credit line is an owner offer:
- * delete `credit` to withdraw it.
+ * Every check verified 30 Sep 2026 against the live site, its sitemaps and
+ * Google. Full record: public/audits/lifetime-learning-center/website-audit.pdf.
+ * Prices are owner-set (30 Sep 2026). `credit` is an owner offer: delete it to
+ * withdraw. Scores are computed from `checks`, never typed in.
  */
 export const lifetimeLearningCenter: AuditPage = {
   slug: "lifetime-learning-center",
@@ -16,147 +16,156 @@ export const lifetimeLearningCenter: AuditPage = {
   meta: {
     title: "Website audit | Lifetime Learning Center | Zenith Digital",
     description:
-      "A hand-reviewed audit of lifetimelearningcenter.org: what's holding it back in Google, the three fixes that matter most, and two ways forward.",
+      "A hand-reviewed audit of lifetimelearningcenter.org: 34 checks across six areas, the three fixes that matter most, and two ways forward.",
   },
 
   hero: {
     eyebrow: "Private website audit",
     heading: "Lifetime Learning Center",
-    lead: [
-      "Google already knows where you are. Your website just doesn't tell it what you are. Your map listing shows up when people look for learning programs for older adults in Seattle, but it doesn't appear to be managed by anyone at LLC, and the website behind it gives Google very little to work with.",
-      "Below: what we found, the three fixes that matter most, and two ways to get it done.",
-    ],
+    verdict: "Great content, weak setup. Google knows where you are, but not what you are.",
+    lead: "Your map listing already shows up when people look for learning programs for older adults in Seattle. The website behind it gives Google very little to work with. Everything below is fixable without starting over.",
     loomId: "",
     pdfHref: "/audits/lifetime-learning-center/website-audit.pdf",
     pdfLabel: "Download the full audit (PDF)",
     callCta: { label: "Book 15 minutes", href: "/book-a-call" },
   },
 
-  stats: [
-    { value: "108", label: "pages your site lists for Google" },
-    { value: "0 of 16", label: "main pages have a description" },
-    { value: "53 of 54", label: "event pages are for past events" },
-    { value: "6", label: "Google reviews, on an unclaimed listing" },
-  ],
-
-  working: {
-    heading: "What's already working",
-    items: [
-      "The site is light and loads quickly, and the phone version is easy to read.",
-      "Close to 40 written class descriptions every term: real content Google rewards.",
-      "You already appear in Google's map results for lifelong learning for older adults in Seattle.",
-      "Prices are stated plainly: $20 to register, $40 per class.",
-    ],
+  score: {
+    heading: "Your site score",
+    method: "The share of the 34 checks below that your site passes. Partly counts as half. Every check is listed, so you can recount it.",
   },
 
-  fixes: {
-    heading: "The three things we'd fix first",
+  keyFixes: {
+    heading: "Start here",
     items: [
       {
-        title: "Claim your Google Business Profile",
-        why: "It's where you already show up, and right now it offers \"Own this business?\" to anyone who searches your name.",
-        fix: "Claim it, add real class photos, term hours and a description, and ask students for a review at the end of each term.",
-        effort: "About an hour, plus a few days for Google's verification",
+        title: "Claim your Google listing",
+        body: "It's where people already find you, and right now it offers \"Own this business?\" to anyone who searches your name.",
+        effort: "About an hour",
+        segmentId: "google-listing",
       },
       {
         title: "Give every page a proper name",
-        why: "Your homepage appears in Google as \"HOME | Lifetime Learning\", and none of your main pages has a description, so Google has to guess.",
-        fix: "Titles, descriptions and one clear heading for the 16 main pages, plus one naming template each for class and event pages.",
-        effort: "A day of careful work, done once",
+        body: "Your homepage shows in Google as \"HOME | Lifetime Learning\", and none of your main pages has a description.",
+        effort: "A day, done once",
+        segmentId: "page-names",
       },
       {
         title: "Clear out what Google shouldn't see",
-        why: "Next to your real classes sit an unedited Wix template page, a test event set in Ontario, Canada, two cancelled classes and 53 past events.",
-        fix: "Remove or hide them, agree a simple rule for each new term, and connect Google Search Console.",
+        body: "A template page, a test event set in Ontario, cancelled classes and 53 past events sit next to your real classes.",
         effort: "Half a day, then ten minutes a term",
+        segmentId: "housekeeping",
       },
     ],
   },
 
-  evidence: {
-    heading: "What we saw",
-    items: [
-      {
-        src: "/audits/lifetime-learning-center/google-listing.webp",
-        alt: "Google results for Lifetime Learning Center Seattle, showing the listing with an Own this business link",
-        caption: "Searching your name: the listing offers \"Own this business?\" and shows a Street View photo. In our check, the results under it were an obituary and a boat club, not your website.",
-        width: 800,
-        height: 530,
-      },
-      {
-        src: "/audits/lifetime-learning-center/team-page.webp",
-        alt: "The team page on the LLC website showing Wix template placeholder text",
-        caption: "/team, listed for Google: the Wix template text was never replaced.",
-        width: 560,
-        height: 250,
-      },
-      {
-        src: "/audits/lifetime-learning-center/placeholder-event.webp",
-        alt: "A placeholder event page titled Event with the text event description",
-        caption: "A placeholder event, still published and still listed for Google.",
-        width: 560,
-        height: 420,
-      },
-    ],
-  },
-
-  findings: {
-    heading: "Everything we found",
-    summary: "22 findings in five groups. The PDF has the full detail on each.",
-    groups: [
-      {
-        name: "Your Google listing",
-        items: [
-          { finding: "Business profile appears unclaimed", why: "Anyone can suggest edits to your hours or phone number, and you can't reply to reviews or add photos.", priority: "high" },
-          { finding: "Listing links to the old http:// address", why: "An extra redirect on every click, and a sign the listing hasn't been touched in a while.", priority: "medium" },
-          { finding: "6 reviews", why: "Reviews are one of the main things that move you up the map results.", priority: "medium" },
-        ],
-      },
-      {
-        name: "Page names and descriptions",
-        items: [
-          { finding: "Titles like \"HOME\", \"ABOUT\", \"CLASSES\"", why: "The title is the link people click in Google, and \"HOME\" says nothing about you.", priority: "high" },
-          { finding: "No description on any main page", why: "Google fills the gap with whatever text it finds first.", priority: "high" },
-          { finding: "No main heading on 13 of 16 main pages", why: "The main heading is how Google confirms what a page is about.", priority: "medium" },
-          { finding: "Class page titles don't say what or where", why: "\"Watercolor Basics S1\" could be anywhere in the world.", priority: "medium" },
-          { finding: "Site name set to \"Lifetime Learning\"", why: "Google may show the shorter name instead of the one people search for.", priority: "low" },
-          { finding: "One class title cut short by hidden characters", why: "\"Intermediate Spanish Conversation Prac\" is how it shows in Google.", priority: "low" },
-        ],
-      },
-      {
-        name: "Pages Google shouldn't see",
-        items: [
-          { finding: "Wix template page at /team", why: "An unfinished page tells visitors, and Google, the site isn't looked after.", priority: "high" },
-          { finding: "Test and placeholder events", why: "One is set in St. Catharines, Ontario, which muddies where Google thinks you are.", priority: "high" },
-          { finding: "53 past events and 2 cancelled classes still live", why: "Old pages compete with current ones.", priority: "medium" },
-          { finding: "About and Mission & Vision are the same page", why: "Two copies split what Google credits to either.", priority: "medium" },
-          { finding: "Google still lists an old page address", why: "A sign Google hasn't revisited the site recently.", priority: "medium" },
-        ],
-      },
-      {
-        name: "Content Google can't read",
-        items: [
-          { finding: "The class schedule is embedded from another website", why: "Google and screen readers treat your most useful page as nearly empty.", priority: "high" },
-          { finding: "Photo descriptions are file names", why: "Screen readers read \"Cercile and students_edited.jpg\" aloud.", priority: "medium" },
-          { finding: "No sharing image or description", why: "Links shared by email, Facebook or Nextdoor show up blank.", priority: "medium" },
-          { finding: "Default Wix icon in browser tabs", why: "Google shows it next to your result instead of your logo.", priority: "low" },
-        ],
-      },
-      {
-        name: "Trust and details",
-        items: [
-          { finding: "\"Contact\" in the menu goes to the homepage", why: "There's no page with hours, directions, parking and accessibility.", priority: "medium" },
-          { finding: "Tax ID and \"2020-2024\" are phone links", why: "Tapping them on a phone tries to dial them.", priority: "low" },
-          { finding: "Term end date says Friday 19 November", why: "It's a Thursday, and the Register page says so.", priority: "low" },
-          { finding: "Described to Google as a generic local business", why: "Marking you as a nonprofit educational organization helps Google and AI assistants describe you correctly.", priority: "low" },
-        ],
-      },
-    ],
-  },
+  segments: [
+    {
+      id: "google-listing",
+      name: "Google listing",
+      googleSees: "A learning center at 3841 NE 123rd St, rated 4.7 from 6 reviews, that nobody has claimed.",
+      checks: [
+        { label: "Shows in Google's map results", status: "pass", detail: "Second for \"lifelong learning for older adults seattle\" when we checked." },
+        { label: "Strong rating", status: "pass", detail: "4.7 stars." },
+        { label: "Listing is claimed and managed", status: "fail", priority: "high", detail: "It shows \"Own this business?\", so anyone can suggest edits and you can't reply to reviews." },
+        { label: "Enough reviews to compete", status: "fail", priority: "medium", detail: "6 reviews. Seattle Central's continuing education listing has 13." },
+        { label: "Your own photos", status: "fail", priority: "medium", detail: "The only photo is a Street View shot of the building." },
+        { label: "Links to the secure version of your site", status: "fail", priority: "medium", detail: "The listing still links to the old http:// address." },
+      ],
+      evidence: [
+        {
+          src: "/audits/lifetime-learning-center/google-listing.webp",
+          alt: "Google results for Lifetime Learning Center Seattle, showing the listing with an Own this business link",
+          caption: "Searching your name. In our check, the results under the listing were an obituary and a boat club, not your website.",
+          width: 800,
+          height: 530,
+        },
+      ],
+    },
+    {
+      id: "page-names",
+      name: "Page names and descriptions",
+      googleSees: "A site called \"Lifetime Learning\" with pages named HOME, ABOUT and CLASSES.",
+      checks: [
+        { label: "Every page has its own title", status: "partial", priority: "low", detail: "Mostly, but two pairs of event pages share the same title." },
+        { label: "Titles say what you offer and where", status: "fail", priority: "high", detail: "Your homepage title is \"HOME | Lifetime Learning\"." },
+        { label: "Every main page has a description", status: "fail", priority: "high", detail: "None of the 16 main pages has one, so Google writes its own." },
+        { label: "One main heading per page", status: "fail", priority: "medium", detail: "Missing on 13 of the 16 main pages, including the homepage." },
+        { label: "Class pages named clearly", status: "fail", priority: "medium", detail: "\"Watercolor Basics S1\" could be anywhere, and one title is cut short to \"Spanish Conversation Prac\"." },
+        { label: "Site name matches your name", status: "fail", priority: "low", detail: "Set to \"Lifetime Learning\", not \"Lifetime Learning Center\"." },
+      ],
+    },
+    {
+      id: "housekeeping",
+      name: "Housekeeping",
+      googleSees: "108 pages, including a template page, a test event in Ontario and 53 events that already happened.",
+      checks: [
+        { label: "Sitemap in place", status: "pass", detail: "Wix generates it and lists every page." },
+        { label: "Old page addresses redirect", status: "pass", detail: "The old About copy redirects to Mission & Vision." },
+        { label: "No template or test pages", status: "fail", priority: "high", detail: "/team still says \"I'm a title. Click here to edit me.\", and two test events are published." },
+        { label: "Past events handled", status: "fail", priority: "medium", detail: "53 of 54 event pages are for events that already happened." },
+        { label: "Cancelled classes taken down", status: "fail", priority: "medium", detail: "Bridge and Authoritarian Personality still have live pages marked CLASS CANCELLED." },
+        { label: "No duplicate pages", status: "fail", priority: "medium", detail: "About and Mission & Vision are the same page." },
+      ],
+      evidence: [
+        {
+          src: "/audits/lifetime-learning-center/team-page.webp",
+          alt: "The team page on the LLC website showing Wix template placeholder text",
+          caption: "/team, listed for Google: the template text was never replaced.",
+          width: 560,
+          height: 250,
+        },
+        {
+          src: "/audits/lifetime-learning-center/placeholder-event.webp",
+          alt: "A placeholder event page titled Event with the text event description",
+          caption: "A placeholder event, still published.",
+          width: 560,
+          height: 420,
+        },
+      ],
+    },
+    {
+      id: "readable-content",
+      name: "Content Google can read",
+      googleSees: "Detailed class descriptions, and a schedule page with almost nothing on it.",
+      checks: [
+        { label: "Class descriptions in real text", status: "pass", detail: "Close to 40 written descriptions every term." },
+        { label: "Business details describe a nonprofit school", status: "partial", priority: "low", detail: "Address and phone are marked up, but as a generic local business." },
+        { label: "Class schedule readable on the page", status: "fail", priority: "high", detail: "It's embedded from another website, so Google sees the page as nearly empty." },
+        { label: "Photos described", status: "fail", priority: "medium", detail: "Descriptions are file names, like \"Cercile and students_edited.jpg\"." },
+        { label: "Sharing preview set", status: "fail", priority: "medium", detail: "Links shared by email, Facebook or Nextdoor show no image or description." },
+        { label: "Your own site icon", status: "fail", priority: "low", detail: "The default Wix icon shows in browser tabs and next to your Google result." },
+      ],
+    },
+    {
+      id: "trust",
+      name: "Trust and visitor details",
+      googleSees: "Clear prices and contact details, but no page that tells a first-time visitor how to find you.",
+      checks: [
+        { label: "Prices stated plainly", status: "pass", detail: "$20 to register, $40 per class." },
+        { label: "Address and phone on every page", status: "pass", detail: "In the footer site-wide." },
+        { label: "A word from a student", status: "pass", detail: "Cynthia Ryan's quote on the homepage." },
+        { label: "A page with hours, directions and parking", status: "fail", priority: "medium", detail: "\"Contact\" in the menu goes back to the homepage." },
+        { label: "Numbers display correctly", status: "fail", priority: "low", detail: "Your Tax ID and \"2020-2024\" become phone links on the Support page." },
+        { label: "Dates agree across pages", status: "fail", priority: "low", detail: "Class Descriptions says the term ends Friday 19 November. It's a Thursday." },
+      ],
+    },
+    {
+      id: "speed-mobile",
+      name: "Speed and mobile",
+      googleSees: "A light, quick site that reads well on phones.",
+      checks: [
+        { label: "Light pages", status: "pass", detail: "The homepage is under 200 KB." },
+        { label: "Loads quickly", status: "pass", detail: "Main content appears in under a second on a normal connection." },
+        { label: "Easy to read on a phone", status: "pass", detail: "Large text and big tap targets." },
+        { label: "Adapts to tablets", status: "partial", priority: "medium", detail: "Tablets get the desktop layout shrunk to fit." },
+      ],
+    },
+  ],
 
   offers: {
     heading: "Two ways forward",
-    intro: "You can work through everything above yourselves, and the three fixes are the place to start. If you'd rather hand it off, these are the two ways we'd do it.",
+    intro: "You can work through everything above yourselves, and \"Start here\" is the place to begin. If you'd rather hand it off, these are the two ways we'd do it.",
     options: [
       {
         id: "fix",
@@ -230,7 +239,7 @@ export const lifetimeLearningCenter: AuditPage = {
   proof: {
     eyebrow: "Done before",
     heading: "Bel'Istria: from Wix's older editor to Wix Studio",
-    body: "We moved Bel'Istria's 35+ pages across, held every tracked ranking through launch, and gave each service its own page. Search impressions are up 257% year on year.",
+    body: "We moved Bel'Istria's 35+ pages across, gave each group of services its own page, and held every tracked ranking through the 30-day window after launch. Search impressions are up 257% year on year.",
     links: [
       { label: "Read the case study", href: "/case-studies/belistria" },
       { label: "How a Wix to Wix Studio move works", href: "/services/wix-classic-to-wix-studio" },

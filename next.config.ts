@@ -46,6 +46,31 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
         ],
       },
+      // Private audit pages, same four-layer reasoning as /p/ above.
+      //
+      // The pattern is route-shaped ON PURPOSE. `/audit/:path*` would look
+      // right and would also match `/public/audit/`, which is a DIFFERENT,
+      // pre-existing folder holding three images used on /free-website-audit,
+      // a public indexed page. That wildcard noindexed all three. `[^./]+`
+      // matches one slug-shaped segment with no dot, so the audit routes are
+      // covered and the images are not. Keep the two namespaces straight:
+      // /audit/ is this route, /audits/ is its assets.
+      {
+        source: "/audit/:slug([^./]+)",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+      // The audit's own assets, including the PDF. This entry is not a
+      // duplicate of the one above: a PDF cannot carry a robots meta tag, so
+      // for that file this header is the ONLY thing keeping it out of the
+      // index, and it is served from /audits/ (plural), a different path.
+      {
+        source: "/audits/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
     ];
   },
 

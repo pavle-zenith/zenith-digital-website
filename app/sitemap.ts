@@ -20,6 +20,12 @@ const SITE = "https://www.thezenithdigital.com";
  * by existing rather than by someone remembering to add it. The query excludes
  * drafts, so an unpublished post cannot be listed. /studio is deliberately
  * absent: it is an editing tool and is noindexed on the route itself.
+ *
+ * /audit/[slug] is deliberately absent too. Those are private client
+ * documents sent as a link: noindexed on the route, noindexed again by an
+ * X-Robots-Tag header on /audit/ and /audits/, and linked from nowhere.
+ * This list being an allowlist is what keeps them out, so adding an audit
+ * needs no change here. Do not add one.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await sanityFetchSafe<PostSitemapEntry[]>(postSlugsQuery, []);

@@ -177,8 +177,8 @@ export const pulse: ProposalPage = {
   },
 
   plan: {
-    heading: "The plan: two websites, one system",
-    intro: "Both sites are built together on Wix Studio, sharing one design system so they feel like sister brands, each with its own identity, colours and domain. Your team can edit text, photos, case studies and blog posts without calling anyone.",
+    heading: "The plan: two websites, each built for its business",
+    intro: "Both sites are built on Wix Studio as sister brands: the same Pulse spirit, but each one designed from scratch around how its business works, with its own layout, colours and domain. Your team can edit text, photos, case studies and blog posts without calling anyone.",
     sites: [
       {
         name: "Pulse Electrical",
@@ -198,7 +198,7 @@ export const pulse: ProposalPage = {
       {
         name: "Pulse Catering",
         domain: "pulsecateringequipment.co.uk",
-        note: "A simpler site built on the same system.",
+        note: "Designed on its own, around how catering customers work: kitchens and venues that need breakdowns fixed fast and equipment kept running.",
         pages: [
           { name: "Home", detail: "Including the areas you cover" },
           { name: "About" },
@@ -286,7 +286,7 @@ export const pulse: ProposalPage = {
     rows: [
       { when: "Week 1", what: "Access email sent, backups taken, kick-off call, content gathered" },
       { when: "Weeks 2 to 3", what: "Pulse Electrical designed and built" },
-      { when: "Weeks 3 to 4", what: "Pulse Catering built on the same system" },
+      { when: "Weeks 3 to 4", what: "Pulse Catering designed and built" },
       { when: "Week 4", what: "Your review and changes, Google Business Profiles fixed" },
       { when: "Week 5", what: "Switch-over, redirects checked, old hosting cancelled" },
     ],

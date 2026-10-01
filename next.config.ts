@@ -71,6 +71,23 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
         ],
       },
+      // Private proposal pages, same four layers and the same route-shaped
+      // pattern as the audit entry above: one slug segment with no dot, so a
+      // public file can never be caught by it.
+      {
+        source: "/proposal/:slug([^./]+)",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+      // The proposals' screenshots. An image cannot carry a robots meta tag,
+      // so for these files this header is the only protection.
+      {
+        source: "/proposals/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
     ];
   },
 

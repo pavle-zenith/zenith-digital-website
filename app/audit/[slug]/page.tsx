@@ -14,7 +14,7 @@ import { AuditOffers } from "@/components/sections/audit-page/AuditOffers";
 import { AuditCeiling } from "@/components/sections/audit-page/AuditCeiling";
 import { AuditProof } from "@/components/sections/audit-page/AuditProof";
 import { AuditClose } from "@/components/sections/audit-page/AuditClose";
-import { AuditMobileBar } from "@/components/sections/audit-page/AuditMobileBar";
+import { MobileBar } from "@/components/sections/private-doc/MobileBar";
 
 /**
  * Private audit pages. A document sent to one client as a link, not a page of
@@ -130,7 +130,7 @@ export default async function AuditRoute({
       <AuditCeiling ceiling={audit.offers.ceiling} />
       {audit.proof ? <AuditProof proof={audit.proof} /> : null}
       <AuditClose close={audit.close} cta={audit.hero.callCta} />
-      <AuditMobileBar label="See your two options" />
+      <MobileBar label="See your two options" target="options" />
     </>
   );
 }

@@ -62,12 +62,15 @@ export function Button({
       </Link>
     );
   }
+  // mailto: and tel: hand off to the mail or phone app. In a new tab they
+  // leave a blank tab behind, so only real external pages open in one.
+  const handsOff = /^(mailto|tel):/.test(cta.href);
   return (
     <a
       href={cta.href}
       className={cls}
-      rel="noopener"
-      target="_blank"
+      rel={handsOff ? undefined : "noopener"}
+      target={handsOff ? undefined : "_blank"}
       onClick={onClick}
     >
       {label}

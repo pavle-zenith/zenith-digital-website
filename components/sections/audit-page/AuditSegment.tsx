@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
 import {
@@ -10,7 +8,8 @@ import {
 } from "@/content/audits/score";
 import type { AuditSegment as Segment } from "@/content/audits/types";
 import { AuditFixList } from "./AuditFixList";
-import { CheckIcon } from "./icons";
+import { CheckIcon } from "@/components/sections/private-doc/icons";
+import { EvidenceFigure } from "@/components/sections/private-doc/EvidenceFigure";
 
 /**
  * One scored segment. Every segment has the same shape, which is what makes the
@@ -47,7 +46,7 @@ export function AuditSegment({
     <Section
       id={segment.id}
       tone="light"
-      className={cn("audit-anchor", index % 2 === 1 && "bg-light-surface")}
+      className={cn("doc-anchor", index % 2 === 1 && "bg-light-surface")}
       frameClassName="!py-14 md:!py-20"
     >
       <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
@@ -121,24 +120,7 @@ export function AuditSegment({
           )}
         >
           {evidence.map((img) => (
-            <figure key={img.src}>
-              <div className="overflow-hidden rounded-[6px] border border-light-border bg-light-bg">
-                {/* Served straight from /audits/, which carries the noindex
-                    header; through the optimizer it would be re-served from
-                    /_next/image, where that header does not apply. */}
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  width={img.width}
-                  height={img.height}
-                  unoptimized
-                  className="h-auto w-full"
-                />
-              </div>
-              <figcaption className="mt-3 text-label tracking-normal text-light-muted">
-                {img.caption}
-              </figcaption>
-            </figure>
+            <EvidenceFigure key={img.src} image={img} />
           ))}
         </div>
       ) : null}

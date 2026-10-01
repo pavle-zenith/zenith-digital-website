@@ -1,11 +1,10 @@
-import Image from "next/image";
-
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import type { AuditPage } from "@/content/audits/types";
 import type { Tally } from "@/content/audits/score";
-import { DownloadIcon } from "./icons";
+import { DarkBand } from "@/components/sections/private-doc/DarkBand";
+import { DownloadIcon } from "@/components/sections/private-doc/icons";
 import { ScoreGauge } from "./ScoreGauge";
 
 /**
@@ -41,18 +40,7 @@ export function AuditHero({
 
   return (
     // #audit-hero: the jump bar watches this to know when to slide in.
-    <div id="audit-hero" className="relative isolate overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-bg">
-        <Image
-          src="/textures/studio-texture.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover opacity-[0.16]"
-          aria-hidden
-        />
-      </div>
+    <DarkBand id="audit-hero" priority>
 
       <Section
         tone="dark"
@@ -125,6 +113,6 @@ export function AuditHero({
           </div>
         ) : null}
       </Section>
-    </div>
+    </DarkBand>
   );
 }

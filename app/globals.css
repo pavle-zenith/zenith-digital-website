@@ -267,13 +267,14 @@ body {
   }
 }
 
-/* Audit anchors (segments, #options). Offsets a jump-link target by the real
-   height of the site nav plus the audit jump bar, both measured at runtime and
-   written to these vars by AuditJumpBar, so a heading never lands underneath
-   them. The fallbacks only cover the moment before hydration. */
-.audit-anchor {
+/* Private-document anchors (/audit/ segments and #options, /proposal/
+   sections). Offsets a jump-link target by the real height of the site nav
+   plus the jump bar, both measured at runtime and written to these vars by
+   private-doc/JumpBar, so a heading never lands underneath them. The
+   fallbacks only cover the moment before hydration. */
+.doc-anchor {
   scroll-margin-top: calc(
-    var(--audit-nav-h, 4rem) + var(--audit-jump-h, 3.25rem) + 1rem
+    var(--doc-nav-h, 4rem) + var(--doc-jump-h, 3.25rem) + 1rem
   );
 }
 

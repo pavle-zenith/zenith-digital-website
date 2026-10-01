@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { Pill } from "@/components/ui/Pill";
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
 import type { AuditMark, AuditPage } from "@/content/audits/types";
-import { CheckIcon, CrossIcon, DashIcon } from "./icons";
+import { DarkBand } from "@/components/sections/private-doc/DarkBand";
+import { CheckIcon, CrossIcon, DashIcon } from "@/components/sections/private-doc/icons";
 
 /**
  * The two priced ways forward, plus the matrix that separates them.
@@ -35,18 +35,8 @@ export function AuditOffers({ offers }: { offers: AuditPage["offers"] }) {
 
   return (
     // #options: the target of the jump bar's "Your options" and the phone
-    // bottom bar. audit-anchor offsets it below the two sticky bars.
-    <div id="options" className="audit-anchor relative isolate overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-bg">
-        <Image
-          src="/textures/studio-texture.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-[0.16]"
-          aria-hidden
-        />
-      </div>
+    // bottom bar. doc-anchor offsets it below the two sticky bars.
+    <DarkBand id="options" className="doc-anchor">
 
       <Section
         tone="dark"
@@ -223,7 +213,7 @@ export function AuditOffers({ offers }: { offers: AuditPage["offers"] }) {
           </div>
         </div>
       </Section>
-    </div>
+    </DarkBand>
   );
 }
 

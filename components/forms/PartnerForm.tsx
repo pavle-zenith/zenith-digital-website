@@ -6,7 +6,7 @@ import { Suspense, useActionState, useEffect } from "react";
 import {
   submitPartnerApplication,
   type PartnerFormState,
-} from "@/app/partnerships/actions";
+} from "@/app/(site)/partnerships/actions";
 import { pApply } from "@/content/partnerships";
 import { trackLead } from "@/lib/analytics";
 import { cn } from "@/lib/utils";

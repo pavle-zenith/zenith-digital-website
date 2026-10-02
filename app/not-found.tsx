@@ -1,71 +1,31 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
+import SiteNotFound from "./(site)/not-found";
 
-import { Section } from "@/components/ui/Section";
-import { Button } from "@/components/ui/Button";
-import { notFound } from "@/content/not-found";
-
-/**
- * Next emits its own `noindex` for not-found pages, but the root layout sets
- * `index, follow` sitewide and that inherits down to here. Without this
- * override the page ships two contradicting robots tags. Restating it means
- * both tags agree.
- */
-export const metadata: Metadata = {
-  title: "Page not found | Zenith Digital",
-  robots: { index: false, follow: true },
-};
+export { metadata } from "./(site)/not-found";
 
 /**
- * Custom 404. Renders inside the root layout, so the nav and footer come with
- * it and a lost visitor keeps the full site navigation.
+ * 404 for a URL that matches no route, and for an unknown slug on a route
+ * with `dynamicParams = false` (/audit/nope). It renders under the root layout
+ * alone, outside the (site) group, so it brings the site chrome with it and
+ * is prerendered as a complete page. A 404 raised by notFound() inside a site
+ * route uses app/(site)/not-found.tsx, which the (site) layout already wraps.
  *
- * Light, since it sits directly under the light nav bar. The route options are
- * a hairline grid rather than a paragraph of links: someone who mistyped a URL
- * is scanning, not reading.
+ * Next serialises this root boundary into every page's payload, so the page
+ * source of /partner-showcase carries this tree as data too. It is never
+ * rendered there. A catch-all route that sent every unknown URL into the
+ * (site) group would avoid that, but it makes those 404s render on demand,
+ * and Next ships an on-demand 404 with an empty body that only fills in with
+ * JavaScript. A complete 404 for every visitor and crawler wins.
  */
-export default function NotFoundPage() {
+export default function NotFound() {
   return (
-    <Section tone="light" divide={false} frameClassName="!py-16 md:!py-28">
-      <div className="max-w-3xl">
-        <p className="font-mono text-label uppercase track-label text-light-muted">
-          Error {notFound.code}
-        </p>
-        <h1 className="mt-4 font-display text-h1 font-medium leading-tight tracking-tight text-balance">
-          {notFound.heading}
-        </h1>
-        <p className="mt-4 max-w-[60ch] text-body-lg leading-relaxed text-light-muted">
-          {notFound.body}
-        </p>
-
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button cta={notFound.cta} tone="light" />
-          <Button cta={notFound.ctaSecondary} tone="light" />
-        </div>
-      </div>
-
-      {/* Hairline grid of the routes people were probably after. */}
-      <div className="mt-14 grid gap-px bg-light-border sm:grid-cols-2">
-        {notFound.links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="group flex items-baseline justify-between gap-4 bg-light-bg p-6 transition hover:bg-light-surface md:p-8"
-          >
-            <span>
-              <span className="block font-display text-body-lg font-medium group-hover:text-accent">
-                {link.label}
-              </span>
-              <span className="mt-1 block text-body text-light-muted">
-                {link.desc}
-              </span>
-            </span>
-            <span aria-hidden className="btn-arrow shrink-0">
-              &rarr;
-            </span>
-          </Link>
-        ))}
-      </div>
-    </Section>
+    <>
+      <Nav />
+      <main id="main">
+        <SiteNotFound />
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -5,7 +5,16 @@ import { useAutoCycle } from "@/lib/useAutoCycle";
 
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
+import type { CtaLink } from "@/lib/types";
 import { processSection } from "@/content/home";
+
+type ProcessData = {
+  name: string;
+  heading: string;
+  /** Optional: a page that must not route to a sales step passes none. */
+  cta?: CtaLink;
+  steps: { step: string; label: string; heading: string; points: string[] }[];
+};
 
 const STEP_MS = 4000;
 
@@ -37,32 +46,58 @@ function samples(x0: number, x1: number) {
 const fullCurve = `M ${samples(0, VIEW_W).join(" L ")}`;
 const fullFill = `M ${samples(0, VIEW_W).join(" L ")} L ${VIEW_W} ${VIEW_H} L 0 ${VIEW_H} Z`;
 
-export function Process() {
+export function Process({
+  data = processSection,
+  id,
+  className,
+}: {
+  /** Defaults to the homepage's process, so / and /services are unchanged. */
+  data?: ProcessData;
+  id?: string;
+  className?: string;
+} = {}) {
+  const processSection = data;
   const { active, select: setActive, setPaused } = useAutoCycle(
     processSection.steps.length,
     STEP_MS,
   );
+  // A named process shows its name once. The homepage writes it into the
+  // heading itself; a heading that doesn't carry it gets it as a label.
+  const showName = !processSection.heading.includes(processSection.name);
 
   // Highlight everything up to (and including) the active step's column —
   // progress accumulates. The clip on the highlight layer animates the sweep.
   const hiddenRight = 100 - ((active + 1) / processSection.steps.length) * 100;
 
   return (
-    <Section tone="light" frameClassName="!py-14 md:!py-24">
+    <Section id={id} tone="light" className={className} frameClassName="!py-14 md:!py-24">
       {/* Header */}
       <div className="mb-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-        <h2 className="max-w-3xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-          {processSection.heading}
-        </h2>
-        <Link
-          href={processSection.cta.href}
-          className="btn-animated group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-[6px] px-6 py-3 sm:w-auto text-body font-medium text-accent-ink transition"
-        >
-          {processSection.cta.label}{" "}
-          <span aria-hidden className="btn-arrow">
-            &rarr;
-          </span>
-        </Link>
+        {showName ? (
+          <div className="max-w-3xl">
+            <p className="mb-4 font-mono text-label uppercase track-label text-light-muted">
+              {processSection.name}
+            </p>
+            <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+              {processSection.heading}
+            </h2>
+          </div>
+        ) : (
+          <h2 className="max-w-3xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+            {processSection.heading}
+          </h2>
+        )}
+        {processSection.cta ? (
+          <Link
+            href={processSection.cta.href}
+            className="btn-animated group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-[6px] px-6 py-3 sm:w-auto text-body font-medium text-accent-ink transition"
+          >
+            {processSection.cta.label}{" "}
+            <span aria-hidden className="btn-arrow">
+              &rarr;
+            </span>
+          </Link>
+        ) : null}
       </div>
 
       {/* Curve + grid. Hover pause lives here, not on the step buttons: the

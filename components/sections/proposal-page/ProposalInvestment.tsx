@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { DarkBand } from "@/components/sections/private-doc/DarkBand";
 import { proposalTemplate } from "@/content/proposals/template";
 import type { ProposalPage } from "@/content/proposals/types";
-import { TickList } from "./parts";
+import { TickList } from "@/components/sections/private-doc/parts";
 
 type Investment = ProposalPage["investment"];
 

@@ -1,9 +1,8 @@
-import fs from "node:fs";
-import path from "node:path";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getProposal, proposals } from "@/content/proposals";
+import { defaultShareImages } from "@/lib/shareImage";
 import { proposalTemplate } from "@/content/proposals/template";
 import { JumpBar } from "@/components/sections/private-doc/JumpBar";
 import { MobileBar } from "@/components/sections/private-doc/MobileBar";
@@ -39,7 +38,7 @@ import { ProposalClose } from "@/components/sections/proposal-page/ProposalClose
  *
  * `dynamicParams = false` means only the slugs in the collection build; every
  * other `/proposal/<anything>` is a 404 rather than an empty shell. There is
- * deliberately no `app/proposal/page.tsx`, so `/proposal` itself 404s too.
+ * deliberately no `app/(site)/proposal/page.tsx`, so `/proposal` itself 404s too.
  *
  * No JSON-LD here on purpose: structured data exists to help machines
  * understand a page, and this one is not for them.
@@ -73,37 +72,19 @@ export async function generateMetadata({
     // private document a duplicate of the homepage. Null clears it.
     alternates: { canonical: null },
     // Only the words change, so a pasted link previews as this proposal. The
-    // image is restated on purpose: a page that sets its own `openGraph`
-    // replaces the layout's whole object, and the root's file-based
-    // opengraph-image.jpg goes with it (that is why /about previews without
-    // one). Same file, same alt text.
+    // image is restated (see lib/shareImage): a page-level `openGraph`
+    // replaces the layout's, and the default image would go with it.
     openGraph: {
       title: proposal.meta.title,
       description: proposal.meta.description,
-      images: [{ url: "/opengraph-image.jpg", ...SHARE_IMAGE }],
+      images: defaultShareImages.openGraph,
     },
     twitter: {
       title: proposal.meta.title,
       description: proposal.meta.description,
-      images: [{ url: "/twitter-image.jpg", ...SHARE_IMAGE }],
+      images: defaultShareImages.twitter,
     },
   };
-}
-
-/** The site's default share image, as app/opengraph-image.jpg declares it. */
-const SHARE_IMAGE = {
-  width: 1200,
-  height: 630,
-  type: "image/jpeg",
-  alt: readAlt(),
-};
-
-function readAlt(): string {
-  try {
-    return fs.readFileSync(path.join(process.cwd(), "app/opengraph-image.alt.txt"), "utf8").trim();
-  } catch {
-    return "Zenith Digital";
-  }
 }
 
 export default async function ProposalRoute({

@@ -1,6 +1,6 @@
 import { Section } from "@/components/ui/Section";
 import type { ProposalPage } from "@/content/proposals/types";
-import { TickList } from "./parts";
+import { TickList } from "@/components/sections/private-doc/parts";
 
 /**
  * Google Business Profiles. Heading left and the list right from `lg`, so this

@@ -5,8 +5,6 @@ import "./globals.css";
 import { inter, saansMono, sfPro } from "./fonts";
 import { JsonLd } from "@/components/JsonLd";
 import { Analytics } from "@/components/analytics/Analytics";
-import { Nav } from "@/components/layout/Nav";
-import { Footer } from "@/components/layout/Footer";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -50,6 +48,13 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The document shell only. The page chrome (nav, <main>, footer) belongs to
+ * the next layout down: app/(site)/layout.tsx for every public route, and
+ * app/partner-showcase/layout.tsx for the one route that must not carry the
+ * site's navigation. app/not-found.tsx adds the site chrome itself, because an
+ * unmatched URL renders under this layout alone.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -89,9 +94,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Nav />
-        <main id="main">{children}</main>
-        <Footer />
+        {children}
         {/* Consent banner + route-change page views. */}
         <Analytics />
         {/* Loaded unconditionally: the Consent Mode defaults above decide what

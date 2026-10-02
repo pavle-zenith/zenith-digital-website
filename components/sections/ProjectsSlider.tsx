@@ -81,8 +81,13 @@ export function ProjectsSlider({
 
       {/* Scroll track — bleeds to the frame rails so the screenshots run edge
           to edge, then continues off the right to scroll. */}
+      {/* Focusable and labelled: a scroll region holding nothing focusable
+          can't be scrolled from the keyboard otherwise (WCAG 2.1.1). */}
       <div
         ref={trackRef}
+        role="region"
+        aria-label="Projects"
+        tabIndex={0}
         className="frame-bleed mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((it) => (

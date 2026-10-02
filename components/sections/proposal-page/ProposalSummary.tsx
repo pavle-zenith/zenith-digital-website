@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import type { ProposalPage } from "@/content/proposals/types";
-import { NumberChip } from "./parts";
+import { NumberChip } from "@/components/sections/private-doc/parts";
 
 /**
  * "The short version": the three things to know, for a reader who stops here.

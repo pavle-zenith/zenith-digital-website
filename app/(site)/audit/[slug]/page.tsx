@@ -39,7 +39,7 @@ import { MobileBar } from "@/components/sections/private-doc/MobileBar";
  *
  * `dynamicParams = false` means only the slugs in the collection build; every
  * other `/audit/<anything>` is a 404 rather than an empty shell. There is
- * deliberately no `app/audit/page.tsx`, so `/audit` itself 404s too.
+ * deliberately no `app/(site)/audit/page.tsx`, so `/audit` itself 404s too.
  *
  * No JSON-LD here on purpose: structured data exists to help machines
  * understand a page, and this one is not for them.

@@ -297,7 +297,7 @@ All commercial terms (prices, margins, turnarounds, revision limits) are **place
 
 ## 15. Established build conventions (source of truth: the homepage)
 
-The homepage (`app/page.tsx` + `components/sections/*`) is the reference implementation of the design system as actually built. When building any new page or section, reuse these patterns; do not re-derive them.
+The homepage (`app/(site)/page.tsx` + `components/sections/*`) is the reference implementation of the design system as actually built. When building any new page or section, reuse these patterns; do not re-derive them.
 
 **Layout & the hairline frame**
 - Every section is a `Section` (`components/ui/Section.tsx`): tone `dark`/`light`, content in the `.frame` column with side rails. Override vertical padding via `frameClassName` (e.g. `"!py-14 md:!py-24"`); mobile padding is always smaller than desktop.

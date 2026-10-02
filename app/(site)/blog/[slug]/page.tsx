@@ -36,6 +36,15 @@ import type { Post, PostCard, PostSitemapEntry } from "@/sanity/lib/types";
  */
 export const dynamicParams = true;
 
+/**
+ * Belt and braces for scheduled posts. The Sanity fetch already revalidates
+ * hourly (sanity/lib/client), which Next 15 adopts as this route's revalidate,
+ * but stating it here keeps the schedule working if that fetch option ever
+ * changes: a slug requested before its publishedAt renders notFound(), and
+ * that miss can't outlive the hour.
+ */
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   const posts = await sanityFetchSafe<PostSitemapEntry[]>(postSlugsQuery, []);
   return posts.map((p) => ({ slug: p.slug }));

@@ -88,6 +88,15 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
         ],
       },
+      // The partner showcase, same four layers. One exact path: the page has
+      // no private assets (its images are all public elsewhere on the site),
+      // so there is no folder entry to pair with it.
+      {
+        source: "/partner-showcase",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
     ];
   },
 
@@ -130,6 +139,13 @@ const nextConfig: NextConfig = {
       // carries the call, the audit offer and every contact method.
       {
         source: "/contact-us",
+        destination: "/book-a-call",
+        permanent: true,
+      },
+      // /contact too: Search Console (1 Oct 2026) still shows it with 88
+      // impressions over 90 days, and it was 404ing. Same target as /contact-us.
+      {
+        source: "/contact",
         destination: "/book-a-call",
         permanent: true,
       },

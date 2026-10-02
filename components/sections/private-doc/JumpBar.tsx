@@ -25,6 +25,9 @@ export type JumpLink = {
  * silently leave a gap or an overlap the day that changes. The same
  * measurement, plus the bar's own height, is published as CSS variables that
  * `.doc-anchor` uses, so a jump never lands a heading underneath either bar.
+ * Only a header that is actually pinned (sticky or fixed) counts: a page with
+ * its own in-flow header, like /partner-showcase, scrolls it away, so the bar
+ * sits at the very top there.
  *
  * The current section is marked with `aria-current` from an observer rather
  * than a scroll handler, and on a phone the active link is scrolled into view
@@ -39,7 +42,7 @@ export function JumpBar({
 }: {
   items: JumpLink[];
   /** The conversion target (options, price), set apart at the far end. */
-  trailing: { id: string; name: string };
+  trailing?: { id: string; name: string };
   /** The bar stays hidden while this element is on screen. */
   heroId: string;
   /** Accessible name for the landmark. */
@@ -55,12 +58,12 @@ export function JumpBar({
   // Publish the nav and bar heights for `top` and for anchor offsets.
   useEffect(() => {
     const root = document.documentElement;
-    const nav = document.querySelector("header");
+    const nav = pinnedHeader();
     const bar = barRef.current;
     if (!bar) return;
 
     const publish = () => {
-      if (nav) root.style.setProperty("--doc-nav-h", `${nav.getBoundingClientRect().height}px`);
+      root.style.setProperty("--doc-nav-h", `${navHeight()}px`);
       root.style.setProperty("--doc-jump-h", `${bar.getBoundingClientRect().height}px`);
     };
     publish();
@@ -81,7 +84,7 @@ export function JumpBar({
       setShown(true);
       return;
     }
-    const navH = Math.round(document.querySelector("header")?.getBoundingClientRect().height ?? 64);
+    const navH = navHeight();
     const observer = new IntersectionObserver(
       ([entry]) => entry && setShown(!entry.isIntersecting),
       // The nav's band counts as gone: the hero is "away" once it's under it.
@@ -93,17 +96,14 @@ export function JumpBar({
 
   // Track which section owns the top of the reading area.
   useEffect(() => {
-    const ids = [...items.map((i) => i.id), trailing.id];
+    const ids = [...items.map((i) => i.id), ...(trailing ? [trailing.id] : [])];
     const targets = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
     if (!targets.length) return;
 
     const offset = () =>
-      Math.round(
-        (document.querySelector("header")?.getBoundingClientRect().height ?? 64) +
-          (barRef.current?.getBoundingClientRect().height ?? 52),
-      );
+      navHeight() + Math.round(barRef.current?.getBoundingClientRect().height ?? 52);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -118,7 +118,7 @@ export function JumpBar({
     );
     targets.forEach((t) => observer.observe(t));
     return () => observer.disconnect();
-  }, [items, trailing.id]);
+  }, [items, trailing]);
 
   // Keep the active link visible inside the sideways-scrolling bar.
   useEffect(() => {
@@ -169,21 +169,35 @@ export function JumpBar({
               </a>
             </li>
           ))}
-          <li className="ml-auto">
-            <a
-              href={`#${trailing.id}`}
-              data-jump={trailing.id}
-              aria-current={active === trailing.id ? "location" : undefined}
-              className={linkClass(active === trailing.id)}
-            >
-              {trailing.name}
-              <span aria-hidden className="btn-arrow">
-                &rarr;
-              </span>
-            </a>
-          </li>
+          {trailing ? (
+            <li className="ml-auto">
+              <a
+                href={`#${trailing.id}`}
+                data-jump={trailing.id}
+                aria-current={active === trailing.id ? "location" : undefined}
+                className={linkClass(active === trailing.id)}
+              >
+                {trailing.name}
+                <span aria-hidden className="btn-arrow">
+                  &rarr;
+                </span>
+              </a>
+            </li>
+          ) : null}
         </ul>
       </div>
     </nav>
   );
+}
+
+/** The page header, if it stays pinned to the top while scrolling. */
+function pinnedHeader(): HTMLElement | null {
+  const header = document.querySelector<HTMLElement>("header");
+  if (!header) return null;
+  const { position } = getComputedStyle(header);
+  return position === "sticky" || position === "fixed" ? header : null;
+}
+
+function navHeight(): number {
+  return Math.round(pinnedHeader()?.getBoundingClientRect().height ?? 0);
 }

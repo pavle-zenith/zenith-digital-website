@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import type { ProposalPage } from "@/content/proposals/types";
-import { NumberChip } from "./parts";
+import { NumberChip } from "@/components/sections/private-doc/parts";
 
 /**
  * The handover. The section that carries the most trust, so it gets the dark

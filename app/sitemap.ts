@@ -7,6 +7,12 @@ import { sanityFetchSafe } from "@/sanity/lib/client";
 import { postSlugsQuery } from "@/sanity/lib/queries";
 import type { PostSitemapEntry } from "@/sanity/lib/types";
 
+/**
+ * Regenerate hourly, on the same clock as the blog routes, so a scheduled post
+ * is listed here within an hour of its publishedAt without a deploy.
+ */
+export const revalidate = 3600;
+
 const SITE = "https://www.thezenithdigital.com";
 
 /**
@@ -21,12 +27,12 @@ const SITE = "https://www.thezenithdigital.com";
  * drafts, so an unpublished post cannot be listed. /studio is deliberately
  * absent: it is an editing tool and is noindexed on the route itself.
  *
- * /audit/[slug] and /proposal/[slug] are deliberately absent too. Those are
- * private client documents sent as a link: noindexed on the route, noindexed
- * again by an X-Robots-Tag header on /audit/ and /audits/, /proposal/ and
- * /proposals/, and linked from nowhere. This list being an allowlist is what
- * keeps them out, so adding an audit or a proposal needs no change here. Do
- * not add one.
+ * /audit/[slug], /proposal/[slug] and /partner-showcase are deliberately
+ * absent too. Those are private documents sent as a link: noindexed on the
+ * route, noindexed again by an X-Robots-Tag header (/audit/ and /audits/,
+ * /proposal/ and /proposals/, /partner-showcase), and linked from nowhere.
+ * This list being an allowlist is what keeps them out, so adding an audit or
+ * a proposal needs no change here. Do not add one.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await sanityFetchSafe<PostSitemapEntry[]>(postSlugsQuery, []);

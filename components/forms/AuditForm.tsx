@@ -6,7 +6,7 @@ import { useActionState, useEffect, useRef } from "react";
 import {
   submitAudit,
   type AuditFormState,
-} from "@/app/free-website-audit/actions";
+} from "@/app/(site)/free-website-audit/actions";
 import { auditForm } from "@/content/free-website-audit";
 import { trackLead } from "@/lib/analytics";
 

@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import type { ProposalPage } from "@/content/proposals/types";
-import { TickList } from "./parts";
+import { TickList } from "@/components/sections/private-doc/parts";
 
 /**
  * The plan: one panel per site, side by side from `md` in a hairline grid,

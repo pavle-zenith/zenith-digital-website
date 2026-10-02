@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FilterTab } from "@/components/ui/FilterTab";
 import { cn, servesRaw } from "@/lib/utils";
 import {
@@ -24,16 +25,40 @@ import {
  * client. A card links to its detail page once the study ships one (the
  * live-site link moves inside that page); until then it links to the live
  * site — all data-driven, no per-card code.
+ *
+ * Every prop is optional and defaults to /case-studies as it is. A page that
+ * must keep the reader off the site's own pages (/partner-showcase) passes
+ * `links="live"`: each card then links to the client's live site in a new tab
+ * where there is one, and to nothing otherwise, never to /case-studies/*. A
+ * `*.wixstudio.com` address is a Wix preview, not the client's site, so in
+ * that mode it is not linked either.
  */
-export function CaseStudyGrid() {
+type GridOptions = {
+  id?: string;
+  className?: string;
+  heading?: string;
+  intro?: string;
+  links?: "default" | "live";
+};
+
+/** A Wix Studio preview address (site.wixstudio.com/...), not a live site. */
+function isPreview(url: string) {
+  try {
+    return new URL(url).hostname.endsWith(".wixstudio.com");
+  } catch {
+    return false;
+  }
+}
+
+export function CaseStudyGrid(options: GridOptions = {}) {
   return (
-    <Suspense fallback={<GridInner industry={null} onSelect={null} />}>
-      <FilterableGrid />
+    <Suspense fallback={<GridInner industry={null} onSelect={null} {...options} />}>
+      <FilterableGrid {...options} />
     </Suspense>
   );
 }
 
-function FilterableGrid() {
+function FilterableGrid(options: GridOptions) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
@@ -47,34 +72,36 @@ function FilterableGrid() {
     });
   };
 
-  return <GridInner industry={industry} onSelect={select} />;
+  return <GridInner industry={industry} onSelect={select} {...options} />;
 }
 
 function GridInner({
   industry,
   onSelect,
+  id,
+  className,
+  heading,
+  intro,
+  links = "default",
 }: {
   industry: IndustrySlug | null;
   onSelect: ((slug: IndustrySlug | null) => void) | null;
-}) {
-  // Studies with a written detail page lead the grid, in every filtered view
-  // too: those cards say "Read the case study" and keep the reader on the site,
-  // where the rest send them straight out to the client's domain. Sorting here
-  // rather than hand-ordering the data means shipping a new study promotes it
-  // automatically. `sort` is stable, so the data order holds within each group.
+} & GridOptions) {
+  // In "live" mode no card leads to a detail page, so none is promoted.
+  const hasDetail = (slug: string) => links === "default" && detailSlugs.has(slug);
+  const liveUrl = (url?: string) => (links === "live" && url && isPreview(url) ? undefined : url);
+
   const visible = (
     industry
       ? caseStudyCards.filter((c) => c.industry === industry)
       : caseStudyCards
   )
     .slice()
-    .sort(
-      (a, b) =>
-        Number(detailSlugs.has(b.slug)) - Number(detailSlugs.has(a.slug)),
-    );
+    .sort((a, b) => Number(hasDetail(b.slug)) - Number(hasDetail(a.slug)));
 
   return (
-    <Section tone="light" frameClassName="!py-12 md:!py-20">
+    <Section id={id} tone="light" className={className} frameClassName="!py-12 md:!py-20">
+      {heading ? <SectionHeader heading={heading} intro={intro} tone="light" /> : null}
       {/* Filter pills — one row, always. The row never wraps: wrapping is what
           stranded a lone pill on a second row. The nine pills measure 947px, so
           they sit still from xl up (1176px of frame at 1280) and the row becomes
@@ -157,7 +184,7 @@ function GridInner({
               <p className="mt-2 text-body leading-snug text-light-muted">
                 {c.story}
               </p>
-              {detailSlugs.has(c.slug) ? (
+              {hasDetail(c.slug) ? (
                 <Link
                   href={`/case-studies/${c.slug}`}
                   className="mt-auto inline-flex items-center gap-1.5 pt-5 font-display text-body font-medium transition group-hover:text-accent"
@@ -167,9 +194,9 @@ function GridInner({
                     &rarr;
                   </span>
                 </Link>
-              ) : c.liveUrl ? (
+              ) : liveUrl(c.liveUrl) ? (
                 <a
-                  href={c.liveUrl}
+                  href={liveUrl(c.liveUrl)}
                   target="_blank"
                   rel="noopener"
                   className="mt-auto inline-flex items-center gap-1.5 pt-5 font-display text-body font-medium transition group-hover:text-accent"

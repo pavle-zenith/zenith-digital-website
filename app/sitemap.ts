@@ -27,11 +27,11 @@ const SITE = "https://www.thezenithdigital.com";
  * drafts, so an unpublished post cannot be listed. /studio is deliberately
  * absent: it is an editing tool and is noindexed on the route itself.
  *
- * /audit/[slug], /proposal/[slug] and /partner-showcase are deliberately
- * absent too. Those are private documents sent as a link: noindexed on the
- * route, noindexed again by an X-Robots-Tag header (/audit/ and /audits/,
- * /proposal/ and /proposals/, /partner-showcase), and linked from nowhere.
- * This list being an allowlist is what keeps them out, so adding an audit or
+ * /audit/[slug], /proposal/[slug], /partner-showcase and /project-request
+ * are deliberately absent too. Those are private pages sent as a link:
+ * noindexed on the route, noindexed again by an X-Robots-Tag header (/audit/
+ * and /audits/, /proposal/ and /proposals/, /partner-showcase,
+ * /project-request), and linked from nowhere. This list being an allowlist is what keeps them out, so adding an audit or
  * a proposal needs no change here. Do not add one.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

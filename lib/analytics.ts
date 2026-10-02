@@ -19,6 +19,8 @@ export type LeadForm =
   | "contact"
   | "free-website-audit"
   | "partner-application"
+  /** /project-request, the private intake form sent to warm leads. */
+  | "project-request"
   /**
    * A completed Cal.com booking. Deliberately the same `generate_lead` event
    * as the three forms rather than an event of its own: it is the same thing
@@ -45,6 +47,25 @@ export function trackLead(form: LeadForm) {
       })
       .catch(() => {
         // Analytics must never break a form submission.
+      });
+  }
+}
+
+/**
+ * /project-request: one event per step reached, so drop-off shows per step.
+ * Gated exactly as `trackLead` is: GA through Consent Mode, PostHog only once
+ * it has loaded, which only happens after consent.
+ */
+export function trackStep(step: number) {
+  window.gtag?.("event", "project_request_step", { step });
+
+  if (typeof window !== "undefined") {
+    void import("posthog-js")
+      .then(({ default: posthog }) => {
+        if (posthog.__loaded) posthog.capture("project_request_step", { step });
+      })
+      .catch(() => {
+        // Analytics must never break the form.
       });
   }
 }

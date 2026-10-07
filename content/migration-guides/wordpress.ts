@@ -3,8 +3,9 @@ import type { MigrationGuideContent } from "./types";
 
 /**
  * /services/wordpress-to-wix-studio
- * Targets: wordpress to wix studio · migrate wordpress to wix · wix wordpress
- * importer · move off wordpress.
+ * Targets: moving from wordpress to wix · wordpress to wix · migrate wordpress
+ * site to wix · wordpress to wix studio · wix wordpress importer
+ * Title and H1 reworded 7 Oct 2026 to the phrasing Search Console shows (buyers say "Wix", and use a verb). See Docs/WordPress_Routing_Fix_Handoff.md.
  *
  * THE THESIS: WordPress is the only platform Wix built an importer for, and it
  * only covers the blog. Wix states plainly that importing a site created
@@ -52,16 +53,16 @@ export const wordpress: MigrationGuideContent = {
   publish: true,
   platform: "WordPress",
   seo: {
-    title: "WordPress to Wix Studio: Migration Guide | Zenith Digital",
+    title: "Moving from WordPress to Wix: Migration Guide | Zenith Digital",
     description:
-      "Wix imports WordPress blog posts and nothing else. What that importer takes, what it drops, what gets rebuilt, and what the move costs.",
+      "Moving from WordPress to Wix? Wix imports your blog posts and nothing else. What transfers, what gets rebuilt, and what the move costs.",
   },
 
   hero: {
     name: "WordPress to Wix Studio migration",
-    h1: "WordPress to Wix Studio: the complete migration guide",
+    h1: "Moving from WordPress to Wix Studio: the complete migration guide",
     subhead:
-      "Wix built an importer for WordPress and only WordPress. It covers your blog posts. Everything else, from the pages to the plugins to the theme, gets rebuilt. Here's exactly where that line falls and what it costs to cross it.",
+      "Moving a site from WordPress to Wix means one thing imports and the rest is rebuilt. Wix built an importer for WordPress and only WordPress, and it covers your blog posts. The pages, the plugins and the theme are rebuilt in Wix Studio, Wix's professional editor. Here's exactly where that line falls and what it costs to cross it.",
     chips: [
       "The only platform Wix imports from",
       "Blog posts in, everything else rebuilt",
@@ -71,7 +72,7 @@ export const wordpress: MigrationGuideContent = {
   },
 
   glance: {
-    heading: "WordPress to Wix Studio at a glance",
+    heading: "Moving from WordPress to Wix Studio at a glance",
     intro:
       "The short answers, before the detail. Every one of these is expanded further down the page.",
     items: [
@@ -510,6 +511,10 @@ export const wordpress: MigrationGuideContent = {
     ctas,
     items: [
       {
+        q: "Can you switch from WordPress to Wix?",
+        a: "Yes. There's no official one-click conversion, so switching from WordPress to Wix is part import and part rebuild. Wix's importer brings your blog posts across, and the pages, design and plugin features are rebuilt in Wix or Wix Studio. Static pages can keep their URLs, and anything that does change gets a redirect. Most sites take two to five weeks.",
+      },
+      {
         q: "Can I import my WordPress site into Wix Studio?",
         a: "Only the blog. Wix states that importing a site created outside of Wix isn't supported, and names WordPress blog posts as the single exception. The importer brings post text, images, video, original dates and categories across. Your pages, theme, plugins and everything they powered are rebuilt in Studio. So the honest answer is that WordPress is the one platform Wix will meet you halfway on, and halfway is the blog.",
       },
@@ -523,11 +528,7 @@ export const wordpress: MigrationGuideContent = {
       },
       {
         q: "Will I lose my Google rankings moving from WordPress to Wix Studio?",
-        a: "Not if the URLs are handled deliberately, and on this move most of them don't have to change at all. Static pages keep their paths. Blog posts depend on one build decision: Wix's Blog app puts every post under a /post/ prefix that can't be removed, while a blog built on the CMS lets you set the prefix yourself, so a WordPress site already publishing at /blog/post-name can keep exactly that. The quieter risk is metadata: Yoast and Rank Math settings live in the plugin, not the post, so titles and descriptions get re-entered and diffed against the crawl before the domain moves.",
-      },
-      {
-        q: "Will my URLs change moving from WordPress to Wix Studio?",
-        a: "Mostly not, and where they do it's a choice rather than a constraint. Wix Studio imposes no path structure on standard pages, so /about stays /about. Your blog comes down to how it gets built: Wix's Blog app forces every post under a /post/ prefix, so a site with three hundred posts needs three hundred mapped redirects, while a CMS-driven blog lets you set the prefix and the slug, which is how an existing /blog/post-name structure survives the move untouched. Where redirects are needed they get mapped post by post, never a blanket rule pointing the old blog at the new index, which technically avoids 404s and quietly converts every ranking post into a bounce.",
+        a: "Not if the URLs are handled deliberately, and on this move most don't have to change. Where one does, it's a choice rather than a constraint. Wix Studio imposes no path structure on standard pages, so /about stays /about. Blog posts depend on one build decision: Wix's Blog app puts every post under a /post/ prefix that can't be removed, so three hundred posts need three hundred mapped redirects, while a CMS-driven blog lets you set the prefix and the slug, so an existing /blog/post-name structure survives untouched. Redirects are mapped post by post, never a blanket rule pointing the old blog at the new index, which avoids 404s on paper and quietly converts every ranking post into a bounce. The quieter risk is metadata: Yoast and Rank Math settings live in the plugin, not the post, so titles and descriptions get re-entered and diffed against the crawl before the domain moves.",
       },
       {
         q: "How much does a WordPress to Wix Studio migration cost?",
@@ -538,7 +539,7 @@ export const wordpress: MigrationGuideContent = {
         a: "Two to five weeks from kickoff to launch for most sites, then a 30-day monitoring window that runs while you're already live. The blog archive drives the number: the import itself is a day, but checking formatting across four hundred posts, one by one, is not. Your WordPress site keeps serving traffic throughout.",
       },
       {
-        q: "Can I migrate my WordPress site to Wix Studio myself?",
+        q: "Can I transfer my WordPress site to Wix myself?",
         a: "For a small site, yes, and the blog importer genuinely helps. The trap is that it succeeds loudly while the rest of the site quietly doesn't come. A five-page site with a short blog is a reasonable weekend project. It turns when you have a few hundred posts carrying organic traffic, custom post types holding real content, WooCommerce, or plugins doing work you'd have to replace rather than drop. The reliable signal is your organic traffic: if the blog earns enquiries, the risk isn't the rebuild, it's the redirect map you can't check afterwards.",
       },
       {

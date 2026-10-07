@@ -3,8 +3,9 @@ import type { ServicePageContent } from "./types";
 
 /**
  * /services/website-migration
- * Targets: migrate to wix studio · wordpress to wix migration · wix studio
- * migration · migrate website without losing seo.
+ * Targets: migrate to wix studio · wix studio migration · migrate website
+ * without losing seo.
+ * WordPress terms belong to the WordPress guide. 7 Oct 2026: Search Console showed this hub taking 531 impressions on them at position 39 to 59.
  *
  * THIS PAGE IS THE HUB. The platform blocks in `unique` are its spokes: each
  * one that carries an `href` links to a full migration guide under
@@ -325,7 +326,7 @@ export const websiteMigration: ServicePageContent = {
         name: "WordPress",
         logo: "/platforms/wordpress.svg",
         href: "/services/wordpress-to-wix-studio",
-        desc: "What Wix's WordPress importer actually takes, what it leaves behind, and what the plugins become.",
+        desc: "Moving from WordPress to Wix: what the importer takes, what it leaves behind, and what the plugins become.",
       },
       {
         name: "Webflow",

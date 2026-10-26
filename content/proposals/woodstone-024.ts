@@ -73,6 +73,7 @@ export const woodstone024: AuditProposalPage = {
       "Engleska i mađarska verzija sajta ne postoje.",
       "Sajt ne odgovara na pitanja koja kupci postavljaju Google-u i AI asistentima.",
     ],
+    fixesHeading: "Šta treba uraditi",
     fixes: [
       "Redizajniran sajt sa modernijim sekcijama i sadržajem za bolju prodaju",
       "Optimizovan za AI i SEO",

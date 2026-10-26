@@ -144,8 +144,18 @@ export interface AuditProposalPage {
     secondaryCta: { label: string; href: string };
   };
 
-  /** `points` are what is missing (crosses), `fixes` what changes (ticks). */
-  summary: { id: string; heading: string; body: string[]; points: string[]; fixes: string[] };
+  /**
+   * `points` are what is missing (crosses); `fixes`, under their own small
+   * heading, what has to change (ticks).
+   */
+  summary: {
+    id: string;
+    heading: string;
+    body: string[];
+    points: string[];
+    fixesHeading: string;
+    fixes: string[];
+  };
   stats: { id: string; heading: string; items: { value: string; label: string }[] };
   findings: { id: string; heading: string; intro: string; items: AuditProposalFinding[] };
 

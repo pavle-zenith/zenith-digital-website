@@ -6,8 +6,8 @@ import { DocHeading, DocSection } from "./parts";
 /**
  * "Ukratko": the short version for a reader who stops here. Two paragraphs,
  * then the three problems as ruled rows marked with a cross (what the site is
- * missing), followed straight on by the three changes marked with a tick
- * (what the new site does), so the pair reads as problem, then answer.
+ * missing), then, under a small heading of their own, the three changes
+ * marked with a tick, so the pair reads as problem, then what has to be done.
  */
 export function AuditProposalSummary({ summary }: { summary: AuditProposalPage["summary"] }) {
   const [first, ...rest] = summary.body;
@@ -23,7 +23,12 @@ export function AuditProposalSummary({ summary }: { summary: AuditProposalPage["
         ))}
       </div>
       <TickList items={summary.points} columns={1} icon="cross" className="mt-8" />
-      <TickList items={summary.fixes} columns={1} icon="check" className="mt-6" />
+      {/* Its own heading, so the ticks read as the work ahead rather than as
+          claims about the current site. */}
+      <h3 className="mt-10 font-display text-body-lg font-medium text-light-text">
+        {summary.fixesHeading}
+      </h3>
+      <TickList items={summary.fixes} columns={1} icon="check" className="mt-3" />
     </DocSection>
   );
 }

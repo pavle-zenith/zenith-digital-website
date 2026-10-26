@@ -15,7 +15,16 @@ const SEVERITY: Record<Severity, { pill: string; dot: string }> = {
   medium: { pill: PRIORITY_PILL.low, dot: "bg-light-muted" },
 };
 
-export function SeverityPill({ severity, count }: { severity: Severity; count?: number }) {
+export function SeverityPill({
+  severity,
+  count,
+  label,
+}: {
+  severity: Severity;
+  count?: number;
+  /** The word in the page's language; defaults to the English template's. */
+  label?: string;
+}) {
   return (
     <span
       className={cn(
@@ -25,7 +34,7 @@ export function SeverityPill({ severity, count }: { severity: Severity; count?: 
     >
       <span aria-hidden className={cn("h-1.5 w-1.5 rounded-full", SEVERITY[severity].dot)} />
       {count === undefined ? null : <span className="tabular-nums">{count}</span>}
-      {proposalTemplate.severity[severity]}
+      {label ?? proposalTemplate.severity[severity]}
     </span>
   );
 }

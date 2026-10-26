@@ -153,6 +153,30 @@ body {
   outline-offset: 2px;
 }
 
+/*
+ * Private documents print. A client may save a proposal as a PDF, so on a page
+ * that carries `.print-doc` (components/sections/audit-proposal): the site's
+ * nav, footer and cookie banner drop out; colours print exactly, so the navy
+ * bands keep their ground and white text never lands on white paper (with
+ * "background graphics" off, a browser would drop the navy and keep the white
+ * text); and the FAQ prints with every answer open, since nobody can tap a
+ * PDF. The document's own fixed bars hide themselves with `print:hidden`.
+ */
+@media print {
+  body:has(.print-doc) header:not(.print-doc header),
+  body:has(.print-doc) footer:not(.print-doc footer),
+  body:has(.print-doc) [role="dialog"] {
+    display: none !important;
+  }
+  .print-doc {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-doc button[aria-expanded="false"] + div {
+    grid-template-rows: 1fr !important;
+  }
+}
+
 /* Respect reduced motion (§7, §14) */
 @media (prefers-reduced-motion: reduce) {
   *,

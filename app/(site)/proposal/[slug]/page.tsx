@@ -15,6 +15,7 @@ import { ProposalGbp } from "@/components/sections/proposal-page/ProposalGbp";
 import { ProposalInvestment } from "@/components/sections/proposal-page/ProposalInvestment";
 import { ProposalTimeline } from "@/components/sections/proposal-page/ProposalTimeline";
 import { ProposalClose } from "@/components/sections/proposal-page/ProposalClose";
+import { AuditProposal } from "@/components/sections/audit-proposal/AuditProposal";
 
 /**
  * Private proposal pages. A sales document sent to one prospect as a link, not
@@ -42,6 +43,11 @@ import { ProposalClose } from "@/components/sections/proposal-page/ProposalClose
  *
  * No JSON-LD here on purpose: structured data exists to help machines
  * understand a page, and this one is not for them.
+ *
+ * TWO SHAPES. A build proposal (Pulse) renders the sections below; an audit
+ * proposal (`kind: "audit"`, Woodstone 024) is a site review plus a phased
+ * offer in one reading column, in the client's language, and renders through
+ * `AuditProposal`. Both share these privacy layers and this metadata.
  */
 
 export const dynamicParams = false;
@@ -59,6 +65,10 @@ export async function generateMetadata({
   const proposal = getProposal(slug);
   if (!proposal) return {};
 
+  // An audit proposal previews with its hero headline, in its own locale.
+  const shareTitle = proposal.kind === "audit" ? proposal.meta.ogTitle : proposal.meta.title;
+  const locale = proposal.kind === "audit" ? proposal.meta.ogLocale : undefined;
+
   return {
     title: proposal.meta.title,
     description: proposal.meta.description,
@@ -75,12 +85,13 @@ export async function generateMetadata({
     // image is restated (see lib/shareImage): a page-level `openGraph`
     // replaces the layout's, and the default image would go with it.
     openGraph: {
-      title: proposal.meta.title,
+      title: shareTitle,
       description: proposal.meta.description,
       images: defaultShareImages.openGraph,
+      ...(locale ? { locale } : null),
     },
     twitter: {
-      title: proposal.meta.title,
+      title: shareTitle,
       description: proposal.meta.description,
       images: defaultShareImages.twitter,
     },
@@ -95,6 +106,7 @@ export default async function ProposalRoute({
   const { slug } = await params;
   const proposal = getProposal(slug);
   if (!proposal) notFound();
+  if (proposal.kind === "audit") return <AuditProposal proposal={proposal} />;
 
   return (
     <>

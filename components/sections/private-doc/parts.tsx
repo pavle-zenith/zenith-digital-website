@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { Tone } from "@/lib/types";
-import { CheckIcon } from "./icons";
+import { CheckIcon, CrossIcon } from "./icons";
 
 /**
  * Pieces shared by the private documents (proposal, partner showcase).
@@ -27,16 +27,22 @@ export function NumberChip({ n, tone }: { n: number; tone: Tone }) {
  * Ruled rows with a tick. Every row takes a top rule, the first included
  * (DESIGN.md, Divided List); in two columns the grid keeps each pair of rows
  * level, so the rules run straight across.
+ *
+ * `icon` changes what the row says: a tick is something done or included, a
+ * cross something missing (in the -ink red on light grounds), an empty box
+ * something still to do.
  */
 export function TickList({
   items,
   tone = "light",
   columns = 2,
+  icon = "check",
   className,
 }: {
   items: string[];
   tone?: Tone;
   columns?: 1 | 2;
+  icon?: "check" | "cross" | "box";
   className?: string;
 }) {
   return (
@@ -52,12 +58,29 @@ export function TickList({
             tone === "dark" ? "border-border" : "border-light-border",
           )}
         >
-          <CheckIcon
-            className={cn(
-              "mt-[3px] h-[18px] w-[18px] shrink-0",
-              tone === "dark" ? "text-positive" : "text-positive-ink",
-            )}
-          />
+          {icon === "box" ? (
+            <span
+              aria-hidden
+              className={cn(
+                "mt-[3px] h-[18px] w-[18px] shrink-0 rounded-[4px] border-2",
+                tone === "dark" ? "border-text-muted" : "border-light-muted",
+              )}
+            />
+          ) : icon === "cross" ? (
+            <CrossIcon
+              className={cn(
+                "mt-[3px] h-[18px] w-[18px] shrink-0",
+                tone === "dark" ? "text-negative" : "text-negative-ink",
+              )}
+            />
+          ) : (
+            <CheckIcon
+              className={cn(
+                "mt-[3px] h-[18px] w-[18px] shrink-0",
+                tone === "dark" ? "text-positive" : "text-positive-ink",
+              )}
+            />
+          )}
           <span className={cn("text-body", tone === "dark" ? "text-text" : "text-light-text")}>
             {item}
           </span>

@@ -4,9 +4,13 @@ import type { AuditProposalPage } from "@/content/proposals/types";
 import { DocHeading, DocSection } from "./parts";
 
 /**
- * "Vaš predlog početne strane": the client's own mockup as a small thumbnail
- * beside what we keep and the three changes. Thumbnail first on a phone, so
- * the reader sees which mockup the text is about before reading it.
+ * The mockup section: an image beside or above what we keep and change.
+ *
+ * A tall image (a full-page mockup, as on Woodstone) is a small thumbnail
+ * beside the text, first on a phone, so the reader sees which mockup the text
+ * is about before reading it. A wide image (a structure diagram, as on
+ * ASPIRE-USA) is meant to be read, so it takes the column's full width above
+ * the text instead of shrinking to a thumbnail.
  *
  * Until the owner supplies the image, a dashed frame holds its place with the
  * placeholder label, visibly unfinished rather than silently missing.
@@ -21,11 +25,18 @@ export function AuditProposalMockup({
   mockup: AuditProposalPage["mockup"];
   missingImage: string;
 }) {
+  const wide = mockup.image ? mockup.image.width > mockup.image.height : false;
   return (
     <DocSection id={mockup.id} tinted>
       <DocHeading heading={mockup.heading} />
-      <div className="grid items-start gap-8 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10">
-        <div className="w-40 md:w-full">
+      <div
+        className={
+          wide
+            ? "grid gap-8"
+            : "grid items-start gap-8 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10"
+        }
+      >
+        <div className={wide ? undefined : "w-40 md:w-full"}>
           {mockup.image ? (
             <EvidenceFigure image={mockup.image} />
           ) : (

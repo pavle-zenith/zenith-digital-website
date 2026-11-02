@@ -175,10 +175,35 @@ export interface AuditProposalPage {
     intro: string;
     name: string;
     duration: string;
+    /** The standard price, shown struck before `price` (e.g. a nonprofit rate). */
+    wasPrice?: string;
     price: string;
     items: string[];
     /** Terms under the offer: tax, payment, what the price leaves out, validity. */
     notes: string[];
+  };
+
+  /**
+   * Optional audit score under the offer. NO SCORE IS TYPED: every number is
+   * computed from `areas[].checks` by content/audits/score.ts, the same method
+   * as the audit pages (a pass counts 1, a partial pass a half), so the page
+   * can never show a score its checks don't support. `stages` names the
+   * three bands in the page's language (under 40, 40 to 74, 75 and up).
+   */
+  score?: {
+    id: string;
+    heading: string;
+    intro: string;
+    todayLabel: string;
+    stages: { poor: string; fair: string; good: string };
+    /** One line on how the score is counted, given the number of checks. */
+    method: (checks: number) => string;
+    /** Printed under the bar: what the offer does to these checks. */
+    launchNote: string;
+    areas: {
+      name: string;
+      checks: { label: string; status: "pass" | "partial" | "fail" }[];
+    }[];
   };
 
   timeline: { id: string; heading: string; rows: { what: string; detail?: string; when: string }[] };
@@ -191,6 +216,10 @@ export interface AuditProposalPage {
     body: string;
     primaryCta: { label: string; href: string };
     secondaryCta?: { label: string; href: string };
+    /** Reassurance figures shown before the button, tied to the client's concerns. */
+    stats?: { value: string; label: string }[];
+    /** The founder's photo beside the signature. */
+    photo?: { src: string; alt: string };
     signature: string[];
   };
 }

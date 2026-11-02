@@ -6,6 +6,7 @@ import { AuditProposalStats, AuditProposalSummary } from "./AuditProposalSummary
 import { AuditProposalFindings } from "./AuditProposalFindings";
 import { AuditProposalMockup } from "./AuditProposalMockup";
 import { AuditProposalOffer } from "./AuditProposalOffer";
+import { AuditProposalScore } from "./AuditProposalScore";
 import { AuditProposalNeeds, AuditProposalTimeline } from "./AuditProposalPlan";
 import { AuditProposalClose, AuditProposalFaq } from "./AuditProposalClose";
 
@@ -25,7 +26,18 @@ import { AuditProposalClose, AuditProposalFaq } from "./AuditProposalClose";
  * contents the page needs at this length.
  */
 export function AuditProposal({ proposal: p }: { proposal: AuditProposalPage }) {
-  const toc = [p.summary, p.stats, p.findings, p.mockup, p.offer, p.timeline, p.needs, p.faq, p.close].map(
+  const toc = [
+    p.summary,
+    p.stats,
+    p.findings,
+    p.mockup,
+    p.offer,
+    ...(p.score ? [p.score] : []),
+    p.timeline,
+    p.needs,
+    p.faq,
+    p.close,
+  ].map(
     (section) => ({ id: section.id, name: section.heading }),
   );
 
@@ -40,6 +52,7 @@ export function AuditProposal({ proposal: p }: { proposal: AuditProposalPage }) 
       <AuditProposalFindings findings={p.findings} labels={p.labels} />
       <AuditProposalMockup mockup={p.mockup} missingImage={p.labels.missingImage} />
       <AuditProposalOffer offer={p.offer} labels={p.labels} />
+      {p.score ? <AuditProposalScore score={p.score} /> : null}
       <AuditProposalTimeline timeline={p.timeline} />
       <AuditProposalNeeds needs={p.needs} />
       <AuditProposalFaq faq={p.faq} />

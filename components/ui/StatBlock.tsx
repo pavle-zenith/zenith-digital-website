@@ -10,8 +10,11 @@ export function StatBlock({
 }: {
   metric: Metric;
   tone?: Tone;
-  /** "h2" for a narrow grid, where a value like "29 od 38" would wrap at h1. */
-  size?: "h1" | "h2";
+  /**
+   * "h2" for a narrow grid, where a value like "29 od 38" would wrap at h1;
+   * "h3" for a compact supporting row that shouldn't outshout its section.
+   */
+  size?: "h1" | "h2" | "h3";
   className?: string;
 }) {
   return (
@@ -19,7 +22,7 @@ export function StatBlock({
       <span
         className={cn(
           "font-display font-medium leading-none",
-          size === "h2" ? "text-h2" : "text-h1",
+          size === "h3" ? "text-h3" : size === "h2" ? "text-h2" : "text-h1",
         )}
       >
         {metric.value}

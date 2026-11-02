@@ -62,6 +62,7 @@ team section/
 inter-display/
 saans-font-family/
 sf-pro-display (1)/
+rs-brand-kit/
 
 # Claude Code local settings: machine-specific absolute paths, per-developer.
 # The shared .claude/settings.json (if one exists) is still tracked.

@@ -5,7 +5,9 @@ import type { AuditProposalPage } from "./types";
  * ASPIRE-USA (formerly Afghan Scouts Durham), aspire-usa.org, Durham, NC. A
  * review of the current Wix Studio site and a one-project proposal, for Donna.
  * Built from the owner's brief (~/Desktop/aspire-usa-proposal-brief.md) on the
- * Woodstone 024 audit template. US spelling throughout.
+ * Woodstone 024 audit template, then condensed to about half the words
+ * (~/Desktop/aspire-usa-proposal-condense.md): one idea per sentence, each
+ * finding readable in ten seconds. US spelling throughout.
  *
  * Her stated priorities: slow development cycles and a complicated structure,
  * plus the rename. Owner decisions: stay on Wix Studio, build only (no care
@@ -14,22 +16,16 @@ import type { AuditProposalPage } from "./types";
  * CHECKED AGAINST THE LIVE SITE, 2 Nov 2026. Where the brief and the site
  * disagreed, the copy follows the site:
  *   - Dropdowns add 9 distinct links, not 13 (Wix renders each submenu twice
- *     in the markup). The desktop menu says "Team"; "Staffs" is the phone
- *     menu's label, not a heading.
- *   - Financials does have a spending breakdown in percentages (30/35/20/15)
- *     and suggested gifts ($35 to $1,000). What it lacks is amounts, a working
- *     report (the Download Report button opens nothing) and a Form 990. It
- *     also carries leftover template text under "30% Educational Support".
- *   - FAQ has ten questions across four tabs, not two.
- *   - The homepage has two main headings, both "ASPIRE-USA", rather than an
- *     empty one.
- *   - The blog's 40 posts are mostly student stories, not all first-person.
+ *     in the markup).
+ *   - Financials does have a spending breakdown in percentages (30/35/20/15).
+ *     What it lacks is amounts, a working report (the Download Report button
+ *     opens nothing) and a Form 990.
  *   - Spellings on the site: ASPIRE-USA, ASPIRE USA, Aspire-USA, and "Aspire
- *     USA" in every page title.
+ *     USA" in every page title, so four, not three.
+ *   - "We Apsire" is on the homepage; the typo on Meet Our Students is
+ *     "Professional Jounrey".
  *   - Donorbox is headed "Supporting Afghan Scouts" and carries the old badge;
- *     "Afghan Scouts Durham" is in its tab title and tax line. It already
- *     defaults to monthly giving, and suggests $25 to $200.
- *   - Sosan's student card uses the same template photo as "James Williams".
+ *     "Afghan Scouts Durham" is in its tab title and tax line.
  *
  * Screenshots in /proposals/aspire-usa/ were captured the same day. Student
  * faces are blurred or cropped out: the point of each one is the problem, not
@@ -67,7 +63,7 @@ export const aspireUsa: AuditProposalPage = {
   hero: {
     eyebrow: "Website review and proposal",
     heading: "ASPIRE-USA: a clearer site that turns visitors into supporters",
-    lead: "We reviewed aspire-usa.org the way a first-time donor, Google and AI assistants see it. This page covers what we found, what to fix first, and how we'd rebuild the site in four weeks with fewer pages, one clear message and a donation path that stays on your site.",
+    lead: "What a first-time donor, Google and AI assistants see on aspire-usa.org today, and how we'd fix it in four weeks.",
     meta: [
       { label: "Prepared for", value: "Donna, ASPIRE-USA (formerly Afghan Scouts Durham)" },
       { label: "Date", value: "2 November 2026" },
@@ -81,20 +77,18 @@ export const aspireUsa: AuditProposalPage = {
     id: "summary",
     heading: "In short",
     body: [
-      "The good news: you already have what's hardest to build. Real students, real outcomes, and forty blog posts, most of them in your students' own words. The first Afghan woman to earn Eagle Scout. Students at Columbia and Swarthmore.",
-      "The site makes that hard to act on. A visitor who's moved by a story has to work to find out where the money goes, and the Donate button takes them to a page with your old name. A redesign alone won't fix that. The structure, the donation path and the rename need to be solved together.",
+      "You already have what's hardest to build: real students, real outcomes and forty stories. The site just makes them hard to act on.",
     ],
     points: [
-      "Donating sends people to a page with your old name, off your site.",
-      "Ten menu items, and most of the dropdown links open the same few pages.",
-      "Unfinished student profiles, and a financial report button that doesn't open a report.",
+      "Donating leads to your old name, off your site.",
+      "Most menu links open the same few pages.",
+      "Placeholder profiles and no financial report.",
     ],
-    fixesHeading: "What needs to change",
+    fixesHeading: "What changes",
     fixes: [
-      "One clear message and six pages instead of ten",
-      "Donations on your own site, under the ASPIRE-USA name",
-      "A finished rename, so Google and AI assistants connect ASPIRE-USA to your history",
-      "A site your team can update without waiting on a designer",
+      "Six clear pages and one message",
+      "Donations on your own site",
+      "A site your team updates without a designer",
     ],
   },
 
@@ -102,60 +96,47 @@ export const aspireUsa: AuditProposalPage = {
     id: "at-a-glance",
     heading: "At a glance",
     items: [
-      { value: "10", label: "top-level menu items, plus 9 dropdown links that open the same pages" },
-      {
-        value: "2",
-        label: "names on the way to a donation: ASPIRE-USA on the site, Afghan Scouts Durham on the form and email",
-      },
-      { value: "3", label: "placeholder student profiles live on Meet Our Students" },
-      { value: "0", label: "annual reports or Form 990s you can open from the Financials page" },
-      { value: "0 of 10", label: "pages with a description written for Google" },
-      { value: "40", label: "posts already on your blog, most of them student stories, your strongest asset" },
+      { value: "2", label: "names on the way to a donation" },
+      { value: "9", label: "menu links that open a page you've already seen" },
+      { value: "3", label: "placeholder student profiles" },
+      { value: "0 of 10", label: "pages with a Google description" },
     ],
   },
 
   findings: {
     id: "findings",
     heading: "What we found",
-    intro:
-      "We ordered the findings by their effect on donations and trust. Each one shows what we saw, why it matters and what we propose.",
+    intro: "Ordered by effect on donations.",
     items: [
       {
         id: "finding-1",
         number: "Finding 1",
-        title: "The donation path leaves your site, and your name",
+        title: "Donating takes people off your site, to your old name",
         severity: "critical",
         tag: "Donations",
         seen: [
-          "Every Donate button sends people to donorbox.org/durham-afghan-scouts. That page is headed \"Supporting Afghan Scouts\", carries the old Afghan Scouts badge and names Afghan Scouts Durham in its tax line. There's no student story. One of the homepage Donate buttons links back to the homepage instead.",
-          "The first screen offers \"Meet our students\" and \"Join our newsletter\". Both link to the homepage, and neither is a way to give.",
+          "Every Donate button opens a Donorbox page with the old Afghan Scouts badge and name. Both hero buttons, and one Donate button, link back to the homepage.",
         ],
-        why: [
-          "A donor who's ready to give lands on a page with a different name. That moment of \"am I in the right place?\" is where gifts get lost, and during a rename it happens on every click.",
-        ],
+        why: ["A donor who isn't sure they're in the right place doesn't give."],
         proposal: [
           [
-            "A Donate page on aspire-usa.org with your Donorbox form embedded and renamed to ASPIRE-USA. Same Donorbox account, so existing monthly donors aren't affected.",
-            "One set of suggested amounts, each tied to a real need, for example \"[$50] covers [a month of transit to classes]\". Today the form suggests $25 to $200 and the Financials page $35 to $1,000. You give us the figures.",
-            "Monthly giving kept as the default and shown first, with one-time as the second option.",
-            "Your EIN, donor-advised funds and IRA charitable distributions moved from Contact to the Donate page, where donors look for them.",
-            "One Donate button in the header and one in the first screen. Every other button on the page leads somewhere real.",
+            "Your Donorbox form on your own Donate page, renamed",
+            "Suggested amounts tied to real needs, monthly first",
+            "EIN, donor-advised fund and IRA giving on the same page",
           ],
         ],
         evidence: [
           {
             src: `${ASSETS}/donorbox.webp`,
             alt: "The Donorbox page the Donate buttons lead to, headed Supporting Afghan Scouts, with the old Afghan Scouts badge and Afghan Scouts Durham in the tax line.",
-            caption:
-              "Where the Donate buttons lead: the old Afghan Scouts badge, no ASPIRE-USA name, and Afghan Scouts Durham in the tax line.",
+            caption: "Where Donate leads today: the old name and badge.",
             width: 1400,
             height: 1452,
           },
           {
             src: `${ASSETS}/home-hero.webp`,
             alt: "The aspire-usa.org homepage first screen with the Meet our students and Join our newsletter buttons marked.",
-            caption:
-              "The first screen: \"Meet our students\" and \"Join our newsletter\" both link to the homepage. Background photo blurred.",
+            caption: "Both hero buttons link back to the homepage.",
             width: 1400,
             height: 1161,
           },
@@ -164,28 +145,21 @@ export const aspireUsa: AuditProposalPage = {
       {
         id: "finding-2",
         number: "Finding 2",
-        title: "Ten pages, and most of the menu leads to the same few",
+        title: "Ten pages, and most menu links open the same page",
         severity: "critical",
         tag: "Site structure",
         seen: [
-          "The header has ten items. Their dropdowns add nine more links, such as Values, Team, Legal, Safety Net and Annual Report, but each one opens the top of a page the visitor has already seen. Annual Report opens Financials, where the Download Report button doesn't open a report.",
-          "The same blog posts repeat as feeds across Programs, Afghan Scouts, Financials and Meet Our Students. \"Welcoming Our New ASPIRE Scholar!\" appears twice on Programs.",
+          "Nine dropdown links, from Values to Annual Report, open the top of a page you've already seen. The same blog posts repeat across four pages.",
         ],
-        why: [
-          "Visitors click expecting a section and land somewhere they've already been. The site feels bigger than the story, and it's harder for your team to keep ten pages current than six.",
-        ],
+        why: ["Visitors stop exploring, and ten pages are harder to keep current than six."],
         proposal: [
-          [
-            "Six pages: Home, About, Students, Programs, Impact, Stories, plus Donate as the button in the header.",
-            "Afghan Scouts becomes a section of Programs and About. FAQ answers move onto the pages where the questions come up. Get Involved and Contact fold into Donate and the footer.",
-            "301 redirects for every old address, so links people have shared and existing Google rankings keep working.",
-          ],
+          ["Six pages, each with one job", "Redirects from every old address, so nothing breaks"],
         ],
         evidence: [
           {
             src: `${ASSETS}/nav-dropdown.webp`,
             alt: "The aspire-usa.org Programs dropdown open, showing Self-Sufficiency, Community Work, Success Stories, Legal and Safety Net.",
-            caption: "The Programs menu: five links, all opening the top of the same page.",
+            caption: "Five Programs links, one page.",
             width: 1600,
             height: 488,
           },
@@ -194,155 +168,93 @@ export const aspireUsa: AuditProposalPage = {
       {
         id: "finding-3",
         number: "Finding 3",
-        title: "Unfinished content is live",
+        title: "Placeholders where donors check the details",
         severity: "high",
         tag: "Trust",
         seen: [
-          "Meet Our Students shows template placeholders: \"James Williams\" and \"Jessica Davis\" (twice), each with \"Universety or course\" and \"Aspire to be...\". Several real students also stop at \"Aspire to be...\", and Sosan's card uses the same template photo as James Williams.",
-          "Headings carry typos: \"We Apsire\", \"Passge to the U.S.\" and \"Professional Jounrey\", and the phone menu says \"Staffs\". On Financials, \"30% Educational Support\" still carries the template's text: \"This is the space to introduce the Services section.\"",
-          "A few details don't match across pages: the Eagle Scout story names the student Fifi on one page and Fatima on another, and the founder is described as a high school student next to a Swarthmore '30 card.",
+          "Meet Our Students shows template profiles like \"James Williams\" and typos like \"Professional Jounrey\". Financials has percentages but no amounts, and Download Report doesn't open a report.",
         ],
         why: [
-          "Donors and grant reviewers read small details as a sign of how carefully an organization runs. Placeholders on the page about your students are the first thing to go.",
+          "Donors and grant makers judge how you run by the small details and by where the money goes.",
         ],
         proposal: [
           [
-            "Student profiles from one list your team edits: display name, school, field, what they aspire to, photo and a link to their story. Nothing shows until it's complete.",
-            "Every page proofread before launch.",
-            "One agreed name per student, used everywhere.",
+            "Student profiles from one list your team edits",
+            "An Impact page with your figures, annual report and Form 990",
+            "Every page proofread",
           ],
         ],
         evidence: [
           {
             src: `${ASSETS}/student-placeholders.webp`,
             alt: "Student cards on Meet Our Students: Sosan, James Williams and Jessica Davis twice, each reading Universety or course and Aspire to be.",
-            caption: "Meet Our Students: template placeholders live on the page. Photos cropped.",
+            caption: "Template profiles live on Meet Our Students.",
             width: 1600,
             height: 331,
           },
-        ],
-      },
-      {
-        id: "finding-4",
-        number: "Finding 4",
-        title: "The Financials page stops short of a report",
-        severity: "high",
-        tag: "Donor confidence",
-        seen: [
-          "The page is headed \"Transparency Builds Trust\" and splits spending into four percentages, but there are no amounts, the Download Report button doesn't open a report, and there's no Form 990. Its three headline numbers are about Afghan scouting and European asylum applications in 2021.",
-        ],
-        why: [
-          "\"Where does my money go?\" is the deciding question for many donors and nearly every grant maker. Charity reviewers such as Candid look for the same information.",
-        ],
-        proposal: [
-          [
-            "An Impact page: how each dollar is spent, how many students you support, and outcomes such as universities, internships and the Eagle Scout rank.",
-            "Your annual report and Form 990 to download, with your EIN and board listed.",
-            "Built from your figures. We design the page and you supply the numbers.",
-          ],
-        ],
-        evidence: [
           {
             src: `${ASSETS}/financials-numbers.webp`,
             alt: "Our Story in Numbers on the Financials page: 11,000 PARSA youth scouts, 42,000 Afghan asylum applications in Europe in 2021, 0.12% of Afghan scouts evacuated.",
-            caption:
-              "\"Our Story in Numbers\" on Financials: about Afghan scouting and European asylum applications in 2021.",
+            caption: "Financials: percentages, no amounts.",
             width: 1600,
             height: 414,
           },
         ],
       },
       {
-        id: "finding-5",
-        number: "Finding 5",
-        title: "The name change isn't finished yet",
+        id: "finding-4",
+        number: "Finding 4",
+        title: "The name change isn't finished",
         severity: "high",
-        tag: "Rename and AI search",
+        tag: "Rename",
         seen: [
-          "The site uses ASPIRE-USA, ASPIRE USA and Aspire-USA, and every page title says \"Aspire USA\". The email address is still info@afghanscoutsdurham.org and the donation page still says Afghan Scouts Durham. The link to your old name is one paragraph near the bottom of the homepage.",
-          "\"ASPIRE\" is a crowded name. A search for ASPIRE-USA and Afghan students returns other organizations' ASPIRE programs, not your site.",
+          "The site uses four spellings of ASPIRE-USA, the email is still on the old domain, and Donorbox shows the old name. Searches for ASPIRE-USA return other ASPIRE programs.",
         ],
         why: [
-          "Google and AI assistants treat a renamed organization as a new, unknown one unless the old and new names are connected clearly. Until then, your years as Afghan Scouts Durham don't count toward ASPIRE-USA.",
+          "Google and AI assistants won't link ASPIRE-USA to your history until the two names are connected.",
         ],
         proposal: [
           [
-            "One spelling, ASPIRE-USA, everywhere.",
-            "\"Formerly Afghan Scouts Durham\" on About and in the footer.",
-            "Structured data that names you as a nonprofit, with your EIN, address, both names and your official profiles.",
-            "A short checklist for your team: email domain, Donorbox, Candid profile, Google Business Profile and social accounts.",
+            "One spelling everywhere, plus \"formerly Afghan Scouts Durham\"",
+            "Nonprofit structured data with both names and your EIN",
           ],
         ],
       },
       {
-        id: "finding-6",
-        number: "Finding 6",
+        id: "finding-5",
+        number: "Finding 5",
         title: "The first screen on a phone",
         severity: "high",
         tag: "Mobile",
         seen: [
-          "On a phone, the ASPIRE-USA heading sits under the menu bar, the logo overlaps the tagline, and the tagline is cut off by the button. There's no Donate button on the first screen. At tablet width the text runs over the buttons.",
+          "The heading hides under the menu, the logo overlaps the tagline, and there's no Donate button.",
         ],
-        why: [
-          "Most people who click a link from an email or a social post arrive on a phone. The first screen is where they decide whether to keep reading.",
-        ],
-        proposal: [
-          "A new first screen in Wix Studio: one sentence on who you help, a Donate button and a Meet our students link, checked on phone, tablet and desktop.",
-        ],
+        why: ["Most visitors from email and social media arrive on a phone."],
+        proposal: ["One message and a Donate button, tested on every screen size."],
         evidence: [
           {
             src: `${ASSETS}/home-mobile.webp`,
             alt: "The aspire-usa.org homepage on a 375 px phone screen: the heading under the menu bar, the logo over the tagline and the button cutting it off.",
-            caption:
-              "The first screen on a phone: the heading under the menu bar, the logo over the tagline, and no Donate button. Background photo blurred.",
+            caption: "The first screen on a phone today.",
             width: 750,
             height: 803,
           },
         ],
       },
       {
-        id: "finding-7",
-        number: "Finding 7",
-        title: "Search basics",
+        id: "finding-6",
+        number: "Finding 6",
+        title: "Your 40 stories are hard to find",
         severity: "medium",
-        tag: "Search basics",
+        tag: "Search and stories",
         seen: [
-          [
-            "None of the ten pages has a description for Google, so Google writes its own.",
-            "The homepage has two main headings, both reading \"ASPIRE-USA\". FAQ and Contact have no main heading.",
-            "Images are described by their file names, such as \"Screenshot 2026-09-26 225107.png\". Screen readers read those out loud.",
-            "Page titles like \"Home | Aspire USA\" don't say what you do or where.",
-          ],
+          "No page has a Google description, images are described by their file names, and the stories mostly appear as repeated feeds.",
         ],
-        why: [
-          "Google can't reliably tell which page answers searches like \"support Afghan students\" or \"Afghan refugee scholarship Durham NC\".",
-        ],
+        why: ["Specific student stories are what Google, AI assistants and journalists quote."],
         proposal: [
           [
-            "A title, description and one main heading for every page.",
-            "Real image descriptions.",
-            "Structured data for the organization, articles and FAQs.",
-            "Your sitemap and robots.txt are already set up correctly, so we keep them.",
-          ],
-        ],
-      },
-      {
-        id: "finding-8",
-        number: "Finding 8",
-        title: "Your stories are your strongest asset, and they're buried",
-        severity: "medium",
-        tag: "Stories and AI search",
-        seen: [
-          "You have forty blog posts, most of them your students' own stories, from Ramish's role in student government to Fatima's Eagle Scout project in the National Scouting Library. They mostly appear as repeated feeds at the bottom of other pages.",
-        ],
-        why: [
-          "Specific, dated stories with real outcomes are what journalists, grant makers and AI assistants quote. Right now they're hard to find and harder to cite.",
-        ],
-        proposal: [
-          [
-            "A Stories hub with clear categories, and three featured stories on the homepage.",
-            "Each story with an author, a date and a link to how readers can help.",
-            "Plain answers to the questions people ask: is ASPIRE-USA a 501(c)(3), how donations are used, what happened to Afghan scouts after 2021.",
+            "A Stories hub, with three featured on the homepage",
+            "Titles, descriptions and image text on every page",
           ],
         ],
       },
@@ -352,7 +264,7 @@ export const aspireUsa: AuditProposalPage = {
   mockup: {
     id: "new-structure",
     heading: "The new site, in six pages",
-    body: "Fewer pages, each with one job. Every page ends with a way to help, and donations stay on aspire-usa.org.",
+    body: "Six pages, each with one job, and donations on your own site.",
     image: {
       src: `${ASSETS}/structure.webp`,
       alt: "Proposed structure for aspire-usa.org: six pages and a Donate button.",
@@ -361,49 +273,33 @@ export const aspireUsa: AuditProposalPage = {
       height: 1086,
     },
     points: [
-      {
-        lead: "One message on the first screen.",
-        text: "Who you help, why it matters now, and a Donate button.",
-      },
-      {
-        lead: "Donations on your own site.",
-        text: "Your Donorbox form, under your new name, next to your EIN and other ways to give.",
-      },
-      {
-        lead: "Stories at the center.",
-        text: "Your students' own words lead to Students, Impact and Donate.",
-      },
+      { lead: "One message first.", text: "Who you help, and a Donate button." },
+      { lead: "Give on your own site.", text: "Your Donorbox form, under your new name." },
+      { lead: "Stories at the center.", text: "They lead to Students, Impact and Donate." },
     ],
   },
 
   offer: {
     id: "proposal",
     heading: "Proposal",
-    intro:
-      "Everything in this review, in one project: a new ASPIRE-USA site in Wix Studio, ready in four weeks.",
+    intro: "Everything above, in one project.",
     name: "New ASPIRE-USA site in Wix Studio",
     duration: "4 weeks",
     wasPrice: "$1,500",
     price: "$1,250",
     items: [
-      "New design in your Wix Studio account, with your new name and logo",
-      "Six pages: Home, About, Students, Programs, Impact, Stories, plus Donate",
-      "Donate page with your Donorbox form embedded and renamed, suggested amounts and other ways to give",
-      "Student profiles from one list your team edits",
-      "Impact page built from your figures, with your annual report and Form 990",
-      "All 40 posts kept at their current addresses, with categories and three stories featured on the homepage",
-      "Copy edited and proofread across the site",
-      "301 redirects for every old page address",
-      "Rename completed on the site: one spelling, \"formerly Afghan Scouts Durham\", nonprofit structured data",
-      "Titles, descriptions, headings and image descriptions on every page",
-      "Google Search Console and Google Analytics connected",
-      "Training and a short guide, so your team can add students, stories and updates without a designer",
+      "New design in your Wix Studio account, with your new name",
+      "Six pages plus an on-site Donate page",
+      "Student profiles and an Impact page your team can edit",
+      "All 40 posts kept, with redirects for every old address",
+      "Copy proofread and the rename completed",
+      "SEO and AI search setup, with Search Console and Analytics",
+      "Training and a short guide for your team",
     ],
     notes: [
-      "Nonprofit rate. Our standard price for this scope is $1,500.",
-      "Payment: 50% to start, 50% at launch, by invoice.",
-      "Your Wix plan, Donorbox fees and any paid apps aren't included.",
-      "This offer is valid for 30 days from the date above.",
+      "Nonprofit rate. Standard price for this scope: $1,500.",
+      "50% to start, 50% at launch, by invoice. Wix plan and Donorbox fees not included.",
+      "Valid until December 31, 2026.",
     ],
   },
 
@@ -414,13 +310,9 @@ export const aspireUsa: AuditProposalPage = {
   score: {
     id: "site-score",
     heading: "Your site's score today",
-    intro:
-      "The checks behind this review, scored. Each area matches one of the findings above.",
     todayLabel: "Today",
     stages: { poor: "Critical", fair: "Needs attention", good: "Pass" },
-    method: (checks) =>
-      `How it's counted: ${checks} checks, each worth 1 if it passes, half if it partly passes and 0 if it doesn't, shown out of 100. Critical is under 40, Needs attention 40 to 74, Pass 75 and up.`,
-    launchNote: "The proposal above addresses every check that doesn't pass yet.",
+    method: (checks) => `${checks} checks behind this review, scored out of 100.`,
     areas: [
       {
         name: "Donations",
@@ -444,11 +336,6 @@ export const aspireUsa: AuditProposalPage = {
           { label: "No template placeholders are live", status: "fail" },
           { label: "Headings are free of typos", status: "fail" },
           { label: "Each student goes by one name across pages", status: "partial" },
-        ],
-      },
-      {
-        name: "Donor confidence",
-        checks: [
           { label: "Spending is broken down", status: "partial" },
           { label: "An annual report and Form 990 can be downloaded", status: "fail" },
           { label: "Your EIN and other ways to give are published", status: "pass" },
@@ -470,17 +357,12 @@ export const aspireUsa: AuditProposalPage = {
         ],
       },
       {
-        name: "Search basics",
+        name: "Search and stories",
         checks: [
           { label: "Every page has a description for Google", status: "fail" },
           { label: "Every page has one main heading", status: "partial" },
           { label: "Images have real descriptions", status: "partial" },
           { label: "Sitemap and robots.txt are set up", status: "pass" },
-        ],
-      },
-      {
-        name: "Stories",
-        checks: [
           { label: "New stories are published regularly", status: "pass" },
           { label: "Stories are easy to find", status: "partial" },
         ],
@@ -492,14 +374,10 @@ export const aspireUsa: AuditProposalPage = {
     id: "how-it-works",
     heading: "How the project runs",
     rows: [
-      {
-        what: "Kickoff and access",
-        detail: "(Wix collaborator access, Donorbox, Search Console, photos)",
-        when: "week 1",
-      },
+      { what: "Kickoff and access", when: "week 1" },
       { what: "Structure and design for approval", when: "weeks 1-2" },
       { what: "Build, copy, students and stories", when: "weeks 2-4" },
-      { what: "Testing, redirects and launch", when: "week 4" },
+      { what: "Testing and launch", when: "week 4" },
     ],
   },
 
@@ -507,11 +385,10 @@ export const aspireUsa: AuditProposalPage = {
     id: "what-we-need",
     heading: "What we need from you",
     items: [
-      "Collaborator access to your Wix site and Donorbox",
-      "Your new logo and any brand colors",
-      "Student details and photos you're comfortable publishing",
-      "Your budget figures, annual report and Form 990",
-      "Quick feedback at each step, from one person who can approve",
+      "Wix and Donorbox collaborator access",
+      "Your logo and brand colors",
+      "Student details and photos you're happy to publish",
+      "Your budget figures and annual report",
     ],
   },
 
@@ -521,27 +398,19 @@ export const aspireUsa: AuditProposalPage = {
     items: [
       {
         q: "Do we have to leave Wix?",
-        a: "No. We rebuild inside your Wix Studio account, so you keep your domain, your plan and your blog. Your team keeps editing in the same editor.",
+        a: "No. We rebuild in your Wix Studio account, and you keep your domain, plan and blog.",
       },
       {
-        q: "What happens to our blog posts?",
-        a: "All of them stay at their current addresses, so links people have shared and your Google rankings keep working. We add categories and feature the strongest ones.",
+        q: "Will monthly donors be affected?",
+        a: "No. It's the same Donorbox form, just on your own site.",
       },
       {
-        q: "Will our monthly donors be affected?",
-        a: "No. We embed the same Donorbox form on your site and rename it, so recurring gifts continue as they are.",
+        q: "Can we update the site ourselves?",
+        a: "Yes. You get training and a short guide, so updates take minutes.",
       },
       {
-        q: "Do we need our current designer for the handover?",
-        a: "Only to add us as a collaborator on the Wix site. If you're the site owner, you can do that yourself in a few clicks.",
-      },
-      {
-        q: "Will we be able to update the site ourselves?",
-        a: "Yes. After launch you get training and a short guide. Adding a student, a story or an update takes minutes and doesn't need a designer.",
-      },
-      {
-        q: "How long until the new name shows up on Google?",
-        a: "The site is ready for it on launch day. Google usually updates its results over the following weeks, and the redirects and structured data help it connect ASPIRE-USA to Afghan Scouts Durham.",
+        q: "Do we need our current designer?",
+        a: "Only to add us as a collaborator, which you can also do yourself.",
       },
     ],
   },
@@ -549,7 +418,7 @@ export const aspireUsa: AuditProposalPage = {
   close: {
     id: "next-step",
     heading: "Next step",
-    body: "If you have questions, email us. If not, we'll confirm exactly what's included and send the agreement. Payment is 50% to start and 50% at launch, by invoice.",
+    body: "Reply with any questions. If there are none, we'll send the agreement.",
     primaryCta: EMAIL,
     // Two figures for the concerns Donna named (a slow designer, a
     // complicated structure), both from the offer above, then two about us,

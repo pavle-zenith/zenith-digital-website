@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { StatBlock } from "@/components/ui/StatBlock";
 import { TickList } from "@/components/sections/private-doc/parts";
 import type { AuditProposalPage } from "@/content/proposals/types";
@@ -35,8 +36,9 @@ export function AuditProposalSummary({ summary }: { summary: AuditProposalPage["
 
 /**
  * "Brzi pregled": the numbers, as a hairline grid of stat cells (gap-px over
- * the rule colour, solid cells). Two across on a phone, three from `sm`, so
- * the six figures read as two clean rows on anything wider than a phone.
+ * the rule colour, solid cells). Two across on a phone. Six figures go three
+ * across from `sm`, so they read as two clean rows; any count that doesn't
+ * split into threes (four, say) stays two across, so no row is left short.
  */
 export function AuditProposalStats({ stats }: { stats: AuditProposalPage["stats"] }) {
   return (
@@ -44,7 +46,10 @@ export function AuditProposalStats({ stats }: { stats: AuditProposalPage["stats"
       <DocHeading heading={stats.heading} />
       <ul
         role="list"
-        className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-light-border bg-light-border sm:grid-cols-3"
+        className={cn(
+          "grid grid-cols-2 gap-px overflow-hidden rounded-card border border-light-border bg-light-border",
+          stats.items.length % 3 === 0 && "sm:grid-cols-3",
+        )}
       >
         {stats.items.map((item) => (
           <li key={item.label} className="bg-light-bg p-5 break-inside-avoid md:p-6">

@@ -193,13 +193,13 @@ export interface AuditProposalPage {
   score?: {
     id: string;
     heading: string;
-    intro: string;
+    intro?: string;
     todayLabel: string;
     stages: { poor: string; fair: string; good: string };
     /** One line on how the score is counted, given the number of checks. */
     method: (checks: number) => string;
     /** Printed under the bar: what the offer does to these checks. */
-    launchNote: string;
+    launchNote?: string;
     areas: {
       name: string;
       checks: { label: string; status: "pass" | "partial" | "fail" }[];

@@ -81,12 +81,12 @@ export function AuditProposalScore({ score }: { score: Score }) {
           <span className="absolute right-0 text-positive-ink">{score.stages.good}</span>
         </div>
 
-        <p className="mt-6 border-t border-light-border pt-5 text-body text-light-text">
-          {score.launchNote}
-        </p>
-        <p className="mt-2 text-label tracking-normal text-light-muted">
-          {score.method(all.total)}
-        </p>
+        <div className="mt-6 space-y-2 border-t border-light-border pt-5">
+          {score.launchNote ? (
+            <p className="text-body text-light-text">{score.launchNote}</p>
+          ) : null}
+          <p className="text-label tracking-normal text-light-muted">{score.method(all.total)}</p>
+        </div>
       </div>
 
       <ul role="list" className="mt-8">

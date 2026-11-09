@@ -16,6 +16,7 @@ import { ProposalInvestment } from "@/components/sections/proposal-page/Proposal
 import { ProposalTimeline } from "@/components/sections/proposal-page/ProposalTimeline";
 import { ProposalClose } from "@/components/sections/proposal-page/ProposalClose";
 import { AuditProposal } from "@/components/sections/audit-proposal/AuditProposal";
+import { ProposalViewBeacon } from "@/components/sections/private-doc/ProposalViewBeacon";
 
 /**
  * Private proposal pages. A sales document sent to one prospect as a link, not
@@ -43,6 +44,9 @@ import { AuditProposal } from "@/components/sections/audit-proposal/AuditProposa
  *
  * No JSON-LD here on purpose: structured data exists to help machines
  * understand a page, and this one is not for them.
+ *
+ * VIEW NOTIFICATION. `ProposalViewBeacon` emails us when the page has been
+ * visible for five seconds (lib/proposalViews.ts); open your own with `?me=1`.
  *
  * TWO SHAPES. A build proposal (Pulse) renders the sections below; an audit
  * proposal (`kind: "audit"`, Woodstone 024) is a site review plus a phased
@@ -106,10 +110,18 @@ export default async function ProposalRoute({
   const { slug } = await params;
   const proposal = getProposal(slug);
   if (!proposal) notFound();
-  if (proposal.kind === "audit") return <AuditProposal proposal={proposal} />;
+  if (proposal.kind === "audit") {
+    return (
+      <>
+        <AuditProposal proposal={proposal} />
+        <ProposalViewBeacon slug={proposal.slug} />
+      </>
+    );
+  }
 
   return (
     <>
+      <ProposalViewBeacon slug={proposal.slug} />
       <ProposalHero hero={proposal.hero} />
       <JumpBar
         label={proposalTemplate.jumpLabel}

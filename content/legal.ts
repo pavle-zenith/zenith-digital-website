@@ -15,6 +15,8 @@
  *   - the Supabase project or region  → "Where your data is held"
  *   - the rate-limit window           → the anti-spam row (currently 1 hour,
  *                                       lib/forms.ts WINDOW_MS)
+ *   - the proposal-view beacon        → §"Anonymous view counting on
+ *                                       proposals" (lib/proposalViews.ts)
  */
 
 export type LegalBlock =
@@ -37,7 +39,7 @@ const EMAIL = "hello@thezenithdigital.com";
 
 export const privacyPolicy: LegalDocument = {
   title: "Privacy policy",
-  updated: "17 August 2026",
+  updated: "9 November 2026",
   intro:
     "This policy explains what this website collects, why, and what you can do about it. It covers thezenithdigital.com and the enquiry forms on it. It is written to be read, not to be survived.",
   sections: [
@@ -96,6 +98,11 @@ export const privacyPolicy: LegalDocument = {
               "To see which pages earn their place",
             ],
             [
+              "You view a proposal we sent you",
+              "Which proposal, the time, your country and your device type. No cookies and no IP address",
+              "Anonymous view counting, so we know the proposal was opened",
+            ],
+            [
               "Any visit",
               "Standard server logs, including IP address, kept by our host",
               "Security and keeping the site running",
@@ -126,6 +133,19 @@ export const privacyPolicy: LegalDocument = {
       ],
     },
     {
+      heading: "Anonymous view counting on proposals",
+      blocks: [
+        {
+          type: "p",
+          text: "When we send a business a proposal, it is a private page on this site under /proposal/. If that page stays open and visible for five seconds, your browser sends us one request saying which proposal was opened.",
+        },
+        {
+          type: "p",
+          text: "From that request we note the time, the country your connection comes from and whether you are on a phone, tablet or computer, and email that to ourselves. Our host works out the country; we never see or store your IP address. The request carries no cookies and no identifier, nothing is saved in your browser, and the email is the only record. We send ourselves at most one email per proposal per hour.",
+        },
+      ],
+    },
+    {
       heading: "Who else touches your data",
       blocks: [
         {
@@ -138,7 +158,7 @@ export const privacyPolicy: LegalDocument = {
           rows: [
             [
               "Vercel",
-              "Hosts the site and keeps server logs",
+              "Hosts the site, keeps server logs, and tells us the country a proposal view comes from",
               "Global edge network",
             ],
             [
@@ -146,7 +166,11 @@ export const privacyPolicy: LegalDocument = {
               "Stores form submissions in a Postgres database",
               "Frankfurt, Germany (EU)",
             ],
-            ["Resend", "Delivers the notification email to us", "EU and US"],
+            [
+              "Resend",
+              "Delivers notification emails to us, for forms and proposal views",
+              "EU and US",
+            ],
             [
               "Google Analytics",
               "Website analytics, only after you accept",
@@ -179,6 +203,7 @@ export const privacyPolicy: LegalDocument = {
             "Enquiry and application data: we process it to take steps at your request before entering a contract, and because we have a legitimate interest in answering people who contact us.",
             "Analytics: your consent, given through the banner and withdrawable at any time.",
             "Server logs and rate limiting: our legitimate interest in keeping the site available and free of spam.",
+            "Proposal view counting: our legitimate interest in knowing whether a proposal we sent has been read.",
           ],
         },
       ],
@@ -191,6 +216,7 @@ export const privacyPolicy: LegalDocument = {
           items: [
             "Enquiries, audit requests and partner applications: kept while the conversation is live, and for up to 24 months afterwards so we can pick up where we left off. Ask us to delete yours sooner and we will.",
             "Rate-limiting records: up to one hour, and they are lost whenever the site redeploys.",
+            "Proposal view emails: kept in our inbox for up to 24 months, like enquiries. Resend keeps its own delivery log under its own schedule.",
             "Analytics: retained by Google under the retention period set on the property.",
             "Server logs: retained by our host under its own schedule.",
           ],

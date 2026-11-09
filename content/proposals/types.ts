@@ -13,7 +13,18 @@
 
 export type Severity = "critical" | "high" | "medium";
 
-export interface ProposalImage { src: string; alt: string; caption: string; width: number; height: number }
+export interface ProposalImage {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+  /**
+   * A narrower drawing of the same diagram for phones, where the wide one's
+   * text would shrink past reading. Screenshots don't need one.
+   */
+  small?: { src: string; width: number; height: number };
+}
 
 export interface ProposalPage {
   kind?: "build";
@@ -102,7 +113,8 @@ export interface AuditProposalFinding {
   /** "Nalaz 1". */
   number: string;
   title: string;
-  severity: Severity;
+  /** Left out on a page that sets `hideSeverity`, rather than faked. */
+  severity?: Severity;
   /** The area it belongs to, e.g. "Konverzija". */
   tag: string;
   seen: Prose;
@@ -119,6 +131,11 @@ export interface AuditProposalPage {
   /** BCP 47 tag for everything the page says, e.g. "sr-Latn". */
   lang: string;
   meta: { title: string; description: string; ogTitle: string; ogLocale: string };
+  /**
+   * A proposal rather than an audit (SalesWings): the findings read "today,
+   * then on Wix", so they carry no severity badges and no severity tally.
+   */
+  hideSeverity?: boolean;
 
   /** The template's own words, in the page's language. */
   labels: {
@@ -132,6 +149,8 @@ export interface AuditProposalPage {
     mobileBar: string;
     /** Shown in place of an image the owner has not supplied yet. */
     missingImage: string;
+    /** The link under the `proof` card; "Read the case study" when unset. */
+    readCaseStudy?: string;
   };
 
   hero: {
@@ -166,6 +185,23 @@ export interface AuditProposalPage {
     /** null until the owner supplies the client's mockup. */
     image: ProposalImage | null;
     points: { lead: string; text: string }[];
+  };
+
+  /**
+   * Optional "similar project" between the mockup and the offer: one shipped
+   * case study as proof. `href` is the study's own page (/case-studies/slug),
+   * and its image and industry come from that study's card. `quote` is a
+   * testimonial id from content/testimonials-data.ts: the words are looked
+   * up, never retyped here.
+   */
+  proof?: {
+    id: string;
+    heading: string;
+    client: string;
+    line: string;
+    stats: { value: string; label: string }[];
+    href: string;
+    quote: string;
   };
 
   /** One priced offer: what it is, how long, how much, and what it covers. */
@@ -206,7 +242,29 @@ export interface AuditProposalPage {
     }[];
   };
 
-  timeline: { id: string; heading: string; rows: { what: string; detail?: string; when: string }[] };
+  /**
+   * Optional section after the offer, before the timeline: what the client's
+   * team gets to run the site once it's live. Points as the mockup's.
+   */
+  handoff?: {
+    id: string;
+    heading: string;
+    body: string;
+    points: { lead: string; text: string }[];
+  };
+
+  timeline: {
+    id: string;
+    heading: string;
+    rows: {
+      what: string;
+      /** A short aside after the step, on the same line: "(Wix, photos)". */
+      detail?: string;
+      /** A sentence on what the step covers, on its own line under it. */
+      description?: string;
+      when: string;
+    }[];
+  };
   needs: { id: string; heading: string; items: string[] };
   faq: { id: string; heading: string; items: { q: string; a: string }[] };
 

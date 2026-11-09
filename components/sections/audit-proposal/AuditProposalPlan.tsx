@@ -22,6 +22,9 @@ export function AuditProposalTimeline({ timeline }: { timeline: AuditProposalPag
             <p className="text-body text-light-text md:text-body-lg">
               <span className="font-medium">{row.what}</span>
               {row.detail ? <span className="text-light-muted"> {row.detail}</span> : null}
+              {row.description ? (
+                <span className="mt-1 block text-body text-light-muted">{row.description}</span>
+              ) : null}
             </p>
             <p className="col-start-2 font-mono text-label uppercase track-label text-light-muted sm:col-start-3 sm:text-right">
               {row.when}

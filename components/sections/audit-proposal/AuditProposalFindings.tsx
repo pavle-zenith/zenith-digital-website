@@ -34,29 +34,34 @@ const ORDER: Severity[] = ["critical", "high", "medium"];
  *
  * The severity tally comes first, as on the proposal page, so the reader knows
  * how bad before the detail. The severity word is always printed: colour is
- * never the only signal.
+ * never the only signal. A page that is a proposal rather than an audit
+ * (`hideSeverity`) drops both the tally and the badges; the area tag stays.
  */
 export function AuditProposalFindings({
   findings,
   labels,
+  hideSeverity = false,
 }: {
   findings: AuditProposalPage["findings"];
   labels: AuditProposalPage["labels"];
+  hideSeverity?: boolean;
 }) {
   const count = (s: Severity) => findings.items.filter((f) => f.severity === s).length;
 
   return (
     <DocSection id={findings.id}>
       <DocHeading heading={findings.heading} intro={findings.intro} />
-      <p className="-mt-2 mb-8 flex flex-wrap gap-2">
-        {ORDER.filter((s) => count(s) > 0).map((s) => (
-          <SeverityPill key={s} severity={s} count={count(s)} label={labels.severity[s]} />
-        ))}
-      </p>
+      {hideSeverity ? null : (
+        <p className="-mt-2 mb-8 flex flex-wrap gap-2">
+          {ORDER.filter((s) => count(s) > 0).map((s) => (
+            <SeverityPill key={s} severity={s} count={count(s)} label={labels.severity[s]} />
+          ))}
+        </p>
+      )}
 
       <ol role="list" className="space-y-6">
         {findings.items.map((item) => (
-          <FindingCard key={item.id} item={item} labels={labels} />
+          <FindingCard key={item.id} item={item} labels={labels} hideSeverity={hideSeverity} />
         ))}
       </ol>
     </DocSection>
@@ -66,9 +71,11 @@ export function AuditProposalFindings({
 function FindingCard({
   item,
   labels,
+  hideSeverity,
 }: {
   item: AuditProposalFinding;
   labels: AuditProposalPage["labels"];
+  hideSeverity: boolean;
 }) {
   return (
     <li
@@ -82,7 +89,9 @@ function FindingCard({
           {item.title}
         </h3>
         <p className="mt-4 flex flex-wrap items-center gap-2">
-          <SeverityPill severity={item.severity} label={labels.severity[item.severity]} />
+          {!hideSeverity && item.severity ? (
+            <SeverityPill severity={item.severity} label={labels.severity[item.severity]} />
+          ) : null}
           <Pill tone="light">{item.tag}</Pill>
         </p>
       </div>

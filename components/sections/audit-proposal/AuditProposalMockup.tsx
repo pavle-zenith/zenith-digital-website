@@ -1,7 +1,6 @@
-import { CheckIcon } from "@/components/sections/private-doc/icons";
 import { EvidenceFigure } from "@/components/sections/private-doc/EvidenceFigure";
 import type { AuditProposalPage } from "@/content/proposals/types";
-import { DocHeading, DocSection } from "./parts";
+import { DocHeading, DocSection, LeadPoints } from "./parts";
 
 /**
  * The mockup section: an image beside or above what we keep and change.
@@ -15,7 +14,7 @@ import { DocHeading, DocSection } from "./parts";
  * Until the owner supplies the image, a dashed frame holds its place with the
  * placeholder label, visibly unfinished rather than silently missing.
  *
- * The changes are ruled rows with a tick, as `TickList`, with the bold lead
+ * The changes are ruled rows with a tick (`LeadPoints`), with the bold lead
  * the copy gives each one.
  */
 export function AuditProposalMockup({
@@ -48,19 +47,7 @@ export function AuditProposalMockup({
 
         <div>
           <p className="text-body-lg text-light-text">{mockup.body}</p>
-          <ul role="list" className="mt-6">
-            {mockup.points.map((point) => (
-              <li
-                key={point.lead}
-                className="flex items-start gap-3 border-t border-light-border py-4"
-              >
-                <CheckIcon className="mt-[3px] h-[18px] w-[18px] shrink-0 text-positive-ink" />
-                <span className="text-body text-light-text">
-                  <strong className="font-semibold">{point.lead}</strong> {point.text}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <LeadPoints points={mockup.points} className="mt-6" />
         </div>
       </div>
     </DocSection>

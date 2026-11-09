@@ -5,7 +5,9 @@ import { AuditProposalHero } from "./AuditProposalHero";
 import { AuditProposalStats, AuditProposalSummary } from "./AuditProposalSummary";
 import { AuditProposalFindings } from "./AuditProposalFindings";
 import { AuditProposalMockup } from "./AuditProposalMockup";
+import { AuditProposalProof } from "./AuditProposalProof";
 import { AuditProposalOffer } from "./AuditProposalOffer";
+import { AuditProposalHandoff } from "./AuditProposalHandoff";
 import { AuditProposalScore } from "./AuditProposalScore";
 import { AuditProposalNeeds, AuditProposalTimeline } from "./AuditProposalPlan";
 import { AuditProposalClose, AuditProposalFaq } from "./AuditProposalClose";
@@ -31,7 +33,9 @@ export function AuditProposal({ proposal: p }: { proposal: AuditProposalPage }) 
     p.stats,
     p.findings,
     p.mockup,
+    ...(p.proof ? [p.proof] : []),
     p.offer,
+    ...(p.handoff ? [p.handoff] : []),
     ...(p.score ? [p.score] : []),
     p.timeline,
     p.needs,
@@ -49,9 +53,11 @@ export function AuditProposal({ proposal: p }: { proposal: AuditProposalPage }) 
       </div>
       <AuditProposalSummary summary={p.summary} />
       <AuditProposalStats stats={p.stats} />
-      <AuditProposalFindings findings={p.findings} labels={p.labels} />
+      <AuditProposalFindings findings={p.findings} labels={p.labels} hideSeverity={p.hideSeverity} />
       <AuditProposalMockup mockup={p.mockup} missingImage={p.labels.missingImage} />
+      {p.proof ? <AuditProposalProof proof={p.proof} linkLabel={p.labels.readCaseStudy} /> : null}
       <AuditProposalOffer offer={p.offer} labels={p.labels} />
+      {p.handoff ? <AuditProposalHandoff handoff={p.handoff} /> : null}
       {p.score ? <AuditProposalScore score={p.score} /> : null}
       <AuditProposalTimeline timeline={p.timeline} />
       <AuditProposalNeeds needs={p.needs} />

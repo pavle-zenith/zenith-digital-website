@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/Section";
+import { CheckIcon } from "@/components/sections/private-doc/icons";
 import { cn } from "@/lib/utils";
 import type { Tone } from "@/lib/types";
 import type { Prose } from "@/content/proposals/types";
@@ -106,5 +107,30 @@ export function ProseBlocks({
         ),
       )}
     </div>
+  );
+}
+
+/**
+ * Points with a bold lead, as ruled rows with a tick: what the new site does
+ * (the mockup section) or what the client's team gets (the handoff).
+ */
+export function LeadPoints({
+  points,
+  className,
+}: {
+  points: { lead: string; text: string }[];
+  className?: string;
+}) {
+  return (
+    <ul role="list" className={className}>
+      {points.map((point) => (
+        <li key={point.lead} className="flex items-start gap-3 border-t border-light-border py-4">
+          <CheckIcon className="mt-[3px] h-[18px] w-[18px] shrink-0 text-positive-ink" />
+          <span className="text-body text-light-text">
+            <strong className="font-semibold">{point.lead}</strong> {point.text}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -9,6 +9,7 @@ import {
 } from "@/app/(site)/free-website-audit/actions";
 import { auditForm } from "@/content/free-website-audit";
 import { trackLead } from "@/lib/analytics";
+import { OpenedAt } from "@/components/forms/OpenedAt";
 
 const initialState: AuditFormState = { status: "idle" };
 
@@ -113,6 +114,9 @@ export function AuditForm({ id }: { id?: string }) {
           className={inputCls}
         />
       </label>
+
+      {/* When the form appeared, for the spam check's minimum fill time */}
+      <OpenedAt />
 
       {/* Honeypot — hidden from people, filled by bots */}
       <input

@@ -39,7 +39,7 @@ const EMAIL = "hello@thezenithdigital.com";
 
 export const privacyPolicy: LegalDocument = {
   title: "Privacy policy",
-  updated: "9 November 2026",
+  updated: "16 November 2026",
   intro:
     "This policy explains what this website collects, why, and what you can do about it. It covers thezenithdigital.com and the enquiry forms on it. It is written to be read, not to be survived.",
   sections: [
@@ -89,8 +89,8 @@ export const privacyPolicy: LegalDocument = {
             ],
             [
               "You submit any form",
-              "Your IP address, held in memory for up to one hour",
-              "To rate-limit submissions and block spam",
+              "Your IP address, held in memory for up to one hour, and the time you opened the form",
+              "To rate-limit submissions and filter out spam",
             ],
             [
               "You accept analytics cookies",

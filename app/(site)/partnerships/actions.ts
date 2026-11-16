@@ -7,8 +7,11 @@ import {
   isEmail,
   normalizeUrl,
   notify,
+  quarantine,
   rateLimited,
+  spamReason,
   storeSubmission,
+  type Submission,
 } from "@/lib/forms";
 
 export type PartnerFormState =
@@ -73,14 +76,29 @@ export async function submitPartnerApplication(
     return { status: "error", message: "Pick a partnership track." };
   }
 
-  const stored = await storeSubmission({
+  const submission: Submission = {
     source: "partnerships",
     name,
     email,
     website,
     message: need || null,
     payload: { agency, track },
+  };
+
+  // Looks like spam: kept for review, not emailed, answered as a success.
+  const spam = spamReason({
+    text: [need],
+    names: [agency, name],
+    sites: [website],
+    openedAt: formData.get("ts"),
+    now: Date.now(),
   });
+  if (spam) {
+    await quarantine({ ...submission, spam });
+    return { status: "success" };
+  }
+
+  const stored = await storeSubmission(submission);
 
   const emailed = await notify({
     subject: `Partner application: ${agency}`,

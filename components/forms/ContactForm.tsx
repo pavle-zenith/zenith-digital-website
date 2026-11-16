@@ -9,6 +9,7 @@ import {
 import { bookContact } from "@/content/book-a-call";
 import { trackLead } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import { OpenedAt } from "@/components/forms/OpenedAt";
 
 const initialState: ContactFormState = { status: "idle" };
 
@@ -85,6 +86,9 @@ export function ContactForm() {
           className={cn(inputCls, "resize-y")}
         />
       </label>
+
+      {/* When the form appeared, for the spam check's minimum fill time */}
+      <OpenedAt />
 
       {/* Honeypot — hidden from people, filled by bots */}
       <input

@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 
 import { getSupabase } from "@/lib/supabase";
+import type { SpamReason } from "@/lib/spam";
 
 /**
  * Shared server-action helpers for the site's forms (contact, audit, partner
@@ -25,6 +26,17 @@ export function rateLimited(ip: string): boolean {
 
 // Pure checks live in lib/validators.ts so client forms can use them too.
 export { isEmail, isPhone, normalizeUrl } from "@/lib/validators";
+export { spamReason } from "@/lib/spam";
+
+/**
+ * A submission lib/spam.ts flagged: stored with the reason so a false
+ * positive can be found and answered, logged without personal data, and
+ * never emailed. The caller then answers with its normal success state.
+ */
+export async function quarantine(input: Submission & { spam: SpamReason }): Promise<void> {
+  console.info(`form spam quarantined: ${input.source} (${input.spam})`);
+  await storeSubmission(input);
+}
 
 /** Which form a row came from. Also the `source` column's value. */
 export type SubmissionSource =
@@ -42,6 +54,8 @@ export type Submission = {
   message?: string | null;
   /** Form-specific fields with no column of their own (agency, track, ...). */
   payload?: Record<string, string>;
+  /** Set when lib/spam.ts flagged it: stored as `payload.spam`, not emailed. */
+  spam?: SpamReason | null;
 };
 
 /**
@@ -61,7 +75,7 @@ export async function storeSubmission(input: Submission): Promise<boolean> {
     phone: input.phone ?? null,
     website: input.website ?? null,
     message: input.message ?? null,
-    payload: input.payload ?? {},
+    payload: { ...input.payload, ...(input.spam ? { spam: input.spam } : null) },
   });
 
   if (error) {

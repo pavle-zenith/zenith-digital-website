@@ -7,8 +7,11 @@ import {
   isPhone,
   normalizeUrl,
   notify,
+  quarantine,
   rateLimited,
+  spamReason,
   storeSubmission,
+  type Submission,
 } from "@/lib/forms";
 
 export type ContactFormState =
@@ -78,14 +81,29 @@ export async function submitContact(
     };
   }
 
-  const stored = await storeSubmission({
+  const submission: Submission = {
     source: "book-a-call",
     name,
     email,
     phone: phone || null,
     website,
     message,
+  };
+
+  // Looks like spam: kept for review, not emailed, answered as a success.
+  const spam = spamReason({
+    text: [message],
+    names: [name],
+    sites: website ? [website] : [],
+    openedAt: formData.get("ts"),
+    now: Date.now(),
   });
+  if (spam) {
+    await quarantine({ ...submission, spam });
+    return { status: "success" };
+  }
+
+  const stored = await storeSubmission(submission);
 
   const emailed = await notify({
     subject: `Contact form: ${name}`,

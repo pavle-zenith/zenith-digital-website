@@ -6,8 +6,11 @@ import {
   isEmail,
   normalizeUrl,
   notify,
+  quarantine,
   rateLimited,
+  spamReason,
   storeSubmission,
+  type Submission,
 } from "@/lib/forms";
 
 export type AuditFormState =
@@ -56,12 +59,27 @@ export async function submitAudit(
   }
 
   // No name field on this form, so the row carries none.
-  const stored = await storeSubmission({
+  const submission: Submission = {
     source: "free-website-audit",
     email,
     website: site,
     message: note || null,
+  };
+
+  // Looks like spam: kept for review, not emailed, answered as a success.
+  const spam = spamReason({
+    text: [note],
+    names: [],
+    sites: [site],
+    openedAt: formData.get("ts"),
+    now: Date.now(),
   });
+  if (spam) {
+    await quarantine({ ...submission, spam });
+    return { status: "success", site: new URL(site).hostname };
+  }
+
+  const stored = await storeSubmission(submission);
 
   const emailed = await notify({
     subject: `Audit request: ${site}`,

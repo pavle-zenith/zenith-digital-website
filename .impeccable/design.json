@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-21T00:00:00.000Z",
+  "generatedAt": "2026-11-17T21:52:24.000Z",
   "title": "Design System: Zenith Digital",
   "extensions": {
     "colorMeta": {
@@ -163,27 +163,31 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Hero headline only. One per page, SF Pro Display Medium at -0.02em."
+        "purpose": "Hero headline only. One per page."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Interior page H1, and the value in every StatBlock, so a metric reads with the weight of a page title."
+        "purpose": "Page-level H1 on interior pages, and the value in every StatBlock, which is why a metric reads with the same weight as a page title."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "Page H1 on the five hub pages whose heading runs long or sits over a lead paragraph: /services, /about, /case-studies, /blog, /free-website-audit. 48px desktop, 32px phone. Every other page H1 stays Headline."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Section headings via SectionHeader, set with text-balance."
-      },
-      "body": {
-        "displayName": "Body",
-        "purpose": "All paragraph copy plus every button and tab label. Inter Display at 1.6."
+        "purpose": "Section headings via SectionHeader. Set with text-balance."
       },
       "body-lg": {
         "displayName": "Body Large",
-        "purpose": "Section intros and lead paragraphs, always in the muted token rather than full-strength ink."
+        "purpose": "Section intros and lead paragraphs. Rendered in the muted token, never full-strength ink."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Everything else, including all button and tab labels."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Saans Mono, uppercase, 0.04em. Eyebrows, stat captions, pill text, nav column headers. Labels only, never speech."
+        "purpose": "Eyebrows, stat captions, pill text, nav column headers. Measure caps at 68ch (--measure)."
       }
     },
     "shadows": [
@@ -200,12 +204,17 @@
       {
         "name": "glass-bar",
         "value": "background: rgba(10,16,32,0.55); backdrop-filter: blur(12px)",
-        "purpose": "Caption and stat bars sitting over photography or video, where text needs separation from moving content."
+        "purpose": "Glass pills and caption bars over photography or video, where text needs separation from moving content."
       },
       {
         "name": "nav-scrolled",
         "value": "background: rgba(255,255,255,0.7); backdrop-filter: blur(24px)",
         "purpose": "The sticky header once the page has scrolled. Returns to solid while the mobile drawer is open."
+      },
+      {
+        "name": "glass-bar-captioned",
+        "value": "background: rgba(10,16,32,0.7); backdrop-filter: blur(12px)",
+        "purpose": "Stat bars carrying small captions over screenshots (StatMedia). Denser than glass-bar so white/80 captions hold 4.5:1 even over a white page."
       }
     ],
     "motion": [
@@ -406,17 +415,17 @@
       },
       {
         "name": "The -ink Split Rule",
-        "body": "Every feedback color ships as a pair: the base value clears 3:1 and is for fills and meaningful graphics; the -ink value is the only one permitted on text over a light fill. The -ink values clear 4.5:1 against BOTH light grounds, white and light-surface. Measured (white / #f4f6fa): green 5.05 / 4.67, red 5.82 / 5.38, amber 4.93 / 4.55. A value can pass on white and fail on the tinted surface: green (#1e9e6a) and amber (#a2650a) both did until they were darkened. Re-measure against both after any change.",
+        "body": "Every feedback color ships as a pair: the base value clears 3:1 and is for fills and meaningful graphics; the -ink value is the only one permitted on text over a light fill. Using #35c88c for a word on white is a bug, not a style choice.\n\nThe -ink values clear 4.5:1 against both light grounds, white and light-surface. Measured (white / #f4f6fa): green 5.05 / 4.67, red 5.82 / 5.38, amber 4.93 / 4.55. That second ground is the part worth checking, because a value can pass on white and fail on the tinted surface: green (#1e9e6a) and amber (#a2650a) both did until they were darkened. Re-measure against both after any change.",
         "section": "colors"
       },
       {
         "name": "The Spent Ground Rule",
-        "body": "Navy is emphasis, not alternation. It is reserved for the sections that carry proof and price, and a long white run between them is the intended state rather than a defect: the emphasis only works because it is rare. A ground change is a decision about what the section is doing, never a decision about visual variety.",
+        "body": "Navy is emphasis, not alternation. It is reserved for the sections that carry proof and price, and a long white run between them is the intended state rather than a defect: the emphasis only works because it is rare. A ground change is a decision about what the section is doing, never a decision about visual variety. Do not \"restore alternation\" by flipping sections to navy on a cadence.",
         "section": "colors"
       },
       {
         "name": "The Reciprocal Ground Rule",
-        "body": "#0a1020 is the dark background and the light foreground; #ffffff is the light background. The two grounds are one relationship inverted, so a component written for one tone maps to the other by swapping token families, never by inventing new values.",
+        "body": "#0a1020 is the dark background and the light foreground; #ffffff is the light background. The two grounds are one relationship inverted, so a component written for one tone maps to the other by swapping token families (bg/text/border ↔ light-bg/light-text/light-border), never by inventing new values.",
         "section": "colors"
       },
       {
@@ -436,7 +445,7 @@
       },
       {
         "name": "The No Double Hairline Rule",
-        "body": "A band sitting on a section boundary draws only its top rule. The element below it owns the separator. border-y on a boundary band produces two 1px lines with a hair of ground between them, and it is always wrong.",
+        "body": "A band sitting on a section boundary draws only its top rule. The element below it owns the separator: the next section's .frame-divide, or a grid's border-t. border-y on a boundary band produces two 1px lines with a hair of ground between them, and it is always wrong.",
         "section": "layout"
       },
       {
@@ -446,7 +455,7 @@
       },
       {
         "name": "The Zero Lift Rule",
-        "body": "No component casts a shadow for lift, at rest or on hover. If a design feels like it needs elevation, it needs a hairline or a surface tint instead. Tailwind ring-* compiles to box-shadow but is used only as a hairline where border cannot reach; a ring at rest, in a rule colour, at hairline width is a border, not elevation. The only things allowed above the page plane are true overlays, and they announce themselves with a scrim.",
+        "body": "No component casts a shadow at rest or on hover. If a design feels like it needs elevation, it needs a hairline or a surface tint instead. The only things allowed above the page plane are true overlays, and they announce themselves with a scrim, not a shadow.",
         "section": "elevation"
       },
       {
@@ -456,7 +465,7 @@
       },
       {
         "name": "The Squares-Not-Circles Rule",
-        "body": "Interactive controls are rounded rectangles at 6px. Slider arrows in particular are bordered 40px squares with a solid section-background fill, so sliding content cannot show through them. Circular buttons read as consumer-app furniture and do not belong on this drawing. One exception, and only this one: the before/after comparison handle is a rounded-full 44px thumb, because it is a draggable affordance on a track rather than a button.",
+        "body": "Interactive controls are rounded rectangles at 6px. Slider arrows in particular are bordered 40px squares with a solid section-background fill, so sliding content cannot show through them. Circular buttons read as consumer-app furniture and do not belong on this drawing. One exception, and only this one: the before/after comparison handle is a rounded-full 44px thumb, because it is a draggable affordance on a track rather than a button, and every platform draws that control round.",
         "section": "shapes"
       }
     ],

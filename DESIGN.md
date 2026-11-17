@@ -37,6 +37,12 @@ typography:
     fontWeight: 500
     lineHeight: 1.08
     letterSpacing: "-0.02em"
+  statement:
+    fontFamily: "SF Pro Display, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2rem, 3.5vw, 3rem)"
+    fontWeight: 500
+    lineHeight: 1.1
+    letterSpacing: "-0.02em"
   title:
     fontFamily: "SF Pro Display, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.75rem, 3vw, 2.5rem)"
@@ -211,6 +217,7 @@ The `-ink` values clear 4.5:1 against **both** light grounds, white and `light-s
 ### Hierarchy
 - **Display** (500, `clamp(2.75rem, 6vw, 5.5rem)`, 1.05): Hero headline only. One per page.
 - **Headline** (500, `clamp(2.25rem, 4.5vw, 3.75rem)`, 1.08): Page-level H1 on interior pages, and the value in every `StatBlock`, which is why a metric reads with the same weight as a page title.
+- **Statement** (500, `clamp(2rem, 3.5vw, 3rem)`, 1.1, `text-statement`): Page H1 on the five hub pages whose heading runs long or sits over a lead paragraph: `/services`, `/about`, `/case-studies`, `/blog`, `/free-website-audit`. 48px desktop, 32px phone. Every other page H1 stays Headline.
 - **Title** (600, `clamp(1.75rem, 3vw, 2.5rem)`, 1.12): Section headings via `SectionHeader`. Set with `text-balance`.
 - **Subtitle** (500, `1.5rem`, 1.2): Card and sub-section headings; also the mobile drawer's nav items.
 - **Body Large** (400, `1.125rem`, 1.6): Section intros and lead paragraphs. Rendered in the muted token, never full-strength ink.
@@ -245,7 +252,7 @@ Grids are hairline grids: `grid gap-px` over a rule-colored background with soli
 
 This system is flat. There is no shadow scale and no elevation ramp. The only `box-shadow` written by hand is an explicit `shadow-none` cancelling a default, though Tailwind `ring-*` also compiles to `box-shadow` and the system uses it as a hairline, not as lift: `ring-1 ring-white/60` gives the featured pricing card a defined edge against the dark section behind it, and `ring-2 ring-light-bg` separates the overlapping hero avatars. A ring at rest, in a rule colour, at hairline width is a border drawn where `border` cannot reach. It is not elevation, and nothing else in the system may use it. Depth is otherwise expressed two ways and only two: a change of tonal fill (`bg` → `surface` → `surface-2` on dark, `light-bg` → `light-surface` on light) and a 1px hairline border. A card is distinguished from its ground by its rule and its fill, never by lift.
 
-The single escape hatch is overlay: content that genuinely floats above the page (the video lightbox, the testimonial modal, the mobile drawer, the scrolled nav) may use a scrim and a backdrop blur, which is a different mechanism from elevation. Those use `bg-black/70 backdrop-blur-xl` for full-screen scrims, `bg-bg/55 backdrop-blur-md` for glass bars over media, and `bg-light-bg/70 backdrop-blur-xl` for the nav once scrolled. Nothing else in the system is permitted to blur or float.
+The single escape hatch is overlay: content that genuinely floats above the page (the video lightbox, the testimonial modal, the mobile drawer, the scrolled nav) may use a scrim and a backdrop blur, which is a different mechanism from elevation. Those use `bg-black/70 backdrop-blur-xl` for full-screen scrims, `bg-bg/55 backdrop-blur-md` for glass pills over media (`bg-bg/70` when the bar carries small captions, as `StatMedia` does, so they hold 4.5:1 over a light screenshot), and `bg-light-bg/70 backdrop-blur-xl` for the nav once scrolled. Nothing else in the system is permitted to blur or float.
 
 ### Named Rules
 

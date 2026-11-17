@@ -62,15 +62,18 @@ export function Footer() {
             <div className="grid max-w-3xl grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-3">
               {footer.columns.map((col) => (
                 <div key={col.heading}>
-                  <h3 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
+                  <h2 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
                     {col.heading}
-                  </h3>
-                  <ul className="space-y-3">
+                  </h2>
+                  {/* Phones: the gap moves into each link as padding, so rows
+                      keep their 31px pitch but the tap target is the full
+                      row rather than the 19px line of text. */}
+                  <ul className="md:space-y-3">
                     {col.links.map((link) => (
                       <li key={link.href}>
                         <Link
                           href={link.href}
-                          className="font-display font-medium transition hover:text-accent"
+                          className="inline-block py-1.5 font-display font-medium transition hover:text-accent md:py-0"
                         >
                           {link.label}
                         </Link>
@@ -82,23 +85,23 @@ export function Footer() {
 
               {/* Contact information */}
               <div>
-                <h3 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
+                <h2 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
                   {footer.contact.heading}
-                </h3>
-                <ul className="space-y-3 font-display font-medium">
+                </h2>
+                <ul className="font-display font-medium md:space-y-3">
                   <li>
                     <a
                       href={`mailto:${footer.contact.email}`}
-                      className="transition hover:text-accent"
+                      className="inline-block py-1.5 transition hover:text-accent md:py-0"
                     >
                       {footer.contact.email}
                     </a>
                   </li>
-                  <li>{footer.contact.city}</li>
+                  <li className="py-1.5 md:py-0">{footer.contact.city}</li>
                   <li>
                     <a
                       href={`tel:${footer.contact.phone.replace(/\s/g, "")}`}
-                      className="transition hover:text-accent"
+                      className="inline-block py-1.5 transition hover:text-accent md:py-0"
                     >
                       {footer.contact.phone}
                     </a>
@@ -116,7 +119,9 @@ export function Footer() {
         <div className="frame relative flex flex-col justify-between gap-10 pb-14 pt-6 lg:flex-row lg:items-center">
           <div>
             <p className="text-body-lg font-medium">{footer.partnersLabel}</p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-12 gap-y-6">
+            {/* Phones: a 3-up grid. Free wrapping left MOD alone on a third
+                row (2-2-1). */}
+            <div className="mt-6 grid grid-cols-3 items-center gap-x-6 gap-y-6 sm:flex sm:flex-wrap sm:gap-x-12">
               {footer.partners.map((p) => (
                 <Image
                   key={p.alt}

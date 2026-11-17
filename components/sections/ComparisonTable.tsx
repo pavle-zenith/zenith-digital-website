@@ -50,7 +50,12 @@ export function ComparisonTable() {
         </div>
 
         <div className="overflow-hidden rounded-card border border-border bg-bg/60 backdrop-blur-xl">
-          <div className="overflow-x-auto">
+          <div
+            role="region"
+            aria-label={comparison.heading}
+            tabIndex={0}
+            className="overflow-x-auto"
+          >
             <table className="w-full min-w-[880px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-border">
@@ -66,7 +71,11 @@ export function ComparisonTable() {
                           "w-[27%] bg-white text-body-lg text-light-text",
                       )}
                     >
-                      {col}
+                      {col || (
+                        <span className="sr-only">
+                          {comparison.criterionLabel}
+                        </span>
+                      )}
                     </th>
                   ))}
                 </tr>

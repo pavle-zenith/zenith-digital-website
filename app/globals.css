@@ -72,6 +72,12 @@
   --text-h1--line-height: 1.08;
   --text-h2: clamp(1.75rem, 3vw, 2.5rem);
   --text-h2--line-height: 1.12;
+  /* Statement: the page H1 on the hub pages whose heading runs long or sits
+     over a lead paragraph (/services, /about, /case-studies, /blog,
+     /free-website-audit). 48px desktop, 32px phone. Every other page H1
+     keeps --text-h1. */
+  --text-statement: clamp(2rem, 3.5vw, 3rem);
+  --text-statement--line-height: 1.1;
   --text-h3: 1.5rem;
   --text-h3--line-height: 1.2;
   --text-body-lg: 1.125rem;

@@ -30,14 +30,15 @@ Neighboring agencies cannot truthfully copy the combination of the Legend tier, 
 
 ## Operating Context
 
-- **Live and indexed.** The Next.js site is what visitors and crawlers see at `thezenithdigital.com`. Cutover from Wix is done. Design work continues on the migration guides, `/about`, and `/blog` while the site is publicly serving traffic, so every change ships against real indexed URLs and must not break them.
+- **Live and indexed.** The Next.js site is what visitors and crawlers see at `thezenithdigital.com`. Cutover from Wix is done. Every change ships against real indexed URLs while the site serves traffic, so no change may break them.
 - **One founder, one standard.** Pavle runs the agency from Belgrade, Serbia (`hello@thezenithdigital.com`, `+381 64 97 60617`), serving the UK, EU, and US. Building websites for businesses since 2019; Zenith Digital founded 2021.
 - **The buyer's evaluation path** is: land from search or an AI answer → check the work (`/case-studies`) → check the claims (`/about`, `/testimonials`) → check price (the pricing tiers on the homepage; there is no standalone `/pricing` route) → book a call or request an audit. The footer's "Ask AI about Zenith" tiles deliberately hand that verification to a third-party assistant.
-- **Sales artifacts:** Cal.com embed for booking; a hand-reviewed free audit delivered as a short video walkthrough, not an auto-generated PDF; a gated white-label rate card shared only after a partner applies.
+- **Sales artifacts:** Cal.com embed for booking; a hand-reviewed free audit delivered as a short video walkthrough, not an auto-generated PDF; a gated full-site white-label rate card shared only after a partner applies.
+- **Private sales documents** live in the same codebase as their own surfaces: per-client proposals (`/proposal/[slug]`, which notify the owner when viewed), audit reports (`/audit/[slug]`), the partner showcase (`/partner-showcase`) and the project request form (`/project-request`). Every one is `noindex` with a matching `X-Robots-Tag` header, absent from the sitemap, never linked from the public site, and never links out to a client's live site. They are excluded from cookieless page-view analytics, and the privacy policy promises the proposal view notification is the only request those pages send about a visit.
 
 ## Capabilities and Constraints
 
-**Stack (existing, not up for re-litigation):** Next.js 15 App Router, TypeScript, React Server Components, Tailwind v4, self-hosted fonts via `next/font/local`, deployed on Vercel. Forms are server actions writing to Supabase and notifying via Resend, with an in-memory per-IP rate limit. Analytics: GA4 plus PostHog, both behind Google Consent Mode v2 defaults and a cookie banner.
+**Stack (existing, not up for re-litigation):** Next.js 15 App Router, TypeScript, React Server Components, Tailwind v4, self-hosted fonts via `next/font/local`, deployed on Vercel. Forms are server actions writing to Supabase and notifying via Resend, with an in-memory per-IP rate limit. Analytics: GA4 (Google Consent Mode v2, cookieless pings until consent), PostHog and Microsoft Clarity, all behind the cookie banner; plus Vercel Web Analytics, which is cookieless, keeps no IP address, runs outside the consent gate, and skips `/studio` and `/proposal/`. The privacy policy (`content/legal.ts`) states each of these and must change with them.
 
 **Content model (owner-confirmed, this decision supersedes CLAUDE.md §6):** page copy lives in `content/<page>.ts` files and stays there. Components read only from content. Sanity holds **blog posts only** (`post` is the single document type, by design) and the embedded Studio at `/studio` exists for that. Future sections are built as TS content files, not Sanity schemas. Do not build toward a page-module CMS.
 
@@ -50,7 +51,7 @@ Neighboring agencies cannot truthfully copy the combination of the Legend tier, 
 - Unpublished migration guides stay authored in-repo behind `publish: false`, excluded from routing and the sitemap, rather than shipping as thin doorway pages.
 - Numbers are dated and stated once. A fact confirmed on one page may not be restated differently on another.
 
-**Undecided / owner-pending:** the typical build start window (still a visible bracketed placeholder in the services FAQ); the risk-strip claims and two partner-story placeholders on `/partnerships`.
+**Undecided / owner-pending:** nothing open as of 17 November 2026. The build start window, the `/partnerships` risk-strip claims and the partner-story placeholders are all settled.
 
 ## Brand Commitments
 
@@ -68,11 +69,13 @@ Neighboring agencies cannot truthfully copy the combination of the Legend tier, 
 - Named clients and logos: Knode, Techtonnik, MOD Digital, Capacity, Genroks, Stilby (`/public/logos-dark`, `/public/logos-white`).
 - Real testimonials with real names, roles, companies and headshots, centralized in `content/testimonials-data.ts` and referenced everywhere else. Partner quotes on `/partnerships` come from this same source.
 - Long-term fulfilment partnerships running since 2023: MOD Digital, Techtonnik, LMF HR.
-- Screenshots of client work in `/public/portfolio-blocky` (OWNER NOTE: these are uncompressed source PNGs, ~13MB across four; compress).
-- Pricing, final and public: The Minimum from €1,750 (2 weeks) · The Studio €3,750 (5 weeks) · The Zenith custom/monthly. Landing pages €1,250 retail.
-- Partner commercials, final: 10% referral commission paid when the client pays; 3-business-day feedback window; 2 revision rounds included, extra rounds €250; no minimum commitment; up to four partner builds in parallel.
+- Screenshots of client work in `/public/portfolio-blocky`, served as WebP. The two leftover source PNGs there are unreferenced.
+- Published case-study results beyond the four above (for example Hunting Brook Gardens and Genroks AI) live in `content/case-studies.ts`, the single source of truth for every client figure.
+- Pricing, final and public: The Minimum from €1,250 (5 pages, 2 weeks) · The Studio €2,350 (12 pages, 5 weeks) · The Zenith custom/monthly. Landing pages from €750 retail (set 26 August 2026). Most builds start within a week of the call.
+- Partner commercials, final: referral commission of 10%, paid when the client pays, rising to 15% after a partner's second closed deal in a year (retainers pay 10% of the first 3 months); 3-business-day feedback window; 2 revision rounds included, extra rounds €250; no minimum commitment; first project scoped within one business day; NDA before anything is shared; the same team on every project; up to four partner builds in parallel.
+- Partner entry prices, public by owner decision: landing pages from €600 and production retainers from €1,099/month (30 hours). These are the only partner figures that ship.
 
-**Deliberately absent, never to be fabricated:** white-label wholesale prices (internal, gated behind an application, must not appear in any content file or rendered page); the build start window; unverified migration transfer tables.
+**Deliberately absent, never to be fabricated:** the full-site white-label wholesale rate card (internal, shared only after a partner applies, must not appear in any content file or rendered page); unverified migration transfer tables.
 
 ## Product Principles
 

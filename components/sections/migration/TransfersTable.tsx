@@ -120,16 +120,26 @@ export function TransfersTable({ data }: { data: MigrationGuideContent }) {
               re-sorted. A hairline grid, not floating cards: gap-px over the
               rule colour with solid-filled cells (CLAUDE.md §15). The trailing
               filler keeps the block rectangular when the row count is odd. */}
-          <dl className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2">
+          <dl
+            className={cn(
+              "mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2",
+              // Odd row count: a pseudo-element fills the last cell, since a
+              // <dl> may not hold an empty filler <div>.
+              transfers.rows.length % 2 === 1 &&
+                "md:after:block md:after:bg-light-bg md:after:content-['']",
+            )}
+          >
             {transfers.rows.map((row) => (
               <div key={row.item} className="flex flex-col bg-light-bg p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
-                    <FeatureIcon name={row.icon ?? ""} />
+                {/* Icon and status chip live inside the <dt> so the group
+                    holds only <dt>/<dd>, as a <dl> requires. */}
+                <dt className="font-display text-body-lg font-medium leading-snug text-light-text">
+                  <span className="mb-5 flex items-start justify-between gap-4 font-normal">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
+                      <FeatureIcon name={row.icon ?? ""} />
+                    </span>
+                    <StatusChip status={row.status} />
                   </span>
-                  <StatusChip status={row.status} />
-                </div>
-                <dt className="mt-5 font-display text-body-lg font-medium leading-snug text-light-text">
                   {row.item}
                 </dt>
                 <dd className="mt-2 text-body leading-relaxed text-light-muted">
@@ -137,9 +147,6 @@ export function TransfersTable({ data }: { data: MigrationGuideContent }) {
                 </dd>
               </div>
             ))}
-            {transfers.rows.length % 2 === 1 ? (
-              <div aria-hidden className="hidden bg-light-bg md:block" />
-            ) : null}
           </dl>
 
           {transfers.footnote ? (

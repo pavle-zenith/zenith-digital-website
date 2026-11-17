@@ -22,9 +22,12 @@ export function CrossIndustry() {
     <Section tone="light" frameClassName="!py-12 md:!py-20">
       <div className="relative isolate">
         {/* Curve background — spans the full inner section, rail to rail (the
-            negative inset cancels the frame's gutter padding), behind the grid */}
+            negative inset cancels the frame's gutter padding), behind the grid.
+            From sm up only: in the one-column phone layout the section is
+            ~2,000px tall, `slice` scales the curve up ~6x, and its line cut
+            straight through the client descriptions. */}
         <div
-          className="pointer-events-none absolute inset-y-0 -z-10 opacity-25"
+          className="pointer-events-none absolute inset-y-0 -z-10 hidden opacity-25 sm:block"
           style={{
             left: "calc(-1 * clamp(20px, 4vw, 64px))",
             right: "calc(-1 * clamp(20px, 4vw, 64px))",

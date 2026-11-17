@@ -111,6 +111,9 @@ export function PartnershipsHero() {
           to edge, then continues off the right to scroll. */}
       <div
         ref={trackRef}
+        role="region"
+        aria-label={pProjects.heading}
+        tabIndex={0}
         className="frame-bleed mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {pProjects.items.map((it) => (

@@ -39,7 +39,7 @@ export function CaseStudiesHero() {
       </div>
 
       <div className="relative flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
-        <h1 className="max-w-3xl font-display text-h2 font-medium leading-[1.15] tracking-tight text-balance">
+        <h1 className="max-w-3xl font-display text-statement font-medium tracking-tight text-balance">
           {csHero.heading}{" "}
           <span className="text-light-muted">{csHero.headingMuted}</span>
         </h1>

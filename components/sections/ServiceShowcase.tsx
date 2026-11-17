@@ -17,10 +17,13 @@ export function ServiceShowcase({
   slides,
   usps,
   dark,
+  label,
 }: {
   slides: ServiceSlide[];
   usps: ServiceUsp[];
   dark: boolean;
+  /** Accessible name for the scroll track (the parent section's title). */
+  label: string;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const muted = dark ? "text-text-muted" : "text-light-muted";
@@ -109,8 +112,13 @@ export function ServiceShowcase({
           </div>
         ) : null}
 
+        {/* Focusable so a keyboard user can scroll it with the arrow keys:
+            the slides themselves hold nothing to tab to. */}
         <div
           ref={trackRef}
+          role="region"
+          aria-label={label}
+          tabIndex={0}
           className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {extended.map((slide, i) => (

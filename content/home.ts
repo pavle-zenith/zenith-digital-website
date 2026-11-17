@@ -194,6 +194,8 @@ export const comparison = {
   intro:
     "Every option gets you a website. This is what each one actually costs you over a year.",
   columns: ["", "AI websites", "Freelancers", "Agencies", "Zenith Digital"],
+  // Screen-reader name for the blank top-left header cell over the row labels.
+  criterionLabel: "Criterion",
   rows: [
     {
       criterion: "Annual cost",

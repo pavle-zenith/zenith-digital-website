@@ -55,7 +55,7 @@ export function AuditPageHero() {
               </span>
             </div>
 
-            <h1 className="mt-8 max-w-xl font-display text-[clamp(2rem,3.5vw,3rem)] font-medium leading-[1.1] tracking-tight text-balance">
+            <h1 className="mt-8 max-w-xl font-display text-statement font-medium tracking-tight text-balance">
               {auditHero.heading}
             </h1>
 

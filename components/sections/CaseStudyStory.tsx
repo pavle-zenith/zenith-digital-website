@@ -52,7 +52,8 @@ export function CaseStudyStory({ study }: { study: CaseStudyDetail }) {
                   <span
                     className={cn(
                       "font-display text-body-lg font-medium",
-                      r.positive && "text-positive",
+                      // -ink: the base green is 2.1:1 on white (DESIGN.md).
+                      r.positive && "text-positive-ink",
                     )}
                   >
                     {r.isQuote ? <>&ldquo;{r.value}&rdquo;</> : r.value}

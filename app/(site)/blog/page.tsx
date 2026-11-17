@@ -61,7 +61,7 @@ export default async function BlogPage() {
         </div>
 
         <div className="relative max-w-3xl">
-          <h1 className="font-display text-h2 font-medium leading-[1.15] tracking-tight text-balance">
+          <h1 className="font-display text-statement font-medium tracking-tight text-balance">
             {blogIndex.heading}
           </h1>
           <p className="mt-4 text-body-lg font-medium leading-relaxed text-light-muted">

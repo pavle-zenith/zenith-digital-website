@@ -27,9 +27,8 @@ function partnerQuote(id: string) {
  * OWNER — postHandover and capacityPolicy were set 18 Aug 2026. No bracketed
  * placeholders remain in this file.
  *
- * Still worth confirming (real copy, not bracketed):
- *   - the risk strip claims in pBenefits.riskStrip
- *   - the LMF HR / WellingtonWebCo story placeholders in pStories
+ * The risk strip claims (pBenefits.riskStrip) and the LMF HR / WellingtonWebCo
+ * stories were confirmed by the owner on 17 Nov 2026. Nothing here is pending.
  */
 export const commercials = {
   partnerDiscount: "full rate card shared on application",
@@ -364,7 +363,7 @@ export const pBenefits = {
       body: `Use us for one overflow project or as your standing production team. ${commercials.minimumCommitment}.`,
     },
   ],
-  // Risk-reduction strip — OWNER: confirm each claim before launch.
+  // Risk-reduction strip. All four claims owner-confirmed 17 Nov 2026.
   riskStrip: [
     "No minimum commitment",
     "First project scoped within one business day",

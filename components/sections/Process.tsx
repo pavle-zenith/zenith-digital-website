@@ -147,8 +147,9 @@ export function Process({
           ))}
         </div>
 
-        {/* Chart area */}
-        <div className="relative h-[440px] w-full">
+        {/* Chart area. Shorter on phones, where the narrow chart left a
+            tall empty band under the step copy. */}
+        <div className="relative h-[380px] w-full sm:h-[440px]">
           {/* Vertical dotted grid segments */}
           <div className="absolute inset-0 grid grid-cols-5">
             {processSection.steps.map((_, i) => (

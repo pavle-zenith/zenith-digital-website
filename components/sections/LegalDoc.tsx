@@ -64,7 +64,13 @@ export function LegalDoc({ doc }: { doc: LegalDocument }) {
               // Wide tables scroll inside their own container so the page body
               // never scrolls sideways on a phone.
               return (
-                <div key={i} className="mt-6 overflow-x-auto">
+                <div
+                  key={i}
+                  role="region"
+                  aria-label={section.heading}
+                  tabIndex={0}
+                  className="mt-6 overflow-x-auto"
+                >
                   <table className="w-full min-w-[34rem] border-collapse text-left">
                     <thead>
                       <tr>

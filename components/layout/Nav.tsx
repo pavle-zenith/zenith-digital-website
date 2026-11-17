@@ -121,9 +121,11 @@ export function Nav() {
           />
         </div>
 
+        {/* 44px hit area around a 24px glyph; the negative margin keeps the
+            bars aligned to the gutter where the bare glyph used to sit. */}
         <button
           type="button"
-          className="flex flex-col gap-1.5 md:hidden"
+          className="-mr-2.5 flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-[6px] md:hidden"
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}

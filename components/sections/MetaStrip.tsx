@@ -58,19 +58,21 @@ export function MetaStrip({
                 row.media ? "relative !pl-[3.5rem]" : null,
               )}
             >
-              {row.media ? (
-                // `inset-y-1`, not `inset-y-0`. Stretching to the cell's full
-                // height matches the two LINE BOXES, and a line box carries
-                // leading above and below the glyphs it holds, so the mark
-                // ended up visibly taller than the text beside it. Trimming
-                // 4px off each end lands its edges on the cap height of the
-                // label and the baseline of the value, which is where the eye
-                // expects them.
-                <span className="absolute inset-y-1 left-0 aspect-square">
-                  {row.media}
-                </span>
-              ) : null}
               <dt className="font-mono text-label uppercase track-label text-light-muted">
+                {/* The mark sits inside the <dt> (a <dl> group may hold only
+                    <dt>/<dd>); it is still positioned against the row. */}
+                {row.media ? (
+                  // `inset-y-1`, not `inset-y-0`. Stretching to the cell's full
+                  // height matches the two LINE BOXES, and a line box carries
+                  // leading above and below the glyphs it holds, so the mark
+                  // ended up visibly taller than the text beside it. Trimming
+                  // 4px off each end lands its edges on the cap height of the
+                  // label and the baseline of the value, which is where the eye
+                  // expects them.
+                  <span className="absolute inset-y-1 left-0 aspect-square">
+                    {row.media}
+                  </span>
+                ) : null}
                 {row.label}
               </dt>
               <dd className="text-right font-display font-medium sm:mt-1.5 sm:text-left">

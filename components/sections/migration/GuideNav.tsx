@@ -54,7 +54,10 @@ export function GuideNav({
         "tone-light sticky top-16 z-30 border-b border-light-border bg-light-bg transition-opacity duration-200",
         hidden && "pointer-events-none opacity-0",
       )}
+      // `inert`, not just aria-hidden: while faded out, its links must also
+      // drop out of the Tab order, or keyboard users land on invisible links.
       aria-hidden={hidden}
+      inert={hidden}
     >
       <div className="frame !py-0">
         {/* Mobile: one line that opens a list. */}

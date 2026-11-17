@@ -49,7 +49,7 @@ export function AboutHero() {
       </div>
 
       <div className="relative">
-        <h1 className="max-w-4xl font-display text-h2 font-medium leading-[1.15] tracking-tight text-balance">
+        <h1 className="max-w-4xl font-display text-statement font-medium tracking-tight text-balance">
           {aboutHero.heading}{" "}
           <span className="text-light-muted">{aboutHero.headingMuted}</span>
         </h1>

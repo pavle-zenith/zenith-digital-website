@@ -505,10 +505,12 @@ function GuideGlance({ data }: { data: MigrationGuideContent }) {
       <dl className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2 lg:grid-cols-3">
         {glance.items.map((item, i) => (
           <div key={item.label} className="bg-light-bg p-6">
-            <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
-              <FeatureIcon name={GLANCE_ICONS[i] ?? "answer"} />
-            </span>
-            <dt className="mt-5 font-display text-body-lg font-medium leading-snug text-light-text">
+            {/* The icon sits inside the <dt>: a <dl> group may hold only
+                <dt>/<dd>, so a sibling span made the list invalid. */}
+            <dt className="font-display text-body-lg font-medium leading-snug text-light-text">
+              <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
+                <FeatureIcon name={GLANCE_ICONS[i] ?? "answer"} />
+              </span>
               {item.label}
             </dt>
             <dd className="mt-2 text-body leading-relaxed text-light-muted">

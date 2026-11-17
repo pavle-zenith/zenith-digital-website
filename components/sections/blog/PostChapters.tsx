@@ -87,7 +87,7 @@ export function PostChapters({
                 aria-hidden
                 className={cn(
                   "shrink-0 pt-[0.2rem] font-mono text-label track-label tabular-nums",
-                  item.id === active ? "text-accent" : "text-light-muted/70",
+                  item.id === active ? "text-accent" : "text-light-muted",
                 )}
               >
                 {String(i + 1).padStart(2, "0")}

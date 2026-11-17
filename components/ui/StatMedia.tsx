@@ -19,6 +19,11 @@ export type MediaStat = { value: string; label?: string };
  * The colour flip is required by the move: over the image the text is white on
  * dark glass, below it the text sits on a light surface and has to be dark ink
  * or it vanishes.
+ *
+ * The glass is 70% navy, denser than the 55% used for pills elsewhere: these
+ * bars carry small captions, and over a light screenshot 55% washed out to
+ * mid-grey and dropped the captions to 2.9:1. At 70% with captions at white/80
+ * they clear 4.5:1 even over a white page.
  */
 export function StatMedia({
   src,
@@ -42,14 +47,14 @@ export function StatMedia({
       </div>
 
       {stats.length ? (
-        <div className="mt-3 flex flex-wrap gap-x-10 gap-y-3 rounded-[8px] border border-light-border bg-light-surface p-4 sm:absolute sm:inset-x-4 sm:bottom-4 sm:mt-0 sm:border-white/15 sm:bg-bg/55 sm:backdrop-blur-md">
+        <div className="mt-3 flex flex-wrap gap-x-10 gap-y-3 rounded-[8px] border border-light-border bg-light-surface p-4 sm:absolute sm:inset-x-4 sm:bottom-4 sm:mt-0 sm:border-white/15 sm:bg-bg/70 sm:backdrop-blur-md">
           {stats.map((st) => (
             <div key={st.value}>
               <div className="font-display text-h3 font-medium leading-none tracking-tight text-light-text sm:text-white">
                 {st.value}
               </div>
               {st.label ? (
-                <div className="mt-1.5 max-w-[22ch] text-body leading-snug text-light-muted sm:text-white/70">
+                <div className="mt-1.5 max-w-[22ch] text-body leading-snug text-light-muted sm:text-white/80">
                   {st.label}
                 </div>
               ) : null}

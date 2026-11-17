@@ -101,7 +101,12 @@ export function ServiceSection({
       </div>
 
       {/* Example slider + USP row */}
-      <ServiceShowcase slides={data.slides} usps={data.usps} dark={dark} />
+      <ServiceShowcase
+        slides={data.slides}
+        usps={data.usps}
+        dark={dark}
+        label={data.title}
+      />
     </Section>
   );
 

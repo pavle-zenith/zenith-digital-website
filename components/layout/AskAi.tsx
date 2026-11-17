@@ -62,9 +62,9 @@ export function AskAi() {
   return (
     <div className="shrink-0">
       {/* Same label treatment as the link columns it sits next to. */}
-      <h3 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
+      <h2 className="mb-5 font-mono text-label uppercase track-label text-light-muted">
         {askAi.heading}
-      </h3>
+      </h2>
 
       <ul className="flex flex-wrap items-center gap-3">
         {askAi.assistants.map((a) => {

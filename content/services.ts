@@ -8,8 +8,8 @@ import { whyWixItem } from "./faq";
  * the future dedicated slugs, so the index links convert to page links with
  * zero content rework.
  *
- * OWNER — still to set (visible [bracketed] placeholders until then):
- *   - typical build start window (FAQ "How fast can we start?")
+ * Build start window settled (owner, confirmed 17 Nov 2026): most builds
+ * start within a week (FAQ "How fast can we start?").
  * Retail landing-page price set 26 Aug 2026: €750 (partner rate moved to
  * €600). Partner prices (€600 / €1,099) appear ONLY in the white-label
  * teaser, framed as partner pricing.

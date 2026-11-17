@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
@@ -46,8 +47,9 @@ export function WallOfLove() {
         ))}
       </div>
 
-      {/* Blurred lightbox player */}
-      {activeCard && activeCard.type === "video" ? (
+      {/* Blurred lightbox player, portaled to <body> so no ancestor stacking
+          context can cap its z-index (see VideoTestimonials). */}
+      {activeCard && activeCard.type === "video" ? createPortal(
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-6 backdrop-blur-xl"
           onClick={() => setActive(null)}
@@ -94,7 +96,8 @@ export function WallOfLove() {
               />
             ) : null}
           </div>
-        </div>
+        </div>,
+        document.body,
       ) : null}
     </Section>
   );

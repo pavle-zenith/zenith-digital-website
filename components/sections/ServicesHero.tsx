@@ -38,11 +38,14 @@ export function ServicesHero() {
         />
       </div>
 
-      <div className="relative max-w-3xl">
-        <h1 className="font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
+      {/* Wider than the other light heroes: this heading is a full sentence
+          (70 characters), so at h1 size in a 3xl column it stacked into
+          three short lines. One step down and a 5xl column sets it in two. */}
+      <div className="relative max-w-5xl">
+        <h1 className="font-display text-[clamp(2.25rem,4vw,3.25rem)] font-medium leading-[1.08] tracking-tight text-balance">
           {sHero.heading}
         </h1>
-        <p className="mt-6 max-w-xl text-body-lg font-medium leading-relaxed text-light-muted">
+        <p className="mt-6 max-w-[54rem] text-body-lg font-medium leading-relaxed text-light-muted text-pretty">
           {sHero.support}
         </p>
         <div className="mt-8 flex flex-wrap gap-3">

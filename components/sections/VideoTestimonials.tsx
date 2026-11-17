@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { Section } from "@/components/ui/Section";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
@@ -334,8 +335,12 @@ export function VideoTestimonials({
         </div>
       </Section>
 
-      {/* Blurred video overlay */}
-      {activeItem ? (
+      {/* Blurred video overlay. Portaled to <body>: this section's wrapper is
+          `isolate`, which caps the dialog's z-[100] at the section, so
+          positioned content further down the page (the wall's avatars on
+          /testimonials) painted over the scrim. Only rendered after a click,
+          so `document` always exists here. */}
+      {activeItem ? createPortal(
         <div
           ref={dialogRef}
           // tone-dark: the scrim is near-black, so the dialog owns the
@@ -401,7 +406,8 @@ export function VideoTestimonials({
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body,
       ) : null}
     </div>
   );

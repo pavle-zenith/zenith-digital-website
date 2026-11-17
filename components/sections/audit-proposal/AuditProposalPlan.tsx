@@ -8,7 +8,11 @@ import { DocHeading, DocSection } from "./parts";
  * under it on a phone. The timing is a mono label, as on the proposal
  * timeline, so the eye can run down the weeks alone.
  */
-export function AuditProposalTimeline({ timeline }: { timeline: AuditProposalPage["timeline"] }) {
+export function AuditProposalTimeline({
+  timeline,
+}: {
+  timeline: NonNullable<AuditProposalPage["timeline"]>;
+}) {
   return (
     <DocSection id={timeline.id}>
       <DocHeading heading={timeline.heading} />
@@ -40,11 +44,50 @@ export function AuditProposalTimeline({ timeline }: { timeline: AuditProposalPag
  * "Šta nam treba od vas": a checklist, so each row starts with an empty box:
  * these are things still to answer or send, not things already done.
  */
-export function AuditProposalNeeds({ needs }: { needs: AuditProposalPage["needs"] }) {
+export function AuditProposalNeeds({
+  needs,
+}: {
+  needs: NonNullable<AuditProposalPage["needs"]>;
+}) {
   return (
     <DocSection id={needs.id} tinted>
       <DocHeading heading={needs.heading} />
       <TickList items={needs.items} columns={1} icon="box" />
+    </DocSection>
+  );
+}
+
+/**
+ * "Where to start": the order to work in, on an audit with no offer
+ * (Gardner). The timeline's rows, hairline and number chip, with the when as
+ * the mono label above the work rather than beside it: here the when is what
+ * the reader scans for, and the work is a sentence or two, so it's set at the
+ * body weight rather than as a step name.
+ */
+export function AuditProposalPriorities({
+  priorities,
+}: {
+  priorities: NonNullable<AuditProposalPage["priorities"]>;
+}) {
+  return (
+    <DocSection id={priorities.id}>
+      <DocHeading heading={priorities.heading} intro={priorities.intro} />
+      <ol role="list">
+        {priorities.rows.map((row, i) => (
+          <li
+            key={row.when}
+            className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 border-t border-light-border py-5 break-inside-avoid sm:gap-x-6"
+          >
+            <NumberChip n={i + 1} tone="light" />
+            <div>
+              <p className="font-mono text-label uppercase track-label text-light-muted">
+                {row.when}
+              </p>
+              <p className="mt-1.5 text-body text-light-text md:text-body-lg">{row.what}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </DocSection>
   );
 }

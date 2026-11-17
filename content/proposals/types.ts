@@ -204,8 +204,12 @@ export interface AuditProposalPage {
     quote: string;
   };
 
-  /** One priced offer: what it is, how long, how much, and what it covers. */
-  offer: {
+  /**
+   * One priced offer: what it is, how long, how much, and what it covers.
+   * Left out on an audit with no paid offer (Gardner), which then has no
+   * price, project or payment wording anywhere, and no timeline or needs.
+   */
+  offer?: {
     id: string;
     heading: string;
     intro: string;
@@ -253,7 +257,19 @@ export interface AuditProposalPage {
     points: { lead: string; text: string }[];
   };
 
-  timeline: {
+  /**
+   * "Where to start": the order to work in, for an audit with no offer. Set
+   * as the timeline's rows; the hero and the mobile bar point here when there
+   * is no offer.
+   */
+  priorities?: {
+    id: string;
+    heading: string;
+    intro?: string;
+    rows: { when: string; what: string }[];
+  };
+
+  timeline?: {
     id: string;
     heading: string;
     rows: {
@@ -265,7 +281,7 @@ export interface AuditProposalPage {
       when: string;
     }[];
   };
-  needs: { id: string; heading: string; items: string[] };
+  needs?: { id: string; heading: string; items: string[] };
   faq: { id: string; heading: string; items: { q: string; a: string }[] };
 
   close: {

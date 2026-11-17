@@ -3,6 +3,7 @@ import { pulse } from "./pulse";
 import { woodstone024 } from "./woodstone-024";
 import { aspireUsa } from "./aspire-usa";
 import { saleswings } from "./saleswings";
+import { gardnerSchool } from "./gardner-school";
 
 /**
  * Every private proposal page. Adding one is a new content file plus one line
@@ -11,7 +12,7 @@ import { saleswings } from "./saleswings";
  *
  * Deliberately NOT in `app/sitemap.ts`. These are private documents.
  */
-export const proposals: AnyProposal[] = [pulse, woodstone024, aspireUsa, saleswings];
+export const proposals: AnyProposal[] = [pulse, woodstone024, aspireUsa, saleswings, gardnerSchool];
 
 export function getProposal(slug: string): AnyProposal | undefined {
   return proposals.find((p) => p.slug === slug);

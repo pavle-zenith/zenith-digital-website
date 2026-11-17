@@ -9,7 +9,11 @@ import { AuditProposalProof } from "./AuditProposalProof";
 import { AuditProposalOffer } from "./AuditProposalOffer";
 import { AuditProposalHandoff } from "./AuditProposalHandoff";
 import { AuditProposalScore } from "./AuditProposalScore";
-import { AuditProposalNeeds, AuditProposalTimeline } from "./AuditProposalPlan";
+import {
+  AuditProposalNeeds,
+  AuditProposalPriorities,
+  AuditProposalTimeline,
+} from "./AuditProposalPlan";
 import { AuditProposalClose, AuditProposalFaq } from "./AuditProposalClose";
 
 /**
@@ -26,6 +30,9 @@ import { AuditProposalClose, AuditProposalFaq } from "./AuditProposalClose";
  *
  * The jump bar lists every section in page order, the sticky table of
  * contents the page needs at this length.
+ *
+ * An audit with no paid offer (Gardner) leaves out the offer, timeline and
+ * needs, and sets `priorities` instead, in the offer's place.
  */
 export function AuditProposal({ proposal: p }: { proposal: AuditProposalPage }) {
   const toc = [
@@ -34,16 +41,20 @@ export function AuditProposal({ proposal: p }: { proposal: AuditProposalPage }) 
     p.findings,
     p.mockup,
     ...(p.proof ? [p.proof] : []),
-    p.offer,
+    ...(p.offer ? [p.offer] : []),
+    ...(p.priorities ? [p.priorities] : []),
     ...(p.handoff ? [p.handoff] : []),
     ...(p.score ? [p.score] : []),
-    p.timeline,
-    p.needs,
+    ...(p.timeline ? [p.timeline] : []),
+    ...(p.needs ? [p.needs] : []),
     p.faq,
     p.close,
   ].map(
     (section) => ({ id: section.id, name: section.heading }),
   );
+
+  // The offer, or on an audit with no offer, where to start.
+  const barTarget = p.offer?.id ?? p.priorities?.id;
 
   return (
     <div lang={p.lang} className="print-doc">
@@ -56,16 +67,19 @@ export function AuditProposal({ proposal: p }: { proposal: AuditProposalPage }) 
       <AuditProposalFindings findings={p.findings} labels={p.labels} hideSeverity={p.hideSeverity} />
       <AuditProposalMockup mockup={p.mockup} missingImage={p.labels.missingImage} />
       {p.proof ? <AuditProposalProof proof={p.proof} linkLabel={p.labels.readCaseStudy} /> : null}
-      <AuditProposalOffer offer={p.offer} labels={p.labels} />
+      {p.offer ? <AuditProposalOffer offer={p.offer} labels={p.labels} /> : null}
+      {p.priorities ? <AuditProposalPriorities priorities={p.priorities} /> : null}
       {p.handoff ? <AuditProposalHandoff handoff={p.handoff} /> : null}
       {p.score ? <AuditProposalScore score={p.score} /> : null}
-      <AuditProposalTimeline timeline={p.timeline} />
-      <AuditProposalNeeds needs={p.needs} />
+      {p.timeline ? <AuditProposalTimeline timeline={p.timeline} /> : null}
+      {p.needs ? <AuditProposalNeeds needs={p.needs} /> : null}
       <AuditProposalFaq faq={p.faq} />
       <AuditProposalClose close={p.close} />
-      <div className="print:hidden">
-        <MobileBar label={p.labels.mobileBar} target={p.offer.id} />
-      </div>
+      {barTarget ? (
+        <div className="print:hidden">
+          <MobileBar label={p.labels.mobileBar} target={barTarget} />
+        </div>
+      ) : null}
     </div>
   );
 }

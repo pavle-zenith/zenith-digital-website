@@ -23,7 +23,7 @@ export function AuditProposalOffer({
   offer,
   labels,
 }: {
-  offer: AuditProposalPage["offer"];
+  offer: NonNullable<AuditProposalPage["offer"]>;
   labels: AuditProposalPage["labels"];
 }) {
   return (

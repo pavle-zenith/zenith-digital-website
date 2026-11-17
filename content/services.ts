@@ -17,9 +17,9 @@ import { whyWixItem } from "./faq";
 
 // 1. Hero (dark, compact) + numbered anchor index
 export const sHero = {
-  heading: "Wix Studio services, and exactly what's in each one",
+  heading: "Wix Studio design and development for growing businesses and agencies",
   support:
-    "One team for the whole journey. From a first Wix Studio build to migrations, campaigns, and white-label production for agencies.",
+    "For service businesses that have outgrown a template, and agencies that need a build team behind their brand. One team from the first build to migrations, campaigns and white-label production.",
   ctas: [
     { label: "Book a call", href: "/book-a-call", variant: "primary" } as CtaLink,
     {

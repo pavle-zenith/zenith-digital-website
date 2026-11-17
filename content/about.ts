@@ -231,7 +231,7 @@ export const aboutVerify = {
     },
     {
       record: "Agency partners",
-      body: "MOD Digital, Techtonnik, LMF HR, Wellington Web Co and AdVantage resell or subcontract our builds. Several have run for three years.",
+      body: "MOD Digital, Techtonnik, LMF HR, Wellington Web Co, AdVantage and Latitude Haus resell or subcontract our builds. Several have run for three years.",
       href: "/partnerships",
       linkLabel: "White-label and partnerships",
       note: null,

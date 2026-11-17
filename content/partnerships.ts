@@ -501,6 +501,19 @@ export const pStories = {
       image: "/partners/wellington-web-co.webp",
       quote: partnerQuote("finlay-wellington"),
     },
+    {
+      // Added 17 Nov 2026. OWNER: logo to follow (a wordmark renders until
+      // set). No stats until
+      // there are real figures; StatMedia renders the shot alone when empty.
+      name: "Latitude Haus",
+      logo: "",
+      relationship: "Development partner since 2026",
+      title: "Websites for the travel companies running on Latitude",
+      story:
+        "Latitude Haus builds Latitude, the software luxury and private tour operators run their enquiries, bookings, crew, guests and finance on. We develop the websites their hospitality clients sell through.",
+      stats: [],
+      image: "/partners/latitude-haus.webp",
+    },
   ] as PartnerStory[],
 };
 

@@ -168,6 +168,9 @@ export const allTestimonials: Testimonial[] = [
     avatar: "/avatars/flynn-blackie.jpg",
     logo: "/logos-white/mod.png",
     logoDark: "/logos-dark/mod.png",
+    // Landscape clip (832x464); his face sits centre-frame, so the portrait
+    // cards and the 9:16 lightbox crop it cleanly with object-cover.
+    video: "/testimonials/flynn-blackie.mp4",
     poster: "/testimonials/flynn.jpg",
   },
   {

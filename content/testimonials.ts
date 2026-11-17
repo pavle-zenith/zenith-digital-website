@@ -26,7 +26,7 @@ export {
 } from "./testimonials-data";
 export type { Testimonial } from "./testimonials-data";
 
-// Clients with a video (or, for Flynn, a poster shot), in the order the
+// Clients with a video, in the order the
 // /testimonials slider plays them.
 // Adding a video is a one-line change: set `video` on the testimonial and add
 // its id here. These people also keep a wall card below: the slider card shows

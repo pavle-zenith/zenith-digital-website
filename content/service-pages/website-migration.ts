@@ -308,7 +308,7 @@ export const websiteMigration: ServicePageContent = {
         name: "Wix Classic",
         logo: "/platforms/wix.svg",
         href: "/services/wix-classic-to-wix-studio",
-        desc: "Wix can't convert a Classic site to Studio, so see exactly what carries across and what gets rebuilt.",
+        desc: "Since May 2026 a Classic site can branch to Studio, but the design never carries. Here's what does, and what gets rebuilt.",
       },
       {
         name: "Squarespace",

@@ -47,10 +47,19 @@ export const wixHarmony: MigrationGuideContent = {
   slug: "wix-harmony-to-wix-studio",
   publish: true,
   platform: "Wix Harmony",
+  // SNIPPET REWRITE (17 Nov 2026). Baseline, Search Console 20 Oct to 16 Nov
+  // 2026: 1,195 impressions, average position 4.6, 18 clicks, 1.5% CTR. Google
+  // already ranks the page, so this is a click problem, not a ranking one. The
+  // title carries the query plus the fear a migration searcher brings (losing
+  // URLs). The description answers "can I move it?" in its first clause, then
+  // names three honest hooks from the body: the site stays live (process),
+  // slugs can match (transfers row), 404s fixed inside the 30-day window at no
+  // extra cost (step 6). The old description ran to 188 characters, so its
+  // price was never shown. Compare CTR from 18 Nov onward.
   seo: {
-    title: "Wix Harmony to Wix Studio | Migration Guide | Zenith Digital",
+    title: "Wix Harmony to Wix Studio: keep your URLs | Zenith Digital",
     description:
-      "Wix Harmony sites can't be transferred to Wix Studio, and Harmony has no CMS or multilingual yet. What that means, what a rebuild involves, and how to decide before you start. From €1,250.",
+      "Wix can't transfer a Harmony site, so it's rebuilt in Studio. It stays live while we build, your URLs can stay the same, and any 404 in 30 days is fixed free.",
   },
 
   hero: {
@@ -452,6 +461,11 @@ export const wixHarmony: MigrationGuideContent = {
         href: "https://support.wix.com/en/article/request-moving-members-from-one-site-to-another-in-your-wix-account",
         note: "Wix's own answer on the one row with no workaround: due to privacy concerns, it isn't possible to export and import your member list.",
       },
+      {
+        label: "Studio Editor: Creating a Studio Version of a Wix Editor Site",
+        href: "https://support.wix.com/en/article/studio-editor-creating-a-studio-version-of-a-wix-editor-site",
+        note: "The contrast with Harmony. Since May 2026 a classic Wix Editor site can branch to Studio, keeping the dashboard, business data and apps. The design isn't carried, and publishing the branch unpublishes the Editor version for good. Checked 17 November 2026.",
+      },
     ],
   },
 
@@ -519,7 +533,7 @@ export const wixHarmony: MigrationGuideContent = {
         label: "Wix Classic to Wix Studio",
         logo: "/platforms/wix.svg",
         href: "/services/wix-classic-to-wix-studio",
-        desc: "On the classic Wix Editor rather than Harmony? Different constraints, and Wix won't convert that one either.",
+        desc: "On the classic Wix Editor rather than Harmony? That one can branch to Studio with its data intact, though the design is still rebuilt.",
       },
       {
         label: "Framer to Wix Studio",

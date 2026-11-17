@@ -48,6 +48,12 @@ import type { MigrationGuideContent } from "./types";
  * full URL mapping and lost no rankings (257% YoY impressions after); Knode AI
  * and Katie Hailey were both on Wix Classic and were rebuilt rather than
  * carried. Re-verify the Wix constraints if Wix changes the branch workflow.
+ *
+ * RE-CHECKED 17 Nov 2026 against the branch article (Wix's copy dated
+ * 15 Oct 2026; the feature request was marked Released on 14 May 2026). The
+ * route is as described, plus one prerequisite this page lacked: the account
+ * must have switched to the Wix Studio platform. Wix also warns that
+ * publishing the branch can affect SEO where content or structure differs.
  */
 
 const ctas: CtaLink[] = [
@@ -160,7 +166,8 @@ export const wixClassic: MigrationGuideContent = {
       {
         title: "Create a Studio version of your existing site",
         navLabel: "The Studio branch route",
-        eligibility: "Wix Editor sites on a Premium plan",
+        eligibility:
+          "Wix Editor sites on a Premium plan, in an account switched to Wix Studio",
         body: "Wix creates a Studio branch alongside your live site. The branch shares the original's dashboard, so your business data is already there when you open it.",
         lead: "What that means in practice:",
         points: [
@@ -534,7 +541,7 @@ export const wixClassic: MigrationGuideContent = {
       {
         label: "Studio Editor: Creating a Studio Version of a Wix Editor Site",
         href: "https://support.wix.com/en/article/studio-editor-creating-a-studio-version-of-a-wix-editor-site",
-        note: "The branch route. Shares the dashboard, does not carry the design, and publishing retires the Editor branch.",
+        note: "The branch route, released May 2026. Needs a Premium plan and an account switched to Wix Studio. Shares the dashboard, business data and apps, does not carry the design, and publishing unpublishes the Editor branch for good. Checked 17 November 2026.",
       },
       {
         label: "Wix Editor: Rebuilding Your Site in the Studio Editor",
@@ -585,7 +592,7 @@ export const wixClassic: MigrationGuideContent = {
     items: [
       {
         q: "How do I migrate a Wix Classic site to Wix Studio?",
-        a: "The site is rebuilt in Studio rather than converted, because the two editors use different layout engines. In practice that means: inventory the current site's URLs and rankings, decide which content is worth carrying, model the repeating pages as CMS collections, build responsively in Studio on a separate site, move the content and per-page SEO settings, then repoint the domain and import the redirects. Your Classic site stays live throughout and the switch itself takes an afternoon.",
+        a: "The site is rebuilt in Studio rather than converted, because the two editors use different layout engines. Since May 2026 you can create a Studio branch of a Premium Wix Editor site, which carries the dashboard, the business data and the apps but not the design, and publishing the branch unpublishes the Classic version for good. On either route the work looks the same: inventory the current site's URLs and rankings, decide which content is worth carrying, model the repeating pages as CMS collections, build responsively in Studio, move the content and per-page SEO settings, then go live and import any redirects. Your Classic site stays live throughout and the switch itself takes an afternoon.",
       },
       {
         q: "Is Wix Studio actually better than the Wix Classic editor?",

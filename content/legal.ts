@@ -17,6 +17,10 @@
  *                                       lib/forms.ts WINDOW_MS)
  *   - the proposal-view beacon        → §"Anonymous view counting on
  *                                       proposals" (lib/proposalViews.ts)
+ *   - Vercel Web Analytics, or the    → "You view a page" row, §"Cookies and
+ *     routes it skips                   analytics", Vercel row, basis and
+ *                                       retention (components/analytics/
+ *                                       VercelAnalytics.tsx)
  */
 
 export type LegalBlock =
@@ -39,7 +43,7 @@ const EMAIL = "hello@thezenithdigital.com";
 
 export const privacyPolicy: LegalDocument = {
   title: "Privacy policy",
-  updated: "16 November 2026",
+  updated: "17 November 2026",
   intro:
     "This policy explains what this website collects, why, and what you can do about it. It covers thezenithdigital.com and the enquiry forms on it. It is written to be read, not to be survived.",
   sections: [
@@ -93,6 +97,11 @@ export const privacyPolicy: LegalDocument = {
               "To rate-limit submissions and filter out spam",
             ],
             [
+              "You view a page",
+              "The page, the referring site, your country, your device type, browser and operating system. No cookies and no IP address",
+              "Anonymous page view counts, so we know which pages get read",
+            ],
+            [
               "You accept analytics cookies",
               "Pages viewed, approximate location, device and browser, referring site",
               "To see which pages earn their place",
@@ -117,6 +126,10 @@ export const privacyPolicy: LegalDocument = {
         {
           type: "p",
           text: "This site sets no analytics cookies until you accept them. Google Analytics loads with consent defaulted to denied, which means it sends anonymous, cookieless signals only. If you accept, it sets its usual cookies. If you decline, it never does.",
+        },
+        {
+          type: "p",
+          text: "One count runs whatever you answer, because it uses no cookies. Vercel Web Analytics records each page view: the page, the referring site, your country, your device type, browser and operating system. It stores nothing in your browser and keeps no IP address. It tells repeat views on the same day apart using a hash of the request that is discarded after 24 hours, and we only ever see totals, never individual visitors. Proposal pages are left out of it.",
         },
         {
           type: "p",
@@ -158,7 +171,7 @@ export const privacyPolicy: LegalDocument = {
           rows: [
             [
               "Vercel",
-              "Hosts the site, keeps server logs, and tells us the country a proposal view comes from",
+              "Hosts the site, keeps server logs, counts page views without cookies, and tells us the country a proposal view comes from",
               "Global edge network",
             ],
             [
@@ -201,7 +214,8 @@ export const privacyPolicy: LegalDocument = {
           type: "list",
           items: [
             "Enquiry and application data: we process it to take steps at your request before entering a contract, and because we have a legitimate interest in answering people who contact us.",
-            "Analytics: your consent, given through the banner and withdrawable at any time.",
+            "Analytics cookies and session recording: your consent, given through the banner and withdrawable at any time.",
+            "Cookieless page view counts: our legitimate interest in knowing which pages get read. They identify no one.",
             "Server logs and rate limiting: our legitimate interest in keeping the site available and free of spam.",
             "Proposal view counting: our legitimate interest in knowing whether a proposal we sent has been read.",
           ],
@@ -218,6 +232,7 @@ export const privacyPolicy: LegalDocument = {
             "Rate-limiting records: up to one hour, and they are lost whenever the site redeploys.",
             "Proposal view emails: kept in our inbox for up to 24 months, like enquiries. Resend keeps its own delivery log under its own schedule.",
             "Analytics: retained by Google under the retention period set on the property.",
+            "Page view counts: held by Vercel as totals, under the retention period of our plan.",
             "Server logs: retained by our host under its own schedule.",
           ],
         },

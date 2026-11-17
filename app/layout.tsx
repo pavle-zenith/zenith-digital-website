@@ -5,6 +5,7 @@ import "./globals.css";
 import { inter, saansMono, sfPro } from "./fonts";
 import { JsonLd } from "@/components/JsonLd";
 import { Analytics } from "@/components/analytics/Analytics";
+import { VercelAnalytics } from "@/components/analytics/VercelAnalytics";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -100,6 +101,10 @@ export default function RootLayout({
         {/* Loaded unconditionally: the Consent Mode defaults above decide what
             it may store. Absent env var means no tag at all (local/preview). */}
         {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
+        {/* Cookieless page views for every visitor, outside the consent
+            gate. Why, and which routes it skips: components/analytics/
+            VercelAnalytics.tsx. */}
+        <VercelAnalytics />
       </body>
     </html>
   );

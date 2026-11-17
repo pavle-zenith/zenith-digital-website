@@ -2,9 +2,10 @@
  * Blog cover art convention (owner-supplied, 27 Aug 2026).
  *
  * Covers live in the repo, not in Sanity: the Sanity MCP tooling cannot
- * upload image binaries, and a brand new post slug already needs a deploy
- * before its route exists (`dynamicParams = false` in app/blog/[slug]), so
- * the deploy that creates the route carries the art with it.
+ * upload image binaries. A scheduled post goes live on its own (the blog
+ * route has `dynamicParams = true` and revalidates hourly), but its cover
+ * only exists once a deploy carries the files and this registration. So
+ * covers ship in a deploy BEFORE the post's publishedAt, never after.
  *
  * Files, per post slug:
  *   public/blog/{slug}/cover.webp   1920x1200 (16:10), shown on blog cards
@@ -28,6 +29,12 @@ const BLOG_COVERS = new Set([
   "traffic-but-no-enquiries",
   "wix-studio-premium-brand",
   "luxury-travel-website-design",
+  // Scheduled weekly, 24 Nov to 22 Dec 2026. Covers ship ahead of the posts.
+  "wix-harmony-vs-wix-studio",
+  "ai-built-website-no-enquiries",
+  "business-website-cost",
+  "ads-clicks-but-no-leads",
+  "what-should-go-on-your-homepage",
 ]);
 
 /** Card thumbnail path for a post, or null when no cover art exists. */

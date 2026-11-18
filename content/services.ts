@@ -20,6 +20,8 @@ export const sHero = {
   heading: "Wix Studio design and development for growing businesses and agencies",
   support:
     "For service businesses that have outgrown a template, and agencies that need a build team behind their brand. One team from the first build to migrations, campaigns and white-label production.",
+  /** Under the support line; shown once the /industries hub has a route. */
+  industriesLink: { label: "See the work by industry", href: "/industries" },
   ctas: [
     { label: "Book a call", href: "/book-a-call", variant: "primary" } as CtaLink,
     {

@@ -359,3 +359,23 @@ export const landingPages: ServicePageContent = {
     priceFrom: "750",
   },
 };
+
+/**
+ * The landing page as a package card, for the shared pricing element
+ * (components/sections/service/ServicePagePricing) on the industry pages.
+ * Built from this page's own fields so no price, timeline or inclusion is
+ * restated: the price and its note from `pricing`, the timeline from the hero
+ * chip, the features from `included`, the summary from the hero subhead's
+ * first sentence.
+ */
+const landingTimeline = landingPages.hero.chips.find((c) => /week/i.test(c));
+
+export const landingPackage = {
+  name: "Landing page",
+  icon: "split",
+  summary: `${landingPages.hero.subhead.split(". ")[0]}.`,
+  price: landingPages.pricing.from ?? "",
+  priceNote: landingPages.pricing.fromNote ?? "",
+  timeline: landingTimeline ?? "",
+  features: landingPages.included.items.map((item) => item.title),
+};

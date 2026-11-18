@@ -22,15 +22,20 @@ const GAP = 24;
  * `allCta` closes the section with the full-width "All case studies" strip on
  * the inverted studio texture (the detail-page treatment). Without it the
  * section keeps its own bottom padding instead.
+ *
+ * `moreLink` sits under the heading ("More travel work"), pointing at the
+ * current study's industry page; resolved on the server by the caller.
  */
 export function CaseStudySlider({
   heading,
   items,
   allCta = false,
+  moreLink,
 }: {
   heading: string;
   items: CaseStudyCard[];
   allCta?: boolean;
+  moreLink?: { label: string; href: string } | null;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -58,9 +63,22 @@ export function CaseStudySlider({
     >
       {/* Header: heading left, arrows right, sharing a baseline */}
       <div className="mb-8 flex flex-wrap items-end justify-between gap-8 md:mb-12">
-        <h2 className="max-w-3xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-          {heading}
-        </h2>
+        <div>
+          <h2 className="max-w-3xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+            {heading}
+          </h2>
+          {moreLink ? (
+            <Link
+              href={moreLink.href}
+              className="group mt-3 inline-flex items-center gap-1.5 font-display text-body font-medium transition hover:text-accent"
+            >
+              {moreLink.label}{" "}
+              <span aria-hidden className="btn-arrow">
+                &rarr;
+              </span>
+            </Link>
+          ) : null}
+        </div>
         <div className="flex gap-2">
           {([-1, 1] as const).map((dir) => (
             <button

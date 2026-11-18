@@ -1,8 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { sHero } from "@/content/services";
+import { hubRoutable } from "@/content/industries";
 
 /**
  * /services hero — white themed, compact, on the inverted studio texture
@@ -48,6 +50,18 @@ export function ServicesHero() {
         <p className="mt-6 max-w-[54rem] text-body-lg font-medium leading-relaxed text-light-muted text-pretty">
           {sHero.support}
         </p>
+        {/* Gated on the hub, like every link to /industries. */}
+        {hubRoutable ? (
+          <Link
+            href={sHero.industriesLink.href}
+            className="group mt-4 inline-flex items-center gap-1.5 font-display text-body font-medium transition hover:text-accent"
+          >
+            {sHero.industriesLink.label}{" "}
+            <span aria-hidden className="btn-arrow">
+              &rarr;
+            </span>
+          </Link>
+        ) : null}
         <div className="mt-8 flex flex-wrap gap-3">
           {sHero.ctas.map((cta) => (
             <Button key={cta.href} cta={cta} tone="light" />

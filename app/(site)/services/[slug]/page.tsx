@@ -155,7 +155,11 @@ export default async function ServiceDetailPage({ params }: Props) {
       <ServicePageStakes data={page} />
       {/* Full stats + testimonials, same as the homepage. */}
       <Testimonials />
-      <ServicePagePricing data={page} />
+      {/* The service pages keep Referral beside the two client tiers. */}
+      <ServicePagePricing
+        data={page}
+        plans={["minimum", "studio", "referral"]}
+      />
       {/* The trust gap: pricing is settled, the reader now asks who these
           people are. Light per the founder spec, tinted so it separates from
           the white Pricing section directly above. */}

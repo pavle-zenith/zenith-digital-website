@@ -1,4 +1,5 @@
 import { Nav } from "@/components/layout/Nav";
+import { industryMenu } from "@/content/industries";
 import { Footer } from "@/components/layout/Footer";
 
 /**
@@ -10,7 +11,7 @@ import { Footer } from "@/components/layout/Footer";
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Nav />
+      <Nav industryMenu={industryMenu()} />
       <main id="main">{children}</main>
       <Footer />
     </>

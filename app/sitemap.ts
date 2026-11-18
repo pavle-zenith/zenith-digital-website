@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { caseStudyDetails } from "@/content/case-studies";
 import { migrationGuides } from "@/content/migration-guides";
+import { hubLive, industryPages } from "@/content/industries";
 import { servicePages } from "@/content/service-pages";
 import { sanityFetchSafe } from "@/sanity/lib/client";
 import { postSlugsQuery } from "@/sanity/lib/queries";
@@ -74,6 +75,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${SITE}/services/${g.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    // The industries hub and its pages, each only once published (a preview
+    // build routes unpublished ones, but `hubLive` and `industryPages` are
+    // the published sets, so they never reach the sitemap).
+    ...(hubLive
+      ? [
+          {
+            url: `${SITE}/industries`,
+            changeFrequency: "monthly" as const,
+            priority: 0.8,
+          },
+        ]
+      : []),
+    ...industryPages.map((p) => ({
+      url: `${SITE}/industries/${p.slug}`,
+      lastModified: new Date(p.updated),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
     ...caseStudyDetails.map((c) => ({
       url: `${SITE}/case-studies/${c.slug}`,

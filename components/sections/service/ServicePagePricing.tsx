@@ -6,7 +6,10 @@ import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { cn } from "@/lib/utils";
 import { pricing as homePricing } from "@/content/home";
 import { pPricing } from "@/content/partnerships";
-import type { ServicePageContent } from "@/content/service-pages";
+import { landingPackage } from "@/content/service-pages/landing-pages";
+
+/** Every package the element can show. */
+export type PricingPlan = "landing" | "minimum" | "studio" | "referral";
 
 /**
  * Pricing — light, the PartnerPricing card anatomy: a header zone (icon +
@@ -20,14 +23,42 @@ import type { ServicePageContent } from "@/content/service-pages";
  * line. The optional `pullQuote` (the payback arithmetic on the design page)
  * closes the section below the plan cards, under a short accent rule. The
  * per-page price drivers are no longer rendered in this layout.
+ *
+ * Shared by the service pages and the industry pages (owner, 18 Nov 2026:
+ * "the usual pricing element"), so it takes only the three fields it reads.
+ * A service page's full content satisfies the shape as it is.
+ *
+ * `plans` picks which packages show, in order. The default is the three
+ * client packages (landing page, The Minimum, The Studio), which is what the
+ * industry pages show; the service pages pass their own trio with Referral.
+ * The landing page card is built from the landing page service's own content
+ * (landingPackage), so its price is read, never restated. `notes` replaces a
+ * card's summary with a page-specific line, keeping the card heights aligned.
  */
-export function ServicePagePricing({ data }: { data: ServicePageContent }) {
+export function ServicePagePricing({
+  data,
+  plans: planKeys = ["landing", "minimum", "studio"],
+  notes,
+}: {
+  data: { pricing: { heading: string; note: string; pullQuote?: string } };
+  plans?: PricingPlan[];
+  notes?: Partial<Record<PricingPlan, string>>;
+}) {
   const minimum = homePricing.tiers.find((t) => t.name === "The Minimum");
   const studio = homePricing.tiers.find((t) => t.name === "The Studio");
   const referral = pPricing.tiers.find((t) => t.name === "Referral");
-  const plans = [minimum, studio, referral].filter(
-    (t): t is NonNullable<typeof t> => Boolean(t),
-  );
+  const landing = minimum
+    ? { ...landingPackage, badge: "", highlighted: false, cta: minimum.cta }
+    : undefined;
+  const byKey = { landing, minimum, studio, referral };
+  const plans = planKeys
+    .map((key) => {
+      const tier = byKey[key];
+      return tier
+        ? { ...tier, summary: notes?.[key] ?? tier.summary }
+        : undefined;
+    })
+    .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
   return (
     <Section tone="light" frameClassName="!py-14 md:!py-24">

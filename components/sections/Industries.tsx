@@ -13,8 +13,19 @@ import { industries } from "@/content/home";
  * of tall portrait cards that bleeds to the frame side rails. Each card is a
  * placeholder image with the industry name overlaid bottom-left, and a "View work"
  * link beneath it. Arrows scroll by one card; the track also scrolls/snaps by touch.
+ *
+ * `hrefs` are resolved on the server (app/(site)/page.tsx) from each card's
+ * industry key through the industries registry, one per item in order.
+ * `allLink` is the "See all industries" link beside the heading, passed only
+ * once the /industries hub has a route.
  */
-export function Industries() {
+export function Industries({
+  hrefs,
+  allLink,
+}: {
+  hrefs: string[];
+  allLink?: { label: string; href: string };
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const scrollByCard = (dir: 1 | -1) => {
@@ -53,6 +64,17 @@ export function Industries() {
           <p className="mt-4 max-w-xl text-body-lg md:mt-5 font-medium text-light-muted">
             {industries.intro}
           </p>
+          {allLink ? (
+            <Link
+              href={allLink.href}
+              className="group mt-4 inline-flex items-center gap-1.5 font-display text-body font-medium transition hover:text-accent"
+            >
+              {allLink.label}{" "}
+              <span aria-hidden className="btn-arrow">
+                &rarr;
+              </span>
+            </Link>
+          ) : null}
         </div>
         <div className="flex gap-2">
           <button
@@ -80,7 +102,7 @@ export function Industries() {
         ref={trackRef}
         className="flex snap-x snap-mandatory gap-8 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {industries.items.map((it) => (
+        {industries.items.map((it, i) => (
           <div
             key={it.name}
             data-card
@@ -90,7 +112,7 @@ export function Industries() {
                 only the image, which is alt="" and aria-hidden, so all eight
                 cards announced as an unnamed "link" (WCAG 2.4.4). The name is
                 what gives each card its accessible name now. */}
-            <Link href={it.href} className="group block">
+            <Link href={hrefs[i]} className="group block">
               <div className="relative aspect-[3/4] overflow-hidden rounded-[8px] bg-light-surface">
                 <Image
                   src={it.image}

@@ -9,8 +9,19 @@ import { DividedList, DividedRow } from "@/components/ui/DividedList";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { cn } from "@/lib/utils";
 import { nav, servicesMenu } from "@/content/home";
+import type { IndustryMenu } from "@/content/industries";
 
-export function Nav() {
+/**
+ * `industryMenu` is the Services menu's "By industry" column, resolved on the
+ * server by the layout (content/industries industryMenu). Null until the
+ * /industries hub has a route, and the menu is then exactly the two service
+ * columns, so the gate lives in one place.
+ */
+export function Nav({
+  industryMenu = null,
+}: {
+  industryMenu?: IndustryMenu | null;
+}) {
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -151,11 +162,26 @@ export function Nav() {
             : "pointer-events-none max-h-0 opacity-0",
         )}
       >
-        <div className="mx-auto grid max-w-[var(--container-site)] grid-cols-3 divide-x divide-light-border border-x border-light-border">
-          {/* Cols 1 and 2 — the services themselves, closed off by a single
-              full-width row spanning both. */}
-          <div className="col-span-2 flex flex-col">
-            <div className="grid flex-1 grid-cols-2 divide-x divide-light-border">
+        <div
+          className={cn(
+            "mx-auto grid max-w-[var(--container-site)] divide-x divide-light-border border-x border-light-border",
+            industryMenu ? "grid-cols-4" : "grid-cols-3",
+          )}
+        >
+          {/* The link columns (the two service columns, plus "By industry"
+              once the hub is live), closed off by a single full-width row. */}
+          <div
+            className={cn(
+              "flex flex-col",
+              industryMenu ? "col-span-3" : "col-span-2",
+            )}
+          >
+            <div
+              className={cn(
+                "grid flex-1 divide-x divide-light-border",
+                industryMenu ? "grid-cols-3" : "grid-cols-2",
+              )}
+            >
               {/* No horizontal padding on the column so the row hairlines run
                   edge to edge, touching the vertical dividers. */}
               {(
@@ -193,20 +219,62 @@ export function Nav() {
                   </DividedList>
                 </div>
               ))}
+
+              {/* "By industry": compact rows (icon and label, no description
+                  line) so five of them stand about as tall as three service
+                  rows. Same chips and hover as the services. */}
+              {industryMenu ? (
+                <div className="py-8">
+                  <p className="mb-4 px-6 font-mono text-label uppercase track-label text-light-muted">
+                    {industryMenu.heading}
+                  </p>
+                  <DividedList tone="light">
+                    {industryMenu.items.map((it) => (
+                      <DividedRow key={it.href} className="px-6 py-3">
+                        <Link
+                          href={it.href}
+                          className="group flex items-center gap-3"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-surface text-light-text transition group-hover:border-accent group-hover:text-accent">
+                            <FeatureIcon name={it.icon} className="h-4 w-4" />
+                          </span>
+                          <span className="font-display font-medium group-hover:text-accent">
+                            {it.label}
+                          </span>
+                        </Link>
+                      </DividedRow>
+                    ))}
+                  </DividedList>
+                </div>
+              ) : null}
             </div>
 
-            {/* Secondary CTA closing both columns. Owns its top rule; the
+            {/* Secondary CTAs closing the columns, side by side once the
+                industries link joins. The row owns its top rule; the
                 dropdown's bottom border sits under it. */}
-            <Link
-              href={servicesMenu.viewAll.href}
-              className="group flex items-center justify-center gap-2 border-t border-light-border bg-light-surface px-6 py-4 text-body font-medium text-light-text transition hover:bg-light-border"
-              onClick={() => setMenuOpen(false)}
-            >
-              {servicesMenu.viewAll.label}
-              <span aria-hidden className="btn-arrow">
-                &rarr;
-              </span>
-            </Link>
+            <div className="flex divide-x divide-light-border border-t border-light-border">
+              {[
+                servicesMenu.viewAll,
+                ...(industryMenu ? [industryMenu.viewAll] : []),
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="group flex flex-1 items-center justify-center gap-2 bg-light-surface px-6 py-4 text-body font-medium text-light-text transition hover:bg-light-border"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FeatureIcon
+                    name={link.icon}
+                    className="h-4 w-4 shrink-0 text-light-muted transition group-hover:text-light-text"
+                  />
+                  {link.label}
+                  <span aria-hidden className="btn-arrow">
+                    &rarr;
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Col 3 — Featured case study. Image fills the column height, caption pins bottom. */}
@@ -268,6 +336,48 @@ export function Nav() {
                 >
                   {item.label}
                 </Link>
+                {/* The Services group's "By industry" sub-group: the same
+                    five links as the desktop column, plus the hub. Same gate. */}
+                {"menu" in item && item.menu === "services" && industryMenu ? (
+                  <div className="-mt-1 pb-5">
+                    <p className="font-mono text-label uppercase track-label text-light-muted">
+                      {industryMenu.heading}
+                    </p>
+                    <ul className="mt-2 grid grid-cols-2 gap-x-4">
+                      {industryMenu.items.map((it) => (
+                        <li key={it.href}>
+                          <Link
+                            href={it.href}
+                            className="flex min-h-11 items-center gap-2.5 text-body font-medium"
+                            onClick={() => setOpen(false)}
+                          >
+                            <FeatureIcon
+                              name={it.icon}
+                              className="h-4 w-4 shrink-0 text-light-muted"
+                            />
+                            {it.label}
+                          </Link>
+                        </li>
+                      ))}
+                      <li>
+                        <Link
+                          href={industryMenu.allShort.href}
+                          className="group flex min-h-11 items-center gap-2.5 text-body font-medium"
+                          onClick={() => setOpen(false)}
+                        >
+                          <FeatureIcon
+                            name={industryMenu.allShort.icon}
+                            className="h-4 w-4 shrink-0 text-light-muted"
+                          />
+                          {industryMenu.allShort.label}
+                          <span aria-hidden className="btn-arrow">
+                            &rarr;
+                          </span>
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                ) : null}
               </li>
             ))}
           </ul>

@@ -1,4 +1,5 @@
 import { Nav } from "@/components/layout/Nav";
+import { industryMenu } from "@/content/industries";
 import { Footer } from "@/components/layout/Footer";
 import SiteNotFound from "./(site)/not-found";
 
@@ -21,7 +22,7 @@ export { metadata } from "./(site)/not-found";
 export default function NotFound() {
   return (
     <>
-      <Nav />
+      <Nav industryMenu={industryMenu()} />
       <main id="main">
         <SiteNotFound />
       </main>

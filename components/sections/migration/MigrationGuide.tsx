@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
+import { FitTable } from "@/components/ui/FitTable";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { SourcesGrid } from "@/components/sections/SourcesGrid";
@@ -679,123 +680,24 @@ function GuideRoutes({ data }: { data: MigrationGuideContent }) {
   );
 }
 
-/** Lucide "x" glyph, inline per CLAUDE.md §15 (no icon packages). */
-function XMark({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={cn("h-4 w-4", className)}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <path d="M18 6 6 18M6 6l12 12" />
-    </svg>
-  );
-}
-
 /**
- * Who should move and who shouldn't, as a white comparison table spanning the
- * full section: hairline verticals between the columns, hairlines between
- * every row, a tinted header band, and a marker on every cell.
- *
- * THE GRID FLOWS DOWN COLUMNS, NOT ACROSS ROWS. `grid-flow-col` over an
- * explicit row count puts the whole "worth moving" list in column one and the
- * whole "stay put" list in column two, so rows line up across the vertical
- * rule without pairing two items that have nothing to do with each other. It
- * also means the DOM order is every pro, then every con, which is exactly the
- * order you want when the table collapses to one column on phones.
- *
- * The two sides are told apart by marker SHAPE (a tick against a cross) as
- * well as colour, so the distinction survives greyscale and colour blindness.
- * The cons are quieter than the pros: they qualify the reader out, they don't
- * argue with them.
+ * Who should move and who shouldn't. The table itself is the shared FitTable
+ * (components/ui), the same one the industry pages use; only the column
+ * labels are this template's own.
  */
 function GuideFit({ data }: { data: MigrationGuideContent }) {
   const { fit } = data;
-  // +1 for the header cell that heads each column.
-  const rowCount = Math.max(fit.goodFit.length, fit.notAFit.length) + 1;
-  // Keeps the block rectangular when one side has fewer reasons than the other.
-  const fillers = Math.max(0, fit.goodFit.length - fit.notAFit.length);
-
   return (
-    <Section tone="light" frameClassName="!py-14 md:!py-24" id={ID.fit}>
-      <div className="max-w-3xl">
-        <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-          {fit.heading}
-        </h2>
-        <p className="mt-4 text-body-lg font-medium leading-relaxed text-light-muted">
-          {fit.intro}
-        </p>
-      </div>
-
-      <div
-        className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-flow-col"
-        style={{ gridTemplateRows: `repeat(${rowCount}, auto)` }}
-      >
-        <ColumnHead
-          label="Worth moving"
-          marker={<VerifiedCheck className="text-positive-ink" />}
-        />
-        {fit.goodFit.map((point) => (
-          <div key={point} className="flex items-start gap-3 bg-light-bg p-5">
-            <VerifiedCheck className="mt-0.5 shrink-0 text-positive-ink" />
-            <span className="text-body font-medium leading-snug text-light-text">
-              {point}
-            </span>
-          </div>
-        ))}
-
-        <ColumnHead
-          label="Stay where you are"
-          marker={<XMark className="text-light-muted" />}
-        />
-        {fit.notAFit.map((point) => (
-          <div key={point} className="flex items-start gap-3 bg-light-bg p-5">
-            <XMark className="mt-0.5 shrink-0 text-light-muted" />
-            <span className="text-body leading-snug text-light-muted">
-              {point}
-            </span>
-          </div>
-        ))}
-        {Array.from({ length: fillers }, (_, i) => (
-          <div
-            key={`filler-${i}`}
-            aria-hidden
-            className="hidden bg-light-bg md:block"
-          />
-        ))}
-      </div>
-
-      {fit.footnote ? (
-        <p className="measure mt-10 border-t border-light-border pt-8 text-body-lg leading-relaxed text-light-muted">
-          {fit.footnote}
-        </p>
-      ) : null}
-    </Section>
-  );
-}
-
-/** Tinted header cell heading one column of the fit table. */
-function ColumnHead({
-  label,
-  marker,
-}: {
-  label: string;
-  marker: React.ReactNode;
-}) {
-  return (
-    <div className="flex items-center gap-3 bg-light-surface px-5 py-4">
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-bg">
-        {marker}
-      </span>
-      <span className="font-mono text-label uppercase track-label text-light-muted">
-        {label}
-      </span>
-    </div>
+    <FitTable
+      id={ID.fit}
+      heading={fit.heading}
+      intro={fit.intro}
+      goodLabel="Worth moving"
+      notLabel="Stay where you are"
+      good={fit.goodFit}
+      notAFit={fit.notAFit}
+      footnote={fit.footnote}
+    />
   );
 }
 

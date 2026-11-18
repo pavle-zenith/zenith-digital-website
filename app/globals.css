@@ -681,3 +681,92 @@ body {
     background-color: var(--color-accent);
   }
 }
+/* Industry step scene (travel, page structure): the page a search lands on.
+   Only a `from`: the element's base style is the highlighted end state, so
+   reduced motion shows the match rather than an unmarked page. */
+@keyframes wf-target {
+  from {
+    border-color: var(--color-light-border);
+    background-color: var(--color-light-bg);
+  }
+}
+/* Industry step scene (travel, integrations): a sync pulse crossing the
+   connector from the booking system to the website. `left` rather than a
+   transform, so it travels the connector's full width whatever that is. */
+@keyframes wf-travel {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 6px);
+    opacity: 0;
+  }
+}
+
+/* Industry step scenes (all pages). Most are `from`-only, so the element's
+   base style is its end frame and reduced motion shows the finished picture.
+
+   wf-move: arrive at the resting place from an offset set per element
+   (--wf-x / --wf-y; percentages resolve against the element's own box). */
+@keyframes wf-move {
+  from {
+    transform: translate(var(--wf-x, 0), var(--wf-y, 0));
+  }
+}
+/* wf-leave: travel to an offset and disappear (an enquiry reaching its
+   team). Ends hidden, which is also the reduced-motion frame. */
+@keyframes wf-leave {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--wf-x, 0), var(--wf-y, 0)) scale(0.9);
+    visibility: hidden;
+  }
+}
+/* wf-mute: fade from full strength down to the element's own (lower) base
+   opacity, e.g. a card a filter has ruled out. */
+@keyframes wf-mute {
+  from {
+    opacity: 1;
+  }
+}
+/* wf-type: text typed left to right; run with steps(<characters>). */
+@keyframes wf-type {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+/* wf-draw: a connector drawing itself (SVG path with pathLength="1" and
+   stroke-dasharray 1). */
+@keyframes wf-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+/* wf-ping: a ring pinging out once from a dot or icon. Base opacity 0. */
+@keyframes wf-ping {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  15% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}

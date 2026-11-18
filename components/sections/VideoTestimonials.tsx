@@ -18,6 +18,8 @@ type VideoItem = {
   logo: string;
   poster: string;
   video: string;
+  /** A short line placing the speaker ("The partner behind ..."). */
+  context?: string;
 };
 
 /**
@@ -96,13 +98,27 @@ export function VideoTestimonials({
   slider = false,
   tone = "dark",
   trackId,
+  layout = "grid",
+  fullQuotes = false,
 }: {
   data?: VideoData;
   slider?: boolean;
   tone?: Tone;
   /** Set when another section hosts the arrows (see SliderArrows). */
   trackId?: string;
+  /**
+   * "quotes-column" (industry pages): from xl, three columns. Each video
+   * testimonial takes a column and the written ones stack in the last column,
+   * sharing a video card's height (narrower columns can't fit both quotes
+   * beside a video, so this waits for xl). From sm the written ones sit side by side
+   * under the videos; phones stack everything.
+   */
+  layout?: "grid" | "quotes-column";
+  /** Show each quote whole rather than its first sentence. */
+  fullQuotes?: boolean;
 }) {
+  const quotesColumn = layout === "quotes-column" && !slider;
+  const writtenItems = data.items.filter((it) => !it.video && !it.poster);
   const dark = tone === "dark";
   const hasHeader = Boolean(data.heading || data.intro);
   // Arrows hosted elsewhere (the hero) means this section renders none.
@@ -235,10 +251,19 @@ export function VideoTestimonials({
             hasHeader ? "mt-12" : trackId ? "mt-0" : "mt-6",
             slider
               ? "flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              : "grid grid-cols-1 gap-6 md:grid-cols-3",
+              : quotesColumn
+                ? "grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3"
+                : "grid grid-cols-1 gap-6 md:grid-cols-3",
           )}
         >
-          {data.items.map((item, i) => (
+          {data.items.map((item, i) =>
+            // No video and no poster: a written quote. It gets a plain card,
+            // not a play button that would open an empty player.
+            !item.video && !item.poster ? (
+              // In the quotes-column layout the written ones render together
+              // in their own column, after the videos.
+              quotesColumn ? null : <QuoteCard key={item.name} item={item} />
+            ) : (
             <button
               key={item.name}
               data-card
@@ -250,6 +275,7 @@ export function VideoTestimonials({
                 "group relative flex aspect-[3/3.7] flex-col sm:aspect-[3/4.4] overflow-hidden rounded-[8px] border border-border text-left text-white",
                 slider &&
                   "w-[280px] shrink-0 snap-start sm:w-[320px] lg:w-[360px]",
+
               )}
             >
               {/* Poster / video first-frame area */}
@@ -283,7 +309,18 @@ export function VideoTestimonials({
 
               {/* Legibility gradient — hard at the bottom for the text, clear up top.
                   Base --color-scrim matches the case-study panel gradient. */}
-              <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-scrim via-scrim/80 to-transparent" />
+              {/* A full quote runs well above the bottom half, past where the
+                  short one stopped, so its scrim starts higher and stays dense
+                  through the text (on a light poster, like Flynn's white
+                  shirt, the half-height scrim left white type on white). */}
+              <div
+                className={cn(
+                  "absolute inset-x-0 bottom-0 bg-gradient-to-t from-scrim to-transparent",
+                  fullQuotes
+                    ? "top-[12%] via-scrim/90 via-60%"
+                    : "top-1/2 via-scrim/80",
+                )}
+              />
 
               {/* Matching scrim at the top, for the white client logo. The
                   bottom gradient only ever covered the text, so the logo was
@@ -318,20 +355,55 @@ export function VideoTestimonials({
               {/* Bottom panel: quote, name + check, role - company */}
               <div className="relative mt-auto flex flex-col gap-4 p-5">
                 <p className="font-display text-body-lg font-medium leading-snug tracking-tight">
-                  {firstSentence(item.quote)}
+                  {fullQuotes ? item.quote : firstSentence(item.quote)}
                 </p>
                 <div>
+                  {item.context ? (
+                    <p className="mb-2 font-mono text-[10px] uppercase track-label text-white/70">
+                      {item.context}
+                    </p>
+                  ) : null}
                   <div className="flex items-center gap-1.5 font-display text-body-lg font-medium">
                     {item.name}
                     <VerifiedCheck className="text-white" />
                   </div>
                   <div className="text-body text-white/70">
-                    {item.role} - {item.company}
+                    {item.company ? `${item.role} - ${item.company}` : item.role}
                   </div>
                 </div>
               </div>
             </button>
-          ))}
+            ),
+          )}
+          {quotesColumn && writtenItems.length ? (
+            <div
+              className={cn(
+                "flex flex-col gap-6 sm:col-span-2 sm:flex-row",
+                // One video leaves two columns: the written ones fill both as
+                // a 2-up grid instead of stacking in one and leaving a gap.
+                data.items.length - writtenItems.length === 1
+                  ? "xl:grid xl:grid-cols-2"
+                  : // No videos at all: the written ones take the full row.
+                    data.items.length === writtenItems.length
+                    ? cn(
+                        "xl:col-span-3 xl:grid",
+                        writtenItems.length % 3 === 0
+                          ? "xl:grid-cols-3"
+                          : "xl:grid-cols-2",
+                      )
+                    : "xl:col-span-1 xl:flex-col",
+              )}
+            >
+              {writtenItems.map((item) => (
+                <QuoteCard
+                  key={item.name}
+                  item={item}
+                  compact
+                  className="flex-1"
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </Section>
 
@@ -410,5 +482,67 @@ export function VideoTestimonials({
         document.body,
       ) : null}
     </div>
+  );
+}
+
+/**
+ * A written testimonial in the video grid: the same dark card and type as
+ * the video cards (logo top-left, quote, name with the verified check, role
+ * and company), but a figure rather than a button, with no play control and
+ * no lightbox, because there is nothing to play.
+ */
+function QuoteCard({
+  item,
+  className,
+  compact = false,
+}: {
+  item: VideoItem;
+  className?: string;
+  /** Body-size quote, for two cards sharing one video card's height. */
+  compact?: boolean;
+}) {
+  return (
+    <figure
+      className={cn(
+        "flex flex-col justify-between rounded-[8px] border border-border bg-surface p-5 text-white",
+        compact ? "gap-5" : "gap-8",
+        className,
+      )}
+    >
+      {item.logo ? (
+        <Image
+          src={item.logo}
+          unoptimized={servesRaw(item.logo)}
+          alt={item.company}
+          width={160}
+          height={40}
+          className="h-7 w-auto self-start object-contain"
+        />
+      ) : (
+        <span className="font-display font-medium">{item.company}</span>
+      )}
+      <blockquote
+        className={cn(
+          "font-display font-medium leading-snug tracking-tight",
+          compact ? "text-body" : "text-body-lg",
+        )}
+      >
+        &ldquo;{item.quote}&rdquo;
+      </blockquote>
+      <figcaption>
+        {item.context ? (
+          <p className="mb-2 font-mono text-[10px] uppercase track-label text-white/70">
+            {item.context}
+          </p>
+        ) : null}
+        <div className="flex items-center gap-1.5 font-display text-body-lg font-medium">
+          {item.name}
+          <VerifiedCheck className="text-white" />
+        </div>
+        <div className="text-body text-white/70">
+          {item.company ? `${item.role} - ${item.company}` : item.role}
+        </div>
+      </figcaption>
+    </figure>
   );
 }

@@ -4,13 +4,18 @@ import { JsonLd } from "@/components/JsonLd";
 import { CaseStudiesHero } from "@/components/sections/CaseStudiesHero";
 import { CaseStudies } from "@/components/sections/CaseStudies";
 import { CaseStudyGrid } from "@/components/sections/CaseStudyGrid";
+import { hubRoutable, industryFilterLinks } from "@/content/industries";
 import { WorkGallery } from "@/components/sections/WorkGallery";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ComparisonTable } from "@/components/sections/ComparisonTable";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Faq } from "@/components/sections/Faq";
-import { caseStudyCards, csFinalCta } from "@/content/case-studies";
+import {
+  caseStudyCards,
+  csFinalCta,
+  csIndustriesLink,
+} from "@/content/case-studies";
 
 export const metadata: Metadata = {
   title: "Wix Studio Website Examples & Case Studies | Zenith Digital",
@@ -59,7 +64,10 @@ export default function CaseStudiesPage() {
       <CaseStudies />
       <Testimonials showStats={false} />
       <ClientLogos />
-      <CaseStudyGrid />
+      <CaseStudyGrid
+        industryLinks={industryFilterLinks()}
+        browseLink={hubRoutable ? csIndustriesLink : undefined}
+      />
       <ComparisonTable />
       {/* FAQPage JSON-LD stays on the homepage only — same items, no duplicate markup. */}
       <Faq />

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
@@ -8,12 +7,12 @@ import { Suspense } from "react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FilterTab } from "@/components/ui/FilterTab";
-import { cn, servesRaw } from "@/lib/utils";
+import { ProjectCard } from "@/components/ui/ProjectCard";
 import {
   INDUSTRIES,
-  INDUSTRY_FILTER_LABELS,
   caseStudyCards,
   detailSlugs,
+  inIndustry,
   type IndustrySlug,
 } from "@/content/case-studies";
 
@@ -32,6 +31,11 @@ import {
  * where there is one, and to nothing otherwise, never to /case-studies/*. A
  * `*.wixstudio.com` address is a Wix preview, not the client's site, so in
  * that mode it is not linked either.
+ *
+ * `industryLinks` maps an industry to its page (built server-side from the
+ * published /industries pages, see content/industries). A filtered view whose
+ * industry has one shows a link to it above the cards. It's a prop rather than
+ * an import so the industry pages' copy never ships in this client bundle.
  */
 type GridOptions = {
   id?: string;
@@ -39,6 +43,9 @@ type GridOptions = {
   heading?: string;
   intro?: string;
   links?: "default" | "live";
+  industryLinks?: Partial<Record<IndustrySlug, { href: string; label: string }>>;
+  /** "Browse by industry" to the hub, beside the pills; omit to hide. */
+  browseLink?: { href: string; label: string };
 };
 
 /** A Wix Studio preview address (site.wixstudio.com/...), not a live site. */
@@ -83,6 +90,8 @@ function GridInner({
   heading,
   intro,
   links = "default",
+  industryLinks,
+  browseLink,
 }: {
   industry: IndustrySlug | null;
   onSelect: ((slug: IndustrySlug | null) => void) | null;
@@ -93,24 +102,29 @@ function GridInner({
 
   const visible = (
     industry
-      ? caseStudyCards.filter((c) => c.industry === industry)
+      ? caseStudyCards.filter((c) => inIndustry(c, industry))
       : caseStudyCards
   )
     .slice()
     .sort((a, b) => Number(hasDetail(b.slug)) - Number(hasDetail(a.slug)));
+  const industryLink = industry ? industryLinks?.[industry] : undefined;
 
   return (
     <Section id={id} tone="light" className={className} frameClassName="!py-12 md:!py-20">
       {heading ? <SectionHeader heading={heading} intro={intro} tone="light" /> : null}
-      {/* Filter pills — one row, always. The row never wraps: wrapping is what
-          stranded a lone pill on a second row. The nine pills measure 947px, so
-          they sit still from xl up (1176px of frame at 1280) and the row becomes
-          a horizontal scroll rail below that. The boundary is xl rather than lg
-          because at 1024 the frame is only 940px, which would spill 7px of pill
-          outside it. The bleed uses max-xl utilities rather than .frame-bleed:
-          that class is unlayered CSS, so an xl:mx-0 utility could never outrank
-          it and the rail would go on ignoring the section gutter on desktop. */}
-      <div className="mb-10 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] max-xl:mx-[calc(-1*clamp(20px,4vw,64px))] max-xl:px-[clamp(20px,4vw,64px)] xl:overflow-visible xl:pb-0 [&::-webkit-scrollbar]:hidden">
+      {/* Filter pills. Twelve industries plus "All" measure about 1,340px,
+          wider than the frame at any width, so the row has two behaviours:
+          - Below lg it stays one row and scrolls sideways (a swipe rail that
+            bleeds to the screen edge, the scrollbar hidden). The bleed uses
+            max-lg utilities rather than .frame-bleed: that class is unlayered
+            CSS, so an lg:mx-0 utility could never outrank it.
+          - From lg up it wraps, capped at a width that splits the pills into
+            two even rows (7 and 6). The pills use the full INDUSTRIES labels
+            (one label set sitewide), measured into that cap. Left to wrap at the frame width, the last
+            pill dropped alone to a second row, which is the failure the old
+            single-row rule existed to prevent. */}
+      <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+      <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] max-lg:mx-[calc(-1*clamp(20px,4vw,64px))] max-lg:px-[clamp(20px,4vw,64px)] lg:max-w-[48rem] lg:flex-wrap lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden">
         <FilterTab active={industry === null} onClick={() => onSelect?.(null)}>
           All
         </FilterTab>
@@ -120,97 +134,47 @@ function GridInner({
             active={industry === slug}
             onClick={() => onSelect?.(slug)}
           >
-            {INDUSTRY_FILTER_LABELS[slug]}
+            {INDUSTRIES[slug]}
           </FilterTab>
         ))}
       </div>
+      {browseLink ? (
+        <Link
+          href={browseLink.href}
+          className="group inline-flex shrink-0 items-center gap-1.5 font-display text-body font-medium transition hover:text-accent lg:mt-2"
+        >
+          {browseLink.label}{" "}
+          <span aria-hidden className="btn-arrow">
+            &rarr;
+          </span>
+        </Link>
+      ) : null}
+      </div>
+
+      {/* A filtered view points on to that industry's own page. */}
+      {industryLink ? (
+        <p className="-mt-4 mb-8">
+          <Link
+            href={industryLink.href}
+            className="group inline-flex items-center gap-1.5 font-display text-body font-medium transition hover:text-accent"
+          >
+            {industryLink.label}{" "}
+            <span aria-hidden className="btn-arrow">
+              &rarr;
+            </span>
+          </Link>
+        </p>
+      ) : null}
 
       {/* Card grid — two per row */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {visible.map((c) => (
-          <article
+          <ProjectCard
             key={c.slug}
-            className="group flex flex-col overflow-hidden rounded-card border border-light-border bg-light-bg"
-          >
-            {/* Thumb, or the styled wordmark placeholder (never a broken image) */}
-            <div className="relative aspect-[16/10] overflow-hidden border-b border-light-border bg-bg">
-              {c.thumb ? (
-                <Image
-                  src={c.thumb}
-                  unoptimized={servesRaw(c.thumb)}
-                  alt={`${c.client} website`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover object-center transition duration-500 group-hover:scale-[1.02]"
-                />
-              ) : c.logo ? (
-                <div className="flex h-full w-full items-center justify-center">
-                  <Image
-                    src={c.logo}
-                    unoptimized={servesRaw(c.logo)}
-                    alt={c.client}
-                    width={220}
-                    height={56}
-                    className="h-8 w-auto max-w-[60%] object-contain opacity-90"
-                  />
-                </div>
-              ) : (
-                <div className="flex h-full w-full items-center justify-center">
-                  <span className="font-display text-h3 font-medium text-text">
-                    {c.client}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Body */}
-            <div className="flex flex-1 flex-col p-6">
-              <div className="flex items-baseline justify-between gap-3">
-                <h3 className="font-display text-body-lg font-medium">
-                  {c.client}
-                </h3>
-                <span className="shrink-0 font-mono text-label uppercase track-label text-light-muted">
-                  {INDUSTRIES[c.industry]}
-                </span>
-              </div>
-              <p
-                className={cn(
-                  "mt-3 font-display text-h3 font-medium leading-tight",
-                  c.metricPending && "italic text-light-muted",
-                )}
-              >
-                {c.metricIsQuote ? <>&ldquo;{c.metric}&rdquo;</> : c.metric}
-              </p>
-              <p className="mt-2 text-body leading-snug text-light-muted">
-                {c.story}
-              </p>
-              {hasDetail(c.slug) ? (
-                <Link
-                  href={`/case-studies/${c.slug}`}
-                  className="mt-auto inline-flex items-center gap-1.5 pt-5 font-display text-body font-medium transition group-hover:text-accent"
-                >
-                  Read the case study{" "}
-                  <span aria-hidden className="btn-arrow">
-                    &rarr;
-                  </span>
-                </Link>
-              ) : liveUrl(c.liveUrl) ? (
-                <a
-                  href={liveUrl(c.liveUrl)}
-                  target="_blank"
-                  rel="noopener"
-                  className="mt-auto inline-flex items-center gap-1.5 pt-5 font-display text-body font-medium transition group-hover:text-accent"
-                >
-                  View live site{" "}
-                  <span aria-hidden className="btn-arrow">
-                    &rarr;
-                  </span>
-                </a>
-              ) : (
-                <span className="mt-auto pt-5" aria-hidden />
-              )}
-            </div>
-          </article>
+            card={c}
+            detail={hasDetail(c.slug)}
+            liveUrl={liveUrl(c.liveUrl)}
+          />
         ))}
       </div>
     </Section>

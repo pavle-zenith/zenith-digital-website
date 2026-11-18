@@ -10,51 +10,59 @@ import { quoteOf } from "./testimonials-data";
  * automatically — shipping a new study is a data change, not a refactor.
  */
 
-// Industry taxonomy — the filter pill list derives from this map, so adding a
+// Industry taxonomy. The single source for the /case-studies filter pills, the
+// card corner tags and the /industries pages (content/industries): adding a
 // project with a new industry automatically adds the pill.
+//
+// Key order is the order everything renders in: travel first, then by depth
+// of work, agencies last (owner decision, 17 Nov 2026). The old catch-all
+// "services" was split that day into trades, professional services, creative
+// and local. The `services` key stayed so existing ?industry=services links
+// keep working; it now means professional services only.
+//
+// One label set (fixes brief, 18 Nov 2026): these are the names the
+// /industries hub rows, the card tags, the filter pills and the industry
+// pages all read, so the site never shows two category systems side by side.
 export const INDUSTRIES = {
-  travel: "Travel & hospitality",
-  saas: "SaaS & tech",
-  marine: "Marine & rentals",
-  coaches: "Coaches & speakers",
-  courses: "Courses & education",
-  ecommerce: "E-commerce & retail",
-  agencies: "Agencies & white-label",
-  property: "Property & real estate",
+  travel: "Travel",
+  ecommerce: "E-commerce",
+  saas: "SaaS and AI",
+  coaches: "Coaches",
+  courses: "Courses",
+  property: "Property",
+  marine: "Marine",
+  trades: "Trades",
   services: "Professional services",
+  creative: "Creative",
+  local: "Local business",
+  agencies: "Agencies",
 } as const;
 
 export type IndustrySlug = keyof typeof INDUSTRIES;
-
-/**
- * Shorter labels for the filter pills only. Nine full-length pills need ~1474px
- * and never fit one row, so the last one dropped alone to a second row. The
- * trimmed set fits on a single row from lg up. Cards keep the full INDUSTRIES
- * label in their corner tag, so nothing is lost, and the pill still reads
- * unambiguously next to the "All" that precedes it.
- */
-export const INDUSTRY_FILTER_LABELS: Record<IndustrySlug, string> = {
-  travel: "Travel",
-  saas: "SaaS",
-  marine: "Marine",
-  coaches: "Coaches",
-  courses: "Courses",
-  ecommerce: "E-commerce",
-  agencies: "Agencies",
-  property: "Property",
-  services: "Professional services",
-};
 
 export type CaseStudyCard = {
   client: string;
   slug: string;
   industry: IndustrySlug;
+  /**
+   * Further industries the project genuinely belongs to (owner, 18 Nov 2026:
+   * Just Stay does short-let bookings and landlord lettings, so it's travel
+   * and property). The card's tag and the hub preview stay on `industry`;
+   * the grid filter and the industry pages' work sections include these too.
+   */
+  alsoIn?: IndustrySlug[];
   /** One hard metric (real figures only — no invented numbers). */
   metric: string;
   /** Render the metric in quotes (a quote-metric, not a number). */
   metricIsQuote?: boolean;
   /** Owner still to supply the real metric — rendered as a visible placeholder. */
   metricPending?: boolean;
+  /**
+   * Who shares the result, set after the metric wherever the card renders.
+   * A result that belongs to a wider system than the site says so on the card
+   * itself, not only on the case study.
+   */
+  metricCredit?: string;
   story: string;
   /**
    * Screenshot thumb from /portfolio-slider (4:3 browser mockup on the client's
@@ -105,7 +113,12 @@ export const caseStudyCards: CaseStudyCard[] = [
     slug: "scottish-luxury-experience",
     industry: "travel",
     metric: "$521k in 7 months",
-    story: "The UK's best-looking travel website, live in 4 weeks",
+    // The result belongs to the full system MOD Digital runs behind the site
+    // (see the case study), so it is always credited (industries brief).
+    metricCredit: "with MOD Digital",
+    // Was "The UK's best-looking travel website": an unsourced superlative
+    // (fixes brief, 18 Nov 2026).
+    story: "Luxury Scotland tours from £15k, website live in 4 weeks",
     thumb: "/case-studies/scottish-luxury-experience/card.webp",
     logo: "/logos-white/sle.avif",
     liveUrl: "https://www.scottishluxuryexperience.com",
@@ -177,7 +190,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Techtonnik",
     slug: "techtonnik",
-    industry: "services",
+    industry: "agencies",
     metric: "10+ projects delivered",
     story: "Their own site moved off WordPress, and fulfillment partner since 2023",
     thumb: "/case-studies/techtonnik/card.webp",
@@ -233,6 +246,7 @@ export const caseStudyCards: CaseStudyCard[] = [
     client: "Just Stay",
     slug: "just-stay",
     industry: "travel",
+    alsoIn: ["property"],
     metric: "Two funnels, live in 4 weeks",
     story:
       "Short-let booking funnel and landlord pipeline for a UK Airbnb superhost",
@@ -333,7 +347,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "ATW Trucking",
     slug: "atw-trucking",
-    industry: "services",
+    industry: "trades",
     metric: "Logistics site rebuild",
     story: "Freight, logistics, and heavy equipment shipping for an Indiana carrier",
     thumb: "/case-studies/atw-trucking/card.webp",
@@ -352,7 +366,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Pressure Test Scotland",
     slug: "pressure-test-scotland",
-    industry: "services",
+    industry: "trades",
     metric: "Instant-quote lead capture",
     story: "Quote form and service pages for a Scotland-wide pipe testing firm",
     thumb: "/case-studies/pressure-test-scotland/card.webp",
@@ -361,7 +375,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "LORAK Films",
     slug: "lorak-films",
-    industry: "services",
+    industry: "creative",
     metric: "Production company portfolio",
     story: "Reel-led portfolio and case studies for a film production crew",
     thumb: "/case-studies/lorak-films/card.webp",
@@ -370,7 +384,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Creatify Collective",
     slug: "creatify-collective",
-    industry: "agencies",
+    industry: "creative",
     metric: "Creative studio portfolio",
     story: "Selected work site for a fashion, lifestyle, and automotive studio",
     thumb: "/case-studies/creatify-collective/card.webp",
@@ -427,7 +441,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Creative Native Films",
     slug: "creative-native-films",
-    industry: "services",
+    industry: "creative",
     metric: "Video production portfolio",
     story: "Portfolio and quote requests for an Indianapolis video production company",
     thumb: "/case-studies/creative-native-films/card.webp",
@@ -463,7 +477,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "BW Kitchens",
     slug: "bw-kitchens",
-    industry: "services",
+    industry: "trades",
     metric: "Kitchen fitter lead site",
     story: "Projects and free-quote enquiries for a kitchen fitter in Worthing and Sussex",
     thumb: "/case-studies/bw-kitchens/card.webp",
@@ -472,7 +486,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Ameci Pizza Kitchen",
     slug: "ameci-pizza-culver",
-    industry: "travel",
+    industry: "local",
     metric: "Restaurant site with ordering",
     story: "Menu, specials, catering and online ordering for a family pizzeria in Irvine, California",
     thumb: "/case-studies/ameci-pizza-culver/card.webp",
@@ -499,7 +513,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Bonnie Barbers",
     slug: "bonnie-barbers",
-    industry: "services",
+    industry: "local",
     metric: "Local barbershop site",
     story: "Prices, recent cuts and directions for a barbershop on Tranent High Street",
     thumb: "/case-studies/bonnie-barbers/card.webp",
@@ -1742,6 +1756,11 @@ export const caseStudyDetails: CaseStudyDetail[] = [
 /** Slugs with a shipped detail page — their cards flip to internal links. */
 export const detailSlugs = new Set(caseStudyDetails.map((d) => d.slug));
 
+/** A card is in an industry by its main tag or any `alsoIn` tag. */
+export function inIndustry(card: CaseStudyCard, key: IndustrySlug): boolean {
+  return card.industry === key || Boolean(card.alsoIn?.includes(key));
+}
+
 export function getCaseStudyDetail(slug: string): CaseStudyDetail | undefined {
   return caseStudyDetails.find((d) => d.slug === slug);
 }
@@ -1879,6 +1898,9 @@ export const csQuotes = {
 };
 
 // 8. Final CTA band
+/** Beside the grid's filter pills; shown once the /industries hub has a route. */
+export const csIndustriesLink = { label: "Browse by industry", href: "/industries" };
+
 export const csFinalCta = {
   heading: ["Your business could be the next", "card up there"],
   paragraph:

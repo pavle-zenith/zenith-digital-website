@@ -1,4 +1,5 @@
 import type { CtaLink, Metric } from "@/lib/types";
+import type { IndustrySlug } from "./case-studies";
 
 import { attribution, testimonial } from "./testimonials-data";
 
@@ -487,67 +488,71 @@ export const featuredWork = {
 // 8. Industries served — horizontal card slider (Stripe "startups" carousel style).
 // Images are placeholders (swap for real client shots). Industries are drawn from
 // the portfolio; the blurb names the kind of work delivered in each vertical.
-// The /industries/[slug] template is not built yet, so every card points at
-// the work index until it is. Repoint when those routes ship.
+// Each card names an industry key; its link is resolved on the server from
+// the industries registry (app/(site)/page.tsx): the /industries/{slug} page
+// once published, the filtered case-study grid until then, Agencies to
+// /partnerships. Nothing here needs repointing when a page ships.
 export const industries = {
   heading: "Industries we work with",
   intro:
     "We know the buyers, the objections, and the pages that convert in each of these markets.",
+  /** Beside the heading; shown only once the /industries hub has a route. */
+  allLink: { label: "See all industries", href: "/industries" },
   items: [
     {
       name: "SaaS & tech",
       blurb:
         "Product sites and web apps that turn launches into pipeline. Knode's carried them into a Series A.",
-      href: "/case-studies?industry=saas",
+      industry: "saas" as IndustrySlug,
       image: "/industries/saas-tech.jpg",
     },
     {
       name: "Travel & hospitality",
       blurb:
         "Booking-ready sites for transfers, stays, and experiences. Bel'Istria grew impressions 257%.",
-      href: "/case-studies?industry=travel",
+      industry: "travel" as IndustrySlug,
       image: "/industries/travel-hospitality.jpg",
     },
     {
       name: "Coaches & speakers",
       blurb:
         "Lead-capture pages built to sell seats and sessions for experts and public speakers.",
-      href: "/case-studies?industry=coaches",
+      industry: "coaches" as IndustrySlug,
       image: "/industries/coaches-speakers.jpg",
     },
     {
       name: "Marketing & agencies",
       blurb:
         "Campaign landing pages and white-label builds. MOD's drove €1M+ in client revenue.",
-      href: "/case-studies?industry=agencies",
+      industry: "agencies" as IndustrySlug,
       image: "/industries/marketing-agencies.jpg",
     },
     {
       name: "E-commerce & retail",
       blurb:
         "Storefronts and brand sites built to convert, launched across new markets.",
-      href: "/case-studies?industry=ecommerce",
+      industry: "ecommerce" as IndustrySlug,
       image: "/industries/ecommerce-retail.jpg",
     },
     {
       name: "Clothing & fashion brands",
       blurb:
         "Brand-led storefronts and lookbooks that make new labels look established from day one.",
-      href: "/case-studies?industry=ecommerce",
+      industry: "ecommerce" as IndustrySlug,
       image: "/industries/clothing.jpg",
     },
     {
       name: "Creatives & personal brands",
       blurb:
         "Portfolio and personal-brand sites for videographers, photographers, and creators who need to stand out.",
-      href: "/case-studies",
+      industry: "creative" as IndustrySlug,
       image: "/industries/creatives.jpg", // TODO: image coming later
     },
     {
       name: "Professional services",
       blurb:
         "Credible, conversion-ready sites for firms that win work on trust and expertise.",
-      href: "/case-studies?industry=services",
+      industry: "services" as IndustrySlug,
       image: "/industries/professional-services.jpg",
     },
   ],
@@ -1008,6 +1013,9 @@ export const footer = {
       heading: "Company",
       links: [
         { label: "Services", href: "/services" },
+        // Rendered only once the /industries hub has a route (Footer.tsx),
+        // so the footer never links a 404.
+        { label: "Industries", href: "/industries", requiresHub: true },
         { label: "Case studies", href: "/case-studies" },
         { label: "Partnerships", href: "/partnerships" },
         { label: "About", href: "/about" },
@@ -1141,8 +1149,31 @@ export const servicesMenu = {
       href: "/partnerships",
     },
   ],
-  // Full-width row closing off the two service columns.
-  viewAll: { label: "View all services", href: "/services" },
+  /**
+   * Third column, "By industry" (hub-and-nav brief, 17 Nov 2026). Keys only:
+   * each item's label and icon come from the /industries hub rows, and its
+   * href from the industries registry (the industry page once published,
+   * the filtered case-study grid until then), so the menu and the hub can't
+   * drift apart. The column and viewAllIndustries render only once the hub
+   * has a route (see industryMenu in content/industries); until then the
+   * menu is exactly the two service columns.
+   */
+  industries: {
+    heading: "By industry",
+    // Four, owner decisions 18 Nov 2026: Courses dropped, Professional
+    // services in place of Coaches. Both stay on the hub.
+    keys: ["travel", "ecommerce", "saas", "services"] as IndustrySlug[],
+  },
+  // Full-width row closing off the service columns.
+  // `icon` names a components/ui/FeatureIcon entry, drawn beside the label.
+  viewAll: { label: "View all services", href: "/services", icon: "layout-grid" },
+  viewAllIndustries: {
+    label: "View all industries",
+    href: "/industries",
+    icon: "globe",
+  },
+  // The mobile drawer's shorter form of the same link.
+  allIndustriesShort: { label: "All industries", href: "/industries", icon: "globe" },
   // Only ever point this at a study with a shipped detail page.
   featured: {
     label: "Featured case study",

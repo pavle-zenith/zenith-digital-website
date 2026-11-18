@@ -13,7 +13,8 @@ import { Included } from "@/components/sections/Included";
 import { Process } from "@/components/sections/Process";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Faq } from "@/components/sections/Faq";
-import { caseStudiesCta, faqSection, finalCta } from "@/content/home";
+import { caseStudiesCta, faqSection, finalCta, industries } from "@/content/home";
+import { hubRoutable, industryHref } from "@/content/industries";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -39,7 +40,10 @@ export default function HomePage() {
       {/* Conversion-ordered tail */}
       <Problem />
       <CrossIndustry />
-      <Industries />
+      <Industries
+        hrefs={industries.items.map((it) => industryHref(it.industry))}
+        allLink={hubRoutable ? industries.allLink : undefined}
+      />
       <Process />
       <Audit />
       <Pricing />

@@ -20,6 +20,21 @@
 - [SEO, AEO & PPC](https://www.thezenithdigital.com/services/seo-aeo-ppc): search, answer-engine optimization, and paid campaigns for Wix Studio sites
 - [White-label & partnerships](https://www.thezenithdigital.com/partnerships): unbranded production for agencies, landing pages from €600, retainers from €1,099/mo
 
+## Industries
+
+- [Industries](https://www.thezenithdigital.com/industries): hub listing every industry Zenith Digital builds for, with the projects shipped in each
+  - [Travel](https://www.thezenithdigital.com/industries/travel): websites for travel agencies, tour operators and holiday rentals that take bookings and enquiries direct; Scottish Luxury Experience ($521k in booked trips in 7 months, with MOD Digital), Bel'Istria, Just Stay
+  - [E-commerce](https://www.thezenithdigital.com/industries/ecommerce): online stores on Wix Studio and Shopify for product brands, drops and producers selling direct, including multi-language stores
+  - [SaaS and AI](https://www.thezenithdigital.com/industries/saas): marketing sites for SaaS and AI startups, on Wix Studio or custom code with Sanity; Knode AI (10 pages in 3 weeks), Genroks AI (10+ ISO deals since launch)
+  - [Coaches](https://www.thezenithdigital.com/industries/coaches): websites for coaches, speakers, practitioners and authors with class, retreat and speaker bookings; Katie Hailey (Figma to live in 1.5 weeks)
+  - [Courses](https://www.thezenithdigital.com/industries/courses): course websites, launch pages and searchable libraries; Hunting Brook Gardens (€140k in course and event sales, with MOD Digital)
+  - [Property](https://www.thezenithdigital.com/industries/property): websites for estate agencies, developers and property services with searchable listings and enquiry routing
+  - [Marine](https://www.thezenithdigital.com/industries/marine): boat and yacht marketplaces, brokers, charters and dock rentals; Yacht Junky, a multi-seller marketplace built natively in Wix Studio
+  - [Trades](https://www.thezenithdigital.com/industries/trades): quote-led websites for trades, contractors and logistics firms, with service and area pages
+  - [Professional services](https://www.thezenithdigital.com/industries/professional-services): websites for consultancies and service firms, in English, German or Serbian
+  - [Creative](https://www.thezenithdigital.com/industries/creative): portfolio websites for film crews, video production companies and creative studios
+  - [Local business](https://www.thezenithdigital.com/industries/local-business): websites for barbers, restaurants, shops and local services with prices, hours and booking or ordering
+
 ## Proof
 
 - [Case studies](https://www.thezenithdigital.com/case-studies): Knode AI (10-page SaaS site in 3 weeks for a company raising a $10M Series A), Scottish Luxury Experience ($521k in 7 months), Bel'Istria (257% impression growth, top AI recommendation for Istria transfers), MOD Digital (3-year agency build partnership, €1M+ campaign revenue)

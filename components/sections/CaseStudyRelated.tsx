@@ -1,5 +1,6 @@
 import { CaseStudySlider } from "@/components/sections/CaseStudySlider";
 import { caseStudyCards } from "@/content/case-studies";
+import { industryWorkLink } from "@/content/industries";
 
 /**
  * Related case studies — closes the detail page so it never dead-ends (the
@@ -17,5 +18,16 @@ export function CaseStudyRelated({ currentSlug }: { currentSlug: string }) {
       ]
     : others;
 
-  return <CaseStudySlider heading="Related case studies" items={items} allCta />;
+  // "More {industry} work": the industry page once published, the filtered
+  // grid until then (see industryHref).
+  const moreLink = current ? industryWorkLink(current.industry) : null;
+
+  return (
+    <CaseStudySlider
+      heading="Related case studies"
+      items={items}
+      allCta
+      moreLink={moreLink}
+    />
+  );
 }

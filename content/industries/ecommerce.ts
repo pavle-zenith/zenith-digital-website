@@ -76,7 +76,7 @@ export const ecommerce: IndustryPageContent = {
     },
   },
 
-  inShort: `Zenith Digital designs and builds online stores on Wix Studio and Shopify for product brands, makers and producers selling direct, from streetwear drops to made-to-order couture and craft spirits. A full store takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a launch landing page and ${lower(minimum.price)} for a full site.`,
+  inShort: `Zenith Digital designs and builds online stores on Wix Studio, Shopify or in custom code for product brands, makers and producers selling direct, from streetwear drops to made-to-order couture and craft spirits. A full store takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a launch landing page and ${lower(minimum.price)} for a full site.`,
 
   fit: {
     heading: "Who we work best with among product brands",
@@ -292,6 +292,6 @@ export const ecommerce: IndustryPageContent = {
   schema: {
     serviceName: "E-commerce website design",
     description:
-      "Online store design and build on Wix Studio and Shopify for product brands, makers and producers selling direct, including drops, pre-orders and multi-language stores.",
+      "Online store design and build on Wix Studio, Shopify or in custom code for product brands, makers and producers selling direct, including drops, pre-orders and multi-language stores.",
   },
 };

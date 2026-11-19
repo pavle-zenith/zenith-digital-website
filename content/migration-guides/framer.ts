@@ -611,7 +611,7 @@ export const framer: MigrationGuideContent = {
       {
         label: "Wix Studio vs Webflow",
         icon: "compass",
-        href: "/blog/wix-studio-vs-webflow",
+        href: "/compare/wix-studio-vs-webflow",
         desc: "The two platforms most Framer teams shortlist next, compared on the points that actually decide it.",
       },
       {

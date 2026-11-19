@@ -75,7 +75,7 @@ export const travel: IndustryPageContent = {
     },
   },
 
-  inShort: `Zenith Digital designs and builds websites on Wix Studio for travel agencies, tour operators, holiday rentals, transfer companies and adventure brands, with the booking or enquiry flow connected to the system you already run. A full site takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a campaign landing page and ${lower(minimum.price)} for a full site.`,
+  inShort: `Zenith Digital designs and builds websites on Wix Studio or in custom code for travel agencies, tour operators, holiday rentals, transfer companies and adventure brands, with the booking or enquiry flow connected to the system you already run. A full site takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a campaign landing page and ${lower(minimum.price)} for a full site.`,
 
   fit: {
     heading: "Who we work best with among travel businesses",
@@ -184,7 +184,7 @@ export const travel: IndustryPageContent = {
         body: "The design brief comes from your price: cinematic photography, restrained type and unhurried pacing for premium trips; clear prices and dates for stays. On a travel site the imagery is the product, so plan the photography before the features.",
         deliverables: [
           "Wireframes and copy",
-          "The site, built in Wix Studio",
+          "The site, built in Wix Studio or custom code",
           "Copy written for how guests decide",
         ],
       },
@@ -310,6 +310,6 @@ export const travel: IndustryPageContent = {
   schema: {
     serviceName: "Travel website design",
     description:
-      "Website design and build on Wix Studio for travel agencies, tour operators, holiday rentals, transfer companies and adventure brands, with booking and enquiry flows connected to the operator's own systems.",
+      "Website design and build on Wix Studio or in custom code for travel agencies, tour operators, holiday rentals, transfer companies and adventure brands, with booking and enquiry flows connected to the operator's own systems.",
   },
 };

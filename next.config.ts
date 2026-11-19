@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
 
+// No path aliases here: next.config can't resolve `@/`, which is why the
+// comparison publishing switchboard is a standalone file.
+import { liveComparisonRedirects } from "./content/comparisons/status";
+
 const nextConfig: NextConfig = {
   // `next build` and `next dev` both write to .next by default, so a build run
   // while the dev server is up overwrites the chunks it is serving and the dev
@@ -165,6 +169,11 @@ const nextConfig: NextConfig = {
       },
       // /embed-test is deliberately NOT redirected. It was a scratch page with
       // no equity, so a 404 is the correct signal to drop it from the index.
+
+      // Old URLs replaced by a /compare page, each redirected only once its
+      // comparison is published (content/comparisons/status.ts). First:
+      // /blog/wix-studio-vs-webflow -> /compare/wix-studio-vs-webflow.
+      ...liveComparisonRedirects(),
     ];
   },
 };

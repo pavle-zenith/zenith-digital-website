@@ -78,6 +78,29 @@ export const postsQuery = groq`
     }
 `;
 
+/**
+ * The newest live post, for the Resources menu's featured card. Title and
+ * slug only: the cover comes from the repo (content/blog-covers.ts).
+ */
+export const latestPostQuery = groq`
+  *[_type == "post" && defined(slug.current) && ${live}]
+    | order(publishedAt desc)[0] {
+      title,
+      "slug": slug.current
+    }
+`;
+
+/**
+ * Specific posts by slug, as cards (the /compare hub's Guides row). Only live
+ * posts come back, so a guide that isn't published yet is simply left out
+ * rather than linked as a 404.
+ */
+export const postsBySlugQuery = groq`
+  *[_type == "post" && slug.current in $slugs && ${live}] {
+    ${cardFields}
+  }
+`;
+
 /** Slugs for generateStaticParams, and dates for the sitemap. */
 export const postSlugsQuery = groq`
   *[_type == "post" && defined(slug.current) && ${live}]

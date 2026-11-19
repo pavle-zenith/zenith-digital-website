@@ -569,10 +569,10 @@ export const wordpress: MigrationGuideContent = {
         desc: "The hub: what a migration to Wix Studio covers, what it costs, and every platform we move sites from.",
       },
       {
-        label: "Squarespace to Wix Studio",
-        logo: "/platforms/squarespace.svg",
-        href: "/services/squarespace-to-wix-studio",
-        desc: "What the Squarespace export actually contains, and the page types it silently leaves behind.",
+        label: "Wix Studio vs WordPress",
+        icon: "compass",
+        href: "/compare/wix-studio-vs-wordpress",
+        desc: "Before you commit to moving: where each platform wins, including when WordPress is the better choice.",
       },
       {
         label: "Webflow to Wix Studio",

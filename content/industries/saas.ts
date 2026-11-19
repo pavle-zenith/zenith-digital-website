@@ -14,12 +14,12 @@ import { PACKAGES, card, figure, lower } from "./proof";
  * Scope notes that shape the copy: Knode's engagement covered positioning,
  * design, build, CMS and integrations but NOT copywriting (case-study
  * techUsed); Genroks' covered brand, design, copy and SEO/AEO. The published
- * packages are Wix Studio builds, so a custom-code build is described as
- * scoped on a call, never given a price.
+ * packages apply to Wix Studio and custom-code builds alike (owner,
+ * 19 Nov 2026).
  *
  * OWNER, please confirm before publishing:
- *   1. "A custom-code build is scoped and priced on a call" (pricing note and
- *      the cost FAQ). No custom-code price is published anywhere.
+ *   (Resolved 19 Nov 2026: custom-code builds use the same published
+ *   packages as Wix Studio.)
  *   2. Not a fit: "You need the product itself designed or built". True to
  *      the offer as published (websites, not app UI), but you know the edge
  *      cases better.
@@ -75,7 +75,7 @@ export const saas: IndustryPageContent = {
     },
   },
 
-  inShort: `Zenith Digital designs and builds marketing websites for SaaS and AI startups, on Wix Studio or in custom code with Sanity CMS, with demo booking and lead capture connected to the tools you already use. A full site takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Wix Studio builds start ${lower(landing.price)} for a launch landing page and ${lower(minimum.price)} for a full site.`,
+  inShort: `Zenith Digital designs and builds marketing websites for SaaS and AI startups, on Wix Studio or in custom code with Sanity CMS, with demo booking and lead capture connected to the tools you already use. A full site takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a launch landing page and ${lower(minimum.price)} for a full site.`,
 
   fit: {
     heading: "Who we work best with among SaaS and AI teams",
@@ -213,7 +213,7 @@ export const saas: IndustryPageContent = {
 
   pricing: {
     heading: "What a SaaS website costs",
-    note: "Fixed prices for Wix Studio builds, agreed before we start. A custom-code build is scoped and priced on a call.",
+    note: "Fixed prices, agreed before we start, and the same whether we build on Wix Studio or in custom code.",
     notes: {
       landing: "For a launch, a waitlist or one campaign, live in about a week.",
     },
@@ -225,7 +225,7 @@ export const saas: IndustryPageContent = {
     items: [
       {
         q: "How much does a SaaS website cost?",
-        a: `A full Wix Studio site starts ${lower(minimum.price)} for ${lower(minimum.scope)} in ${minimum.timeline}, and ${studio.name} is ${studio.price} for ${lower(studio.scope)} in ${studio.timeline}. A launch landing page is ${lower(landing.price)}, ${lower(landing.timeline)}. A custom-code build, like ${genroks.client}'s, is scoped and priced on a call.`,
+        a: `A full site starts ${lower(minimum.price)} for ${lower(minimum.scope)} in ${minimum.timeline}, and ${studio.name} is ${studio.price} for ${lower(studio.scope)} in ${studio.timeline}. A launch landing page is ${lower(landing.price)}, ${lower(landing.timeline)}. The prices are the same on Wix Studio and in custom code, like ${genroks.client}'s Next.js site with Sanity.`,
       },
       {
         q: "Should a SaaS startup build on Wix Studio, Webflow or custom code?",
@@ -268,9 +268,9 @@ export const saas: IndustryPageContent = {
         icon: "pen",
       },
       {
-        kind: "Article",
+        kind: "Comparison",
         label: "Wix Studio vs Webflow: which should you build on?",
-        href: "/blog/wix-studio-vs-webflow",
+        href: "/compare/wix-studio-vs-webflow",
         desc: "The platform choice most SaaS teams weigh, compared on what matters after launch.",
         icon: "pen",
       },

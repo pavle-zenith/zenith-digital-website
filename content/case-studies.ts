@@ -40,6 +40,20 @@ export const INDUSTRIES = {
 
 export type IndustrySlug = keyof typeof INDUSTRIES;
 
+// Platform taxonomy (compare-and-platform brief, owner facts 19 Nov 2026):
+// what each project is built on. The /compare pages and the coming platform
+// pages pull their proof from these tags the way industry pages pull by
+// industry, so a newly tagged project shows up without touching a page.
+// Zenith Digital builds on Wix Studio, Next.js with Sanity, and Shopify.
+export const PLATFORMS = {
+  "wix-studio": "Wix Studio",
+  nextjs: "Next.js",
+  sanity: "Sanity",
+  shopify: "Shopify",
+} as const;
+
+export type Platform = keyof typeof PLATFORMS;
+
 export type CaseStudyCard = {
   client: string;
   slug: string;
@@ -75,6 +89,12 @@ export type CaseStudyCard = {
   logo?: string;
   /** Live site URL; omit while the owner confirms it (card renders unlinked). */
   liveUrl?: string;
+  /**
+   * What it's built on (owner, 19 Nov 2026): the Next.js + Sanity and
+   * Shopify lists from the platform brief, and every other project Wix
+   * Studio. An untagged card simply doesn't appear in platform proof.
+   */
+  platforms?: Platform[];
 };
 
 /**
@@ -101,6 +121,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Knode AI",
     slug: "knode-ai",
+    platforms: ["wix-studio"],
     industry: "saas",
     metric: "Raising a Series A",
     story: "Off Wix Classic onto a new Studio site in 3 weeks",
@@ -111,6 +132,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Scottish Luxury Experience",
     slug: "scottish-luxury-experience",
+    platforms: ["wix-studio"],
     industry: "travel",
     metric: "$521k in 7 months",
     // The result belongs to the full system MOD Digital runs behind the site
@@ -126,6 +148,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Bel'Istria",
     slug: "belistria",
+    platforms: ["wix-studio"],
     industry: "travel",
     metric: "257% YoY impressions",
     story:
@@ -137,6 +160,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Fort Lauderdale Dock Rentals",
     slug: "fort-lauderdale-dock-rentals",
+    platforms: ["wix-studio"],
     industry: "marine",
     metric: "30+ warm leads",
     story:
@@ -149,6 +173,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "MOD Digital",
     slug: "mod-digital",
+    platforms: ["wix-studio"],
     industry: "agencies",
     metric: "10+ brands shipped together",
     story: "15+ landing pages driving €1M+ in client campaign revenue",
@@ -159,6 +184,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Hunting Brook Gardens",
     slug: "hunting-brook-gardens",
+    platforms: ["wix-studio"],
     industry: "courses",
     metric: "€140k in course sales",
     story:
@@ -169,6 +195,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Jim Steele",
     slug: "jim-steele",
+    platforms: ["wix-studio"],
     industry: "coaches",
     metric: "10+ venues interested",
     story:
@@ -180,6 +207,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Stilby",
     slug: "stilby",
+    platforms: ["wix-studio"],
     industry: "ecommerce",
     metric: "3 languages, 2-week launch",
     story: "Multilingual sites to expand into Montenegro and Slovakia",
@@ -190,6 +218,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Techtonnik",
     slug: "techtonnik",
+    platforms: ["nextjs", "sanity"],
     industry: "agencies",
     metric: "10+ projects delivered",
     story: "Their own site moved off WordPress, and fulfillment partner since 2023",
@@ -200,6 +229,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Capacity",
     slug: "capacity",
+    platforms: ["nextjs", "sanity"],
     industry: "agencies",
     metric: "5+ consulting projects",
     story: "Fractional web design team leading design & dev operations",
@@ -210,6 +240,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Genroks AI",
     slug: "genroks-ai",
+    platforms: ["nextjs", "sanity"],
     industry: "saas",
     metric: "10+ ISO deals since launch",
     story: "Custom-coded rebrand and AEO for an AI compliance startup",
@@ -223,6 +254,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Wellington Web Co",
     slug: "wellington-web-co",
+    platforms: ["nextjs", "sanity"],
     industry: "agencies",
     // Grounded in Finlay's testimonial, which is the one real thing here.
     metric: "Dozens of local business sites",
@@ -235,6 +267,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "AdVantage Media",
     slug: "advantage-media",
+    platforms: ["wix-studio"],
     industry: "agencies",
     metric: "White-label production partner",
     story: "Conversion-driven small business sites shipped under their brand",
@@ -245,6 +278,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Just Stay",
     slug: "just-stay",
+    platforms: ["wix-studio"],
     industry: "travel",
     alsoIn: ["property"],
     metric: "Two funnels, live in 4 weeks",
@@ -256,6 +290,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Yacht Junky",
     slug: "yacht-junky",
+    platforms: ["wix-studio"],
     industry: "marine",
     metric: "Boat and yacht marketplace",
     story: "Multi-seller listing platform for private sellers and dealers",
@@ -265,15 +300,17 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Highland Fling",
     slug: "highland-fling",
+    platforms: ["nextjs", "sanity"],
     industry: "travel",
     metric: "Adventure booking platform",
     story: "Bungee and adrenaline experience bookings across Scotland",
     thumb: "/case-studies/highland-fling/card.webp",
-    liveUrl: "https://moddigital.wixstudio.com/highlandfling",
+    liveUrl: "https://www.bungeejumpscotland.co.uk",
   },
   {
     client: "Villa Maria",
     slug: "villa-maria",
+    platforms: ["wix-studio"],
     industry: "travel",
     metric: "Direct booking site",
     story: "Riverside apartments and rooms taking bookings without the OTAs",
@@ -283,6 +320,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "St Matthew Place",
     slug: "st-matthew-place",
+    platforms: ["wix-studio"],
     industry: "property",
     metric: "Development launch site",
     story: "Sales site for a luxury apartment development in Boka Kotorska",
@@ -292,6 +330,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Superstan",
     slug: "superstan",
+    platforms: ["wix-studio"],
     industry: "property",
     metric: "Property listing portal",
     story: "Searchable listings and enquiry routing for an estate agency",
@@ -301,6 +340,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "NotYou Brand",
     slug: "notyou-brand",
+    platforms: ["shopify"],
     industry: "ecommerce",
     metric: "Streetwear storefront",
     story: "Drop-driven store and lookbook for a creative apparel label",
@@ -310,6 +350,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Lepa Couture",
     slug: "lepa-couture",
+    platforms: ["shopify"],
     industry: "ecommerce",
     // Marko's testimonial calls it a prestige Shopify site, so this much is real.
     metric: "Prestige Shopify storefront",
@@ -320,6 +361,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Bradsells",
     slug: "bradsells",
+    platforms: ["wix-studio"],
     industry: "ecommerce",
     metric: "Craft spirits brand site",
     story: "Scottish coffee liqueur brand story and direct sales",
@@ -329,6 +371,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Destilerija Maodus",
     slug: "destilerija-maodus",
+    platforms: ["nextjs", "sanity"],
     industry: "ecommerce",
     metric: "Distillery brand and shop",
     story: "Illustrated brand site and gift ordering for a rakija distillery",
@@ -338,6 +381,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Destilerija Gorska",
     slug: "destilerija-gorska",
+    platforms: ["shopify"],
     industry: "ecommerce",
     metric: "Distillery brand site",
     story: "Product storytelling for a small-batch fruit brandy producer",
@@ -347,6 +391,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "ATW Trucking",
     slug: "atw-trucking",
+    platforms: ["wix-studio"],
     industry: "trades",
     metric: "Logistics site rebuild",
     story: "Freight, logistics, and heavy equipment shipping for an Indiana carrier",
@@ -356,6 +401,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "LMF HR",
     slug: "lmf-hr",
+    platforms: ["wix-studio"],
     industry: "services",
     // Les Marie's testimonial supplies this one.
     metric: "12+ client sites delivered",
@@ -366,6 +412,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Pressure Test Scotland",
     slug: "pressure-test-scotland",
+    platforms: ["nextjs", "sanity"],
     industry: "trades",
     metric: "Instant-quote lead capture",
     story: "Quote form and service pages for a Scotland-wide pipe testing firm",
@@ -375,6 +422,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "LORAK Films",
     slug: "lorak-films",
+    platforms: ["wix-studio"],
     industry: "creative",
     metric: "Production company portfolio",
     story: "Reel-led portfolio and case studies for a film production crew",
@@ -384,6 +432,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Creatify Collective",
     slug: "creatify-collective",
+    platforms: ["wix-studio"],
     industry: "creative",
     metric: "Creative studio portfolio",
     story: "Selected work site for a fashion, lifestyle, and automotive studio",
@@ -393,6 +442,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Bianomics",
     slug: "bianomics",
+    platforms: ["nextjs", "sanity"],
     industry: "services",
     metric: "Consultancy positioning site",
     story:
@@ -402,6 +452,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Katie Hailey",
     slug: "katie-hailey",
+    platforms: ["wix-studio"],
     industry: "coaches",
     metric: "Figma to live in 1.5 weeks",
     story: "Yoga, sound healing, and retreat bookings for a UK practitioner",
@@ -411,6 +462,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Kevan Christie",
     slug: "kevan-christie",
+    platforms: ["wix-studio"],
     industry: "coaches",
     metric: "Author and book launch site",
     story: "Debut novel launch, archives, and press for an Edinburgh journalist",
@@ -420,6 +472,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Iskra",
     slug: "iskra",
+    platforms: ["nextjs", "sanity"],
     industry: "saas",
     metric: "App landing and onboarding",
     story: "Landing page and store funnel for a quit-smoking tracker app",
@@ -429,6 +482,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "MindEd",
     slug: "minded",
+    platforms: ["wix-studio"],
     industry: "courses",
     metric: "70+ pages migrated, 2 languages",
     story: "Education platform redesign for a kids learning app",
@@ -441,6 +495,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Creative Native Films",
     slug: "creative-native-films",
+    platforms: ["wix-studio"],
     industry: "creative",
     metric: "Video production portfolio",
     story: "Portfolio and quote requests for an Indianapolis video production company",
@@ -450,6 +505,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Mindful Productivity",
     slug: "mindful-productivity",
+    platforms: ["wix-studio"],
     industry: "coaches",
     metric: "Retreat booking site",
     story: "Half-day and weekend retreats for a mindful productivity practice",
@@ -459,6 +515,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "The House Painter's Encyclopedia",
     slug: "house-painters-encyclopedia",
+    platforms: ["wix-studio"],
     industry: "courses",
     metric: "Trade reference library",
     story: "A searchable field reference for professional house painters, by surface, problem and technique",
@@ -468,6 +525,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Sunny Side Scribbles",
     slug: "sunny-side-scribbles",
+    platforms: ["wix-studio"],
     industry: "ecommerce",
     metric: "Book sponsorship store",
     story: "Sponsored books with handwritten notes for children, from a Texas small business",
@@ -477,6 +535,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "BW Kitchens",
     slug: "bw-kitchens",
+    platforms: ["wix-studio"],
     industry: "trades",
     metric: "Kitchen fitter lead site",
     story: "Projects and free-quote enquiries for a kitchen fitter in Worthing and Sussex",
@@ -486,6 +545,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Ameci Pizza Kitchen",
     slug: "ameci-pizza-culver",
+    platforms: ["wix-studio"],
     industry: "local",
     metric: "Restaurant site with ordering",
     story: "Menu, specials, catering and online ordering for a family pizzeria in Irvine, California",
@@ -495,6 +555,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "TKS Sicherheitsdienste",
     slug: "tks-sicherheit",
+    platforms: ["wix-studio"],
     industry: "services",
     metric: "German-language company site",
     story: "Services, quality and careers for a family-run security company in Hesse, Germany",
@@ -504,6 +565,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Auto Odšteta",
     slug: "auto-odsteta",
+    platforms: ["wix-studio"],
     industry: "services",
     metric: "Serbian-language lead site",
     story: "Road accident damage claims for drivers in Belgrade and Lazarevac",
@@ -513,28 +575,31 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Bonnie Barbers",
     slug: "bonnie-barbers",
+    platforms: ["wix-studio"],
     industry: "local",
     metric: "Local barbershop site",
     story: "Prices, recent cuts and directions for a barbershop on Tranent High Street",
     thumb: "/case-studies/bonnie-barbers/card.webp",
     liveUrl: "https://www.bonniebarbers.com",
   },
+  {
+    client: "Readmedial",
+    slug: "readmedial",
+    platforms: ["wix-studio"],
+    industry: "coaches",
+    metric: "Author and guides site",
+    story: "Guides, speaking and the ROAD Model for a personal development author",
+    thumb: "/case-studies/readmedial/card.webp",
+    liveUrl: "https://www.readmedial.com",
+  },
   // Coming soon: built, not yet on their own domains. Left unlinked (no
   // liveUrl) and flagged through metricPending so they read as provisional.
   // On launch, set the metric to the build's scope, drop metricPending and
   // add the live domain.
   {
-    client: "Readmedial",
-    slug: "readmedial",
-    industry: "coaches",
-    metric: "Coming soon",
-    metricPending: true,
-    story: "Guides, speaking and the ROAD Model for a personal development author",
-    thumb: "/case-studies/readmedial/card.webp",
-  },
-  {
     client: "ARCOM Energy",
     slug: "arcom-energy",
+    platforms: ["wix-studio"],
     industry: "property",
     metric: "Coming soon",
     metricPending: true,
@@ -544,6 +609,7 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Woodstone 024",
     slug: "woodstone-024",
+    platforms: ["wix-studio"],
     industry: "ecommerce",
     metric: "Coming soon",
     metricPending: true,
@@ -1759,6 +1825,23 @@ export const detailSlugs = new Set(caseStudyDetails.map((d) => d.slug));
 /** A card is in an industry by its main tag or any `alsoIn` tag. */
 export function inIndustry(card: CaseStudyCard, key: IndustrySlug): boolean {
   return card.industry === key || Boolean(card.alsoIn?.includes(key));
+}
+
+/** Whether a project is built on a platform (by its platform tags). */
+export function onPlatform(card: CaseStudyCard, p: Platform): boolean {
+  return card.platforms?.includes(p) ?? false;
+}
+
+/**
+ * Projects built on a platform, case studies with a detail page first, the
+ * way the industry pages order their work.
+ */
+export function cardsOnPlatform(p: Platform): CaseStudyCard[] {
+  return caseStudyCards
+    .filter((c) => onPlatform(c, p))
+    .sort(
+      (a, b) => Number(detailSlugs.has(b.slug)) - Number(detailSlugs.has(a.slug)),
+    );
 }
 
 export function getCaseStudyDetail(slug: string): CaseStudyDetail | undefined {

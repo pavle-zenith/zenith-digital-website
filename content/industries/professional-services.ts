@@ -71,7 +71,7 @@ export const professionalServices: IndustryPageContent = {
     },
   },
 
-  inShort: `Zenith Digital designs and builds websites on Wix Studio for consultancies and professional service firms: the offer in your clients' words, the people and credentials behind it, and one clear way to book a consultation or call, in English, German or Serbian. A full site takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a landing page and ${lower(minimum.price)} for a full site.`,
+  inShort: `Zenith Digital designs and builds websites on Wix Studio or in custom code for consultancies and professional service firms: the offer in your clients' words, the people and credentials behind it, and one clear way to book a consultation or call, in English, German or Serbian. A full site takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a landing page and ${lower(minimum.price)} for a full site.`,
 
   fit: {
     heading: "Who we work best with among service firms",
@@ -287,6 +287,6 @@ export const professionalServices: IndustryPageContent = {
   schema: {
     serviceName: "Professional services website design",
     description:
-      "Website design and build on Wix Studio for consultancies and professional service firms, with service pages, credentials, consultation booking and urgent call routing, in English, German or Serbian.",
+      "Website design and build on Wix Studio or in custom code for consultancies and professional service firms, with service pages, credentials, consultation booking and urgent call routing, in English, German or Serbian.",
   },
 };

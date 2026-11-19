@@ -1,5 +1,6 @@
 import { Nav } from "@/components/layout/Nav";
 import { industryMenu } from "@/content/industries";
+import { getResourcesMenu } from "@/lib/resources-menu";
 import { Footer } from "@/components/layout/Footer";
 import SiteNotFound from "./(site)/not-found";
 
@@ -19,10 +20,11 @@ export { metadata } from "./(site)/not-found";
  * and Next ships an on-demand 404 with an empty body that only fills in with
  * JavaScript. A complete 404 for every visitor and crawler wins.
  */
-export default function NotFound() {
+export default async function NotFound() {
+  const resources = await getResourcesMenu();
   return (
     <>
-      <Nav industryMenu={industryMenu()} />
+      <Nav industryMenu={industryMenu()} resources={resources} />
       <main id="main">
         <SiteNotFound />
       </main>

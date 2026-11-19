@@ -576,7 +576,7 @@ export const html: MigrationGuideContent = {
       {
         label: "Wix Studio vs Webflow",
         icon: "compass",
-        href: "/blog/wix-studio-vs-webflow",
+        href: "/compare/wix-studio-vs-webflow",
         desc: "The two platforms most often weighed up when a hand-built site finally needs a CMS behind it.",
       },
       {

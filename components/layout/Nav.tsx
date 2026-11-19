@@ -7,11 +7,20 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { cn } from "@/lib/utils";
-import { nav, servicesMenu } from "@/content/home";
+import { nav, resourcesMenu, servicesMenu } from "@/content/home";
 import type { IndustryMenu } from "@/content/industries";
+import type { ResourcesMenu } from "@/lib/resources-menu";
 
-type MenuName = "services" | "industries";
+type MenuName = "services" | "industries" | "resources";
 type MenuLink = { label: string; href: string; icon: string };
+/** One icon-and-label row. `badge` replaces the icon ("VS"). */
+type MenuItem = {
+  label: string;
+  href: string;
+  icon?: string;
+  desc?: string;
+  badge?: string;
+};
 
 /**
  * Site header: the bar, the desktop mega menus, and the phone drawer.
@@ -28,12 +37,16 @@ type MenuLink = { label: string; href: string; icon: string };
  * `industryMenu` is the Industries tab's content, resolved on the server by
  * the layout (content/industries industryMenu). Null until the /industries
  * hub has a route, and the Industries tab is then left out entirely, so the
- * gate lives in one place.
+ * gate lives in one place. `resources` is the Resources menu's server-side
+ * part (lib/resources-menu): the compare column, gated on the /compare hub,
+ * and the latest blog post.
  */
 export function Nav({
   industryMenu = null,
+  resources = null,
 }: {
   industryMenu?: IndustryMenu | null;
+  resources?: ResourcesMenu | null;
 }) {
   const [open, setOpen] = useState(false);
   // Which desktop panel is open, if any. One at a time: hovering or
@@ -41,6 +54,22 @@ export function Nav({
   const [menu, setMenu] = useState<MenuName | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const close = () => setMenu(null);
+  const headerRef = useRef<HTMLElement>(null);
+  // Set while Escape hands focus back to a tab, so that focus doesn't
+  // reopen the panel it just closed.
+  const skipFocusOpen = useRef(false);
+  // Escape dismisses the open panel and returns focus to its tab (WCAG
+  // 1.4.13: content shown on hover or focus can be dismissed).
+  const onHeaderKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key !== "Escape" || !menu) return;
+    const name = menu;
+    close();
+    const trigger = headerRef.current?.querySelector<HTMLElement>(`[data-menu-trigger="${name}"]`);
+    if (trigger && trigger !== document.activeElement) {
+      skipFocusOpen.current = true;
+      trigger.focus();
+    }
+  };
 
   const items = nav.items.filter(
     (item) => !("menu" in item && item.menu === "industries") || industryMenu,
@@ -99,7 +128,13 @@ export function Nav({
         // through the blur above the opaque drawer.
         scrolled && !open ? "bg-light-bg/70 backdrop-blur-xl" : "bg-light-bg",
       )}
+      ref={headerRef}
       onMouseLeave={close}
+      onKeyDown={onHeaderKeyDown}
+      // Tabbing out of the header closes the panel, as leaving it does.
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) close();
+      }}
     >
       {/* Bar sits in the max-width column, inset by the frame gutter so the
           logo lines up with section content on every breakpoint. */}
@@ -127,14 +162,21 @@ export function Nav({
                     key={item.href}
                     onMouseEnter={() => setMenu(itemMenu)}
                     className={cn(
-                      "wideOnly" in item && item.wideOnly && "hidden xl:block",
+                      "wideOnly" in item && item.wideOnly === true && "hidden xl:block",
                     )}
                   >
                     <Link
                       href={item.href}
                       // onFocus mirrors onMouseEnter, so a keyboard user
                       // tabbing to a menu item sees its panel too.
-                      onFocus={() => setMenu(itemMenu)}
+                      onFocus={() => {
+                        if (skipFocusOpen.current) {
+                          skipFocusOpen.current = false;
+                          return;
+                        }
+                        setMenu(itemMenu);
+                      }}
+                      data-menu-trigger={itemMenu ?? undefined}
                       aria-expanded={itemMenu ? active : undefined}
                       // -mx-3/px-3: the open pill's padding takes no room in
                       // the row, which is already tight at tablet widths.
@@ -254,6 +296,39 @@ export function Nav({
         </MenuPanel>
       ) : null}
 
+      {/* Resources: Compare platforms (once the /compare hub has a route) |
+          Learn | the latest article, then the quick links. Learn takes the
+          compare column's room while it's hidden. */}
+      <MenuPanel open={menu === "resources"}>
+        <div className="grid grid-cols-3 divide-x divide-light-border">
+          {resources?.compare ? (
+            <MenuColumn label={resources.compare.label}>
+              <MenuLinks
+                items={resources.compare.items.map((it) => ({ ...it, badge: "VS" }))}
+                onNavigate={close}
+              />
+              <MenuMore link={resources.compare.viewAll} onNavigate={close} />
+            </MenuColumn>
+          ) : null}
+          <MenuColumn
+            label={resourcesMenu.learn.label}
+            className={resources?.compare ? undefined : "col-span-2"}
+          >
+            <MenuLinks items={resourcesMenu.learn.items} onNavigate={close} />
+          </MenuColumn>
+          {resources?.featured ? (
+            <MenuColumn label={resources.featured.label}>
+              <MenuFeatured featured={resources.featured} onNavigate={close} />
+            </MenuColumn>
+          ) : null}
+        </div>
+        <MenuQuickLinks
+          viewAll={resourcesMenu.viewAll}
+          links={resourcesMenu.quickLinks}
+          onNavigate={close}
+        />
+      </MenuPanel>
+
       {/* Phone drawer: full-screen overlay below the bar, so opening it never
           pushes the page down. Positioned absolute with an explicit viewport
           height (NOT fixed: the bar's backdrop-filter makes the header the
@@ -365,6 +440,34 @@ export function Nav({
               <DrawerViewAll link={industryMenu.viewAll} onNavigate={closeDrawer} />
             </DrawerSub>
           ) : null}
+
+          <DrawerSub
+            id="drawer-resources"
+            title={labelFor("resources")}
+            backLabel={nav.drawerBack}
+            open={sub === "resources"}
+            onBack={() => setSub(null)}
+            backRef={(el) => {
+              backs.current.resources = el;
+            }}
+          >
+            {resources?.compare ? (
+              <DrawerGroup
+                label={resources.compare.label}
+                items={[
+                  ...resources.compare.items.map((it) => ({ ...it, badge: "VS" })),
+                  { ...resources.compare.viewAll },
+                ]}
+                onNavigate={closeDrawer}
+              />
+            ) : null}
+            <DrawerGroup
+              label={resourcesMenu.learn.label}
+              items={resourcesMenu.learn.items}
+              onNavigate={closeDrawer}
+            />
+            <DrawerViewAll link={resourcesMenu.viewAll} onNavigate={closeDrawer} />
+          </DrawerSub>
         </nav>
 
         {/* The one primary CTA, pinned to the bottom. */}
@@ -419,13 +522,15 @@ function MenuPanel({
  */
 function MenuColumn({
   label,
+  className,
   children,
 }: {
   label: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-w-0 flex-col">
+    <div className={cn("flex min-w-0 flex-col", className)}>
       <p className="border-b border-light-border px-6 py-4 font-mono text-label uppercase track-label text-light-muted">
         {label}
       </p>
@@ -434,12 +539,15 @@ function MenuColumn({
   );
 }
 
-/** Icon-and-label rows: a bordered icon square, then the name. */
+/**
+ * Icon-and-label rows: a bordered square (an icon, or a badge such as "VS"),
+ * then the name, with an optional one-line description under it.
+ */
 function MenuLinks({
   items,
   onNavigate,
 }: {
-  items: { label: string; href: string; icon: string }[];
+  items: MenuItem[];
   onNavigate: () => void;
 }) {
   return (
@@ -451,11 +559,16 @@ function MenuLinks({
             className="group flex items-center gap-3 py-1.5"
             onClick={onNavigate}
           >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text transition group-hover:border-accent group-hover:text-accent">
-              <FeatureIcon name={it.icon} className="h-4 w-4" />
-            </span>
-            <span className="font-display text-body-lg font-medium leading-tight transition group-hover:text-accent">
-              {it.label}
+            <MenuChip item={it} large={Boolean(it.desc)} />
+            <span className="min-w-0">
+              <span className="block font-display text-body-lg font-medium leading-tight transition group-hover:text-accent">
+                {it.label}
+              </span>
+              {it.desc ? (
+                <span className="mt-0.5 block text-[0.8125rem] leading-snug text-light-muted">
+                  {it.desc}
+                </span>
+              ) : null}
             </span>
           </Link>
         </li>
@@ -464,29 +577,89 @@ function MenuLinks({
   );
 }
 
-/** A panel's featured page: the image, then its title. */
+/**
+ * The bordered square at the start of a menu row. `large` (44px, the site's
+ * icon-chip size) for rows with a description line, so the label and its
+ * description never stand taller than the square beside them; 32px for
+ * single-line rows.
+ */
+function MenuChip({ item, large = false }: { item: MenuItem; large?: boolean }) {
+  return (
+    <span
+      className={cn(
+        "flex shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text transition group-hover:border-accent group-hover:text-accent",
+        large ? "h-11 w-11" : "h-8 w-8",
+      )}
+    >
+      {item.badge ? (
+        <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-wide">
+          {item.badge}
+        </span>
+      ) : item.icon ? (
+        <FeatureIcon name={item.icon} className={large ? "h-5 w-5" : "h-4 w-4"} />
+      ) : null}
+    </span>
+  );
+}
+
+/** A column's closing "All ..." link, under its rows. */
+function MenuMore({
+  link,
+  onNavigate,
+}: {
+  link: MenuLink;
+  onNavigate: () => void;
+}) {
+  return (
+    <Link
+      href={link.href}
+      className="group mt-3 inline-flex items-center gap-2 text-body font-medium text-light-text transition hover:text-accent"
+      onClick={onNavigate}
+    >
+      {link.label}
+      <span aria-hidden className="btn-arrow">
+        &rarr;
+      </span>
+    </Link>
+  );
+}
+
+/**
+ * A panel's featured page: the image, then its title (and, for an article,
+ * its "Read the article" line). No image, no frame: the title stands alone.
+ */
 function MenuFeatured({
   featured,
   onNavigate,
 }: {
-  featured: { title: string; href: string; image: string };
+  featured: { title: string; href: string; image: string | null; cta?: string };
   onNavigate: () => void;
 }) {
   return (
     <Link href={featured.href} className="group flex flex-col" onClick={onNavigate}>
-      <div className="relative h-[168px] overflow-hidden rounded-[6px] border border-light-border">
-        <Image
-          src={featured.image}
-          alt=""
-          fill
-          sizes="360px"
-          className="object-cover object-center transition duration-500 group-hover:scale-[1.02]"
-        />
-      </div>
-      <p className="mt-3 flex items-start gap-2 font-display font-medium leading-snug group-hover:text-accent">
-        <span className="text-accent">+</span>
+      {featured.image ? (
+        <div className="relative mb-3 h-[168px] overflow-hidden rounded-[6px] border border-light-border">
+          <Image
+            src={featured.image}
+            alt=""
+            fill
+            sizes="360px"
+            className="object-cover object-center transition duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+      ) : null}
+      <p className="flex items-start gap-2 font-display font-medium leading-snug group-hover:text-accent">
+        {featured.cta ? null : <span className="text-accent">+</span>}
         {featured.title}
       </p>
+      {featured.cta ? (
+        <span className="mt-2 inline-flex items-center gap-2 text-body font-medium text-light-muted transition group-hover:text-accent">
+          {featured.cta}
+          <span aria-hidden className="btn-arrow">
+            &rarr;
+          </span>
+        </span>
+      ) : null}
     </Link>
   );
 }
@@ -603,7 +776,7 @@ function DrawerGroup({
   onNavigate,
 }: {
   label: string;
-  items: { label: string; href: string; icon: string }[];
+  items: MenuItem[];
   onNavigate: () => void;
 }) {
   return (
@@ -619,9 +792,7 @@ function DrawerGroup({
               className="flex items-center gap-3 py-1.5 text-body-lg font-medium"
               onClick={onNavigate}
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-light-border text-light-text">
-                <FeatureIcon name={it.icon} className="h-4 w-4" />
-              </span>
+              <MenuChip item={it} />
               {it.label}
             </Link>
           </li>

@@ -35,6 +35,12 @@
   - [Creative](https://www.thezenithdigital.com/industries/creative): portfolio websites for film crews, video production companies and creative studios
   - [Local business](https://www.thezenithdigital.com/industries/local-business): websites for barbers, restaurants, shops and local services with prices, hours and booking or ordering
 
+## Compare
+
+- [Compare platforms](https://www.thezenithdigital.com/compare): Wix Studio compared with WordPress, Webflow and other website platforms on speed, CMS, SEO, cost and who runs the site after launch, from vendor sources
+  - [Wix Studio vs WordPress](https://www.thezenithdigital.com/compare/wix-studio-vs-wordpress): Wix Studio, Wix's platform for professional sites, if you want a fast, secure site your team edits without plugins or updates to manage. WordPress if you run a large editorial operation or depend on a plugin you can't replace.
+  - [Wix Studio vs Webflow](https://www.thezenithdigital.com/compare/wix-studio-vs-webflow): Wix Studio if the people editing the site after launch aren't web specialists. Webflow if a trained team runs a large structured CMS and wants class-level design control.
+
 ## Proof
 
 - [Case studies](https://www.thezenithdigital.com/case-studies): Knode AI (10-page SaaS site in 3 weeks for a company raising a $10M Series A), Scottish Luxury Experience ($521k in 7 months), Bel'Istria (257% impression growth, top AI recommendation for Istria transfers), MOD Digital (3-year agency build partnership, €1M+ campaign revenue)

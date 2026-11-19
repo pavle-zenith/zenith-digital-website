@@ -65,7 +65,7 @@ export const trades: IndustryPageContent = {
     },
   },
 
-  inShort: `Zenith Digital designs and builds websites on Wix Studio for trades, contractors and logistics firms: a quote request on the first screen, a page for every service and area you cover, and your projects, reviews and accreditations where customers decide. A full site takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a landing page and ${lower(minimum.price)} for a full site.`,
+  inShort: `Zenith Digital designs and builds websites on Wix Studio or in custom code for trades, contractors and logistics firms: a quote request on the first screen, a page for every service and area you cover, and your projects, reviews and accreditations where customers decide. A full site takes ${minimum.timeline.replace(" weeks", "")} to ${studio.timeline}. Prices start ${lower(landing.price)} for a landing page and ${lower(minimum.price)} for a full site.`,
 
   fit: {
     heading: "Who we work best with among trades",
@@ -282,6 +282,6 @@ export const trades: IndustryPageContent = {
   schema: {
     serviceName: "Trades and contractor website design",
     description:
-      "Website design and build on Wix Studio for trades, contractors and logistics firms, with quote requests on the first screen, service and area pages, project galleries and recruiting pages.",
+      "Website design and build on Wix Studio or in custom code for trades, contractors and logistics firms, with quote requests on the first screen, service and area pages, project galleries and recruiting pages.",
   },
 };

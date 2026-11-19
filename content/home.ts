@@ -1022,9 +1022,11 @@ export const footer = {
       ],
     },
     {
-      heading: "Zenith resources",
+      heading: "Resources",
       links: [
         { label: "Blog", href: "/blog" },
+        // Rendered only once the /compare hub has a route (Footer.tsx).
+        { label: "Compare platforms", href: "/compare", requiresCompare: true },
         { label: "Free website audit", href: "/free-website-audit" },
         { label: "FAQ", href: "/faq" },
         { label: "Testimonials", href: "/testimonials" },
@@ -1219,6 +1221,49 @@ export const industriesMenu = {
   },
 };
 
+/**
+ * Mega-dropdown panel for "Resources" (resources brief, Part A, 19 Nov 2026),
+ * replacing the plain Blog and FAQ nav items. Columns: Compare platforms
+ * (only once the /compare hub has a route; its links come from the
+ * comparisons registry, published pages only), Learn, and the latest blog
+ * post (read from Sanity on the server), then the quick links row.
+ */
+export const resourcesMenu = {
+  compare: {
+    label: "Compare platforms",
+    viewAll: { label: "All comparisons", href: "/compare", icon: "split" },
+  },
+  learn: {
+    label: "Learn",
+    items: [
+      {
+        label: "Blog",
+        href: "/blog",
+        desc: "Guides on Wix Studio, migrations, SEO and AEO",
+        icon: "pen",
+      },
+      {
+        label: "Migration guides",
+        href: "/services/website-migration",
+        desc: "Moving from WordPress, Squarespace, Webflow and more",
+        icon: "transfer",
+      },
+      {
+        label: "FAQ",
+        href: "/faq",
+        desc: "Prices, timelines and how a build runs",
+        icon: "answer",
+      },
+    ],
+  },
+  featured: { label: "Latest article", cta: "Read the article" },
+  viewAll: { label: "All articles", href: "/blog", icon: "pen" },
+  quickLinks: [
+    { label: "Free website audit", href: "/free-website-audit", icon: "gauge" },
+    { label: "Testimonials", href: "/testimonials", icon: "users" },
+  ],
+};
+
 export const nav = {
   items: [
     {
@@ -1234,18 +1279,21 @@ export const nav = {
       menu: "industries" as const,
     },
     { label: "Case Studies", href: "/case-studies" },
-    { label: "Testimonials", href: "/testimonials" },
+    // `wideOnly`: left out of the desktop bar below 1280px. With Resources
+    // added, six items and two CTAs overran the bar at 768px (the page
+    // scrolled sideways) and touched the CTAs up to ~1100px. Testimonials is
+    // the one to go: the Resources menu's quick links and the footer both
+    // carry it, and the phone drawer lists everything.
+    { label: "Testimonials", href: "/testimonials", wideOnly: true },
     { label: "Partnerships", href: "/partnerships" },
-    // Grouped with the FAQ rather than up beside Case Studies: the footer
-    // already files Blog under "Zenith resources" with the FAQ and the
-    // testimonials, so the two menus sort the site the same way. The
-    // commercial items keep the front of the row.
-    // `wideOnly`: left out of the desktop bar below 1280px. With the
-    // Industries tab, seven items and two CTAs overran the bar from 768px
-    // (the page scrolled sideways) and touched the CTAs up to ~1100px. Both
-    // stay in the footer and the phone drawer.
-    { label: "Blog", href: "/blog", wideOnly: true },
-    { label: "FAQ", href: "/faq", wideOnly: true },
+    // Blog and FAQ moved into this menu (resources brief, Part A, 19 Nov
+    // 2026). There's no Resources landing page: on desktop the item opens
+    // its menu, and its href falls back to /blog for no-JS users.
+    {
+      label: "Resources",
+      href: "/blog",
+      menu: "resources" as const,
+    },
   ],
   // Accessible name of the close button on the phone's Services and
   // Industries screens (it shows as an ×).

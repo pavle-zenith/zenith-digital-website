@@ -129,12 +129,15 @@ export function hubRowFor(key: IndustrySlug): HubRow | undefined {
 
 export type IndustryMenuItem = { label: string; icon: string; href: string };
 
+type MenuLink = { label: string; href: string; icon: string };
+
 export type IndustryMenu = {
-  heading: string;
-  /** Desktop panel: every hub row, in hub order. */
-  items: IndustryMenuItem[];
-  viewAll: { label: string; href: string; icon: string };
-  /** The panel's last column: one published industry page. */
+  /** Every hub row, in labelled groups (a column each on desktop). */
+  groups: { label: string; items: IndustryMenuItem[] }[];
+  viewAll: MenuLink;
+  /** The rest of the dropdown's bottom row. */
+  quickLinks: MenuLink[];
+  /** The dropdown's last column: one published industry page. */
   featured: { label: string; title: string; href: string; image: string } | null;
 };
 
@@ -144,22 +147,35 @@ export type IndustryMenu = {
  * pages' copy never ships in the browser bundle.
  *
  * Null until the hub has a route: the Nav then drops the Industries tab and
- * the menu stays exactly as it was. Labels and icons come from the hub
- * rows, hrefs from the hub rows and industryHref, and the featured card's
- * title from its industry page's own H1.
+ * the menu stays exactly as it was. Labels, icons and hrefs come from the
+ * hub rows, and the featured card's title from its industry page's own H1.
+ * Hub rows missing from the content's groups join the last group.
  */
 export function industryMenu(): IndustryMenu | null {
   if (!hubRoutable) return null;
-  const { heading, viewAll, featured } = industriesMenu;
+  const { groups, viewAll, quickLinks, featured } = industriesMenu;
+  const rows = hubRows();
+  const item = (row: (typeof rows)[number]) => ({
+    label: row.name,
+    icon: row.icon,
+    href: row.href,
+  });
+  const grouped = new Set(groups.flatMap((g) => g.keys));
+  const leftovers = rows.filter((row) => !grouped.has(row.key)).map(item);
   const featuredPage = industryPageFor(featured.key);
   return {
-    heading,
-    items: hubRows().map((row) => ({
-      label: row.name,
-      icon: row.icon,
-      href: row.href,
+    groups: groups.map((g, i) => ({
+      label: g.label,
+      items: [
+        ...g.keys.flatMap((key) => {
+          const row = rows.find((r) => r.key === key);
+          return row ? [item(row)] : [];
+        }),
+        ...(i === groups.length - 1 ? leftovers : []),
+      ],
     })),
     viewAll,
+    quickLinks,
     featured: featuredPage
       ? {
           label: featured.label,

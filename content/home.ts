@@ -1111,7 +1111,7 @@ export const servicesMenu = {
   build: [
     {
       icon: "palette",
-      label: "Wix Studio website design",
+      label: "Website design",
       desc: "Conversion-first custom builds, from €1,250",
       href: "/services/wix-studio-website-design",
     },
@@ -1151,7 +1151,17 @@ export const servicesMenu = {
   ],
   // Full-width row closing off the service columns.
   // `icon` names a components/ui/FeatureIcon entry, drawn beside the label.
-  viewAll: { label: "View all services", href: "/services", icon: "layout-grid" },
+  viewAll: { label: "All services", href: "/services", icon: "layout-grid" },
+  // Column headers, in the dropdown and on the phone's Services screen.
+  groups: { build: "Design & build", grow: "Grow & scale" },
+  // The rest of the row of quick links along the bottom of the dropdown,
+  // after viewAll (DesignMe-style segmentation, owner 19 Nov 2026).
+  quickLinks: [
+    { label: "Free website audit", href: "/free-website-audit", icon: "gauge" },
+    { label: "Case studies", href: "/case-studies", icon: "layers" },
+    { label: "Testimonials", href: "/testimonials", icon: "users" },
+    { label: "FAQ", href: "/faq", icon: "answer" },
+  ],
   // Only ever point this at a study with a shipped detail page.
   featured: {
     label: "Featured case study",
@@ -1175,9 +1185,32 @@ export const servicesMenu = {
  * can't drift apart. Nothing here renders until the hub has a route.
  */
 export const industriesMenu = {
-  heading: "By industry",
+  // Three groups of four, a column each in the dropdown and a section each
+  // on the phone's Industries screen. Keys only: labels, icons and hrefs
+  // come from the hub rows. Any hub row not listed here is appended to the
+  // last group, so a new industry is never missing from the menu.
+  groups: [
+    {
+      label: "Products & platforms",
+      keys: ["ecommerce", "saas", "courses", "creative"] as IndustrySlug[],
+    },
+    {
+      label: "Places & bookings",
+      keys: ["travel", "property", "marine", "local"] as IndustrySlug[],
+    },
+    {
+      label: "Services & expertise",
+      keys: ["coaches", "services", "trades", "agencies"] as IndustrySlug[],
+    },
+  ],
   // `icon` names a components/ui/FeatureIcon entry, drawn beside the label.
-  viewAll: { label: "View all industries", href: "/industries", icon: "globe" },
+  viewAll: { label: "All industries", href: "/industries", icon: "globe" },
+  // The rest of the dropdown's bottom row, after viewAll.
+  quickLinks: [
+    { label: "Case studies by industry", href: "/case-studies", icon: "layers" },
+    { label: "White-label for agencies", href: "/partnerships", icon: "handshake" },
+    { label: "Free website audit", href: "/free-website-audit", icon: "gauge" },
+  ],
   // Only ever point this at an industry with a published page.
   featured: {
     label: "Featured industry",
@@ -1214,8 +1247,9 @@ export const nav = {
     { label: "Blog", href: "/blog", wideOnly: true },
     { label: "FAQ", href: "/faq", wideOnly: true },
   ],
-  // The phone drawer's back button, on the Services and Industries screens.
-  drawerBack: "Back",
+  // Accessible name of the close button on the phone's Services and
+  // Industries screens (it shows as an ×).
+  drawerBack: "Back to menu",
   ctas: [
     {
       label: "Free website audit",
@@ -1228,6 +1262,4 @@ export const nav = {
       variant: "primary",
     } as CtaLink,
   ],
-  // Sign-off pinned to the bottom of the mobile drawer.
-  drawerTagline: "Wix Studio experts. Custom builds when you outgrow it.",
 };

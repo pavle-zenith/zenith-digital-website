@@ -54,7 +54,7 @@ export function Included() {
         {tab.boxes.map((box) => (
           <div
             key={box.title}
-            className="flex flex-col rounded-[8px] border border-light-border bg-light-surface p-8"
+            className="type-card flex flex-col rounded-[8px] border border-light-border bg-light-surface p-8"
           >
             <span className="flex h-11 w-11 items-center justify-center rounded-[6px] bg-accent text-accent-ink">
               <FeatureIcon name={box.icon} />

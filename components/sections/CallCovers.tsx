@@ -15,9 +15,9 @@ export function CallCovers() {
         {callCovers.heading}
       </h2>
 
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-2 lg:grid-cols-3">
+      <div className="type-card grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-2 lg:grid-cols-3">
         {callCovers.items.map((item) => (
-          <article key={item.title} className="flex flex-col bg-light-bg p-8">
+          <article key={item.title} className="type-card flex flex-col bg-light-bg p-8">
             <span className="flex h-12 w-12 items-center justify-center rounded-card bg-accent text-accent-ink">
               <CoverIcon name={item.icon} />
             </span>

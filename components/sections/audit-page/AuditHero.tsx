@@ -61,7 +61,7 @@ export function AuditHero({
               <span aria-hidden>&middot;</span>
               <span>{date}</span>
             </p>
-            <p className="mt-8 font-display text-h3 font-medium leading-snug tracking-tight text-balance text-text">
+            <p className="mt-8 font-display text-body-lg sm:text-h3 font-medium leading-snug tracking-tight text-balance text-text">
               {hero.verdict}
             </p>
             <p className="mt-4 max-w-(--measure) text-body-lg text-text-muted">

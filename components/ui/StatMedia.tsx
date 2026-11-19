@@ -47,7 +47,7 @@ export function StatMedia({
       </div>
 
       {stats.length ? (
-        <div className="mt-3 flex flex-wrap gap-x-10 gap-y-3 rounded-[8px] border border-light-border bg-light-surface p-4 sm:absolute sm:inset-x-4 sm:bottom-4 sm:mt-0 sm:border-white/15 sm:bg-bg/70 sm:backdrop-blur-md">
+        <div className="type-card mt-3 flex flex-wrap gap-x-10 gap-y-3 rounded-[8px] border border-light-border bg-light-surface p-4 sm:absolute sm:inset-x-4 sm:bottom-4 sm:mt-0 sm:border-white/15 sm:bg-bg/70 sm:backdrop-blur-md">
           {stats.map((st) => (
             <div key={st.value}>
               <div className="font-display text-h3 font-medium leading-none tracking-tight text-light-text sm:text-white">

@@ -19,7 +19,7 @@ export function PartnerProblems() {
         {pProblems.items.map((item) => (
           <article
             key={item.title}
-            className="relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-card bg-bg p-8"
+            className="type-card relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-card bg-bg p-8"
           >
             <Image
               src={item.image}

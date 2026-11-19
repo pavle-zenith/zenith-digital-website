@@ -36,7 +36,7 @@ export function ProjectCard({
   showIndustry?: boolean;
 }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-card border border-light-border bg-light-bg">
+    <article className="type-card group flex flex-col overflow-hidden rounded-card border border-light-border bg-light-bg">
       {/* Thumb, or the styled wordmark placeholder (never a broken image) */}
       <div className="relative aspect-[16/10] overflow-hidden border-b border-light-border bg-bg">
         {card.thumb ? (

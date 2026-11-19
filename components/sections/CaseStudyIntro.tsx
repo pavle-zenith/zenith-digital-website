@@ -27,7 +27,7 @@ export function CaseStudyIntro({ study }: { study: CaseStudyDetail }) {
             {study.introduction ? (
               // The h2 treatment (display face, tight tracking) held below
               // full h2 size so it leads the section without shouting.
-              <p className="mt-5 max-w-3xl font-display text-h3 font-medium leading-snug tracking-tight md:text-[1.75rem]">
+              <p className="mt-5 max-w-3xl font-display text-body-lg sm:text-h3 font-medium leading-snug tracking-tight md:text-[1.75rem]">
                 {study.introduction}
               </p>
             ) : null}

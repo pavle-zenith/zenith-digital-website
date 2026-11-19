@@ -115,7 +115,7 @@ export function Pricing({
                   // section, so it owns the light focus-ring colour. Without
                   // it the CTAs below inherit the section's near-white ring
                   // and focus is invisible on white.
-                  "tone-light flex flex-col overflow-hidden rounded-[8px] bg-light-bg text-light-text",
+                  "type-card tone-light flex flex-col overflow-hidden rounded-[8px] bg-light-bg text-light-text",
                   // White outline so the featured card's dark header keeps a
                   // defined edge against the dark section behind it.
                   // The featured card's dark header needs a defined edge
@@ -242,7 +242,7 @@ export function Pricing({
               shading); the tint gradient keeps the copy on the left readable
               while the shading opens up on the right. */}
         {showWhiteLabel ? (
-          <div className="tone-light relative mt-4 overflow-hidden rounded-[8px] bg-light-bg text-light-text">
+          <div className="type-card tone-light relative mt-4 overflow-hidden rounded-[8px] bg-light-bg text-light-text">
             <Image
               src="/textures/studio-texture.jpg"
               alt=""

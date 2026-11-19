@@ -27,7 +27,7 @@ export function PartnerApply() {
           </h2>
 
           {/* Founder-fronted close — standout white card, accent hairline */}
-          <div className="mt-8 max-w-md rounded-[8px] border border-accent-line bg-light-bg p-6">
+          <div className="type-card mt-8 max-w-md rounded-[8px] border border-accent-line bg-light-bg p-6">
             <p className="font-display text-body-lg font-medium leading-snug">
               {founder.headline}
             </p>

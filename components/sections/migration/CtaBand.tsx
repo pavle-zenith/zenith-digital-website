@@ -72,7 +72,7 @@ export function CtaBand({
               {/* A paragraph, not a heading: these sit between H2 sections and
                 would otherwise inject a phantom level into the outline the
                 chapters column is built from. */}
-              <p className="font-display text-h3 font-medium leading-snug tracking-tight text-balance text-white">
+              <p className="font-display text-body-lg sm:text-h3 font-medium leading-snug tracking-tight text-balance text-white">
                 {heading}
               </p>
               <p className="mt-3 text-body leading-relaxed text-white/75">
@@ -97,7 +97,7 @@ export function CtaBand({
   return (
     <div
       className={cn(
-        "rounded-card border p-6 md:p-7",
+        "type-card rounded-card border p-6 md:p-7",
         dark
           ? "border-border bg-surface"
           : "border-light-border bg-light-surface",

@@ -51,7 +51,7 @@ export function Problem() {
 
       {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines.
           Five cards: three thirds on top, two halves beneath. */}
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-2 lg:grid-cols-6">
+      <div className="type-card grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-2 lg:grid-cols-6">
         {whyZenith.items.map((item, i) => (
           <article
             key={item.title}

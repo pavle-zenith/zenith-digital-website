@@ -49,7 +49,7 @@ export function ComparisonTable() {
           </p>
         </div>
 
-        <div className="overflow-hidden rounded-card border border-border bg-bg/60 backdrop-blur-xl">
+        <div className="type-card overflow-hidden rounded-card border border-border bg-bg/60 backdrop-blur-xl">
           <div
             role="region"
             aria-label={comparison.heading}

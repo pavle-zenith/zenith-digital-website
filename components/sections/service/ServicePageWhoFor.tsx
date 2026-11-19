@@ -147,7 +147,7 @@ function SituationCard({ card }: { card: WhoForCard }) {
         <p className="mt-2 text-body text-light-muted">{card.valueNote}</p>
       </div>
 
-      <div className="mt-3 rounded-[8px] border border-light-border bg-light-bg p-6">
+      <div className="type-card mt-3 rounded-[8px] border border-light-border bg-light-bg p-6">
         <p className="mb-4 font-mono text-label uppercase track-label text-light-muted">
           What that looks like
         </p>

@@ -30,7 +30,7 @@ export function AuditReport({ report }: { report: Report }) {
     <div className="w-full max-w-md">
       {/* Score card — the head stacks on phones: side by side there isn't room
           for the score block and the issues pill, and both wrap mid-phrase. */}
-      <div className="flex flex-col items-start gap-4 rounded-[8px] border border-light-border bg-light-bg p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+      <div className="type-card flex flex-col items-start gap-4 rounded-[8px] border border-light-border bg-light-bg p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
         <div>
           <p className="font-mono text-label uppercase track-label text-light-muted">
             {report.label}
@@ -47,7 +47,7 @@ export function AuditReport({ report }: { report: Report }) {
       </div>
 
       {/* Findings list */}
-      <div className="mt-3 rounded-[8px] border border-light-border bg-light-bg p-6">
+      <div className="type-card mt-3 rounded-[8px] border border-light-border bg-light-bg p-6">
         <p className="mb-4 font-mono text-label uppercase track-label text-light-muted">
           Top findings
         </p>

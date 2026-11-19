@@ -122,7 +122,7 @@ export function TransfersTable({ data }: { data: MigrationGuideContent }) {
               filler keeps the block rectangular when the row count is odd. */}
           <dl
             className={cn(
-              "mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2",
+              "type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2",
               // Odd row count: a pseudo-element fills the last cell, since a
               // <dl> may not hold an empty filler <div>.
               transfers.rows.length % 2 === 1 &&
@@ -158,7 +158,7 @@ export function TransfersTable({ data }: { data: MigrationGuideContent }) {
           {/* The ask lands here because the reader has just been handed a list
               of things that may or may not apply to their own site. */}
           {transfers.cta ? (
-            <div className="mt-10 rounded-card border border-light-border bg-light-surface p-6 md:p-7">
+            <div className="type-card mt-10 rounded-card border border-light-border bg-light-surface p-6 md:p-7">
               <p className="font-display text-body-lg font-medium">
                 {transfers.cta.heading}
               </p>

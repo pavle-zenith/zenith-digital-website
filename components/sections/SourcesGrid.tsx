@@ -44,7 +44,7 @@ export function SourcesGrid({
       </div>
 
       {/* The trailing filler keeps the block rectangular on an odd count. */}
-      <div className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2">
+      <div className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2">
         {items.map((source) => (
           <a
             key={source.href}

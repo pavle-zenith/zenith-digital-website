@@ -46,7 +46,7 @@ export function PartnerServices() {
             <article
               key={item.title}
               className={cn(
-                "flex flex-col bg-bg p-8",
+                "type-card flex flex-col bg-bg p-8",
                 i === last && "md:col-span-2",
               )}
             >

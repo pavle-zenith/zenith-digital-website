@@ -10,7 +10,7 @@ import { trades } from "./trades";
 import { professionalServices } from "./professional-services";
 import { creative } from "./creative";
 import { localBusiness } from "./local-business";
-import { servicesMenu } from "@/content/home";
+import { industriesMenu } from "@/content/home";
 import { industriesHub, type HubRow } from "./hub";
 import type { IndustryPageContent } from "./types";
 
@@ -127,35 +127,47 @@ export function hubRowFor(key: IndustrySlug): HubRow | undefined {
  * Navigation (hub-and-nav brief, Part B)
  * ------------------------------------------------------------------ */
 
+export type IndustryMenuItem = { label: string; icon: string; href: string };
+
 export type IndustryMenu = {
   heading: string;
-  items: { label: string; icon: string; href: string }[];
+  /** Desktop panel: every hub row, in hub order. */
+  items: IndustryMenuItem[];
   viewAll: { label: string; href: string; icon: string };
-  /** The drawer's shorter label for the same link. */
-  allShort: { label: string; href: string; icon: string };
+  /** The panel's last column: one published industry page. */
+  featured: { label: string; title: string; href: string; image: string } | null;
 };
 
 /**
- * The Services menu's "By industry" column and the mobile drawer's matching
- * sub-group, resolved on the server and passed to the (client) Nav, so the
- * industry pages' copy never ships in the browser bundle.
+ * The Industries tab's dropdown and the phone drawer's Industries screen,
+ * resolved on the server and passed to the (client) Nav, so the industry
+ * pages' copy never ships in the browser bundle.
  *
- * Null until the hub has a route: the menu then stays exactly as it was.
- * Labels and icons come from the hub rows, hrefs from industryHref.
+ * Null until the hub has a route: the Nav then drops the Industries tab and
+ * the menu stays exactly as it was. Labels and icons come from the hub
+ * rows, hrefs from the hub rows and industryHref, and the featured card's
+ * title from its industry page's own H1.
  */
 export function industryMenu(): IndustryMenu | null {
   if (!hubRoutable) return null;
-  const { heading, keys } = servicesMenu.industries;
+  const { heading, viewAll, featured } = industriesMenu;
+  const featuredPage = industryPageFor(featured.key);
   return {
     heading,
-    items: keys.flatMap((key) => {
-      const row = hubRowFor(key);
-      return row
-        ? [{ label: row.name, icon: row.icon, href: industryHref(key) }]
-        : [];
-    }),
-    viewAll: servicesMenu.viewAllIndustries,
-    allShort: servicesMenu.allIndustriesShort,
+    items: hubRows().map((row) => ({
+      label: row.name,
+      icon: row.icon,
+      href: row.href,
+    })),
+    viewAll,
+    featured: featuredPage
+      ? {
+          label: featured.label,
+          title: featuredPage.hero.h1,
+          href: `/industries/${featuredPage.slug}`,
+          image: featured.image,
+        }
+      : null,
   };
 }
 

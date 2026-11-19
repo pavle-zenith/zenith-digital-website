@@ -76,7 +76,7 @@ export function FitTable({
               {good.map((point, i) => (
                 <li
                   key={point}
-                  className="flex items-center gap-4 rounded-card border border-light-border bg-light-bg p-4 md:p-5"
+                  className="type-card flex items-center gap-4 rounded-card border border-light-border bg-light-bg p-4 md:p-5"
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-surface text-light-text">
                     <FeatureIcon name={goodIcons?.[i] ?? ""} />
@@ -98,7 +98,7 @@ export function FitTable({
                 {notAFit.map((point) => (
                   <li
                     key={point}
-                    className="flex items-center gap-4 rounded-[6px] border border-dashed border-light-muted/40 p-3 md:p-4"
+                    className="type-card flex items-center gap-4 rounded-[6px] border border-dashed border-light-muted/40 p-3 md:p-4"
                   >
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-dashed border-light-muted/40 text-light-muted">
                       <XMark className="h-3.5 w-3.5" />
@@ -135,7 +135,7 @@ export function FitTable({
       </div>
 
       <div
-        className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-flow-col"
+        className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-flow-col"
         style={{ gridTemplateRows: `repeat(${rowCount}, auto)` }}
       >
         <ColumnHead

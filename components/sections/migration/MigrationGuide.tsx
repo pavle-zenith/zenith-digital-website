@@ -503,7 +503,7 @@ function GuideGlance({ data }: { data: MigrationGuideContent }) {
           engine lift a question with its answer. The question is set in the
           card-title face rather than the mono label, because it reads as a
           question rather than as a field name. */}
-      <dl className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2 lg:grid-cols-3">
+      <dl className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2 lg:grid-cols-3">
         {glance.items.map((item, i) => (
           <div key={item.label} className="bg-light-bg p-6">
             {/* The icon sits inside the <dt>: a <dl> group may hold only
@@ -583,7 +583,7 @@ function GuideBenefits({ data }: { data: MigrationGuideContent }) {
           become the sticky scrollport and the mockup would stop travelling.
           Each half carries its own rounding instead. */}
       <div className="mt-10 grid gap-8 md:mt-12 lg:grid-cols-2 lg:gap-12">
-        <div className="grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border">
+        <div className="type-card grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border">
           {benefits.items.map((item, i) => (
             <div key={item.title} className="bg-light-bg p-6">
               <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
@@ -647,7 +647,7 @@ function GuideRoutes({ data }: { data: MigrationGuideContent }) {
 
       <div className="mt-10 grid gap-px overflow-hidden rounded-card border border-border bg-border md:mt-12 lg:grid-cols-2">
         {routes.items.map((route) => (
-          <article key={route.title} className="flex flex-col bg-bg p-8">
+          <article key={route.title} className="type-card flex flex-col bg-bg p-8">
             <Pill tone="dark" className="self-start">
               {route.eligibility}
             </Pill>
@@ -748,7 +748,7 @@ function GuideCost({ data }: { data: MigrationGuideContent }) {
       </div>
 
       <div className="mt-10 grid gap-px overflow-hidden rounded-card border border-border bg-border md:mt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
-        <div className="flex flex-col bg-bg p-8">
+        <div className="type-card flex flex-col bg-bg p-8">
           <div className="font-display text-h1 font-medium leading-none tracking-tight">
             {cost.priceFrom}
           </div>
@@ -857,7 +857,7 @@ function GuideRelated({ data }: { data: MigrationGuideContent }) {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2">
+      <div className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2">
         {related.items.map((item, i) => (
           <Link
             key={item.href}

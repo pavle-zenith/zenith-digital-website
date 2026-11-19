@@ -1149,31 +1149,9 @@ export const servicesMenu = {
       href: "/partnerships",
     },
   ],
-  /**
-   * Third column, "By industry" (hub-and-nav brief, 17 Nov 2026). Keys only:
-   * each item's label and icon come from the /industries hub rows, and its
-   * href from the industries registry (the industry page once published,
-   * the filtered case-study grid until then), so the menu and the hub can't
-   * drift apart. The column and viewAllIndustries render only once the hub
-   * has a route (see industryMenu in content/industries); until then the
-   * menu is exactly the two service columns.
-   */
-  industries: {
-    heading: "By industry",
-    // Four, owner decisions 18 Nov 2026: Courses dropped, Professional
-    // services in place of Coaches. Both stay on the hub.
-    keys: ["travel", "ecommerce", "saas", "services"] as IndustrySlug[],
-  },
   // Full-width row closing off the service columns.
   // `icon` names a components/ui/FeatureIcon entry, drawn beside the label.
   viewAll: { label: "View all services", href: "/services", icon: "layout-grid" },
-  viewAllIndustries: {
-    label: "View all industries",
-    href: "/industries",
-    icon: "globe",
-  },
-  // The mobile drawer's shorter form of the same link.
-  allIndustriesShort: { label: "All industries", href: "/industries", icon: "globe" },
   // Only ever point this at a study with a shipped detail page.
   featured: {
     label: "Featured case study",
@@ -1184,12 +1162,43 @@ export const servicesMenu = {
   },
 };
 
+/**
+ * Mega-dropdown panel for "Industries", the tab beside Services (owner,
+ * 19 Nov 2026; it used to be a "By industry" column inside the Services
+ * menu). Every /industries hub row as a compact icon row, in hub order, a
+ * full-width "View all industries" row, and a featured industry page in the
+ * last column, mirroring the Services panel.
+ *
+ * Labels, icons and hrefs come from the hub rows and the industries
+ * registry, and the featured title from that industry page's own H1 (see
+ * industryMenu in content/industries), so the menu, the hub and the pages
+ * can't drift apart. Nothing here renders until the hub has a route.
+ */
+export const industriesMenu = {
+  heading: "By industry",
+  // `icon` names a components/ui/FeatureIcon entry, drawn beside the label.
+  viewAll: { label: "View all industries", href: "/industries", icon: "globe" },
+  // Only ever point this at an industry with a published page.
+  featured: {
+    label: "Featured industry",
+    key: "travel" as IndustrySlug,
+    image: "/industries/travel-hospitality.jpg",
+  },
+};
+
 export const nav = {
   items: [
     {
       label: "Services",
       href: "/services",
       menu: "services" as const,
+    },
+    // Its own tab with its own dropdown (owner, 19 Nov 2026), shown only
+    // while the /industries hub has a route: the Nav skips it otherwise.
+    {
+      label: "Industries",
+      href: "/industries",
+      menu: "industries" as const,
     },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Testimonials", href: "/testimonials" },
@@ -1198,9 +1207,15 @@ export const nav = {
     // already files Blog under "Zenith resources" with the FAQ and the
     // testimonials, so the two menus sort the site the same way. The
     // commercial items keep the front of the row.
-    { label: "Blog", href: "/blog" },
-    { label: "FAQ", href: "/faq" },
+    // `wideOnly`: left out of the desktop bar below 1280px. With the
+    // Industries tab, seven items and two CTAs overran the bar from 768px
+    // (the page scrolled sideways) and touched the CTAs up to ~1100px. Both
+    // stay in the footer and the phone drawer.
+    { label: "Blog", href: "/blog", wideOnly: true },
+    { label: "FAQ", href: "/faq", wideOnly: true },
   ],
+  // The phone drawer's back button, on the Services and Industries screens.
+  drawerBack: "Back",
   ctas: [
     {
       label: "Free website audit",

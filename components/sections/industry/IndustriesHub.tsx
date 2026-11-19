@@ -158,10 +158,10 @@ function IndustryList() {
     >
       <div className="max-w-3xl">
         <Eyebrow>{hub.list.eyebrow}</Eyebrow>
-        <h2 className="font-display text-h1 font-medium leading-[1.08] tracking-tight text-balance">
+        <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {hub.list.heading}
         </h2>
-        <p className="mt-5 max-w-2xl text-body-lg font-medium leading-relaxed text-light-muted">
+        <p className="mt-4 max-w-2xl text-body-lg font-medium leading-relaxed text-light-muted">
           {hub.list.intro}
         </p>
       </div>

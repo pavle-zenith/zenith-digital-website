@@ -50,7 +50,7 @@ export function ServicePageUnique({ data }: { data: ServicePageContent }) {
 
         {unique.kind === "comparison" ? (
           <>
-            <div className="mt-10 grid gap-px overflow-hidden rounded-card border border-border bg-border md:mt-12 md:grid-cols-3">
+            <div className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-border bg-border md:mt-12 md:grid-cols-3">
               {unique.columns.map((col, i) => {
                 const ours = i === unique.columns.length - 1;
                 return (
@@ -113,9 +113,9 @@ export function ServicePageUnique({ data }: { data: ServicePageContent }) {
 
         {unique.kind === "explainer" ? (
           <>
-            <div className="mt-10 grid gap-px overflow-hidden rounded-card border border-border bg-border md:mt-12 md:grid-cols-2">
+            <div className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-border bg-border md:mt-12 md:grid-cols-2">
               {[unique.left, unique.right].map((side) => (
-                <div key={side.title} className="bg-bg/70 p-8 backdrop-blur-md">
+                <div key={side.title} className="type-card bg-bg/70 p-8 backdrop-blur-md">
                   <h3 className="font-display text-h3 font-medium leading-tight tracking-tight">
                     {side.title}
                   </h3>
@@ -210,7 +210,7 @@ export function ServicePagePlatforms({ data }: { data: ServicePageContent }) {
           </p>
         </div>
 
-        <ul className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-4 lg:grid-cols-6">
+        <ul className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-4 lg:grid-cols-6">
           {unique.items.map((item, index) => {
             const body = (
               <>

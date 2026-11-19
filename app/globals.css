@@ -115,6 +115,37 @@
   --measure: 68ch;
 }
 
+/* Phones (under 640px): a smaller type scale (owner, 19 Nov 2026).
+   Headings step down a size, no paragraph runs bigger than 16px, and copy
+   inside a card is 14px. Tablet and desktop keep the @theme values above.
+
+   The text-* utilities read these variables (font-size: var(--text-h2)),
+   so redefining them here resizes every use at once. Unlayered on purpose:
+   it has to beat the @theme block, which Tailwind emits in a layer. */
+@media (max-width: 639.98px) {
+  :root {
+    --text-display: 2.375rem; /* 38px, was 44 */
+    --text-h1: 1.875rem; /* 30px, was 36 */
+    --text-statement: 1.75rem; /* 28px, was 32 */
+    --text-h2: 1.5rem; /* 24px, was 28 */
+    --text-h3: 1.25rem; /* 20px, was 24 */
+    --text-body-lg: 1rem; /* 16px, was 18 */
+  }
+
+  /* Cards. Put `type-card` on a card's outer element and every text-body
+     and text-body-lg inside it is 14px, with text-h3 card titles at 18px.
+     Never on a form: inputs under 16px make iOS Safari zoom on focus. */
+  .type-card {
+    --text-body-lg: 0.875rem;
+    --text-body: 0.875rem;
+    --text-h3: 1.125rem;
+    /* Text with no size class of its own (names, labels) inherits a
+       computed size from the page, which the variables above don't reach.
+       Setting the card's own size gives it 14px to inherit too. */
+    font-size: var(--text-body);
+  }
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;

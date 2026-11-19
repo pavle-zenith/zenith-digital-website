@@ -40,7 +40,7 @@ export function AboutVerify() {
         {aboutVerify.items.map((item) => (
           <div
             key={item.record}
-            className="flex flex-col bg-light-bg p-6 md:p-8"
+            className="type-card flex flex-col bg-light-bg p-6 md:p-8"
           >
             <h3 className="font-display text-body-lg font-medium leading-tight text-light-text">
               {item.record}

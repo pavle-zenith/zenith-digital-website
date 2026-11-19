@@ -35,7 +35,7 @@ export function PartnerBenefits() {
         {/* One grid, 1px gaps over a rule-colored bg render as shared hairlines. */}
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {pBenefits.items.map((item) => (
-            <article key={item.title} className="flex flex-col bg-bg p-8">
+            <article key={item.title} className="type-card flex flex-col bg-bg p-8">
               <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-border bg-surface text-text">
                 <BenefitIcon name={item.icon} />
               </span>

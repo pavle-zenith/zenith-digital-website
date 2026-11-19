@@ -206,7 +206,7 @@ function SliderCard({ study: c }: { study: CaseStudyCard }) {
 
   // Two per view from sm up: each card is half the track minus half the gap.
   const shell =
-    "group flex w-[88vw] shrink-0 snap-start flex-col overflow-hidden rounded-card border border-light-border bg-light-bg sm:w-[calc(50%-12px)]";
+    "type-card group flex w-[88vw] shrink-0 snap-start flex-col overflow-hidden rounded-card border border-light-border bg-light-bg sm:w-[calc(50%-12px)]";
 
   if (!href) {
     return (

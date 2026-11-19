@@ -29,7 +29,7 @@ export function FaqAccordion({
         return (
           <div
             key={item.q}
-            className="rounded-[8px] border border-light-border transition hover:border-light-muted/40"
+            className="type-card rounded-[8px] border border-light-border transition hover:border-light-muted/40"
           >
             <button
               type="button"

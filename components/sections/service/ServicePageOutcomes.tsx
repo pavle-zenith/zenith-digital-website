@@ -44,7 +44,7 @@ export function ServicePageOutcomes({ data }: { data: ServicePageContent }) {
             key={item.title}
             // justify-end drops the copy to the foot of the card, so the shot
             // reads across the open top half.
-            className="relative flex min-h-[420px] flex-col justify-end overflow-hidden rounded-card bg-bg text-text md:min-h-[480px]"
+            className="type-card relative flex min-h-[420px] flex-col justify-end overflow-hidden rounded-card bg-bg text-text md:min-h-[480px]"
           >
             {/* Desaturated and dimmed so a detailed site screenshot reads as
                 a background rather than competing with the copy, then a

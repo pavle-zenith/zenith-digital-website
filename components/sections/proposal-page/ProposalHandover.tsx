@@ -45,7 +45,7 @@ export function ProposalHandover({ handover }: { handover: ProposalPage["handove
         ))}
       </ol>
 
-      <p className="mt-12 max-w-3xl font-display text-h3 font-medium leading-snug tracking-tight text-balance text-text md:mt-16">
+      <p className="mt-12 max-w-3xl font-display text-body-lg sm:text-h3 font-medium leading-snug tracking-tight text-balance text-text md:mt-16">
         {handover.closing}
       </p>
     </Section>

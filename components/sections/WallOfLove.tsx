@@ -166,7 +166,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
 
   if (card.type === "quote") {
     return (
-      <figure className="rounded-[8px] border border-light-border bg-light-bg p-6">
+      <figure className="type-card rounded-[8px] border border-light-border bg-light-bg p-6">
         <figcaption className="flex items-center gap-3">
           {card.avatar ? (
             <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[6px]">
@@ -249,7 +249,7 @@ function Card({ card, onPlay }: { card: WallCard; onPlay: () => void }) {
         >
           &ldquo;
         </span>
-        <blockquote className="mt-2 font-display text-h3 font-medium italic leading-snug text-balance">
+        <blockquote className="mt-2 font-display text-body-lg sm:text-h3 font-medium italic leading-snug text-balance">
           {card.line}
         </blockquote>
         <figcaption className="mt-4 flex items-center justify-center gap-1.5 text-body text-light-muted">

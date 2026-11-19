@@ -85,7 +85,7 @@ export function ServicePagePricing({
           return (
             <div
               key={tier.name}
-              className="flex flex-col overflow-hidden rounded-[8px] border border-light-border bg-light-bg text-light-text"
+              className="type-card flex flex-col overflow-hidden rounded-[8px] border border-light-border bg-light-bg text-light-text"
             >
               {/* Header zone — alternating solid treatments: navy + texture
                   (featured) / white / grey surface for referral. */}
@@ -198,7 +198,7 @@ export function ServicePagePricing({
       {data.pricing.pullQuote ? (
         <div className="mx-auto mt-12 max-w-3xl text-center md:mt-16">
           <div aria-hidden className="mx-auto w-10 border-t-2 border-accent" />
-          <p className="mt-6 font-display text-h3 font-medium leading-snug tracking-tight text-balance">
+          <p className="mt-6 font-display text-body-lg sm:text-h3 font-medium leading-snug tracking-tight text-balance">
             {data.pricing.pullQuote}
           </p>
         </div>

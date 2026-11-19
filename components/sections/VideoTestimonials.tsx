@@ -504,7 +504,7 @@ function QuoteCard({
   return (
     <figure
       className={cn(
-        "flex flex-col justify-between rounded-[8px] border border-border bg-surface p-5 text-white",
+        "type-card flex flex-col justify-between rounded-[8px] border border-border bg-surface p-5 text-white",
         compact ? "gap-5" : "gap-8",
         className,
       )}

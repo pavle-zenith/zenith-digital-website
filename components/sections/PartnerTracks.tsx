@@ -19,7 +19,7 @@ export function PartnerTracks() {
         {pTracks.tracks.map((track) => (
           <article
             key={track.name}
-            className="flex flex-col rounded-card border border-light-border p-8 sm:p-10"
+            className="type-card flex flex-col rounded-card border border-light-border p-8 sm:p-10"
           >
             <span className="font-mono text-label uppercase track-label text-light-muted">
               {track.name}

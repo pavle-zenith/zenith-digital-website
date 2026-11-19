@@ -146,7 +146,7 @@ export function Hero() {
           the section runs at !py-0, so a margin here collapses straight out of
           the section and shows a navy strip of <body> between sections. */}
       <div className="max-md:py-6">
-      <div className="frame-bleed-md grid grid-cols-1 gap-px bg-light-border max-md:overflow-hidden max-md:rounded-card max-md:border max-md:border-light-border sm:grid-cols-2 md:border-t md:border-light-border">
+      <div className="type-card frame-bleed-md grid grid-cols-1 gap-px bg-light-border max-md:overflow-hidden max-md:rounded-card max-md:border max-md:border-light-border sm:grid-cols-2 md:border-t md:border-light-border">
         {hero.featured.map((c, i) => (
           <Link
             key={c.client}

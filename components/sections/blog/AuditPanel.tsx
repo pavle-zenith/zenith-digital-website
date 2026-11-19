@@ -43,7 +43,7 @@ export function AuditPanel({
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-10">
       <div>
-        <p className="font-display text-h3 font-medium leading-snug tracking-tight text-balance text-light-text">
+        <p className="font-display text-body-lg sm:text-h3 font-medium leading-snug tracking-tight text-balance text-light-text">
           {heading}
         </p>
         <p className="mt-3 max-w-md text-body leading-relaxed text-light-muted">

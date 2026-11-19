@@ -39,7 +39,7 @@ export function Services() {
       </div>
 
       {/* 6-col grid — 1px gaps on a rule-colored bg render as hairlines. */}
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-6">
+      <div className="type-card grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:grid-cols-6">
         {services.items.map((item) => (
           // Each card links to its dedicated service page where one exists,
           // and to the hub otherwise, so the grid feeds the internal link graph.

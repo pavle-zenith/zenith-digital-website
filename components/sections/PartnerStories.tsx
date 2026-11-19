@@ -105,7 +105,7 @@ export function PartnerStories() {
               {s.quote ? (
                 <>
                   <div className="flex-1" aria-hidden />
-                  <figure className="mt-8 rounded-[8px] bg-light-surface p-6">
+                  <figure className="type-card mt-8 rounded-[8px] bg-light-surface p-6">
                     <blockquote
                       className={cn(
                         "leading-relaxed",

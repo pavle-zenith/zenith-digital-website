@@ -18,7 +18,7 @@ export function CaseStudyTestimonial({
   return (
     <Section tone="light" frameClassName="!py-20 md:!py-32">
       <figure className="mx-auto max-w-3xl text-center">
-        <blockquote className="font-display text-h3 font-medium leading-snug tracking-tight text-balance md:text-[1.75rem]">
+        <blockquote className="font-display text-body-lg sm:text-h3 font-medium leading-snug tracking-tight text-balance md:text-[1.75rem]">
           &ldquo;{testimonial.quote}&rdquo;
         </blockquote>
         <figcaption className="mt-10 flex items-center justify-center gap-3">

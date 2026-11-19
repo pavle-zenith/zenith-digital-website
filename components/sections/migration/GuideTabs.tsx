@@ -166,7 +166,7 @@ export function GuideTabs({
 
       <div
         ref={panelsRef}
-        className="mt-4 grid rounded-[8px] border border-light-border bg-light-surface"
+        className="type-card mt-4 grid rounded-[8px] border border-light-border bg-light-surface"
       >
         {items.map((item, i) => (
           <div

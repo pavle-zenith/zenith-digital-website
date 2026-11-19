@@ -96,7 +96,7 @@ export function PostTile({ post }: { post: PostCardData }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col overflow-hidden rounded-card border border-light-border bg-light-bg transition hover:border-light-muted/40"
+      className="type-card group flex flex-col overflow-hidden rounded-card border border-light-border bg-light-bg transition hover:border-light-muted/40"
     >
       <PostThumb post={post} className="aspect-[16/10]" />
 

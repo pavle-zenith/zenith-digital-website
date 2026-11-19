@@ -123,7 +123,7 @@ export function FounderSection({
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
         {/* Portrait first on phones: the face is the point of the section. */}
         <div className="order-1 lg:order-2">
-          <figure className="relative aspect-[4/5] w-full overflow-hidden rounded-card border border-light-border bg-light-bg">
+          <figure className="type-card relative aspect-[4/5] w-full overflow-hidden rounded-card border border-light-border bg-light-bg">
             <Image
               src={data.image}
               alt={data.imageAlt}
@@ -220,7 +220,7 @@ export function FounderSection({
 function BadgedPortrait({ data }: { data: FounderData }) {
   return (
     <div className="relative mx-auto w-full max-w-md pr-5 sm:pr-8 lg:mx-0">
-      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card border border-light-border bg-light-bg">
+      <div className="type-card relative aspect-[4/5] w-full overflow-hidden rounded-card border border-light-border bg-light-bg">
         <Image
           src={data.image}
           alt={data.imageAlt}

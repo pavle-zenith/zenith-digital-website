@@ -30,7 +30,7 @@ export function PartnerPricing() {
           return (
             <div
               key={tier.name}
-              className="flex flex-col overflow-hidden rounded-[8px] border border-light-border bg-light-bg text-light-text"
+              className="type-card flex flex-col overflow-hidden rounded-[8px] border border-light-border bg-light-bg text-light-text"
             >
               {/* Header zone — alternating solid treatments: navy + texture
                   (featured) / white / grey. */}

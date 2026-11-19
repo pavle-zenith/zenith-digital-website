@@ -267,7 +267,7 @@ function Familiar({ data }: { data: IndustryPageContent }) {
 
       <ul className="mt-12 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-16 md:grid-cols-2 lg:grid-cols-3">
         {familiar.items.map((item) => (
-          <li key={item.title} className="flex flex-col bg-light-bg p-6 md:p-8">
+          <li key={item.title} className="type-card flex flex-col bg-light-bg p-6 md:p-8">
             <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-light-border bg-light-surface text-light-text">
               <FeatureIcon name={item.icon} />
             </span>
@@ -391,7 +391,7 @@ function Related({ data }: { data: IndustryPageContent }) {
         {data.related.heading}
       </h2>
 
-      <div className="mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2">
+      <div className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2">
         {data.related.items.map((item) => (
           <Link
             key={item.href}

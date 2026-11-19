@@ -161,7 +161,7 @@ export function WorkStrip({
               {row.quote ? (
                 <>
                   <div className="flex-1" aria-hidden />
-                  <figure className="mt-8 rounded-[8px] bg-light-surface p-6">
+                  <figure className="type-card mt-8 rounded-[8px] bg-light-surface p-6">
                     <blockquote className="text-body leading-relaxed text-light-text">
                       &ldquo;{row.quote.quote}&rdquo;
                     </blockquote>

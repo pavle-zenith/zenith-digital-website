@@ -28,7 +28,7 @@ export function ServicePageRelated({ data }: { data: ServicePageContent }) {
       </h2>
 
       {siblings.length > 0 ? (
-        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-10 md:grid-cols-2">
+        <div className="type-card mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-10 md:grid-cols-2">
           {siblings.map((item) => (
             <Link
               key={item.href}

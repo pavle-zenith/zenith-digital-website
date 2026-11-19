@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 
+import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { industries } from "@/content/home";
 
@@ -16,8 +17,8 @@ import { industries } from "@/content/home";
  *
  * `hrefs` are resolved on the server (app/(site)/page.tsx) from each card's
  * industry key through the industries registry, one per item in order.
- * `allLink` is the "See all industries" link beside the heading, passed only
- * once the /industries hub has a route.
+ * `allLink` is the "See all industries" primary button on the right, above
+ * the arrows, passed only once the /industries hub has a route.
  */
 export function Industries({
   hrefs,
@@ -54,8 +55,9 @@ export function Industries({
 
   return (
     <Section tone="light" frameClassName="!py-12 md:!py-20">
-      {/* Header: heading + intro on the left, arrows on the right, all aligned to
-          the bottom so the text and controls share one baseline above the cards. */}
+      {/* Header: heading + intro on the left; the hub CTA and the arrows on
+          the right, all aligned to the bottom so text and controls share one
+          baseline above the cards. */}
       <div className="mb-8 flex md:mb-12 flex-wrap items-end justify-between gap-8">
         <div>
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
@@ -64,35 +66,30 @@ export function Industries({
           <p className="mt-4 max-w-xl text-body-lg md:mt-5 font-medium text-light-muted">
             {industries.intro}
           </p>
-          {allLink ? (
-            <Link
-              href={allLink.href}
-              className="group mt-4 inline-flex items-center gap-1.5 font-display text-body font-medium transition hover:text-accent"
-            >
-              {allLink.label}{" "}
-              <span aria-hidden className="btn-arrow">
-                &rarr;
-              </span>
-            </Link>
-          ) : null}
         </div>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => scrollByCard(-1)}
-            aria-label="Previous industries"
-            className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border text-light-text transition hover:bg-light-surface"
-          >
-            <Arrow dir="left" />
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollByCard(1)}
-            aria-label="Next industries"
-            className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border text-light-text transition hover:bg-light-surface"
-          >
-            <Arrow dir="right" />
-          </button>
+        {/* Right column: the primary CTA to the hub, then the arrows. On
+            phones the column drops under the intro, the button goes full
+            width and the arrows stay right-aligned under it. */}
+        <div className="flex w-full flex-col items-end gap-4 sm:w-auto">
+          {allLink ? <Button cta={allLink} tone="light" /> : null}
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => scrollByCard(-1)}
+              aria-label="Previous industries"
+              className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border text-light-text transition hover:bg-light-surface"
+            >
+              <Arrow dir="left" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByCard(1)}
+              aria-label="Next industries"
+              className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border text-light-text transition hover:bg-light-surface"
+            >
+              <Arrow dir="right" />
+            </button>
+          </div>
         </div>
       </div>
 

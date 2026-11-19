@@ -131,7 +131,7 @@ function StepArt({ step }: { step: number }) {
     // in and scope confirmed the next business day.
     case 0:
       return (
-        <div className="w-full max-w-md rounded-[8px] border border-light-border bg-light-bg p-6">
+        <div className="type-card w-full max-w-md rounded-[8px] border border-light-border bg-light-bg p-6">
           <p className="mb-4 font-mono text-label uppercase track-label text-light-muted">
             Partner channel
           </p>
@@ -150,7 +150,7 @@ function StepArt({ step }: { step: number }) {
               ))}
             </div>
           </div>
-          <div className="ml-auto mt-3 w-fit max-w-[85%] rounded-[8px] rounded-tr-none bg-accent p-4">
+          <div className="type-card ml-auto mt-3 w-fit max-w-[85%] rounded-[8px] rounded-tr-none bg-accent p-4">
             <p className="text-body text-accent-ink">
               Scope, price, and timeline attached.
             </p>
@@ -250,7 +250,7 @@ function StepArt({ step }: { step: number }) {
     // 04 — Handover: transfer checklist, everything under the partner's brand.
     default:
       return (
-        <div className="w-full max-w-md rounded-[8px] border border-light-border bg-light-bg p-6">
+        <div className="type-card w-full max-w-md rounded-[8px] border border-light-border bg-light-bg p-6">
           <div className="flex items-center justify-between">
             <p className="font-mono text-label uppercase track-label text-light-muted">
               Handover

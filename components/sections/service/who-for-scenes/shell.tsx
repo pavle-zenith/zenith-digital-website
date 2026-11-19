@@ -19,7 +19,7 @@ export function SceneCard({
 }) {
   return (
     <div className="w-full max-w-md">
-      <div className="rounded-[8px] border border-light-border bg-light-bg p-6">
+      <div className="type-card rounded-[8px] border border-light-border bg-light-bg p-6">
         <div className="flex items-center justify-between gap-3">
           <p className="font-mono text-label uppercase track-label text-light-muted">
             {label}

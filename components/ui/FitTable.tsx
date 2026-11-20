@@ -121,6 +121,9 @@ export function FitTable({
             {notFooter}
           </div>
         </div>
+        {footnote ? (
+          <p className="mt-10 max-w-3xl text-body leading-relaxed text-light-muted">{footnote}</p>
+        ) : null}
       </Section>
     );
   }

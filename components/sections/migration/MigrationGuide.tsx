@@ -7,14 +7,16 @@ import { Pill } from "@/components/ui/Pill";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import { FitTable } from "@/components/ui/FitTable";
+import { DriverTabs } from "@/components/sections/tools/DriverTabs";
+import { StepTabs } from "./StepTabs";
+import { DetailToggle } from "@/components/sections/compare/DetailToggle";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
-import { SourcesGrid } from "@/components/sections/SourcesGrid";
 import { WorkStrip } from "@/components/sections/WorkStrip";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { Pricing } from "@/components/sections/Pricing";
-import { cn, servesRaw } from "@/lib/utils";
+import { cn, formatLongDate, servesRaw } from "@/lib/utils";
 import { CtaBand } from "./CtaBand";
 import { TransfersTable } from "./TransfersTable";
 import { GuideNav } from "./GuideNav";
@@ -87,6 +89,9 @@ export function MigrationGuide({ data }: { data: MigrationGuideContent }) {
       {/* Directly under the site nav and above the hero, so it's pinned from
           the first scroll rather than appearing part-way down the page. */}
       <GuideNav items={navItems} />
+      {/* Every in-page target lands below the sticky stack: site header,
+          announcement bar and this guide's menu (owner, 20 Nov 2026). */}
+      <div className="[&_[id]]:scroll-mt-[calc(7.5rem+var(--announce-h))]">
       <GuideHero data={data} />
       <GuideStats data={data} />
 
@@ -109,15 +114,7 @@ export function MigrationGuide({ data }: { data: MigrationGuideContent }) {
       <GuideFit data={data} />
       <TransfersTable data={data} />
 
-      <LongForm
-        id={ID.steps}
-        heading={data.steps.heading}
-        intro={data.steps.intro}
-        items={data.steps.items}
-        tone="light"
-        numbered
-        mockups={stepMockups(data, data.steps.items.length)}
-      />
+      <GuideSteps data={data} />
 
       {/* Kept at the owner's request: sitewide proof between two stretches of
           reading. ClientLogos draws the rule that closes the band above it. */}
@@ -162,6 +159,7 @@ export function MigrationGuide({ data }: { data: MigrationGuideContent }) {
 
       <GuideSources data={data} />
       <GuideRelated data={data} />
+      </div>
     </>
   );
 }
@@ -324,40 +322,6 @@ function LongForm({
   );
 }
 
-/**
- * One client site per step, for the mockup column beside the stages.
- *
- * Drawn from the guide's own proof cases first, then topped up from the rest
- * of the grid, deduped so no two steps show the same site. These illustrate
- * the kind of work the stage produces rather than the stage itself, so they
- * carry a real client alt rather than a caption claiming otherwise.
- */
-function stepMockups(data: MigrationGuideContent, count: number) {
-  // The guide's proof slugs are deliberately EXCLUDED. Those sites already
-  // appear in the case-studies rows and one of them heads the benefits
-  // section, so reusing them here showed the same client three times. The
-  // steps draw from the rest of the portfolio instead.
-  const spoken = new Set(data.proof?.workSlugs ?? []);
-  const ordered = [
-    ...caseStudies.items.map((i) => i.slug),
-    ...caseStudyCards.map((c) => c.slug),
-  ];
-  const seen = new Set<string>();
-  const out: { src: string; alt: string }[] = [];
-  for (const slug of ordered) {
-    if (out.length >= count) break;
-    if (seen.has(slug) || spoken.has(slug)) continue;
-    seen.add(slug);
-    const card = caseStudyCards.find((c) => c.slug === slug);
-    if (!card?.thumb) continue;
-    out.push({
-      src: card.thumb,
-      alt: `${card.client} website, built on Wix Studio`,
-    });
-  }
-  return out;
-}
-
 /** Stable anchor id from a block title, scoped by section. */
 function anchorId(prefix: string, title: string) {
   return `${prefix}-${title
@@ -501,24 +465,20 @@ function GuideGlance({ data }: { data: MigrationGuideContent }) {
       </div>
 
       {/* Still a definition list: labelled question/answer pairs are the most
-          extractable thing on the page, and the markup is what lets an answer
-          engine lift a question with its answer. The question is set in the
-          card-title face rather than the mono label, because it reads as a
-          question rather than as a field name. */}
-      <dl className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2 lg:grid-cols-3">
+          extractable thing on the page. Laid out as rows (owner, 20 Nov 2026:
+          cleaner, spaced out): the question with its icon on the left, the
+          answer beside it, hairlines between, no boxes. */}
+      <dl className="type-card mt-10 border-b border-light-border md:mt-12">
         {glance.items.map((item, i) => (
-          <div key={item.label} className="bg-light-bg p-6">
-            {/* The icon sits inside the <dt>: a <dl> group may hold only
-                <dt>/<dd>, so a sibling span made the list invalid. */}
-            <dt className="font-display text-body-lg font-medium leading-snug text-light-text">
-              <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
-                <FeatureIcon name={GLANCE_ICONS[i] ?? "answer"} />
-              </span>
+          <div
+            key={item.label}
+            className="grid gap-2 border-t border-light-border py-5 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-10 md:py-6"
+          >
+            <dt className="flex items-center gap-3 font-display text-body-lg font-medium leading-snug text-light-text">
+              <FeatureIcon name={GLANCE_ICONS[i] ?? "answer"} className="h-5 w-5 shrink-0 text-light-muted" />
               {item.label}
             </dt>
-            <dd className="mt-2 text-body leading-relaxed text-light-muted">
-              {item.value}
-            </dd>
+            <dd className="text-body leading-relaxed text-light-muted md:self-center">{item.value}</dd>
           </div>
         ))}
       </dl>
@@ -580,42 +540,29 @@ function GuideBenefits({ data }: { data: MigrationGuideContent }) {
         </p>
       </div>
 
-      {/* Capabilities down one half, a site built with them down the other.
-          The outer grid deliberately carries NO overflow-hidden: it would
-          become the sticky scrollport and the mockup would stop travelling.
-          Each half carries its own rounding instead. */}
-      <div className="mt-10 grid gap-8 md:mt-12 lg:grid-cols-2 lg:gap-12">
-        <div className="type-card grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border">
-          {benefits.items.map((item, i) => (
-            <div key={item.title} className="bg-light-bg p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
-                <FeatureIcon name={BENEFIT_ICONS[i] ?? "layers"} />
-              </span>
-              <h3 className="mt-5 font-display text-body-lg font-medium leading-snug text-light-text">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-body leading-relaxed text-light-muted">
-                {item.body}
-              </p>
-            </div>
-          ))}
-        </div>
+      {/* The six capabilities as small tabs, one line showing at a time,
+          beside a site built with them (owner, 20 Nov 2026: less text). Every
+          line stays in the HTML. */}
+      <div className="mt-10 grid gap-8 md:mt-12 lg:grid-cols-2 lg:items-center lg:gap-12">
+        <DriverTabs
+          label={benefits.heading}
+          items={benefits.items.map((item, i) => ({
+            icon: BENEFIT_ICONS[i] ?? "layers",
+            title: item.title,
+            body: item.body,
+            links: [],
+          }))}
+        />
 
         {shot?.thumb ? (
-          <div className="hidden lg:block">
-            {/* Sticky, so the site stays beside whichever capability is being
-                read rather than scrolling away at the first card. */}
-            <div className="sticky top-[calc(8rem+var(--announce-h))]">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface">
-                <Image
-                  src={shot.thumb}
-                  alt={`${shot.client} website, built on Wix Studio`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
+          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface lg:block">
+            <Image
+              src={shot.thumb}
+              alt={`${shot.client} website, built on Wix Studio`}
+              fill
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover"
+            />
           </div>
         ) : null}
       </div>
@@ -647,28 +594,31 @@ function GuideRoutes({ data }: { data: MigrationGuideContent }) {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-px overflow-hidden rounded-card border border-border bg-border md:mt-12 lg:grid-cols-2">
-        {routes.items.map((route) => (
-          <article key={route.title} className="type-card flex flex-col bg-bg p-8">
-            <Pill tone="dark" className="self-start">
-              {route.eligibility}
-            </Pill>
-            <h3 className="mt-5 font-display text-h3 font-medium leading-snug tracking-tight text-balance">
-              {route.title}
-            </h3>
-            <p className="mt-4 text-body leading-relaxed text-text-muted">
-              {route.body}
-            </p>
-            {route.points?.length ? (
-              <>
-                {route.lead ? (
-                  <p className="mt-6 text-body text-text-muted">{route.lead}</p>
+      {/* Both routes stay side by side (the reader is choosing), but each
+          one's point list folds under one switch (owner, 20 Nov 2026: less
+          text). The points stay in the HTML. */}
+      <div className="mt-10 md:mt-12">
+        <DetailToggle show="Show details" hide="Hide details" tone="dark">
+          <div className="grid gap-px overflow-hidden rounded-card border border-border bg-border lg:grid-cols-2">
+            {routes.items.map((route) => (
+              <article key={route.title} className="type-card flex flex-col bg-bg p-8">
+                <Pill tone="dark" className="self-start">
+                  {route.eligibility}
+                </Pill>
+                <h3 className="mt-5 font-display text-h3 font-medium leading-snug tracking-tight text-balance">
+                  {route.title}
+                </h3>
+                <p className="mt-4 text-body leading-relaxed text-text-muted">{route.body}</p>
+                {route.points?.length ? (
+                  <div className="hidden group-data-[details=on]/details:block">
+                    {route.lead ? <p className="mt-6 text-body text-text-muted">{route.lead}</p> : null}
+                    <PointList points={route.points} tone="dark" />
+                  </div>
                 ) : null}
-                <PointList points={route.points} tone="dark" />
-              </>
-            ) : null}
-          </article>
-        ))}
+              </article>
+            ))}
+          </div>
+        </DetailToggle>
       </div>
 
       {routes.footnote ? (
@@ -690,13 +640,18 @@ function GuideRoutes({ data }: { data: MigrationGuideContent }) {
 function GuideFit({ data }: { data: MigrationGuideContent }) {
   const { fit } = data;
   return (
+    // Two separate columns (owner, 20 Nov 2026: cleaner, spaced out): the
+    // reasons to move and the reasons to stay never pair row by row, so they
+    // read as two lists rather than one table.
     <FitTable
       id={ID.fit}
+      variant="boxes"
       heading={fit.heading}
       intro={fit.intro}
       goodLabel="Worth moving"
       notLabel="Stay where you are"
       good={fit.goodFit}
+      goodIcons={fit.goodFit.map(() => "check")}
       notAFit={fit.notAFit}
       footnote={fit.footnote}
     />
@@ -832,14 +787,86 @@ function GuideCost({ data }: { data: MigrationGuideContent }) {
 function GuideSources({ data }: { data: MigrationGuideContent }) {
   if (!data.sources) return null;
   const { sources } = data;
-
+  if (sources.items.length === 0) return null;
+  // Folded shut at the foot of the page (owner, 20 Nov 2026: less text), as
+  // on the comparison pages: every link stays in the HTML.
   return (
-    <SourcesGrid
-      heading={sources.heading}
-      intro={sources.intro}
-      verified={sources.verified}
-      items={sources.items}
-    />
+    <Section tone="light" frameClassName="!py-10 md:!py-14">
+      <details className="group/sources">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+          <h2 className="font-display text-h3 font-medium leading-snug tracking-tight">
+            {sources.heading}: {sources.items.length} pages
+            {sources.verified ? <span className="text-light-muted">, verified {formatLongDate(sources.verified)}</span> : null}
+          </h2>
+          <FeatureIcon
+            name="chevron-down"
+            className="h-5 w-5 shrink-0 text-light-muted transition-transform duration-200 group-open/sources:rotate-180"
+          />
+        </summary>
+        <p className="mt-4 max-w-3xl text-body leading-relaxed text-light-muted">{sources.intro}</p>
+        <ul className="type-card mt-6 grid border-t border-light-border md:grid-cols-2 md:gap-x-12">
+          {sources.items.map((source) => (
+            <li key={source.href} className="border-b border-light-border py-3">
+              <a
+                href={source.href}
+                target="_blank"
+                rel="noopener nofollow"
+                className="group inline-flex items-baseline gap-1.5 font-display text-body font-medium text-light-text transition hover:text-accent"
+              >
+                {source.label}
+                <span aria-hidden className="btn-arrow">
+                  &rarr;
+                </span>
+              </a>
+              <p className="mt-0.5 text-[0.8125rem] leading-snug text-light-muted">{source.note}</p>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </Section>
+  );
+}
+
+/**
+ * "How the move runs" as numbered tabs (owner, 20 Nov 2026: cleaner, less
+ * text): the stages listed by number, title and duration, one stage's
+ * detail at a time. Every panel is server-rendered into the HTML.
+ */
+function GuideSteps({ data }: { data: MigrationGuideContent }) {
+  const { steps } = data;
+  return (
+    <Section tone="light" frameClassName="!py-14 md:!py-24" id={ID.steps}>
+      <div className="max-w-[68ch]">
+        <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">{steps.heading}</h2>
+        <p className="mt-4 text-body-lg font-medium leading-relaxed text-light-muted">{steps.intro}</p>
+      </div>
+      <div className="mt-10 md:mt-12">
+        <StepTabs
+          label={steps.heading}
+          steps={steps.items.map((item) => ({ title: item.navLabel ?? item.title, duration: item.duration }))}
+          panelIds={steps.items.map((item) => anchorId(ID.steps, item.title))}
+          panels={steps.items.map((item, i) => (
+            <article key={item.title} className="type-card max-w-[68ch]">
+              <p className="font-mono text-label uppercase track-label text-light-muted">
+                {`Step ${String(i + 1).padStart(2, "0")}`}
+              </p>
+              <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-3">
+                <h3 className="font-display text-h3 font-medium leading-snug tracking-tight text-balance">{item.title}</h3>
+                {item.duration ? <Pill tone="light">{item.duration}</Pill> : null}
+              </div>
+              <p className="mt-4 text-body leading-relaxed text-light-muted">{item.body}</p>
+              {item.points?.length ? (
+                <>
+                  {item.lead ? <p className="mt-6 text-body text-light-muted">{item.lead}</p> : null}
+                  <PointList points={item.points} tone="light" />
+                </>
+              ) : null}
+              {item.cta ? <ContextualCta data={item.cta} tone="light" /> : null}
+            </article>
+          ))}
+        />
+      </div>
+    </Section>
   );
 }
 
@@ -899,9 +926,6 @@ function GuideRelated({ data }: { data: MigrationGuideContent }) {
                 &rarr;
               </span>
             </h3>
-            <p className="mt-3 text-body leading-relaxed text-light-muted">
-              {item.desc}
-            </p>
           </Link>
         ))}
       </div>

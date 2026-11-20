@@ -1,13 +1,7 @@
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
-import {
-  GUIDE_ASIDE_GRID,
-  GUIDE_SECTION_FRAME,
-  GuideAside,
-  GuideContentCol,
-  guideAsideRow,
-} from "./GuideAside";
+import { DetailToggle } from "@/components/sections/compare/DetailToggle";
 import { cn } from "@/lib/utils";
 import { transferStatusLabels } from "@/content/migration-guides";
 import type {
@@ -70,6 +64,19 @@ const STATUS_ORDER: TransferStatus[] = [
 ];
 
 /**
+ * Each state's column reads as its own (owner, 20 Nov 2026: "the columns are
+ * hardly distinguishable"): a 3px top bar in the state's colour, a tinted
+ * header, and for "Doesn't move" a dashed outline, the same mark the fit
+ * boxes use for what doesn't belong. Green only where the news is good.
+ */
+const COLUMN_STYLES: Record<TransferStatus, { card: string; header: string }> = {
+  carries: { card: "border-light-border border-t-[3px] border-t-positive", header: "border-light-border bg-positive/10" },
+  rebuilt: { card: "border-light-border border-t-[3px] border-t-accent", header: "border-light-border bg-accent-subtle" },
+  replaced: { card: "border-light-border border-t-[3px] border-t-light-muted", header: "border-light-border bg-light-surface" },
+  lost: { card: "border-dashed border-light-muted/50 border-t-[3px] border-t-light-border", header: "border-dashed border-light-muted/40 bg-light-surface/60" },
+};
+
+/**
  * Exported so a blog `comparisonTable` row can carry the same chip. The four
  * states have to mean one thing across the site, which means one renderer for
  * them rather than a second set of styles that agree by coincidence.
@@ -96,97 +103,105 @@ export function StatusChip({ status }: { status: TransferStatus }) {
   );
 }
 
+/**
+ * "What carries across, and what gets rebuilt", grouped by what happens to
+ * each thing (owner, 20 Nov 2026: cleaner, spaced out, less text). Four
+ * columns, one per state in the order the guide's rule sets (carries
+ * first), each headed by its label and what it means, listing the items by
+ * name. The one-sentence note for every item stays in the HTML and shows
+ * under one "Show details" switch, rather than a card of prose per item and
+ * a legend in a side column.
+ *
+ * Within a column the authored order is kept. Still a <dl> per column, so
+ * each item pairs with its note for the answer engines these pages are for.
+ */
 export function TransfersTable({ data }: { data: MigrationGuideContent }) {
   const { transfers } = data;
+  const groups = STATUS_ORDER.map((status) => ({
+    status,
+    rows: transfers.rows.filter((r) => r.status === status),
+  })).filter((g) => g.rows.length > 0);
 
   return (
-    <Section
-      tone="light"
-      frameClassName={GUIDE_SECTION_FRAME}
-      id="what-carries-across"
-    >
-      <div className={GUIDE_ASIDE_GRID}>
-        {/* Content column: heading and the stacked rows, flush left on the
-            same line, matching the long-form sections. */}
-        <GuideContentCol wide>
-          <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-            {transfers.heading}
-          </h2>
-          <p className="mt-4 text-body-lg font-medium leading-relaxed text-light-muted">
-            {transfers.intro}
-          </p>
+    // The same vertical rhythm as the sections around it. GUIDE_SECTION_FRAME
+    // (no padding) belonged to the old two-column layout with its own insets.
+    <Section tone="light" frameClassName="!py-14 md:!py-24" id="what-carries-across">
+      <div className="max-w-3xl">
+        <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+          {transfers.heading}
+        </h2>
+        <p className="mt-4 text-body-lg font-medium leading-relaxed text-light-muted">{transfers.intro}</p>
+      </div>
 
-          {/* Authored order is deliberate (carries leads) and never
-              re-sorted. A hairline grid, not floating cards: gap-px over the
-              rule colour with solid-filled cells (CLAUDE.md §15). The trailing
-              filler keeps the block rectangular when the row count is odd. */}
-          <dl
+      <div className="mt-8 md:mt-10">
+        <DetailToggle show="Show details" hide="Hide details">
+          <div
             className={cn(
-              "type-card mt-10 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-12 md:grid-cols-2",
-              // Odd row count: a pseudo-element fills the last cell, since a
-              // <dl> may not hold an empty filler <div>.
-              transfers.rows.length % 2 === 1 &&
-                "md:after:block md:after:bg-light-bg md:after:content-['']",
+              "grid items-start gap-4 md:grid-cols-2 lg:gap-5",
+              groups.length >= 4 ? "xl:grid-cols-4" : groups.length === 3 ? "xl:grid-cols-3" : "",
             )}
           >
-            {transfers.rows.map((row) => (
-              <div key={row.item} className="flex flex-col bg-light-bg p-6">
-                {/* Icon and status chip live inside the <dt> so the group
-                    holds only <dt>/<dd>, as a <dl> requires. */}
-                <dt className="font-display text-body-lg font-medium leading-snug text-light-text">
-                  <span className="mb-5 flex items-start justify-between gap-4 font-normal">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
-                      <FeatureIcon name={row.icon ?? ""} />
+            {groups.map((g) => (
+              <section
+                key={g.status}
+                aria-labelledby={`transfers-${g.status}`}
+                className={cn(
+                  "type-card flex flex-col overflow-hidden rounded-card border bg-light-bg",
+                  COLUMN_STYLES[g.status].card,
+                )}
+              >
+                <header className={cn("border-b px-6 pb-5 pt-5", COLUMN_STYLES[g.status].header)}>
+                  <h3 id={`transfers-${g.status}`} className="flex items-center justify-between gap-3">
+                    <StatusChip status={g.status} />
+                    <span className="font-display text-h3 font-medium leading-none tabular-nums text-light-text">
+                      {g.rows.length}
                     </span>
-                    <StatusChip status={row.status} />
-                  </span>
-                  {row.item}
-                </dt>
-                <dd className="mt-2 text-body leading-relaxed text-light-muted">
-                  {row.note}
-                </dd>
-              </div>
+                  </h3>
+                  <p className="mt-3 text-[0.875rem] leading-snug text-light-muted">
+                    {transferStatusLabels[g.status].legend}
+                  </p>
+                </header>
+                <dl className="divide-y divide-light-border">
+                  {g.rows.map((row) => (
+                    <div key={row.item} className="px-6 py-4">
+                      <dt
+                        className={cn(
+                          "flex items-start gap-3 text-body font-medium leading-snug",
+                          g.status === "lost" ? "text-light-muted" : "text-light-text",
+                        )}
+                      >
+                        <FeatureIcon name={row.icon ?? ""} className="mt-0.5 h-[18px] w-[18px] shrink-0 text-light-muted" />
+                        {row.item}
+                      </dt>
+                      <dd className="mt-2 hidden pl-[30px] text-[0.875rem] leading-relaxed text-light-muted group-data-[details=on]/details:block">
+                        {row.note}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
             ))}
-          </dl>
-
-          {transfers.footnote ? (
-            <p className="mt-10 text-body-lg leading-relaxed text-light-muted">
-              {transfers.footnote}
-            </p>
-          ) : null}
-
-          {/* The ask lands here because the reader has just been handed a list
-              of things that may or may not apply to their own site. */}
-          {transfers.cta ? (
-            <div className="type-card mt-10 rounded-card border border-light-border bg-light-surface p-6 md:p-7">
-              <p className="font-display text-body-lg font-medium">
-                {transfers.cta.heading}
-              </p>
-              <p className="mt-2 text-body leading-relaxed text-light-muted">
-                {transfers.cta.paragraph}
-              </p>
-              <div className="mt-5">
-                <Button cta={transfers.cta.cta} tone="light" />
-              </div>
-            </div>
-          ) : null}
-        </GuideContentCol>
-
-        <GuideAside label="What the labels mean" tone="light">
-          <dl>
-            {STATUS_ORDER.map((status) => (
-              <div key={status} className={cn(guideAsideRow("light"), "py-4")}>
-                <dt>
-                  <StatusChip status={status} />
-                </dt>
-                <dd className="mt-2 text-body leading-snug text-light-muted">
-                  {transferStatusLabels[status].legend}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </GuideAside>
+          </div>
+        </DetailToggle>
       </div>
+
+      {transfers.footnote ? (
+        <p className="mt-10 max-w-3xl text-body-lg leading-relaxed text-light-muted">{transfers.footnote}</p>
+      ) : null}
+
+      {/* The ask lands here because the reader has just been handed a list
+          of things that may or may not apply to their own site. */}
+      {transfers.cta ? (
+        <div className="type-card mt-10 flex flex-col gap-5 rounded-card border border-light-border bg-light-surface p-6 md:flex-row md:items-center md:justify-between md:p-7">
+          <div className="max-w-2xl">
+            <p className="font-display text-body-lg font-medium">{transfers.cta.heading}</p>
+            <p className="mt-2 text-body leading-relaxed text-light-muted">{transfers.cta.paragraph}</p>
+          </div>
+          <div className="shrink-0">
+            <Button cta={transfers.cta.cta} tone="light" />
+          </div>
+        </div>
+      ) : null}
     </Section>
   );
 }

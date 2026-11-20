@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useActiveSection } from "@/lib/useActiveSection";
+import { announcementHeight, useActiveSection } from "@/lib/useActiveSection";
 import { cn } from "@/lib/utils";
 
 /**
@@ -37,7 +37,7 @@ export function GuideNav({
     const observer = new IntersectionObserver(
       ([entry]) =>
         setHidden(entry.isIntersecting || entry.boundingClientRect.top < 0),
-      { rootMargin: "-96px 0px 0px 0px", threshold: 0 },
+      { rootMargin: `-${96 + announcementHeight()}px 0px 0px 0px`, threshold: 0 },
     );
     observer.observe(faq);
     return () => observer.disconnect();
@@ -50,8 +50,10 @@ export function GuideNav({
     <div
       className={cn(
         // tone-light sets --rule, so .frame draws the same side rails as every
-        // Section. top-16 clears the 4rem site header, which is sticky at z-50.
-        "tone-light sticky top-16 z-30 border-b border-light-border bg-light-bg transition-opacity duration-200",
+        // Section. It sits under the 4rem site header and, when it shows, the
+        // announcement bar (--announce-h), both sticky above it; top-16 alone
+        // slid it under the bar (owner, 20 Nov 2026).
+        "tone-light sticky top-[calc(4rem+var(--announce-h))] z-30 border-b border-light-border bg-light-bg transition-opacity duration-200",
         hidden && "pointer-events-none opacity-0",
       )}
       // `inert`, not just aria-hidden: while faded out, its links must also

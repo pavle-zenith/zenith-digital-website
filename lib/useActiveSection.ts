@@ -15,11 +15,14 @@ import { useEffect, useState } from "react";
  */
 export function useActiveSection(
   items: { id: string }[],
-  rootMargin = "-96px 0px -60% 0px",
+  rootMarginOverride?: string,
 ): string | null {
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
+    // The sticky stack is the site header plus the announcement bar when one
+    // shows (20 Nov 2026), so the top margin grows by the bar's height.
+    const rootMargin = rootMarginOverride ?? `-${96 + announcementHeight()}px 0px -60% 0px`;
     const targets = items
       .map((i) => document.getElementById(i.id))
       .filter((el): el is HTMLElement => el !== null);
@@ -36,7 +39,12 @@ export function useActiveSection(
     );
     targets.forEach((t) => observer.observe(t));
     return () => observer.disconnect();
-  }, [items, rootMargin]);
+  }, [items, rootMarginOverride]);
 
   return active;
+}
+
+/** The announcement bar's height in px, or 0 when there isn't one. */
+export function announcementHeight(): number {
+  return document.getElementById("announcement")?.offsetHeight ?? 0;
 }

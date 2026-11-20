@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { cn } from "@/lib/utils";
@@ -25,6 +25,8 @@ export type Driver = {
 export function DriverTabs({ items, label }: { items: Driver[]; label: string }) {
   const [active, setActive] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  // Unique per instance, so two sets of tabs on one page never share ids.
+  const uid = useId();
 
   const onKeyDown = (e: React.KeyboardEvent, i: number) => {
     const n = items.length;
@@ -62,9 +64,9 @@ export function DriverTabs({ items, label }: { items: Driver[]; label: string })
               }}
               type="button"
               role="tab"
-              id={`driver-tab-${i}`}
+              id={`${uid}-tab-${i}`}
               aria-selected={on}
-              aria-controls={`driver-panel-${i}`}
+              aria-controls={`${uid}-panel-${i}`}
               tabIndex={on ? 0 : -1}
               onClick={() => setActive(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
@@ -91,12 +93,13 @@ export function DriverTabs({ items, label }: { items: Driver[]; label: string })
         <div
           key={item.title}
           role="tabpanel"
-          id={`driver-panel-${i}`}
-          aria-labelledby={`driver-tab-${i}`}
+          id={`${uid}-panel-${i}`}
+          aria-labelledby={`${uid}-tab-${i}`}
           hidden={i !== active}
           className="mt-6 px-1"
         >
           <p className="text-body leading-relaxed text-light-muted">{item.body}</p>
+          {item.links.length ? (
           <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
             {item.links.map((link) => (
               <Link
@@ -111,6 +114,7 @@ export function DriverTabs({ items, label }: { items: Driver[]; label: string })
               </Link>
             ))}
           </div>
+          ) : null}
         </div>
       ))}
     </div>

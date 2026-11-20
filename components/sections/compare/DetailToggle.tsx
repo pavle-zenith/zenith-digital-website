@@ -13,10 +13,12 @@ import { FeatureIcon } from "@/components/ui/FeatureIcon";
 export function DetailToggle({
   show,
   hide,
+  tone = "light",
   children,
 }: {
   show: string;
   hide: string;
+  tone?: "light" | "dark";
   children: React.ReactNode;
 }) {
   const [on, setOn] = useState(false);
@@ -27,7 +29,11 @@ export function DetailToggle({
           type="button"
           aria-pressed={on}
           onClick={() => setOn((v) => !v)}
-          className="inline-flex items-center gap-1.5 rounded-[6px] border border-light-border px-3 py-1.5 text-[0.875rem] font-medium text-light-text transition hover:bg-light-surface"
+          className={
+            tone === "dark"
+              ? "inline-flex items-center gap-1.5 rounded-[6px] border border-border px-3 py-1.5 text-[0.875rem] font-medium text-text transition hover:bg-surface-2"
+              : "inline-flex items-center gap-1.5 rounded-[6px] border border-light-border px-3 py-1.5 text-[0.875rem] font-medium text-light-text transition hover:bg-light-surface"
+          }
         >
           {on ? hide : show}
           <FeatureIcon name="chevron-down" className={`h-4 w-4 transition-transform duration-200 ${on ? "rotate-180" : ""}`} />

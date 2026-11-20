@@ -20,6 +20,7 @@ import {
   pricingPage as c,
 } from "@/content/pricing";
 import { cn } from "@/lib/utils";
+import { costCalculatorRoutable } from "@/content/tools/status";
 
 /**
  * /pricing (pricing page brief, 20 Nov 2026). Every figure comes from
@@ -336,15 +337,22 @@ function CostsAndPayment() {
         notFooter={
           <div className="mt-4">
             <p className="text-body leading-relaxed text-light-muted">{out.intro}</p>
-            <Link
-              href={out.link.href}
-              className="group mt-3 inline-flex items-center gap-1.5 text-body font-medium text-light-text underline decoration-light-border underline-offset-4 transition hover:decoration-light-text"
-            >
-              {out.link.label}
-              <span aria-hidden className="btn-arrow">
-                &rarr;
-              </span>
-            </Link>
+            <div className="mt-3 flex flex-col items-start gap-2">
+              {/* The cost calculator adds the platform plan to the build:
+                  linked here once it has a route (content/tools/status.ts). */}
+              {[out.link, ...(costCalculatorRoutable ? [out.estimate] : [])].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="group inline-flex items-center gap-1.5 text-body font-medium text-light-text underline decoration-light-border underline-offset-4 transition hover:decoration-light-text"
+                >
+                  {link.label}
+                  <span aria-hidden className="btn-arrow">
+                    &rarr;
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         }
       />

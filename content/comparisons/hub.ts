@@ -28,7 +28,7 @@ export const compareHub = {
   seo: {
     title: "Website platform comparisons: which to choose? | Zenith Digital",
     description:
-      "Wix Studio compared with WordPress, Webflow and other website platforms: speed, CMS, SEO, cost and who runs the site after launch, from vendor sources.",
+      "Wix Studio compared with WordPress, Webflow, Shopify, Next.js, Framer and Squarespace: CMS, SEO, cost and who runs the site after launch.",
   },
   hero: {
     eyebrow: "Platform comparisons",
@@ -43,8 +43,8 @@ export const compareHub = {
   },
   fit: {
     heading: "Which platform fits which team",
-    intro:
-      "Three we build on, four we move sites off. Every comparison says plainly when the other platform is the better choice.",
+    // Kept short (owner, 20 Nov 2026: "much simpler, less text").
+    intro: "Three we build on, four we move sites off.",
     columns: {
       platform: "Platform",
       bestIf: "Best if you are",
@@ -56,12 +56,13 @@ export const compareHub = {
       {
         name: "Wix Studio",
         bestIf:
-          "A team that wants to edit the site visually, with hosting, security and updates handled by the platform.",
+          "A team that edits visually and wants upkeep handled",
         // The strongest Wix Studio case studies, as on the comparisons'
         // proof (Bel'Istria stays out until its AI claim is confirmed).
         built: {
           platform: "wix-studio",
-          slugs: ["scottish-luxury-experience", "hunting-brook-gardens", "knode-ai"],
+          // Two per platform (owner, 20 Nov 2026: simpler), the first two picks.
+          slugs: ["scottish-luxury-experience", "hunting-brook-gardens"],
         },
         link: { label: "Our Wix Studio service", href: "/services/wix-studio-website-design" },
       },
@@ -69,52 +70,52 @@ export const compareHub = {
         name: "Next.js and Sanity",
         rival: "nextjs",
         bestIf:
-          "Building something a platform can't hold: custom interactions, product-like logic or content used in more than one place.",
+          "A site with product-like logic or shared content",
         built: {
           platform: "nextjs",
           // Client sites, case study first; the agency partners tagged
           // Next.js (Techtonnik, Capacity, Wellington Web Co) show
           // partnership volume, not a site.
-          slugs: ["genroks-ai", "highland-fling", "pressure-test-scotland"],
+          slugs: ["genroks-ai", "highland-fling"],
         },
       },
       {
         name: "Shopify",
         rival: "shopify",
         bestIf:
-          "A brand where selling products at volume is the business: the catalogue, apps and checkout come first.",
+          "A brand where selling products is the business",
         built: {
           platform: "shopify",
-          slugs: ["lepa-couture", "destilerija-gorska", "notyou-brand"],
+          slugs: ["lepa-couture", "destilerija-gorska"],
         },
-        // Until Wix Studio vs Shopify exists (owner, 19 Nov 2026).
+        // Fallback only: the row links Wix Studio vs Shopify once it's routable.
         link: { label: "E-commerce websites", href: "/industries/ecommerce" },
       },
       {
         name: "WordPress",
         rival: "wordpress",
         bestIf:
-          "Running a large editorial operation, or relying on a plugin you can't replace.",
+          "A large editorial team, or a plugin you can't replace",
         guide: { label: "WordPress guide", href: "/services/wordpress-to-wix-studio" },
       },
       {
         name: "Webflow",
         rival: "webflow",
         bestIf:
-          "A trained team running a large structured CMS that wants class-level design control.",
+          "A trained team running a large structured CMS",
         guide: { label: "Webflow guide", href: "/services/webflow-to-wix-studio" },
       },
       {
         name: "Framer",
         rival: "framer",
-        bestIf: "A design-led team shipping fast landing pages on a site that stays small.",
+        bestIf: "A design-led team shipping landing pages fast",
         guide: { label: "Framer guide", href: "/services/framer-to-wix-studio" },
         link: { label: "Framer to Wix Studio guide", href: "/services/framer-to-wix-studio" },
       },
       {
         name: "Squarespace",
         rival: "squarespace",
-        bestIf: "After a polished small site that won't outgrow its templates.",
+        bestIf: "A small site that won't outgrow its templates",
         guide: { label: "Squarespace guide", href: "/services/squarespace-to-wix-studio" },
         link: {
           label: "Squarespace to Wix Studio guide",
@@ -129,7 +130,6 @@ export const compareHub = {
       guide?: { label: string; href: string };
       link?: { label: string; href: string };
     }[],
-    note: "Vendor prices on the comparison pages come from each vendor's own pricing page, with the date we checked them. Ours come from our published packages.",
   },
   guides: {
     heading: "Guides",

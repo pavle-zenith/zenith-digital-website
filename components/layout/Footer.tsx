@@ -6,6 +6,7 @@ import { FooterClock } from "@/components/layout/FooterClock";
 import { footer } from "@/content/home";
 import { hubRoutable } from "@/content/industries";
 import { compareHubRoutable } from "@/content/comparisons";
+import { costCalculatorRoutable } from "@/content/tools/status";
 import { servesRaw } from "@/lib/utils";
 
 /**
@@ -71,14 +72,16 @@ export function Footer() {
                       keep their 31px pitch but the tap target is the full
                       row rather than the 19px line of text. */}
                   <ul className="md:space-y-3">
-                    {/* A link marked requiresHub (Industries) or
-                        requiresCompare (Compare platforms) waits for its hub
-                        to have a route, so the footer never links a 404. */}
+                    {/* A link marked requiresHub (Industries),
+                        requiresCompare (Compare platforms) or
+                        requiresCalculator waits for its page to have a
+                        route, so the footer never links a 404. */}
                     {col.links
                       .filter(
                         (link) =>
                           (!("requiresHub" in link) || hubRoutable) &&
-                          (!("requiresCompare" in link) || compareHubRoutable),
+                          (!("requiresCompare" in link) || compareHubRoutable) &&
+                          (!("requiresCalculator" in link) || costCalculatorRoutable),
                       )
                       .map((link) => (
                       <li key={link.href}>

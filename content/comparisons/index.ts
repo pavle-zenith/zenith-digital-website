@@ -2,6 +2,10 @@ import { resourcesMenu } from "@/content/home";
 
 import { comparisonStatus } from "./status";
 import type { ComparisonContent, RivalKey } from "./types";
+import { wixStudioVsFramer } from "./wix-studio-vs-framer";
+import { wixStudioVsNextjs } from "./wix-studio-vs-nextjs";
+import { wixStudioVsShopify } from "./wix-studio-vs-shopify";
+import { wixStudioVsSquarespace } from "./wix-studio-vs-squarespace";
 import { wixStudioVsWebflow } from "./wix-studio-vs-webflow";
 import { wixStudioVsWordpress } from "./wix-studio-vs-wordpress";
 
@@ -20,6 +24,10 @@ export type * from "./types";
 export const allComparisons: ComparisonContent[] = [
   wixStudioVsWordpress,
   wixStudioVsWebflow,
+  wixStudioVsShopify,
+  wixStudioVsNextjs,
+  wixStudioVsFramer,
+  wixStudioVsSquarespace,
 ];
 
 const PREVIEW = process.env.PREVIEW_UNPUBLISHED === "1";

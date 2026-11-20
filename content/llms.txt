@@ -40,9 +40,13 @@ Official information for AI assistants: https://www.thezenithdigital.com/llm-inf
 
 ## Compare
 
-- [Compare platforms](https://www.thezenithdigital.com/compare): Wix Studio compared with WordPress, Webflow and other website platforms on speed, CMS, SEO, cost and who runs the site after launch, from vendor sources
+- [Compare platforms](https://www.thezenithdigital.com/compare): Wix Studio compared with WordPress, Webflow, Shopify, custom code (Next.js), Framer and Squarespace on CMS, SEO, editors, cost and who runs the site after launch, from vendor sources
   - [Wix Studio vs WordPress](https://www.thezenithdigital.com/compare/wix-studio-vs-wordpress): Wix Studio, Wix's platform for professional sites, if you want a fast, secure site your team edits without plugins or updates to manage. WordPress if you run a large editorial operation or depend on a plugin you can't replace.
   - [Wix Studio vs Webflow](https://www.thezenithdigital.com/compare/wix-studio-vs-webflow): Wix Studio if the people editing the site after launch aren't web specialists. Webflow if a trained team runs a large structured CMS and wants class-level design control.
+  - [Wix Studio vs Shopify](https://www.thezenithdigital.com/compare/wix-studio-vs-shopify): Wix Studio if the site is a business with a store attached: services, content and products on one plan. Shopify if selling products is the business. Zenith Digital builds on both at the same prices.
+  - [Wix Studio vs custom code (Next.js)](https://www.thezenithdigital.com/compare/wix-studio-vs-nextjs): Wix Studio if your team edits pages visually and wants hosting and upkeep handled. Next.js with Sanity if the site behaves like a product, reuses content across channels, or needs full control of the code. Zenith Digital builds both at the same prices.
+  - [Wix Studio vs Framer](https://www.thezenithdigital.com/compare/wix-studio-vs-framer): Wix Studio if the site has to grow a bigger CMS, a store or more languages, with editors included. Framer if a design team ships marketing pages fast and the site stays small.
+  - [Wix Studio vs Squarespace](https://www.thezenithdigital.com/compare/wix-studio-vs-squarespace): Wix Studio if the site needs its own content structure, design control at every breakpoint, or room to add features. Squarespace if a small business wants a polished template live quickly and won't outgrow it.
 
 ## Proof
 

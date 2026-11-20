@@ -113,6 +113,11 @@ export type ComparisonContent = {
     wix: Choice;
     rival: Choice;
     custom: Choice;
+    /**
+     * Overrides the third box's title ("Custom code (Next.js) is usually
+     * better if..."), for the page where Next.js is the rival.
+     */
+    customTitle?: string;
   };
   cost: {
     heading: string;
@@ -129,6 +134,12 @@ export type ComparisonContent = {
      * Omitted: the first three tagged projects, case studies first.
      */
     picks?: string[];
+    /**
+     * For a platform we build on (`rival.weBuildOnIt`): up to three of our
+     * projects on it, shown after the Wix Studio picks. Each must carry the
+     * rival's platform tag.
+     */
+    rivalPicks?: string[];
     /** For a platform we don't build on: we move sites off it. */
     rivalLine: string;
   };

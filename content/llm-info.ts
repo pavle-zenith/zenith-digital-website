@@ -8,6 +8,7 @@ import { hubLive, industryHref, industryPages } from "@/content/industries";
 import { migrationGuides } from "@/content/migration-guides";
 import { PRICING_UPDATED, pricePackages, pricingPage } from "@/content/pricing";
 import { servicePages } from "@/content/service-pages";
+import { COST_CALCULATOR_PATH, costCalculatorLive } from "@/content/tools/status";
 import { organizationSchema } from "@/lib/schema";
 
 /**
@@ -139,6 +140,7 @@ export const llmInfo = {
     extra: [
       ...(hubLive ? [{ label: "Industry pages", href: "/industries" }] : []),
       ...(compareHubLive ? [{ label: "Platform comparisons", href: "/compare" }] : []),
+      ...(costCalculatorLive ? [{ label: "Website cost calculator", href: COST_CALCULATOR_PATH }] : []),
       { label: "White-label and partnerships", href: "/partnerships" },
     ],
   },

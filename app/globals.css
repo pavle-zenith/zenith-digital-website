@@ -808,3 +808,64 @@ body {
     transform: scale(2.4);
   }
 }
+
+/* Cost calculator pages slider (/tools/website-cost-calculator). A 6px
+   track filled in ink up to the value (--fill, set inline), and a 20px
+   square thumb at the control radius: a control, so squared like every
+   other one. */
+.cost-range {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+.cost-range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    var(--color-accent) var(--fill, 0%),
+    var(--color-light-border) var(--fill, 0%)
+  );
+}
+.cost-range::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-light-border);
+}
+.cost-range::-moz-range-progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-accent);
+}
+.cost-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -7px;
+  border: 2px solid var(--color-accent);
+  border-radius: 6px;
+  background: var(--color-light-bg);
+}
+.cost-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-accent);
+  border-radius: 6px;
+  background: var(--color-light-bg);
+}
+.cost-range:focus-visible {
+  outline: none;
+}
+.cost-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.cost-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

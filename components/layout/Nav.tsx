@@ -132,9 +132,11 @@ export function Nav({
   }, [open]);
 
   const [audit, quote] = nav.ctas;
-  // Resources > Learn, with the comparisons hub link once the /compare hub is live.
+  // Resources > Learn, with the cost calculator and the comparisons hub
+  // link once each has a route.
   const learnItems: MenuItem[] = [
     ...resourcesMenu.learn.items,
+    ...(resources?.calculator ? [resources.calculator] : []),
     ...(resources?.compare ? [resources.compare.viewAll] : []),
   ];
 

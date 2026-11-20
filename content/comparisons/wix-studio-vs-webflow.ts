@@ -301,8 +301,7 @@ export const wixStudioVsWebflow: ComparisonContent = {
     // sales, then a Series A raise. Bel'Istria stays out until its "top spot
     // in AI answers" claim is confirmed.
     picks: ["scottish-luxury-experience", "hunting-brook-gardens", "knode-ai"],
-    rivalLine:
-      "We don't build on Webflow. We move sites off it, and the guide covers the CSV exports, the redirect list, and the CMS images to save before the old site is cancelled.",
+    rivalLine: "We don't build on Webflow. We move sites off it.",
   },
   faq: {
     heading: ["Wix Studio vs Webflow:", "your questions"],

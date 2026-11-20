@@ -5,6 +5,7 @@ import { migrationGuides } from "@/content/migration-guides";
 import { hubLive, industryPages } from "@/content/industries";
 import { compareHubLive, publishedComparisons } from "@/content/comparisons";
 import { liveComparisonRedirects } from "@/content/comparisons/status";
+import { COST_CALCULATOR_PATH, costCalculatorLive } from "@/content/tools/status";
 import { servicePages } from "@/content/service-pages";
 import { sanityFetchSafe } from "@/sanity/lib/client";
 import { postSlugsQuery } from "@/sanity/lib/queries";
@@ -109,6 +110,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
+    // The cost calculator, only once published (content/tools/status.ts).
+    ...(costCalculatorLive
+      ? [{ url: `${SITE}${COST_CALCULATOR_PATH}`, changeFrequency: "monthly" as const, priority: 0.7 }]
+      : []),
     // The /compare hub and comparisons, each only once published
     // (content/comparisons/status.ts), never the preview-only set.
     ...(compareHubLive

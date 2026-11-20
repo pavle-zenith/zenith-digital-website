@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/utils";
 import type { Tone } from "@/lib/types";
 import { pricing } from "@/content/home";
+import { costCalculatorRoutable } from "@/content/tools/status";
 
 /**
  * Pricing (dark, textured section — Reducto-style tier cards). Header band:
@@ -83,21 +84,27 @@ export function Pricing({
             >
               {pricing.intro}
             </p>
-            {/* Every price on one page (pricing brief, 20 Nov 2026). */}
-            <Link
-              href={pricing.seeAll.href}
-              className={cn(
-                "group mt-4 inline-flex items-center gap-1.5 text-body font-medium underline underline-offset-4 transition",
-                dark
-                  ? "text-text decoration-border hover:decoration-text"
-                  : "text-light-text decoration-light-border hover:decoration-light-text",
-              )}
-            >
-              {pricing.seeAll.label}
-              <span aria-hidden className="btn-arrow">
-                &rarr;
-              </span>
-            </Link>
+            {/* Every price on one page (pricing brief, 20 Nov 2026), and the
+                cost calculator beside it once it has a route. */}
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+              {[pricing.seeAll, ...(costCalculatorRoutable ? [pricing.estimate] : [])].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "group inline-flex items-center gap-1.5 text-body font-medium underline underline-offset-4 transition",
+                    dark
+                      ? "text-text decoration-border hover:decoration-text"
+                      : "text-light-text decoration-light-border hover:decoration-light-text",
+                  )}
+                >
+                  {link.label}
+                  <span aria-hidden className="btn-arrow">
+                    &rarr;
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
           <Link
             href={pricing.cta.href}

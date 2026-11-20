@@ -29,6 +29,9 @@ export const compareTemplate = {
     criterionColumn: "Criterion",
     edgeColumn: "Edge",
     details: "Details",
+    /** The one switch over the scorecard (owner, 20 Nov 2026). */
+    showDetails: "Show details",
+    hideDetails: "Hide details",
     /** One line above the table. Icons: check, plus, wrench (shape, not colour). */
     tags: {
       included: { label: "Built in", icon: "check" },
@@ -70,12 +73,31 @@ export const compareTemplate = {
     rival: (rival: string) => `${rival} if`,
     details: "Details",
   },
+  /** The five questions as a slide deck (owner, 20 Nov 2026). */
+  deck: {
+    progress: "Question",
+    of: "of",
+    result: "Your result",
+    prev: "Previous question",
+    next: "Next question",
+    yourAnswers: "Your answers",
+    leans: (name: string) => `Your answers point to ${name}`,
+    split: "Your answers are split",
+    splitBody: "Both fit part of what you need. A 20-minute call usually settles it.",
+    /** "{wix} · {rival}", filled with each name and its count. */
+    tally: "{wix} · {rival}",
+    restart: "Answer again",
+    verdict: "See which fits",
+    cta: { label: "Talk it through", href: "/book-a-call" },
+  },
   choose: {
     wix: "Wix Studio is usually better if...",
     rival: (rival: string) => `${rival} is usually better if...`,
     custom: "Custom code (Next.js) is usually better if...",
   },
   costItemColumn: "Year one",
+  /** The folded notes under the cost table. */
+  costNotes: "How these figures work",
   costMethod:
     "Platform prices are from each vendor's own pricing page; the build is our published package.",
   /**

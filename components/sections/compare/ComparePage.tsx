@@ -8,10 +8,14 @@ import { ProjectSlider } from "@/components/sections/industry/ProjectSlider";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ShortAnswer } from "@/components/sections/ShortAnswer";
+import { QuestionDeck } from "@/components/sections/compare/QuestionDeck";
+import { CompareGrid, criterionIcon } from "@/components/sections/compare/CompareGrid";
+import { DetailToggle } from "@/components/sections/compare/DetailToggle";
+import { platformLogo } from "@/content/comparisons/logos";
 import { cardsOnPlatform, detailSlugs } from "@/content/case-studies";
 import { compareHubRoutable } from "@/content/comparisons";
 import type { ComparisonContent } from "@/content/comparisons";
-import type { ScoreEdge, ScoreRow, ScoreTag } from "@/content/comparisons/types";
+import type { ScoreEdge } from "@/content/comparisons/types";
 import { compareTemplate as t } from "@/content/comparisons/template";
 import { cn } from "@/lib/utils";
 
@@ -84,16 +88,30 @@ function monthYear(iso: string) {
 /* ------------------------------------------------------------------ */
 
 function CompareHero({ data }: { data: ComparisonContent }) {
+  // Both platforms' marks in place of a "VS" chip (owner, 20 Nov 2026).
+  const marks = [
+    { src: platformLogo.wix, name: t.wixName },
+    { src: platformLogo[data.rival.key], name: data.rival.name },
+  ].filter((m) => m.src);
   const eyebrow = (
     <>
-      <span className="flex h-6 w-6 items-center justify-center rounded-[4px] border border-light-border bg-light-bg font-mono text-[9px] font-medium leading-none text-light-text">
-        VS
+      {/* Side by side, not overlapped: the Wix mark is a wordmark and an
+          overlap clipped its X. */}
+      <span className="flex gap-1">
+        {marks.map((m) => (
+          <span
+            key={m.name}
+            className="flex h-7 w-7 items-center justify-center rounded-[5px] border border-light-border bg-light-bg"
+          >
+            <Image src={m.src} alt="" width={16} height={16} unoptimized className="h-4 w-4 object-contain" />
+          </span>
+        ))}
       </span>
       {t.eyebrow}
     </>
   );
   const eyebrowClass =
-    "inline-flex items-center gap-2 rounded-full border border-light-border bg-light-bg/80 py-1 pl-1 pr-3 font-mono text-label uppercase track-label text-light-muted";
+    "inline-flex items-center gap-2.5 rounded-full border border-light-border bg-light-bg/80 py-1 pl-1 pr-3.5 font-mono text-label uppercase track-label text-light-muted";
 
   return (
     <Section
@@ -155,22 +173,17 @@ export function HeroTexture() {
 /* ------------------------------------------------------------------ */
 
 /**
- * The scorecard (table simplify brief, 20 Nov 2026). One row per criterion:
- * short cells with a tag icon, the Edge pill, and a Details toggle holding
- * the verified sentences, so they stay in the page for search and AI answers
- * while the default view scans in one screen. From lg, every row shares one
- * five-column template, so an open row never shifts the columns; below lg
- * each row is a compact card. The tally under it is computed from `edge`.
+ * The scorecard (owner, 20 Nov 2026: "more cleanly and spaced out"): the
+ * criteria down the left, each platform its own column card under its logo,
+ * the edge set in full ink, and one "Show details" switch for the verified
+ * sentences instead of a toggle per row. Then the tally, computed from the
+ * rows, never typed.
  */
-const SCORE_COLS =
-  "lg:grid-cols-[minmax(0,1.7fr)_minmax(0,3fr)_minmax(0,3fr)_minmax(0,1.4fr)_6rem]";
-
 function CompareTable({ data }: { data: ComparisonContent }) {
   const s = t.scorecard;
   const rival = data.rival.name;
   const count: Record<ScoreEdge, number> = { wix: 0, rival: 0, even: 0, depends: 0 };
   data.table.rows.forEach((row) => (count[row.edge] += 1));
-  const tags = Object.keys(s.tags) as ScoreTag[];
 
   return (
     <Section tone="light" frameClassName="!py-10 md:!py-16" id="comparison" className="scroll-mt-[calc(4rem+var(--announce-h))]">
@@ -183,145 +196,48 @@ function CompareTable({ data }: { data: ComparisonContent }) {
         </p>
       </div>
 
-      <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[0.8125rem] text-light-muted md:mt-10 md:gap-x-6">
-        {tags.map((tag) => (
-          <li key={tag} className="inline-flex items-center gap-1.5">
-            <TagIcon tag={tag} />
-            {s.tags[tag].label}
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-4 overflow-hidden rounded-card border border-light-border">
-        {/* Column heads for sighted readers; each cell also names its
-            platform for screen readers, so the heads are hidden from them. */}
-        <div aria-hidden className={cn("hidden bg-light-surface lg:grid", SCORE_COLS)}>
-          <span className="px-5 py-3 font-mono text-label uppercase track-label text-light-muted">
-            {s.criterionColumn}
-          </span>
-          <span className="px-5 py-3 font-display text-body font-medium">{t.wixName}</span>
-          <span className="px-5 py-3 font-display text-body font-medium">{rival}</span>
-          <span className="px-5 py-3 font-mono text-label uppercase track-label text-light-muted">
-            {s.edgeColumn}
-          </span>
-          <span />
-        </div>
-        <ul>
-          {data.table.rows.map((row) => (
-            <ScoreRowItem key={row.criterion} row={row} rival={rival} />
-          ))}
-        </ul>
+      <div className="mt-8 md:mt-10">
+        <DetailToggle show={s.showDetails} hide={s.hideDetails}>
+          <CompareGrid
+            caption={data.table.heading}
+            edgeLabel={s.edgeColumn}
+            columns={[
+              { name: t.wixName, logo: platformLogo.wix },
+              { name: rival, logo: platformLogo[data.rival.key] },
+            ]}
+            rows={data.table.rows.map((row) => ({
+              label: row.criterion,
+              icon: criterionIcon(row.criterion),
+              cells: [
+                { text: row.wix.short, detail: row.detail.wix, edge: row.edge === "wix" },
+                { text: row.rival.short, detail: row.detail.rival, edge: row.edge === "rival" },
+              ],
+            }))}
+          />
+        </DetailToggle>
       </div>
 
-      <p className="mt-4 text-body font-medium text-light-text">{s.tally(count, rival)}</p>
-      <p className="mt-2 font-mono text-label uppercase track-label text-light-muted">
-        {t.lastCheckedLabel} <time dateTime={data.checked}>{monthYear(data.checked)}</time>
+      <p className="mt-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <span className="text-body font-medium text-light-text">{s.tally(count, rival)}</span>
+        <span className="font-mono text-label uppercase track-label text-light-muted">
+          {t.lastCheckedLabel} <time dateTime={data.checked}>{monthYear(data.checked)}</time>
+        </span>
       </p>
     </Section>
-  );
-}
-
-function ScoreRowItem({ row, rival }: { row: ScoreRow; rival: string }) {
-  const s = t.scorecard;
-  return (
-    <li className="border-t border-light-border first:border-t-0 lg:first:border-t">
-      <details className="group">
-        <summary
-          className={cn(
-            "grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-1 px-4 py-3 transition-colors hover:bg-light-surface/50 lg:gap-0 lg:p-0 [&::-webkit-details-marker]:hidden",
-            SCORE_COLS,
-          )}
-        >
-          <span className="self-center font-display text-body font-medium text-light-text lg:px-5 lg:py-3">
-            {row.criterion}
-          </span>
-          <ScoreCell name={t.wixName} cell={row.wix} wins={row.edge === "wix"} />
-          <ScoreCell name={rival} cell={row.rival} wins={row.edge === "rival"} />
-          {/* First line on phones, beside the criterion; its own column from lg. */}
-          <span className="col-start-2 row-start-1 self-center lg:col-auto lg:row-auto lg:px-5 lg:py-3">
-            <span className="sr-only">{s.edgeColumn}: </span>
-            <EdgePill edge={row.edge} rival={rival} />
-          </span>
-          <span className="col-span-2 inline-flex items-center gap-1 self-center text-[0.8125rem] text-light-muted lg:col-auto lg:justify-end lg:px-5 lg:py-3">
-            {s.details}
-            <FeatureIcon
-              name="chevron-down"
-              className="h-4 w-4 transition-transform duration-200 group-open:rotate-180"
-            />
-          </span>
-        </summary>
-        <div className={cn("grid gap-2 px-4 pb-4 lg:gap-0 lg:px-0 lg:pb-4", SCORE_COLS)}>
-          <p className="text-[0.9375rem] leading-relaxed text-light-muted lg:col-start-2 lg:px-5">
-            <span className="font-medium text-light-text lg:sr-only">{t.wixName}: </span>
-            {row.detail.wix}
-          </p>
-          <p className="text-[0.9375rem] leading-relaxed text-light-muted lg:col-start-3 lg:px-5">
-            <span className="font-medium text-light-text lg:sr-only">{rival}: </span>
-            {row.detail.rival}
-          </p>
-        </div>
-      </details>
-    </li>
-  );
-}
-
-/** A short cell: "{Platform}: " on phones (screen readers only from lg), the tag icon, the text. */
-function ScoreCell({ name, cell, wins }: { name: string; cell: ScoreRow["wix"]; wins: boolean }) {
-  return (
-    <span
-      className={cn(
-        "col-span-2 min-w-0 text-[0.9375rem] leading-snug text-light-text lg:col-auto lg:flex lg:items-center lg:gap-2 lg:px-5 lg:py-3 lg:text-body",
-        wins && "lg:bg-light-surface",
-      )}
-    >
-      <span className="mr-1.5 text-light-muted lg:sr-only">{name}:</span>
-      {/* Inline on phones, so a long value wraps under its label. */}
-      {cell.tag ? (
-        <TagIcon tag={cell.tag} className="mr-1.5 inline-block align-[-3px] lg:mr-0" />
-      ) : null}
-      <span className="min-w-0">{cell.short}</span>
-      {cell.tag ? <span className="sr-only"> ({t.scorecard.tags[cell.tag].label})</span> : null}
-    </span>
-  );
-}
-
-function TagIcon({ tag, className }: { tag: ScoreTag; className?: string }) {
-  return (
-    <FeatureIcon
-      name={t.scorecard.tags[tag].icon}
-      className={cn("h-4 w-4 shrink-0 text-light-text", className)}
-    />
-  );
-}
-
-/** Wix Studio in the ink wash, the rival on a surface fill, Even and Depends dashed. */
-function EdgePill({ edge, rival }: { edge: ScoreEdge; rival: string }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex whitespace-nowrap rounded-full border px-2.5 py-0.5 font-mono text-label uppercase track-label",
-        edge === "wix"
-          ? "border-accent-line bg-accent-subtle text-accent"
-          : edge === "rival"
-            ? "border-light-border bg-light-surface text-light-text"
-            : "border-dashed border-light-border text-light-muted",
-      )}
-    >
-      {t.scorecard.edge(edge, rival)}
-    </span>
   );
 }
 
 /* ------------------------------------------------------------------ */
 
 /**
- * Five questions as a compact list (brief, 20 Nov 2026): the question, then
- * "Wix Studio if ..." and "{Rival} if ..." side by side. Where the old answer
- * adds a fact, it sits under a Details toggle on that row.
+ * Five questions as a slide deck (owner, 20 Nov 2026): one question per
+ * slide, "Wix Studio if ..." or "{Rival} if ...", then a last slide that
+ * tallies the picks into this page's own verdict. The deck is a client
+ * island; every question and answer is still in the server HTML.
  */
 function FiveQuestions({ data }: { data: ComparisonContent }) {
   const rival = data.rival.name;
-  const q = t.questionsIf;
+  const d = t.deck;
   return (
     <Section tone="light" frameClassName="!py-10 md:!py-16">
       <div className="max-w-3xl">
@@ -332,61 +248,31 @@ function FiveQuestions({ data }: { data: ComparisonContent }) {
           {data.questions.intro}
         </p>
       </div>
-
-      <ol className="mt-6 border-b border-light-border md:mt-10">
-        {data.questions.items.map((item) => {
-          const row = (
-            <div className="grid gap-1.5 py-4 md:grid-cols-[minmax(0,3fr)_minmax(0,4.5fr)_minmax(0,4.5fr)] md:gap-8">
-              <div>
-                <h3 className="font-display text-body font-medium leading-snug text-light-text">
-                  {item.q}
-                </h3>
-                {item.detail ? (
-                  <span className="mt-1 inline-flex items-center gap-1 text-[0.8125rem] text-light-muted">
-                    {q.details}
-                    <FeatureIcon
-                      name="chevron-down"
-                      className="h-4 w-4 transition-transform duration-200 group-open:rotate-180"
-                    />
-                  </span>
-                ) : null}
-              </div>
-              <Outcome label={q.wix} text={item.wix} />
-              <Outcome label={q.rival(rival)} text={item.rival} />
-            </div>
-          );
-          return (
-            <li key={item.q} className="border-t border-light-border">
-              {item.detail ? (
-                <details className="group">
-                  <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                    {row}
-                  </summary>
-                  <p className="max-w-[68ch] pb-4 text-[0.9375rem] leading-relaxed text-light-muted md:-mt-1 md:ml-[calc((100%-4rem)*0.25+2rem)]">
-                    {item.detail}
-                  </p>
-                </details>
-              ) : (
-                row
-              )}
-            </li>
-          );
-        })}
-      </ol>
+      <div className="mt-8 md:mt-10">
+        <QuestionDeck
+          items={data.questions.items}
+          choose={{ wix: data.choose.wix, rival: data.choose.rival }}
+          copy={{
+            progress: d.progress,
+            of: d.of,
+            result: d.result,
+            prev: d.prev,
+            next: d.next,
+            wixIf: t.questionsIf.wix,
+            rivalIf: t.questionsIf.rival(rival),
+            wixName: t.wixName,
+            rivalName: rival,
+            yourAnswers: d.yourAnswers,
+            leans: { wix: d.leans(t.wixName), rival: d.leans(rival), split: d.split },
+            splitBody: d.splitBody,
+            tally: d.tally,
+            restart: d.restart,
+            verdict: { label: d.verdict, href: "#choose" },
+            cta: d.cta,
+          }}
+        />
+      </div>
     </Section>
-  );
-}
-
-function Outcome({ label, text }: { label: string; text: string }) {
-  return (
-    <p className="flex gap-2 text-[0.9375rem] leading-snug text-light-text">
-      <span aria-hidden className="arrow-glyph shrink-0 text-light-muted">
-        &rarr;
-      </span>
-      <span>
-        <span className="font-medium">{label}</span> {text}
-      </span>
-    </p>
   );
 }
 
@@ -394,27 +280,27 @@ function Outcome({ label, text }: { label: string; text: string }) {
 
 function Choose({ data }: { data: ComparisonContent }) {
   const boxes = [
-    { title: t.choose.wix, ...data.choose.wix, icon: "layers" },
-    { title: t.choose.rival(data.rival.name), ...data.choose.rival, icon: "split" },
-    { title: t.choose.custom, ...data.choose.custom, icon: "braces" },
+    { title: t.choose.wix, ...data.choose.wix },
+    { title: t.choose.rival(data.rival.name), ...data.choose.rival },
+    { title: data.choose.customTitle ?? t.choose.custom, ...data.choose.custom },
   ];
   return (
-    <Section tone="light" frameClassName="!py-10 md:!py-16">
+    <Section
+      tone="light"
+      id="choose"
+      frameClassName="!py-10 md:!py-16"
+      className="scroll-mt-[calc(4rem+var(--announce-h))]"
+    >
       <h2 className="max-w-3xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
         {data.choose.heading}
       </h2>
       <div className="type-card mt-8 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border md:mt-10 lg:grid-cols-3">
         {boxes.map((b) => (
           <div key={b.title} className="flex flex-col bg-light-bg p-6 md:p-8">
-            <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-surface text-light-text">
-                <FeatureIcon name={b.icon} />
-              </span>
-              <span className="rounded-full border border-light-border px-3 py-1 font-mono text-label uppercase track-label text-light-muted">
-                {b.label}
-              </span>
-            </div>
-            <h3 className="mt-6 font-display text-h3 font-medium leading-snug tracking-tight">
+            {/* The label as a quiet caption: no icon tile or pill (owner,
+                20 Nov 2026: less text, fewer boxes). */}
+            <p className="font-mono text-label uppercase track-label text-light-muted">{b.label}</p>
+            <h3 className="mt-3 font-display text-h3 font-medium leading-snug tracking-tight">
               {b.title}
             </h3>
             <p className="mt-3 text-body leading-relaxed text-light-muted">{b.body}</p>
@@ -434,67 +320,42 @@ function CostTable({ data }: { data: ComparisonContent }) {
         <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
           {data.cost.heading}
         </h2>
-        <p className="mt-4 text-body-lg font-medium leading-relaxed text-light-muted">
-          {data.cost.setup} {t.costMethod}
-        </p>
+        <p className="mt-4 text-body-lg font-medium leading-relaxed text-light-muted">{data.cost.setup}</p>
       </div>
 
-      <div className="type-card mt-8 overflow-hidden rounded-card border border-light-border md:mt-10">
-        <table className="w-full border-collapse text-left">
-          <caption className="sr-only">{data.cost.heading}</caption>
-          <thead className="max-md:sr-only">
-            <tr className="bg-light-surface">
-              <th
-                scope="col"
-                className="w-[28%] px-5 py-4 font-mono text-label font-normal uppercase track-label text-light-muted"
-              >
-                {t.costItemColumn}
-              </th>
-              <th scope="col" className="w-[36%] px-5 py-4 font-display text-body-lg font-medium">
-                {t.wixName}
-              </th>
-              <th scope="col" className="w-[36%] px-5 py-4 font-display text-body-lg font-medium">
-                {data.rival.name}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.cost.rows.map((row) => (
-              <tr
-                key={row.label}
-                className="border-t border-light-border first:border-t-0 max-md:block max-md:space-y-3 max-md:px-5 max-md:py-5 md:first:border-t"
-              >
-                <th
-                  scope="row"
-                  className="px-5 py-4 align-top font-display text-body font-medium text-light-text max-md:block max-md:p-0"
-                >
-                  {row.label}
-                </th>
-                {[
-                  { name: t.wixName, value: row.wix },
-                  { name: data.rival.name, value: row.rival },
-                ].map((c) => (
-                  <td
-                    key={c.name}
-                    className="px-5 py-4 align-top text-body leading-relaxed text-light-text tabular-nums max-md:block max-md:p-0"
-                  >
-                    <span className="mb-1 block font-mono text-label uppercase track-label text-light-muted md:hidden">
-                      {c.name}
-                    </span>
-                    {c.value}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="mt-8 md:mt-10">
+        <CompareGrid
+          caption={data.cost.heading}
+          columns={[
+            { name: t.wixName, logo: platformLogo.wix },
+            { name: data.rival.name, logo: platformLogo[data.rival.key] },
+          ]}
+          rows={data.cost.rows.map((row) => ({
+            label: row.label,
+            icon: criterionIcon(row.label),
+            cells: [{ text: row.wix }, { text: row.rival }],
+          }))}
+        />
       </div>
-      <p className="mt-4 max-w-3xl text-body leading-relaxed text-light-muted">
-        {t.costStepUp} {data.cost.note} {t.costCurrencyNote}
-      </p>
-      <p className="mt-2 font-mono text-label uppercase track-label text-light-muted">
-        {t.lastCheckedLabel} <time dateTime={data.checked}>{monthYear(data.checked)}</time>
-      </p>
+      {/* The method, the step-up plan and the currency note, folded under
+          the table (owner, 20 Nov 2026: less text). Still in the HTML. */}
+      <details className="group/costnote mt-6 max-w-3xl">
+        <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-4 gap-y-1 [&::-webkit-details-marker]:hidden">
+          <span className="inline-flex items-center gap-1 text-body font-medium text-light-text">
+            {t.costNotes}
+            <FeatureIcon
+              name="chevron-down"
+              className="h-4 w-4 text-light-muted transition-transform duration-200 group-open/costnote:rotate-180"
+            />
+          </span>
+          <span className="font-mono text-label uppercase track-label text-light-muted">
+            {t.lastCheckedLabel} <time dateTime={data.checked}>{monthYear(data.checked)}</time>
+          </span>
+        </summary>
+        <p className="mt-3 text-[0.9375rem] leading-relaxed text-light-muted">
+          {t.costMethod} {t.costStepUp} {data.cost.note} {t.costCurrencyNote}
+        </p>
+      </details>
     </Section>
   );
 }
@@ -519,6 +380,18 @@ function Proof({ data }: { data: ComparisonContent }) {
         return card;
       })
     : tagged.slice(0, 3);
+  // A platform we also build on: our projects on it follow the Wix Studio ones.
+  const rivalPlatform = data.rival.weBuildOnIt ? data.rival.platform : undefined;
+  if (rivalPlatform && data.proof.rivalPicks) {
+    const onRival = cardsOnPlatform(rivalPlatform);
+    for (const slug of data.proof.rivalPicks) {
+      const card = onRival.find((c) => c.slug === slug);
+      if (!card) {
+        throw new Error(`compare/${data.slug}: "${slug}" isn't tagged ${rivalPlatform}`);
+      }
+      cards.push(card);
+    }
+  }
   return (
     <Section tone="light" frameClassName="!py-10 md:!py-16">
       {/* The industry pages' slider: one card and a peek on phones, three
@@ -595,9 +468,6 @@ function Related({ data }: { data: ComparisonContent }) {
                 <span className="btn-arrow whitespace-nowrap" aria-hidden>
                   &rarr;
                 </span>
-              </span>
-              <span className="mt-2 hidden text-[0.875rem] leading-relaxed text-light-muted sm:block">
-                {item.desc}
               </span>
             </span>
           </Link>

@@ -2,6 +2,7 @@ import type { CtaLink, Metric } from "@/lib/types";
 import type { IndustrySlug } from "./case-studies";
 
 import { attribution, testimonial } from "./testimonials-data";
+import { COST_CALCULATOR_PATH } from "./tools/status";
 
 /**
  * Homepage content. Single source of truth for all section copy + asset paths.
@@ -696,6 +697,8 @@ export const pricing = {
   cta: { label: "Book a call", href: "/book-a-call" },
   /** A quiet text link under the intro to the full /pricing page. */
   seeAll: { label: "See every price", href: "/pricing" },
+  // Beside "See every price" once the calculator has a route (Pricing.tsx).
+  estimate: { label: "Estimate your year-one cost", href: COST_CALCULATOR_PATH },
   // White-label band below the tiers
   whiteLabel: {
     heading: "Agencies: resell our builds under your brand",
@@ -1028,6 +1031,8 @@ export const footer = {
         { label: "Partnerships", href: "/partnerships" },
         // Footer only, not the nav (owner, 20 Nov 2026).
         { label: "Pricing", href: "/pricing" },
+        // Rendered only once the calculator has a route (Footer.tsx).
+        { label: "Website cost calculator", href: COST_CALCULATOR_PATH, requiresCalculator: true },
         { label: "About", href: "/about" },
       ],
     },
@@ -1319,6 +1324,8 @@ export const resourcesMenu = {
       },
     ],
   },
+  // Shown under Learn once the calculator has a route (content/tools/status.ts).
+  calculator: { label: "Website cost calculator", href: COST_CALCULATOR_PATH, icon: "calculator" },
   featured: { label: "Latest article", cta: "Read the article" },
   viewAll: { label: "All articles", href: "/blog", icon: "pen" },
   quickLinks: [

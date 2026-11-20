@@ -6,6 +6,7 @@ import { seoAeoPpc } from "@/content/service-pages/seo-aeo-ppc";
 import { websiteMigration } from "@/content/service-pages/website-migration";
 import { wixStudioDevelopment } from "@/content/service-pages/wix-studio-development";
 import { wixStudioWebsiteDesign } from "@/content/service-pages/wix-studio-website-design";
+import { COST_CALCULATOR_PATH } from "@/content/tools/status";
 import type { CtaLink } from "@/lib/types";
 
 /**
@@ -322,6 +323,7 @@ export const pricingPage = {
       { title: "Ad spend", body: "paid to the ad platforms, separate from any campaign management." },
     ],
     link: { label: "What each platform costs to run", href: "/compare" },
+    estimate: { label: "Estimate your year-one cost", href: COST_CALCULATOR_PATH },
   },
   payment: {
     heading: "How payment works",

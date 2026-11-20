@@ -8,6 +8,12 @@
  * euros) and is NEVER converted. Re-check a vendor's page before changing a
  * figure, and update its `checked` date when you do.
  *
+ * The one exception: the website cost calculator
+ * (/tools/website-cost-calculator) converts, because it adds a vendor plan
+ * to our build price in the visitor's currency. It still stores every figure
+ * here in US dollars and converts only at render, at the ECB rates in
+ * content/fx.ts, marking each converted figure "≈". Nowhere else converts.
+ *
  * Verified 19 Nov 2026 in a real browser (Chrome via Playwright), USD
  * shown; other regions may see other prices. Every figure below was on the
  * vendor's own page that day:
@@ -22,6 +28,18 @@
  *  - wordpress.com/pricing: first-year prices billed yearly and the
  *    "Auto-renews at" rate printed under each plan.
  *  - wordpress.org/plugins: "Browse over 79,000 free plugins."
+ *
+ * Added 20 Nov 2026 for the cost calculator, each read on the vendor's own
+ * page that day (USD):
+ *  - shopify.com/pricing: Basic US$29, Grow US$79, Advanced US$299 a month
+ *    on the "Pay yearly" toggle (US$39, US$105, US$399 paying monthly);
+ *    Plus "from $2,300/mo".
+ *  - vercel.com/pricing: Hobby US$0, Pro US$20 a month with "a $20 included
+ *    credit to use across resources"; "All prices shown are in USD and
+ *    exclude value-added tax (VAT) ... and other applicable taxes."
+ *  - sanity.io/pricing: Free US$0, "Up to 20 user seats", 10k documents;
+ *    Growth "$15 per seat / month", and annual billing only on Enterprise
+ *    ("only monthly payments are supported for self-serve plans").
  * Not used: Wix Multilingual's free word credit (the app page says 3,000,
  * a support article said 5,000), and which Wix plans include Multilingual
  * (only "free to install" is stated).
@@ -55,6 +73,10 @@ export const wixStudio = {
   paymentsFrom: "Standard",
   /** support.wix.com, "CMS: About dynamic pages". */
   staticPageLimit: 100,
+  /** Plans table, "Product catalog", Standard to Elite (read 20 Nov 2026). */
+  productCatalog: "50,000",
+  /** Plans table, "Multiple currencies": a dash on Standard, "Primary plus 5" on Plus. */
+  currenciesFrom: "Plus",
 };
 
 export const webflow = {
@@ -82,4 +104,85 @@ export const wordpressCom = {
 export const wordpressOrg = {
   /** wordpress.org/plugins: "Browse over 79,000 free plugins." */
   plugins: "79,000",
+};
+
+/** Shopify plans, billed yearly ("Pay yearly" on the vendor's page). */
+export const shopify = {
+  source: { href: "https://www.shopify.com/pricing", checked: "2026-11-20" },
+  plans: {
+    basic: { name: "Basic", perMonth: 29, perMonthMonthly: 39 },
+    grow: { name: "Grow", perMonth: 79, perMonthMonthly: 105 },
+    advanced: { name: "Advanced", perMonth: 299, perMonthMonthly: 399 },
+  },
+  /** "from $2,300/mo". */
+  plusFrom: 2300,
+};
+
+/** Vercel, the host for our custom-code builds. Prices exclude tax. */
+export const vercel = {
+  source: { href: "https://vercel.com/pricing", checked: "2026-11-20" },
+  plans: {
+    hobby: { name: "Hobby", perMonth: 0 },
+    /** Includes US$20 of usage credit a month. */
+    pro: { name: "Pro", perMonth: 20, usageCredit: 20 },
+  },
+  excludesTax: true,
+};
+
+/** Sanity, the CMS on our custom-code builds. Self-serve plans bill monthly only. */
+export const sanity = {
+  source: { href: "https://www.sanity.io/pricing", checked: "2026-11-20" },
+  plans: {
+    free: { name: "Free", perMonth: 0, seats: 20, documents: "10k" },
+    growth: { name: "Growth", perSeatPerMonth: 15 },
+  },
+  monthlyBillingOnly: true,
+};
+
+/**
+ * Framer, framer.com/pricing, yearly billing selected, read 20 Nov 2026.
+ * Redirects are a dash on Basic and a check on Pro in the plans table.
+ * Editor and locale prices are per month, billed with the plan.
+ */
+export const framer = {
+  source: { href: "https://www.framer.com/pricing", checked: "2026-11-20" },
+  plans: {
+    basic: { name: "Basic", perMonth: 10, pages: 30, collections: 2, cmsItems: "1,000" },
+    pro: { name: "Pro", perMonth: 30, pages: 150, collections: 10, cmsItems: "2,500" },
+  },
+  /** Pro with paid add-ons: "up to 40,000 CMS items" (pricing FAQ). */
+  proMaxCmsItems: "40,000",
+  /** "Additional editors" and "Content editors", per editor per month. */
+  editors: { full: 20, content: 10 },
+  /** Locales add-on: per locale per month, "Up to 20". */
+  locale: { perMonth: 20, max: 20 },
+  redirectsFrom: "Pro",
+};
+
+/**
+ * Squarespace, squarespace.com/pricing, "Pay annually" selected, read
+ * 20 Nov 2026. Contributors and store fees as printed on each plan card.
+ */
+export const squarespace = {
+  source: { href: "https://www.squarespace.com/pricing", checked: "2026-11-20" },
+  plans: {
+    basic: { name: "Basic", perMonth: 12, contributors: "2", storeFee: "2%" },
+    core: { name: "Core", perMonth: 17, contributors: "Unlimited", storeFee: "No" },
+    advanced: { name: "Advanced", perMonth: 25, contributors: "Unlimited", storeFee: "No" },
+  },
+  /** support.squarespace.com "Page limits": up to 1,000 pages on any current plan. */
+  pageLimit: "1,000",
+  /** Code injection: Core, Plus, Advanced (help centre). */
+  codeInjectionFrom: "Core",
+  /** Weglot integration: free for one language up to 2,000 words (help centre). */
+  weglotFreeWords: "2,000",
+};
+
+/**
+ * Weglot, weglot.com/pricing, read 20 Nov 2026. Shown in euros, excluding
+ * VAT, for our region; the Starter plan covers 1 language and 10,000 words.
+ */
+export const weglot = {
+  source: { href: "https://www.weglot.com/pricing", checked: "2026-11-20" },
+  starter: { name: "Starter", perMonthEur: 15, words: "10,000", languages: 1 },
 };

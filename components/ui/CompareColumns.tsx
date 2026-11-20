@@ -16,6 +16,8 @@ export type CompareOption = {
   headline?: string;
   /** Small text under the headline ("Annual cost"). */
   sub?: string;
+  /** Drawn under the headline and sub, above the rows (the cost calculator's price scale). */
+  visual?: React.ReactNode;
   rows: { label?: string; text: string; mark: CompareMark }[];
 };
 
@@ -75,10 +77,20 @@ function Card({ option: o, tone }: { option: CompareOption; tone: "dark" | "ligh
       className={cn(
         "type-card flex w-full flex-col rounded-card border p-6 md:p-7",
         white
-          ? "tone-light border-white bg-white text-light-text shadow-[0_1px_2px_rgba(10,16,32,0.05),0_22px_48px_-22px_rgba(10,16,32,0.45)]"
+          ? cn(
+              "tone-light border-white bg-white text-light-text",
+              // On white, a soft lift small enough to stay inside the slider
+              // track's padding (16px sides, 24px below): the larger one was
+              // clipped by the track into a hard grey edge (owner, 20 Nov 2026).
+              tone === "light"
+                ? "shadow-[0_1px_2px_rgba(10,16,32,0.05),0_10px_24px_-12px_rgba(10,16,32,0.22)]"
+                : "shadow-[0_1px_2px_rgba(10,16,32,0.05),0_22px_48px_-22px_rgba(10,16,32,0.45)]",
+            )
           : tone === "dark"
             ? "border-border bg-surface/60 text-text backdrop-blur-md"
-            : "border-light-border bg-light-surface text-light-text",
+            : // Softer on white (owner, 20 Nov 2026: the grey slab and full
+              // border read as a hard shadow): a faint tint and a half-strength rule.
+              "border-light-border/60 bg-light-surface/50 text-light-text",
       )}
     >
       <div className="flex items-start justify-between gap-3">
@@ -104,6 +116,7 @@ function Card({ option: o, tone }: { option: CompareOption; tone: "dark" | "ligh
         </p>
       ) : null}
       {o.sub ? <p className={cn("mt-1.5 text-body", muted)}>{o.sub}</p> : null}
+      {o.visual ? <div className="mt-5">{o.visual}</div> : null}
 
       <ul className={cn("mt-6 divide-y border-t", rule, white || tone === "light" ? "border-light-border" : "border-border")}>
         {o.rows.map((row) => (

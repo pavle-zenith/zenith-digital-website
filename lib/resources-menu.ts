@@ -1,12 +1,15 @@
 import { blogCover } from "@/content/blog-covers";
 import { compareMenu, type CompareMenu } from "@/content/comparisons";
 import { resourcesMenu } from "@/content/home";
+import { costCalculatorRoutable } from "@/content/tools/status";
 import { POST_TAG, sanityClient } from "@/sanity/lib/client";
 import { latestPostQuery } from "@/sanity/lib/queries";
 
 export type ResourcesMenu = {
   /** "Compare platforms" column; null until the /compare hub has a route. */
   compare: CompareMenu | null;
+  /** Learn's "Website cost calculator" row; null until the page has a route. */
+  calculator: { label: string; href: string; icon: string } | null;
   /** The newest live post; null if there isn't one or Sanity is unreachable. */
   featured: {
     label: string;
@@ -56,6 +59,7 @@ export async function getResourcesMenu(): Promise<ResourcesMenu> {
   const post = await latestPost();
   return {
     compare: compareMenu(),
+    calculator: costCalculatorRoutable ? resourcesMenu.calculator : null,
     featured: post
       ? {
           label: resourcesMenu.featured.label,

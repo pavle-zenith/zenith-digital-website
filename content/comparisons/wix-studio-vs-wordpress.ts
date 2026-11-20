@@ -264,12 +264,13 @@ export const wixStudioVsWordpress: ComparisonContent = {
       {
         label: "Platform plan",
         wix: `${plans.basic.name}, ${perMonthYearly(plans.basic.perMonth)}: ${perYear(plans.basic.perMonth)} for the year.`,
-        rival: `Self-hosted: the software is free and hosting varies by host. WordPress.com: ${usd(wordpressCom.personal.perMonth)} a month on ${wordpressCom.personal.name} to ${usd(wordpressCom.business.perMonth)} on ${wordpressCom.business.name} in year one, billed yearly, renewing at ${usd(wordpressCom.personal.renews)} to ${usd(wordpressCom.business.renews)}.`,
+        // Short cell (owner, 20 Nov 2026: less text); the renewal rates are in the note.
+        rival: `Free software; hosting varies by host. WordPress.com: ${usd(wordpressCom.personal.perMonth)} to ${usd(wordpressCom.business.perMonth)} a month, billed yearly.`,
       },
       {
         label: "Hosting, security and updates",
         wix: "Included in the plan.",
-        rival: "Your host, plus whoever updates and secures core, themes and plugins: varies.",
+        rival: "Varies: your host, plus whoever keeps it updated.",
       },
       {
         label: "Editors",
@@ -282,7 +283,7 @@ export const wixStudioVsWordpress: ComparisonContent = {
         rival: "We don't build on WordPress: quotes vary by agency.",
       },
     ],
-    note: "WordPress.com includes hosting on every plan, the free one too, and allows plugins on every paid plan.",
+    note: `WordPress.com prices are for year one (${wordpressCom.personal.name} to ${wordpressCom.business.name}) and renew at ${usd(wordpressCom.personal.renews)} to ${usd(wordpressCom.business.renews)} a month. It includes hosting on every plan, the free one too, and allows plugins on every paid plan.`,
   },
   proof: {
     heading: "Built on Wix Studio by Zenith Digital",
@@ -291,8 +292,7 @@ export const wixStudioVsWordpress: ComparisonContent = {
     // sales, then a Series A raise. Bel'Istria stays out until its "top spot
     // in AI answers" claim is confirmed.
     picks: ["scottish-luxury-experience", "hunting-brook-gardens", "knode-ai"],
-    rivalLine:
-      "We don't build on WordPress. We move sites off it, and the guide covers what imports, what's rebuilt and how rankings are protected.",
+    rivalLine: "We don't build on WordPress. We move sites off it.",
   },
   faq: {
     heading: ["Wix Studio vs WordPress:", "your questions"],

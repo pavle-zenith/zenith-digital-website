@@ -92,7 +92,7 @@ function PostMeta({ post }: { post: PostCardData }) {
 }
 
 /** A card in the two-across grid. */
-export function PostTile({ post }: { post: PostCardData }) {
+export function PostTile({ post, excerpt = true }: { post: PostCardData; excerpt?: boolean }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
@@ -106,10 +106,10 @@ export function PostTile({ post }: { post: PostCardData }) {
           {post.title}
         </h3>
         {/* Clamped so a long excerpt cannot make one card taller than the one
-            beside it. */}
-        <p className="mt-2 line-clamp-2 text-body leading-snug text-light-muted">
-          {post.excerpt}
-        </p>
+            beside it. Off where a page wants titles only (the /compare hub). */}
+        {excerpt ? (
+          <p className="mt-2 line-clamp-2 text-body leading-snug text-light-muted">{post.excerpt}</p>
+        ) : null}
         <span className="mt-auto inline-flex items-center gap-1.5 pt-5 font-display text-body font-medium transition group-hover:text-accent">
           Read the post{" "}
           <span aria-hidden className="btn-arrow">

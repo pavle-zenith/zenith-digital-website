@@ -20,6 +20,12 @@ import type { ServicePageContent } from "./types";
  * impressions.
  */
 
+/**
+ * How long a migration takes, short form: the answer to "How long does a
+ * migration take?" in the FAQ below. The cost calculator reads it.
+ */
+export const migrationTimeline = "2 to 4 weeks, then 30 days of monitoring";
+
 const ctas: CtaLink[] = [
   { label: "Book a call", href: "/book-a-call", variant: "primary" },
   {

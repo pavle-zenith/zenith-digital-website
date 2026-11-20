@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
+import { ShortAnswer } from "@/components/sections/ShortAnswer";
 import { Button } from "@/components/ui/Button";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import { FitTable } from "@/components/ui/FitTable";
@@ -209,36 +210,10 @@ function HeroShots({
   );
 }
 
-/**
- * The short answer: the passage an AI answer or a featured snippet lifts.
- * Label and date on the left, the answer at reading measure on the right, so
- * it reads as a statement of fact with a date on it rather than a pitch.
- */
+/** The industry's short answer, in the site's one short-answer block. */
 function InShort({ data }: { data: IndustryPageContent }) {
-  const updated = new Date(data.updated);
-  const month = updated.toLocaleDateString("en-GB", {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-
   return (
-    <Section tone="light" frameClassName="!py-12 md:!py-16">
-      <div className="grid gap-4 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] md:gap-12">
-        <div>
-          <h2 className="font-mono text-label uppercase track-label text-light-text">
-            {t.inShortLabel}
-          </h2>
-          <p className="mt-2 font-mono text-label uppercase track-label text-light-muted">
-            {t.updatedLabel}{" "}
-            <time dateTime={data.updated}>{month}</time>
-          </p>
-        </div>
-        <p className="max-w-[68ch] text-body-lg font-medium leading-relaxed text-light-text">
-          {data.inShort}
-        </p>
-      </div>
-    </Section>
+    <ShortAnswer label={t.inShortLabel} text={data.inShort} updated={data.updated} updatedLabel={t.updatedLabel} />
   );
 }
 

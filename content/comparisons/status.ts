@@ -23,6 +23,11 @@ export const comparisonStatus: {
   pages: {
     "wix-studio-vs-wordpress": true,
     "wix-studio-vs-webflow": true,
+    // Written and switched on 20 Nov 2026 (owner: "make them live").
+    "wix-studio-vs-shopify": true,
+    "wix-studio-vs-nextjs": true,
+    "wix-studio-vs-framer": true,
+    "wix-studio-vs-squarespace": true,
   },
 };
 

@@ -73,6 +73,8 @@ function HubHero() {
       >
         <Image
           src="/textures/studio-texture.jpg"
+          // The hero texture is the largest paint on a phone: load it first.
+          priority
           alt=""
           fill
           sizes="100vw"
@@ -153,7 +155,7 @@ function IndustryList() {
     <Section
       tone="light"
       id={hub.list.id}
-      className="scroll-mt-16"
+      className="scroll-mt-[calc(4rem+var(--announce-h))]"
       frameClassName="!py-14 md:!py-24"
     >
       <div className="max-w-3xl">

@@ -183,6 +183,13 @@ body {
  */
 :root {
   --focus-ring: var(--color-accent);
+  /* The sticky announcement bar's height (components/layout/AnnouncementBar),
+     0 when it's switched off. The nav pins below it, and every sticky offset
+     and anchor margin that clears the nav adds it. */
+  --announce-h: 0px;
+}
+:root:has(#announcement) {
+  --announce-h: 2.25rem;
 }
 
 :focus-visible {
@@ -335,7 +342,7 @@ body {
    fallbacks only cover the moment before hydration. */
 .doc-anchor {
   scroll-margin-top: calc(
-    var(--doc-nav-h, 4rem) + var(--doc-jump-h, 3.25rem) + 1rem
+    var(--doc-nav-h, calc(4rem + var(--announce-h))) + var(--doc-jump-h, 3.25rem) + 1rem
   );
 }
 

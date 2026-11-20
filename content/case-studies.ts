@@ -187,6 +187,10 @@ export const caseStudyCards: CaseStudyCard[] = [
     platforms: ["wix-studio"],
     industry: "courses",
     metric: "€140k in course sales",
+    // Credited like Scottish Luxury Experience: the figure belongs to the
+    // full system MOD Digital runs (the courses page states the rule "wherever
+    // it appears"; llm-info brief, 20 Nov 2026).
+    metricCredit: "with MOD Digital",
     story:
       "Landing pages and course infrastructure for an Irish gardening school",
     thumb: "/case-studies/hunting-brook-gardens/card.webp",
@@ -274,6 +278,20 @@ export const caseStudyCards: CaseStudyCard[] = [
     thumb: "/case-studies/advantage-media/card.webp",
     logo: "/logos-white/advantage.png",
     liveUrl: "https://www.advantage-media-marketing.com",
+  },
+  {
+    // Added 20 Nov 2026 (owner): a partner we build client websites for, and
+    // we built their own site in Next.js (checked live: Next.js on Vercel).
+    // Name styled as on their site. Scope metric only, no figures. Card from
+    // the owner's 2x2 mockup (1400x1050 WebP q80, like every other card).
+    client: "BlackBee Agency",
+    slug: "blackbee-agency",
+    platforms: ["nextjs"],
+    industry: "agencies",
+    metric: "Custom-coded agency site",
+    story: "Website for a performance marketing agency running paid media for ecommerce brands",
+    thumb: "/case-studies/blackbee-agency/card.webp",
+    liveUrl: "https://www.blackbeeagency.com",
   },
   {
     client: "Just Stay",

@@ -26,12 +26,15 @@ export function ProjectSlider({
   cards,
   details,
   labels,
+  showIndustry = false,
   children,
 }: {
   cards: CaseStudyCard[];
   /** Slugs with a shipped detail page; the rest link to their live site. */
   details: string[];
   labels: { prev: string; next: string; region: string };
+  /** Off on an industry page, where every card shares its industry. */
+  showIndustry?: boolean;
   children: React.ReactNode;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -111,7 +114,7 @@ export function ProjectSlider({
               card={c}
               detail={hasDetail.has(c.slug)}
               liveUrl={c.liveUrl}
-              showIndustry={false}
+              showIndustry={showIndustry}
               sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
             />
           </div>

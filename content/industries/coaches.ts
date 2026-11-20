@@ -14,8 +14,9 @@ import { PACKAGES, card, detail, figure, lower } from "./proof";
  *
  * OWNER, please confirm before publishing:
  *   1. Testimonials: only Jim Steele and Traci Alexander (who mentions her
- *      life coaching business) are coaching clients on record. Katie, Kevan,
- *      Mindful Productivity and Readmedial have none. A video from any of them
+ *      life coaching business) are coaching clients on record, plus Anna
+ *      Magyulan (Mindful Productivity, 20 Nov 2026). Katie, Kevan and
+ *      Readmedial have none. A video from any of them
  *      would lift this section most. Is Kayla Bloom (Wlcm2Wtvr, video) a
  *      coach? If so she can lead.
  */
@@ -191,6 +192,8 @@ export const coaches: IndustryPageContent = {
     items: [
       { id: "jim-steele" },
       { id: "traci-alexander" },
+      // Mindful Productivity's founder (owner-supplied, 20 Nov 2026).
+      { id: "anna-magyulan" },
       { id: "kayla-bloom" },
       { id: "christopher-barone" },
       { id: "erin-camp" },

@@ -38,6 +38,8 @@ export function PostHero({ data }: { data: Post }) {
       >
         <Image
           src="/textures/studio-texture.jpg"
+          // The hero texture is the largest paint on a phone: load it first.
+          priority
           alt=""
           fill
           sizes="100vw"

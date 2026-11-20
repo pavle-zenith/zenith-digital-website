@@ -18,7 +18,7 @@ export const bookHero = {
   checks: [
     "Free 20-minute call",
     "Advice you can use the same day",
-    "No retainers, no pressure",
+    "No obligation, no pressure",
   ],
   subhead:
     "Book a slot and we'll review your current site live on the call: what's working, what's quietly costing you leads, and what we'd change. Everything we cover is yours, whether we work together or not.",

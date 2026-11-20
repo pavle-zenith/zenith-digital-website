@@ -68,7 +68,7 @@ export function AuditForm({ id }: { id?: string }) {
     <form
       id={id}
       action={formAction}
-      className="scroll-mt-24 rounded-card bg-light-bg p-6 text-left text-light-text sm:p-10"
+      className="scroll-mt-[calc(6rem+var(--announce-h))] rounded-card bg-light-bg p-6 text-left text-light-text sm:p-10"
     >
       <h2 className="mb-8 text-center font-display text-h3 font-medium">
         {auditForm.cardTitle}

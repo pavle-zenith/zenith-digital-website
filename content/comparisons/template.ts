@@ -1,4 +1,4 @@
-import type { CriterionKey, RivalKey } from "./types";
+import type { RivalKey, ScoreEdge, ScoreTag } from "./types";
 import { perMonthYearly, wixStudio } from "./vendors";
 
 const { basic, plus } = wixStudio.plans;
@@ -17,29 +17,58 @@ export const compareTemplate = {
     call: { label: "Book a call", href: "/book-a-call" },
   },
 
-  /** The 12 criteria, in the one order every page renders them. */
-  criteria: [
-    { key: "bestFor", label: "Best for" },
-    { key: "speed", label: "Speed to launch" },
-    { key: "design", label: "Design freedom" },
-    { key: "cms", label: "CMS" },
-    { key: "seo", label: "SEO control" },
-    { key: "ai", label: "AI search readiness" },
-    { key: "multilingual", label: "Multilingual" },
-    { key: "ecommerce", label: "E-commerce" },
-    { key: "integrations", label: "Integrations and code" },
-    { key: "editors", label: "Who edits it after launch" },
-    { key: "maintenance", label: "Maintenance and security" },
-    { key: "cost", label: "Cost over time" },
-  ] as { key: CriterionKey; label: string }[],
-  criterionColumn: "Criterion",
   lastCheckedLabel: "Last checked",
-
   wixName: "Wix Studio",
-  leans: {
-    wix: "Points to Wix Studio",
-    rival: (rival: string) => `Points to ${rival}`,
-    either: "Could go either way",
+
+  /**
+   * The scorecard table. Each row's cells are short; the verified sentences
+   * sit under its Details toggle, so they stay on the page for search and AI
+   * answers without making the table a wall of text.
+   */
+  scorecard: {
+    criterionColumn: "Criterion",
+    edgeColumn: "Edge",
+    details: "Details",
+    /** One line above the table. Icons: check, plus, wrench (shape, not colour). */
+    tags: {
+      included: { label: "Built in", icon: "check" },
+      // Short enough that the legend stays on one line at 375.
+      addon: { label: "Plugin or add-on", icon: "plus" },
+      yours: { label: "Your job", icon: "wrench" },
+    } satisfies Record<ScoreTag, { label: string; icon: string }>,
+    edge: (edge: ScoreEdge, rival: string) =>
+      edge === "wix" ? "Wix Studio" : edge === "rival" ? rival : edge === "even" ? "Even" : "Depends",
+    /**
+     * Under the table, always computed from the rows' `edge`, never typed:
+     * "Wix Studio has the edge on 5, WordPress on 1, even on 4, and 2 depend
+     * on your team."
+     */
+    tally: (count: Record<ScoreEdge, number>, rival: string) => {
+      const parts: string[] = [];
+      const leads = (
+        [
+          ["Wix Studio", count.wix],
+          [rival, count.rival],
+        ] as const
+      ).filter(([, n]) => n > 0);
+      leads.forEach(([name, n], i) =>
+        parts.push(i === 0 ? `${name} has the edge on ${n}` : `${name} on ${n}`),
+      );
+      if (count.even) parts.push(`${leads.length ? "even" : "Even"} on ${count.even}`);
+      if (count.depends) {
+        parts.push(`${count.depends} ${count.depends === 1 ? "depends" : "depend"} on your team`);
+      }
+      const last = parts.pop();
+      const sentence = parts.length ? `${parts.join(", ")}, and ${last}` : (last ?? "");
+      return `${sentence.charAt(0).toUpperCase()}${sentence.slice(1)}.`;
+    },
+  },
+
+  /** The five questions: two outcomes per question, "Wix Studio if ...". */
+  questionsIf: {
+    wix: "Wix Studio if",
+    rival: (rival: string) => `${rival} if`,
+    details: "Details",
   },
   choose: {
     wix: "Wix Studio is usually better if...",
@@ -63,13 +92,16 @@ export const compareTemplate = {
     legendHref: "https://www.wix.com/studio/community/partners/zenith-digital",
     legendLink: "See our partner profile",
     guideLink: (rival: string) => `Read the ${rival} to Wix Studio guide`,
+    prev: "Previous project",
+    next: "Next project",
   },
 
+  /** One closed <details> at the foot of the page, with every link inside. */
   sources: {
-    heading: "Sources",
+    summary: (count: number, checked: string) =>
+      `Sources: ${count} vendor pages, checked ${checked}`,
     intro:
       "Every platform fact and price on this page comes from the vendor's own documentation or pricing page, read on the date shown.",
-    checked: "Checked",
   },
 
   finalCta: {

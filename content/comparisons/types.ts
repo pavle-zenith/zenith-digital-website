@@ -19,23 +19,30 @@ export type RivalKey =
   | "squarespace";
 
 /**
- * The 12 table criteria, in the one order every comparison uses (labels in
- * ./template). A page leaves out a row that genuinely doesn't apply rather
- * than padding it.
+ * Scorecard (table simplify brief, 20 Nov 2026). Every comparison's table is
+ * a list of these rows, in the order the page wants them read; criteria are
+ * per page, so a row covers what actually separates the two platforms.
  */
-export type CriterionKey =
-  | "bestFor"
-  | "speed"
-  | "design"
-  | "cms"
-  | "seo"
-  | "ai"
-  | "multilingual"
-  | "ecommerce"
-  | "integrations"
-  | "editors"
-  | "maintenance"
-  | "cost";
+
+/** The marker before a short cell: built in, a plugin or paid add-on, or your job. */
+export type ScoreTag = "included" | "addon" | "yours";
+
+/** Who the row favours: shown as the Edge pill and tinted on the winning cell. */
+export type ScoreEdge = "wix" | "rival" | "even" | "depends";
+
+export type ScoreRow = {
+  /** "Hosting". */
+  criterion: string;
+  /**
+   * 2 to 6 words, one line at 1440. Never says more than `detail` supports:
+   * shorten it further rather than stretch it.
+   */
+  wix: { short: string; tag?: ScoreTag };
+  rival: { short: string; tag?: ScoreTag };
+  edge: ScoreEdge;
+  /** The full verified sentences, under the row's Details toggle. */
+  detail: { wix: string; rival: string };
+};
 
 /** A vendor page used as a source, with the date it was read. */
 export type Source = {
@@ -82,16 +89,23 @@ export type ComparisonContent = {
   table: {
     heading: string;
     intro: string;
-    rows: Partial<Record<CriterionKey, { wix: string; rival: string }>>;
+    rows: ScoreRow[];
   };
+  /** A compact list: each question with its two outcomes side by side. */
   questions: {
     heading: string;
     intro: string;
     items: {
       q: string;
-      a: string;
-      /** Which way the answer usually points. */
-      leans: "wix" | "rival" | "either";
+      /** Completes "Wix Studio if ...": 12 words at most. */
+      wix: string;
+      /** Completes "{Rival} if ...": 12 words at most. */
+      rival: string;
+      /**
+       * The fuller answer, behind a Details toggle. Left out where the two
+       * outcomes already say all of it.
+       */
+      detail?: string;
     }[];
   };
   choose: {

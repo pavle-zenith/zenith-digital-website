@@ -22,10 +22,63 @@ const CONTACT_ICONS: Record<string, React.ReactNode> = {
 };
 
 /**
- * Contact block below the FAQ on /book-a-call. Heading and direct routes left,
- * form right. `#contact` is the anchor the calendar's fallback line points to,
- * so the scroll offset clears the sticky nav. Tinted on the frame column, not
- * the section element, so the grey stops at the side rails.
+ * The contact block's text: heading, paragraph and the direct-route chips
+ * (email, WhatsApp). Shared by ContactSection and the /book-a-call hero,
+ * which sets it beside the calendar (owner, 20 Nov 2026, a conversion test).
+ * `compact` drops the heading to h3 size for the narrower hero column.
+ */
+export function ContactIntro({ compact = false }: { compact?: boolean }) {
+  return (
+    <>
+      <h2
+        className={
+          compact
+            ? "font-display text-h3 font-medium leading-snug tracking-tight text-balance"
+            : "font-display text-h2 font-medium leading-tight tracking-tight text-balance"
+        }
+      >
+        {bookContact.heading}
+      </h2>
+      <p
+        className={
+          compact
+            ? "mt-2 max-w-md text-body leading-relaxed text-light-muted"
+            : "mt-4 max-w-md text-body-lg font-medium text-light-muted"
+        }
+      >
+        {bookContact.paragraph}
+      </p>
+
+      {/* Icon chips, matching the founder section's profile links. The
+          label survives as the accessible name, so a screen reader still
+          hears "Email" rather than "link". */}
+      <ul className={compact ? "mt-4 flex flex-wrap items-center gap-2" : "mt-6 flex flex-wrap items-center gap-2"}>
+        {bookContact.direct.map((link) => (
+          <li key={link.href}>
+            <a
+              href={link.href}
+              aria-label={link.label}
+              title={link.label}
+              {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+              className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text transition hover:border-accent hover:text-accent"
+            >
+              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="currentColor" aria-hidden>
+                {CONTACT_ICONS[link.icon]}
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+/**
+ * Contact block, heading and direct routes left, form right. Was below the
+ * FAQ on /book-a-call; since 20 Nov 2026 the form sits beside the calendar
+ * in BookHero instead (a conversion test). Kept so the old layout is a
+ * one-line swap back in app/(site)/book-a-call/page.tsx. Tinted on the frame
+ * column, not the section element, so the grey stops at the side rails.
  */
 export function ContactSection() {
   return (
@@ -33,45 +86,12 @@ export function ContactSection() {
       id="contact"
       tone="light"
       // scroll-mt goes on the section, since that's the anchor target.
-      className="scroll-mt-20"
+      className="scroll-mt-[calc(5rem+var(--announce-h))]"
       frameClassName="bg-light-surface !py-12 md:!py-20"
     >
       <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-        <div className="lg:sticky lg:top-24 lg:self-start">
-          <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-            {bookContact.heading}
-          </h2>
-          <p className="mt-4 max-w-md text-body-lg font-medium text-light-muted">
-            {bookContact.paragraph}
-          </p>
-
-          {/* Icon chips, matching the founder section's profile links. The
-              label survives as the accessible name, so a screen reader still
-              hears "Email" rather than "link". */}
-          <ul className="mt-6 flex flex-wrap items-center gap-2">
-            {bookContact.direct.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  aria-label={link.label}
-                  title={link.label}
-                  {...(link.href.startsWith("http")
-                    ? { target: "_blank", rel: "noopener" }
-                    : {})}
-                  className="flex h-10 w-10 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text transition hover:border-accent hover:text-accent"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-[18px] w-[18px]"
-                    fill="currentColor"
-                    aria-hidden
-                  >
-                    {CONTACT_ICONS[link.icon]}
-                  </svg>
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="lg:sticky lg:top-[calc(6rem+var(--announce-h))] lg:self-start">
+          <ContactIntro />
         </div>
 
         <ContactForm />

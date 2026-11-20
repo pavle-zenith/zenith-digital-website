@@ -17,7 +17,7 @@ export function PartnerApply() {
     <Section
       tone="light"
       id="apply"
-      className="scroll-mt-24"
+      className="scroll-mt-[calc(6rem+var(--announce-h))]"
       frameClassName="!py-14 md:!py-24"
     >
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">

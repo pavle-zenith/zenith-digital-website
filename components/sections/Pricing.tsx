@@ -83,6 +83,21 @@ export function Pricing({
             >
               {pricing.intro}
             </p>
+            {/* Every price on one page (pricing brief, 20 Nov 2026). */}
+            <Link
+              href={pricing.seeAll.href}
+              className={cn(
+                "group mt-4 inline-flex items-center gap-1.5 text-body font-medium underline underline-offset-4 transition",
+                dark
+                  ? "text-text decoration-border hover:decoration-text"
+                  : "text-light-text decoration-light-border hover:decoration-light-text",
+              )}
+            >
+              {pricing.seeAll.label}
+              <span aria-hidden className="btn-arrow">
+                &rarr;
+              </span>
+            </Link>
           </div>
           <Link
             href={pricing.cta.href}

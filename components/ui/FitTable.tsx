@@ -42,6 +42,7 @@ export function FitTable({
   variant = "table",
   eyebrow,
   goodIcons,
+  notFooter,
 }: {
   id?: string;
   heading: string;
@@ -56,6 +57,8 @@ export function FitTable({
   eyebrow?: string;
   /** Boxes only: one FeatureIcon name per good-fit line. */
   goodIcons?: string[];
+  /** Boxes only: under the right-hand frame (a note, a link). */
+  notFooter?: React.ReactNode;
 }) {
   if (variant === "boxes") {
     return (
@@ -65,6 +68,11 @@ export function FitTable({
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
             {heading}
           </h2>
+          {intro ? (
+            <p className="mt-4 text-body-lg font-medium leading-relaxed text-light-muted">
+              {intro}
+            </p>
+          ) : null}
         </div>
 
         <div className="mt-10 grid gap-10 md:mt-14 lg:grid-cols-2 lg:gap-12">
@@ -110,6 +118,7 @@ export function FitTable({
                 ))}
               </ul>
             </div>
+            {notFooter}
           </div>
         </div>
       </Section>

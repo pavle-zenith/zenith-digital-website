@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useState } from "react";
 
 import { Section } from "@/components/ui/Section";
@@ -25,7 +27,7 @@ export function FaqMaster() {
 
         {/* Sticky contact block, past the vertical rule */}
         <div className="lg:border-l lg:border-light-border lg:pl-16">
-          <div className="lg:sticky lg:top-24">
+          <div className="lg:sticky lg:top-[calc(6rem+var(--announce-h))]">
             <h2 className="font-display text-h2 font-medium leading-tight tracking-tight">
               {fContact.heading}
             </h2>
@@ -70,7 +72,7 @@ function CategoryBlock({
   return (
     <div
       id={category.id}
-      className="scroll-mt-24 py-10 first:pt-0 last:pb-0 md:py-12"
+      className="scroll-mt-[calc(6rem+var(--announce-h))] py-10 first:pt-0 last:pb-0 md:py-12"
     >
       <h2 className="text-center font-display text-h3 font-medium leading-tight tracking-tight md:text-left md:text-[1.75rem]">
         {category.label}
@@ -119,6 +121,17 @@ function CategoryBlock({
           );
         })}
       </div>
+      {category.link ? (
+        <Link
+          href={category.link.href}
+          className="group mt-5 inline-flex items-center gap-1.5 text-body font-medium text-light-text underline decoration-light-border underline-offset-4 transition hover:decoration-light-text"
+        >
+          {category.link.label}
+          <span aria-hidden className="btn-arrow">
+            &rarr;
+          </span>
+        </Link>
+      ) : null}
     </div>
   );
 }

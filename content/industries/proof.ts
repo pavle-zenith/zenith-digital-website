@@ -116,14 +116,14 @@ export const PACKAGES: Record<PackageKey, Package> = {
     price: minimumTier.price,
     timeline: weeks(minimumTier.timeline),
     scope: minimumTier.features[0],
-    href: "/#pricing",
+    href: "/pricing",
   },
   studio: {
     name: studioTier.name,
     price: studioTier.price,
     timeline: weeks(studioTier.timeline),
     scope: studioTier.features[0],
-    href: "/#pricing",
+    href: "/pricing",
   },
   landing: {
     name: "Landing page",

@@ -29,7 +29,7 @@ export function ServiceSection({
     <Section
       tone={dark ? "dark" : "light"}
       id={data.id}
-      className={cn("scroll-mt-16", dark && "bg-transparent")}
+      className={cn("scroll-mt-[calc(4rem+var(--announce-h))]", dark && "bg-transparent")}
       frameClassName="!py-14 md:!py-24"
     >
       <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">

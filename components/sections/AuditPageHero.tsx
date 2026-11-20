@@ -17,6 +17,8 @@ export function AuditPageHero() {
       <div className="absolute inset-0 -z-10 bg-bg">
         <Image
           src="/textures/studio-texture.jpg"
+          // The hero texture is the largest paint on a phone: load it first.
+          priority
           alt=""
           fill
           className="object-cover opacity-[0.16]"

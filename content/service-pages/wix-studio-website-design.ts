@@ -203,7 +203,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
       },
       {
         icon: "support",
-        title: "30 to 60 days of support",
+        title: "30 days of support",
         group: "After launch",
         body: "We stay on after launch to fix anything that surfaces once real traffic and real users arrive, because that's when the edge cases show up.",
       },
@@ -270,7 +270,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     // The H1 promises "pays for itself", so the pull quote does the
     // arithmetic rather than leaving the reader to take it on faith.
     pullQuote:
-      "The arithmetic behind the headline is worth doing before the call: if a customer is worth €500 to you, the €1,250 build pays for itself with three enquiries the old site wasn't winning. The case studies above are how that plays out in practice.",
+      "The arithmetic behind the headline is worth doing before the call: if a customer is worth €500 to you, the €1,250 build pays for itself with three new customers the old site wasn't winning. The case studies above are how that plays out in practice.",
     drivers: [
       {
         title: "Page count",
@@ -292,7 +292,7 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     },
     ctaSecondary: {
       label: "See all pricing",
-      href: "/#pricing",
+      href: "/pricing",
       variant: "secondary",
     },
   },
@@ -305,32 +305,36 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     columns: [
       {
         name: "A template",
+        icon: "layout-grid",
         note: "Cheapest, fastest, most replaceable",
         points: [
-          "Design shared with everyone else who bought it",
-          "Your content bends to fit the layout",
-          "SEO basics left to you to configure",
-          "No one to call when it breaks",
+          { text: "Design shared with everyone else who bought it", mark: "bad" },
+          { text: "Your content bends to fit the layout", mark: "bad" },
+          { text: "SEO basics left to you to configure", mark: "mixed" },
+          { text: "No one to call when it breaks", mark: "bad" },
         ],
       },
       {
         name: "A freelancer",
+        icon: "user",
         note: "Cheaper, until availability changes",
         points: [
-          "Quality varies with who you happen to hire",
-          "One person is one point of failure",
-          "Copy, design, SEO rarely all in one skill set",
-          "Handover depends on them still being around",
+          { text: "Quality varies with who you happen to hire", mark: "mixed" },
+          { text: "One person is one point of failure", mark: "bad" },
+          { text: "Copy, design, SEO rarely all in one skill set", mark: "mixed" },
+          { text: "Handover depends on them still being around", mark: "mixed" },
         ],
       },
       {
         name: "Zenith",
+        icon: "mountain",
+        badge: "Recommended",
         note: "Fixed price, fixed date, named team",
         points: [
-          "Designed from scratch, no theme underneath",
-          "Copy, design, build, and SEO in one engagement",
-          "Fixed price agreed before work starts",
-          "30 to 60 days of support, then a site you can run",
+          { text: "Designed from scratch, no theme underneath", mark: "good" },
+          { text: "Copy, design, build, and SEO in one engagement", mark: "good" },
+          { text: "Fixed price agreed before work starts", mark: "good" },
+          { text: "30 days of support, then a site you can run", mark: "good" },
         ],
       },
     ],

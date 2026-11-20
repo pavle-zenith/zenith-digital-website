@@ -59,7 +59,7 @@ import type {
 const MEASURE = "max-w-[78ch]";
 
 /** Clears the sticky site header plus the article navigator when jumping. */
-const ANCHOR_OFFSET = "scroll-mt-32";
+const ANCHOR_OFFSET = "scroll-mt-[calc(8rem+var(--announce-h))]";
 
 /**
  * BODY PROSE IS 18px HERE, one step up from the sitewide 16px.
@@ -157,7 +157,7 @@ export function PostBody({
           // a long enough contents list pushed the ask off screen and it never
           // came back. Now only the list scrolls (see PostChapters) and the CTA
           // is pinned under it.
-          stickyClassName="lg:flex lg:max-h-[calc(100vh-8rem)] lg:flex-col"
+          stickyClassName="lg:flex lg:max-h-[calc(100vh-8rem-var(--announce-h))] lg:flex-col"
           bodyClassName="lg:flex lg:min-h-0 lg:flex-1 lg:flex-col"
         >
           <PostChapters items={chapters} />

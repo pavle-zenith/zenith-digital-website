@@ -395,6 +395,8 @@ function GuideHero({ data }: { data: MigrationGuideContent }) {
       >
         <Image
           src="/textures/studio-texture.jpg"
+          // The hero texture is the largest paint on a phone: load it first.
+          priority
           alt=""
           fill
           sizes="100vw"
@@ -603,7 +605,7 @@ function GuideBenefits({ data }: { data: MigrationGuideContent }) {
           <div className="hidden lg:block">
             {/* Sticky, so the site stays beside whichever capability is being
                 read rather than scrolling away at the first card. */}
-            <div className="sticky top-32">
+            <div className="sticky top-[calc(8rem+var(--announce-h))]">
               <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface">
                 <Image
                   src={shot.thumb}
@@ -806,9 +808,8 @@ function GuideCost({ data }: { data: MigrationGuideContent }) {
 
           <p className="mt-8 text-body text-text-muted">
             <Link
-              // The brief specified /pricing; that route 404s. /#pricing is the
-              // sitewide convention and the anchor exists on the homepage.
-              href="/#pricing"
+              // Every published price, on one page (pricing brief, 20 Nov 2026).
+              href="/pricing"
               className="group inline-flex items-center gap-1.5 font-medium text-text underline decoration-border underline-offset-4 transition hover:decoration-text"
             >
               See the full package pricing

@@ -8,7 +8,6 @@ import { BeforeAfterWork } from "@/components/sections/BeforeAfterWork";
 import { QuoteBand } from "@/components/sections/QuoteBand";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { Faq } from "@/components/sections/Faq";
-import { ContactSection } from "@/components/sections/ContactSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { bookFaq, bookFinalCta } from "@/content/book-a-call";
 import { founderBookACall } from "@/content/founder";
@@ -43,9 +42,9 @@ export default function BookACallPage() {
           check before picking a slot. Plain white after the dark QuoteBand. */}
       <FounderSection data={founderBookACall} size="expert" />
       <Faq data={bookFaq} />
-      {/* The out for anyone who won't book a slot. The calendar's fallback
-          line links down to it. */}
-      <ContactSection />
+      {/* The contact form sits beside the calendar in BookHero since 20 Nov
+          2026 (a conversion test). To go back: render <ContactSection /> here
+          and drop the form column from BookHero. */}
       <CtaBanner data={bookFinalCta} />
     </>
   );

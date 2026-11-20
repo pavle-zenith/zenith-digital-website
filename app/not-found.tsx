@@ -1,3 +1,4 @@
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Nav } from "@/components/layout/Nav";
 import { industryMenu } from "@/content/industries";
 import { getResourcesMenu } from "@/lib/resources-menu";
@@ -24,6 +25,7 @@ export default async function NotFound() {
   const resources = await getResourcesMenu();
   return (
     <>
+      <AnnouncementBar />
       <Nav industryMenu={industryMenu()} resources={resources} />
       <main id="main">
         <SiteNotFound />

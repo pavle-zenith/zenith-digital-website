@@ -12,6 +12,14 @@ import type { IndustryMenu } from "@/content/industries";
 import type { ResourcesMenu } from "@/lib/resources-menu";
 
 type MenuName = "services" | "industries" | "resources";
+
+/**
+ * Panels with a featured card: the columns before it share the width equally,
+ * and the featured column is a fixed width, so its image shows whole at its
+ * own aspect ratio rather than cropped to the row height (owner, 20 Nov 2026).
+ */
+const FEATURED_COLS =
+  "grid-cols-[minmax(0,1fr)_minmax(0,1fr)_16rem] xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_22rem]";
 type MenuLink = { label: string; href: string; icon: string };
 /** One icon-and-label row. `badge` replaces the icon ("VS"). */
 type MenuItem = {
@@ -49,6 +57,11 @@ export function Nav({
   resources?: ResourcesMenu | null;
 }) {
   const [open, setOpen] = useState(false);
+  // Where the header's bottom edge sits when the drawer opens. With the
+  // announcement bar above it, that's 36px lower at the top of the page, so
+  // a fixed 100dvh-4rem would push the drawer's pinned CTA off the screen.
+  // Measured on open; the page can't scroll while the drawer is up.
+  const [drawerTop, setDrawerTop] = useState<number | null>(null);
   // Which desktop panel is open, if any. One at a time: hovering or
   // focusing another top-level item switches (or closes) it.
   const [menu, setMenu] = useState<MenuName | null>(null);
@@ -119,11 +132,16 @@ export function Nav({
   }, [open]);
 
   const [audit, quote] = nav.ctas;
+  // Resources > Learn, with the comparisons hub link once the /compare hub is live.
+  const learnItems: MenuItem[] = [
+    ...resourcesMenu.learn.items,
+    ...(resources?.compare ? [resources.compare.viewAll] : []),
+  ];
 
   return (
     <header
       className={cn(
-        "tone-light sticky top-0 z-50 border-b border-light-border text-light-text transition-colors duration-300",
+        "tone-light sticky top-[var(--announce-h)] z-50 border-b border-light-border text-light-text transition-colors duration-300",
         // Solid while the drawer is open so the bar never shows page content
         // through the blur above the opaque drawer.
         scrolled && !open ? "bg-light-bg/70 backdrop-blur-xl" : "bg-light-bg",
@@ -226,7 +244,14 @@ export function Nav({
           )}
           aria-label="Toggle menu"
           aria-expanded={open}
-          onClick={() => (open ? closeDrawer() : setOpen(true))}
+          onClick={() => {
+            if (open) {
+              closeDrawer();
+              return;
+            }
+            setDrawerTop(headerRef.current?.getBoundingClientRect().bottom ?? null);
+            setOpen(true);
+          }}
         >
           {open ? (
             <XIcon className="h-5 w-5" />
@@ -254,7 +279,7 @@ export function Nav({
       {/* Services: Design & build | Grow & scale | featured case study,
           then the quick links. */}
       <MenuPanel open={menu === "services"}>
-        <div className="grid grid-cols-3 divide-x divide-light-border">
+        <div className={cn("grid divide-x divide-light-border", FEATURED_COLS)}>
           <MenuColumn label={servicesMenu.groups.build}>
             <MenuLinks items={servicesMenu.build} onNavigate={close} />
           </MenuColumn>
@@ -276,7 +301,14 @@ export function Nav({
           quick links. */}
       {industryMenu ? (
         <MenuPanel open={menu === "industries"}>
-          <div className="grid grid-cols-4 divide-x divide-light-border">
+          <div
+            className={cn(
+              "grid divide-x divide-light-border",
+              industryMenu.featured
+                ? "grid-cols-[repeat(3,minmax(0,1fr))_16rem] xl:grid-cols-[repeat(3,minmax(0,1fr))_22rem]"
+                : "grid-cols-3",
+            )}
+          >
             {industryMenu.groups.map((group) => (
               <MenuColumn key={group.label} label={group.label}>
                 <MenuLinks items={group.items} onNavigate={close} />
@@ -296,25 +328,14 @@ export function Nav({
         </MenuPanel>
       ) : null}
 
-      {/* Resources: Compare platforms (once the /compare hub has a route) |
-          Learn | the latest article, then the quick links. Learn takes the
-          compare column's room while it's hidden. */}
+      {/* Resources: Learn (two thirds) | the latest article, then the quick
+          links. Learn is plain links, no descriptions, and the comparisons
+          appear as one link to the /compare hub once it has a
+          route (owner, 20 Nov 2026: no per-comparison links for now). */}
       <MenuPanel open={menu === "resources"}>
-        <div className="grid grid-cols-3 divide-x divide-light-border">
-          {resources?.compare ? (
-            <MenuColumn label={resources.compare.label}>
-              <MenuLinks
-                items={resources.compare.items.map((it) => ({ ...it, badge: "VS" }))}
-                onNavigate={close}
-              />
-              <MenuMore link={resources.compare.viewAll} onNavigate={close} />
-            </MenuColumn>
-          ) : null}
-          <MenuColumn
-            label={resourcesMenu.learn.label}
-            className={resources?.compare ? undefined : "col-span-2"}
-          >
-            <MenuLinks items={resourcesMenu.learn.items} onNavigate={close} />
+        <div className={cn("grid divide-x divide-light-border", FEATURED_COLS)}>
+          <MenuColumn label={resourcesMenu.learn.label} className="col-span-2">
+            <MenuLinks items={learnItems} columns={2} onNavigate={close} />
           </MenuColumn>
           {resources?.featured ? (
             <MenuColumn label={resources.featured.label}>
@@ -337,6 +358,7 @@ export function Nav({
           focusable nor in the accessibility tree. */}
       <div
         inert={!open}
+        style={drawerTop !== null ? { height: `calc(100dvh - ${drawerTop}px)` } : undefined}
         className={cn(
           "absolute inset-x-0 top-full z-40 flex h-[calc(100dvh-4rem)] flex-col bg-light-bg transition-opacity duration-200 md:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0",
@@ -451,19 +473,10 @@ export function Nav({
               backs.current.resources = el;
             }}
           >
-            {resources?.compare ? (
-              <DrawerGroup
-                label={resources.compare.label}
-                items={[
-                  ...resources.compare.items.map((it) => ({ ...it, badge: "VS" })),
-                  { ...resources.compare.viewAll },
-                ]}
-                onNavigate={closeDrawer}
-              />
-            ) : null}
+            {/* The same Learn links as on desktop. */}
             <DrawerGroup
               label={resourcesMenu.learn.label}
-              items={resourcesMenu.learn.items}
+              items={learnItems}
               onNavigate={closeDrawer}
             />
             <DrawerViewAll link={resourcesMenu.viewAll} onNavigate={closeDrawer} />
@@ -545,13 +558,16 @@ function MenuColumn({
  */
 function MenuLinks({
   items,
+  columns = 1,
   onNavigate,
 }: {
   items: MenuItem[];
+  /** 2: rows fill left to right, for a column twice the usual width. */
+  columns?: 1 | 2;
   onNavigate: () => void;
 }) {
   return (
-    <ul className="flex flex-col gap-1">
+    <ul className={columns === 2 ? "grid grid-cols-2 gap-x-8 gap-y-1" : "flex flex-col gap-1"}>
       {items.map((it) => (
         <li key={it.href}>
           <Link
@@ -602,28 +618,6 @@ function MenuChip({ item, large = false }: { item: MenuItem; large?: boolean }) 
   );
 }
 
-/** A column's closing "All ..." link, under its rows. */
-function MenuMore({
-  link,
-  onNavigate,
-}: {
-  link: MenuLink;
-  onNavigate: () => void;
-}) {
-  return (
-    <Link
-      href={link.href}
-      className="group mt-3 inline-flex items-center gap-2 text-body font-medium text-light-text transition hover:text-accent"
-      onClick={onNavigate}
-    >
-      {link.label}
-      <span aria-hidden className="btn-arrow">
-        &rarr;
-      </span>
-    </Link>
-  );
-}
-
 /**
  * A panel's featured page: the image, then its title (and, for an article,
  * its "Read the article" line). No image, no frame: the title stands alone.
@@ -632,18 +626,28 @@ function MenuFeatured({
   featured,
   onNavigate,
 }: {
-  featured: { title: string; href: string; image: string | null; cta?: string };
+  featured: {
+    title: string;
+    href: string;
+    image: string | null;
+    /** CSS aspect-ratio of the image ("2 / 1"): shown whole, never cropped. */
+    aspect?: string;
+    cta?: string;
+  };
   onNavigate: () => void;
 }) {
   return (
     <Link href={featured.href} className="group flex flex-col" onClick={onNavigate}>
       {featured.image ? (
-        <div className="relative mb-3 h-[168px] overflow-hidden rounded-[6px] border border-light-border">
+        <div
+          className="relative mb-3 w-full overflow-hidden rounded-[6px] border border-light-border"
+          style={{ aspectRatio: featured.aspect ?? "16 / 10" }}
+        >
           <Image
             src={featured.image}
             alt=""
             fill
-            sizes="360px"
+            sizes="(max-width: 1279px) 256px, 352px"
             className="object-cover object-center transition duration-500 group-hover:scale-[1.02]"
           />
         </div>

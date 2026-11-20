@@ -149,7 +149,7 @@ export function JumpBar({
         "tone-light fixed inset-x-0 z-40 border-b border-light-border bg-light-bg transition-transform duration-300 ease-out motion-reduce:transition-none",
         shown ? "translate-y-0" : "-translate-y-full",
       )}
-      style={{ top: "var(--doc-nav-h, 4rem)" }}
+      style={{ top: "var(--doc-nav-h, calc(4rem + var(--announce-h)))" }}
     >
       <div className="frame">
         <ul
@@ -198,6 +198,13 @@ function pinnedHeader(): HTMLElement | null {
   return position === "sticky" || position === "fixed" ? header : null;
 }
 
+/**
+ * Where the pinned nav ends: its height plus its sticky `top`, which is the
+ * announcement bar's height when that bar pins above it.
+ */
 function navHeight(): number {
-  return Math.round(pinnedHeader()?.getBoundingClientRect().height ?? 0);
+  const header = pinnedHeader();
+  if (!header) return 0;
+  const top = parseFloat(getComputedStyle(header).top) || 0;
+  return Math.round(top + header.getBoundingClientRect().height);
 }

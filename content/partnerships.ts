@@ -513,6 +513,36 @@ export const pStories = {
       stats: [],
       image: "/partners/latitude-haus.webp",
     },
+    {
+      // Added 20 Nov 2026 (owner: "we build websites for their clients").
+      // Already a client: we built Bianomics' own site, and the shot is that
+      // site's 4:3 case-study card. Bianca's words are her existing quote.
+      // OWNER: logo to follow (a wordmark renders until set); add a "since"
+      // year to the relationship line, and stats once there are figures.
+      name: "Bianomics",
+      logo: "",
+      relationship: "Website partner",
+      title: "Websites for the businesses Bianomics works with",
+      story:
+        "Bianomics brings brand, PR, events, operations and workforce programmes to its clients. When one of them needs a website, we build it. We built Bianomics' own site too.",
+      stats: [],
+      image: "/case-studies/bianomics/card.webp",
+      quote: partnerQuote("bianca-cervantes"),
+    },
+    {
+      // Added 20 Nov 2026 (owner: "media buyers and ads managers and we make
+      // them websites, we also made the BlackBee site in Next.js").
+      // The shot is BlackBee's own site's case-study card. OWNER: add a
+      // "since" year and stats once there are figures.
+      name: "BlackBee Agency",
+      logo: "",
+      relationship: "Website partner",
+      title: "Websites for the ecommerce brands BlackBee runs ads for",
+      story:
+        "BlackBee Agency runs paid media, creative and copy for ecommerce brands. We build the websites for their clients, and we built BlackBee's own site in Next.js.",
+      stats: [],
+      image: "/case-studies/blackbee-agency/card.webp",
+    },
   ] as PartnerStory[],
 };
 

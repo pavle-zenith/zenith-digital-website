@@ -32,7 +32,7 @@ export const compareHub = {
   },
   hero: {
     eyebrow: "Platform comparisons",
-    h1: "Which platform should you build on?",
+    h1: "Which platform should you pick for your website?",
     lead:
       "Side-by-side comparisons of the platforms we build on, and the ones we move sites off. Speed, CMS, SEO, cost and who runs the site after launch.",
   },

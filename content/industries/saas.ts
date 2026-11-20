@@ -269,7 +269,7 @@ export const saas: IndustryPageContent = {
       },
       {
         kind: "Comparison",
-        label: "Wix Studio vs Webflow: which should you build on?",
+        label: "Wix Studio vs Webflow: which should you pick for your website?",
         href: "/compare/wix-studio-vs-webflow",
         desc: "The platform choice most SaaS teams weigh, compared on what matters after launch.",
         icon: "pen",

@@ -6,6 +6,10 @@ import type { ServicePageContent } from "./types";
  * Targets: landing page design agency · wix landing page · campaign landing
  * pages.
  *
+ * Owner, 20 Nov 2026: €750 now covers up to 2 landing pages, 3 pages are
+ * €1,000, and 4 or more is a website (The Minimum). `landingPriceSteps` below
+ * is the one place those numbers live; the cost calculator reads it.
+ *
  * PUBLISHED Aug 2026. Retail price set by owner (26 Aug 2026): €750 fixed per page, with
  * the partner rate on /partnerships moved down to €600 on 26 Aug 2026,
  * so the retail floor sits above the partner rate as designed.
@@ -24,6 +28,16 @@ const ctas: CtaLink[] = [
     variant: "secondary",
   },
 ];
+
+/** Landing-page price points (owner, 20 Nov 2026). Amounts in EUR. */
+export const landingPriceSteps = {
+  upToTwo: 750,
+  three: 1000,
+  /** As published: "€1,000". */
+  threePages: "€1,000",
+  /** 4 or more pages is a website: The Minimum covers up to 5. */
+  maxPages: 3,
+} as const;
 
 export const landingPages: ServicePageContent = {
   slug: "landing-pages",
@@ -244,8 +258,8 @@ export const landingPages: ServicePageContent = {
   pricing: {
     heading: "What a landing page costs",
     from: "From €750",
-    fromNote: "fixed, per page",
-    note: "One page, one fixed number, agreed before the brief call ends. Agencies reselling under their own brand pay the partner rate published on the partnerships page instead.",
+    fromNote: "fixed, up to 2 pages",
+    note: `Up to two pages, one fixed number, agreed before the brief call ends. Three pages are ${landingPriceSteps.threePages}. Agencies reselling under their own brand pay the partner rate published on the partnerships page instead.`,
     drivers: [
       {
         title: "Length of the page",
@@ -300,7 +314,7 @@ export const landingPages: ServicePageContent = {
       },
       {
         q: "What does a landing page cost?",
-        a: "One fixed price per page, quoted before the brief call ends, with length, copy scope, and integrations the three things that move it. Agencies reselling under their own brand pay the partner rate listed on the partnerships page.",
+        a: `From €750 for up to two pages and ${landingPriceSteps.threePages} for three, fixed before the brief call ends, with length, copy scope, and integrations the three things that move it. Agencies reselling under their own brand pay the partner rate listed on the partnerships page.`,
       },
       {
         q: "Do you write the copy?",

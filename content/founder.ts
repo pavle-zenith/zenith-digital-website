@@ -61,6 +61,8 @@ export type FounderLink = { label: string; href: string };
 export const founderCore = {
   name: "Pavle Maodus",
   role: "Founder, Zenith Digital",
+  /** The founder's direct address (owner, 20 Nov 2026), for /llm-info and llms.txt. */
+  email: "pavle@thezenithdigital.com",
   image: "/pavle.webp",
   imageAlt: "Pavle Maodus, founder of Zenith Digital, Wix Legend Partner",
   // Rendered as the stat bar overlaid on the portrait.

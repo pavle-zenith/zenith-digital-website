@@ -1,3 +1,4 @@
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Nav } from "@/components/layout/Nav";
 import { industryMenu } from "@/content/industries";
 import { getResourcesMenu } from "@/lib/resources-menu";
@@ -9,6 +10,14 @@ import { Footer } from "@/components/layout/Footer";
  * /partner-showcase, can sit outside it with its own header and footer
  * (see that route's layout).
  */
+/**
+ * Hourly: the announcement bar's month is worked out when a page renders
+ * (this month before the 15th, next month from the 15th), so pages refresh
+ * at least hourly to roll it over, and to start or end a scheduled message,
+ * without a redeploy.
+ */
+export const revalidate = 3600;
+
 export default async function SiteLayout({
   children,
 }: {
@@ -19,6 +28,7 @@ export default async function SiteLayout({
   const resources = await getResourcesMenu();
   return (
     <>
+      <AnnouncementBar />
       <Nav industryMenu={industryMenu()} resources={resources} />
       <main id="main">{children}</main>
       <Footer />

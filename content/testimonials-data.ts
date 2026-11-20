@@ -9,9 +9,10 @@
  * mid-sentence with commas (CLAUDE.md §14 keeps dashes off the site). No
  * sentence was reworded, shortened, or invented.
  *
- * OWNER — headshots: 28 of the 32 use their real photo, copied out of
+ * OWNER — headshots: 30 of the 34 use their real photo, copied out of
  * "site asset dump/client headshots" into /public/avatars and renamed to match
- * the ids below. Four have no usable photo and fall back to
+ * the ids below (Joshua Christopher's and Anna Magyulan's are the
+ * owner-supplied Google profile photos, saved at 256px). Four have no usable photo and fall back to
  * PLACEHOLDER_AVATAR: Marko Georgievski, Christopher Barone, Tom H, and
  * Bates Green (his file in the dump is 0 bytes). To fix one, drop the image
  * at /public/avatars/<id>.<ext> and point `avatar` at it.
@@ -372,6 +373,29 @@ export const allTestimonials: Testimonial[] = [
     quote:
       "Top guys, I would highly recommend. Went over and above my expectations. If you want a good site, give these guys a try.",
     avatar: "/avatars/david-connel.jpeg",
+  },
+  {
+    // Owner-supplied, 19 Nov 2026. Not to be confused with Joshua Christie
+    // (Alluring Endeavours) above. One mechanical fix: "House Painters" to
+    // "House Painter's", the project's name everywhere else on the site.
+    id: "joshua-christopher",
+    name: "Joshua Christopher",
+    company: "The House Painter's Encyclopedia",
+    role: "Founder",
+    quote:
+      "Pavle did an excellent job building out the CMS architecture on The House Painter's Encyclopedia. He helped bring a project very dear to me to life. He is easy to communicate with and brings a wealth of knowledge and creativity to projects.",
+    avatar: "/avatars/joshua-christopher.jpg",
+  },
+  {
+    // Owner-supplied, 20 Nov 2026, verbatim (her exclamation marks kept:
+    // they're her words, not site copy).
+    id: "anna-magyulan",
+    name: "Anna Magyulan",
+    company: "Mindful Productivity",
+    role: "Founder",
+    quote:
+      "Pavle did an amazing job redesigning my website! He understood my vision and brought it to life beautifully. He was professional, patient, responsive, and attentive to every detail. Communication was easy, and he was always happy to make adjustments. I truly enjoyed working with him and highly recommend him!",
+    avatar: "/avatars/anna-magyulan.jpg",
   },
 ];
 

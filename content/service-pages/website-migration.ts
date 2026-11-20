@@ -293,7 +293,7 @@ export const websiteMigration: ServicePageContent = {
     },
     ctaSecondary: {
       label: "See all pricing",
-      href: "/#pricing",
+      href: "/pricing",
       variant: "secondary",
     },
   },

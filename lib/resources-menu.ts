@@ -13,6 +13,8 @@ export type ResourcesMenu = {
     title: string;
     href: string;
     image: string | null;
+    /** CSS aspect-ratio of the image, so the menu shows it whole. */
+    aspect: string;
     cta: string;
   } | null;
 };
@@ -61,6 +63,8 @@ export async function getResourcesMenu(): Promise<ResourcesMenu> {
           title: post.title,
           href: `/blog/${post.slug}`,
           image: blogCover(post.slug),
+          // Blog covers are 1920x1200.
+          aspect: "16 / 10",
         }
       : null,
   };

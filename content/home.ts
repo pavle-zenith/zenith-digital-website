@@ -197,6 +197,11 @@ export const comparison = {
   columns: ["", "AI websites", "Freelancers", "Agencies", "Zenith Digital"],
   // Screen-reader name for the blank top-left header cell over the row labels.
   criterionLabel: "Criterion",
+  /** Cards (owner, 20 Nov 2026): one icon per option, in column order. */
+  icons: ["sparkles", "user", "building", "mountain"],
+  /** On our card. */
+  badge: "Recommended",
+  sliderLabels: { prev: "Previous option", next: "Next option" },
   rows: [
     {
       criterion: "Annual cost",
@@ -687,8 +692,10 @@ export const proof = {
 export const pricing = {
   heading: "Transparent, fixed pricing",
   intro:
-    "Fixed scope, fixed price, fixed timeline. No retainers, no licensing traps, no surprise invoices.",
+    "Fixed scope, fixed price, fixed timeline. No licensing traps, no surprise invoices.",
   cta: { label: "Book a call", href: "/book-a-call" },
+  /** A quiet text link under the intro to the full /pricing page. */
+  seeAll: { label: "See every price", href: "/pricing" },
   // White-label band below the tiers
   whiteLabel: {
     heading: "Agencies: resell our builds under your brand",
@@ -711,7 +718,7 @@ export const pricing = {
       featuresLabel: "Core functionality",
       features: [
         "Up to 5 pages",
-        "Wix Studio design & build",
+        "Wix Studio or custom-code design & build",
         "Mobile responsive",
         "Basic on-page SEO",
         "1 round of revisions",
@@ -725,7 +732,7 @@ export const pricing = {
       name: "The Studio",
       icon: "layers",
       price: "€2,350",
-      priceNote: "one-time, 2 to 3 instalments",
+      priceNote: "one-time, 2 instalments",
       summary:
         "Custom functionality, a CMS your team can run, and the full SEO and copy stack.",
       timeline: "5-week delivery",
@@ -752,6 +759,7 @@ export const pricing = {
       timeline: "Ongoing",
       featuresLabel: "Everything in The Studio, plus:",
       features: [
+        "Ongoing pages & builds",
         "Dedicated design & dev team",
         "Growth retainer & ad campaigns",
         "Ongoing SEO & content",
@@ -1018,6 +1026,8 @@ export const footer = {
         { label: "Industries", href: "/industries", requiresHub: true },
         { label: "Case studies", href: "/case-studies" },
         { label: "Partnerships", href: "/partnerships" },
+        // Footer only, not the nav (owner, 20 Nov 2026).
+        { label: "Pricing", href: "/pricing" },
         { label: "About", href: "/about" },
       ],
     },
@@ -1064,6 +1074,8 @@ export const footer = {
   // line: it is the whole payload of every link.
   askAi: {
     heading: "Ask AI about Zenith Digital",
+    /** Under the tiles: the page assistants can read the facts from. */
+    info: { label: "Official information for AI assistants", href: "/llm-info" },
     prompt:
       "Evaluate Zenith Digital as a potential website design and development company for anyone looking for a website, website migration, SEO / AEO and PPC or ecommerce store for their business. Use public information from https://www.thezenithdigital.com/ and summarize their positioning, services, case studies, proof, strengths, potential concerns, and ideal client fit",
     // `queryUrl` ends at the query parameter the prompt is appended to.
@@ -1095,6 +1107,8 @@ export const footer = {
   legal: [
     { label: "Privacy policy", href: "/privacy" },
     { label: "Terms of service", href: "/terms" },
+    // The official facts page (llm-info brief, 20 Nov 2026).
+    { label: "For AI assistants", href: "/llm-info" },
   ],
   wordmark: "Zenith Digital",
 };
@@ -1169,7 +1183,10 @@ export const servicesMenu = {
     label: "Featured case study",
     title:
       "How Bel'Istria went from losing local search to the answer AI recommends.",
-    image: "/portfolio-blocky/belistria.webp",
+    // The case study's 2:1 hero shot, shown whole: the square card cropped to
+    // a strip in the menu (owner, 20 Nov 2026).
+    image: "/case-studies/belistria/hero.webp",
+    aspect: "2 / 1",
     href: "/case-studies/belistria",
   },
 };
@@ -1218,6 +1235,7 @@ export const industriesMenu = {
     label: "Featured industry",
     key: "travel" as IndustrySlug,
     image: "/industries/travel-hospitality.jpg",
+    aspect: "3 / 2",
   },
 };
 
@@ -1228,10 +1246,58 @@ export const industriesMenu = {
  * comparisons registry, published pages only), Learn, and the latest blog
  * post (read from Sanity on the server), then the quick links row.
  */
+/**
+ * The announcement bar above the nav (owner, 20 Nov 2026). Resolved on the
+ * server by lib/announcement.ts at build and every revalidate, so the month
+ * never changes in the visitor's browser.
+ *
+ * Placeholders: {month} is the month we're booking (this month before the
+ * 15th, next month from the 15th on, Belgrade time); {nextMonth} the one
+ * after it; {spotsLeft} the number below. Don't type the arrow: the bar adds
+ * it. The bar is sticky with the nav and can't be dismissed (owner, 20 Nov
+ * 2026); `enabled: false` is the off switch.
+ */
+export const announcement = {
+  /** false hides the bar everywhere. */
+  enabled: true,
+  href: "/book-a-call",
+  /** Owner-set. 0 switches to the "full" message; undefined drops the spots part. */
+  spotsLeft: 3 as number | undefined,
+  /** The default messages, desktop and phone (under 640px). */
+  messages: {
+    spots: {
+      desktop: "Booking {month} builds: {spotsLeft} spots left. Fixed price, built to win you enquiries",
+      phone: "{month}: {spotsLeft} spots left. Book a call",
+    },
+    full: {
+      desktop: "{month} is full. Booking {nextMonth} builds",
+      phone: "{month} is full. Booking {nextMonth} builds",
+    },
+    noCount: {
+      desktop: "Booking {month} builds. Fixed price, built to win you enquiries",
+      phone: "Booking {month} builds. Book a call",
+    },
+  },
+  /**
+   * Scheduled messages: each overrides the default from `start` to `end`
+   * (ISO dates, both inclusive, Belgrade time). The first match wins.
+   * `phone` falls back to `desktop`; `href` to the one above. Example:
+   * { start: "2026-12-01", end: "2026-12-24", desktop: "...", phone: "..." }
+   */
+  scheduled: [] as {
+    start: string;
+    end: string;
+    desktop: string;
+    phone?: string;
+    href?: string;
+  }[],
+  regionLabel: "Announcement",
+};
+
 export const resourcesMenu = {
   compare: {
     label: "Compare platforms",
-    viewAll: { label: "All comparisons", href: "/compare", icon: "split" },
+    viewAll: { label: "Website builder comparisons", href: "/compare", icon: "split" },
   },
   learn: {
     label: "Learn",
@@ -1239,19 +1305,16 @@ export const resourcesMenu = {
       {
         label: "Blog",
         href: "/blog",
-        desc: "Guides on Wix Studio, migrations, SEO and AEO",
         icon: "pen",
       },
       {
         label: "Migration guides",
         href: "/services/website-migration",
-        desc: "Moving from WordPress, Squarespace, Webflow and more",
         icon: "transfer",
       },
       {
         label: "FAQ",
         href: "/faq",
-        desc: "Prices, timelines and how a build runs",
         icon: "answer",
       },
     ],

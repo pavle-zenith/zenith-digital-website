@@ -22,7 +22,7 @@ export function Faq({ data = faqSection }: { data?: FaqData }) {
     <Section tone="light" frameClassName="!py-12 md:!py-20">
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         {/* Left: sticky heading */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div className="lg:sticky lg:top-[calc(6rem+var(--announce-h))] lg:self-start">
           <h2 className="font-display text-h2 font-medium leading-tight tracking-tight">
             {data.heading.map((line) => (
               <span key={line} className="block">

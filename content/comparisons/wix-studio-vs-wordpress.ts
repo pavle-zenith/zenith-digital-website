@@ -71,85 +71,173 @@ export const wixStudioVsWordpress: ComparisonContent = {
     heading: "Wix Studio and WordPress, side by side",
     intro:
       "Most comparisons argue about design. The bigger difference is who owns the upkeep: on a self-hosted WordPress site it's you, on Wix Studio it's the platform.",
-    rows: {
-      bestFor: {
-        wix: "Businesses whose own team updates the site and wants hosting, security and updates handled.",
-        rival: "Large editorial teams, and sites built around a plugin they can't do without.",
+    // Scorecard (table simplify brief, 20 Nov 2026). Each `detail` is the
+    // row's verified sentence from before, unchanged. "Arrange your own"
+    // became "Self-hosted: arrange your own": the sentence says WordPress.com
+    // includes hosting, so the short cell can't say every WordPress site
+    // needs its own.
+    rows: [
+      {
+        criterion: "Best for",
+        wix: { short: "Teams that want it handled" },
+        rival: { short: "Big editorial teams, plugin-led sites" },
+        edge: "depends",
+        detail: {
+          wix: "Businesses whose own team updates the site and wants hosting, security and updates handled.",
+          rival: "Large editorial teams, and sites built around a plugin they can't do without.",
+        },
       },
-      speed: {
-        wix: "Hosting and the editor come with the plan, so the build is the only lead time.",
-        rival: "Self-hosting means arranging hosting and a domain first; WordPress.com includes hosting on every plan.",
+      {
+        criterion: "Hosting",
+        wix: { short: "Included in the plan", tag: "included" },
+        rival: { short: "Self-hosted: arrange your own", tag: "yours" },
+        edge: "wix",
+        detail: {
+          wix: "Hosting and the editor come with the plan, so the build is the only lead time.",
+          rival: "Self-hosting means arranging hosting and a domain first; WordPress.com includes hosting on every plan.",
+        },
       },
-      design: {
-        wix: "Three built-in breakpoints plus up to three of your own, an advanced CSS grid and custom CSS.",
-        rival: "Set by your theme: the Site Editor designs the whole site visually, but only with a block theme.",
+      {
+        criterion: "Security and updates",
+        wix: { short: "Handled by Wix", tag: "included" },
+        rival: { short: "Major updates and plugins on you", tag: "yours" },
+        edge: "wix",
+        detail: {
+          wix: "Wix runs the hosting and security, with no setup or maintenance on your side.",
+          rival: "Minor updates install themselves; major releases, themes, plugins and the site's security are yours to look after.",
+        },
       },
-      cms: {
-        wix: `Collections and dynamic pages, from ${plans.basic.cmsItems} items on ${plans.basic.name} to ${plans.elite.cmsItems} on ${plans.elite.name}.`,
-        rival: "Posts and pages, plus custom post types for any other kind of content.",
+      {
+        criterion: "Design freedom",
+        wix: { short: "Visual, custom breakpoints and CSS", tag: "included" },
+        rival: { short: "Depends on your theme" },
+        edge: "even",
+        detail: {
+          wix: "Three built-in breakpoints plus up to three of your own, an advanced CSS grid and custom CSS.",
+          rival: "Set by your theme: the Site Editor designs the whole site visually, but only with a block theme.",
+        },
       },
-      seo: {
-        wix: "Titles, descriptions and URLs per page, a 301 redirect manager and an automatic sitemap, all built in.",
-        rival: "Core makes an XML sitemap and a robots.txt; check what your theme and plugins add for meta descriptions and redirects.",
+      {
+        criterion: "CMS",
+        wix: {
+          short: `Built in, ${plans.basic.cmsItems} to ${plans.elite.cmsItems} items`,
+          tag: "included",
+        },
+        rival: { short: "Posts, pages, custom types", tag: "included" },
+        edge: "even",
+        detail: {
+          wix: `Collections and dynamic pages, from ${plans.basic.cmsItems} items on ${plans.basic.name} to ${plans.elite.cmsItems} on ${plans.elite.name}.`,
+          rival: "Posts and pages, plus custom post types for any other kind of content.",
+        },
       },
-      ai: {
-        wix: "Wix writes and maintains an llms.txt file you can edit (on an upgraded plan with your own domain), and robots.txt is editable.",
-        rival: "Core serves a default robots.txt that points to the sitemap; for llms.txt or AI crawler rules, check your host and plugins.",
+      {
+        criterion: "SEO basics",
+        wix: { short: "Meta, redirects, sitemap built in", tag: "included" },
+        rival: { short: "Sitemap built in, rest via plugins", tag: "addon" },
+        edge: "wix",
+        detail: {
+          wix: "Titles, descriptions and URLs per page, a 301 redirect manager and an automatic sitemap, all built in.",
+          rival: "Core makes an XML sitemap and a robots.txt; check what your theme and plugins add for meta descriptions and redirects.",
+        },
       },
-      multilingual: {
-        wix: "Wix Multilingual is free to install and translates the site in the editor, by hand or by machine.",
-        rival: "Core doesn't support a multilingual site out of the box, so a plugin adds it.",
+      {
+        criterion: "AI search (llms.txt)",
+        wix: { short: "Built in, editable", tag: "included" },
+        rival: { short: "Via your host or a plugin", tag: "addon" },
+        edge: "wix",
+        detail: {
+          wix: "Wix writes and maintains an llms.txt file you can edit (on an upgraded plan with your own domain), and robots.txt is editable.",
+          rival: "Core serves a default robots.txt that points to the sitemap; for llms.txt or AI crawler rules, check your host and plugins.",
+        },
       },
-      ecommerce: {
-        wix: `A store and online payments are built in, with payments from the ${wixStudio.paymentsFrom} plan.`,
-        rival: "WooCommerce is free to download; hosting, extensions and a payment provider are set up around it.",
+      {
+        criterion: "Multilingual",
+        wix: { short: "Free Wix app", tag: "included" },
+        rival: { short: "Needs a plugin", tag: "addon" },
+        edge: "wix",
+        detail: {
+          wix: "Wix Multilingual is free to install and translates the site in the editor, by hand or by machine.",
+          rival: "Core doesn't support a multilingual site out of the box, so a plugin adds it.",
+        },
       },
-      integrations: {
-        wix: "The Wix App Market, plus your own code and CSS in the Code panel, the Wix IDE or GitHub.",
-        rival: `Over ${wordpressOrg.plugins} free plugins in the official directory, and full code access on a self-hosted site.`,
+      {
+        criterion: "E-commerce",
+        wix: { short: `Built in, from ${wixStudio.paymentsFrom}`, tag: "included" },
+        rival: { short: "WooCommerce, free plugin", tag: "addon" },
+        edge: "even",
+        detail: {
+          wix: `A store and online payments are built in, with payments from the ${wixStudio.paymentsFrom} plan.`,
+          rival: "WooCommerce is free to download; hosting, extensions and a payment provider are set up around it.",
+        },
       },
-      editors: {
-        wix: `Collaborators come with the plan (${plans.basic.collaborators} on ${plans.basic.name}, ${plans.plus.collaborators} on ${plans.plus.name}), and a client can be kept to content mode.`,
-        rival: "Six built-in roles, from Super Admin to Subscriber; installing and managing plugins is an Administrator's job.",
+      {
+        criterion: "Plugins and apps",
+        wix: { short: "Wix App Market plus code" },
+        rival: { short: `${wordpressOrg.plugins}+ free plugins`, tag: "included" },
+        edge: "rival",
+        detail: {
+          wix: "The Wix App Market, plus your own code and CSS in the Code panel, the Wix IDE or GitHub.",
+          rival: `Over ${wordpressOrg.plugins} free plugins in the official directory, and full code access on a self-hosted site.`,
+        },
       },
-      maintenance: {
-        wix: "Wix runs the hosting and security, with no setup or maintenance on your side.",
-        rival: "Minor updates install themselves; major releases, themes, plugins and the site's security are yours to look after.",
+      {
+        criterion: "Editors and roles",
+        wix: {
+          short: `${plans.basic.collaborators} to ${plans.elite.collaborators} collaborators, by plan`,
+          tag: "included",
+        },
+        rival: { short: "6 built-in roles", tag: "included" },
+        edge: "even",
+        detail: {
+          wix: `Collaborators come with the plan (${plans.basic.collaborators} on ${plans.basic.name}, ${plans.plus.collaborators} on ${plans.plus.name}), and a client can be kept to content mode.`,
+          rival: "Six built-in roles, from Super Admin to Subscriber; installing and managing plugins is an Administrator's job.",
+        },
       },
-      cost: {
-        wix: `One plan per site, from ${perMonthYearly(plans.basic.perMonth)}, with any paid apps on top.`,
-        rival: "The software is free; hosting, premium plugins and the hours spent maintaining them are the running costs, and they vary.",
+      {
+        criterion: "Running cost",
+        wix: { short: `From ${usd(plans.basic.perMonth)} a month, billed yearly` },
+        rival: { short: "Free software, plus hosting and plugins" },
+        edge: "depends",
+        detail: {
+          wix: `One plan per site, from ${perMonthYearly(plans.basic.perMonth)}, with any paid apps on top.`,
+          rival: "The software is free; hosting, premium plugins and the hours spent maintaining them are the running costs, and they vary.",
+        },
       },
-    },
+    ],
   },
   questions: {
     heading: "Five questions that decide it",
     intro: "Answer these honestly and the choice usually makes itself.",
+    // Two outcomes per question (brief, 20 Nov 2026). The old answers stay as
+    // `detail` where they add a fact; questions 1, 4 and 5 dropped theirs
+    // because the two outcomes now say all of it.
     items: [
       {
         q: "Who will edit the site day to day?",
-        a: "Non-specialists editing visually: Wix Studio. Authors and editors with an approval flow: WordPress.",
-        leans: "wix",
+        wix: "your own team edits visually, without a developer",
+        rival: "authors and editors need roles and an approval flow",
       },
       {
         q: "How much will you publish?",
-        a: `Newsroom-scale publishing suits WordPress; a Wix site holds ${wixStudio.staticPageLimit} static pages, plus its collections.`,
-        leans: "rival",
+        wix: "it's a business site with a blog and collections",
+        rival: "you publish at newsroom scale, every day",
+        detail: `Newsroom-scale publishing suits WordPress; a Wix site holds ${wixStudio.staticPageLimit} static pages, plus its collections.`,
       },
       {
         q: "Will you sell online?",
-        a: `Wix Studio takes payments from ${wixStudio.paymentsFrom}; WooCommerce adds plugins and updates to maintain.`,
-        leans: "wix",
+        wix: "you want a store with no extra software to maintain",
+        rival: "you already run WooCommerce and want to keep it",
+        detail: `Wix Studio takes payments from ${wixStudio.paymentsFrom}; WooCommerce adds plugins and updates to maintain.`,
       },
       {
         q: "How custom does it need to be?",
-        a: "A plugin with no Wix equivalent can decide it for WordPress on its own.",
-        leans: "rival",
+        wix: "built-in features and the App Market cover what you need",
+        rival: "a plugin with no Wix equivalent runs part of the business",
       },
       {
         q: "What do you want to pay to run it?",
-        a: "One predictable plan on Wix Studio, against free software plus hosting and upkeep that vary.",
-        leans: "wix",
+        wix: "you want one predictable plan per site",
+        rival: "free software suits you and someone handles hosting and upkeep",
       },
     ],
   },

@@ -3,15 +3,21 @@ import { servesRaw } from "@/lib/utils";
 
 import { Section } from "@/components/ui/Section";
 import { BookingCalendar } from "@/components/ui/BookingCalendar";
+import { ContactForm } from "@/components/forms/ContactForm";
+import { ContactIntro } from "@/components/sections/ContactSection";
 import { bookHero } from "@/content/book-a-call";
 
 /**
  * /book-a-call hero — light, single centered column: badge pill, H1, three
  * check items, then the Cal.com embed as a bordered card. Below the calendar
  * (live-site order): overlapping avatar proof row + label, the subhead, and
- * the partner logo strip. The line under the embed sends anyone who won't book
- * a slot down to the contact form, which doubles as the path out if the iframe
- * ever fails to load.
+ * the partner logo strip.
+ *
+ * Calendar and contact form side by side from lg (owner, 20 Nov 2026, a
+ * conversion test): the calendar keeps the wider column, the form sits right
+ * with its intro and direct routes. Stacked below lg, calendar first; the
+ * line under the calendar then skips past it to the form (`#contact`), and
+ * doubles as the way out if the iframe ever fails to load.
  */
 export function BookHero() {
   return (
@@ -28,6 +34,8 @@ export function BookHero() {
       >
         <Image
           src="/textures/studio-texture.jpg"
+          // The hero texture is the largest paint on a phone: load it first.
+          priority
           alt=""
           fill
           sizes="100vw"
@@ -73,23 +81,42 @@ export function BookHero() {
         </ul>
       </div>
 
-      {/* Cal.com embed — anchor target for every "Book a call" CTA */}
-      <div
-        id="calendar"
-        className="relative mt-10 min-h-[480px] scroll-mt-24 overflow-hidden rounded-card border border-light-border bg-white p-2 sm:p-4 md:min-h-[640px]"
-      >
-        <BookingCalendar calLink={bookHero.calLink} />
-      </div>
+      <div className="relative mt-10 grid gap-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-start lg:gap-8">
+        <div>
+          {/* Cal.com embed: anchor target for every "Book a call" CTA */}
+          <div
+            id="calendar"
+            className="min-h-[480px] scroll-mt-[calc(6rem+var(--announce-h))] overflow-hidden rounded-card border border-light-border bg-white p-2 sm:p-4 md:min-h-[640px]"
+          >
+            <BookingCalendar calLink={bookHero.calLink} />
+          </div>
 
-      <p className="mt-4 text-center text-body text-light-muted">
-        {bookHero.fallback.text}{" "}
-        <a
-          href={bookHero.fallback.href}
-          className="font-medium text-light-text underline underline-offset-4 transition hover:text-light-muted"
+          {/* Phones and tablets only: the form is right beside it from lg. */}
+          <p className="mt-4 text-center text-body text-light-muted lg:hidden">
+            {bookHero.fallback.text}{" "}
+            <a
+              href={bookHero.fallback.href}
+              className="font-medium text-light-text underline underline-offset-4 transition hover:text-light-muted"
+            >
+              {bookHero.fallback.label}
+            </a>
+          </p>
+        </div>
+
+        {/* `#contact`: the anchor the fallback line and older links use.
+            Sticky from lg: at this column width Cal.com stacks its details
+            over the month grid, so the calendar runs taller than the form,
+            and the form stays in view while it's scrolled. */}
+        <div
+          id="contact"
+          className="scroll-mt-[calc(6rem+var(--announce-h))] text-left lg:sticky lg:top-[calc(6rem+var(--announce-h))]"
         >
-          {bookHero.fallback.label}
-        </a>
-      </p>
+          <ContactIntro compact />
+          <div className="mt-6">
+            <ContactForm />
+          </div>
+        </div>
+      </div>
 
       {/* Proof: overlapping avatars + label, then the subhead */}
       <div className="mx-auto mt-14 flex max-w-2xl flex-col items-center text-center">

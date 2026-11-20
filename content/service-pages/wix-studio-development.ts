@@ -289,7 +289,7 @@ export const wixStudioDevelopment: ServicePageContent = {
     },
     ctaSecondary: {
       label: "See all pricing",
-      href: "/#pricing",
+      href: "/pricing",
       variant: "secondary",
     },
   },

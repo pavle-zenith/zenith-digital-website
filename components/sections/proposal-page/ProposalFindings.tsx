@@ -21,7 +21,7 @@ const COLUMNS = "grid gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16
 // From `lg` the title column sticks under the nav and jump bar, so a tall
 // screenshot never scrolls its finding's name away.
 const STICKY =
-  "lg:sticky lg:top-[calc(var(--doc-nav-h,4rem)_+_var(--doc-jump-h,3.25rem)_+_2rem)] lg:self-start";
+  "lg:sticky lg:top-[calc(var(--doc-nav-h,calc(4rem_+_var(--announce-h)))_+_var(--doc-jump-h,3.25rem)_+_2rem)] lg:self-start";
 
 /**
  * "What we found": the case for the project. One block per finding, worst

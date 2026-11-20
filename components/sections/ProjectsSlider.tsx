@@ -102,7 +102,8 @@ export function ProjectsSlider({
                 src={it.image}
                 alt={`${it.name} website`}
                 fill
-                sizes="520px"
+                // The slide's own widths: 320px, 420px from sm, 520px from lg.
+                sizes="(max-width: 639px) 320px, (max-width: 1023px) 420px, 520px"
                 className="object-cover"
               />
             </div>

@@ -19,7 +19,7 @@ export function AuditExample() {
 
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         {/* Sticky report */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div className="lg:sticky lg:top-[calc(6rem+var(--announce-h))] lg:self-start">
           <div className="flex flex-col items-center gap-6 rounded-card bg-light-surface p-6 sm:p-10">
             <AuditReport report={auditExample.report} />
           </div>

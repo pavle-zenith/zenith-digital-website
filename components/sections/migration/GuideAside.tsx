@@ -152,7 +152,7 @@ export function GuideAside({
         className,
       )}
     >
-      <div className={cn("lg:sticky lg:top-24", stickyClassName)}>
+      <div className={cn("lg:sticky lg:top-[calc(6rem+var(--announce-h))]", stickyClassName)}>
         {/* Horizontal insets sit on the label and the rows, never on the
             column, so every hairline runs from the vertical rule to the rail. */}
         <p

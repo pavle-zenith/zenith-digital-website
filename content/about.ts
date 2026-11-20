@@ -187,8 +187,13 @@ export const aboutFinalCta = {
  * on the legal pages only, never in schema: `legalName` would need to match
  * the registration exactly across every surface that carries it.
  */
-export const aboutLegal =
-  "Zenith Digital is the trading name of MILORAD MAODUS PR RACUNARSKO PROGRAMIRANJE ZENITH DIGITAL KANJIZA, registered in Serbia.";
+export const aboutEntity =
+  "MILORAD MAODUS PR RACUNARSKO PROGRAMIRANJE ZENITH DIGITAL KANJIZA";
+
+/** Serbian business register numbers (owner, 20 Nov 2026: publish them). */
+export const aboutRegistration = { pib: "114003945", mb: "67251318" };
+
+export const aboutLegal = `Zenith Digital is the trading name of ${aboutEntity}, registered in Serbia. Tax ID (PIB) ${aboutRegistration.pib}, registration number (MB) ${aboutRegistration.mb}.`;
 
 /**
  * The record, verified.

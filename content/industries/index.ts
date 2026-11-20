@@ -138,7 +138,7 @@ export type IndustryMenu = {
   /** The rest of the dropdown's bottom row. */
   quickLinks: MenuLink[];
   /** The dropdown's last column: one published industry page. */
-  featured: { label: string; title: string; href: string; image: string } | null;
+  featured: { label: string; title: string; href: string; image: string; aspect: string } | null;
 };
 
 /**
@@ -182,6 +182,7 @@ export function industryMenu(): IndustryMenu | null {
           title: featuredPage.hero.h1,
           href: `/industries/${featuredPage.slug}`,
           image: featured.image,
+          aspect: featured.aspect,
         }
       : null,
   };

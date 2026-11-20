@@ -34,17 +34,17 @@ export function formatLongDate(iso: string): string {
 
 /**
  * True for assets that are already in their final form and should be served
- * straight from the CDN, bypassing Vercel's image optimizer (`unoptimized`).
+ * straight from the CDN, bypassing Vercel's image optimizer (`unoptimized`):
+ * a transform costs a quota unit and would save nothing.
  *
- * Three groups qualify, for the same reason: the file on disk is already a
- * compressed, correctly sized asset, so a transform costs a quota unit and
- * saves little or nothing, while emitting a srcset that asks for the same
- * picture at up to sixteen widths.
- *
- *  - `/logos-*`      flat brand marks, 16-32px tall from sources capped at 160
  *  - `/certifications` credential badges, 8-16KB for a box never over 80px
- *  - `/case-studies`  project shots, already WebP and capped at 2x their
- *                     largest render width
+ *
+ * Logos and case-study shots used to be here too. Measured in the
+ * performance pass (20 Nov 2026), that trade was wrong for phones: logo
+ * files 512-705px wide filled ~100px slots, and 1400px case-study cards
+ * (140KB) filled 368px ones, costing 150-300KB a page. Both now go through
+ * the optimizer, sized per device; about 60 shots and the logos, a few
+ * widths each, cached, is a small share of the image quota.
  *
  * DELIBERATELY NOT AVATARS. There are 34 of them, several between 200KB and
  * 700KB, and most render at 44px. Serving those raw would ship megabytes to
@@ -53,8 +53,6 @@ export function formatLongDate(iso: string): string {
 export function servesRaw(src: unknown): boolean {
   return (
     typeof src === "string" &&
-    (src.startsWith("/logos-") ||
-      src.startsWith("/certifications/") ||
-      src.startsWith("/case-studies/"))
+    src.startsWith("/certifications/")
   );
 }

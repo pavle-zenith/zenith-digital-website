@@ -4,6 +4,7 @@ import { caseStudyDetails } from "@/content/case-studies";
 import { migrationGuides } from "@/content/migration-guides";
 import { hubLive, industryPages } from "@/content/industries";
 import { compareHubLive, publishedComparisons } from "@/content/comparisons";
+import { liveComparisonRedirects } from "@/content/comparisons/status";
 import { servicePages } from "@/content/service-pages";
 import { sanityFetchSafe } from "@/sanity/lib/client";
 import { postSlugsQuery } from "@/sanity/lib/queries";
@@ -38,6 +39,9 @@ const SITE = "https://www.thezenithdigital.com";
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await sanityFetchSafe<PostSitemapEntry[]>(postSlugsQuery, []);
+  const redirectedPosts = new Set(
+    liveComparisonRedirects().map((r) => r.source),
+  );
 
   const staticRoutes: {
     path: string;
@@ -95,6 +99,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
+    {
+      url: `${SITE}/llm-info`,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    },
+    {
+      url: `${SITE}/pricing`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
     // The /compare hub and comparisons, each only once published
     // (content/comparisons/status.ts), never the preview-only set.
     ...(compareHubLive
@@ -118,11 +132,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    ...posts.map((p) => ({
-      url: `${SITE}/blog/${p.slug}`,
-      lastModified: new Date(p.lastVerified ?? p.publishedAt),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
+    // A post whose URL now 301s to a /compare page is left out even while
+    // it is still published in Sanity: a sitemap must only list final URLs.
+    ...posts
+      .filter((p) => !redirectedPosts.has(`/blog/${p.slug}`))
+      .map((p) => ({
+        url: `${SITE}/blog/${p.slug}`,
+        lastModified: new Date(p.lastVerified ?? p.publishedAt),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      })),
   ];
 }

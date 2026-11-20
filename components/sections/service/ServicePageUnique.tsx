@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
-import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
-import { cn, servesRaw } from "@/lib/utils";
+import { CompareColumns } from "@/components/ui/CompareColumns";
+import { servesRaw } from "@/lib/utils";
 import type { ServicePageContent } from "@/content/service-pages";
 
 /**
@@ -39,67 +39,32 @@ export function ServicePageUnique({ data }: { data: ServicePageContent }) {
         className="bg-transparent"
         frameClassName="!py-14 md:!py-24"
       >
-        <div className="max-w-3xl">
-          <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-            {unique.heading}
-          </h2>
-          <p className="mt-4 text-body-lg font-medium leading-relaxed text-text-muted">
-            {unique.intro}
-          </p>
-        </div>
-
         {unique.kind === "comparison" ? (
           <>
-            <div className="type-card mt-10 grid gap-px overflow-hidden rounded-card border border-border bg-border md:mt-12 md:grid-cols-3">
-              {unique.columns.map((col, i) => {
-                const ours = i === unique.columns.length - 1;
-                return (
-                  <div
-                    key={col.name}
-                    className={cn(
-                      "flex flex-col p-8",
-                      ours
-                        ? "bg-white text-light-text"
-                        : "bg-bg/70 backdrop-blur-md",
-                    )}
-                  >
-                    <h3 className="font-display text-h3 font-medium leading-tight tracking-tight">
-                      {col.name}
-                    </h3>
-                    <p
-                      className={cn(
-                        "mt-2 text-body",
-                        ours ? "text-light-muted" : "text-text-muted",
-                      )}
-                    >
-                      {col.note}
-                    </p>
-                    <ul className="mt-6 flex flex-col gap-3">
-                      {col.points.map((point) => (
-                        <li key={point} className="flex items-start gap-2.5">
-                          {ours ? (
-                            <VerifiedCheck className="mt-0.5 text-positive-ink" />
-                          ) : (
-                            <span
-                              aria-hidden
-                              className="mt-2 h-1 w-1 shrink-0 rounded-full bg-text-muted"
-                            />
-                          )}
-                          <span
-                            className={cn(
-                              "text-body leading-snug",
-                              ours ? "text-light-text" : "text-text-muted",
-                            )}
-                          >
-                            {point}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })}
-            </div>
+            {/* Scannable cards (owner, 20 Nov 2026), ours white and first on
+                phones; the heading rides in the slider's header row. */}
+            <CompareColumns
+              tone="dark"
+              labels={{ prev: "Previous option", next: "Next option", region: unique.heading }}
+              options={unique.columns.map((col, i) => ({
+                name: col.name,
+                icon: col.icon,
+                ours: i === unique.columns.length - 1,
+                badge: col.badge,
+                headline: col.note,
+                rows: col.points.map((p) => ({ text: p.text, mark: p.mark })),
+              }))}
+              header={
+                <>
+                  <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+                    {unique.heading}
+                  </h2>
+                  <p className="mt-4 text-body-lg font-medium leading-relaxed text-text-muted">
+                    {unique.intro}
+                  </p>
+                </>
+              }
+            />
             <div className="mt-10 max-w-2xl border-t border-border pt-8">
               <h3 className="font-display text-body-lg font-medium">
                 {unique.footnote.title}
@@ -109,7 +74,16 @@ export function ServicePageUnique({ data }: { data: ServicePageContent }) {
               </p>
             </div>
           </>
-        ) : null}
+        ) : (
+          <div className="max-w-3xl">
+            <h2 className="font-display text-h2 font-medium leading-tight tracking-tight text-balance">
+              {unique.heading}
+            </h2>
+            <p className="mt-4 text-body-lg font-medium leading-relaxed text-text-muted">
+              {unique.intro}
+            </p>
+          </div>
+        )}
 
         {unique.kind === "explainer" ? (
           <>

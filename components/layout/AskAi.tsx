@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { footer } from "@/content/home";
@@ -93,6 +94,15 @@ export function AskAi() {
           );
         })}
       </ul>
+      <Link
+        href={askAi.info.href}
+        className="group mt-4 inline-flex items-center gap-1.5 text-[0.8125rem] text-light-muted underline decoration-light-border underline-offset-4 transition hover:text-light-text"
+      >
+        {askAi.info.label}
+        <span aria-hidden className="btn-arrow">
+          &rarr;
+        </span>
+      </Link>
     </div>
   );
 }

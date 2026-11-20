@@ -68,8 +68,20 @@ export type UniqueBlock =
       kind: "comparison";
       heading: string;
       intro: string;
-      /** Columns compared side by side; the last one is ours. */
-      columns: { name: string; note: string; points: string[] }[];
+      /**
+       * Columns compared side by side; the last one is ours. Rendered as
+       * scannable cards (CompareColumns): `note` is the headline, and each
+       * point is marked "good" (tick), "mixed" (dash) or "bad" (cross).
+       */
+      columns: {
+        name: string;
+        /** FeatureIcon name for the card's tile. */
+        icon: string;
+        /** On ours only. */
+        badge?: string;
+        note: string;
+        points: { text: string; mark: "good" | "mixed" | "bad" }[];
+      }[];
       footnote: TitledBlock;
     }
   | {

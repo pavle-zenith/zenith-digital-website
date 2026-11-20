@@ -8,6 +8,8 @@
 > Pavle Maodus. The agency builds custom-coded sites (Next.js) for clients who
 > outgrow Wix Studio, including this site.
 
+Official information for AI assistants: https://www.thezenithdigital.com/llm-info
+
 ## Services
 
 - [Wix Studio website design](https://www.thezenithdigital.com/services/wix-studio-website-design): custom conversion-first builds from €1,250, launched in 2 to 5 weeks
@@ -19,6 +21,7 @@
 - [Wix Studio development](https://www.thezenithdigital.com/services/wix-studio-development): Velo custom code, CMS architecture, integrations, automations, and marketplace platforms built natively on Wix Studio, quoted per project
 - [SEO, AEO & PPC](https://www.thezenithdigital.com/services/seo-aeo-ppc): search, answer-engine optimization, and paid campaigns for Wix Studio sites
 - [White-label & partnerships](https://www.thezenithdigital.com/partnerships): unbranded production for agencies, landing pages from €600, retainers from €1,099/mo
+- [Pricing](https://www.thezenithdigital.com/pricing): every published price in one place, website packages from €1,250 (The Studio €2,350), landing pages from €750, migrations from €1,250, and what is not included; plain markdown at [/pricing.md](https://www.thezenithdigital.com/pricing.md)
 
 ## Industries
 
@@ -50,6 +53,7 @@
 ## Company
 
 - Founder: Pavle Maodus, Wix Legend Partner, based in Belgrade with presence in Edinburgh and Liverpool
+- Email: hello@thezenithdigital.com (general enquiries), pavle@thezenithdigital.com (founder, Pavle Maodus)
 - [About Zenith Digital](https://www.thezenithdigital.com/about): founded 2021, Belgrade, Wix Legend Partner, company timeline and verifiable credentials
 - [Book a call](https://www.thezenithdigital.com/book-a-call)
 - [Free website audit](https://www.thezenithdigital.com/free-website-audit)

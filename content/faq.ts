@@ -30,6 +30,8 @@ export type FaqCategory = {
   id: string;
   label: string;
   items: { q: string; a: string }[];
+  /** A text link under the category's questions. */
+  link?: { label: string; href: string };
 };
 
 export const fCategories: FaqCategory[] = [
@@ -81,10 +83,11 @@ export const fCategories: FaqCategory[] = [
   {
     id: "pricing-scope",
     label: "Pricing & scope",
+    link: { label: "See every price", href: "/pricing" },
     items: [
       {
         q: "How much does a website cost?",
-        a: `Fixed and published: The Minimum ${pricing.tiers[0].price.toLowerCase()} (5 pages, 2 weeks), The Studio at ${pricing.tiers[1].price} (12 pages, full copy and SEO stack, 5 weeks), custom scopes above that. Landing pages from €750. No retainers required, no surprise invoices.`,
+        a: `Fixed and published: The Minimum ${pricing.tiers[0].price.toLowerCase()} (5 pages, 2 weeks), The Studio at ${pricing.tiers[1].price} (12 pages, full copy and SEO stack, 5 weeks), custom scopes above that. Landing pages from €750. No surprise invoices.`,
       },
       {
         q: "Do prices change after we start?",
@@ -96,7 +99,7 @@ export const fCategories: FaqCategory[] = [
       },
       {
         q: "How do payments work?",
-        a: "In instalments, not one lump sum. The Minimum is two payments: 50% to start, 50% at launch. The Studio can be split into two or three, tied to milestones: kickoff, design approval, launch. No financing, no interest, no card tricks, just the project cost spread across the project. The structure is flexible; the scope is not.",
+        a: "In two instalments, not one lump sum: 50% to start and 50% at launch, on The Minimum and The Studio alike. No financing, no interest, no card tricks, just the project cost spread across the project.",
       },
     ],
   },
@@ -136,7 +139,7 @@ export const fCategories: FaqCategory[] = [
       },
       {
         q: "What support do we get?",
-        a: "30 days free on The Minimum, 60 on The Studio, with responses within 24 hours. After that, an optional care plan from €120/mo, or just call us when you need something. No forced retainers.",
+        a: "30 days of free support after launch on every build, with responses within 24 hours. After that, just call us when you need something, or move to The Zenith for ongoing work.",
       },
       {
         q: "What if something breaks?",

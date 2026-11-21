@@ -76,7 +76,9 @@ export const compareHub = {
           // Client sites, case study first; the agency partners tagged
           // Next.js (Techtonnik, Capacity, Wellington Web Co) show
           // partnership volume, not a site.
-          slugs: ["genroks-ai", "highland-fling"],
+          // Owner, 21 Nov 2026: Highland Fling is Next.js without Sanity, so the
+          // "Next.js and Sanity" row shows Bianomics (Sanity confirmed) instead.
+          slugs: ["genroks-ai", "bianomics"],
         },
       },
       {

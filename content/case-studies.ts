@@ -50,6 +50,8 @@ export const PLATFORMS = {
   nextjs: "Next.js",
   sanity: "Sanity",
   shopify: "Shopify",
+  // Owner, 21 Nov 2026: Techtonnik's site runs on Astro.
+  astro: "Astro",
 } as const;
 
 export type Platform = keyof typeof PLATFORMS;
@@ -222,10 +224,11 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Techtonnik",
     slug: "techtonnik",
-    platforms: ["nextjs", "sanity"],
+    // Owner, 21 Nov 2026: the site moved off Wix Studio to Astro in June 2026.
+    platforms: ["astro"],
     industry: "agencies",
     metric: "10+ projects delivered",
-    story: "Their own site moved off WordPress, and fulfillment partner since 2023",
+    story: "WordPress to Wix Studio to Astro, and brochure-site partner since 2023",
     thumb: "/case-studies/techtonnik/card.webp",
     logo: "/logos-white/techtonnik.png",
     liveUrl: "https://www.techtonnik.com",
@@ -318,7 +321,8 @@ export const caseStudyCards: CaseStudyCard[] = [
   {
     client: "Highland Fling",
     slug: "highland-fling",
-    platforms: ["nextjs", "sanity"],
+    // Owner, 21 Nov 2026: custom Next.js, no Sanity.
+    platforms: ["nextjs"],
     industry: "travel",
     metric: "Adventure booking platform",
     story: "Bungee and adrenaline experience bookings across Scotland",
@@ -815,8 +819,9 @@ function cardOf(slug: string): CaseStudyCard {
   return card;
 }
 
-// Shipped detail pages, in next-study rotation order.
-export const caseStudyDetails: CaseStudyDetail[] = [
+// Shipped detail pages, in next-study rotation order. Studies written later
+// sit below as their own consts and join the rotation in `caseStudyDetails`.
+const shippedDetails: CaseStudyDetail[] = [
   {
     ...cardOf("knode-ai"),
     // Narrative confirmed by owner (Aug 2026): story beats match the project.
@@ -1837,8 +1842,893 @@ export const caseStudyDetails: CaseStudyDetail[] = [
   },
 ];
 
+/* ------------------------------------------------------------------ *
+ * STUDIES ADDED 21 NOV 2026
+ *
+ * Seven published the same day (lepaCouture to pressureTestScotland below,
+ * listed in `caseStudyDetails` after them).
+ *
+ * Links that switch on with `detailSlugs` (no edits needed): the
+ * /case-studies grid, the industry pages and the industries hub, the
+ * comparison pages and hub chips, the sitemap, the /partnerships cards
+ * (Techtonnik, Wellington Web Co to Pressure Test Scotland, Bianomics) and
+ * the /testimonials tags (via `studyHref`).
+ * Scroll shots still to come: Ameci Pizza Kitchen and Pressure Test Scotland
+ * (re-export at 1x, 1440 wide). Lepa Couture, Bianomics and Gorska have none
+ * by design.
+ * ------------------------------------------------------------------ */
+
+/**
+ * LEPA COUTURE: drafted and published 21 Nov 2026. No scroll shot (owner).
+ *
+ * Facts from owner (21 Nov 2026): fashion boutique at Belgrade Waterfront;
+ * custom-made dresses and scarves; designer Lepa studied fashion in Milan
+ * (school not named); aesthetic inspired by houses like The Row; custom
+ * Shopify theme with a gallery page for one-of-a-kind work; EUR, RSD and AED;
+ * serves Serbia and the UAE; takes payments online; orders used to arrive via
+ * Instagram DMs and now come through the site; 3 weeks of development,
+ * engagement July to September 2026, launched September 2026. Owner worked
+ * with Marko Georgievski (marketing manager). Permission: name, numbers,
+ * screenshots. Live store checked 21 Nov 2026: theme "Lepa - Milano Theme
+ * 2026", 20 dresses online, prices from EUR 170 to 350.
+ *
+ * Deliberately NOT claimed: a share of online orders. The owner's "75%" is
+ * not counted and the client can't be reached while it restructures, so the
+ * DM-to-checkout shift ships as a plain statement, without a number.
+ */
+export const lepaCouture: CaseStudyDetail = {
+  ...cardOf("lepa-couture"),
+  headline: "How Lepa Couture moved its orders from Instagram DMs to its own store",
+  stats: [
+    { value: "3 weeks", label: "Development, launched September 2026" },
+    { value: "3", label: "Currencies: euros, dinars and dirhams" },
+    { value: "2", label: "Markets served: Serbia and the UAE" },
+  ],
+  meta: {
+    industry: INDUSTRIES.ecommerce,
+    engagementType: "Custom Shopify build",
+    timeline: "July to September 2026",
+    platform: "Shopify, custom theme",
+    liveUrl: "https://www.lepacouture.com",
+  },
+  challenge: [
+    "Lepa Couture is a fashion label with a boutique at Belgrade Waterfront. Its designer, Lepa, trained in Milan and makes custom dresses and scarves in a quiet, pared-back style inspired by houses like The Row. Each piece is made to order, and many are one of a kind.",
+    "Until 2026, every sale started as an Instagram DM. That works while a label is small, but it means there's no collection to browse at leisure, no checkout, and no simple way for a customer in Dubai to buy a dress from Belgrade. The brief: a store that shows the work the way a gallery would, and lets customers in Serbia and the UAE order and pay without sending a message first.",
+  ],
+  heroShot: {
+    src: "/case-studies/lepa-couture/hero.webp",
+    alt: "Lepa Couture's Shopify store homepage in a browser window, showing a made-to-order dress collection",
+  },  gallery: [
+    {
+      src: "/case-studies/lepa-couture/supporting-1.webp",
+      alt: "Lepa Couture's homepage in a browser window: the LEPA dragonfly mark over a black-and-white portrait",
+    },
+    {
+      src: "/case-studies/lepa-couture/supporting-2.webp",
+      alt: "The dresses collection: Selva, Elanora, Lela and Nerina in a four-column grid with prices in euros",
+    },
+    {
+      src: "/case-studies/lepa-couture/supporting-3.webp",
+      alt: "The Nuvella product page: a striped silk set with photos, size, quantity and add to cart",
+    },
+    {
+      src: "/case-studies/lepa-couture/supporting-4.webp",
+      alt: "The Galerie page: the Belgrade Waterfront boutique, its marble counter and display shelves",
+    },
+  ],
+
+  introduction:
+    "Lepa Couture is a Belgrade Waterfront boutique selling custom-made dresses and scarves by Lepa, a Serbian designer who studied fashion in Milan. In summer 2026, Zenith Digital designed and built its Shopify store on a custom theme, in 3 weeks of development, launching in September 2026 with prices in euros, dinars and dirhams for customers in Serbia and the UAE. Orders that used to arrive as Instagram DMs now come through the website.",
+  approach: [
+    {
+      heading: "A theme made for the label",
+      body: "Off-the-shelf Shopify themes are built for catalogues of stock items, and Lepa's work isn't that. The store runs on a custom theme built around her collection: generous imagery, quiet typography and product pages that let a single dress carry the page, the way the pieces are presented in the boutique.",
+    },
+    {
+      heading: "A gallery for one-of-a-kind work",
+      body: "Much of what Lepa makes is commissioned once and never repeated, so it can't sit in the shop as stock. A dedicated gallery page shows that work on its own, which gives new customers a sense of what a custom commission looks like before they ask for one.",
+    },
+    {
+      heading: "Two markets, three currencies",
+      body: "Lepa's customers are in Serbia and the UAE, so the store shows prices in euros, Serbian dinars and UAE dirhams and takes payment online. A customer in either market can choose a dress and pay for it in a currency they recognise, without a conversation in between.",
+    },
+    {
+      heading: "From the map to the checkout",
+      body: "Local customers often find the boutique through its Google Business Profile. With a real store behind that listing, a search for the boutique now leads somewhere a customer can browse and buy, not just a phone number and an Instagram handle.",
+    },
+  ],
+  results: [
+    {
+      value: "DMs to checkout",
+      label: "Orders now placed on the website instead of Instagram DMs",
+      positive: true,
+    },
+    {
+      value: "Serbia and the UAE",
+      label: "Customers served in euros, dinars and dirhams",
+      positive: true,
+    },
+  ],
+  resultsNote:
+    "Since the September 2026 launch, Lepa Couture has taken its orders through the Shopify store Zenith Digital built, rather than through Instagram DMs, with customers in Serbia and the UAE paying in their own currency.",
+  testimonial: quoteOf("marko-georgievski"),
+  techUsed: [
+    "Custom Shopify theme",
+    "Shopify store setup",
+    "Gallery page",
+    "Multi-currency: EUR, RSD, AED",
+    "Online payments",
+    "Brand & web design",
+  ],
+  publishedAt: "2026-11-21",
+  cta: {
+    heading: ["Still taking orders", "in your DMs?"],
+    paragraph:
+      "A free 20-minute call. We'll tell you whether your products belong on Shopify or Wix Studio, and what a store that takes payment in your customers' currency would cost.",
+  },
+  seo: {
+    title: "Lepa Couture case study | From Instagram DMs to Shopify | Zenith Digital",
+    description:
+      "How Zenith Digital built Lepa Couture's custom Shopify store in 3 weeks: a Belgrade couture label now selling in euros, dinars and dirhams to Serbia and the UAE.",
+  },
+};
+
+/**
+ * BIANOMICS: drafted and published 21 Nov 2026. No scroll shot (owner).
+ *
+ * Facts from owner (21 Nov 2026): consulting company in El Paso, Texas, led by
+ * Bianca Cervantes; relationship since March 2026, Zenith is their development
+ * partner; 4 full website builds for Bianomics' clients (property and real
+ * estate, logistics and packaging, a therapy practice); bianomics.com is a
+ * custom Next.js build whose forms feed monday.com; the Snapshot (their free
+ * read, like our audit) is the conversion path; the marketing team requests
+ * changes through Slack and they ship in about a week; a full website build is
+ * next. Everything approved by the client.
+ * Live site checked 21 Nov 2026: "A human systems company"; six services
+ * (brand and marketing strategy, PR and crisis management, event
+ * architecture, project management, operational blueprints, workforce
+ * development); 8 markets listed; /snapshot is a 7-question application form.
+ *
+ * Confirmed by owner (21 Nov 2026): Bianca's title is Director (matches the
+ * testimonial); the team edits page content in Sanity Studio; Slack change
+ * requests turn around in 7 days.
+ */
+export const bianomics: CaseStudyDetail = {
+  ...cardOf("bianomics"),
+  headline: "How Bianomics gained a development partner its marketing team briefs in Slack",
+  stats: [
+    { value: "4", label: "Client websites built together since March 2026" },
+    { value: "7 days", label: "Turnaround on a Slack change request" },
+    { value: "monday.com", label: "Where every Snapshot request lands" },
+  ],
+  meta: {
+    industry: INDUSTRIES.services,
+    engagementType: "Custom build & development partnership",
+    timeline: "March 2026 onwards",
+    platform: "Custom code (Next.js) + Sanity CMS + monday.com",
+    liveUrl: "https://www.bianomics.com",
+  },
+  challenge: [
+    "Bianomics is a consulting company in El Paso, Texas, led by its director, Bianca Cervantes. It calls itself a human systems company: brand and marketing strategy, public relations, events, operations and workforce development, run as one system for organisations across eight markets. Its clients often need a website as part of that work, and Bianomics needed someone to build them.",
+    "Its own site had a job too. Bianomics wins work through the Snapshot, a free, honest read of where an organisation stands, so the site had to turn interest into Snapshot requests and put them straight into the tools the team already runs on. And the marketing team needed to change the site without waiting on a developer's calendar. The brief: a site built around the Snapshot, connected to monday.com, that the team can edit themselves and extend by asking.",
+  ],
+  heroShot: {
+    src: "/case-studies/bianomics/hero.webp",
+    alt: "The Bianomics homepage in a browser window: You're building something real. We align everything it needs to move.",
+  },  gallery: [
+    {
+      src: "/case-studies/bianomics/supporting-1.webp",
+      alt: "Bianomics' services and markets: brand and marketing strategy, PR and crisis management, events, project management, operational blueprints and workforce development, across eight markets",
+    },
+    {
+      src: "/case-studies/bianomics/supporting-2.webp",
+      alt: "A client story in dark mode: Built by Ability, an HR video and messaging campaign",
+    },
+    {
+      src: "/case-studies/bianomics/supporting-3.webp",
+      alt: "The closing call to action, Ready to be seen for what you actually do?, above the footer",
+    },
+    {
+      src: "/case-studies/bianomics/supporting-4.webp",
+      alt: "Leadership, start to finish: the Bianomics team in black-and-white portraits",
+    },
+  ],
+
+  introduction:
+    "Bianomics is a consulting company in El Paso, Texas, that runs brand, PR, events, operations and workforce development as one system for its clients. Since March 2026, Zenith Digital has been its development partner: a custom Next.js build of bianomics.com with Sanity CMS for content and Snapshot requests feeding monday.com, four full websites for Bianomics' own clients, and new features requested by its marketing team in Slack and shipped within 7 days.",
+  approach: [
+    {
+      heading: "Built around the Snapshot",
+      body: "The Snapshot is how Bianomics starts most relationships: a complimentary read of an organisation's communications and brand position, done by the people who would do the work. The site leads every visitor towards it, and the Snapshot page is a short application, seven questions about where the organisation is and what a win in 90 days would look like, so the team starts each conversation already knowing the problem.",
+    },
+    {
+      heading: "Forms that land in monday.com",
+      body: "Bianomics runs its projects in monday.com, so a form that emailed someone would have been one more thing to copy across. The site is custom code in Next.js precisely so it could connect directly: each Snapshot request arrives in the team's board with every answer attached, ready to be assigned.",
+    },
+    {
+      heading: "Edit it yourself, or ask in Slack",
+      body: "Day-to-day content lives in Sanity Studio, so the marketing team edits copy and pages themselves without touching code. Anything bigger, a new section, a new page type, a change to how a form behaves, they post in a shared Slack channel, and Zenith Digital ships it with AI-assisted development within 7 days. The site keeps up with the business without anyone at Bianomics waiting on a developer's calendar.",
+    },
+    {
+      heading: "A build partner for their clients",
+      body: "When a Bianomics client needs a website, Zenith Digital builds it while Bianomics keeps the relationship and the strategy. Four full sites so far, in property and real estate, logistics and packaging, and a therapy practice, each delivered as part of a wider Bianomics engagement rather than as a separate vendor job.",
+    },
+  ],
+  results: [
+    {
+      value: "4",
+      label: "Full client websites built for Bianomics since March 2026",
+      positive: true,
+    },
+    {
+      value: "7 days",
+      label: "Turnaround from a Slack request to the change being live",
+      positive: true,
+    },
+    {
+      value: "Next build",
+      label: "A full rebuild of bianomics.com is the next project",
+    },
+  ],
+  resultsNote:
+    "Since March 2026, Zenith Digital has built bianomics.com and four client websites for Bianomics, and its marketing team edits the site in Sanity Studio and gets new features live within 7 days by asking in Slack.",
+  testimonial: quoteOf("bianca-cervantes"),
+  techUsed: [
+    "Custom code (Next.js)",
+    "Sanity CMS",
+    "monday.com integration",
+    "Snapshot application funnel",
+    "Slack change requests, 7-day turnaround",
+    { label: "White-label client builds", href: "/partnerships" },
+  ],
+  publishedAt: "2026-11-21",
+  cta: {
+    heading: ["Need a build partner", "for your clients' websites?"],
+    paragraph:
+      "A free 20-minute call. Tell us how you work with clients and we'll show you how a white-label build fits around it, from the first brief to handover.",
+  },
+  seo: {
+    title: "Bianomics case study | A development partner briefed in Slack | Zenith Digital",
+    description:
+      "How Zenith Digital became Bianomics' development partner: a custom Next.js site feeding monday.com, Sanity CMS, four client builds, and 7-day change turnaround.",
+  },
+};
+
+/**
+ * TECHTONNIK: drafted and published 21 Nov 2026.
+ *
+ * Facts from owner (21 Nov 2026): Techtonnik is a Serbian on-demand software
+ * development company founded by Stevan Radovanovic; known since 2023; Zenith
+ * Digital is its fulfilment partner for brochure websites (Techtonnik lists
+ * Zenith in its partner network as "Web presentations, fast"); its own site
+ * moved WordPress to Wix Studio in 2024, then Wix Studio to Astro in June
+ * 2026, because Techtonnik is moving to agent-driven development and wants
+ * changes made through an agent plus backend work; the Astro move took one
+ * week including a layout refresh and light brand refresh; meta titles,
+ * descriptions and URLs carried over unchanged and rankings held steady;
+ * agent-driven changes and backend are a work in progress (coming next).
+ * Live site checked 21 Nov 2026: Astro; "Quality solutions of the highest
+ * magnitude"; four ways to engage (join your team, build it with us, we
+ * assemble the team, we connect you); partner network; hourly, ongoing work.
+ */
+export const techtonnik: CaseStudyDetail = {
+  ...cardOf("techtonnik"),
+  headline: "How Techtonnik moved its site to Astro in a week, with every URL and ranking intact",
+  logoDark: "/logos-dark/techtonnik.png",
+  stats: [
+    { value: "1 week", label: "Wix Studio to Astro, refresh included" },
+    { value: "Every URL", label: "Kept, with the same titles and descriptions" },
+    { value: "Since 2023", label: "Brochure-site fulfilment partner" },
+  ],
+  meta: {
+    industry: INDUSTRIES.agencies,
+    engagementType: "Migration & refresh",
+    timeline: "June 2026",
+    platform: "Astro (custom code), from Wix Studio",
+    liveUrl: "https://www.techtonnik.com",
+  },
+  challenge: [
+    "Techtonnik is an on-demand software development company in Serbia, founded by Stevan Radovanovic. It builds AI-powered web, mobile and desktop apps by joining a client's team, assembling one, or connecting the client with the right partner. Zenith Digital has been its fulfilment partner for brochure websites since 2023, and in 2024 moved Techtonnik's own site from WordPress to Wix Studio.",
+    "By 2026 the company was changing how it builds. Techtonnik wanted its own site to work the way its development does now: changes made through an AI agent, and backend work no website builder would host. That meant leaving Wix Studio. The brief was a move without a reset: same site, same content, same search presence, on a codebase the team could hand to an agent.",
+  ],
+  heroShot: {
+    src: "/case-studies/techtonnik/hero.webp",
+    alt: "Techtonnik's homepage in a browser window: Quality solutions of the highest magnitude",
+  },
+  scrollShot: {
+    src: "/case-studies/techtonnik/full-page.webp",
+    alt: "The full Techtonnik homepage: the hero, four ways to work together, the apps it has helped build, its partner network, how a match works, a client review, the about section and the closing call to action",
+    width: 1440,
+    height: 6019,
+  },  gallery: [
+    {
+      src: "/case-studies/techtonnik/supporting-1.webp",
+      alt: "Techtonnik's homepage in a browser window: Quality solutions of the highest magnitude, above a strip of partner logos",
+    },
+    {
+      src: "/case-studies/techtonnik/supporting-2.webp",
+      alt: "Apps we've helped build: six client web and mobile projects in a grid",
+    },
+    {
+      src: "/case-studies/techtonnik/supporting-3.webp",
+      alt: "The closing call to action, Got a project in mind?, and the footer",
+    },
+    {
+      src: "/case-studies/techtonnik/supporting-4.webp",
+      alt: "The network behind the work: partner companies including codeIT, Cinnamon, Genroks and Zenith Digital",
+    },
+    {
+      src: "/case-studies/techtonnik/supporting-5.webp",
+      alt: "The case studies page: SerbLink and Super Stan, each with a device mockup",
+    },
+  ],
+
+  introduction:
+    "Techtonnik is a Serbian on-demand software development company founded by Stevan Radovanovic. In June 2026, Zenith Digital moved its website from Wix Studio to Astro in one week, with a layout and brand refresh, keeping every URL, meta title and description, and its rankings held steady through the move. It was the site's second migration with Zenith Digital, after WordPress to Wix Studio in 2024.",
+  approach: [
+    {
+      heading: "Same site, new foundation",
+      body: "The point of the move was the codebase, not a redesign, so the content and the spirit of the design stayed put. The layout got a light lift and the brand a refresh, enough to feel current, not enough to make returning visitors or search engines treat it as a new site.",
+    },
+    {
+      heading: "Nothing lost in search",
+      body: "Every URL kept its address, and every page kept its meta title and description, carried across exactly as they were on Wix Studio. With nothing to redirect and nothing to re-index, the move left search with no reason to re-evaluate the site, and Techtonnik's rankings held steady.",
+    },
+    {
+      heading: "A week, refresh included",
+      body: "Moving a site twice teaches you where the time goes. Having rebuilt it on Wix Studio in 2024, Zenith Digital knew every page and every content type, so the Astro build, the refresh and the cutover fit into one week.",
+    },
+    {
+      heading: "Ready for an agent to work on",
+      body: "Astro gives Techtonnik a plain codebase it owns, which is what agent-driven development needs: changes described in words and made in code, plus backend features a site builder couldn't run. That part is being built now and comes next.",
+    },
+  ],
+  results: [
+    {
+      value: "1 week",
+      label: "From Wix Studio to a live Astro site, refresh included",
+      positive: true,
+    },
+    {
+      value: "Every URL",
+      label: "Kept, with meta titles and descriptions unchanged",
+      positive: true,
+    },
+    {
+      value: "Rankings steady",
+      label: "Search positions held through the June 2026 move",
+      positive: true,
+    },
+  ],
+  resultsNote:
+    "In June 2026, Zenith Digital moved Techtonnik's website from Wix Studio to Astro in one week, and every URL, title and description carried over with its rankings holding steady.",
+  testimonial: quoteOf("stevan-radovanovic"),
+  techUsed: [
+    "Astro (custom code)",
+    { label: "Website migration", href: "/services/website-migration" },
+    "URL and metadata parity",
+    "Layout & brand refresh",
+    { label: "Fulfilment partnership", href: "/partnerships" },
+  ],
+  publishedAt: "2026-11-21",
+  cta: {
+    heading: ["Outgrowing your", "website builder?"],
+    paragraph:
+      "A free 20-minute call. We'll tell you whether a move to custom code is worth it for you, and how to do it without losing a URL or a ranking.",
+  },
+  seo: {
+    title: "Techtonnik case study | Wix Studio to Astro in a week | Zenith Digital",
+    description:
+      "How Zenith Digital moved Techtonnik's site from Wix Studio to Astro in one week in June 2026, keeping every URL, title and description, with rankings steady.",
+  },
+};
+
+/**
+ * HIGHLAND FLING: drafted and published 21 Nov 2026.
+ *
+ * Facts from owner (21 Nov 2026): moved off an old WordPress template to a
+ * newly designed, custom-coded Next.js site; launched around November 2025;
+ * about a month; reasons: dated design, newest services missing, a rebrand
+ * wanted; the team struggled to update WordPress and manage its booking
+ * plugin, booking is now better integrated in custom code; URLs and page
+ * structure migrated; charity page, booking pages per activity, location,
+ * about, team, gift vouchers; MOD Digital now runs their email marketing,
+ * which sends traffic to the site (MOD's work, credited as such).
+ * Live site checked 21 Nov 2026: Killiecrankie, Highland Perthshire, near
+ * Pitlochry; "Home of bungee jumping in Scotland"; zip (11 lines, 2 river
+ * crossings, from GBP 49), Garry Bridge swing (40m, GBP 84), 40m bungee from
+ * Garry Bridge (GBP 94), plus tandem bungee, night bungee, night and
+ * blackout swing; charity jumps, gift vouchers, loyalty programme, video
+ * gallery, jobs, partners; booking through FareHarbor embeds.
+ *
+ * Confirmed by owner (21 Nov 2026): launched November 2025; no Sanity;
+ * booking was FareHarbor through a WordPress plugin, now a custom-coded
+ * FareHarbor embed; no business figures available, so results are build
+ * facts; testimonial is Flynn Blackie (MOD Digital), who now runs their email.
+ */
+export const highlandFling: CaseStudyDetail = {
+  ...cardOf("highland-fling"),
+  headline: "How Highland Fling traded a hard-to-run WordPress template for a custom site that sells every jump",
+  stats: [
+    { value: "1 month", label: "From WordPress template to a custom Next.js site" },
+    { value: "Every URL", label: "Page structure and addresses migrated" },
+    { value: "7", label: "Bookable experiences, each with its own page" },
+  ],
+  meta: {
+    industry: INDUSTRIES.travel,
+    engagementType: "Redesign & migration",
+    timeline: "November 2025",
+    platform: "Custom code (Next.js), from WordPress",
+    liveUrl: "https://www.bungeejumpscotland.co.uk",
+  },
+  challenge: [
+    "Highland Fling runs Scotland's permanent bridge bungee at Killiecrankie, near Pitlochry in Highland Perthshire: a 40m bungee from the Garry Bridge, a giant swing over the River Garry, and a zip line course of 11 lines through the trees. It also sells gift vouchers, runs charity jumps, and adds night and tandem jumps to the season.",
+    "Its website hadn't kept up. It was an old WordPress template with a dated design, the newest experiences weren't on it, and the company wanted a rebrand. Day to day it was hard to run: updating pages was a struggle, and so was managing the booking plugin, on a site whose whole job is taking bookings. The brief: a new, custom-built site with the rebrand, every experience on it, booking that just works, and nothing lost from the old site's structure.",
+  ],
+  heroShot: {
+    src: "/case-studies/highland-fling/hero.webp",
+    alt: "Highland Fling's homepage in a browser window: Home of bungee jumping in Scotland",
+  },
+  scrollShot: {
+    src: "/case-studies/highland-fling/full-page.webp",
+    alt: "The full Highland Fling homepage: the bungee jumping hero, zip, swing and bungee cards with prices, Tripadvisor reviews, gift vouchers, tandem and blackout jumps, the Killiecrankie location and the footer",
+    width: 1440,
+    height: 5217,
+  },  gallery: [
+    {
+      src: "/case-studies/highland-fling/supporting-1.webp",
+      alt: "Highland Fling's homepage in a browser window: Home of bungee jumping in Scotland, over the view down from the Garry Bridge",
+    },
+    {
+      src: "/case-studies/highland-fling/supporting-2.webp",
+      alt: "Choose your adventure: zip, swing and bungee cards, each with its price and a booking button",
+    },
+    {
+      src: "/case-studies/highland-fling/supporting-3.webp",
+      alt: "Big adventure. Beautiful Scotland.: the Killiecrankie location section above the footer",
+    },
+    {
+      src: "/case-studies/highland-fling/supporting-4.webp",
+      alt: "The activities page: Find your kind of unforgettable, with three ways to go for it",
+    },
+    {
+      src: "/case-studies/highland-fling/supporting-5.webp",
+      alt: "The bungee page: the price, a check availability button and a photo gallery of the jump",
+    },
+  ],
+
+  introduction:
+    "Highland Fling runs bungee jumping, a giant swing and a zip line course at Killiecrankie in Highland Perthshire, Scotland. In November 2025, Zenith Digital replaced its old WordPress template with a newly designed, custom-coded Next.js site in about a month, with a rebrand, a page for every experience, booking built into each one, and the old URLs and page structure carried across.",
+  approach: [
+    {
+      heading: "A page for every experience",
+      body: "The old template couldn't show the full line-up, so the new site is built around it: zip, swing and bungee each get their own page with the price, age limit, duration and what to expect, alongside the night bungee, tandem bungee, night swing and blackout swing. A comparison page helps anyone who can't choose, and the location, team and safety pages answer the questions people ask before they book.",
+    },
+    {
+      heading: "Booking that works without babysitting",
+      body: "Highland Fling already sold through FareHarbor, but on WordPress it ran through a plugin that was one more thing to manage. The custom build replaces the plugin with FareHarbor's embed, coded into each experience page with the right activity already selected, so a visitor goes from reading about the swing to choosing a slot in one step, and there's no plugin left to update.",
+    },
+    {
+      heading: "More than the jump",
+      body: "Gift vouchers, charity jumps and a loyalty programme each have their own page, because each is a different way into a booking: a present for someone else, a fundraiser with a cause behind it, a reason to come back. Video of real jumps does the reassuring for the nervous.",
+    },
+    {
+      heading: "Moved without breaking anything",
+      body: "The page structure and URLs moved across from the WordPress site, so existing links and search listings kept pointing somewhere real. Since launch, MOD Digital has run Highland Fling's email marketing, and those campaigns send people to the new site.",
+    },
+  ],
+  results: [
+    {
+      value: "1 month",
+      label: "From the old WordPress template to the live custom site",
+      positive: true,
+    },
+    {
+      value: "Every URL",
+      label: "Old page structure and addresses carried across",
+      positive: true,
+    },
+    {
+      value: "7",
+      label: "Bookable experiences, each one a click from a booking slot",
+      positive: true,
+    },
+  ],
+  testimonial: quoteOf("flynn-blackie"),
+  resultsNote:
+    "Since its November 2025 launch, the custom site Zenith Digital built has put all of Highland Fling's experiences, vouchers and charity jumps in one place, with booking built into every experience page.",
+  techUsed: [
+    "Custom code (Next.js)",
+    "Brand refresh & web design",
+    { label: "Website migration", href: "/services/website-migration" },
+    "Custom FareHarbor booking embed",
+    "Gift vouchers & charity pages",
+  ],
+  publishedAt: "2026-11-21",
+  cta: {
+    heading: ["Is your booking site", "harder to run than the business?"],
+    paragraph:
+      "A free 20-minute call. Tell us how bookings come in today and we'll tell you what a site built around them would look like, and what it would cost.",
+  },
+  seo: {
+    title: "Highland Fling case study | WordPress to custom Next.js | Zenith Digital",
+    description:
+      "How Zenith Digital rebuilt Highland Fling's bungee, swing and zip line site in custom Next.js in a month: every experience bookable, every URL carried across.",
+  },
+};
+
+/**
+ * DESTILERIJA GORSKA: drafted and published 21 Nov 2026. No scroll shot
+ * (owner).
+ *
+ * Facts from owner (21 Nov 2026): no website before, a brand new Shopify
+ * build on its own theme; launched February 2025; used mainly for brand
+ * promotion, and to move Instagram DM orders onto the site; no results
+ * available and no access any more (the client's new marketing team runs it);
+ * the site itself is Zenith Digital's build.
+ * Live site checked 21 Nov 2026 (Serbian, prices in RSD): "Stvorena od voća,
+ * vatre i ljubavi"; craft rakija aged at least five years in oak barrels,
+ * carrying the KRAFT mark; the story ties the brand to the Ibar river and
+ * Pančićev vrh; range: plum rakija, an apricot barrique (extremely limited),
+ * 0.05l premium minis, a six-bottle case, a luxury gift pack and the Gorska
+ * Experience Box; pages: shop, Gorska Experience, about, contact, blog.
+ * Deliberately thin: capability-led, no invented outcomes.
+ *
+ * Confirmed by owner (21 Nov 2026): the testimonial as stored (Ivana
+ *     Lesevic, Head of Sales) is right; the other spelling was voice-to-text.
+ */
+export const destilerijaGorska: CaseStudyDetail = {
+  ...cardOf("destilerija-gorska"),
+  headline: "How Destilerija Gorska went from no website to a Shopify store for its craft rakija",
+  stats: [
+    { value: "New build", label: "No website before, launched February 2025" },
+    { value: "6", label: "Rakijas and gift sets in the store (November 2026)" },
+  ],
+  meta: {
+    industry: INDUSTRIES.ecommerce,
+    engagementType: "New Shopify store",
+    timeline: "Launched February 2025",
+    platform: "Shopify, own theme",
+    liveUrl: "https://destilerijagorska.rs",
+  },
+  challenge: [
+    "Destilerija Gorska makes craft rakija in Serbia: plum and apricot brandies aged at least five years in oak barrels and carrying the KRAFT mark, with a brand story rooted in the Ibar river and Pančićev vrh. Its line on the difference is blunt: rakija, not rakijica.",
+    "Before 2025 it had no website at all. The brand lived on Instagram, and so did the orders, one DM at a time. For a premium product sold partly as a gift, that meant no place to tell the full story, no way to show the range side by side, and no way to buy without a conversation. The brief: a first website that carries the brand, and a store that lets people order without messaging.",
+  ],
+  heroShot: {
+    src: "/case-studies/destilerija-gorska/hero.webp",
+    alt: "Destilerija Gorska's Shopify store homepage in a browser window: Stvorena od voća, vatre i ljubavi",
+  },  gallery: [
+    {
+      src: "/case-studies/destilerija-gorska/supporting-1.webp",
+      alt: "Destilerija Gorska's homepage in a browser window: Stvorena od voća, vatre i ljubavi over a pour of rakija",
+    },
+    {
+      src: "/case-studies/destilerija-gorska/supporting-2.webp",
+      alt: "The brand story in black and gold: a black-and-white portrait beside an oak barrel carrying the Gorska mark",
+    },
+    {
+      src: "/case-studies/destilerija-gorska/supporting-3.webp",
+      alt: "Rakija premijum kvaliteta: the apricot barrique mini, plum rakija, the premium plum mini and the six-bottle case, priced in RSD",
+    },
+    {
+      src: "/case-studies/destilerija-gorska/supporting-4.webp",
+      alt: "Upoznajte Gorsku: a Gorska bottle on white beside the brand's introduction",
+    },
+  ],
+
+  introduction:
+    "Destilerija Gorska is a Serbian craft rakija producer whose brandies are aged at least five years in oak. In February 2025, Zenith Digital built its first website, a Shopify store on its own theme, to carry the brand and take orders that used to arrive as Instagram DMs.",
+  approach: [
+    {
+      heading: "Brand first, shop second",
+      body: "Gorska sells a feeling as much as a bottle, so the site leads with the story: the fruit, the fire, the five years in oak, the landscape it comes from. The Gorska Experience page carries that idea on its own, so the brand has somewhere to live beyond an Instagram grid.",
+    },
+    {
+      heading: "A range made for giving",
+      body: "Much of what Gorska sells is a gift, so the store presents the range that way: single bottles next to a six-bottle case, a luxury gift pack and the Gorska Experience Box, with small premium bottles for anyone who wants to try before they commit to a full one.",
+    },
+    {
+      heading: "From DMs to a checkout",
+      body: "Orders used to start as Instagram messages. Now Gorska sends that traffic to the store, where the range, the prices and the checkout are all in one place, and promotions have a page to point to.",
+    },
+  ],
+  results: [
+    {
+      value: "First website",
+      label: "From Instagram only to a branded Shopify store, February 2025",
+      positive: true,
+    },
+    {
+      value: "DMs to the store",
+      label: "Instagram enquiries now sent to the site to order",
+      positive: true,
+    },
+  ],
+  resultsNote:
+    "Since February 2025, Destilerija Gorska has run its brand promotions and its orders through the Shopify store Zenith Digital built, instead of through Instagram DMs alone.",
+  testimonial: quoteOf("ivana-lesevic"),
+  techUsed: [
+    "Shopify store setup",
+    "Shopify theme design",
+    "Brand storytelling pages",
+    "Gift sets & product range",
+  ],
+  publishedAt: "2026-11-21",
+  cta: {
+    heading: ["Is your product better", "than your online presence?"],
+    paragraph:
+      "A free 20-minute call. We'll tell you what a first store for your brand needs, whether it belongs on Shopify or Wix Studio, and what it would cost.",
+  },
+  seo: {
+    title: "Destilerija Gorska case study | First Shopify store | Zenith Digital",
+    description:
+      "How Zenith Digital built Destilerija Gorska's first website, a Shopify store for its five-year oak-aged craft rakija, moving orders from Instagram DMs to checkout.",
+  },
+};
+
+/**
+ * AMECI PIZZA KITCHEN: drafted and published 21 Nov 2026. Scroll shot to
+ * follow (the first export was cut off at 16,384px; re-export at 1x). Add
+ * the testimonial when it arrives (owner expects one soon).
+ *
+ * Facts from owner (21 Nov 2026): Wix Studio landing page, launched November
+ * 2026, built in about a week. Founder Ali Lodin (spelling by voice, confirm
+ * before naming him in copy; the site itself says "call or text Al"). The
+ * previous site was built with Replit and looked like a generic one-prompt AI
+ * site; the brief was an authentic Italian pizzeria the team can edit
+ * themselves. Wix CMS holds the specials and the ordering menu; order buttons
+ * go to the restaurant's third-party ordering site. Two forms, newsletter and
+ * catering, both into the Wix CRM. No results yet (a week live, no baseline).
+ * Live site checked 21 Nov 2026: family-owned since 1994, University Park
+ * Center, 18068 Culver Dr, Irvine; owners came from Queens; daily pickup
+ * specials (Doppio Mondays, Formaggio Tuesdays, Famiglia Feast); full menu in
+ * nine sections with gluten-free crust; catering for 10 to 200, handled by
+ * co-owner Omar. Their review count and prices are theirs and not repeated.
+ * Deliberately thin: capability-led, no invented outcomes.
+ */
+export const ameciPizza: CaseStudyDetail = {
+  ...cardOf("ameci-pizza-culver"),
+  headline: "How Ameci Pizza Kitchen swapped a generic AI-built site for a pizzeria page it runs itself",
+  stats: [
+    { value: "1 week", label: "From brief to launch, November 2026" },
+    { value: "2 forms", label: "Catering and newsletter, straight into the Wix CRM" },
+  ],
+  meta: {
+    industry: INDUSTRIES.local,
+    engagementType: "Landing page rebuild",
+    timeline: "1 week, launched November 2026",
+    platform: "Wix Studio, Wix CMS and Wix CRM",
+    liveUrl: "https://www.amecipizzaculver.com",
+  },
+  challenge: [
+    "Ameci Pizza Kitchen has been a family-run pizzeria in Irvine's University Park since 1994, started by a family that brought its pizza from Queens. Thirty years of regulars, catering for offices and UCI events, and a specials board that changes through the week.",
+    "Its website didn't show any of that. It had been put together with Replit and looked like most one-prompt AI sites: clean enough, and interchangeable with any other. The owners wanted a site that felt like an Italian pizzeria with a history, and one they could keep up to date themselves without calling a developer every time a special changed.",
+  ],
+  heroShot: {
+    src: "/case-studies/ameci-pizza-culver/hero.webp",
+    alt: "Ameci Pizza Kitchen's website in a browser window: Irvine's neighborhood pizzeria since 1994, with buttons to order online or ask about catering",
+  },  gallery: [
+    {
+      src: "/case-studies/ameci-pizza-culver/supporting-1.webp",
+      alt: "Ameci Pizza Kitchen's homepage in a browser window: Irvine's neighborhood pizzeria since 1994, with order online and catering buttons",
+    },
+    {
+      src: "/case-studies/ameci-pizza-culver/supporting-2.webp",
+      alt: "The ones Irvine keeps coming back for: six favourites, from buffalo wings to BBQ chicken pizza",
+    },
+    {
+      src: "/case-studies/ameci-pizza-culver/supporting-3.webp",
+      alt: "The full menu, edited in the Wix CMS: specialty pizzas, with tabs for pasta, calzones, salads and catering trays",
+    },
+    {
+      src: "/case-studies/ameci-pizza-culver/supporting-4.webp",
+      alt: "Thirty years in University Park: the family's story beside photos of a pizza and the shopfront",
+    },
+    {
+      src: "/case-studies/ameci-pizza-culver/supporting-5.webp",
+      alt: "What University Park is saying about us: Google reviews in a carousel",
+    },
+  ],
+
+  introduction:
+    "Ameci Pizza Kitchen is a family-owned pizzeria in Irvine, California, open since 1994. In November 2026, Zenith Digital replaced its Replit-built site with a Wix Studio landing page in about a week: menu and specials the team edits in the Wix CMS, ordering one tap away, and catering and newsletter forms that land in the Wix CRM.",
+  approach: [
+    {
+      heading: "A pizzeria, not a template",
+      body: "The page leads with what only Ameci can say: family-owned since 1994, dough stretched by hand every morning, a kitchen that came from Queens. The favourites, the story and the reviews follow in the order a hungry visitor scrolls.",
+    },
+    {
+      heading: "Specials and menu the team edits",
+      body: "The daily specials and the full menu live in the Wix CMS, so the team changes a price or swaps a deal from a simple list, and the page updates. Every order button goes straight to the restaurant's existing ordering site.",
+    },
+    {
+      heading: "Two forms that do a job",
+      body: "Catering enquiries come in with the date, headcount and pickup or delivery already filled in, and newsletter sign-ups build a list for new specials. Both go into the Wix CRM, so nothing sits in an inbox.",
+    },
+  ],
+  results: [
+    {
+      value: "Edited in-house",
+      label: "Specials and menu updated by the team in the Wix CMS",
+      positive: true,
+    },
+    {
+      value: "Catering + newsletter",
+      label: "Two forms collecting enquiries and subscribers in the Wix CRM",
+      positive: true,
+    },
+  ],
+  resultsNote:
+    "The site went live in November 2026, so it's too early for numbers. What changed on day one: the team runs its own specials and menu, and catering enquiries and newsletter sign-ups now arrive in one place.",
+  techUsed: [
+    { label: "Landing page", href: "/services/landing-pages" },
+    { label: "Wix Studio design", href: "/services/wix-studio-website-design" },
+    "Wix CMS menu and specials",
+    "Wix CRM forms",
+    "Third-party ordering links",
+  ],
+  publishedAt: "2026-11-21",
+  cta: {
+    heading: ["Does your website look", "like everyone else's?"],
+    paragraph:
+      "A free 20-minute call. We'll tell you what a page built for your business needs, how quickly it can be live, and what it would cost.",
+  },
+  seo: {
+    title: "Ameci Pizza Kitchen case study | Wix Studio landing page | Zenith Digital",
+    description:
+      "How Zenith Digital replaced Ameci Pizza Kitchen's generic AI-built site with a Wix Studio landing page in a week, with a menu and specials the team edits itself.",
+  },
+};
+
+/**
+ * PRESSURE TEST SCOTLAND: drafted and published 21 Nov 2026. Scroll shot to
+ * follow (the first export was cut off at 16,384px; re-export at 1x).
+ *
+ * Facts from owner (21 Nov 2026): July 2026, 3 weeks. David Connel (owner)
+ * came to Finlay at Wellington Web Co, and the two studios built it together.
+ * Custom Next.js, content in Sanity, enquiries stored in Supabase. Classic
+ * local business site connected to his Google Business Profile, with a page
+ * per service and his area of operation. Owner reports David now ranks
+ * higher on Google and is very happy.
+ * NOT CLAIMED: "ranking higher" has no query, position or date range behind
+ * it, so the study says what was built for search, not that rankings rose.
+ * Send a Search Console export or 2 or 3 tracked queries with before and
+ * after positions and it becomes a real result.
+ * Live site checked 21 Nov 2026: Scotland-wide pipe pressure testing from an
+ * Ayr base, on water mains since 2003; services: new mains, pressure
+ * testing, swabbing/chlorination/sampling, certification and tie-ins, flow
+ * and pressure testing; quote form on the first screen (name, site
+ * location, service needed); WIRS, SMAS SSIP and SafeContractor shown;
+ * standards strip (BS EN 805, WIS 4-01-03, BS 8558); coverage section.
+ */
+export const pressureTestScotland: CaseStudyDetail = {
+  ...cardOf("pressure-test-scotland"),
+  headline: "How Pressure Test Scotland got a custom site that turns searches into quote requests",
+  stats: [
+    { value: "3 weeks", label: "From brief to launch, July 2026" },
+    { value: "1 form", label: "Quote requests stored in Supabase, first screen" },
+  ],
+  meta: {
+    industry: INDUSTRIES.trades,
+    engagementType: "New build, with Wellington Web Co",
+    timeline: "3 weeks, launched July 2026",
+    platform: "Custom code (Next.js) + Sanity CMS + Supabase",
+    liveUrl: "https://www.pressuretestscotland.co.uk",
+  },
+  challenge: [
+    "Pressure Test Scotland has worked on Scotland's water mains since 2003. From a base in Ayr, it lays new mains, pressure tests them, chlorinates and samples them, and hands contractors the certificate pack that gets a main connected to Scottish Water.",
+    "The work comes from housebuilders, utility contractors and consultants who need a specialist on a set date, and who usually start with a search. David Connel needed a site that shows up for each service across his area, proves the accreditations at a glance, and makes asking for a quote the easiest thing on the page. He took the brief to Finlay at Wellington Web Co, and Zenith Digital built it with them.",
+  ],
+  heroShot: {
+    src: "/case-studies/pressure-test-scotland/hero.webp",
+    alt: "Pressure Test Scotland's website in a browser window: Scotland-wide pipe pressure testing based in Ayr, with a quote form on the first screen",
+  },  gallery: [
+    {
+      src: "/case-studies/pressure-test-scotland/supporting-1.webp",
+      alt: "Pressure Test Scotland's homepage in a browser window: Scotland-wide pipe pressure testing based in Ayr, with the quote form beside the headline",
+    },
+    {
+      src: "/case-studies/pressure-test-scotland/supporting-2.webp",
+      alt: "The services section: new mains, pressure testing, swabbing, chlorination and sampling, and certification and tie-ins",
+    },
+    {
+      src: "/case-studies/pressure-test-scotland/supporting-3.webp",
+      alt: "Why businesses choose Pressure Test Scotland: honest, punctual, saving money and industry recognised",
+    },
+    {
+      src: "/case-studies/pressure-test-scotland/supporting-4.webp",
+      alt: "Who it works with: groundworks and civils contractors, and developers and housebuilders",
+    },
+    {
+      src: "/case-studies/pressure-test-scotland/supporting-5.webp",
+      alt: "The services page: The whole commissioning stage, one specialist, over a photo of a laid main",
+    },
+  ],
+
+  introduction:
+    "Pressure Test Scotland is a water mains testing and commissioning specialist based in Ayr. In July 2026, Zenith Digital and Wellington Web Co built its website in three weeks: custom Next.js, content in Sanity, quote requests stored in Supabase, a page for every service, and the site tied to its Google Business Profile.",
+  approach: [
+    {
+      heading: "A page for every service",
+      body: "New mains, pressure testing, chlorination and sampling, certification and tie-ins, flow testing: each has its own page, written in the terms contractors search for and the standards they check, so each one can be found on its own.",
+    },
+    {
+      heading: "The quote form comes first",
+      body: "The first screen carries a short quote form: name, site location, the service needed. Every request is stored in Supabase as well as sent on, so nothing gets lost in an inbox.",
+    },
+    {
+      heading: "Proof where contractors look",
+      body: "The accreditations, the standards the work is tested to and the area covered sit near the top, and the site is linked to the Google Business Profile, so the search result and the site tell the same story.",
+    },
+  ],
+  results: [
+    {
+      value: "Live in 3 weeks",
+      label: "Custom Next.js build, launched July 2026",
+      positive: true,
+    },
+    {
+      value: "Every request stored",
+      label: "Quote requests saved in Supabase, not just emailed",
+      positive: true,
+    },
+    {
+      value: "Over and above my expectations",
+      label: "David Connel, Director, on the build",
+      isQuote: true,
+    },
+  ],
+  resultsNote:
+    "Pressure Test Scotland now has a page for each of its services, a quote form on every visit, and a site and Google Business Profile that point to each other. It was built with Wellington Web Co, one of the partners behind dozens of local business sites across Scotland.",
+  testimonial: quoteOf("david-connel"),
+  techUsed: [
+    { label: "Partnership build", href: "/partnerships" },
+    "Custom code (Next.js)",
+    "Sanity CMS",
+    "Supabase enquiry storage",
+    "Google Business Profile",
+    "Local service pages",
+  ],
+  publishedAt: "2026-11-21",
+  cta: {
+    heading: ["Do your services each", "have a page Google can find?"],
+    paragraph:
+      "A free 20-minute call. We'll tell you what a site built to bring in quote requests needs, whether custom code or Wix Studio suits you, and what it would cost.",
+  },
+  seo: {
+    title: "Pressure Test Scotland case study | Custom Next.js site | Zenith Digital",
+    description:
+      "How Zenith Digital and Wellington Web Co built Pressure Test Scotland a custom Next.js site in 3 weeks, with a page per service and quote requests stored in Supabase.",
+  },
+};
+
+// Every live detail page, in next-study rotation order.
+export const caseStudyDetails: CaseStudyDetail[] = [
+  ...shippedDetails,
+  lepaCouture,
+  bianomics,
+  techtonnik,
+  highlandFling,
+  destilerijaGorska,
+  ameciPizza,
+  pressureTestScotland,
+];
+
 /** Slugs with a shipped detail page — their cards flip to internal links. */
 export const detailSlugs = new Set(caseStudyDetails.map((d) => d.slug));
+
+/**
+ * A link to a study's detail page that only goes live with the study. Until
+ * the slug ships in `caseStudyDetails`, it returns `fallback` (undefined
+ * hides the link). Use it for hand-placed links to held drafts so publishing
+ * a study switches every link on in the same commit.
+ */
+export function studyHref(slug: string): string | undefined;
+export function studyHref(slug: string, fallback: string): string;
+export function studyHref(slug: string, fallback?: string): string | undefined {
+  return detailSlugs.has(slug) ? `/case-studies/${slug}` : fallback;
+}
 
 /** A card is in an industry by its main tag or any `alsoIn` tag. */
 export function inIndustry(card: CaseStudyCard, key: IndustrySlug): boolean {

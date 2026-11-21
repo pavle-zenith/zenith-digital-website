@@ -6,6 +6,7 @@ import {
   testimonial,
   type Testimonial,
 } from "./testimonials-data";
+import { studyHref } from "./case-studies";
 
 /*
  * /testimonials — page copy plus the derived views of the testimonial batch.
@@ -130,13 +131,26 @@ export type WallCard =
   | { type: "pull"; line: string; attribution: string }
   | { type: "site"; client: string; image: string; href: string };
 
+/** A tag that only exists once `slug` has a shipped detail page. */
+function liveTag(id: string, label: string, slug: string) {
+  const href = studyHref(slug);
+  return href ? { [id]: { label, href } } : {};
+}
+
 /** Outcome tags on the few clients with a published number attached. */
 const TAGS: Record<string, { label: string; href: string }> = {
   "gemma-sole": { label: "Series A", href: "/case-studies/knode-ai" },
   "ivan-belobrajdic": { label: "257% YoY impressions", href: "/case-studies" },
   "flynn-blackie": { label: "€1M+ campaign revenue", href: "/case-studies" },
   "les-marie": { label: "12+ sites delivered", href: "/case-studies" },
-  "stevan-radovanovic": { label: "10+ projects", href: "/case-studies" },
+  "stevan-radovanovic": {
+    label: "10+ projects",
+    href: studyHref("techtonnik", "/case-studies"),
+  },
+  // Held studies (21 Nov 2026): each tag appears when its study publishes.
+  ...liveTag("bianca-cervantes", "4 client sites", "bianomics"),
+  ...liveTag("marko-georgievski", "3 currencies", "lepa-couture"),
+  ...liveTag("david-connel", "Live in 3 weeks", "pressure-test-scotland"),
 };
 
 const asQuote = (t: Testimonial): WallCard => ({

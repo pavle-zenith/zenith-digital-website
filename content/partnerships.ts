@@ -1,6 +1,7 @@
 import type { CtaLink } from "@/lib/types";
 
 import { testimonial } from "./testimonials-data";
+import { studyHref } from "./case-studies";
 
 /**
  * Partner-story quotes come from the testimonial source of truth. These used
@@ -419,7 +420,8 @@ export const pStories = {
       image: "/partners/techtonnik.webp",
       // OWNER: mock quote — replace with a real attributed one before launch.
       quote: partnerQuote("stevan-radovanovic"),
-      href: "/case-studies",
+      // Flips to the Techtonnik study when it publishes.
+      href: studyHref("techtonnik", "/case-studies"),
     },
     // AdVantage story hidden per owner request (2026-08-10) — uncomment to restore.
     // {
@@ -499,6 +501,9 @@ export const pStories = {
       stats: [{ value: "10", label: "projects delivered" }],
       image: "/partners/wellington-web-co.webp",
       quote: partnerQuote("finlay-wellington"),
+      // Pressure Test Scotland was built with Wellington Web Co; the link
+      // appears when that study publishes.
+      href: studyHref("pressure-test-scotland"),
     },
     {
       // Added 17 Nov 2026. OWNER: logo to follow (a wordmark renders until
@@ -528,6 +533,8 @@ export const pStories = {
       stats: [],
       image: "/case-studies/bianomics/card.webp",
       quote: partnerQuote("bianca-cervantes"),
+      // Appears when the Bianomics study publishes.
+      href: studyHref("bianomics"),
     },
     {
       // Added 20 Nov 2026 (owner: "media buyers and ads managers and we make

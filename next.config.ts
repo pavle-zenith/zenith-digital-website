@@ -16,6 +16,15 @@ const nextConfig: NextConfig = {
   // Scoped to the project's own asset path so this cannot become an open
   // image proxy for the whole of cdn.sanity.io.
   images: {
+    // Cost and speed (20 Nov 2026). Vercel bills per image resize, not per
+    // view, so: keep each resized image cached for 31 days instead of the
+    // short default, output WebP only, and generate fewer width variants
+    // (the defaults go up to 3840px; nothing on this site needs more than
+    // 2048). Changing these re-resizes each image once, then it's cached.
+    minimumCacheTTL: 2678400,
+    formats: ["image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [32, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: "https",

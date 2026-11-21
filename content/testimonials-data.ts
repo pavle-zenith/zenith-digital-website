@@ -181,9 +181,9 @@ export const allTestimonials: Testimonial[] = [
     role: "Director",
     quote:
       "When I booked the introductory call, I never would have guessed that Zenith and WWCo would go on to create dozens of local business websites throughout Scotland. Amazing at what they do and I trust Pavle to always deliver.",
-    avatar: "/avatars/finlay-wellington.png",
+    avatar: "/avatars/finlay-wellington.webp",
     video: "/testimonials/finlay-wellington.mp4",
-    poster: "/testimonials/finlay-wellington-poster.png",
+    poster: "/testimonials/finlay-wellington-poster.webp",
   },
   {
     id: "dragan-gavric",
@@ -267,7 +267,7 @@ export const allTestimonials: Testimonial[] = [
     role: "Director",
     quote:
       "They are skilled, trustworthy and genuinely care about delivering high quality work. I'd highly recommend them to anyone looking for web design or development help, you'll be in safe hands whether that's your business or your clients.",
-    avatar: "/avatars/bianca-cervantes.png",
+    avatar: "/avatars/bianca-cervantes.webp",
   },
   {
     id: "michael-forte",

@@ -1,5 +1,6 @@
 import { resourcesMenu } from "@/content/home";
 
+import { platformLogo } from "./logos";
 import { comparisonStatus } from "./status";
 import type { ComparisonContent, RivalKey } from "./types";
 import { wixStudioVsFramer } from "./wix-studio-vs-framer";
@@ -62,7 +63,8 @@ export function comparisonFor(rival: RivalKey): ComparisonContent | undefined {
 
 export type CompareMenu = {
   label: string;
-  items: { label: string; href: string }[];
+  /** One row per comparison: "vs WordPress", with the rival's mark. */
+  items: { label: string; href: string; logo?: string }[];
   viewAll: { label: string; href: string; icon: string };
 };
 
@@ -78,6 +80,7 @@ export function compareMenu(): CompareMenu | null {
     label,
     items: routableComparisons.map((c) => ({
       label: c.menuLabel,
+      logo: platformLogo[c.rival.key],
       href: `/compare/${c.slug}`,
     })),
     viewAll,

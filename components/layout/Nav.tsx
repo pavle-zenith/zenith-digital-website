@@ -21,13 +21,14 @@ type MenuName = "services" | "industries" | "resources";
 const FEATURED_COLS =
   "grid-cols-[minmax(0,1fr)_minmax(0,1fr)_16rem] xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_22rem]";
 type MenuLink = { label: string; href: string; icon: string };
-/** One icon-and-label row. `badge` replaces the icon ("VS"). */
+/** One icon-and-label row. `logo` (a platform mark) or `badge` replaces the icon. */
 type MenuItem = {
   label: string;
   href: string;
   icon?: string;
   desc?: string;
   badge?: string;
+  logo?: string;
 };
 
 /**
@@ -132,13 +133,17 @@ export function Nav({
   }, [open]);
 
   const [audit, quote] = nav.ctas;
-  // Resources > Learn, with the cost calculator and the comparisons hub
-  // link once each has a route.
+  // Resources > Learn, with the cost calculator once it has a route.
   const learnItems: MenuItem[] = [
     ...resourcesMenu.learn.items,
     ...(resources?.calculator ? [resources.calculator] : []),
-    ...(resources?.compare ? [resources.compare.viewAll] : []),
   ];
+  // Resources > Compare platforms: every comparison by name, then the hub
+  // (owner, 21 Nov 2026: back in the menu now there are six, so the nav
+  // links each one in the page HTML).
+  const compareItems: MenuItem[] = resources?.compare
+    ? [...resources.compare.items, resources.compare.viewAll]
+    : [];
 
   return (
     <header
@@ -330,15 +335,29 @@ export function Nav({
         </MenuPanel>
       ) : null}
 
-      {/* Resources: Learn (two thirds) | the latest article, then the quick
-          links. Learn is plain links, no descriptions, and the comparisons
-          appear as one link to the /compare hub once it has a
-          route (owner, 20 Nov 2026: no per-comparison links for now). */}
+      {/* Resources: Compare platforms | Learn | the latest article, then the
+          quick links. Plain links, no descriptions. Compare lists every
+          comparison with its rival's mark, then the /compare hub (owner,
+          21 Nov 2026, reversing 20 Nov's "no per-comparison links": with six
+          live, the nav should link each one). Before the hub has a route,
+          Learn takes both columns. Like every panel it is always mounted
+          and inert while closed, so its links are in the server HTML. */}
       <MenuPanel open={menu === "resources"}>
         <div className={cn("grid divide-x divide-light-border", FEATURED_COLS)}>
-          <MenuColumn label={resourcesMenu.learn.label} className="col-span-2">
-            <MenuLinks items={learnItems} columns={2} onNavigate={close} />
-          </MenuColumn>
+          {resources?.compare ? (
+            <>
+              <MenuColumn label={resources.compare.label}>
+                <MenuLinks items={compareItems} onNavigate={close} />
+              </MenuColumn>
+              <MenuColumn label={resourcesMenu.learn.label}>
+                <MenuLinks items={learnItems} onNavigate={close} />
+              </MenuColumn>
+            </>
+          ) : (
+            <MenuColumn label={resourcesMenu.learn.label} className="col-span-2">
+              <MenuLinks items={learnItems} columns={2} onNavigate={close} />
+            </MenuColumn>
+          )}
           {resources?.featured ? (
             <MenuColumn label={resources.featured.label}>
               <MenuFeatured featured={resources.featured} onNavigate={close} />
@@ -475,7 +494,14 @@ export function Nav({
               backs.current.resources = el;
             }}
           >
-            {/* The same Learn links as on desktop. */}
+            {/* The same Compare and Learn links as on desktop. */}
+            {resources?.compare ? (
+              <DrawerGroup
+                label={resources.compare.label}
+                items={compareItems}
+                onNavigate={closeDrawer}
+              />
+            ) : null}
             <DrawerGroup
               label={resourcesMenu.learn.label}
               items={learnItems}
@@ -609,7 +635,16 @@ function MenuChip({ item, large = false }: { item: MenuItem; large?: boolean }) 
         large ? "h-11 w-11" : "h-8 w-8",
       )}
     >
-      {item.badge ? (
+      {item.logo ? (
+        <Image
+          src={item.logo}
+          alt=""
+          width={18}
+          height={18}
+          unoptimized
+          className={cn("object-contain", large ? "h-5 w-5" : "h-[18px] w-[18px]")}
+        />
+      ) : item.badge ? (
         <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-wide">
           {item.badge}
         </span>

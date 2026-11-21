@@ -251,11 +251,11 @@ export const creative: IndustryPageContent = {
         icon: "palette",
       },
       {
-        kind: "Service",
-        label: "SEO, AEO & PPC",
-        href: "/services/seo-aeo-ppc",
-        desc: "Getting found in search and named in AI answers, the work behind Creative Native Films' leads.",
-        icon: "search",
+        kind: "Comparison",
+        label: "Wix Studio vs Framer",
+        href: "/compare/wix-studio-vs-framer",
+        desc: "The design-led builder creatives weigh, compared on what matters after launch.",
+        icon: "split",
       },
       {
         kind: "Article",

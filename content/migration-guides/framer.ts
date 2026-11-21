@@ -597,10 +597,10 @@ export const framer: MigrationGuideContent = {
         desc: "The platform teams usually weigh against Framer, and the one that does hand you a full code export.",
       },
       {
-        label: "HTML to Wix Studio",
-        icon: "code",
-        href: "/services/html-to-wix-studio",
-        desc: "The opposite problem: no vendor, no export button, and every file already yours.",
+        label: "Wix Studio vs Framer",
+        icon: "split",
+        href: "/compare/wix-studio-vs-framer",
+        desc: "The two platforms side by side: CMS, editors, languages, stores and what year one costs.",
       },
       {
         label: "Wix Studio website design",

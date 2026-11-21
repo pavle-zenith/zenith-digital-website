@@ -269,10 +269,10 @@ export const saas: IndustryPageContent = {
       },
       {
         kind: "Comparison",
-        label: "Wix Studio vs Webflow: which should you pick for your website?",
-        href: "/compare/wix-studio-vs-webflow",
-        desc: "The platform choice most SaaS teams weigh, compared on what matters after launch.",
-        icon: "pen",
+        label: "Wix Studio vs custom code (Next.js)",
+        href: "/compare/wix-studio-vs-nextjs",
+        desc: "When a product site needs code, and when it doesn't.",
+        icon: "split",
       },
       {
         kind: "Migration guide",

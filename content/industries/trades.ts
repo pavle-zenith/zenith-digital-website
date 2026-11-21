@@ -257,11 +257,11 @@ export const trades: IndustryPageContent = {
         icon: "pen",
       },
       {
-        kind: "Article",
-        label: "Why does your website get traffic but no enquiries?",
-        href: "/blog/traffic-but-no-enquiries",
-        desc: "Where visitors drop off between finding you and asking for a quote.",
-        icon: "pen",
+        kind: "Comparison",
+        label: "Wix Studio vs Squarespace",
+        href: "/compare/wix-studio-vs-squarespace",
+        desc: "Which platform suits a trade business, compared plainly.",
+        icon: "split",
       },
       {
         kind: "Migration guide",

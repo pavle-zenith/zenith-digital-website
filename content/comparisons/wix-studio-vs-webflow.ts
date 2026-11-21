@@ -61,7 +61,7 @@ export const wixStudioVsWebflow: ComparisonContent = {
   seo: {
     title: "Wix Studio vs Webflow in 2026: which to choose | Zenith Digital",
     description:
-      "Wix Studio or Webflow? Who can edit the site after launch, what that access costs, and the 2026 Webflow changes, from each vendor's own pages.",
+      "Wix Studio vs Webflow compared on editors, CMS, SEO, pricing, design and ecommerce. See which suits your business and when Webflow is the better choice.",
   },
   hero: {
     h1: "Wix Studio vs Webflow",
@@ -351,11 +351,11 @@ export const wixStudioVsWebflow: ComparisonContent = {
         icon: "layers",
       },
       {
-        kind: "Article",
-        label: "Wix Studio pricing",
-        href: "/blog/wix-studio-pricing",
-        desc: "What each Wix Studio plan includes, and what a build costs on top.",
-        icon: "receipt",
+        kind: "Service",
+        label: "Wix Studio website design",
+        href: "/services/wix-studio-website-design",
+        desc: "How we design and build on Wix Studio, at a fixed, published price.",
+        icon: "palette",
       },
       {
         kind: "Case study",

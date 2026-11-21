@@ -100,8 +100,13 @@ export function SnapSlider({
         role="region"
         aria-label={labels.region}
         tabIndex={0}
+        // `relative` makes the track the containing block for anything
+        // absolutely positioned inside a slide (screen-reader-only labels,
+        // badges), so the track clips it. Without it, those 1px sr-only
+        // spans on off-screen slides sat outside the page and widened it,
+        // and phones scrolled sideways (owner, 21 Nov 2026).
         className={cn(
-          "mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto [scrollbar-width:none] md:mt-10 [&::-webkit-scrollbar]:hidden",
+          "relative mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto [scrollbar-width:none] md:mt-10 [&::-webkit-scrollbar]:hidden",
           trackClassName,
         )}
       >

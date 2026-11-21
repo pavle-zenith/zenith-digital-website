@@ -285,11 +285,11 @@ export const travel: IndustryPageContent = {
         icon: "pen",
       },
       {
-        kind: "Article",
-        label: "Is Wix Studio good enough for a premium brand website?",
-        href: "/blog/wix-studio-premium-brand",
-        desc: "The platform's real limits, for operators selling at the top of the market.",
-        icon: "pen",
+        kind: "Industry",
+        label: "Property and real estate websites",
+        href: "/industries/property",
+        desc: "Rentals and lettings sites, including Just Stay, which does both.",
+        icon: "house",
       },
       {
         kind: "Migration guide",

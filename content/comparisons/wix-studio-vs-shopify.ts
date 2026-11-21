@@ -38,7 +38,7 @@ export const wixStudioVsShopify: ComparisonContent = {
   seo: {
     title: "Wix Studio vs Shopify in 2026: which to choose | Zenith Digital",
     description:
-      "Wix Studio or Shopify? Store plans, fees, staff, content and selling abroad compared from each vendor's own pages, by an agency that builds on both.",
+      "Wix Studio vs Shopify compared on pricing, fees, products, staff and selling abroad. See which suits your business and when Shopify is the better choice.",
   },
   hero: {
     h1: "Wix Studio vs Shopify",
@@ -283,11 +283,11 @@ export const wixStudioVsShopify: ComparisonContent = {
         icon: "receipt",
       },
       {
-        kind: "Article",
-        label: "Wix Studio pricing",
-        href: "/blog/wix-studio-pricing",
-        desc: "What each Wix Studio plan includes, and what a build costs on top.",
-        icon: "layers",
+        kind: "Tool",
+        label: "Website cost calculator",
+        href: "/tools/website-cost-calculator",
+        desc: "Your year-one cost on Wix Studio or Shopify, build plus platform plan.",
+        icon: "calculator",
       },
       {
         kind: "Service",

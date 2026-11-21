@@ -36,7 +36,7 @@ export const wixStudioVsNextjs: ComparisonContent = {
   seo: {
     title: "Wix Studio vs custom code (Next.js) in 2026 | Zenith Digital",
     description:
-      "Wix Studio or a custom Next.js site with Sanity? Editing, hosting, running costs and upkeep compared, by an agency that builds both at the same price.",
+      "Wix Studio vs custom code (Next.js) compared on editing, hosting, SEO and upkeep. See which suits your business and when custom code is the better choice.",
   },
   hero: {
     h1: "Wix Studio vs custom code (Next.js)",
@@ -275,11 +275,11 @@ export const wixStudioVsNextjs: ComparisonContent = {
     heading: "Keep reading",
     items: [
       {
-        kind: "Pricing",
-        label: "Every price, published",
-        href: "/pricing",
-        desc: "The same packages on Wix Studio, custom code and Shopify.",
-        icon: "receipt",
+        kind: "Tool",
+        label: "Website cost calculator",
+        href: "/tools/website-cost-calculator",
+        desc: "Your year-one cost on Wix Studio or custom code, build plus hosting.",
+        icon: "calculator",
       },
       {
         kind: "Comparison",

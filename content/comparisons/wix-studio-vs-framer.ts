@@ -41,7 +41,7 @@ export const wixStudioVsFramer: ComparisonContent = {
   seo: {
     title: "Wix Studio vs Framer in 2026: which to choose | Zenith Digital",
     description:
-      "Wix Studio or Framer? CMS limits, editor seats, stores and languages compared from each vendor's own pages, with what year one costs.",
+      "Wix Studio vs Framer compared on CMS, editors, SEO, languages, ecommerce and pricing. See which suits your business and when Framer is the better choice.",
   },
   hero: {
     h1: "Wix Studio vs Framer",
@@ -302,11 +302,11 @@ export const wixStudioVsFramer: ComparisonContent = {
         icon: "split",
       },
       {
-        kind: "Article",
-        label: "Wix Studio pricing",
-        href: "/blog/wix-studio-pricing",
-        desc: "What each Wix Studio plan includes, and what a build costs on top.",
-        icon: "receipt",
+        kind: "Service",
+        label: "Wix Studio website design",
+        href: "/services/wix-studio-website-design",
+        desc: "How we design and build on Wix Studio, at a fixed, published price.",
+        icon: "palette",
       },
       {
         kind: "Article",

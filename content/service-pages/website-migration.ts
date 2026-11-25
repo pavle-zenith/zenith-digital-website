@@ -1,5 +1,6 @@
 import type { CtaLink } from "@/lib/types";
 import type { ServicePageContent } from "./types";
+import { transformationPlacements } from "../transformations";
 
 /**
  * /services/website-migration
@@ -39,9 +40,12 @@ export const websiteMigration: ServicePageContent = {
   slug: "website-migration",
   publish: true,
   seo: {
-    title: "Website Migration to Wix Studio | Zenith Digital",
+    // 25 Nov 2026: 608 impressions, 0 clicks, position 38 in 90 days, nearly
+    // all on WordPress queries its guide ranks better for. Service-led title,
+    // WordPress left to the guide.
+    title: "Website Migration Service: Move to Wix Studio | Zenith Digital",
     description:
-      "Migrate to Wix Studio from Wix Classic, Squarespace, WordPress, Webflow, Framer, or Harmony. Full URL inventory, 1:1 redirect map, and zero ranking loss in writing. From €1,250.",
+      "Move your site to Wix Studio from Wix Classic, Squarespace, Webflow, Framer or Harmony. Every URL mapped and redirected, 30 days of monitoring. From €1,250.",
   },
 
   hero: {
@@ -220,6 +224,13 @@ export const websiteMigration: ServicePageContent = {
     ],
   },
 
+  // Straight after the process: the stages, then what comes out of them.
+  transformation: {
+    slugs: transformationPlacements.migrationService,
+    heading: "What a migration looks like",
+    support: "Off the old platform, onto one the team can run.",
+  },
+
   process: {
     heading: "How a migration runs",
     intro:
@@ -383,8 +394,8 @@ export const websiteMigration: ServicePageContent = {
         a: "Yes. Products, variants, categories, and images transfer into Wix Studio's store, and product URLs get the same 1:1 redirect treatment as everything else. Payment and shipping configuration is set up and tested before cutover, not after.",
       },
       {
-        q: "Why leave WordPress for Wix Studio?",
-        a: "Because the total cost of WordPress is rarely the licence. It's the plugin renewals, the maintenance retainer, the security patching, and the developer you call when an update breaks the layout. Wix Studio removes that whole category of work and hands editing back to your team.",
+        q: "Why do businesses move their website to Wix Studio?",
+        a: "Usually because the site has become a job. On WordPress it's plugin renewals, updates and security patches; on Webflow it's a designer for every change; on Squarespace it's the template ceiling. Wix Studio hands editing back to your team, with hosting, security and updates handled. Each platform's guide covers what carries over.",
       },
       {
         q: "What does zero ranking loss in writing actually mean?",

@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { CaseStudies } from "@/components/sections/CaseStudies";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Services } from "@/components/sections/Services";
+import { Transformation } from "@/components/sections/Transformation";
 import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
 import { Problem } from "@/components/sections/Problem";
 import { Audit } from "@/components/sections/Audit";
@@ -13,7 +14,7 @@ import { Included } from "@/components/sections/Included";
 import { Process } from "@/components/sections/Process";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Faq } from "@/components/sections/Faq";
-import { caseStudiesCta, faqSection, finalCta, industries } from "@/content/home";
+import { caseStudiesCta, faqSection, finalCta, industries, transformation } from "@/content/home";
 import { hubRoutable, industryHref } from "@/content/industries";
 
 const faqSchema = {
@@ -44,6 +45,7 @@ export default function HomePage() {
         hrefs={industries.items.map((it) => industryHref(it.industry))}
         allLink={hubRoutable ? industries.allLink : undefined}
       />
+      <Transformation {...transformation} />
       <Process />
       <Audit />
       <Pricing />

@@ -1,3 +1,4 @@
+import { CountUp } from "@/components/ui/CountUp";
 import { cn } from "@/lib/utils";
 import type { Metric, Tone } from "@/lib/types";
 
@@ -6,6 +7,7 @@ export function StatBlock({
   metric,
   tone = "dark",
   size = "h1",
+  countUp = false,
   className,
 }: {
   metric: Metric;
@@ -15,6 +17,8 @@ export function StatBlock({
    * "h3" for a compact supporting row that shouldn't outshout its section.
    */
   size?: "h1" | "h2" | "h3";
+  /** Count the number up once when it scrolls into view (CountUp). */
+  countUp?: boolean;
   className?: string;
 }) {
   return (
@@ -25,7 +29,7 @@ export function StatBlock({
           size === "h3" ? "text-h3" : size === "h2" ? "text-h2" : "text-h1",
         )}
       >
-        {metric.value}
+        {countUp ? <CountUp value={metric.value} /> : metric.value}
       </span>
       <span
         className={tone === "dark" ? "text-text-muted" : "text-light-muted"}

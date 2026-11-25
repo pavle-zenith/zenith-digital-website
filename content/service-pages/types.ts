@@ -1,4 +1,4 @@
-import type { CtaLink } from "@/lib/types";
+import type { CtaLink, TransformationSection } from "@/lib/types";
 
 /**
  * /services/[slug] — the shared shape every service page fills in.
@@ -211,6 +211,11 @@ export type ServicePageContent = {
     items: (TitledBlock & { icon?: string; group?: string })[];
   };
   /**
+   * The featured before/after, rendered after the process section. Optional:
+   * only the migration service has one.
+   */
+  transformation?: TransformationSection;
+  /**
    * `image` switches the section to the split showcase layout: heading, photo,
    * and CTA on the left, hairline-divided stages with focus chips on the
    * right. Without it the section renders as the plain numbered column.
@@ -238,6 +243,19 @@ export type ServicePageContent = {
   };
 
   unique: UniqueBlock;
+
+  /**
+   * Platform pages only: the honest limits of the platform the page sells,
+   * each with the vendor's own documentation, then the promise to say so
+   * when it's the wrong choice. Optional; the original five pages don't
+   * carry it.
+   */
+  tradeoffs?: {
+    heading: string;
+    intro: string;
+    items: { title: string; body: string; source?: { label: string; href: string } }[];
+    promise: TitledBlock;
+  };
 
   faq: {
     heading: string[];

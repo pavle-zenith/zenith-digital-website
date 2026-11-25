@@ -1,8 +1,7 @@
-import type { CtaLink } from "@/lib/types";
+import type { CtaLink, TransformationSection } from "@/lib/types";
 
 import { quoteOf } from "./testimonials-data";
-
-import { beforeAfterItems } from "./case-studies";
+import { transformationPlacements } from "./transformations";
 
 /**
  * /book-a-call — bottom-funnel conversion page. Every CTA on the site resolves
@@ -93,11 +92,11 @@ export const callCovers = {
   ],
 };
 
-// 3. Before/after work (light, centered heading, 2x2 grid of drag sliders).
-// Slider pairs are shared from content/case-studies.ts.
-export const beforeAfter = {
+// 3. Featured before/after (Transformation). Entries and their copy:
+// content/transformations.ts.
+export const transformation: TransformationSection = {
+  slugs: transformationPlacements.bookACall,
   heading: "Our previous website work in action",
-  items: beforeAfterItems,
 };
 
 // 4. Testimonial band (dark with texture, three quote cards). Features the
@@ -185,6 +184,13 @@ export const bookContact = {
       label: "What do you need?",
       placeholder:
         "A rebuild, a migration off WordPress, help with rankings. A sentence or two is plenty.",
+    },
+    // A one-line human check instead of a minimum message length (owner,
+    // 25 Nov 2026). The server accepts `answers`, case-insensitive.
+    check: {
+      label: "Quick check: what's 2 + 2?",
+      placeholder: "Your answer",
+      answers: ["4", "four"],
     },
   },
   submit: "Send message",

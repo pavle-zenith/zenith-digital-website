@@ -4,12 +4,12 @@ import { JsonLd } from "@/components/JsonLd";
 import { personSchema } from "@/lib/schema";
 import { BookHero } from "@/components/sections/BookHero";
 import { CallCovers } from "@/components/sections/CallCovers";
-import { BeforeAfterWork } from "@/components/sections/BeforeAfterWork";
+import { Transformation } from "@/components/sections/Transformation";
 import { QuoteBand } from "@/components/sections/QuoteBand";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
-import { bookFaq, bookFinalCta } from "@/content/book-a-call";
+import { bookFaq, bookFinalCta, transformation } from "@/content/book-a-call";
 import { founderBookACall } from "@/content/founder";
 
 export const metadata: Metadata = {
@@ -36,7 +36,7 @@ export default function BookACallPage() {
       <JsonLd data={personSchema} />
       <BookHero />
       <CallCovers />
-      <BeforeAfterWork />
+      <Transformation {...transformation} />
       <QuoteBand />
       {/* Who the call is actually with, right before the questions people
           check before picking a slot. Plain white after the dark QuoteBand. */}

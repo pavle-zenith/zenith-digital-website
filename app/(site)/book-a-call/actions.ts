@@ -2,6 +2,8 @@
 
 import { headers } from "next/headers";
 
+import { bookContact } from "@/content/book-a-call";
+
 import {
   isEmail,
   isPhone,
@@ -14,10 +16,15 @@ import {
   type Submission,
 } from "@/lib/forms";
 
+/** What the visitor typed, sent back with an error so the form can refill it. */
+export type ContactValues = Partial<
+  Record<"name" | "email" | "phone" | "website" | "message" | "check", string>
+>;
+
 export type ContactFormState =
   | { status: "idle" }
   | { status: "success" }
-  | { status: "error"; message: string };
+  | { status: "error"; message: string; values?: ContactValues };
 
 /**
  * Contact form on /book-a-call. Two delivery legs, both best-effort: the row
@@ -52,33 +59,34 @@ export async function submitContact(
   const phone = String(formData.get("phone") ?? "").trim();
   const rawWebsite = String(formData.get("website") ?? "").trim();
   const website = rawWebsite ? normalizeUrl(rawWebsite) : null;
+  const check = String(formData.get("check") ?? "").trim();
+
+  // React resets the form after every submission, so an error has to carry
+  // the typed values back or the visitor loses everything they wrote.
+  const values: ContactValues = { name, email, phone, website: rawWebsite, message, check };
+  const fail = (text: string): ContactFormState => ({
+    status: "error",
+    message: text,
+    values,
+  });
 
   if (!name) {
-    return { status: "error", message: "Add your name." };
+    return fail("Add your name.");
   }
   if (!isEmail(email)) {
-    return {
-      status: "error",
-      message: "That doesn't look like an email address.",
-    };
+    return fail("That doesn't look like an email address.");
   }
-  if (message.length < 10) {
-    return {
-      status: "error",
-      message: "Tell us a little more about what you need.",
-    };
+  if (!message) {
+    return fail("Tell us what you need.");
+  }
+  if (!bookContact.fields.check.answers.includes(check.toLowerCase())) {
+    return fail("That's not quite it. What's 2 + 2?");
   }
   if (phone && !isPhone(phone)) {
-    return {
-      status: "error",
-      message: "That doesn't look like a phone number.",
-    };
+    return fail("That doesn't look like a phone number.");
   }
   if (rawWebsite && !website) {
-    return {
-      status: "error",
-      message: "That doesn't look like a website address.",
-    };
+    return fail("That doesn't look like a website address.");
   }
 
   const submission: Submission = {
@@ -121,10 +129,7 @@ export async function submitContact(
 
   if (!stored && !emailed) {
     console.error("submitContact: submission not delivered", { name, email });
-    return {
-      status: "error",
-      message: "Something went wrong sending your message.",
-    };
+    return fail("Something went wrong sending your message.");
   }
 
   return { status: "success" };

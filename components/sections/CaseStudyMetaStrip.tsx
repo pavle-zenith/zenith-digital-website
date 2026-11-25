@@ -10,6 +10,7 @@ import type { CaseStudyDetail } from "@/content/case-studies";
 export function CaseStudyMetaStrip({ study }: { study: CaseStudyDetail }) {
   return (
     <MetaStrip
+      actionBeside="xl"
       rows={[
         { label: "Client", value: study.client },
         { label: "Industry", value: study.meta.industry },
@@ -23,7 +24,7 @@ export function CaseStudyMetaStrip({ study }: { study: CaseStudyDetail }) {
           href={study.meta.liveUrl}
           target="_blank"
           rel="noopener"
-          className="group inline-flex w-full shrink-0 items-center justify-center gap-2 self-start rounded-[6px] border border-light-border px-5 py-3 font-display text-body font-medium transition hover:bg-light-surface sm:w-auto sm:py-2.5 lg:self-auto"
+          className="group inline-flex w-full shrink-0 items-center justify-center gap-2 self-start rounded-[6px] border border-light-border px-5 py-3 font-display text-body font-medium transition hover:bg-light-surface sm:w-auto sm:py-2.5 xl:self-auto"
         >
           View live site{" "}
           <span aria-hidden className="btn-arrow">

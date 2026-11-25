@@ -40,7 +40,7 @@ export const organizationSchema = {
   name: "Zenith Digital",
   url: SITE,
   description:
-    "Zenith Digital is a Wix Studio web design agency based in Belgrade, Serbia, serving clients across the UK, EU, and US.",
+    "Zenith Digital is a web design and development studio based in Belgrade, Serbia, building on Wix Studio, Shopify and custom code for clients across the UK, EU, and US.",
   // Google's Organization rich result and knowledge panel both read `logo`.
   // Points at the App Router icon so there's one brand mark, not two.
   logo: `${SITE}/icon.png`,

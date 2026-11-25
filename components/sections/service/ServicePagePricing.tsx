@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
+import { pricingTerms } from "@/lib/pricingTerms";
 import { cn } from "@/lib/utils";
 import { pricing as homePricing } from "@/content/home";
 import { pPricing } from "@/content/partnerships";
@@ -76,7 +77,10 @@ export function ServicePagePricing({
         {plans.map((tier, i) => {
           const featured = "highlighted" in tier && tier.highlighted;
           const badge = tier.badge || null;
-          const timeline = "timeline" in tier ? tier.timeline : null;
+          const terms = pricingTerms(
+            tier.priceNote,
+            "timeline" in tier ? tier.timeline : null,
+          );
           const featuresLabel =
             "featuresLabel" in tier && tier.featuresLabel
               ? tier.featuresLabel
@@ -143,18 +147,19 @@ export function ServicePagePricing({
                     {tier.summary}
                   </p>
 
-                  <div className="mt-6 font-display text-h2 font-medium leading-[1.05] tracking-tight">
-                    {tier.price}
+                  {/* Price alone up top (a unit like "of project value"
+                      beside it); the payment terms and delivery time lead
+                      the checklist (pricingTerms). */}
+                  <div className="mt-6 flex flex-wrap items-baseline gap-x-2">
+                    <span className="font-display text-h2 font-medium leading-[1.05] tracking-tight">
+                      {tier.price}
+                    </span>
+                    {terms.unit ? (
+                      <span className={cn("text-body", featured ? "text-white/60" : "text-light-muted")}>
+                        {terms.unit}
+                      </span>
+                    ) : null}
                   </div>
-                  <p
-                    className={cn(
-                      "mt-2 text-body",
-                      featured ? "text-white/60" : "text-light-muted",
-                    )}
-                  >
-                    {tier.priceNote}
-                    {timeline ? ` · ${timeline}` : ""}
-                  </p>
                   <Link
                     href={tier.cta.href}
                     className={cn(
@@ -178,7 +183,7 @@ export function ServicePagePricing({
                   {featuresLabel}
                 </p>
                 <ul className="mt-5 flex flex-col gap-3">
-                  {tier.features.map((f) => (
+                  {[...terms.terms, ...tier.features].map((f) => (
                     <li
                       key={f}
                       className="flex items-start gap-3 text-body text-light-text"

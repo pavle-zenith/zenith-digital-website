@@ -13,6 +13,11 @@ import { cn } from "@/lib/utils";
  * page-agnostic. `caption={false}` hides the visible title (it still feeds
  * alt/aria text); `frameClassName` replaces the default shape classes
  * (aspect/radius/border) when a host needs a different frame.
+ *
+ * `labels` takes the corner text when a pair isn't a plain before/after
+ * (`{ before: "Wireframe", after: "Final design" }`); the knob's label follows
+ * it. `beforeAlt`/`afterAlt`, `imageClassName` (e.g. a top crop) and `sizes`
+ * let a host that draws the pair large say what it shows and how it's served.
  */
 export function BeforeAfterSlider({
   title,
@@ -21,14 +26,23 @@ export function BeforeAfterSlider({
   caption = true,
   labels = true,
   frameClassName,
+  beforeAlt,
+  afterAlt,
+  imageClassName = "object-cover",
+  sizes = "(max-width: 768px) 100vw, 50vw",
 }: {
   title: string;
   before: string;
   after: string;
   caption?: boolean;
-  labels?: boolean;
+  labels?: boolean | { before: string; after: string };
   frameClassName?: string;
+  beforeAlt?: string;
+  afterAlt?: string;
+  imageClassName?: string;
+  sizes?: string;
 }) {
+  const text = typeof labels === "object" ? labels : { before: "Before", after: "After" };
   const [pct, setPct] = useState(50);
   const ref = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
@@ -74,31 +88,32 @@ export function BeforeAfterSlider({
         {/* After (base layer) */}
         <Image
           src={after}
-          alt={`${title} website after the Zenith rebuild`}
+          alt={afterAlt ?? `${title} website after the Zenith rebuild`}
           fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
+          sizes={sizes}
+          className={imageClassName}
           draggable={false}
         />
         {/* Before (top layer, revealed left of the handle) */}
         <Image
           src={before}
-          alt={`${title} website before the rebuild`}
+          alt={beforeAlt ?? `${title} website before the rebuild`}
           fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
+          sizes={sizes}
+          className={imageClassName}
           style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }}
           draggable={false}
         />
 
-        {/* Corner labels */}
+        {/* Corner labels: glass pills over media (DESIGN.md), at the /70
+            strength small captions need to hold 4.5:1 over a light page. */}
         {labels ? (
           <>
-            <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-label uppercase track-label text-white backdrop-blur-sm">
-              Before
+            <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-bg/70 px-2.5 py-1 font-mono text-label uppercase track-label text-white backdrop-blur-md">
+              {text.before}
             </span>
-            <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-label uppercase track-label text-white backdrop-blur-sm">
-              After
+            <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-bg/70 px-2.5 py-1 font-mono text-label uppercase track-label text-white backdrop-blur-md">
+              {text.after}
             </span>
           </>
         ) : null}
@@ -112,7 +127,7 @@ export function BeforeAfterSlider({
         <button
           type="button"
           role="slider"
-          aria-label={`Compare ${title} before and after`}
+          aria-label={`Compare ${title} ${text.before.toLowerCase()} and ${text.after.toLowerCase()}`}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={Math.round(pct)}

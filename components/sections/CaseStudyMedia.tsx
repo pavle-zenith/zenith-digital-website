@@ -2,15 +2,14 @@ import Image from "next/image";
 import { servesRaw } from "@/lib/utils";
 
 import { Section } from "@/components/ui/Section";
-import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
 import type { CaseStudyDetail } from "@/content/case-studies";
 
 /**
  * Project media grid, between the introduction and the written story. Two
  * columns from md up, a single stacked column on mobile: every image is
  * simply on the page, nothing scrolls sideways and nothing hides behind a
- * control. A before/after slider takes the first cell when the study has
- * one; the gallery stills fill the rest. Renders nothing without media.
+ * control. The gallery stills fill it; a study's before/after is its own
+ * section above it (Transformation). Renders nothing without stills.
  *
  * An odd image count leaves the last cell empty rather than stretching the
  * final image to full width: a 4:3 still blown up to double width reads as
@@ -25,7 +24,7 @@ import type { CaseStudyDetail } from "@/content/case-studies";
  */
 export function CaseStudyMedia({ study }: { study: CaseStudyDetail }) {
   const stills = study.gallery ?? [];
-  if (!study.beforeAfter && stills.length === 0) return null;
+  if (stills.length === 0) return null;
 
   return (
     <Section tone="light" frameClassName="relative !py-12 md:!py-20">
@@ -51,16 +50,6 @@ export function CaseStudyMedia({ study }: { study: CaseStudyDetail }) {
       </div>
 
       <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-        {study.beforeAfter ? (
-          <BeforeAfterSlider
-            title={study.client}
-            before={study.beforeAfter.before}
-            after={study.beforeAfter.after}
-            caption={false}
-            frameClassName="aspect-[4/3] rounded-card border border-light-border"
-          />
-        ) : null}
-
         {stills.map((image) => (
           <figure key={image.src} className="flex flex-col gap-4">
             <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-light-border bg-light-surface">

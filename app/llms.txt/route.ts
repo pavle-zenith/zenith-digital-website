@@ -4,6 +4,8 @@ import { join } from "node:path";
 import { COST_CALCULATOR_PATH, costCalculatorLive } from "@/content/tools/status";
 import { publishedResources, resourcesHubLive } from "@/content/resources";
 import { resourcesHub } from "@/content/resources/hub";
+import { customWebsiteDevelopment } from "@/content/service-pages/custom-website-development";
+import { customWebsitesLive, customWebsitesPath } from "@/content/service-pages/status";
 import { SITE } from "@/lib/schema";
 
 /**
@@ -16,6 +18,13 @@ export const dynamic = "force-static";
 
 /** Lines that join the file once their page is published, each after its anchor line. */
 const gated = [
+  // The custom-code service, beside the Wix Studio one, described in the
+  // page's own words (custom website development brief, 25 Nov 2026).
+  {
+    live: customWebsitesLive,
+    after: /^- \[Wix Studio website design\]\(/,
+    line: `- [${customWebsiteDevelopment.hero.name}](${SITE}${customWebsitesPath}): ${lowerFirst(customWebsiteDevelopment.seo.description)}`,
+  },
   {
     live: costCalculatorLive,
     after: /^- \[Pricing\]\(/,
@@ -38,6 +47,11 @@ function resourceLines(): string[] {
     ),
   ];
   return items.length ? ["## Resources", "", ...items, ""] : [];
+}
+
+/** "Custom-coded websites..." reads as "custom-coded websites..." after a colon. */
+function lowerFirst(text: string) {
+  return text.charAt(0).toLowerCase() + text.slice(1);
 }
 
 export function GET() {

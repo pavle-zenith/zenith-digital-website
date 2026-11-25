@@ -1,10 +1,20 @@
-import type { CtaLink, Metric } from "@/lib/types";
+import type { CtaLink, Metric, TransformationSection } from "@/lib/types";
 
 import { quoteOf } from "./testimonials-data";
+import { transformationPlacements } from "./transformations";
+import { customWebsitesLive, customWebsitesPath } from "./service-pages/status";
+
+/**
+ * A case study's custom-code scope entry: plain text until the custom website
+ * development page is published, then a link to it (brief, 25 Nov 2026).
+ */
+const customCode = (label: string) =>
+  customWebsitesLive ? { label, href: customWebsitesPath } : label;
 
 /**
  * /case-studies — single source of truth for all case-study data. The homepage
- * featured two-panel cards and the before/after slider sets import from here
+ * featured two-panel cards import from here, and the before/afters
+ * (content/transformations.ts) read their client names and logos from it
  * (no duplicated case data anywhere). Studies listed in `caseStudyDetails` get
  * a /case-studies/[slug] detail page and their cards flip to internal links
  * automatically — shipping a new study is a data change, not a refactor.
@@ -723,30 +733,6 @@ export const caseStudies = {
   ],
 };
 
-// Before/after slider pairs. Shared with /free-website-audit and /book-a-call.
-export const beforeAfterItems = [
-  {
-    title: "Knode AI",
-    before: "/before-after/knode-before.jpg",
-    after: "/before-after/knode-after.jpg",
-  },
-  {
-    title: "FoxStays Dock Rental",
-    before: "/before-after/foxstays-before.jpg",
-    after: "/before-after/foxstays-after.jpg",
-  },
-  {
-    title: "Hunting Brook Gardens",
-    before: "/before-after/huntingbrook-before.jpg",
-    after: "/before-after/huntingbrook-after.jpg",
-  },
-  {
-    title: "MindEd",
-    before: "/before-after/minded-before.jpg",
-    after: "/before-after/minded-after.jpg",
-  },
-];
-
 // ---- Case study detail pages (/case-studies/[slug]) ----
 
 export type CaseStudyGalleryImage = {
@@ -805,7 +791,6 @@ export type CaseStudyDetail = CaseStudyCard & {
   scrollShot?: CaseStudyGalleryImage & { width: number; height: number };
   /** First image illustrates the challenge; the rest feed the gallery. */
   gallery?: CaseStudyGalleryImage[];
-  beforeAfter?: { before: string; after: string };
   /** Muted autoplay loop in the gallery. */
   video?: string;
   testimonial?: { quote: string; name: string; role: string; avatar?: string };
@@ -895,10 +880,6 @@ const shippedDetails: CaseStudyDetail[] = [
         caption: "The launch hero: real product UI, no stock illustration.",
       },
     ],
-    beforeAfter: {
-      before: "/before-after/knode-before.jpg",
-      after: "/before-after/knode-after.jpg",
-    },
     testimonial: quoteOf("gemma-sole"),
     // Scope confirmed by owner: integrations in, copywriting out.
     techUsed: [
@@ -1482,10 +1463,6 @@ const shippedDetails: CaseStudyDetail[] = [
         alt: "Design detail from the Hunting Brook Gardens build (3 of 3)",
       },
     ],
-    beforeAfter: {
-      before: "/before-after/huntingbrook-before.jpg",
-      after: "/before-after/huntingbrook-after.jpg",
-    },
     // Flynn as partner voice, per owner. His signoff covers MOD projects.
     testimonial: quoteOf("flynn-blackie"),
     techUsed: [
@@ -1833,7 +1810,7 @@ const shippedDetails: CaseStudyDetail[] = [
     ],
     testimonial: quoteOf("uros-stanimirovic"),
     techUsed: [
-      "Custom code build",
+      customCode("Custom code build"),
       "Sanity CMS",
       "Brand & web design",
       "Copywriting",
@@ -2087,7 +2064,7 @@ export const bianomics: CaseStudyDetail = {
     "Since March 2026, Zenith Digital has built bianomics.com and four client websites for Bianomics, and its marketing team edits the site in Sanity Studio and gets new features live within 7 days by asking in Slack.",
   testimonial: quoteOf("bianca-cervantes"),
   techUsed: [
-    "Custom code (Next.js)",
+    customCode("Custom code (Next.js)"),
     "Sanity CMS",
     "monday.com integration",
     "Snapshot application funnel",
@@ -2217,7 +2194,7 @@ export const techtonnik: CaseStudyDetail = {
     "In June 2026, Zenith Digital moved Techtonnik's website from Wix Studio to Astro in one week, and every URL, title and description carried over with its rankings holding steady.",
   testimonial: quoteOf("stevan-radovanovic"),
   techUsed: [
-    "Astro (custom code)",
+    customCode("Astro (custom code)"),
     { label: "Website migration", href: "/services/website-migration" },
     "URL and metadata parity",
     "Layout & brand refresh",
@@ -2351,7 +2328,7 @@ export const highlandFling: CaseStudyDetail = {
   resultsNote:
     "Since its November 2025 launch, the custom site Zenith Digital built has put all of Highland Fling's experiences, vouchers and charity jumps in one place, with booking built into every experience page.",
   techUsed: [
-    "Custom code (Next.js)",
+    customCode("Custom code (Next.js)"),
     "Brand refresh & web design",
     { label: "Website migration", href: "/services/website-migration" },
     "Custom FareHarbor booking embed",
@@ -2697,7 +2674,7 @@ export const pressureTestScotland: CaseStudyDetail = {
   testimonial: quoteOf("david-connel"),
   techUsed: [
     { label: "Partnership build", href: "/partnerships" },
-    "Custom code (Next.js)",
+    customCode("Custom code (Next.js)"),
     "Sanity CMS",
     "Supabase enquiry storage",
     "Google Business Profile",
@@ -2997,11 +2974,12 @@ export const csHero = {
   ],
 };
 
-// 5. Before/after section
-export const csBeforeAfter = {
+// 5. Featured before/after (Transformation), above the grid. Entries and
+// their copy: content/transformations.ts.
+export const csTransformation: TransformationSection = {
+  slugs: transformationPlacements.caseStudies,
   heading: "Before and after Zenith",
   support: "Drag the handle. Same business, same goals, different website.",
-  items: beforeAfterItems,
 };
 
 // 7. Testimonial band — outcome-led picks tied to projects visible above.

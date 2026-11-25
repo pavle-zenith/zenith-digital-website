@@ -1,3 +1,5 @@
+import { transformationPlacements } from "./transformations";
+
 /**
  * /free-website-audit — low-intent conversion endpoint. Book-a-call catches
  * visitors ready to talk; this catches everyone else. URL + email in, a
@@ -121,6 +123,9 @@ export const auditWhoFor = {
 // 4. Example audit (light; sticky mock report left, before/after column right)
 export const auditExample = {
   heading: "What an audit actually looks like",
+  // The before/afters beside the sample report (Transformation, compact).
+  // Entries and their copy: content/transformations.ts.
+  transformationSlugs: transformationPlacements.freeAudit,
   caption:
     "A real walkthrough runs 5 to 10 minutes and covers your site specifically, not a template.",
   // Mock report with findings written the way we'd say them on the call.

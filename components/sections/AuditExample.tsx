@@ -1,14 +1,13 @@
 import { Section } from "@/components/ui/Section";
 import { AuditReport } from "@/components/ui/AuditReport";
-import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
+import { TransformationShowcase } from "@/components/sections/Transformation";
 import { auditExample } from "@/content/free-website-audit";
-import { beforeAfter } from "@/content/book-a-call";
 
 /**
  * "What an audit actually looks like" — light split. Left: the mock report
  * (score + findings written in plain language) with the caption, sticky so it
- * follows as you scroll. Right: a column of draggable before/after sliders
- * showing where audits led.
+ * follows as you scroll. Right: the featured before/after (Transformation,
+ * compact), showing where audits led.
  */
 export function AuditExample() {
   return (
@@ -29,15 +28,8 @@ export function AuditExample() {
         </div>
 
         {/* Before/after column */}
-        <div className="flex flex-col gap-10">
-          {beforeAfter.items.map((item) => (
-            <BeforeAfterSlider
-              key={item.title}
-              title={item.title}
-              before={item.before}
-              after={item.after}
-            />
-          ))}
+        <div className="min-w-0">
+          <TransformationShowcase slugs={auditExample.transformationSlugs} compact />
         </div>
       </div>
     </Section>

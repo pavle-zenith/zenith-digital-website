@@ -17,6 +17,7 @@ import { WorkStrip } from "@/components/sections/WorkStrip";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { Pricing } from "@/components/sections/Pricing";
+import { Transformation } from "@/components/sections/Transformation";
 import { cn, formatLongDate, servesRaw } from "@/lib/utils";
 import { CtaBand } from "./CtaBand";
 import { TransfersTable } from "./TransfersTable";
@@ -114,6 +115,8 @@ export function MigrationGuide({ data }: { data: MigrationGuideContent }) {
       <GuideRoutes data={data} />
       <GuideFit data={data} />
       <TransfersTable data={data} />
+      {/* What carries across, then a site that made the move. */}
+      {data.transformation ? <Transformation {...data.transformation} /> : null}
 
       <GuideSteps data={data} />
 

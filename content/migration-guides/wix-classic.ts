@@ -1,5 +1,6 @@
 import type { CtaLink } from "@/lib/types";
 import type { MigrationGuideContent } from "./types";
+import { transformationPlacements } from "../transformations";
 
 /**
  * /services/wix-classic-to-wix-studio
@@ -70,9 +71,11 @@ export const wixClassic: MigrationGuideContent = {
   publish: true,
   platform: "Wix Classic",
   seo: {
-    title: "Wix Classic to Wix Studio: Migration Guide | Zenith Digital",
+    // 25 Nov 2026: 401 impressions, 0 clicks at position 8.7 in 90 days.
+    // Searchers say "Wix Editor" and ask how to upgrade, so the title does too.
+    title: "How to Move from Wix Editor to Wix Studio | Zenith Digital",
     description:
-      "Wix Classic is the Wix Editor. Two ways to move it to Wix Studio, what each carries across, what it costs, and when you can do it yourself.",
+      "Wix has two routes from the Wix Editor (Wix Classic) to Studio, documented separately. Which one applies, what carries over, what it costs, and when to DIY.",
   },
 
   hero: {
@@ -244,6 +247,12 @@ export const wixClassic: MigrationGuideContent = {
     ],
     footnote:
       "One distinction worth holding onto: a redesign changes how the site looks, a migration moves it while preserving the URLs, content, functionality and search visibility the business already depends on. A Classic to Studio project is usually both, and the migration half is what stops the redesign breaking what already works.",
+  },
+
+  // Rendered straight after the transfers table.
+  transformation: {
+    slugs: transformationPlacements.migrationGuides["wix-classic-to-wix-studio"],
+    heading: "A Wix Classic site, moved",
   },
 
   transfers: {

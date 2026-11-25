@@ -1,4 +1,4 @@
-import type { CtaLink } from "@/lib/types";
+import type { CtaLink, TransformationSection } from "@/lib/types";
 
 /**
  * /services/[platform]-to-wix-studio — the migration guide spokes hanging off
@@ -195,6 +195,12 @@ export type MigrationGuideContent = {
     cta?: ContextualCta;
   };
 
+  /**
+   * The featured before/after, rendered straight after the transfers table:
+   * the table says what carries across, this shows a site that made the move.
+   * Optional; only a guide with a real client on that platform has one.
+   */
+  transformation?: TransformationSection;
   /** THE CORE ASSET. See TransferStatus. */
   transfers: {
     heading: string;

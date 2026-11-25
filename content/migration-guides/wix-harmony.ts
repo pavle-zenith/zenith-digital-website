@@ -57,9 +57,12 @@ export const wixHarmony: MigrationGuideContent = {
   // extra cost (step 6). The old description ran to 188 characters, so its
   // price was never shown. Compare CTR from 18 Nov onward.
   seo: {
-    title: "Wix Harmony to Wix Studio: keep your URLs | Zenith Digital",
+    // 25 Nov 2026: 2,938 impressions, 1.2% click rate at position 5.7. The
+    // top queries ask how to switch from Harmony to the Wix Editor, so the
+    // title asks it and the description answers it.
+    title: "Switch from Wix Harmony to Wix Editor or Studio? | Zenith Digital",
     description:
-      "Wix can't transfer a Harmony site, so it's rebuilt in Studio. It stays live while we build, your URLs can stay the same, and any 404 in 30 days is fixed free.",
+      "No, Wix says a Harmony site can't be transferred to the Wix Editor or Studio. What to do instead, what survives a rebuild, and how to keep your URLs.",
   },
 
   hero: {

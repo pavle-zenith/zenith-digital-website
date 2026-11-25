@@ -53,7 +53,7 @@ export const wordpress: MigrationGuideContent = {
   publish: true,
   platform: "WordPress",
   seo: {
-    title: "Moving from WordPress to Wix: Migration Guide | Zenith Digital",
+    title: "Moving from WordPress to Wix: What Transfers | Zenith Digital",
     description:
       "Moving from WordPress to Wix? Wix imports your blog posts and nothing else. What transfers, what gets rebuilt, and what the move costs.",
   },

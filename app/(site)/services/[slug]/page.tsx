@@ -15,6 +15,8 @@ import {
   ServicePagePlatforms,
 } from "@/components/sections/service/ServicePageUnique";
 import { ServicePageRelated } from "@/components/sections/service/ServicePageRelated";
+import { ServicePageTradeoffs } from "@/components/sections/service/ServicePageTradeoffs";
+import { Transformation } from "@/components/sections/Transformation";
 import { founderServices } from "@/content/founder";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
@@ -23,15 +25,16 @@ import { ClientLogos } from "@/components/sections/ClientLogos";
 import { ProjectsSlider } from "@/components/sections/ProjectsSlider";
 import { WorkStrip } from "@/components/sections/WorkStrip";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { getServicePage, servicePages } from "@/content/service-pages";
+import { getServicePage, routableServicePages } from "@/content/service-pages";
 import { MigrationGuide } from "@/components/sections/migration/MigrationGuide";
 import { getMigrationGuide, migrationGuides } from "@/content/migration-guides";
 import type { MigrationGuideContent } from "@/content/migration-guides";
 
 const SITE = "https://www.thezenithdigital.com";
 
-// Only published pages get routes; anything else 404s rather than leaking a
-// half-finished page into the index.
+// Only routable pages get routes (published ones, plus unpublished ones in a
+// PREVIEW_UNPUBLISHED=1 build, noindexed); anything else 404s rather than
+// leaking a half-finished page into the index.
 export const dynamicParams = false;
 
 /**
@@ -47,7 +50,7 @@ export const dynamicParams = false;
  */
 export function generateStaticParams() {
   return [
-    ...servicePages.map((p) => ({ slug: p.slug })),
+    ...routableServicePages.map((p) => ({ slug: p.slug })),
     ...migrationGuides.map((g) => ({ slug: g.slug })),
   ];
 }
@@ -63,6 +66,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: page.seo.title,
     description: page.seo.description,
     alternates: { canonical: `/services/${page.slug}` },
+    // An unpublished page only reaches here in a preview build: keep it out
+    // of the index.
+    ...("publish" in page && !page.publish
+      ? { robots: { index: false, follow: false } }
+      : {}),
   };
 }
 
@@ -152,6 +160,8 @@ export default async function ServiceDetailPage({ params }: Props) {
       <ServicePagePlatforms data={page} />
       <ServicePageIncluded data={page} />
       <ServicePageProcess data={page} />
+      {/* The stages, then what comes out of them (migration service only). */}
+      {page.transformation ? <Transformation {...page.transformation} /> : null}
       <ServicePageStakes data={page} />
       {/* Full stats + testimonials, same as the homepage. */}
       <Testimonials />
@@ -165,6 +175,9 @@ export default async function ServiceDetailPage({ params }: Props) {
           the white Pricing section directly above. */}
       <FounderSection data={founderServices} surface />
       <ServicePageUnique data={page} />
+      {/* The platform's honest limits, right after the comparison that
+          raises them (custom website development only). */}
+      <ServicePageTradeoffs data={page} />
       <Faq data={page.faq} />
       <ServicePageRelated data={page} />
       <CtaBanner data={page.finalCta} />

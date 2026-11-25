@@ -10,6 +10,9 @@ import { aboutNumbers } from "@/content/about";
  * carry four near-identical figures under weaker labels, so a reader met the
  * same evidence twice within two screens and the second showing added nothing.
  *
+ * The figures count up once as the band scrolls into view (CountUp: the
+ * server still renders the final values, and reduced motion skips it).
+ *
  * The note underneath is doing real work and is not boilerplate: it says every
  * figure traces to a named client and links to where. That sentence is the
  * difference between a stat row and a claim.
@@ -20,7 +23,7 @@ export function AboutNumbers() {
       <SectionHeader heading={aboutNumbers.heading} tone="dark" />
       <div className="grid grid-cols-2 gap-8 border-t border-border pt-10 md:grid-cols-4">
         {aboutNumbers.stats.map((metric) => (
-          <StatBlock key={metric.label} metric={metric} tone="dark" />
+          <StatBlock key={metric.label} metric={metric} tone="dark" countUp />
         ))}
       </div>
       <p className="mt-10 max-w-[68ch] text-body text-text-muted">

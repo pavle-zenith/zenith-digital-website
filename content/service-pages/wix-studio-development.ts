@@ -43,9 +43,9 @@ export const wixStudioDevelopment: ServicePageContent = {
 
   hero: {
     name: "Wix Studio development",
-    h1: "Custom Wix Studio development, without moving off the platform",
+    h1: "Wix Studio sites that do what the editor can't",
     subhead:
-      "Velo code, CMS architecture, integrations, and automations built natively in Wix Studio. Including the multi-seller marketplace most agencies would have quoted as a custom build.",
+      "Velo code, CMS architecture, integrations and automations, built natively by a Wix Legend Partner. Including the multi-seller marketplace most agencies would have quoted as a custom build.",
     chips: [
       "Velo & custom code",
       "Marketplaces built native",

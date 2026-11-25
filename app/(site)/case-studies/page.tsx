@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { CaseStudiesHero } from "@/components/sections/CaseStudiesHero";
 import { CaseStudies } from "@/components/sections/CaseStudies";
 import { CaseStudyGrid } from "@/components/sections/CaseStudyGrid";
+import { Transformation } from "@/components/sections/Transformation";
 import { hubRoutable, industryFilterLinks } from "@/content/industries";
 import { WorkGallery } from "@/components/sections/WorkGallery";
 import { ClientLogos } from "@/components/sections/ClientLogos";
@@ -15,6 +16,7 @@ import {
   caseStudyCards,
   csFinalCta,
   csIndustriesLink,
+  csTransformation,
 } from "@/content/case-studies";
 
 export const metadata: Metadata = {
@@ -64,6 +66,7 @@ export default function CaseStudiesPage() {
       <CaseStudies />
       <Testimonials showStats={false} />
       <ClientLogos />
+      <Transformation {...csTransformation} />
       <CaseStudyGrid
         industryLinks={industryFilterLinks()}
         browseLink={hubRoutable ? csIndustriesLink : undefined}

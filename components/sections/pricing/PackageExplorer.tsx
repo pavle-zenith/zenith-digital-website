@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { FeatureIcon } from "@/components/ui/FeatureIcon";
 import type { PricePackage } from "@/content/pricing";
 import { CARD_LIFT, CardWash } from "@/components/sections/pricing/cardStyles";
+import { pricingTerms } from "@/lib/pricingTerms";
 import { cn } from "@/lib/utils";
 
 /**
@@ -156,6 +157,7 @@ export function PackageExplorer({
       <div className="lg:sticky lg:top-[calc(6rem+var(--announce-h))] lg:col-start-2 lg:row-span-2 lg:row-start-1">
         {packages.map((p) => {
           const price = splitFrom(p.price);
+          const terms = pricingTerms(p.priceNote, p.timeline);
           return (
             <div
               key={p.key}
@@ -189,11 +191,9 @@ export function PackageExplorer({
                 <span className="font-display text-[clamp(2.5rem,4vw,3.25rem)] font-medium leading-none tracking-tight tabular-nums">
                   {price.amount}
                 </span>
-                <span className="text-body text-light-muted">{p.priceNote}</span>
-              </p>
-              <p className="mt-3 inline-flex items-center gap-2 text-body text-light-text">
-                <FeatureIcon name="calendar" className="h-4 w-4 text-light-muted" />
-                {p.timeline}
+                {terms.unit ? (
+                  <span className="text-body text-light-muted">{terms.unit}</span>
+                ) : null}
               </p>
 
               <div className="mt-6">
@@ -205,7 +205,9 @@ export function PackageExplorer({
                   {p.featuresLabel}
                 </p>
                 <ul className="mt-3 divide-y divide-light-border">
-                  {p.features.map((f) => (
+                  {/* The payment terms and delivery time lead the list
+                      (pricingTerms), rather than crowding the price. */}
+                  {[...terms.terms, ...p.features].map((f) => (
                     <li key={f} className="flex items-start gap-3 py-2.5 text-body text-light-text">
                       <FeatureIcon name="check" className="mt-1 h-4 w-4 shrink-0 text-light-text" />
                       {f}

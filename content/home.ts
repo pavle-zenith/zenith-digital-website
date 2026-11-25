@@ -1,8 +1,10 @@
-import type { CtaLink, Metric } from "@/lib/types";
+import type { CtaLink, Metric, TransformationSection } from "@/lib/types";
 import type { IndustrySlug } from "./case-studies";
 
 import { attribution, testimonial } from "./testimonials-data";
 import { COST_CALCULATOR_PATH } from "./tools/status";
+import { transformationPlacements } from "./transformations";
+import { customWebsitesLive, customWebsitesPath } from "./service-pages/status";
 
 /**
  * Homepage content. Single source of truth for all section copy + asset paths.
@@ -338,6 +340,14 @@ export const services = {
       span: 3,
     },
   ],
+};
+
+// 6a. Featured before/after (Transformation), its own section straight after
+// the services. Entries and their copy: content/transformations.ts.
+export const transformation: TransformationSection = {
+  slugs: transformationPlacements.home,
+  heading: "Before and after",
+  support: "Same business, same goals, a different website. Drag to compare.",
 };
 
 // 6b. Video testimonials (on the faint textured navy bg, white hairline frame)
@@ -1110,7 +1120,7 @@ export const footer = {
   // with other companies of that name, so the footer always pairs it with what
   // the company is and where it is.
   copyright:
-    "© 2026 Zenith Digital, a Wix Studio web design agency based in Belgrade, serving the UK, EU, and US.",
+    "© 2026 Zenith Digital, a web design and development studio based in Belgrade, serving the UK, EU, and US.",
   legal: [
     { label: "Privacy policy", href: "/privacy" },
     { label: "Terms of service", href: "/terms" },
@@ -1130,53 +1140,113 @@ export const footer = {
  * studies that didn't exist yet.
  */
 export const servicesMenu = {
-  // Left column.
-  build: [
-    {
-      icon: "palette",
-      label: "Website design",
-      desc: "Conversion-first custom builds, from €1,250",
-      href: "/services/wix-studio-website-design",
-    },
-    {
-      icon: "transfer",
-      label: "Website migration",
-      desc: "Off WordPress, Squarespace, or Webflow with no ranking loss",
-      href: "/services/website-migration",
-    },
-    {
-      icon: "split",
-      label: "Landing pages",
-      desc: "Campaign pages live in about a week",
-      href: "/services/landing-pages",
-    },
-  ],
-  // Right column.
-  grow: [
-    {
-      icon: "search",
-      label: "SEO, AEO & PPC",
-      desc: "Rank in search and get named in AI answers",
-      href: "/services/seo-aeo-ppc",
-    },
-    {
-      icon: "code",
-      label: "Wix Studio development",
-      desc: "Custom code, CMS architecture, and integrations",
-      href: "/services/wix-studio-development",
-    },
-    {
-      icon: "layers",
-      label: "White-label & partnerships",
-      desc: "Unbranded production for agencies",
-      href: "/partnerships",
-    },
-  ],
+  // The two service columns. Once the custom website development page is
+  // published (custom website development brief, 25 Nov 2026) they regroup:
+  // the three things we build on the left, Custom websites among them, and
+  // everything that grows or extends a site on the right, with Wix Studio
+  // development moving to the puzzle icon so `code` can mark Custom websites.
+  // Until then the menu stays exactly as it was, so nothing points at the
+  // page. Read from content/service-pages/status.ts.
+  ...(customWebsitesLive
+    ? {
+        build: [
+          {
+            icon: "palette",
+            label: "Website design",
+            desc: "Wix Studio builds, from €1,250",
+            href: "/services/wix-studio-website-design",
+          },
+          {
+            icon: "code",
+            label: "Custom websites",
+            desc: "Next.js and Sanity, for sites a builder can't carry",
+            href: customWebsitesPath,
+          },
+          {
+            icon: "split",
+            label: "Landing pages",
+            desc: "Campaign pages live in about a week",
+            href: "/services/landing-pages",
+          },
+        ],
+        grow: [
+          {
+            icon: "transfer",
+            label: "Website migration",
+            desc: "Off WordPress, Squarespace, or Webflow with every URL mapped and redirected",
+            href: "/services/website-migration",
+          },
+          {
+            icon: "search",
+            label: "SEO, AEO & PPC",
+            desc: "Rank in search and get named in AI answers",
+            href: "/services/seo-aeo-ppc",
+          },
+          {
+            icon: "puzzle",
+            label: "Wix Studio development",
+            desc: "Custom code, CMS architecture, and integrations",
+            href: "/services/wix-studio-development",
+          },
+          {
+            icon: "layers",
+            label: "White-label & partnerships",
+            desc: "Unbranded production for agencies",
+            href: "/partnerships",
+          },
+        ],
+        // Column headers, in the dropdown and on the phone's Services screen.
+        groups: { build: "Design and build", grow: "Grow and scale" },
+      }
+    : {
+        // Left column.
+        build: [
+          {
+            icon: "palette",
+            label: "Website design",
+            desc: "Conversion-first custom builds, from €1,250",
+            href: "/services/wix-studio-website-design",
+          },
+          {
+            icon: "transfer",
+            label: "Website migration",
+            desc: "Off WordPress, Squarespace, or Webflow with no ranking loss",
+            href: "/services/website-migration",
+          },
+          {
+            icon: "split",
+            label: "Landing pages",
+            desc: "Campaign pages live in about a week",
+            href: "/services/landing-pages",
+          },
+        ],
+        // Right column.
+        grow: [
+          {
+            icon: "search",
+            label: "SEO, AEO & PPC",
+            desc: "Rank in search and get named in AI answers",
+            href: "/services/seo-aeo-ppc",
+          },
+          {
+            icon: "code",
+            label: "Wix Studio development",
+            desc: "Custom code, CMS architecture, and integrations",
+            href: "/services/wix-studio-development",
+          },
+          {
+            icon: "layers",
+            label: "White-label & partnerships",
+            desc: "Unbranded production for agencies",
+            href: "/partnerships",
+          },
+        ],
+        // Column headers, in the dropdown and on the phone's Services screen.
+        groups: { build: "Design & build", grow: "Grow & scale" },
+      }),
   // Full-width row closing off the service columns.
   // `icon` names a components/ui/FeatureIcon entry, drawn beside the label.
   viewAll: { label: "All services", href: "/services", icon: "layout-grid" },
-  // Column headers, in the dropdown and on the phone's Services screen.
-  groups: { build: "Design & build", grow: "Grow & scale" },
   // The rest of the row of quick links along the bottom of the dropdown,
   // after viewAll (DesignMe-style segmentation, owner 19 Nov 2026).
   quickLinks: [

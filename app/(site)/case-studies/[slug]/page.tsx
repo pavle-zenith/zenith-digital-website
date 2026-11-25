@@ -8,6 +8,8 @@ import { CaseStudyMetaStrip } from "@/components/sections/CaseStudyMetaStrip";
 import { CaseStudyShot } from "@/components/sections/CaseStudyShot";
 import { CaseStudyIntro } from "@/components/sections/CaseStudyIntro";
 import { CaseStudyMedia } from "@/components/sections/CaseStudyMedia";
+import { Transformation } from "@/components/sections/Transformation";
+import { getTransformation } from "@/content/transformations";
 import { CaseStudyStory } from "@/components/sections/CaseStudyStory";
 import { CaseStudyScrollShot } from "@/components/sections/CaseStudyScrollShot";
 import { CaseStudyTestimonial } from "@/components/sections/CaseStudyTestimonial";
@@ -110,6 +112,11 @@ export default async function CaseStudyPage({ params }: Props) {
       <CaseStudyMetaStrip study={study} />
       {study.heroShot ? <CaseStudyShot image={study.heroShot} /> : null}
       <CaseStudyIntro study={study} />
+      {/* The study's before/after, when it has one. No heading, and no link:
+          it would only point back at this page. */}
+      {getTransformation(study.slug) ? (
+        <Transformation slugs={[study.slug]} link={false} />
+      ) : null}
       <CaseStudyMedia study={study} />
       <CaseStudyStory study={study} />
 

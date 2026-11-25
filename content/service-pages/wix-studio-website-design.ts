@@ -31,10 +31,12 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
 
   hero: {
     name: "Wix Studio website design",
-    h1: "Wix Studio website design that pays for itself",
+    // Outcome-led H1 pattern across the service pages (owner, 25 Nov 2026):
+    // what the reader gets in the heading, price and proof in the subhead.
+    h1: "Wix Studio websites that win enquiries, and your team can edit",
     subhead:
-      "Custom-designed, conversion-first Wix Studio websites from a Wix Legend Partner. Launched in 2 to 5 weeks, from €1,250 fixed.",
-    chips: ["Wix Legend Partner", "100+ sites shipped", "3 to 4 week launch"],
+      "Designed, written and built by a Wix Legend Partner. From €1,250 fixed, live in 2 to 5 weeks, with a handover so you never need a developer to change a headline.",
+    chips: ["Wix Legend Partner", "100+ sites shipped", "Live in 2 to 5 weeks"],
     ctas,
   },
 
@@ -267,10 +269,10 @@ export const wixStudioWebsiteDesign: ServicePageContent = {
     from: "From €1,250",
     fromNote: "fixed, one-time",
     note: "The price is agreed before we start and it doesn't move unless you add scope. Most businesses land between the €1,250 entry build and the €2,350 Studio tier.",
-    // The H1 promises "pays for itself", so the pull quote does the
-    // arithmetic rather than leaving the reader to take it on faith.
+    // The arithmetic behind "win enquiries", so the reader doesn't have to
+    // take it on faith.
     pullQuote:
-      "The arithmetic behind the headline is worth doing before the call: if a customer is worth €500 to you, the €1,250 build pays for itself with three new customers the old site wasn't winning. The case studies above are how that plays out in practice.",
+      "The arithmetic is worth doing before the call: if a customer is worth €500 to you, the €1,250 build pays for itself with three new customers the old site wasn't winning. The case studies above are how that plays out in practice.",
     drivers: [
       {
         title: "Page count",

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { Section } from "@/components/ui/Section";
@@ -112,12 +112,18 @@ export function VideoTestimonials({
    * sharing a video card's height (narrower columns can't fit both quotes
    * beside a video, so this waits for xl). From sm the written ones sit side by side
    * under the videos; phones stack everything.
+   *
+   * "feature" (/about): one video, large. The card sits left at up to 26rem
+   * wide and the full quote is set big beside it with the attribution, so
+   * the card itself carries only the face, the play button and the name.
+   * Phones stack the card over the quote.
    */
-  layout?: "grid" | "quotes-column";
+  layout?: "grid" | "quotes-column" | "feature";
   /** Show each quote whole rather than its first sentence. */
   fullQuotes?: boolean;
 }) {
   const quotesColumn = layout === "quotes-column" && !slider;
+  const feature = layout === "feature" && !slider;
   const writtenItems = data.items.filter((it) => !it.video && !it.poster);
   const dark = tone === "dark";
   const hasHeader = Boolean(data.heading || data.intro);
@@ -208,7 +214,9 @@ export function VideoTestimonials({
         className={cn(dark && "bg-transparent")}
         // The bare slider runs tight (32px), matching the project slider on
         // /partnerships. With a header it keeps the usual section rhythm.
-        frameClassName={hasHeader ? "!py-12 md:!py-20" : "!py-8"}
+        frameClassName={
+          hasHeader ? "!py-12 md:!py-20" : feature ? "!py-14 md:!py-24" : "!py-8"
+        }
       >
         {/* Header: heading left, intro right (plus arrows in slider mode).
             Skipped entirely when the section has no heading or intro. */}
@@ -248,8 +256,10 @@ export function VideoTestimonials({
           ref={trackRef}
           id={trackId}
           className={cn(
-            hasHeader ? "mt-12" : trackId ? "mt-0" : "mt-6",
-            slider
+            hasHeader ? "mt-12" : trackId || feature ? "mt-0" : "mt-6",
+            feature
+              ? "grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-20"
+              : slider
               ? "flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               : quotesColumn
                 ? "grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3"
@@ -264,6 +274,7 @@ export function VideoTestimonials({
               // in their own column, after the videos.
               quotesColumn ? null : <QuoteCard key={item.name} item={item} />
             ) : (
+            <Fragment key={item.name}>
             <button
               key={item.name}
               data-card
@@ -275,6 +286,7 @@ export function VideoTestimonials({
                 "group relative flex aspect-[3/3.7] flex-col sm:aspect-[3/4.4] overflow-hidden rounded-[8px] border border-border text-left text-white",
                 slider &&
                   "w-[280px] shrink-0 snap-start sm:w-[320px] lg:w-[360px]",
+                feature && "w-full max-w-[26rem]",
 
               )}
             >
@@ -354,9 +366,12 @@ export function VideoTestimonials({
 
               {/* Bottom panel: quote, name + check, role - company */}
               <div className="relative mt-auto flex flex-col gap-4 p-5">
-                <p className="font-display text-body-lg font-medium leading-snug tracking-tight">
-                  {fullQuotes ? item.quote : firstSentence(item.quote)}
-                </p>
+                {/* In the feature layout the quote is set beside the card. */}
+                {feature ? null : (
+                  <p className="font-display text-body-lg font-medium leading-snug tracking-tight">
+                    {fullQuotes ? item.quote : firstSentence(item.quote)}
+                  </p>
+                )}
                 <div>
                   {item.context ? (
                     <p className="mb-2 font-mono text-[10px] uppercase track-label text-white/70">
@@ -373,6 +388,8 @@ export function VideoTestimonials({
                 </div>
               </div>
             </button>
+            {feature ? <FeatureQuote item={item} dark={dark} /> : null}
+            </Fragment>
             ),
           )}
           {quotesColumn && writtenItems.length ? (
@@ -491,6 +508,26 @@ export function VideoTestimonials({
  * and company), but a figure rather than a button, with no play control and
  * no lightbox, because there is nothing to play.
  */
+/** The feature layout's quote: set large beside the card, then who said it. */
+function FeatureQuote({ item, dark }: { item: VideoItem; dark: boolean }) {
+  return (
+    <figure className="m-0">
+      <blockquote className="font-display text-h3 font-medium leading-snug tracking-tight text-balance md:text-[clamp(1.5rem,2.6vw,2.25rem)]">
+        {item.quote}
+      </blockquote>
+      <figcaption className="mt-8">
+        <span className="flex items-center gap-1.5 font-display text-body-lg font-medium">
+          {item.name}
+          <VerifiedCheck className={dark ? "text-text" : "text-light-text"} />
+        </span>
+        <span className={cn("block text-body", dark ? "text-text-muted" : "text-light-muted")}>
+          {item.company ? `${item.role} - ${item.company}` : item.role}
+        </span>
+      </figcaption>
+    </figure>
+  );
+}
+
 function QuoteCard({
   item,
   className,

@@ -1,4 +1,6 @@
 import { PACKAGES } from "@/content/industries/proof";
+import { customWebsiteDevelopment } from "@/content/service-pages/custom-website-development";
+import { customWebsitesLive, customWebsitesPath } from "@/content/service-pages/status";
 
 import type { ComparisonContent } from "./types";
 import { perMonthYearly, perYear, sanity, usd, vercel, wixStudio } from "./vendors";
@@ -273,7 +275,21 @@ export const wixStudioVsNextjs: ComparisonContent = {
   },
   related: {
     heading: "Keep reading",
+    // Once the custom website development page is live it leads the row, the
+    // natural next step from this comparison, and takes the Wix Studio vs
+    // Shopify card's place so the grid stays four across.
     items: [
+      ...(customWebsitesLive
+        ? [
+            {
+              kind: "Service",
+              label: customWebsiteDevelopment.hero.name,
+              href: customWebsitesPath,
+              desc: "Next.js and Sanity, for sites a builder can't carry.",
+              icon: "code",
+            },
+          ]
+        : []),
       {
         kind: "Tool",
         label: "Website cost calculator",
@@ -281,13 +297,17 @@ export const wixStudioVsNextjs: ComparisonContent = {
         desc: "Your year-one cost on Wix Studio or custom code, build plus hosting.",
         icon: "calculator",
       },
-      {
-        kind: "Comparison",
-        label: "Wix Studio vs Shopify",
-        href: "/compare/wix-studio-vs-shopify",
-        desc: "When the store is the business, and when it sits alongside the site.",
-        icon: "cart",
-      },
+      ...(customWebsitesLive
+        ? []
+        : [
+            {
+              kind: "Comparison",
+              label: "Wix Studio vs Shopify",
+              href: "/compare/wix-studio-vs-shopify",
+              desc: "When the store is the business, and when it sits alongside the site.",
+              icon: "cart",
+            },
+          ]),
       {
         kind: "Industry",
         label: "SaaS and AI websites",

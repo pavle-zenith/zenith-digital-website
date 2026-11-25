@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
+import { pricingTerms } from "@/lib/pricingTerms";
 import { cn } from "@/lib/utils";
 import { pPricing } from "@/content/partnerships";
 
@@ -27,6 +28,7 @@ export function PartnerPricing() {
       <div className="grid gap-4 lg:grid-cols-3">
         {pPricing.tiers.map((tier, i) => {
           const featured = tier.highlighted;
+          const terms = pricingTerms(tier.priceNote);
           return (
             <div
               key={tier.name}
@@ -84,17 +86,18 @@ export function PartnerPricing() {
                     {tier.summary}
                   </p>
 
-                  <div className="mt-6 font-display text-h2 font-medium leading-[1.05] tracking-tight">
-                    {tier.price}
+                  {/* Price alone up top, a unit beside it; any payment
+                      terms lead the checklist (pricingTerms). */}
+                  <div className="mt-6 flex flex-wrap items-baseline gap-x-2">
+                    <span className="font-display text-h2 font-medium leading-[1.05] tracking-tight">
+                      {tier.price}
+                    </span>
+                    {terms.unit ? (
+                      <span className={cn("text-body", featured ? "text-white/60" : "text-light-muted")}>
+                        {terms.unit}
+                      </span>
+                    ) : null}
                   </div>
-                  <p
-                    className={cn(
-                      "mt-2 text-body",
-                      featured ? "text-white/60" : "text-light-muted",
-                    )}
-                  >
-                    {tier.priceNote}
-                  </p>
                   <Link
                     href={tier.cta.href}
                     className={cn(
@@ -118,7 +121,7 @@ export function PartnerPricing() {
                   What&apos;s included
                 </p>
                 <ul className="mt-5 flex flex-col gap-3">
-                  {tier.features.map((f) => (
+                  {[...terms.terms, ...tier.features].map((f) => (
                     <li
                       key={f}
                       className="flex items-start gap-3 text-body text-light-text"

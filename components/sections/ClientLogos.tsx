@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Section } from "@/components/ui/Section";
+import { publicImageSize } from "@/lib/imageSize";
 import { cn, servesRaw } from "@/lib/utils";
 import { clientLogos } from "@/content/case-studies";
 
@@ -59,8 +60,9 @@ function MarqueeRow({
               src={logo.src}
               unoptimized={servesRaw(logo.src)}
               alt={i < logos.length ? logo.alt : ""}
-              width={150}
-              height={34}
+              // Each mark's real size, so the `w-auto` box is right before
+              // the file arrives and the row never shifts as logos load.
+              {...(publicImageSize(logo.src) ?? { width: 150, height: 34 })}
               className="h-6 w-auto object-contain opacity-70"
               aria-hidden={i >= logos.length}
             />

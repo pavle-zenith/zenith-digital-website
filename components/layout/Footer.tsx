@@ -172,10 +172,14 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Meta bar — rule confined to the frame column like the ones above */}
+      {/* Meta bar — rule confined to the frame column like the ones above.
+          Set a step down from body (14px) so the copyright holds one line:
+          beside the legal links once the row has room for both (xl), on a
+          line of its own above them before that, and balanced when a phone
+          has to break it, so it never leaves one word behind. */}
       <div>
-        <div className="frame frame-divide flex flex-col gap-4 py-6 text-body text-light-muted md:flex-row md:items-center md:justify-between">
-          <p className="max-w-2xl">{footer.copyright}</p>
+        <div className="frame frame-divide flex flex-col gap-3 py-6 text-[0.875rem] leading-relaxed text-light-muted xl:flex-row xl:items-center xl:justify-between xl:gap-8">
+          <p className="text-balance xl:whitespace-nowrap">{footer.copyright}</p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {footer.legal.map((l) => (
               <Link

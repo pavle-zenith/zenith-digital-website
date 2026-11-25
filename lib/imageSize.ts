@@ -3,7 +3,8 @@ import path from "node:path";
 
 /**
  * Intrinsic size of an image in /public, read from its header at build time.
- * PNG, WebP and SVG (by viewBox); anything else, or a missing file, is null.
+ * PNG, WebP, AVIF and SVG (by viewBox); anything else, or a missing file, is
+ * null.
  * Server-only: it reads the file system.
  */
 export function publicImageSize(src: string): { width: number; height: number } | null {
@@ -28,6 +29,15 @@ export function publicImageSize(src: string): { width: number; height: number } 
       if (chunk === "VP8L") {
         const bits = buf.readUInt32LE(21);
         return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 };
+      }
+    }
+
+    // AVIF: the image spatial extents ('ispe') property, after its type,
+    // version and flags: width then height, 32-bit big-endian.
+    if (buf.toString("ascii", 4, 8) === "ftyp" && buf.toString("ascii", 8, 12).startsWith("avi")) {
+      const at = buf.indexOf("ispe");
+      if (at > 0 && buf.length >= at + 16) {
+        return { width: buf.readUInt32BE(at + 8), height: buf.readUInt32BE(at + 12) };
       }
     }
 

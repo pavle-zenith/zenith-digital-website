@@ -1,6 +1,9 @@
 import type { CtaLink } from "@/lib/types";
 
+import { caseStudyCards, detailSlugs, getCaseStudyDetail } from "./case-studies";
 import { whyWixItem } from "./faq";
+import { customWebsiteDevelopment as custom } from "./service-pages/custom-website-development";
+import { customWebsitesLive } from "./service-pages/status";
 
 /*
  * /services — the "what exactly do you do" page and the future hub for
@@ -133,6 +136,8 @@ export const sServices: ServiceEntry[] = [
       },
     ],
   },
+  // Custom websites, second in the build group, once its page is published.
+  ...(customWebsitesLive ? [customWebsitesEntry()] : []),
   {
     id: "website-migrations",
     pageSlug: "website-migration",
@@ -418,6 +423,48 @@ export const sServices: ServiceEntry[] = [
     ],
   },
 ];
+
+/**
+ * The /services section for custom website development (brief, 25 Nov 2026),
+ * built entirely from that page's own content and the case studies it cites,
+ * so the hub never says anything the page doesn't: the hero for the title,
+ * pitch and button; the first five things a build includes; the projects the
+ * page names, with their card metric; and its outcomes as the slides, each on
+ * its project's own hero shot. Only added once the page is published.
+ */
+function customWebsitesEntry(): ServiceEntry {
+  const card = (slug: string) => caseStudyCards.find((c) => c.slug === slug);
+  // Outcome images are the projects' card files; the slug names the project.
+  const slugOf = (image?: string) => image?.match(/^\/case-studies\/([^/]+)\//)?.[1];
+  const usps = ["code", "layers", "plug"]
+    .map((icon) => custom.included.items.find((i) => i.icon === icon))
+    .filter((i): i is NonNullable<typeof i> => Boolean(i));
+
+  return {
+    id: custom.slug,
+    pageSlug: custom.slug,
+    title: custom.hero.name,
+    when: custom.hero.subhead,
+    deliverables: custom.included.items.slice(0, 5).map((i) => i.title),
+    proof: (custom.workSlugs ?? [])
+      .map((slug) => ({ slug, card: card(slug) }))
+      .filter((p) => p.card)
+      .map(({ slug, card: c }) => ({
+        text: `${c!.metric} · ${c!.client}`,
+        ...(detailSlugs.has(slug) ? { href: `/case-studies/${slug}` } : {}),
+      })),
+    meta: custom.pricing.from ? [{ label: custom.pricing.from }] : [],
+    cta: { label: custom.hero.ctas[0].label, href: custom.hero.ctas[0].href },
+    slides: (custom.outcomes?.items ?? []).flatMap((o) => {
+      const slug = slugOf(o.image);
+      const c = slug ? card(slug) : undefined;
+      if (!slug || !c) return [];
+      const shot = getCaseStudyDetail(slug)?.heroShot;
+      return [{ title: o.title, image: shot?.src ?? o.image!, client: c.client, logo: c.logo }];
+    }),
+    usps: usps.map((i) => ({ icon: i.icon!, title: i.title, text: i.body })),
+  };
+}
 
 // 10. Proof — the shared tabular Testimonials section renders here (see
 // app/services/page.tsx); no page-specific proof content needed.

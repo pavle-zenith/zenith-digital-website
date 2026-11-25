@@ -289,10 +289,14 @@ export function Nav({
         )}
       />
 
-      {/* Services: Design & build | Grow & scale | featured case study,
-          then the quick links. */}
+      {/* Services: Design and build | Grow and scale | featured case study,
+          then the quick links. The columns keep room for one more service
+          row than the longer one holds today (owner, 25 Nov 2026), so a new
+          service page drops into the space and the panel doesn't jump:
+          25.25rem is the four rows of Grow and scale (one of them two lines)
+          plus a fifth one-line row (56px and its 4px gap). */}
       <MenuPanel open={menu === "services"}>
-        <div className={cn("grid divide-x divide-light-border", FEATURED_COLS)}>
+        <div className={cn("grid min-h-[25.25rem] divide-x divide-light-border", FEATURED_COLS)}>
           <MenuColumn label={servicesMenu.groups.build}>
             <MenuLinks items={servicesMenu.build} onNavigate={close} />
           </MenuColumn>
@@ -553,7 +557,10 @@ function MenuPanel({
       inert={!open}
       className={cn(
         "absolute inset-x-0 top-[calc(100%+1px)] hidden overflow-hidden border-b border-[var(--rule)] bg-light-bg transition-[max-height,opacity] duration-200 md:block",
-        open ? "max-h-[620px] opacity-100" : "pointer-events-none max-h-0 opacity-0",
+        // The cap only exists to animate the open; it sits well clear of the
+        // tallest panel (services at the narrowest desktop width, with its
+        // spare row filled) so nothing is ever clipped.
+        open ? "max-h-[780px] opacity-100" : "pointer-events-none max-h-0 opacity-0",
       )}
     >
       <div className="mx-auto max-w-[var(--container-site)] border-x border-light-border">

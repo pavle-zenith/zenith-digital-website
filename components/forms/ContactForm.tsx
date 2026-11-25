@@ -31,6 +31,9 @@ export function ContactForm() {
     if (state.status === "success") trackLead("contact");
   }, [state.status]);
 
+  // Refill what the visitor typed when the server sends an error back.
+  const values = state.status === "error" ? (state.values ?? {}) : {};
+
   if (state.status === "success") {
     return (
       <div
@@ -50,11 +53,18 @@ export function ContactForm() {
       className="rounded-card border border-light-border bg-light-bg p-6 sm:p-8"
     >
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field name="name" type="text" required {...bookContact.fields.name} />
+        <Field
+          name="name"
+          type="text"
+          required
+          defaultValue={values.name}
+          {...bookContact.fields.name}
+        />
         <Field
           name="email"
           type="email"
           required
+          defaultValue={values.email}
           {...bookContact.fields.email}
         />
       </div>
@@ -64,12 +74,14 @@ export function ContactForm() {
           name="phone"
           type="tel"
           inputMode="tel"
+          defaultValue={values.phone}
           {...bookContact.fields.phone}
         />
         <Field
           name="website"
           type="text"
           inputMode="url"
+          defaultValue={values.website}
           {...bookContact.fields.website}
         />
       </div>
@@ -82,10 +94,23 @@ export function ContactForm() {
           name="message"
           rows={5}
           required
+          defaultValue={values.message}
           placeholder={bookContact.fields.message.placeholder}
           className={cn(inputCls, "resize-y")}
         />
       </label>
+
+      <div className="mt-5 sm:max-w-[50%] sm:pr-2.5">
+        <Field
+          name="check"
+          type="text"
+          inputMode="numeric"
+          required
+          defaultValue={values.check}
+          label={bookContact.fields.check.label}
+          placeholder={bookContact.fields.check.placeholder}
+        />
+      </div>
 
       {/* When the form appeared, for the spam check's minimum fill time */}
       <OpenedAt />
@@ -127,13 +152,15 @@ function Field({
   placeholder,
   inputMode,
   required = false,
+  defaultValue,
 }: {
   name: string;
   type: string;
   label: string;
   placeholder: string;
-  inputMode?: "url" | "tel";
+  inputMode?: "url" | "tel" | "numeric";
   required?: boolean;
+  defaultValue?: string;
 }) {
   return (
     <label className="block">
@@ -144,6 +171,7 @@ function Field({
         required={required}
         inputMode={inputMode}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         className={inputCls}
       />
     </label>

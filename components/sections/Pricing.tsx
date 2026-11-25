@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
+import { pricingTerms } from "@/lib/pricingTerms";
 import { cn } from "@/lib/utils";
 import type { Tone } from "@/lib/types";
 import { pricing } from "@/content/home";
@@ -129,6 +130,7 @@ export function Pricing({
         <div className="grid gap-4 md:grid-cols-3">
           {pricing.tiers.map((tier, i) => {
             const featured = tier.highlighted;
+            const terms = pricingTerms(tier.priceNote, tier.timeline);
             return (
               <div
                 key={tier.name}
@@ -208,17 +210,18 @@ export function Pricing({
                       {tier.summary}
                     </p>
 
-                    <div className="mt-6 font-display text-h2 font-medium leading-none">
-                      {tier.price}
+                    {/* Price alone up top: the payment terms and delivery
+                        time lead the checklist (pricingTerms). */}
+                    <div className="mt-6 flex flex-wrap items-baseline gap-x-2">
+                      <span className="font-display text-h2 font-medium leading-none">
+                        {tier.price}
+                      </span>
+                      {terms.unit ? (
+                        <span className={cn("text-body", featured ? "text-white/60" : "text-light-muted")}>
+                          {terms.unit}
+                        </span>
+                      ) : null}
                     </div>
-                    <p
-                      className={cn(
-                        "mt-2 text-body",
-                        featured ? "text-white/60" : "text-light-muted",
-                      )}
-                    >
-                      {tier.priceNote} · {tier.timeline}
-                    </p>
 
                     <Link
                       href={tier.cta.href}
@@ -243,7 +246,7 @@ export function Pricing({
                     {tier.featuresLabel}
                   </p>
                   <ul className="mt-5 flex flex-col gap-3">
-                    {tier.features.map((f) => (
+                    {[...terms.terms, ...tier.features].map((f) => (
                       <li
                         key={f}
                         className="flex items-start gap-3 text-body text-light-text"

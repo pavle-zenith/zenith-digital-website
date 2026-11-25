@@ -1039,6 +1039,8 @@ export const footer = {
     {
       heading: "Resources",
       links: [
+        // Rendered only once the /resources hub has a route (Footer.tsx).
+        { label: "All resources", href: "/resources", requiresResources: true },
         { label: "Blog", href: "/blog" },
         // Rendered only once the /compare hub has a route (Footer.tsx).
         { label: "Compare platforms", href: "/compare", requiresCompare: true },
@@ -1326,6 +1328,11 @@ export const resourcesMenu = {
   },
   // Shown under Learn once the calculator has a route (content/tools/status.ts).
   calculator: { label: "Website cost calculator", href: COST_CALCULATOR_PATH, icon: "calculator" },
+  // Once the /resources hub has a route (resources hub brief, 23 Nov 2026):
+  // "All resources" leads Learn, and "Migration guides" opens the hub's
+  // moving filter instead of the migration service page.
+  resourcesHub: { label: "All resources", href: "/resources", icon: "layers" },
+  movingHref: "/resources?topic=moving",
   featured: { label: "Latest article", cta: "Read the article" },
   viewAll: { label: "All articles", href: "/blog", icon: "pen" },
   quickLinks: [

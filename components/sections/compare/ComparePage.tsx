@@ -8,6 +8,7 @@ import { ProjectSlider } from "@/components/sections/industry/ProjectSlider";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ShortAnswer } from "@/components/sections/ShortAnswer";
+import { RelatedCards } from "@/components/sections/RelatedCards";
 import { QuestionDeck } from "@/components/sections/compare/QuestionDeck";
 import { CompareGrid, criterionIcon } from "@/components/sections/compare/CompareGrid";
 import { DetailToggle } from "@/components/sections/compare/DetailToggle";
@@ -52,7 +53,7 @@ export function ComparePage({ data }: { data: ComparisonContent }) {
       <CostTable data={data} />
       <Proof data={data} />
       <Faq data={{ ...data.faq, ctas: [] }} />
-      <Related data={data} />
+      <RelatedCards heading={data.related.heading} items={data.related.items} />
       <Sources data={data} />
       <CtaBanner
         data={{
@@ -439,43 +440,6 @@ function Proof({ data }: { data: ComparisonContent }) {
 }
 
 /* ------------------------------------------------------------------ */
-
-/** Further reading: the migration guide, posts and industry pages. */
-function Related({ data }: { data: ComparisonContent }) {
-  return (
-    <Section tone="light" frameClassName="!py-10 md:!py-16">
-      <h2 className="max-w-3xl font-display text-h2 font-medium leading-tight tracking-tight text-balance">
-        {data.related.heading}
-      </h2>
-      {/* A compact strip (brief, 20 Nov 2026): four across from lg, two from
-          sm; phones get the name and kind only, as a list. */}
-      <div className="type-card mt-8 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border sm:grid-cols-2 md:mt-10 lg:grid-cols-4">
-        {data.related.items.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="group flex items-center gap-4 bg-light-bg p-4 transition hover:bg-light-surface sm:flex-col sm:items-start sm:gap-0 sm:p-6"
-          >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
-              <FeatureIcon name={item.icon} />
-            </span>
-            <span className="min-w-0 sm:mt-5">
-              <span className="block font-mono text-label uppercase track-label text-light-muted">
-                {item.kind}
-              </span>
-              <span className="mt-1 block font-display text-body-lg font-medium leading-snug tracking-tight">
-                {item.label}{" "}
-                <span className="btn-arrow whitespace-nowrap" aria-hidden>
-                  &rarr;
-                </span>
-              </span>
-            </span>
-          </Link>
-        ))}
-      </div>
-    </Section>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 

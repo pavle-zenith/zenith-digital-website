@@ -3,6 +3,9 @@ import Link from "next/link";
 
 import { Section } from "@/components/ui/Section";
 import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
+import { FeatureIcon } from "@/components/ui/FeatureIcon";
+import { resourcesHub } from "@/content/resources/hub";
+import { resourceCardsFor } from "@/lib/resources-index";
 import type { ServicePageContent } from "@/content/service-pages";
 
 /**
@@ -17,6 +20,10 @@ import type { ServicePageContent } from "@/content/service-pages";
 export function ServicePageRelated({ data }: { data: ServicePageContent }) {
   const siblings = data.related.items.filter((i) => i.href !== "/services");
   const hub = data.related.items.find((i) => i.href === "/services");
+  // Published free resources on this service's topic (the migration
+  // checklist on /services/website-migration), as full-width text cards.
+  const topic = resourcesHub.serviceTopics[data.slug];
+  const resources = topic ? resourceCardsFor(topic) : [];
 
   return (
     // No bottom padding: the "All services" strip is the last thing in here and
@@ -79,6 +86,30 @@ export function ServicePageRelated({ data }: { data: ServicePageContent }) {
             </Link>
           ))}
         </div>
+      ) : null}
+
+      {resources.length ? (
+        <ul className="type-card mt-5 grid gap-px overflow-hidden rounded-card border border-light-border bg-light-border">
+          {resources.map((r) => (
+            <li key={r.href}>
+              <Link href={r.href} className="group flex items-center gap-4 bg-light-bg p-6 transition hover:bg-light-surface">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] border border-light-border bg-light-bg text-light-text">
+                  <FeatureIcon name={r.icon} />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-mono text-label uppercase track-label text-light-muted">{r.kind}</span>
+                  <span className="mt-1 block font-display text-body-lg font-medium leading-snug transition group-hover:text-accent">
+                    {r.label}
+                  </span>
+                  <span className="mt-1 block text-body leading-snug text-light-muted">{r.desc}</span>
+                </span>
+                <span aria-hidden className="btn-arrow text-h3">
+                  &rarr;
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       ) : null}
 
       {/* Full-width strip CTA closing the section, on the inverted studio

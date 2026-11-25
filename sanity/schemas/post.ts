@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { resourceTopics } from "@/content/resources/topics";
 import { blogCategoryOptions } from "./objects";
 
 /**
@@ -80,6 +81,19 @@ export const post = defineType({
       initialValue: false,
       description:
         "One featured post leads the index. If several are ticked, the most recent wins.",
+    }),
+    defineField({
+      name: "resourceTopics",
+      title: "Resource topics",
+      type: "array",
+      group: "meta",
+      of: [{ type: "string" }],
+      options: {
+        list: resourceTopics.map((t) => ({ title: t.label, value: t.key })),
+        layout: "grid",
+      },
+      description:
+        "Optional. Where this post shows on the /resources hub. Untagged posts still show under All and Articles, just not under a topic.",
     }),
 
     defineField({

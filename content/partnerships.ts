@@ -36,6 +36,11 @@ export const commercials = {
   buildSla: "Landing page in 1 week, 5-page build in 2 weeks",
   referralCommission: "10%",
   referralPayout: "when the client pays",
+  // Owner, 25 Nov 2026 (referral partner emails): the step-up applies to
+  // every project referred for the rest of that calendar year; commission is
+  // on the first contract only, excluding VAT; attribution lasts 6 months.
+  referralStepUp: "15% on every project you refer for the rest of the calendar year once you've closed two",
+  referralAttribution: "6 months",
   wholesaleStructure:
     "Wholesale partner rates with the full rate card shared on application",
   postHandover:
@@ -575,7 +580,7 @@ export const pFaq = {
     },
     {
       q: "What platforms do you build on?",
-      a: "Wix Studio is our primary platform, with fully custom builds (like this site) when a project needs it. If your client is on something else, ask us about migration.",
+      a: "Wix Studio, Shopify and custom code (Next.js with Sanity, like this site), at the same prices. If your client is on something else, ask us about migration.",
     },
     {
       q: "How is partner pricing structured?",
@@ -591,7 +596,19 @@ export const pFaq = {
     },
     {
       q: "How do referral commissions work?",
-      a: `You introduce, we close and deliver, you get ${commercials.referralCommission} when the client pays. You can see deal status at any point. No cap on introductions.`,
+      a: `You introduce, we quote, close and deliver, and you get ${commercials.referralCommission} of the project value ${commercials.referralPayout}, rising to ${commercials.referralStepUp}. You can see deal status at any point. No cap on introductions.`,
+    },
+    {
+      q: "Which projects earn a referral commission?",
+      a: "Any project a business you introduced signs: a landing page, a website, a store or a migration, including projects quoted between our packages. Commission is on the value of that first contract, excluding VAT. If the same client comes back later for something new, such as an email setup two months on, that's a separate project and isn't included.",
+    },
+    {
+      q: "How do I register a referral?",
+      a: `Email us the company name, the contact person and what they need, before we get in touch with them. We confirm in writing that the introduction is yours, and it stays attributed to you for ${commercials.referralAttribution} for that first project. Everything can be handled by email; a call is optional.`,
+    },
+    {
+      q: "Can I be a referral partner as an individual, or from outside Serbia?",
+      a: "Yes. We work with referral partners in the UK, the EU and the US, as individuals or companies. Commission is paid by bank transfer, PayPal or Revolut, and you handle the tax on it in your own country.",
     },
     {
       q: "Can I be both a referral and white-label partner?",

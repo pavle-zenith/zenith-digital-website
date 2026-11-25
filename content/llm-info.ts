@@ -9,6 +9,7 @@ import { migrationGuides } from "@/content/migration-guides";
 import { PRICING_UPDATED, pricePackages, pricingPage } from "@/content/pricing";
 import { servicePages } from "@/content/service-pages";
 import { COST_CALCULATOR_PATH, costCalculatorLive } from "@/content/tools/status";
+import { publishedResources, resourcesHubLive } from "@/content/resources";
 import { organizationSchema } from "@/lib/schema";
 
 /**
@@ -141,6 +142,9 @@ export const llmInfo = {
       ...(hubLive ? [{ label: "Industry pages", href: "/industries" }] : []),
       ...(compareHubLive ? [{ label: "Platform comparisons", href: "/compare" }] : []),
       ...(costCalculatorLive ? [{ label: "Website cost calculator", href: COST_CALCULATOR_PATH }] : []),
+      // The free resources hub and each published resource, once live.
+      ...(resourcesHubLive ? [{ label: "Free resources", href: "/resources" }] : []),
+      ...publishedResources.map((r) => ({ label: r.card.title, href: `/resources/${r.slug}` })),
       { label: "White-label and partnerships", href: "/partnerships" },
     ],
   },

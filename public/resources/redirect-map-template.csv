@@ -1,0 +1,5 @@
+Old URL,New URL,Page type,Clicks (last 12 months),Decision,Status,Notes
+/about-us,/about,Page,,Keep,To do,Example row: delete before use
+/blog/old-post-title,/blog/new-post-title,Blog post,,Keep,To do,
+/services/old-service,/services/merged-service,Page,,Merge,To do,Merged into the services page
+/old-promo-2023,,Page,,Remove (404),To do,Removed on purpose: no redirect

@@ -7,6 +7,7 @@ import { footer } from "@/content/home";
 import { hubRoutable } from "@/content/industries";
 import { compareHubRoutable } from "@/content/comparisons";
 import { costCalculatorRoutable } from "@/content/tools/status";
+import { resourcesHubRoutable } from "@/lib/resources-index";
 import { servesRaw } from "@/lib/utils";
 
 /**
@@ -81,7 +82,8 @@ export function Footer() {
                         (link) =>
                           (!("requiresHub" in link) || hubRoutable) &&
                           (!("requiresCompare" in link) || compareHubRoutable) &&
-                          (!("requiresCalculator" in link) || costCalculatorRoutable),
+                          (!("requiresCalculator" in link) || costCalculatorRoutable) &&
+                          (!("requiresResources" in link) || resourcesHubRoutable),
                       )
                       .map((link) => (
                       <li key={link.href}>

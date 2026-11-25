@@ -334,6 +334,14 @@ export const costCalculatorPage = {
     ],
   },
   finalCta: pricingPage.finalCta,
+  /**
+   * Related cards, shown once the /resources hub has a route (resources hub
+   * brief, 23 Nov 2026): the hub, then any published planning resources.
+   */
+  related: {
+    heading: "Keep planning",
+    hub: { kind: "Free resources", label: "Guides, tools and checklists", href: "/resources", icon: "layers" },
+  },
   sources: {
     summary: "How we estimate and where the numbers come from",
     ours: { label: "Our prices", text: "The tiers and services on our pricing page.", link: { label: "Pricing", href: "/pricing" } },

@@ -133,9 +133,15 @@ export function Nav({
   }, [open]);
 
   const [audit, quote] = nav.ctas;
-  // Resources > Learn, with the cost calculator once it has a route.
+  // Resources > Learn: "All resources" first once the /resources hub has a
+  // route (with "Migration guides" opening its moving filter), then the
+  // cost calculator once it has one.
+  const hub = resources?.hub ?? null;
   const learnItems: MenuItem[] = [
-    ...resourcesMenu.learn.items,
+    ...(hub ? [hub.item] : []),
+    ...resourcesMenu.learn.items.map((it) =>
+      hub && it.href === "/services/website-migration" ? { ...it, href: hub.movingHref } : it,
+    ),
     ...(resources?.calculator ? [resources.calculator] : []),
   ];
   // Resources > Compare platforms: every comparison by name, then the hub

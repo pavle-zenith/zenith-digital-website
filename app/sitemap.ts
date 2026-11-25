@@ -6,6 +6,7 @@ import { hubLive, industryPages } from "@/content/industries";
 import { compareHubLive, publishedComparisons } from "@/content/comparisons";
 import { liveComparisonRedirects } from "@/content/comparisons/status";
 import { COST_CALCULATOR_PATH, costCalculatorLive } from "@/content/tools/status";
+import { publishedResources, resourcesHubLive } from "@/content/resources";
 import { servicePages } from "@/content/service-pages";
 import { sanityFetchSafe } from "@/sanity/lib/client";
 import { postSlugsQuery } from "@/sanity/lib/queries";
@@ -110,6 +111,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
+    // The /resources hub once it's live, and every published free resource
+    // (content/resources). Never the preview-only set.
+    ...(resourcesHubLive
+      ? [{ url: `${SITE}/resources`, changeFrequency: "weekly" as const, priority: 0.7 }]
+      : []),
+    ...publishedResources.map((r) => ({
+      url: `${SITE}/resources/${r.slug}`,
+      lastModified: new Date(r.updated),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     // The cost calculator, only once published (content/tools/status.ts).
     ...(costCalculatorLive
       ? [{ url: `${SITE}${COST_CALCULATOR_PATH}`, changeFrequency: "monthly" as const, priority: 0.7 }]

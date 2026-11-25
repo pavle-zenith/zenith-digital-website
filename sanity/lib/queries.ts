@@ -101,6 +101,22 @@ export const postsBySlugQuery = groq`
   }
 `;
 
+/**
+ * Every live post as a /resources hub card: title, excerpt, date and the
+ * optional resource topics. Fetched with POST_TAG, so a new post refreshes
+ * the hub through the existing publish webhook.
+ */
+export const resourcePostsQuery = groq`
+  *[_type == "post" && defined(slug.current) && ${live}]
+    | order(publishedAt desc) {
+      title,
+      "slug": slug.current,
+      excerpt,
+      publishedAt,
+      resourceTopics
+    }
+`;
+
 /** Slugs for generateStaticParams, and dates for the sitemap. */
 export const postSlugsQuery = groq`
   *[_type == "post" && defined(slug.current) && ${live}]

@@ -2,6 +2,8 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { COST_CALCULATOR_PATH, costCalculatorLive } from "@/content/tools/status";
+import { publishedResources, resourcesHubLive } from "@/content/resources";
+import { resourcesHub } from "@/content/resources/hub";
 import { SITE } from "@/lib/schema";
 
 /**
@@ -21,8 +23,31 @@ const gated = [
   },
 ];
 
+/**
+ * The Resources section (resources hub brief, 23 Nov 2026): the hub once it's
+ * live and every published free resource, before "## Proof". Nothing here
+ * while neither is live.
+ */
+function resourceLines(): string[] {
+  const items = [
+    ...(resourcesHubLive
+      ? [`- [Resources](${SITE}${resourcesHub.path}): ${resourcesHub.seo.description}`]
+      : []),
+    ...publishedResources.map(
+      (r) => `${resourcesHubLive ? "  " : ""}- [${r.card.title}](${SITE}/resources/${r.slug}): ${r.card.description}`,
+    ),
+  ];
+  return items.length ? ["## Resources", "", ...items, ""] : [];
+}
+
 export function GET() {
   let lines = readFileSync(join(process.cwd(), "content/llms.txt"), "utf8").split("\n");
+  const extra = resourceLines();
+  if (extra.length) {
+    const proof = lines.findIndex((l) => /^## Proof/.test(l));
+    if (proof === -1) throw new Error("llms.txt: no '## Proof' heading to place Resources before");
+    lines = [...lines.slice(0, proof), ...extra, ...lines.slice(proof)];
+  }
   for (const g of gated) {
     if (!g.live) continue;
     const i = lines.findIndex((l) => g.after.test(l));

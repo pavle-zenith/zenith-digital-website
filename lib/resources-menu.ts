@@ -2,6 +2,7 @@ import { blogCover } from "@/content/blog-covers";
 import { compareMenu, type CompareMenu } from "@/content/comparisons";
 import { resourcesMenu } from "@/content/home";
 import { costCalculatorRoutable } from "@/content/tools/status";
+import { resourcesHubRoutable } from "@/lib/resources-index";
 import { POST_TAG, sanityClient } from "@/sanity/lib/client";
 import { latestPostQuery } from "@/sanity/lib/queries";
 
@@ -10,6 +11,11 @@ export type ResourcesMenu = {
   compare: CompareMenu | null;
   /** Learn's "Website cost calculator" row; null until the page has a route. */
   calculator: { label: string; href: string; icon: string } | null;
+  /**
+   * Learn's "All resources" row and where "Migration guides" points; null
+   * until the /resources hub has a route.
+   */
+  hub: { item: { label: string; href: string; icon: string }; movingHref: string } | null;
   /** The newest live post; null if there isn't one or Sanity is unreachable. */
   featured: {
     label: string;
@@ -60,6 +66,7 @@ export async function getResourcesMenu(): Promise<ResourcesMenu> {
   return {
     compare: compareMenu(),
     calculator: costCalculatorRoutable ? resourcesMenu.calculator : null,
+    hub: resourcesHubRoutable ? { item: resourcesMenu.resourcesHub, movingHref: resourcesMenu.movingHref } : null,
     featured: post
       ? {
           label: resourcesMenu.featured.label,

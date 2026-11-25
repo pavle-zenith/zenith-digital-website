@@ -221,6 +221,30 @@ body {
   }
 }
 
+/*
+ * Free checklists print (/resources/[slug], "Print this checklist"). On a page
+ * that carries `.print-checklist`: no nav, no announcement, no footer, no
+ * CTAs (anything marked `print:hidden`), and every checkbox prints as an
+ * empty square, ticked or not, so the paper copy starts fresh. FAQ answers
+ * print open, as on the private documents.
+ */
+@media print {
+  body:has(.print-checklist) header,
+  body:has(.print-checklist) footer,
+  body:has(.print-checklist) #announcement,
+  body:has(.print-checklist) [role="dialog"] {
+    display: none !important;
+  }
+  .print-checklist .print-box {
+    background: transparent !important;
+    border-color: #0a1020 !important;
+    color: transparent !important;
+  }
+  .print-checklist button[aria-expanded="false"] + div {
+    grid-template-rows: 1fr !important;
+  }
+}
+
 /* Respect reduced motion (§7, §14) */
 @media (prefers-reduced-motion: reduce) {
   *,

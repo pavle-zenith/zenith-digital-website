@@ -9,6 +9,7 @@ import { VerifiedCheck } from "@/components/ui/VerifiedCheck";
 import { FitTable } from "@/components/ui/FitTable";
 import { DriverTabs } from "@/components/sections/tools/DriverTabs";
 import { StepTabs } from "./StepTabs";
+import { resourceCardsFor } from "@/lib/resources-index";
 import { DetailToggle } from "@/components/sections/compare/DetailToggle";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
@@ -872,7 +873,18 @@ function GuideSteps({ data }: { data: MigrationGuideContent }) {
 
 /** Back to the hub, plus the sibling guides. The hub card leads. */
 function GuideRelated({ data }: { data: MigrationGuideContent }) {
-  const { related } = data;
+  // The guide's own cards, then every published free resource on moving a
+  // site (the migration checklist), appended rather than typed into each
+  // guide, so a new resource reaches all eight by being published.
+  const related = {
+    ...data.related,
+    items: [
+      ...data.related.items,
+      ...resourceCardsFor("moving").map(
+        (r): MigrationGuideContent["related"]["items"][number] => ({ label: r.label, href: r.href, desc: r.desc, icon: r.icon }),
+      ),
+    ],
+  };
 
   return (
     <Section tone="light" frameClassName="!py-14 md:!py-24">
@@ -928,6 +940,8 @@ function GuideRelated({ data }: { data: MigrationGuideContent }) {
             </h3>
           </Link>
         ))}
+        {/* Odd count: fill the last cell so the grid stays rectangular. */}
+        {related.items.length % 2 === 1 ? <div aria-hidden className="hidden bg-light-bg md:block" /> : null}
       </div>
     </Section>
   );

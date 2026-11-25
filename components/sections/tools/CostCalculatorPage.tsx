@@ -7,6 +7,8 @@ import { Faq } from "@/components/sections/Faq";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { HeroTexture } from "@/components/sections/compare/ComparePage";
 import { ShortAnswer } from "@/components/sections/ShortAnswer";
+import { RelatedCards } from "@/components/sections/RelatedCards";
+import { resourceCardsFor, resourcesHubRoutable } from "@/lib/resources-index";
 import { DriverTabs } from "@/components/sections/tools/DriverTabs";
 import {
   CostCalculator,
@@ -73,6 +75,9 @@ export function CostCalculatorPage() {
         <CostMobileBar />
       </CostProvider>
       <Drivers />
+      {resourcesHubRoutable ? (
+        <RelatedCards heading={c.related.heading} items={[c.related.hub, ...resourceCardsFor("planning")]} />
+      ) : null}
       <Faq data={{ heading: c.faq.heading, subhead: c.faq.subhead, items: c.faq.items, ctas: [] }} />
       <CtaBanner data={c.finalCta} />
       <HowWeEstimate />

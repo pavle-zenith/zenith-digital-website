@@ -157,7 +157,7 @@ export const fCategories: FaqCategory[] = [
       },
       {
         q: "How do referrals work?",
-        a: `Introduce us to a business that needs a site. If it closes, you earn ${commercials.referralCommission} when the client pays, 15% once you've closed two in a year. You stay out of delivery entirely.`,
+        a: `Introduce us to a business that needs a site. If it closes, you earn ${commercials.referralCommission} of the first project's value, excluding VAT, ${commercials.referralPayout}, and ${commercials.referralStepUp}. Landing pages, websites, stores and migrations all count. You stay out of delivery entirely.`,
       },
       {
         q: "Can I be both?",

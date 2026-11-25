@@ -1,27 +1,45 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Section } from "@/components/ui/Section";
-import { pProjects } from "@/content/partnerships";
+import { projectShots } from "@/content/project-shots";
+
+type Shot = { name: string; image: string };
 
 /**
  * Completed-work track under the service hero. The header row is the hero's
  * proof stats in the case-study meta-strip register (hairline-divided,
  * stacking to a labelled column on phones) with the slider arrows on their
  * right; below, a full-bleed divider and the 4:3 shots bleeding to the frame
- * rails. Items come from pProjects, the single source for this set; only the
- * stats are page-supplied.
+ * rails. Only the stats are page-supplied; the shots are every new case-study
+ * thumbnail plus the original slider set (content/project-shots.ts).
+ *
+ * MIXED ORDER (owner, 25 Nov 2026: "always mix their order"). The server
+ * HTML holds an order shuffled from the page's slug, so every service page
+ * starts on different work, without JS too. After hydration the order is
+ * reshuffled at random, so each visit differs. The cards are keyed by
+ * position and stay where they are; only the shot inside each one changes,
+ * so the mix never moves anything on the page (no layout shift).
  */
 export function ProjectsSlider({
   stats,
-  items = pProjects.items,
+  items = projectShots,
+  seed = "",
 }: {
   stats: string[];
-  items?: { name: string; image: string }[];
+  items?: Shot[];
+  /** Seeds the server-rendered order: the page's slug. */
+  seed?: string;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [order, setOrder] = useState(() => shuffle(items, seeded(seed)));
+
+  // A fresh mix on every visit, once on the client.
+  useEffect(() => {
+    setOrder(shuffle(items, Math.random));
+  }, [items]);
 
   const scrollByCard = (dir: 1 | -1) => {
     const track = trackRef.current;
@@ -90,9 +108,11 @@ export function ProjectsSlider({
         tabIndex={0}
         className="frame-bleed mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {items.map((it) => (
+        {order.map((it, i) => (
           <div
-            key={it.name}
+            // By position, not name: the card stays put and only its shot
+            // changes when the order is mixed.
+            key={i}
             data-card
             className="w-[320px] shrink-0 snap-start sm:w-[420px] lg:w-[520px]"
           >
@@ -112,4 +132,29 @@ export function ProjectsSlider({
       </div>
     </Section>
   );
+}
+
+/** Fisher-Yates over a copy, drawing from `random`. */
+function shuffle(items: Shot[], random: () => number): Shot[] {
+  const out = [...items];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/** A repeatable random sequence from a string (FNV-1a hash into mulberry32). */
+function seeded(seed: string): () => number {
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return () => {
+    h = (h + 0x6d2b79f5) | 0;
+    let t = Math.imul(h ^ (h >>> 15), 1 | h);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }

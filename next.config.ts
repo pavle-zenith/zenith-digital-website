@@ -110,6 +110,14 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
         ],
       },
+      // Its Serbian counterpart, /izrada-sajtova: same four layers, one
+      // exact path, no assets of its own.
+      {
+        source: "/izrada-sajtova",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
       // The project request form, sent by hand to warm leads: same four
       // layers, one exact path, no assets of its own.
       {

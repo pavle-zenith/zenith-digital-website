@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { cn, servesRaw } from "@/lib/utils";
-import { partnerShowcaseUi as ui } from "@/content/partner-showcase";
+import { partnerShowcaseUi } from "@/content/partner-showcase";
+import { showcaseSrClientLabels, type ShowcaseLang } from "@/content/partner-showcase-sr-labels";
 import type { ShowcaseSlide } from "@/content/partner-showcase";
 
 /** A slide plus where its crop is anchored, worked out on the server. */
@@ -39,12 +40,16 @@ export function ServiceSlides({
   service,
   slides,
   priority = false,
+  lang = "en",
 }: {
   service: string;
   slides: SlideView[];
   /** Above the fold on load: fetch the first image eagerly. */
   priority?: boolean;
+  /** The page's language: the Serbian page (/izrada-sajtova) passes "sr". */
+  lang?: ShowcaseLang;
 }) {
+  const ui = lang === "sr" ? showcaseSrClientLabels : partnerShowcaseUi;
   const trackRef = useRef<HTMLDivElement>(null);
   const trackId = useId();
   const [index, setIndex] = useState(0);
@@ -85,7 +90,7 @@ export function ServiceSlides({
               <Image
                 src={slide.image}
                 unoptimized={servesRaw(slide.image)}
-                alt={`${slide.client} website`}
+                alt={lang === "sr" ? showcaseSrClientLabels.siteAlt(slide.client) : `${slide.client} website`}
                 fill
                 sizes="(min-width: 1440px) 640px, (min-width: 1024px) 46vw, 100vw"
                 priority={priority && i === 0}

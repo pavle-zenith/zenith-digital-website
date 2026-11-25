@@ -6,7 +6,8 @@ import { useState } from "react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { cn, servesRaw } from "@/lib/utils";
-import { partnerShowcaseUi as ui } from "@/content/partner-showcase";
+import { partnerShowcaseUi } from "@/content/partner-showcase";
+import { showcaseSrClientLabels, type ShowcaseLang } from "@/content/partner-showcase-sr-labels";
 
 export type ReelItem = { client: string; image: string };
 
@@ -34,12 +35,18 @@ export function ShowcaseWork({
   intro,
   stats,
   rows,
+  lang = "en",
 }: {
   heading: string;
   intro: string;
   stats: string[];
   rows: [ReelItem[], ReelItem[]];
+  /** The page's language: the Serbian page (/izrada-sajtova) passes "sr". */
+  lang?: ShowcaseLang;
 }) {
+  const ui = lang === "sr" ? showcaseSrClientLabels : partnerShowcaseUi;
+  const siteAlt = (client: string) =>
+    lang === "sr" ? showcaseSrClientLabels.siteAlt(client) : `${client} website`;
   const [paused, setPaused] = useState(false);
 
   return (
@@ -121,7 +128,7 @@ export function ShowcaseWork({
                   <Image
                     src={item.image}
                     unoptimized={servesRaw(item.image)}
-                    alt={copy ? "" : `${item.client} website`}
+                    alt={copy ? "" : siteAlt(item.client)}
                     fill
                     sizes="(min-width: 1024px) 400px, (min-width: 640px) 320px, 240px"
                     className="object-cover"

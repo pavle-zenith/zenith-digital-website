@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
-import { partnerShowcaseUi as ui } from "@/content/partner-showcase";
+import { partnerShowcaseUi } from "@/content/partner-showcase";
 import type { PartnerShowcase } from "@/content/partner-showcase";
 
 /**
@@ -19,7 +19,14 @@ import type { PartnerShowcase } from "@/content/partner-showcase";
  * Top padding clears the page's own header, which is laid over this section.
  * #showcase-hero: the jump bar stays hidden until it has scrolled away.
  */
-export function ShowcaseHero({ hero }: { hero: PartnerShowcase["hero"] }) {
+export function ShowcaseHero({
+  hero,
+  ui = partnerShowcaseUi,
+}: {
+  hero: PartnerShowcase["hero"];
+  /** The page's labels (the badges); the Serbian page passes its own. */
+  ui?: Pick<typeof partnerShowcaseUi, "badges">;
+}) {
   return (
     <div id="showcase-hero">
       <Section

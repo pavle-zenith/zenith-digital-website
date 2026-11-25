@@ -145,7 +145,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       <ServicePageHero data={page} />
       {/* Completed work directly under the hero — the hero's proof stats head
           the strip, slider arrows on their right. */}
-      <ProjectsSlider stats={page.hero.chips} />
+      <ProjectsSlider stats={page.hero.chips} seed={page.slug} />
       <ServicePageWhoFor data={page} />
       <ClientLogos />
       {/* The arc: where you are, proof it works, what changes, what we do,

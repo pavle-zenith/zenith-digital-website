@@ -9,12 +9,17 @@ import { partnerShowcaseUi } from "@/content/partner-showcase";
  * not sticky: the jump bar takes the top of the screen once the hero is gone,
  * and it only counts a header that stays pinned.
  */
-export function ShowcaseHeader() {
+export function ShowcaseHeader({
+  ui = partnerShowcaseUi,
+}: {
+  /** The Serbian page (/izrada-sajtova) passes its own. */
+  ui?: Pick<typeof partnerShowcaseUi, "wordmark">;
+} = {}) {
   return (
     <header className="tone-light absolute inset-x-0 top-0 z-10 text-light-text">
       <div className="mx-auto flex h-16 max-w-(--container-site) items-center border-b border-light-border px-[clamp(20px,4vw,64px)]">
         <span className="font-display text-body-lg font-medium lowercase tracking-tight">
-          {partnerShowcaseUi.wordmark}
+          {ui.wordmark}
         </span>
       </div>
     </header>
@@ -22,11 +27,15 @@ export function ShowcaseHeader() {
 }
 
 /** One line under the frame: no link columns, no contact details. */
-export function ShowcaseFooter() {
+export function ShowcaseFooter({
+  ui = partnerShowcaseUi,
+}: {
+  ui?: Pick<typeof partnerShowcaseUi, "footer">;
+} = {}) {
   return (
     <footer className="tone-light bg-light-bg text-light-text">
       <div className="frame frame-divide py-8">
-        <p className="text-label text-light-muted">{partnerShowcaseUi.footer}</p>
+        <p className="text-label text-light-muted">{ui.footer}</p>
       </div>
     </footer>
   );

@@ -5,7 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { pricingTerms } from "@/lib/pricingTerms";
 import { cn } from "@/lib/utils";
 import type { Tone } from "@/lib/types";
-import { pricing } from "@/content/home";
+import { pricing as homePricing } from "@/content/home";
 import { costCalculatorRoutable } from "@/content/tools/status";
 
 /**
@@ -16,10 +16,23 @@ import { costCalculatorRoutable } from "@/content/tools/status";
  * white for the entry tier, navy + texture for the featured tier, grey surface
  * for the retainer tier. Nothing is transparent over the section texture.
  */
+/**
+ * The section's content. The homepage's by default; a page in another
+ * language (the Serbian services page) passes its own, and may leave out the
+ * links to English pages (`seeAll`, `estimate`) and the white-label band.
+ */
+type PricingData = Omit<typeof homePricing, "seeAll" | "estimate" | "whiteLabel"> &
+  Partial<Pick<typeof homePricing, "seeAll" | "estimate" | "whiteLabel">>;
+
 export function Pricing({
+  data: pricing = homePricing,
   showWhiteLabel = true,
   tone = "dark",
+  className,
 }: {
+  data?: PricingData;
+  /** On the section: the Serbian page adds `doc-anchor` for its jump bar. */
+  className?: string;
   /**
    * The agency white-label band. On by default (homepage, /services); the
    * migration guides switch it off, because a reader part-way through choosing
@@ -35,12 +48,14 @@ export function Pricing({
   tone?: Tone;
 } = {}) {
   const dark = tone === "dark";
+  const whiteLabel = showWhiteLabel ? pricing.whiteLabel : undefined;
 
   return (
     <Section
       tone={tone}
       frameClassName="relative !pt-0 !pb-14 md:!pb-24"
       id="pricing"
+      className={className}
     >
       {/* Texture confined to the frame column, not the viewport, the same
           treatment the page heroes use: the ground stops at the side rails
@@ -88,7 +103,10 @@ export function Pricing({
             {/* Every price on one page (pricing brief, 20 Nov 2026), and the
                 cost calculator beside it once it has a route. */}
             <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-              {[pricing.seeAll, ...(costCalculatorRoutable ? [pricing.estimate] : [])].map((link) => (
+              {[
+                ...(pricing.seeAll ? [pricing.seeAll] : []),
+                ...(costCalculatorRoutable && pricing.estimate ? [pricing.estimate] : []),
+              ].map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -173,7 +191,7 @@ export function Pricing({
                       className="pointer-events-none object-cover opacity-[0.28]"
                       aria-hidden
                     />
-                  ) : i > 1 ? (
+                  ) : i > 1 && tier.icon === "mountain" ? (
                     <Image
                       src="/textures/zenith-texture.jpg"
                       alt=""
@@ -266,7 +284,7 @@ export function Pricing({
               The studio texture is CSS-inverted (mainly light, dark streak
               shading); the tint gradient keeps the copy on the left readable
               while the shading opens up on the right. */}
-        {showWhiteLabel ? (
+        {whiteLabel ? (
           <div className="type-card tone-light relative mt-4 overflow-hidden rounded-[8px] bg-light-bg text-light-text">
             <Image
               src="/textures/studio-texture.jpg"
@@ -287,27 +305,27 @@ export function Pricing({
             <div className="relative flex min-h-[300px] flex-col justify-end gap-10 px-8 py-10 md:min-h-[380px] md:flex-row md:items-end md:justify-between md:px-12 md:py-12">
               <div className="max-w-3xl">
                 <h3 className="font-display text-h3 font-medium leading-tight tracking-tight text-balance md:text-[1.75rem]">
-                  {pricing.whiteLabel.heading}
+                  {whiteLabel.heading}
                 </h3>
                 <p className="mt-4 max-w-2xl text-body-lg font-medium text-light-muted">
-                  {pricing.whiteLabel.paragraph}
+                  {whiteLabel.paragraph}
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href={pricing.whiteLabel.ctas[0].href}
+                  href={whiteLabel.ctas[0].href}
                   className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] btn-animated px-6 py-3 sm:w-auto text-body font-medium text-accent-ink"
                 >
-                  {pricing.whiteLabel.ctas[0].label}{" "}
+                  {whiteLabel.ctas[0].label}{" "}
                   <span aria-hidden className="btn-arrow">
                     &rarr;
                   </span>
                 </Link>
                 <Link
-                  href={pricing.whiteLabel.ctas[1].href}
+                  href={whiteLabel.ctas[1].href}
                   className="group inline-flex w-full items-center justify-center gap-2 rounded-[6px] border border-light-border bg-white px-6 py-3 sm:w-auto text-body font-medium text-light-text transition hover:bg-light-surface"
                 >
-                  {pricing.whiteLabel.ctas[1].label}{" "}
+                  {whiteLabel.ctas[1].label}{" "}
                   <span aria-hidden className="btn-arrow">
                     &rarr;
                   </span>
@@ -340,6 +358,17 @@ function TierIcon({ name }: { name: string }) {
         <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
         <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
         <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
+      </svg>
+    );
+  }
+  if (name === "split") {
+    // lucide:split, the landing page package's mark
+    return (
+      <svg {...common}>
+        <path d="M16 3h5v5" />
+        <path d="M8 3H3v5" />
+        <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3" />
+        <path d="m15 9 6-6" />
       </svg>
     );
   }

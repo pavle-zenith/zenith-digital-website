@@ -4,7 +4,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { cn } from "@/lib/utils";
 import { publicImageSize } from "@/lib/imageSize";
 import { TickList } from "@/components/sections/private-doc/parts";
-import { partnerShowcaseUi as ui } from "@/content/partner-showcase";
+import { partnerShowcaseUi } from "@/content/partner-showcase";
+import type { ShowcaseLang } from "@/content/partner-showcase-sr-labels";
 import type { PartnerShowcase, ShowcaseSlide } from "@/content/partner-showcase";
 import { ServiceSlides, type SlideView } from "./ServiceSlides";
 
@@ -22,7 +23,17 @@ import { ServiceSlides, type SlideView } from "./ServiceSlides";
  * draws no bottom rule: the next section's top rule is the separator
  * (DESIGN.md, No Double Hairline).
  */
-export function ShowcaseServices({ services }: { services: PartnerShowcase["services"] }) {
+export function ShowcaseServices({
+  services,
+  ui = partnerShowcaseUi,
+  lang = "en",
+}: {
+  services: PartnerShowcase["services"];
+  /** The first row's pill; the Serbian page passes its own. */
+  ui?: Pick<typeof partnerShowcaseUi, "firstServicePill">;
+  /** The page's language, for the sliders: "sr" on /izrada-sajtova. */
+  lang?: ShowcaseLang;
+}) {
   return (
     <Section id="services" tone="light" className="doc-anchor" frameClassName="!pt-14 !pb-0 md:!pt-24">
       <SectionHeader heading={services.heading} intro={services.intro} tone="light" />
@@ -66,7 +77,7 @@ export function ShowcaseServices({ services }: { services: PartnerShowcase["serv
                   mediaLeft ? "lg:col-start-1" : "lg:col-start-2",
                 )}
               >
-                <ServiceSlides service={item.name} slides={item.slides.map(withFocus)} />
+                <ServiceSlides service={item.name} slides={item.slides.map(withFocus)} lang={lang} />
               </div>
             </li>
           );

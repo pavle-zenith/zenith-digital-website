@@ -638,6 +638,19 @@ export const caseStudyCards: CaseStudyCard[] = [
     story: "Decorative garden stone, wholesale and retail, with a quantity calculator, from Subotica",
     thumb: "/case-studies/woodstone-024/card.webp",
   },
+  {
+    // Added 25 Nov 2026 (owner). Live on a Vercel preview, not yet on her
+    // own domain. The full study is drafted below as `emmaJordanDraft`.
+    client: "Emma Jordan",
+    slug: "emma-jordan",
+    platforms: ["nextjs"],
+    industry: "courses",
+    alsoIn: ["coaches"],
+    metric: "Coming soon",
+    metricPending: true,
+    story: "Strong Still and SUMO, a strength coach's two courses, moved off MailerLite onto their own landing pages",
+    thumb: "/case-studies/emma-jordan/card.webp",
+  },
 ];
 
 // Featured two-panel cards (thumbnail + branded panel). Shared with the
@@ -2700,6 +2713,135 @@ export const pressureTestScotland: CaseStudyDetail = {
     title: "Pressure Test Scotland case study | Custom Next.js site | Zenith Digital",
     description:
       "How Zenith Digital and Wellington Web Co built Pressure Test Scotland a custom Next.js site in 3 weeks, with a page per service and quote requests stored in Supabase.",
+  },
+};
+
+/**
+ * EMMA JORDAN: drafted 25 Nov 2026, HELD until the site launches on her own
+ * domain in January 2027. Images are in /public/case-studies/emma-jordan/ (card, hero,
+ * full-page, supporting-1 to 5; supporting-1 is the old MailerLite page).
+ * To publish: answer the questions below, set `liveUrl` on the card and
+ * here, swap the card's metric for the build's scope and drop
+ * `metricPending`, set `publishedAt`, rename to `emmaJordan` and add it to
+ * `caseStudyDetails`.
+ *
+ * Facts from owner (25 Nov 2026): fitness trainer selling two courses,
+ * Strong Still and SUMO; migration from a MailerLite landing page to a
+ * custom Next.js site, with Wix CRM and email infrastructure behind it.
+ * Preview checked 25 Nov 2026 (emmajordan.vercel.app): Strong Still is a
+ * six-week programme of three strength workouts a week with voice coaching,
+ * for people starting out or coming back to training; checkout through
+ * Stripe; an email sign-up for programme updates; a "before you buy" page
+ * with requirements and policies. The preview is flagged as carrying
+ * placeholder data, so its rating, student count, price and company details
+ * are NOT used here.
+ *
+ * Confirmed by owner (25 Nov 2026): launches January 2027; built in 10
+ * days; two landing pages, one for Strong Still and one for SUMO; Wix CRM is
+ * sign-ups and buyers into Wix contacts with email set up to keep in touch.
+ *
+ * STILL TO COME: a testimonial from Emma (owner is getting one), and any
+ * numbers after launch (sign-ups, sales) to replace the capability results.
+ */
+export const emmaJordanDraft: CaseStudyDetail = {
+  ...cardOf("emma-jordan"),
+  headline: "How Emma Jordan moved her strength courses off MailerLite and onto two landing pages built to sell them",
+  stats: [
+    { value: "10 days", label: "From MailerLite to a custom build" },
+    { value: "2 landing pages", label: "One each for Strong Still and SUMO" },
+  ],
+  meta: {
+    industry: INDUSTRIES.courses,
+    engagementType: "Migration from MailerLite, 2 landing pages",
+    timeline: "10 days, launching January 2027",
+    platform: "Custom code (Next.js) + Wix CRM + Stripe",
+    liveUrl: "",
+  },
+  challenge: [
+    "Emma Jordan is a personal trainer and strength coach who sells her coaching as courses. Strong Still is a six-week programme of three strength workouts a week with voice coaching, for people starting out or coming back to training. SUMO is her second course.",
+    "Both were sold from a MailerLite landing page: fine for collecting emails, limited for explaining a programme, answering the questions people ask before they pay, and taking them straight to checkout. She needed a page for each course that sells it properly, with her contacts and emails still working behind them.",
+  ],
+  heroShot: {
+    src: "/case-studies/emma-jordan/hero.webp",
+    alt: "Strong Still by Emma Jordan in a browser window: Build strength you can keep, without rearranging your week",
+  },
+  scrollShot: {
+    src: "/case-studies/emma-jordan/full-page.webp",
+    alt: "The full Strong Still page: the hero and programme preview, who it's for, what's included, how it works, what to expect, the price, the FAQs and the email sign-up",
+    width: 1440,
+    height: 12568,
+  },
+  gallery: [
+    {
+      src: "/case-studies/emma-jordan/supporting-1.webp",
+      alt: "The old MailerLite landing page: Get strong. Feel capable. Find your rhythm again.",
+      caption: "Before: the MailerLite landing page.",
+    },
+    {
+      src: "/case-studies/emma-jordan/supporting-2.webp",
+      alt: "The Join Strong Still panel: what's included, the one-off price and a continue to checkout button",
+    },
+    {
+      src: "/case-studies/emma-jordan/supporting-3.webp",
+      alt: "What you can expect: a carousel of everyday outcomes, from feeling good about yourself to finally sticking with it",
+    },
+    {
+      src: "/case-studies/emma-jordan/supporting-4.webp",
+      alt: "Four standards to practise: protein with every meal and a daily walk, beside a photo of a dumbbell workout",
+    },
+    {
+      src: "/case-studies/emma-jordan/supporting-5.webp",
+      alt: "A place for strength in a busy week: the about section with training photos",
+    },
+  ],
+  introduction:
+    "Emma Jordan is a strength coach who sells her programmes, Strong Still and SUMO, as courses. In 10 days, Zenith Digital moved them off a MailerLite landing page onto two custom Next.js landing pages, one per course, with Wix CRM and email running behind them and checkout through Stripe. They launch in January 2027.",
+  approach: [
+    {
+      heading: "One page per course, built to sell it",
+      body: "The old page asked for an email. Each course now has its own landing page, and Strong Still's explains what six weeks of Strong Still involves, who it's for and who it isn't for, and what's included, so the people who reach the price already know it fits.",
+    },
+    {
+      heading: "Answer the questions before they're asked",
+      body: "Requirements, equipment, access and policies sit on their own before-you-buy page, and the FAQs answer the rest. Fewer doubts at checkout, fewer emails asking the same thing.",
+    },
+    {
+      heading: "Keep the list working",
+      body: "Moving off MailerLite couldn't mean losing the audience. Sign-ups and buyers from both pages land in Wix CRM, with email set up to keep in touch with them, so the pages and the list work as one system.",
+    },
+  ],
+  results: [
+    {
+      value: "Off MailerLite",
+      label: "Both courses sold from their own pages instead of a landing-page tool",
+      positive: true,
+    },
+    {
+      value: "One checkout",
+      label: "From the programme page to Stripe in one step",
+      positive: true,
+    },
+  ],
+  resultsNote:
+    "Both pages launch on Emma's own domain in January 2027. Numbers follow once they have been live long enough to have them.",
+  techUsed: [
+    { label: "Website migration", href: "/services/website-migration" },
+    { label: "Landing pages", href: "/services/landing-pages" },
+    "Custom code (Next.js)",
+    "Wix CRM",
+    "Email set-up",
+    "Stripe checkout",
+  ],
+  publishedAt: "",
+  cta: {
+    heading: ["Selling a course", "from a landing-page tool?"],
+    paragraph:
+      "A free 20-minute call. We'll tell you what a site built to sell your programme needs, which platform suits it, and what it would cost.",
+  },
+  seo: {
+    title: "Emma Jordan case study | MailerLite to Next.js | Zenith Digital",
+    description:
+      "How Zenith Digital moved Emma Jordan's two strength courses off MailerLite onto custom Next.js landing pages in 10 days, with Wix CRM, email and Stripe behind them.",
   },
 };
 
